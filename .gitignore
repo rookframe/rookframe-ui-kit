@@ -1,0 +1,4 @@
+.DS_Store
+.godot/
+examples/exact-commit-consumer/.plugged/
+examples/exact-commit-consumer/rookframe/ui/

@@ -1,0 +1,27 @@
+; Engine configuration file.
+; Edit with the Godot editor where possible.
+
+config_version=5
+
+[application]
+
+config/name="Rookframe UI Kit foundation catalogue"
+run/main_scene="res://examples/foundation-catalogue/foundation_catalogue.tscn"
+
+[display]
+
+window/size/viewport_width=1200
+window/size/viewport_height=820
+window/size/window_width_override=1200
+window/size/window_height_override=820
+window/stretch/mode="canvas_items"
+
+[gui]
+
+theme/custom="res://rookframe/ui/theme/rookframe_theme.tres"
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+textures/default_filters/use_nearest_mipmap_filter=false
