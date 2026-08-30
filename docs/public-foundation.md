@@ -95,35 +95,35 @@ a variation only for its current color or font is unsupported.
 
 ### Text
 
-| Variation | Meaning |
-| --- | --- |
-| `RookframeTitle` | Surface identity |
-| `RookframeSubtitle` | Current task title |
-| `RookframeHeading` | Section identity |
-| `RookframeLabel` | Concise field or statistic label |
-| `RookframeValue` | Prominent live value |
-| `RookframeBody` | Readable rules or descriptive copy |
-| `RookframeMeta` | Help, provenance, or secondary facts |
-| `RookframeStatus` | Compact neutral live state |
-| `RookframePending` | Visible in-progress state |
-| `RookframeSuccess` | Confirmed positive state |
-| `RookframeError` | Actionable failure |
-| `RookframeIdentity` | Row or record name |
-| `RookframeBadgeText` | Text inside a classification chip |
+| Variation | Base type | Meaning |
+| --- | --- | --- |
+| `RookframeTitle` | `Label` | Surface identity |
+| `RookframeSubtitle` | `Label` | Current task title |
+| `RookframeHeading` | `Label` | Section identity |
+| `RookframeLabel` | `Label` | Concise field or statistic label |
+| `RookframeValue` | `Label` | Prominent live value |
+| `RookframeBody` | `Label` | Readable rules or descriptive copy |
+| `RookframeMeta` | `Label` | Help, provenance, or secondary facts |
+| `RookframeStatus` | `Label` | Compact neutral live state |
+| `RookframePending` | `Label` | Visible in-progress state |
+| `RookframeSuccess` | `Label` | Confirmed positive state |
+| `RookframeError` | `Label` | Actionable failure |
+| `RookframeIdentity` | `Label` | Row or record name |
+| `RookframeBadgeText` | `Label` | Text inside a classification chip |
 
 Text roles express meaning, not a request for one color or font size. Their
 exact visual values may change compatibly while the role's purpose remains.
 
 ### Actions
 
-| Variation | Meaning |
-| --- | --- |
-| `RookframePrimaryButton` | Advances or commits the current task |
-| `RookframeSecondaryButton` | Important alternative that does not advance the task |
-| `RookframeQuietButton` | Compact reveal, retry, or row-local action |
-| `RookframeDangerButton` | Destructive or abandoning action |
-| `RookframeTabButton` | Changes a visible section without changing domain state |
-| `RookframeChoiceRow` | Complete detailed or compact choice target |
+| Variation | Base type | Meaning |
+| --- | --- | --- |
+| `RookframePrimaryButton` | `Button` | Advances or commits the current task |
+| `RookframeSecondaryButton` | `Button` | Important alternative that does not advance the task |
+| `RookframeQuietButton` | `Button` | Compact reveal, retry, or row-local action |
+| `RookframeDangerButton` | `Button` | Destructive or abandoning action |
+| `RookframeTabButton` | `Button` | Changes a visible section without changing domain state |
+| `RookframeChoiceRow` | `Button` | Complete detailed or compact choice target |
 
 Use native `Button`; these are Theme variations, not wrappers. Ordinary icon-
 only actions retain a semantic accessible name and at least a 44×44 interaction

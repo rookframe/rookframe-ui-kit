@@ -2,7 +2,7 @@
 
 This is a clean, normal Godot 4.7 project. It does not use repository-specific
 copy tooling. Its checked-in `plug.gd` pins UI Kit commit
-`1cb3b85f7cf26f95b8e187c0695b44494b18fea5` and includes only
+`1fe5bdb21d07dc06d407362eae4b3570cdcf16bf` and includes only
 `rookframe/ui`, so examples and development material are not installed.
 
 Materialize the dependency:

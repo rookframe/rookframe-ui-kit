@@ -20,8 +20,8 @@ The proof used the pinned Godot 4.7 Mono editor at
 `/Applications/Godot_mono.app/Contents/MacOS/Godot` and a fresh copy of
 `examples/exact-commit-consumer`, not the repository project or its catalogue.
 
-The checked-in declaration pins the completed native-first implementation
-commit `1cb3b85f7cf26f95b8e187c0695b44494b18fea5`. gd-plug reported that exact
+The checked-in declaration pins the complete candidate runtime-content commit
+`1fe5bdb21d07dc06d407362eae4b3570cdcf16bf`. gd-plug reported that exact
 commit, installed only `rookframe/ui`, and materialized 222 runtime files.
 `examples/`, the full visual catalogue, root documentation, and repository
 development material were absent from the installed subtree.
@@ -38,9 +38,17 @@ scene demonstrates the normal author workflow:
   scene connections; and
 - run the authored scene without repository-specific tooling.
 
-After the documentation commit was complete, the same clean materialization
-and open/run check was repeated against the exact commit named by the
-`v1.0.0-rc.1` candidate tag.
+During local candidate preparation, the unpublished content and tagged commits
+were materialized through gd-plug from this repository's local Git URL; the
+public GitHub URL had already been proved at its preceding exact commit. After
+the commit and candidate tag are pushed by the owner, the checked-in declaration
+fetches the same content commit from GitHub. No push or external release
+publication is performed by this ticket.
+
+The final tagged commit changes only repository documentation and the consumer
+declaration after the content commit above, so its installed `rookframe/ui`
+tree is byte-identical. The same clean materialization and open/run check was
+repeated against the exact commit named by the `v1.0.0-rc.1` tag.
 
 ## Public-reference coverage
 
