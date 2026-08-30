@@ -22,9 +22,10 @@ names, and documented meanings are stable within a SemVer major line.
 Examples and repository development material intentionally live outside this
 subtree and are not copied by the documented gd-plug declaration.
 
-The human-readable component API is in
-[`docs/public-components.md`](../../docs/public-components.md). Native Control
-configuration is in
-[`docs/native-controls-and-recipes.md`](../../docs/native-controls-and-recipes.md),
-and shared accessibility behavior is in
-[`docs/accessibility-and-input.md`](../../docs/accessibility-and-input.md).
+Repository documentation is intentionally outside the installed runtime
+include. Read the candidate's
+[public component API](https://github.com/rookframe/rookframe-ui-kit/blob/v1.0.0-rc.1/docs/public-components.md),
+[native recipes](https://github.com/rookframe/rookframe-ui-kit/blob/v1.0.0-rc.1/docs/native-controls-and-recipes.md),
+[accessibility and input contract](https://github.com/rookframe/rookframe-ui-kit/blob/v1.0.0-rc.1/docs/accessibility-and-input.md),
+[semantic icon identities](https://github.com/rookframe/rookframe-ui-kit/blob/v1.0.0-rc.1/docs/semantic-icons.md),
+and [compatibility model](https://github.com/rookframe/rookframe-ui-kit/blob/v1.0.0-rc.1/docs/compatibility.md).

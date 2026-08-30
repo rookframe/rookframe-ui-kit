@@ -17,5 +17,6 @@ images, and fixed layouts.
 
 The supported properties, defaults, signals, methods, slots, states, variants,
 paths, and UIDs are documented in
-[`docs/public-components.md`](../../../docs/public-components.md) and indexed by
+[the public component reference](https://github.com/rookframe/rookframe-ui-kit/blob/v1.0.0-rc.1/docs/public-components.md)
+and indexed by
 [`rookframe/ui/catalogue.json`](../catalogue.json).

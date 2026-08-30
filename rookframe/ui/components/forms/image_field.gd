@@ -77,6 +77,7 @@ func _refresh() -> void:
 		replace_button.text = change_label
 		replace_button.disabled = disabled
 		replace_button.accessibility_name = change_label
+		replace_button.accessibility_description = error_text if not error_text.is_empty() else help_text
 	if error != null:
 		error.text = "Error: %s" % error_text
 		error.visible = not error_text.is_empty()

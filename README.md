@@ -31,7 +31,10 @@ See [the coverage inventory](docs/design-system-coverage.md),
 [the public component reference](docs/public-components.md),
 [native recipes](docs/native-controls-and-recipes.md),
 [accessibility and input](docs/accessibility-and-input.md),
-[the public foundation reference](docs/public-foundation.md), and
+[the public foundation reference](docs/public-foundation.md),
+[the semantic icon reference](docs/semantic-icons.md),
+[the compatibility model](docs/compatibility.md),
+[the release-candidate review](docs/release-candidate-review.md), and
 [third-party notices](THIRD_PARTY_NOTICES.md).
 
 ## Exact-commit installation
@@ -45,7 +48,7 @@ extends "res://addons/gd-plug/plug.gd"
 
 func _plugging() -> void:
 	plug("rookframe/rookframe-ui-kit", {
-		"commit": "0bc458b3752a9cffc0f21010e3a675c5c8f838db",
+		"commit": "1cb3b85f7cf26f95b8e187c0695b44494b18fea5",
 		"include": ["rookframe/ui"],
 	})
 ```
@@ -67,7 +70,7 @@ theme/custom="res://rookframe/ui/theme/rookframe_theme.tres"
 ```
 
 The checked-in [exact-commit consumer](examples/exact-commit-consumer) is the
-normal-Godot proof of this seam. It pins the completed component implementation
+normal-Godot proof of this seam. It pins the completed native-first kit
 commit and instances a public Search Field directly from the materialized
 canonical path. Repository catalogues remain outside the installed runtime
 subtree.
@@ -81,10 +84,14 @@ unsupported. Examples, repository tools, and development material live outside
 the installed subtree. `rookframe/ui/catalogue.json` is the machine-readable
 index of public component contracts.
 
-The UI Kit does not participate in SDK Editions. A Package records its exact
-authoring UI Kit commit as provenance, excludes the materialized kit from its
-artifact, and declares compatible Rookframe Versions for runtime compatibility.
-Direct use of Godot APIs remains outside Rookframe's compatibility guarantee.
+The UI Kit uses SemVer and does not participate in SDK Editions. A Package
+records the human-readable UI Kit version and exact authoring commit as
+provenance, excludes the materialized kit from its artifact, and declares
+compatible Rookframe Versions—not a runtime UI Kit range—for runtime
+compatibility. The selected Rookframe Version supplies the canonical subtree
+before Package scenes load. Direct use of Godot APIs and formats remains
+outside Rookframe's backwards-compatibility guarantee; see the
+[full compatibility consequences](docs/compatibility.md).
 
 Stable `v1.0.0` has not been published. Release timing remains an explicit
 owner action.

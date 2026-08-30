@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://dyrvqc2ip2we6"]
+[gd_scene load_steps=5 format=3 uid="uid://dyrvqc2ip2we6"]
 
 [ext_resource type="Theme" path="res://rookframe/ui/theme/rookframe_theme.tres" id="1_theme"]
 [ext_resource type="Texture2D" path="res://rookframe/ui/icons/check.svg" id="2_check"]
 [ext_resource type="PackedScene" uid="uid://jhuolgtvtefyi" path="res://rookframe/ui/components/forms/search_field.tscn" id="3_search"]
+[ext_resource type="Script" path="res://consumer.gd" id="4_consumer"]
 
 [node name="ExactCommitConsumer" type="Control"]
 layout_mode = 3
@@ -12,6 +13,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_theme")
+script = ExtResource("4_consumer")
 
 [node name="Canvas" type="PanelContainer" parent="."]
 layout_mode = 1
@@ -98,7 +100,11 @@ modulate = Color(0.490196, 0.85098, 0.537255, 1)
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Copy" type="Label" parent="Canvas/Margin/Surface/Content/Ready"]
+[node name="ProofStatus" type="Label" parent="Canvas/Margin/Surface/Content/Ready"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_type_variation = &"RookframeSuccess"
 text = "Pinned source materialized successfully"
+
+[connection signal="cleared" from="Canvas/Margin/Surface/Content/Search" to="." method="_on_search_cleared"]
+[connection signal="value_changed" from="Canvas/Margin/Surface/Content/Search" to="." method="_on_search_value_changed"]

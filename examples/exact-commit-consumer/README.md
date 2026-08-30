@@ -2,7 +2,7 @@
 
 This is a clean, normal Godot 4.7 project. It does not use repository-specific
 copy tooling. Its checked-in `plug.gd` pins UI Kit commit
-`0bc458b3752a9cffc0f21010e3a675c5c8f838db` and includes only
+`1cb3b85f7cf26f95b8e187c0695b44494b18fea5` and includes only
 `rookframe/ui`, so examples and development material are not installed.
 
 Materialize the dependency:
@@ -24,8 +24,11 @@ Open the project in Godot and browse the installed subtree in the FileSystem
 dock. `consumer.tscn` instances the public Search Field from its canonical
 path and applies the installed Theme to ordinary `Label`, `LineEdit`,
 `CheckBox`, `Button`, `ProgressBar`, Container, and `TextureRect` nodes. A
-Package author can additionally select the installed Theme as the project Theme
-to preview its variations across author-owned scenes.
+Package author can edit the Search Field's exported properties in the
+Inspector and use ordinary scene connections for its `value_changed` and
+`cleared` signals; the checked-in connections update the status copy. The
+installed Theme can also be selected as the project Theme to preview its
+variations across author-owned scenes.
 
 The materialized `rookframe/ui` directory and `.plugged` bookkeeping are
 ignored deliberately: the declaration and full commit are the reproducible

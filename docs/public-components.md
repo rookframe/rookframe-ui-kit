@@ -9,6 +9,38 @@ SemVer major line.
 The machine-readable form of this reference is
 `res://rookframe/ui/catalogue.json`.
 
+## Public identities
+
+| Public scene | Scene UID | Public behavior script and UID | Root type |
+| --- | --- | --- | --- |
+| `components/layout/adaptive_grid.tscn` | `uid://bqfivtkeswdra` | `components/layout/adaptive_grid.gd`, `uid://cwgli747u0cv2` | `GridContainer` |
+| `components/layout/responsive_split.tscn` | `uid://ctbrwicbpnbko` | `components/layout/responsive_split.gd`, `uid://cgm6s0thbggch` | `BoxContainer` |
+| `components/layout/task_header.tscn` | `uid://daiidltfcnxmc` | `components/layout/task_header.gd`, `uid://fu2nr35six6m` | `VBoxContainer` |
+| `components/layout/section.tscn` | `uid://eakyhwvofovql` | `components/layout/section.gd`, `uid://cnqkqncrm3noo` | `PanelContainer` |
+| `components/layout/action_bar.tscn` | `uid://fawromoaegwob` | `components/layout/action_bar.gd`, `uid://bhv4hi8nxqudi` | `BoxContainer` |
+| `components/layout/adaptive_toolbar.tscn` | `uid://gbsncdddrctra` | `components/layout/action_bar.gd`, `uid://bhv4hi8nxqudi` | `BoxContainer` |
+| `components/forms/text_field.tscn` | `uid://hcrialnjrunbn` | `components/forms/text_field.gd`, `uid://14x5hvhd0hgd` | `VBoxContainer` |
+| `components/forms/text_area.tscn` | `uid://ibntwmikwuovm` | `components/forms/text_area.gd`, `uid://bb8xvwqqnaxb3` | `VBoxContainer` |
+| `components/forms/search_field.tscn` | `uid://jhuolgtvtefyi` | `components/forms/search_field.gd`, `uid://bnvqayp06k4ud` | `VBoxContainer` |
+| `components/forms/choice_row.tscn` | `uid://kipsbpkvppkfb` | `components/forms/choice_row.gd`, `uid://cneqvtm4mj43s` | `Button` |
+| `components/forms/image_field.tscn` | `uid://ljsdqcdmawsqy` | `components/forms/image_field.gd`, `uid://cgrcfqykt0c7o` | `VBoxContainer` |
+| `components/overlays/dialog.tscn` | `uid://87uetn404lqb` | `components/overlays/dialog.gd`, `uid://do77iyssrgyr2` | `Window` |
+| `components/overlays/file_picker_dialog.tscn` | `uid://g4tupp4dkeeb` | `components/overlays/file_picker_dialog.gd`, `uid://2iqy4kt4qdkx` | `Window` |
+| `components/feedback/notice.tscn` | `uid://mvkyfkqyexkga` | `components/feedback/notice.gd`, `uid://d1yvhlo6e2o2n` | `PanelContainer` |
+| `components/feedback/task_state.tscn` | `uid://nrcsepslcftqf` | `components/feedback/task_state.gd`, `uid://c4soskilw12h6` | `PanelContainer` |
+| `components/feedback/step_progress.tscn` | `uid://otcfjhowvcyxj` | `components/feedback/step_progress.gd`, `uid://du3i8msed1xq7` | `VBoxContainer` |
+| `components/data/metric.tscn` | `uid://ptodnotxbclre` | `components/data/metric.gd`, `uid://b5m4p5k5ksqh7` | `PanelContainer` |
+| `components/data/metric_strip.tscn` | `uid://qnxgatyloigoy` | `components/layout/adaptive_grid.gd`, `uid://cwgli747u0cv2` | `GridContainer` |
+| `components/data/icon_action_grid.tscn` | `uid://rlkymfvqiatgk` | `components/layout/adaptive_grid.gd`, `uid://cwgli747u0cv2` | `GridContainer` |
+| `components/data/badge.tscn` | `uid://sbfmvlonoxixc` | `components/data/badge.gd`, `uid://5m6r41nop671` | `PanelContainer` |
+| `components/data/roll_row.tscn` | `uid://tcrguqtsprodb` | `components/data/roll_row.gd`, `uid://wo8rkw0btjpa` | `GridContainer` |
+| `components/data/structured_row.tscn` | `uid://ukteoalflguqe` | `components/data/structured_row.gd`, `uid://vrrt25g1ko53` | `PanelContainer` |
+| `components/surfaces/managed_surface.tscn` | `uid://vhwxjcowiuacj` | `components/surfaces/managed_surface.gd`, `uid://dbt641tlogj02` | `PanelContainer` |
+
+`components/surfaces/managed_surface_state.gd` is the public
+`RookframeManagedSurfaceState` Resource with UID `uid://q51dth77eqqb`; it has no
+scene identity.
+
 ## Editor composition
 
 Instance a scene normally. Set its exported properties in the Inspector. For
@@ -23,14 +55,14 @@ here.
 
 ## Layout and navigation
 
-| Scene | Purpose | Public slots and behavior |
-| --- | --- | --- |
-| `components/layout/adaptive_grid.tscn` | Equal-priority adaptive cells | Direct child Controls; `minimum_columns`, `maximum_columns`, and `minimum_column_width`; emits `column_count_changed` |
-| `components/layout/responsive_split.tscn` | `stage-content` and `task-detail` | `PrimarySlot`, `SecondarySlot`; weighted row at wide width, one reading-order column below `compact_width` |
-| `components/layout/task_header.tscn` | Fixed task hierarchy | `ActionsSlot`, `ProgressSlot`, `TabsSlot`; exported eyebrow, title, subtitle, and title scale |
-| `components/layout/section.tscn` | Framed section and stable trailing lane | `ActionSlot`, `BodySlot`; one content inset owned by the section frame |
-| `components/layout/action_bar.tscn` | Fixed leading and trailing action groups | `LeadingSlot`, `TrailingSlot`; source-order focus; stacks the two groups below 560px |
-| `components/layout/adaptive_toolbar.tscn` | Search/count plus filter/action groups | Same two slots; 700px default threshold |
+| Scene / root | Public properties and defaults | Signals, methods, and slots | Behavior, focus, input, and accessibility |
+| --- | --- | --- | --- |
+| `adaptive_grid.tscn` / `GridContainer` | `minimum_columns = 1`; `maximum_columns = 4`; `minimum_column_width = 220.0` | `column_count_changed(column_count)` | Direct child Controls are equal-priority cells. Reflow uses measured width without recreating children, so source-order reading and focus order remain stable. Children own their accessible names and input. |
+| `responsive_split.tscn` / `BoxContainer` | `compact_width = 720.0`; `primary_ratio = 0.4`; `compact_secondary_first = false` | `layout_profile_changed(profile)`; `get_primary_slot()`, `get_secondary_slot()`; `PrimarySlot`, `SecondarySlot` | Retains one two-region tree, weighted wide and stacked compact. Source order is primary then secondary unless the explicit compact flag reverses it; slotted Controls retain focus and accessibility state. |
+| `task_header.tscn` / `VBoxContainer` | `eyebrow = ""`; `title = "Task title"`; `subtitle = ""`; `use_large_title = false` | `get_actions_slot()`, `get_progress_slot()`, `get_tabs_slot()`; `ActionsSlot`, `ProgressSlot`, `TabsSlot` | Presents fixed task hierarchy without consuming input. Copy remains visible; slotted actions and tabs use native source-order focus and must provide their own accessible names. |
+| `section.tscn` / `PanelContainer` | `title = "Section"`; `description = ""` | `get_action_slot()`, `get_body_slot()`; `ActionSlot`, `BodySlot` | Owns one framed inset and stable trailing action lane. Heading and description provide visible context; body and action Controls retain native input and source-order focus. |
+| `action_bar.tscn` / `BoxContainer` | `compact_width = 560.0` | `layout_profile_changed(profile)`; `get_leading_slot()`, `get_trailing_slot()`; `LeadingSlot`, `TrailingSlot` | Keeps leading and trailing action groups fixed, then stacks them below the measured threshold. It never duplicates Controls; nested groups preserve source-order focus and accessible labels. |
+| `adaptive_toolbar.tscn` / `BoxContainer` | `compact_width = 700.0` | Same API and slots as `ActionBar` | Compose search/count in the leading lane and filters/actions in the trailing lane. Compact reflow retains the same focusable Controls and their accessible state. |
 
 Use one `ResponsiveSplit` instance for both named responsive recipes. For
 `stage-content`, keep the bounded stage in `PrimarySlot` and use the default
@@ -43,13 +75,13 @@ semantic minimum cell width. Fixed grids remain ordinary native
 
 ## Forms and selection
 
-| Scene | Public properties | Signals and methods |
-| --- | --- | --- |
-| `components/forms/text_field.tscn` | `label_text`, `value`, `placeholder`, `help_text`, `error_text`, `editable` | `value_changed`, `value_committed`; `focus_editor()`, `set_error()` |
-| `components/forms/text_area.tscn` | Same contract over native `TextEdit` | Commits on focus exit; minimum editor height is 112px |
-| `components/forms/search_field.tscn` | `label_text`, `show_label`, `value`, `placeholder` | `value_changed`, `value_committed`, `cleared`; `focus_editor()`, `clear()` |
-| `components/forms/choice_row.tscn` | `title`, `description`, `action_label`, `variant`; inherited `button_group`, `button_pressed`, `disabled` | `selection_changed` plus native Button signals; detailed and compact variants |
-| `components/forms/image_field.tscn` | `title`, `help_text`, `error_text`, `preview`, `change_label`, `disabled` | `replace_requested`; `set_preview()`, `set_error()` |
+| Scene / root | Public properties and defaults | Signals and methods | Behavior, focus, input, and accessibility |
+| --- | --- | --- | --- |
+| `text_field.tscn` / `VBoxContainer` | `label_text = "Field label"`; `value = ""`; `placeholder = ""`; `help_text = ""`; `error_text = ""`; `editable = true` | `value_changed(value)`, `value_committed(value)`; `focus_editor()`, `set_error(message)` | Native `LineEdit` input; Return commits. The visible label becomes its accessibility name, help/error becomes the description, and error copy begins with `Error:`. `editable` retains native read-only focus and selection behavior while preventing edits. |
+| `text_area.tscn` / `VBoxContainer` | Same defaults as `TextField` | Same signals and methods | Native `TextEdit` with a 112px minimum editor height; focus exit commits. Label/help/error accessibility and native read-only behavior match `TextField`. |
+| `search_field.tscn` / `VBoxContainer` | `label_text = "Search"`; `show_label = true`; `value = ""`; `placeholder = "Search"` | `value_changed(value)`, `value_committed(value)`, `cleared`; `focus_editor()`, `clear()` | Icon, editor, and clear action share one visible focus perimeter. Return commits; clear emits `cleared` and returns focus to the editor. The label remains the editor's accessibility name even when visually hidden. |
+| `choice_row.tscn` / `Button` | `title = "Choice"`; `description = "Supporting decision copy"`; `action_label = "Select"`; `variant = DETAILED`; native `button_group = null`, `button_pressed = false`, `disabled = false` | `selection_changed(selected)` plus native `pressed` and `toggled`; `set_selected(selected)`, `is_selected()` | The complete native toggle Button is one 44px-minimum target. Title, description, and selected/not-selected state form its accessibility description. Assign a shared `ButtonGroup` for exclusive keyboard/controller selection. |
+| `image_field.tscn` / `VBoxContainer` | `title = "Image"`; `help_text = ""`; `error_text = ""`; `preview = null`; `change_label = "Replace image"`; `disabled = false` | `replace_requested`; `set_preview(texture)`, `set_error(message)` | The native replace Button is the only input target and follows source-order focus. Title names it; help/error describes it. Disabled state prevents focus/activation. The component never opens, admits, or persists a path. |
 
 `SearchField` deliberately supplies one shared focus perimeter for its icon,
 native editor, and clear action. `TextField` and `TextArea` keep help or error
@@ -65,10 +97,10 @@ and loads the selected file; cancel does nothing, and failures use
 
 ## Dialogs and file selection
 
-| Scene | Public properties | Signals and methods |
-| --- | --- | --- |
-| `components/overlays/dialog.tscn` | `tone`, `eyebrow`, `heading`, `description`, action labels, `show_cancel` | `confirmed`, `cancelled`; `get_body_slot()`, `open_dialog()`, `close_dialog()` |
-| `components/overlays/file_picker_dialog.tscn` | `heading`, `description`, `initial_directory`, `allowed_extensions`, `confirm_label`, `show_hidden` | `file_selected`, `cancelled`, `directory_changed`; `open_picker()`, `current_directory()`, `selected_path()` |
+| Scene / root | Public properties and defaults | Signals, methods, and slots | Behavior, focus, input, and accessibility |
+| --- | --- | --- | --- |
+| `dialog.tscn` / `Window` | `tone = INFORMATION`; `eyebrow = "ROOKFRAME"`; `heading = "Dialog title"`; `description = "Explain the decision and its consequence."`; `confirm_label = "Continue"`; `cancel_label = "Cancel"`; `show_cancel = true` | `confirmed`, `cancelled`; `get_body_slot()`, `open_dialog()`, `close_dialog()`; `BodySlot` | Opens as a native modal Window with one blocking scrim and initial focus on Confirm. `ui_cancel`, the cancel action, and `close_requested` emit `cancelled`; Confirm emits `confirmed`. Visible icon, eyebrow, heading, description, and semantic tone describe the interruption without color alone. |
+| `file_picker_dialog.tscn` / `Window` | `heading = "Open a file"`; `description = "Choose a file from your project or computer."`; `initial_directory = "res://"`; `allowed_extensions = []`; `confirm_label = "Open"`; `show_hidden = false` | `file_selected(path)`, `cancelled`, `directory_changed(path)`; `open_picker(directory = "")`, `current_directory()`, `selected_path()` | Initial focus enters Search. Native focusable places, breadcrumbs, file rows, and actions support keyboard/controller navigation; activation opens folders or selects files, `ui_accept` confirms a selection, and `ui_cancel` cancels. Selected name/path and filter summary stay visible and accessible outside hover tooltips. |
 
 `Dialog` is a native modal `Window` with a blocking host scrim, semantic icon
 header, bounded message region, optional `BodySlot`, content-driven height,
@@ -89,11 +121,11 @@ properties and consume `file_selected(path)`.
 
 ## Feedback and workflow
 
-| Scene | States | Public extension |
-| --- | --- | --- |
-| `components/feedback/notice.tscn` | `INFO`, `PENDING`, `SUCCESS`, `ERROR` | `ActionSlot`, optional dismissal, `dismissed` signal |
-| `components/feedback/task_state.tscn` | `LOADING`, `EMPTY`, `SUCCESS`, `ERROR` | Whole-task `ActionSlot` for retry, create, or continue |
-| `components/feedback/step_progress.tscn` | complete, current, pending | Two to eight steps; connected wide rail, compact current-step completion card, wide/compact profile signal |
+| Scene / root | Public properties and defaults | Signals, methods, and slots | Behavior, focus, input, and accessibility |
+| --- | --- | --- | --- |
+| `notice.tscn` / `PanelContainer` | `tone = INFO`; `title = "Notice"`; `description = ""`; `dismissible = false`; tones `INFO`, `PENDING`, `SUCCESS`, `ERROR` | `dismissed`; `get_action_slot()`; `ActionSlot` | Compact in-task status with visible state word and semantic icon. Optional dismiss and slotted actions are native source-order targets; copy remains readable and meaning never depends on color alone. |
+| `task_state.tscn` / `PanelContainer` | `state = EMPTY`; `title = "Nothing here yet"`; `description = ""`; states `LOADING`, `EMPTY`, `SUCCESS`, `ERROR` | `get_action_slot()`; `ActionSlot` | Replaces the owning task body; open-ended loading rotates the visible spinner. It consumes no input itself. Recovery/create/continue Controls live in the slot and require native accessible names. State icon, word, title, and description communicate without color alone. |
+| `step_progress.tscn` / `VBoxContainer` | `accessible_label = "Workflow progress"`; `steps = ["First step", "Second step"]`; `current_step = 1` (one-based); `compact_width = 720.0`; two to eight steps | `layout_profile_changed(profile)` | Read-only progress: connected complete/current/pending rail when wide and current-step completion card when compact. It never becomes a tab set or focus target. Checks, numbers, current label, position, and one complete accessibility description convey state without color. |
 
 `Notice` and `TaskState` include an icon or shape and a visible state word;
 color is supplementary. `StepProgress` uses checks, numbered markers, and a
@@ -105,14 +137,14 @@ progress remains native `ProgressBar`.
 
 ## Structured data display
 
-| Scene | Contract |
-| --- | --- |
-| `components/data/metric.tscn` | Label, value, optional detail, and `ActionSlot` |
-| `components/data/metric_strip.tscn` | Add three or four `Metric` instances as direct children; equal priority and adaptive columns |
-| `components/data/icon_action_grid.tscn` | Add ordinary semantic-icon Buttons directly; maximum two columns |
-| `components/data/badge.tscn` | Short classification text with optional semantic icon |
-| `components/data/roll_row.tscn` | Six slots: state, ordinal, die, identity, result, action; complete/current/pending/locked |
-| `components/data/structured_row.tscn` | One context-neutral family for data, detail, compact detail, stacked detail, summary, table, header, selection banner, category, catalogue, portrait, and pending rows |
+| Scene / root | Public properties and defaults | Signals, methods, and slots | Behavior, focus, input, and accessibility |
+| --- | --- | --- | --- |
+| `metric.tscn` / `PanelContainer` | `label_text = "Metric"`; `value_text = "Value"`; `detail_text = ""` | `get_action_slot()`; `ActionSlot` | Read-only label/value/detail hierarchy. Only a slotted native action receives focus; its accessible name must include the local metric context. |
+| `metric_strip.tscn` / `GridContainer` | `minimum_columns = 1`; `maximum_columns = 4`; `minimum_column_width = 160.0` | `column_count_changed(column_count)` | Add three or four `Metric` children directly. Equal-priority cells reflow without changing source, reading, or focus order. |
+| `icon_action_grid.tscn` / `GridContainer` | `minimum_columns = 1`; `maximum_columns = 2`; `minimum_column_width = 220.0` | `column_count_changed(column_count)` | Add native semantic-icon Buttons directly. The whole 44px-minimum Button remains the target; icon-only actions need matching accessible names and tooltips. Reflow retains source order. |
+| `badge.tscn` / `PanelContainer` | `label_text = "Badge"`; `icon = null` | No signals or methods | Read-only short classification. Text remains visible; an optional icon is supplementary and the Badge does not receive focus or behave as a Button. |
+| `roll_row.tscn` / `GridContainer` | `state = PENDING`; `ordinal = "1"`; `title = "Roll"`; `detail = ""`; `result = ""`; `die_icon = dice.svg`; `compact_width = 720.0`; states `COMPLETE`, `CURRENT`, `PENDING`, `LOCKED` | `layout_profile_changed(profile)`; `get_action_slot()`; `ActionSlot` | Reflows the same state/ordinal/die/identity/result/action regions. Result stays empty until available. Visible state word and semantic icon communicate state; only the slotted action receives source-order focus. |
+| `structured_row.tscn` / `PanelContainer` | `variant = DATA`; `title = "Row identity"`; `detail = ""`; `value_text = ""`; `status_text = ""`; `leading_image = null`; `compact_width = 620.0`; variants `DATA`, `DETAIL`, `COMPACT_DETAIL`, `STACKED_DETAIL`, `SUMMARY`, `TABLE`, `HEADER`, `SELECTION_BANNER`, `CATEGORY`, `CATALOGUE`, `PORTRAIT`, `PENDING` | `layout_profile_changed(profile)`; `get_action_slot()`; `ActionSlot` | Context-neutral read-only row family with one stable trailing lane. Compact reflow retains content and focus order. Title/status remain textual; pending state is not color-only. Use `ChoiceRow`, not this scene, when the entire row must be selectable. |
 
 The result slot in `RollRow` remains empty before a result exists; do not add
 decorative punctuation. The state marker always names its state and uses a
@@ -121,6 +153,11 @@ uses `ChoiceRow` so a non-interactive record does not grow fake button
 behavior.
 
 ## Managed Surface
+
+| Public type / root | Public properties and defaults | Signals and methods | Behavior, focus, input, and accessibility |
+| --- | --- | --- | --- |
+| `managed_surface.tscn` / `PanelContainer` | `surface_title = "Managed surface"`; `state = new RookframeManagedSurfaceState` | `placement_changed(placement)`, `minimized`, `restored`, `close_requested`, `lifecycle_changed(snapshot)`; `get_header_slot()`, `get_task_slot()`, `get_footer_slot()`, `set_task(task)`, `open_surface()`, `close_surface()`, `minimize_surface()`, `restore_surface()`, `set_placement(placement)`, `toggle_placement()`, `set_dock_width(width)`, `set_floating_rect(rect)`, `capture_state()`, `restore_state(snapshot)`, `focus_task()` | Chrome controls are native 44px-minimum targets with accessible names/tooltips. One retained task tree keeps its focus state across dock/float and minimize/restore. Header/footer stay fixed; TaskSlot has the only body scroll owner. Close/minimize retain content and emit state instead of owning host policy. |
+| `RookframeManagedSurfaceState` / `Resource` | `surface_id = "surface"`; `task_instance_id = "task"`; `placement = DOCKED`; `closed = false`; `minimized = false`; `focused = false`; `dock_width = 560.0`; `floating_rect = Rect2(80, 80, 720, 720)`; `scroll_offset = 0.0` | `state_changed(snapshot)`; `is_visible()`, `placement_name()`, `open_surface()`, `close_surface()`, `minimize_surface()`, `restore_surface()`, `focus_surface()`, `set_placement(next_placement)`, `set_dock_width(value)`, `set_floating_rect(value)`, `set_scroll_offset(value)`, `state_snapshot()`, `restore_snapshot(snapshot)` | Serializable semantic state only; it receives no input and owns no UI. `focus_surface()` records focus only while visible. Snapshot geometry uses numeric `x`, `y`, `width`, and `height` fields so consumer persistence can remain JSON-safe. |
 
 `components/surfaces/managed_surface.tscn` owns exactly four regions:
 
