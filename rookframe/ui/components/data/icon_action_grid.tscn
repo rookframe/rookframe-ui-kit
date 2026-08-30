@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://rlkymfvqiatgk"]
+
+[ext_resource type="Script" path="res://rookframe/ui/components/layout/adaptive_grid.gd" id="1_script"]
+
+[node name="IconActionGrid" type="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/h_separation = 12
+theme_override_constants/v_separation = 12
+columns = 2
+script = ExtResource("1_script")
+maximum_columns = 2
+minimum_column_width = 220.0

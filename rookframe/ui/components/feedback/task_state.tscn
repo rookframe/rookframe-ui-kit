@@ -1,0 +1,64 @@
+[gd_scene load_steps=2 format=3 uid="uid://nrcsepslcftqf"]
+
+[ext_resource type="Script" path="res://rookframe/ui/components/feedback/task_state.gd" id="1_script"]
+
+[node name="TaskState" type="PanelContainer"]
+custom_minimum_size = Vector2(0, 220)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_type_variation = &"RookframeNoticeInfo"
+script = ExtResource("1_script")
+
+[node name="Content" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+theme_override_constants/separation = 8
+
+[node name="Icon" type="TextureRect" parent="Content"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+expand_mode = 1
+stretch_mode = 5
+mouse_filter = 2
+
+[node name="State" type="Label" parent="Content"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"RookframeStatus"
+text = "EMPTY"
+horizontal_alignment = 1
+
+[node name="Title" type="Label" parent="Content"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"RookframeHeading"
+text = "Nothing here yet"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Description" type="Label" parent="Content"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"RookframeMeta"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Progress" type="ProgressBar" parent="Content"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(220, 16)
+layout_mode = 2
+size_flags_horizontal = 4
+show_percentage = false
+
+[node name="ActionSlot" type="HFlowContainer" parent="Content"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+alignment = 1
+theme_override_constants/h_separation = 8
+theme_override_constants/v_separation = 8

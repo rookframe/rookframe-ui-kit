@@ -8,7 +8,10 @@ The filesystem is authoritative: normal resources under
 | Resource | Stable identity | Purpose |
 | --- | --- | --- |
 | `theme/rookframe_theme.tres` | `uid://s4dv3jijmvy1` | Shared Theme for built-in Godot Controls and semantic variations |
-| `tokens.gd` | `uid://bx5kfbojp1jkc` | Semantic palette, spacing, geometry, type, and responsive values for future public relationships |
+| `tokens.gd` | `uid://bx5kfbojp1jkc` | Semantic palette, spacing, geometry, type, and responsive values for public relationships |
+| `catalogue.json` | Stable path and schema version | Machine-readable Theme and public component contract index |
+| `components/**/*.tscn` | Documented scene UID | Editor-authored relationship that Godot does not provide as one built-in node |
+| `components/**/*.gd` | Documented script UID | Small behavior required by its associated public relationship |
 | `assets/fonts/Inter-VariableFont_opsz,wght.ttf` | Path plus committed import UID | Readable UI copy, values, fields, and actions |
 | `assets/fonts/Exo2-VariableFont_wght.ttf` | Path plus committed import UID | Condensed hierarchy for managed-surface titles and headings |
 | `assets/frames/*.png` | Semantic path plus committed import UID | Nine-slice managed surface, section, primary/secondary action, and focus frames |
@@ -24,10 +27,10 @@ values directly and cannot reference script constants from a `.tres`, so some
 exact colors and geometry appear in both files deliberately.
 
 When an exact value changes, maintainers update both representations in one
-change and review the foundation catalogue for drift. The semantic names and
+change and review the visual catalogue for drift. The semantic names and
 purposes are the compatibility contract; exact visual values may change within
-a SemVer major line. RFG-160 intentionally does not turn that manual review
-seam into an automated validation or release gate.
+a SemVer major line. The manual review seam is intentionally not an automated
+validation or release gate.
 
 ## Theme variation names
 
@@ -42,7 +45,15 @@ seam into an automated validation or release gate.
 | `RookframeSection` | `PanelContainer` | Framed semantic section |
 | `RookframeManagedSurface` | `PanelContainer` | Outer frame for a reusable managed presentation |
 | `RookframeNotice` | `PanelContainer` | Compact in-place status or recovery region |
+| `RookframeNoticeInfo` | `PanelContainer` | Informational Notice tone |
+| `RookframeNoticePending` | `PanelContainer` | In-progress Notice tone |
+| `RookframeNoticeSuccess` | `PanelContainer` | Successful Notice tone |
+| `RookframeNoticeError` | `PanelContainer` | Recoverable-error Notice tone |
 | `RookframeBadge` | `PanelContainer` | Short classification or compatibility chip |
+| `RookframeSearchField` | `PanelContainer` | Composite Search Field perimeter |
+| `RookframeSearchFieldFocus` | `PanelContainer` | Focused Search Field perimeter |
+| `RookframeStructuredRow` | `PanelContainer` | Neutral structured record frame |
+| `RookframeStructuredRowSelected` | `PanelContainer` | Selected structured record frame |
 
 ### Text
 
@@ -56,6 +67,7 @@ seam into an automated validation or release gate.
 | `RookframeBody` | Readable rules or descriptive copy |
 | `RookframeMeta` | Help, provenance, or secondary facts |
 | `RookframeStatus` | Compact neutral live state |
+| `RookframePending` | Visible in-progress state |
 | `RookframeSuccess` | Confirmed positive state |
 | `RookframeError` | Actionable failure |
 | `RookframeIdentity` | Row or record name |
@@ -73,6 +85,7 @@ exact visual values may change compatibly while the role's purpose remains.
 | `RookframeQuietButton` | Compact reveal, retry, or row-local action |
 | `RookframeDangerButton` | Destructive or abandoning action |
 | `RookframeTabButton` | Changes a visible section without changing domain state |
+| `RookframeChoiceRow` | Complete detailed or compact choice target |
 
 Use native `Button`; these are Theme variations, not wrappers. Ordinary icon-
 only actions retain a semantic accessible name and at least a 44×44 interaction
@@ -80,11 +93,13 @@ target.
 
 ## Native defaults covered by the foundation
 
-The Theme directly styles `Button`, `CheckBox` (including grouped radio use), `LineEdit`,
-`TextEdit`, `MenuButton`, `OptionButton`, `PopupMenu`, `ProgressBar`, `TabBar`,
-`Panel`, `PanelContainer`, separators, and scrollbars. Compose ordinary layout
-with Godot's built-in containers. RFG-161 completes inventory-wide coverage and
-adds a public scene only when Godot lacks the reusable relationship.
+The Theme directly styles `Button`, `CheckBox`, `CheckButton`, `LineEdit`,
+`TextEdit`, `SpinBox`, `HSlider`, `VSlider`, `MenuButton`, `OptionButton`,
+`PopupMenu`, `PopupPanel`, `ProgressBar`, `TabBar`, `TabContainer`, `ItemList`,
+`Tree`, `Window`, dialogs, panels, separators, scrollbars, and the native
+row/flow/grid containers. Compose ordinary behavior with these built-ins. The
+kit adds a public scene only when Godot lacks the reusable relationship; see
+[the component reference](public-components.md).
 
 ## Semantic icons
 

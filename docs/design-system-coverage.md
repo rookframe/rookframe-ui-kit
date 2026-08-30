@@ -16,6 +16,9 @@ Unrelated local working-tree changes in those repositories were excluded. The
 old running Rookframe/design-system material is visual authority; current Godot
 files are implementation and migration evidence, not proof of completeness.
 
+RFG-161's delivery against this unchanged inventory is recorded separately in
+[the completion coverage map](rfg-161-coverage.md).
+
 ## Classification
 
 - **Native + Theme**: Godot owns the behavior. The kit supplies Theme coverage,
@@ -117,8 +120,8 @@ Kit implementation is permitted without a later product decision.
 | --- | --- |
 | `RookframeTheme.tres` | Palette and reusable variations curated into the new Theme; Manager/legacy aliases are consolidated or excluded |
 | `RookframeUiKit.cs` | Semantic values absorbed into Theme/tokens; public C# factories rejected; platform helpers stay application-owned |
-| `rookframe_components.gd` | Multi-node reusable relationships become editor-authored scenes in RFG-161; pass-through factories are not copied |
-| `managed_surface_state.gd` | Retained-surface behavior is design evidence for RFG-161; Package/host policy is split out |
+| `rookframe_components.gd` | Multi-node reusable relationships became editor-authored scenes in RFG-161; pass-through factories were not copied |
+| `managed_surface_state.gd` | Retained-surface behavior informed RFG-161; Package/host policy remains split out |
 | `package_presentation_adapter.gd` | Entirely application/runtime orchestration and excluded |
 | `world_content_library.gd` | Entirely Rookframe domain/application state and excluded |
 | `TabletopWorkspace.tscn`, `tabletop_workspace.gd`, and its JSON contract | Application shell and excluded |

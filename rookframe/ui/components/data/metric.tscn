@@ -1,0 +1,38 @@
+[gd_scene load_steps=2 format=3 uid="uid://ptodnotxbclre"]
+
+[ext_resource type="Script" path="res://rookframe/ui/components/data/metric.gd" id="1_script"]
+
+[node name="Metric" type="PanelContainer"]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"RookframeInsetSurface"
+script = ExtResource("1_script")
+
+[node name="Content" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="Label" type="Label" parent="Content"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"RookframeLabel"
+text = "Metric"
+
+[node name="Value" type="Label" parent="Content"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"RookframeValue"
+text = "Value"
+autowrap_mode = 2
+
+[node name="Detail" type="Label" parent="Content"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"RookframeMeta"
+autowrap_mode = 2
+
+[node name="ActionSlot" type="HBoxContainer" parent="Content"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 8

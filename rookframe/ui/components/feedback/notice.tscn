@@ -1,0 +1,61 @@
+[gd_scene load_steps=3 format=3 uid="uid://mvkyfkqyexkga"]
+
+[ext_resource type="Script" path="res://rookframe/ui/components/feedback/notice.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://rookframe/ui/icons/close.svg" id="2_close"]
+
+[node name="Notice" type="PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"RookframeNoticeInfo"
+script = ExtResource("1_script")
+
+[node name="Content" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Icon" type="TextureRect" parent="Content"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 5
+mouse_filter = 2
+
+[node name="Copy" type="VBoxContainer" parent="Content"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 4
+
+[node name="State" type="Label" parent="Content/Copy"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"RookframeStatus"
+text = "INFO"
+
+[node name="Title" type="Label" parent="Content/Copy"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"RookframeIdentity"
+text = "Notice"
+autowrap_mode = 2
+
+[node name="Description" type="Label" parent="Content/Copy"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"RookframeMeta"
+autowrap_mode = 2
+
+[node name="ActionSlot" type="HFlowContainer" parent="Content/Copy"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/h_separation = 8
+theme_override_constants/v_separation = 8
+
+[node name="Dismiss" type="Button" parent="Content"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(44, 44)
+layout_mode = 2
+theme_type_variation = &"RookframeQuietButton"
+icon = ExtResource("2_close")
+tooltip_text = "Dismiss notice"
+accessibility_name = "Dismiss notice"

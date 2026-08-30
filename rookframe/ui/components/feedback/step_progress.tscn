@@ -1,0 +1,85 @@
+[gd_scene load_steps=2 format=3 uid="uid://otcfjhowvcyxj"]
+
+[ext_resource type="Script" path="res://rookframe/ui/components/feedback/step_progress.gd" id="1_script"]
+
+[node name="StepProgress" type="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+script = ExtResource("1_script")
+
+[node name="Full" type="HBoxContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 12
+
+[node name="Step1" type="Label" parent="Full"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"RookframePending"
+text = "1. First step - current"
+autowrap_mode = 2
+
+[node name="Step2" type="Label" parent="Full"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"RookframeMeta"
+text = "2. Second step - pending"
+autowrap_mode = 2
+
+[node name="Step3" type="Label" parent="Full"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"RookframeMeta"
+autowrap_mode = 2
+
+[node name="Step4" type="Label" parent="Full"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"RookframeMeta"
+autowrap_mode = 2
+
+[node name="Step5" type="Label" parent="Full"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"RookframeMeta"
+autowrap_mode = 2
+
+[node name="Step6" type="Label" parent="Full"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"RookframeMeta"
+autowrap_mode = 2
+
+[node name="Step7" type="Label" parent="Full"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"RookframeMeta"
+autowrap_mode = 2
+
+[node name="Step8" type="Label" parent="Full"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"RookframeMeta"
+autowrap_mode = 2
+
+[node name="Compact" type="VBoxContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Copy" type="Label" parent="Compact"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"RookframePending"
+text = "Step 1 of 2: First step"
+autowrap_mode = 2
+
+[node name="Progress" type="ProgressBar" parent="Compact"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+max_value = 2.0
+value = 1.0
+show_percentage = false

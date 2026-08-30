@@ -1,0 +1,65 @@
+[gd_scene load_steps=2 format=3 uid="uid://ukteoalflguqe"]
+
+[ext_resource type="Script" path="res://rookframe/ui/components/data/structured_row.gd" id="1_script"]
+
+[node name="StructuredRow" type="PanelContainer"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"RookframeStructuredRow"
+script = ExtResource("1_script")
+
+[node name="Content" type="BoxContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Leading" type="TextureRect" parent="Content"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 5
+mouse_filter = 2
+
+[node name="Copy" type="VBoxContainer" parent="Content"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 2
+
+[node name="Title" type="Label" parent="Content/Copy"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"RookframeIdentity"
+text = "Row identity"
+autowrap_mode = 2
+
+[node name="Detail" type="Label" parent="Content/Copy"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"RookframeMeta"
+autowrap_mode = 2
+
+[node name="Value" type="Label" parent="Content"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(96, 44)
+layout_mode = 2
+theme_type_variation = &"RookframeValue"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Status" type="Label" parent="Content"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(112, 44)
+layout_mode = 2
+theme_type_variation = &"RookframeStatus"
+horizontal_alignment = 2
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="ActionSlot" type="HBoxContainer" parent="Content"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(96, 44)
+layout_mode = 2
+alignment = 2
+theme_override_constants/separation = 8

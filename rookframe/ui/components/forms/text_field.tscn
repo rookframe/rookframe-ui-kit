@@ -1,0 +1,33 @@
+[gd_scene load_steps=2 format=3 uid="uid://hcrialnjrunbn"]
+
+[ext_resource type="Script" path="res://rookframe/ui/components/forms/text_field.gd" id="1_script"]
+
+[node name="TextField" type="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 4
+script = ExtResource("1_script")
+
+[node name="Label" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"RookframeLabel"
+text = "Field label"
+
+[node name="Editor" type="LineEdit" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Help" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"RookframeMeta"
+autowrap_mode = 2
+
+[node name="Error" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"RookframeError"
+autowrap_mode = 2

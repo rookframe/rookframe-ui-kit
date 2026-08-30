@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=42 format=3 uid="uid://s4dv3jijmvy1"]
+[gd_resource type="Theme" load_steps=58 format=3 uid="uid://s4dv3jijmvy1"]
 
 [ext_resource type="FontFile" path="res://rookframe/ui/assets/fonts/Inter-VariableFont_opsz,wght.ttf" id="1_inter"]
 [ext_resource type="FontFile" path="res://rookframe/ui/assets/fonts/Exo2-VariableFont_wght.ttf" id="2_exo"]
@@ -11,6 +11,10 @@
 [ext_resource type="Texture2D" path="res://rookframe/ui/assets/frames/primary-hover.png" id="9_primary_hover"]
 [ext_resource type="Texture2D" path="res://rookframe/ui/assets/frames/primary-pressed.png" id="10_primary_pressed"]
 [ext_resource type="Texture2D" path="res://rookframe/ui/assets/frames/focus.png" id="11_focus"]
+[ext_resource type="Texture2D" path="res://rookframe/ui/icons/close.svg" id="12_close"]
+[ext_resource type="Texture2D" path="res://rookframe/ui/icons/search.svg" id="13_search"]
+[ext_resource type="Texture2D" path="res://rookframe/ui/icons/chevron-left.svg" id="14_previous"]
+[ext_resource type="Texture2D" path="res://rookframe/ui/icons/chevron-right.svg" id="15_next"]
 
 [sub_resource type="StyleBoxFlat" id="Canvas"]
 bg_color = Color(0.027451, 0.043137, 0.05098, 1)
@@ -309,6 +313,165 @@ corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
+[sub_resource type="StyleBoxEmpty" id="Empty"]
+
+[sub_resource type="StyleBoxFlat" id="ComponentFocus"]
+content_margin_left = 11.0
+content_margin_top = 9.0
+content_margin_right = 11.0
+content_margin_bottom = 9.0
+bg_color = Color(0.027451, 0.062745, 0.082353, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.509804, 0.972549, 0.956863, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="NoticePending"]
+content_margin_left = 12.0
+content_margin_top = 12.0
+content_margin_right = 12.0
+content_margin_bottom = 12.0
+bg_color = Color(0.027451, 0.062745, 0.082353, 0.98)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.941176, 0.733333, 0.196078, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="NoticeSuccess"]
+content_margin_left = 12.0
+content_margin_top = 12.0
+content_margin_right = 12.0
+content_margin_bottom = 12.0
+bg_color = Color(0.027451, 0.062745, 0.082353, 0.98)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.490196, 0.85098, 0.537255, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="NoticeError"]
+content_margin_left = 12.0
+content_margin_top = 12.0
+content_margin_right = 12.0
+content_margin_bottom = 12.0
+bg_color = Color(0.082353, 0.031373, 0.035294, 0.98)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.937255, 0.356863, 0.329412, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="Row"]
+content_margin_left = 16.0
+content_margin_top = 12.0
+content_margin_right = 16.0
+content_margin_bottom = 12.0
+bg_color = Color(0.043137, 0.066667, 0.078431, 1)
+border_width_bottom = 1
+border_color = Color(0.133333, 0.196078, 0.215686, 1)
+
+[sub_resource type="StyleBoxFlat" id="RowHover"]
+content_margin_left = 16.0
+content_margin_top = 12.0
+content_margin_right = 16.0
+content_margin_bottom = 12.0
+bg_color = Color(0.070588, 0.164706, 0.168627, 0.65)
+border_width_bottom = 1
+border_color = Color(0.266667, 0.913725, 0.913725, 1)
+
+[sub_resource type="StyleBoxFlat" id="RowSelected"]
+content_margin_left = 16.0
+content_margin_top = 12.0
+content_margin_right = 16.0
+content_margin_bottom = 12.0
+bg_color = Color(0.070588, 0.290196, 0.282353, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.509804, 0.972549, 0.956863, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="ListPanel"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.031373, 0.078431, 0.090196, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.133333, 0.196078, 0.215686, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="SliderTrack"]
+content_margin_top = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.031373, 0.078431, 0.090196, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.133333, 0.196078, 0.215686, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="SliderFill"]
+content_margin_top = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.266667, 0.913725, 0.913725, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="WindowBorder"]
+content_margin_left = 16.0
+content_margin_top = 16.0
+content_margin_right = 16.0
+content_margin_bottom = 16.0
+expand_margin_left = 1.0
+expand_margin_top = 44.0
+expand_margin_right = 1.0
+expand_margin_bottom = 1.0
+bg_color = Color(0.043137, 0.066667, 0.078431, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.941176, 0.733333, 0.196078, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
 [sub_resource type="StyleBoxTexture" id="ManagedFrame"]
 texture = ExtResource("3_managed")
 texture_margin_left = 8.0
@@ -429,6 +592,21 @@ CheckBox/colors/font_disabled_color = Color(0.4, 0.48, 0.47, 0.62)
 CheckBox/constants/h_separation = 12
 CheckBox/font_sizes/font_size = 16
 CheckBox/styles/focus = SubResource("ButtonFocus")
+CheckButton/colors/font_color = Color(0.85098, 0.831373, 0.819608, 1)
+CheckButton/colors/font_hover_color = Color(0.509804, 0.972549, 0.956863, 1)
+CheckButton/colors/font_focus_color = Color(0.85098, 0.831373, 0.819608, 1)
+CheckButton/colors/font_disabled_color = Color(0.4, 0.48, 0.47, 0.62)
+CheckButton/constants/h_separation = 12
+CheckButton/font_sizes/font_size = 16
+CheckButton/styles/focus = SubResource("ButtonFocus")
+GridContainer/constants/h_separation = 16
+GridContainer/constants/v_separation = 12
+HBoxContainer/constants/separation = 12
+HFlowContainer/constants/h_separation = 12
+HFlowContainer/constants/v_separation = 12
+HSlider/styles/slider = SubResource("SliderTrack")
+HSlider/styles/grabber_area = SubResource("SliderFill")
+HSlider/styles/grabber_area_highlight = SubResource("ProgressFill")
 HScrollBar/styles/scroll = SubResource("Scrollbar")
 HScrollBar/styles/grabber = SubResource("Grabber")
 HScrollBar/styles/grabber_highlight = SubResource("GrabberHighlight")
@@ -445,6 +623,23 @@ LineEdit/font_sizes/font_size = 16
 LineEdit/styles/normal = SubResource("Input")
 LineEdit/styles/focus = SubResource("InputFocus")
 LineEdit/styles/read_only = SubResource("InputReadOnly")
+ItemList/colors/font_color = Color(0.85098, 0.831373, 0.819608, 1)
+ItemList/colors/font_hovered_color = Color(0.509804, 0.972549, 0.956863, 1)
+ItemList/colors/font_hovered_selected_color = Color(0.003922, 0.047059, 0.062745, 1)
+ItemList/colors/font_selected_color = Color(0.003922, 0.047059, 0.062745, 1)
+ItemList/constants/h_separation = 12
+ItemList/constants/line_separation = 8
+ItemList/constants/v_separation = 8
+ItemList/font_sizes/font_size = 16
+ItemList/styles/cursor = SubResource("ButtonFocus")
+ItemList/styles/cursor_unfocused = SubResource("Empty")
+ItemList/styles/focus = SubResource("ButtonFocus")
+ItemList/styles/hovered = SubResource("RowHover")
+ItemList/styles/hovered_selected = SubResource("RowSelected")
+ItemList/styles/hovered_selected_focus = SubResource("RowSelected")
+ItemList/styles/panel = SubResource("ListPanel")
+ItemList/styles/selected = SubResource("RowSelected")
+ItemList/styles/selected_focus = SubResource("RowSelected")
 MenuButton/colors/font_color = Color(0.85098, 0.831373, 0.819608, 1)
 MenuButton/colors/font_hover_color = Color(0.509804, 0.972549, 0.956863, 1)
 MenuButton/styles/normal = SubResource("Button")
@@ -464,6 +659,12 @@ PopupMenu/colors/font_hover_color = Color(0.509804, 0.972549, 0.956863, 1)
 PopupMenu/colors/font_disabled_color = Color(0.4, 0.48, 0.47, 0.62)
 PopupMenu/styles/panel = SubResource("Raised")
 PopupMenu/styles/hover = SubResource("ButtonHover")
+PopupMenu/constants/h_separation = 12
+PopupMenu/constants/item_end_padding = 12
+PopupMenu/constants/item_start_padding = 12
+PopupMenu/constants/v_separation = 8
+PopupMenu/icons/search = ExtResource("13_search")
+PopupPanel/styles/panel = SubResource("Raised")
 ProgressBar/colors/font_color = Color(0.003922, 0.047059, 0.062745, 1)
 ProgressBar/colors/font_outline_color = Color(0.509804, 0.972549, 0.956863, 1)
 ProgressBar/styles/background = SubResource("ProgressBackground")
@@ -476,6 +677,26 @@ TabBar/styles/tab_unselected = SubResource("Tab")
 TabBar/styles/tab_hovered = SubResource("TabHover")
 TabBar/styles/tab_selected = SubResource("TabSelected")
 TabBar/styles/tab_focus = SubResource("ButtonFocus")
+TabContainer/colors/font_disabled_color = Color(0.4, 0.48, 0.47, 0.62)
+TabContainer/colors/font_hovered_color = Color(0.509804, 0.972549, 0.956863, 1)
+TabContainer/colors/font_selected_color = Color(0.941176, 0.733333, 0.196078, 1)
+TabContainer/colors/font_unselected_color = Color(0.568627, 0.6, 0.603922, 1)
+TabContainer/constants/icon_max_width = 24
+TabContainer/constants/icon_separation = 8
+TabContainer/constants/side_margin = 0
+TabContainer/constants/tab_separation = 0
+TabContainer/font_sizes/font_size = 16
+TabContainer/icons/decrement = ExtResource("14_previous")
+TabContainer/icons/decrement_highlight = ExtResource("14_previous")
+TabContainer/icons/increment = ExtResource("15_next")
+TabContainer/icons/increment_highlight = ExtResource("15_next")
+TabContainer/styles/panel = SubResource("Sunken")
+TabContainer/styles/tab_disabled = SubResource("Tab")
+TabContainer/styles/tab_focus = SubResource("ButtonFocus")
+TabContainer/styles/tab_hovered = SubResource("TabHover")
+TabContainer/styles/tab_selected = SubResource("TabSelected")
+TabContainer/styles/tab_unselected = SubResource("Tab")
+TabContainer/styles/tabbar_background = SubResource("Empty")
 TextEdit/colors/font_color = Color(0.85098, 0.831373, 0.819608, 1)
 TextEdit/colors/font_placeholder_color = Color(0.568627, 0.6, 0.603922, 1)
 TextEdit/colors/font_readonly_color = Color(0.568627, 0.6, 0.603922, 1)
@@ -489,8 +710,44 @@ VScrollBar/styles/scroll = SubResource("Scrollbar")
 VScrollBar/styles/grabber = SubResource("Grabber")
 VScrollBar/styles/grabber_highlight = SubResource("GrabberHighlight")
 VScrollBar/styles/grabber_pressed = SubResource("GrabberHighlight")
+VBoxContainer/constants/separation = 12
+VFlowContainer/constants/h_separation = 12
+VFlowContainer/constants/v_separation = 12
+VSlider/styles/slider = SubResource("SliderTrack")
+VSlider/styles/grabber_area = SubResource("SliderFill")
+VSlider/styles/grabber_area_highlight = SubResource("ProgressFill")
 VSeparator/constants/separation = 1
 VSeparator/styles/separator = SubResource("Separator")
+Tree/colors/font_color = Color(0.85098, 0.831373, 0.819608, 1)
+Tree/colors/font_disabled_color = Color(0.4, 0.48, 0.47, 0.62)
+Tree/colors/font_hovered_color = Color(0.509804, 0.972549, 0.956863, 1)
+Tree/colors/font_hovered_selected_color = Color(0.003922, 0.047059, 0.062745, 1)
+Tree/colors/font_selected_color = Color(0.003922, 0.047059, 0.062745, 1)
+Tree/colors/guide_color = Color(0.133333, 0.196078, 0.215686, 1)
+Tree/constants/h_separation = 12
+Tree/constants/item_margin = 16
+Tree/constants/v_separation = 8
+Tree/font_sizes/font_size = 16
+Tree/styles/cursor = SubResource("ButtonFocus")
+Tree/styles/cursor_unfocused = SubResource("Empty")
+Tree/styles/focus = SubResource("ButtonFocus")
+Tree/styles/hovered = SubResource("RowHover")
+Tree/styles/hovered_selected = SubResource("RowSelected")
+Tree/styles/hovered_selected_focus = SubResource("RowSelected")
+Tree/styles/panel = SubResource("ListPanel")
+Tree/styles/selected = SubResource("RowSelected")
+Tree/styles/selected_focus = SubResource("RowSelected")
+Window/colors/title_color = Color(0.941176, 0.733333, 0.196078, 1)
+Window/constants/close_h_offset = 12
+Window/constants/close_v_offset = 12
+Window/constants/resize_margin = 8
+Window/constants/title_height = 44
+Window/fonts/title_font = ExtResource("2_exo")
+Window/font_sizes/title_font_size = 16
+Window/icons/close = ExtResource("12_close")
+Window/icons/close_pressed = ExtResource("12_close")
+Window/styles/embedded_border = SubResource("WindowBorder")
+Window/styles/embedded_unfocused_border = SubResource("Surface")
 RookframeCanvas/base_type = &"PanelContainer"
 RookframeCanvas/styles/panel = SubResource("Canvas")
 RookframeSurface/base_type = &"PanelContainer"
@@ -505,6 +762,26 @@ RookframeManagedSurface/base_type = &"PanelContainer"
 RookframeManagedSurface/styles/panel = SubResource("ManagedFrame")
 RookframeNotice/base_type = &"PanelContainer"
 RookframeNotice/styles/panel = SubResource("Notice")
+RookframeNoticeInfo/base_type = &"PanelContainer"
+RookframeNoticeInfo/styles/panel = SubResource("Notice")
+RookframeNoticePending/base_type = &"PanelContainer"
+RookframeNoticePending/styles/panel = SubResource("NoticePending")
+RookframeNoticeSuccess/base_type = &"PanelContainer"
+RookframeNoticeSuccess/styles/panel = SubResource("NoticeSuccess")
+RookframeNoticeError/base_type = &"PanelContainer"
+RookframeNoticeError/styles/panel = SubResource("NoticeError")
+RookframeSearchField/base_type = &"PanelContainer"
+RookframeSearchField/styles/panel = SubResource("Input")
+RookframeSearchFieldFocus/base_type = &"PanelContainer"
+RookframeSearchFieldFocus/styles/panel = SubResource("ComponentFocus")
+RookframeSearchEditor/base_type = &"LineEdit"
+RookframeSearchEditor/styles/normal = SubResource("Empty")
+RookframeSearchEditor/styles/focus = SubResource("Empty")
+RookframeSearchEditor/styles/read_only = SubResource("Empty")
+RookframeStructuredRow/base_type = &"PanelContainer"
+RookframeStructuredRow/styles/panel = SubResource("Row")
+RookframeStructuredRowSelected/base_type = &"PanelContainer"
+RookframeStructuredRowSelected/styles/panel = SubResource("RowSelected")
 RookframeBadge/base_type = &"PanelContainer"
 RookframeBadge/styles/panel = SubResource("Badge")
 RookframeTitle/base_type = &"Label"
@@ -535,6 +812,9 @@ RookframeMeta/font_sizes/font_size = 16
 RookframeStatus/base_type = &"Label"
 RookframeStatus/colors/font_color = Color(0.85098, 0.831373, 0.819608, 1)
 RookframeStatus/font_sizes/font_size = 16
+RookframePending/base_type = &"Label"
+RookframePending/colors/font_color = Color(0.941176, 0.733333, 0.196078, 1)
+RookframePending/font_sizes/font_size = 16
 RookframeSuccess/base_type = &"Label"
 RookframeSuccess/colors/font_color = Color(0.490196, 0.85098, 0.537255, 1)
 RookframeSuccess/font_sizes/font_size = 16
@@ -584,3 +864,12 @@ RookframeTabButton/styles/normal = SubResource("Tab")
 RookframeTabButton/styles/hover = SubResource("TabHover")
 RookframeTabButton/styles/pressed = SubResource("TabSelected")
 RookframeTabButton/styles/focus = SubResource("ButtonFocus")
+RookframeChoiceRow/base_type = &"Button"
+RookframeChoiceRow/colors/font_color = Color(0.85098, 0.831373, 0.819608, 1)
+RookframeChoiceRow/colors/font_hover_color = Color(0.85098, 0.831373, 0.819608, 1)
+RookframeChoiceRow/colors/font_pressed_color = Color(0.85098, 0.831373, 0.819608, 1)
+RookframeChoiceRow/styles/normal = SubResource("Row")
+RookframeChoiceRow/styles/hover = SubResource("RowHover")
+RookframeChoiceRow/styles/pressed = SubResource("RowSelected")
+RookframeChoiceRow/styles/focus = SubResource("ButtonFocus")
+RookframeChoiceRow/styles/disabled = SubResource("ButtonDisabled")

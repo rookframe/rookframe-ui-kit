@@ -5,15 +5,15 @@ config_version=5
 
 [application]
 
-config/name="Rookframe UI Kit foundation catalogue"
-run/main_scene="res://examples/foundation-catalogue/foundation_catalogue.tscn"
+config/name="Rookframe UI Kit visual catalogue"
+run/main_scene="res://examples/catalogue/visual_catalogue.tscn"
 
 [display]
 
-window/size/viewport_width=1200
-window/size/viewport_height=820
-window/size/window_width_override=1200
-window/size/window_height_override=820
+window/size/viewport_width=1440
+window/size/viewport_height=900
+window/size/window_width_override=1440
+window/size/window_height_override=900
 window/stretch/mode="canvas_items"
 
 [gui]

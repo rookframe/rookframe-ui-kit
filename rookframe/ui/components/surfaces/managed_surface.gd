@@ -1,0 +1,230 @@
+@tool
+extends PanelContainer
+
+## Retained surface anatomy with fixed header/footer, one scrolling body,
+## serializable docking/floating state, and focus restoration.
+
+signal placement_changed(placement: int)
+signal minimized
+signal restored
+signal close_requested
+signal lifecycle_changed(snapshot: Dictionary)
+
+const STATE_SCRIPT := preload("res://rookframe/ui/components/surfaces/managed_surface_state.gd")
+const PLACEMENT_DOCKED := 0
+const PLACEMENT_FLOATING := 1
+
+@export var surface_title := "Managed surface":
+	set(value):
+		surface_title = value
+		_refresh()
+
+@export var state: Resource = STATE_SCRIPT.new():
+	set(value):
+		_disconnect_state()
+		state = value if value != null else STATE_SCRIPT.new()
+		_connect_state()
+		_refresh()
+
+var _last_focus_owner: Control
+
+
+func _ready() -> void:
+	_connect_state()
+	var scroll := get_node(^"Sections/Body") as ScrollContainer
+	var toggle := get_node(^"Sections/Chrome/Row/TogglePlacement") as Button
+	var minimize_button := get_node(^"Sections/Chrome/Row/Minimize") as Button
+	var close_button := get_node(^"Sections/Chrome/Row/Close") as Button
+	if not scroll.get_v_scroll_bar().value_changed.is_connected(_on_scroll_changed):
+		scroll.get_v_scroll_bar().value_changed.connect(_on_scroll_changed)
+	if not toggle.pressed.is_connected(toggle_placement):
+		toggle.pressed.connect(toggle_placement)
+	if not minimize_button.pressed.is_connected(minimize_surface):
+		minimize_button.pressed.connect(minimize_surface)
+	if not close_button.pressed.is_connected(_on_close_pressed):
+		close_button.pressed.connect(_on_close_pressed)
+	_connect_focus_tracking(get_task_slot())
+	_refresh()
+
+
+func get_header_slot() -> Container:
+	return get_node(^"Sections/Header/HeaderSlot") as Container
+
+
+func get_task_slot() -> Container:
+	return get_node(^"Sections/Body/TaskSlot") as Container
+
+
+func get_footer_slot() -> Container:
+	return get_node(^"Sections/Footer/FooterSlot") as Container
+
+
+func set_task(task: Control) -> Control:
+	var slot := get_task_slot()
+	var previous: Control
+	if slot.get_child_count() > 0:
+		previous = slot.get_child(0) as Control
+		if previous == task:
+			return previous
+		slot.remove_child(previous)
+	if task != null:
+		var existing_parent := task.get_parent()
+		if existing_parent != null:
+			existing_parent.remove_child(task)
+		slot.add_child(task)
+		_connect_focus_tracking(task)
+	return previous
+
+
+func open_surface() -> void:
+	state.call(&"open_surface")
+	_refresh()
+	_restore_focus()
+
+
+func close_surface() -> void:
+	_capture_focus()
+	state.call(&"close_surface")
+	_refresh()
+
+
+func minimize_surface() -> void:
+	_capture_focus()
+	if bool(state.call(&"minimize_surface")):
+		_refresh()
+		minimized.emit()
+
+
+func restore_surface() -> void:
+	if bool(state.call(&"restore_surface")):
+		_refresh()
+		_restore_focus()
+		restored.emit()
+
+
+func set_placement(placement: int) -> void:
+	state.call(&"set_placement", placement)
+	_refresh()
+	placement_changed.emit(int(state.get("placement")))
+
+
+func toggle_placement() -> void:
+	var next := PLACEMENT_FLOATING if int(state.get("placement")) == PLACEMENT_DOCKED else PLACEMENT_DOCKED
+	set_placement(next)
+
+
+func set_dock_width(width: float) -> void:
+	state.call(&"set_dock_width", width)
+
+
+func set_floating_rect(rect: Rect2) -> void:
+	state.call(&"set_floating_rect", rect)
+
+
+func capture_state() -> Dictionary:
+	_sync_scroll_state()
+	return state.call(&"state_snapshot") as Dictionary
+
+
+func restore_state(snapshot: Dictionary) -> void:
+	state.call(&"restore_snapshot", snapshot)
+	_refresh()
+	if bool(state.get("focused")) and bool(state.call(&"is_visible")):
+		_restore_focus()
+
+
+func focus_task() -> void:
+	var focusable := _first_focusable(get_task_slot())
+	if focusable != null:
+		focusable.grab_focus()
+
+
+func _on_close_pressed() -> void:
+	close_surface()
+	close_requested.emit()
+
+
+func _on_scroll_changed(value: float) -> void:
+	state.call(&"set_scroll_offset", value)
+
+
+func _on_state_changed(snapshot: Dictionary) -> void:
+	lifecycle_changed.emit(snapshot)
+
+
+func _on_focus_entered(control: Control) -> void:
+	_last_focus_owner = control
+	state.call(&"focus_surface")
+
+
+func _connect_state() -> void:
+	if state == null or not state.has_signal(&"state_changed"):
+		return
+	if not state.is_connected(&"state_changed", _on_state_changed):
+		state.connect(&"state_changed", _on_state_changed)
+
+
+func _disconnect_state() -> void:
+	if state == null or not state.has_signal(&"state_changed"):
+		return
+	if state.is_connected(&"state_changed", _on_state_changed):
+		state.disconnect(&"state_changed", _on_state_changed)
+
+
+func _connect_focus_tracking(node: Node) -> void:
+	if node is Control:
+		var control := node as Control
+		if control.focus_mode != Control.FOCUS_NONE and not control.focus_entered.is_connected(_on_focus_entered.bind(control)):
+			control.focus_entered.connect(_on_focus_entered.bind(control))
+	for child in node.get_children():
+		_connect_focus_tracking(child)
+
+
+func _capture_focus() -> void:
+	var owner := get_viewport().gui_get_focus_owner()
+	if owner is Control and get_task_slot().is_ancestor_of(owner):
+		_last_focus_owner = owner
+
+
+func _restore_focus() -> void:
+	if _last_focus_owner != null and is_instance_valid(_last_focus_owner) and _last_focus_owner.is_visible_in_tree():
+		_last_focus_owner.call_deferred(&"grab_focus")
+	else:
+		call_deferred(&"focus_task")
+
+
+func _first_focusable(node: Node) -> Control:
+	if node is Control:
+		var control := node as Control
+		if control.focus_mode != Control.FOCUS_NONE and control.visible and control.mouse_filter != Control.MOUSE_FILTER_IGNORE:
+			return control
+	for child in node.get_children():
+		var found := _first_focusable(child)
+		if found != null:
+			return found
+	return null
+
+
+func _sync_scroll_state() -> void:
+	var scroll := get_node_or_null(^"Sections/Body") as ScrollContainer
+	if scroll != null:
+		state.call(&"set_scroll_offset", scroll.scroll_vertical)
+
+
+func _refresh() -> void:
+	if not is_inside_tree() or state == null:
+		return
+	var title_label := get_node_or_null(^"Sections/Chrome/Row/Title") as Label
+	var toggle := get_node_or_null(^"Sections/Chrome/Row/TogglePlacement") as Button
+	var scroll := get_node_or_null(^"Sections/Body") as ScrollContainer
+	if title_label != null:
+		title_label.text = surface_title
+	if toggle != null:
+		var floating := int(state.get("placement")) == PLACEMENT_FLOATING
+		toggle.tooltip_text = "Dock surface" if floating else "Float surface"
+		toggle.accessibility_name = toggle.tooltip_text
+	visible = bool(state.call(&"is_visible"))
+	if scroll != null:
+		scroll.scroll_vertical = roundi(float(state.get("scroll_offset")))
+	accessibility_name = surface_title
+	accessibility_description = "Managed surface with one scrolling task body"

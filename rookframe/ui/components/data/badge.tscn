@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=3 uid="uid://sbfmvlonoxixc"]
+
+[ext_resource type="Script" path="res://rookframe/ui/components/data/badge.gd" id="1_script"]
+
+[node name="Badge" type="PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_type_variation = &"RookframeBadge"
+script = ExtResource("1_script")
+
+[node name="Content" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="Icon" type="TextureRect" parent="Content"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 5
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="Content"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"RookframeBadgeText"
+text = "Badge"

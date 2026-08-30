@@ -9,22 +9,28 @@ This repository is not generated from `rookframe-godot`. Consumers materialize
 the exact source they select at the one canonical runtime root:
 `res://rookframe/ui/`.
 
-## Current foundation
+## Native-first public kit
 
-The RFG-160 foundation includes:
+The current pre-release candidate includes:
 
-- the complete classified coverage inventory from the old Bevy Rookframe and
-  the current Godot implementation;
-- semantic colors, type, spacing, geometry, focus, surfaces, and frame assets;
-- Inter and Exo 2 with their SIL Open Font License texts;
-- the 62-role semantic Tabler icon registry; and
-- representative native Godot Controls in a development catalogue.
+- one shared Theme with complete coverage for the native Controls in the
+  reviewed design-system inventory;
+- semantic colors, type, spacing, geometry, focus, surfaces, frames, and a
+  62-role icon registry;
+- small editor-authored public scenes only for reusable relationships Godot
+  does not provide as a built-in node;
+- responsive layout, accessible forms and search, feedback, Managed Surface,
+  and structured-data contracts; and
+- a complete manual visual and interaction catalogue.
 
-The inventory deliberately assigns the reusable relationship work to RFG-161.
 Application screens, workflows, domain state, host orchestration, redundant
 native wrappers, and a public C# widget hierarchy remain outside this kit.
 
 See [the coverage inventory](docs/design-system-coverage.md),
+[the RFG-161 completion map](docs/rfg-161-coverage.md),
+[the public component reference](docs/public-components.md),
+[native recipes](docs/native-controls-and-recipes.md),
+[accessibility and input](docs/accessibility-and-input.md),
 [the public foundation reference](docs/public-foundation.md), and
 [third-party notices](THIRD_PARTY_NOTICES.md).
 
@@ -61,9 +67,10 @@ theme/custom="res://rookframe/ui/theme/rookframe_theme.tres"
 ```
 
 The checked-in [exact-commit consumer](examples/exact-commit-consumer) is the
-normal-Godot proof of this seam. The repository's
-[foundation catalogue](examples/foundation-catalogue) remains outside the
-installed runtime subtree.
+normal-Godot proof of this seam. It deliberately continues to pin the earlier
+foundation commit as historical provenance. The current candidate's final
+consumer pin is an owner release-preparation action. Repository catalogues
+remain outside the installed runtime subtree.
 
 ## Public boundary
 
@@ -71,7 +78,8 @@ Every normal resource beneath `rookframe/ui/` is public and supported. Its
 path, UID, semantic Theme variation name, and documented purpose participate in
 the UI Kit's independent SemVer contract. Only `rookframe/ui/_internal/` is
 unsupported. Examples, repository tools, and development material live outside
-the installed subtree.
+the installed subtree. `rookframe/ui/catalogue.json` is the machine-readable
+index of public component contracts.
 
 The UI Kit does not participate in SDK Editions. A Package records its exact
 authoring UI Kit commit as provenance, excludes the materialized kit from its
@@ -89,8 +97,10 @@ Open this repository as a Godot 4.7 project or run it with the pinned toolchain:
 /Applications/Godot_mono.app/Contents/MacOS/Godot --path .
 ```
 
-The catalogue is manual visual and interaction evidence, not an automated
-validation suite or release gate.
+The project opens the complete catalogue at
+`examples/catalogue/visual_catalogue.tscn`. Its Native, Forms, Layout,
+Feedback, Data, and Managed tabs are manual visual and interaction evidence,
+not an automated validation suite or release gate.
 
 ## License
 

@@ -1,0 +1,99 @@
+[gd_scene load_steps=8 format=3 uid="uid://vhwxjcowiuacj"]
+
+[ext_resource type="Script" path="res://rookframe/ui/components/surfaces/managed_surface.gd" id="1_script"]
+[ext_resource type="Script" path="res://rookframe/ui/components/surfaces/managed_surface_state.gd" id="2_state_script"]
+[ext_resource type="Texture2D" path="res://rookframe/ui/icons/pop-out.svg" id="3_float"]
+[ext_resource type="Texture2D" path="res://rookframe/ui/icons/minimize.svg" id="4_minimize"]
+[ext_resource type="Texture2D" path="res://rookframe/ui/icons/close.svg" id="5_close"]
+
+[sub_resource type="Resource" id="Resource_state"]
+script = ExtResource("2_state_script")
+
+[node name="ManagedSurface" type="PanelContainer"]
+custom_minimum_size = Vector2(360, 420)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+clip_contents = true
+theme_type_variation = &"RookframeManagedSurface"
+script = ExtResource("1_script")
+state = SubResource("Resource_state")
+
+[node name="Sections" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Chrome" type="PanelContainer" parent="Sections"]
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+theme_type_variation = &"RookframeInsetSurface"
+
+[node name="Row" type="HBoxContainer" parent="Sections/Chrome"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Title" type="Label" parent="Sections/Chrome/Row"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"RookframeHeading"
+text = "Managed surface"
+vertical_alignment = 1
+
+[node name="TogglePlacement" type="Button" parent="Sections/Chrome/Row"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(44, 44)
+layout_mode = 2
+theme_type_variation = &"RookframeQuietButton"
+icon = ExtResource("3_float")
+tooltip_text = "Float surface"
+accessibility_name = "Float surface"
+
+[node name="Minimize" type="Button" parent="Sections/Chrome/Row"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(44, 44)
+layout_mode = 2
+theme_type_variation = &"RookframeQuietButton"
+icon = ExtResource("4_minimize")
+tooltip_text = "Minimize surface"
+accessibility_name = "Minimize surface"
+
+[node name="Close" type="Button" parent="Sections/Chrome/Row"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(44, 44)
+layout_mode = 2
+theme_type_variation = &"RookframeQuietButton"
+icon = ExtResource("5_close")
+tooltip_text = "Close surface"
+accessibility_name = "Close surface"
+
+[node name="Header" type="PanelContainer" parent="Sections"]
+layout_mode = 2
+theme_type_variation = &"RookframeSurface"
+
+[node name="HeaderSlot" type="VBoxContainer" parent="Sections/Header"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Body" type="ScrollContainer" parent="Sections"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 1
+
+[node name="TaskSlot" type="VBoxContainer" parent="Sections/Body"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 12
+
+[node name="Footer" type="PanelContainer" parent="Sections"]
+layout_mode = 2
+theme_type_variation = &"RookframeInsetSurface"
+
+[node name="FooterSlot" type="VBoxContainer" parent="Sections/Footer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 8

@@ -1,0 +1,51 @@
+[gd_scene load_steps=2 format=3 uid="uid://ljsdqcdmawsqy"]
+
+[ext_resource type="Script" path="res://rookframe/ui/components/forms/image_field.gd" id="1_script"]
+
+[node name="ImageField" type="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+script = ExtResource("1_script")
+
+[node name="Title" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"RookframeLabel"
+text = "Image"
+
+[node name="Help" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"RookframeMeta"
+autowrap_mode = 2
+
+[node name="PreviewRow" type="HFlowContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/h_separation = 16
+theme_override_constants/v_separation = 12
+
+[node name="Frame" type="PanelContainer" parent="PreviewRow"]
+custom_minimum_size = Vector2(160, 160)
+layout_mode = 2
+theme_type_variation = &"RookframeInsetSurface"
+
+[node name="Image" type="TextureRect" parent="PreviewRow/Frame"]
+unique_name_in_owner = true
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Replace" type="Button" parent="PreviewRow"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+theme_type_variation = &"RookframeSecondaryButton"
+text = "Replace image"
+
+[node name="Error" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"RookframeError"
+autowrap_mode = 2
