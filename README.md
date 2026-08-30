@@ -45,7 +45,7 @@ extends "res://addons/gd-plug/plug.gd"
 
 func _plugging() -> void:
 	plug("rookframe/rookframe-ui-kit", {
-		"commit": "c7e3c9277436c062dfad29d533fce16ec59c7978",
+		"commit": "5f4ccbfaff195c59f8385582ca57c8020ea77164",
 		"include": ["rookframe/ui"],
 	})
 ```
@@ -67,10 +67,10 @@ theme/custom="res://rookframe/ui/theme/rookframe_theme.tres"
 ```
 
 The checked-in [exact-commit consumer](examples/exact-commit-consumer) is the
-normal-Godot proof of this seam. It deliberately continues to pin the earlier
-foundation commit as historical provenance. The current candidate's final
-consumer pin is an owner release-preparation action. Repository catalogues
-remain outside the installed runtime subtree.
+normal-Godot proof of this seam. It pins the completed component implementation
+commit and instances a public Search Field directly from the materialized
+canonical path. Repository catalogues remain outside the installed runtime
+subtree.
 
 ## Public boundary
 

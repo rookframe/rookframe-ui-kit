@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://dyrvqc2ip2we6"]
+[gd_scene load_steps=4 format=3 uid="uid://dyrvqc2ip2we6"]
 
 [ext_resource type="Theme" path="res://rookframe/ui/theme/rookframe_theme.tres" id="1_theme"]
 [ext_resource type="Texture2D" path="res://rookframe/ui/icons/check.svg" id="2_check"]
+[ext_resource type="PackedScene" uid="uid://jhuolgtvtefyi" path="res://rookframe/ui/components/forms/search_field.tscn" id="3_search"]
 
 [node name="ExactCommitConsumer" type="Control"]
 layout_mode = 3
@@ -57,6 +58,11 @@ custom_minimum_size = Vector2(0, 44)
 layout_mode = 2
 text = "Ordinary native CheckBox"
 button_pressed = true
+
+[node name="Search" parent="Canvas/Margin/Surface/Content" instance=ExtResource("3_search")]
+layout_mode = 2
+show_label = false
+placeholder = "Public Search Field instance"
 
 [node name="Actions" type="HBoxContainer" parent="Canvas/Margin/Surface/Content"]
 layout_mode = 2
