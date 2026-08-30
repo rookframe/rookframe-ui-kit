@@ -15,6 +15,20 @@ The filesystem is authoritative: normal resources under
 | `icons/<semantic-name>.svg` | Manifest name, path, and committed import UID | Stable, context-neutral interface pictogram |
 | `icons/manifest.json` | Stable path | Ordered semantic registry and upstream provenance |
 
+## Token authority
+
+`rookframe_theme.tres` is the visual authority for native Controls.
+`tokens.gd` is its public companion for the reusable relationships that cannot
+express layout or state through Theme items alone. Godot serializes StyleBox
+values directly and cannot reference script constants from a `.tres`, so some
+exact colors and geometry appear in both files deliberately.
+
+When an exact value changes, maintainers update both representations in one
+change and review the foundation catalogue for drift. The semantic names and
+purposes are the compatibility contract; exact visual values may change within
+a SemVer major line. RFG-160 intentionally does not turn that manual review
+seam into an automated validation or release gate.
+
 ## Theme variation names
 
 ### Surfaces
