@@ -11,6 +11,7 @@ func _ready() -> void:
 	_populate_native_controls()
 	_populate_layout_relationships()
 	_populate_data_relationships()
+	_populate_icon_gallery()
 	_populate_managed_surface()
 	_connect_overlays()
 
@@ -104,6 +105,38 @@ func _populate_data_relationships() -> void:
 		metric.set("value_text", definition[1])
 		metric.set("detail_text", definition[2])
 		%MetricStrip.add_child(metric)
+
+
+func _populate_icon_gallery() -> void:
+	var manifest_source := FileAccess.get_file_as_string("res://rookframe/ui/icons/manifest.json")
+	var manifest: Variant = JSON.parse_string(manifest_source)
+	if not manifest is Dictionary:
+		push_error("Could not parse the semantic icon manifest.")
+		return
+	for definition: Dictionary in manifest.get("icons", []):
+		var semantic_name := str(definition.get("name", ""))
+		var accessible_label := str(definition.get("label", semantic_name))
+		var cell := PanelContainer.new()
+		cell.custom_minimum_size = Vector2(160, 96)
+		cell.theme_type_variation = &"RookframeInsetSurface"
+		cell.accessibility_name = "%s icon" % accessible_label
+		var stack := VBoxContainer.new()
+		stack.alignment = BoxContainer.ALIGNMENT_CENTER
+		stack.add_theme_constant_override(&"separation", 8)
+		cell.add_child(stack)
+		var icon := TextureRect.new()
+		icon.custom_minimum_size = Vector2(32, 32)
+		icon.texture = load("res://rookframe/ui/icons/%s.svg" % semantic_name)
+		icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		icon.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		icon.accessibility_name = accessible_label
+		stack.add_child(icon)
+		var label := _copy(semantic_name)
+		label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		label.theme_type_variation = &"RookframeMeta"
+		stack.add_child(label)
+		%IconGallery.add_child(cell)
 
 
 func _populate_managed_surface() -> void:

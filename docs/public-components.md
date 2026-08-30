@@ -107,13 +107,15 @@ the previous tree without freeing it. Docking or floating never creates a
 second task tree. The host reparents the same Managed Surface scene to its
 docked or floating presentation parent when `placement_changed` fires.
 
-`ManagedSurfaceState` is a public Resource script at
+`RookframeManagedSurfaceState` is a public Resource type at
 `components/surfaces/managed_surface_state.gd`. It serializes semantic
 placement, dock width, floating rect, scroll offset, open/minimized state, and
 focus state. `capture_state()` and `restore_state()` exchange a Dictionary with
-the same fields. A host may store that Dictionary using its own persistence
-mechanism. Host registries, stacking/layer policy, ownership checks, and
-application placement policy remain excluded. `focus_surface()` records an
+the same fields; floating geometry uses numeric `x`, `y`, `width`, and `height`
+members so the snapshot is JSON-safe. A host may store that Dictionary using
+its own persistence mechanism. Host registries, stacking/layer policy,
+ownership checks, and application placement policy remain excluded.
+`focus_surface()` records an
 explicit focus transition only while the surface is visible.
 
 Closing and minimizing retain the task tree. `restore_surface()` restores the

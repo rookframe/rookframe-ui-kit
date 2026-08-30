@@ -45,9 +45,6 @@
         "RookframeDangerButton",
         "RookframeTabButton",
         "RookframeChoiceRow"
-      ],
-      "internalToComponents": [
-        "RookframeSearchEditor"
       ]
     },
     "nativeTypes": [
@@ -287,6 +284,8 @@
       "script": "res://rookframe/ui/components/layout/adaptive_grid.gd",
       "scriptUid": "uid://cwgli747u0cv2",
       "rootType": "GridContainer",
+      "properties": {"minimum_columns": 1, "maximum_columns": 4, "minimum_column_width": 160.0},
+      "signals": ["column_count_changed(column_count: int)"],
       "contract": "Add three or four Metric instances as direct children; cells remain equal priority and reflow by measured width."
     },
     {
@@ -296,6 +295,8 @@
       "script": "res://rookframe/ui/components/layout/adaptive_grid.gd",
       "scriptUid": "uid://cwgli747u0cv2",
       "rootType": "GridContainer",
+      "properties": {"minimum_columns": 1, "maximum_columns": 2, "minimum_column_width": 220.0},
+      "signals": ["column_count_changed(column_count: int)"],
       "contract": "Add native semantic icon Buttons directly; the grid uses at most two columns and the entire Button remains the target."
     },
     {
@@ -340,7 +341,7 @@
       "script": "res://rookframe/ui/components/surfaces/managed_surface.gd",
       "scriptUid": "uid://dbt641tlogj02",
       "rootType": "PanelContainer",
-      "properties": {"surface_title": "Managed surface", "state": "ManagedSurfaceState Resource"},
+      "properties": {"surface_title": "Managed surface", "state": "RookframeManagedSurfaceState Resource"},
       "signals": ["placement_changed(placement: int)", "minimized", "restored", "close_requested", "lifecycle_changed(snapshot: Dictionary)"],
       "methods": [
         "get_header_slot() -> Container",
@@ -363,10 +364,10 @@
       "contract": "Retains one task tree and one ScrollContainer while a host reparents the same scene between docked and floating presentation parents."
     },
     {
-      "name": "ManagedSurfaceState",
+      "name": "RookframeManagedSurfaceState",
       "script": "res://rookframe/ui/components/surfaces/managed_surface_state.gd",
       "scriptUid": "uid://q51dth77eqqb",
-      "rootType": "Resource",
+      "rootType": "RookframeManagedSurfaceState Resource",
       "properties": {"surface_id": "surface", "task_instance_id": "task", "placement": "DOCKED", "closed": false, "minimized": false, "focused": false, "dock_width": 560.0, "floating_rect": "Rect2(80, 80, 720, 720)", "scroll_offset": 0.0},
       "signals": ["state_changed(snapshot: Dictionary)"],
       "methods": ["is_visible() -> bool", "placement_name() -> StringName", "open_surface()", "close_surface()", "minimize_surface() -> bool", "restore_surface() -> bool", "focus_surface() -> bool", "set_placement(next_placement: int)", "set_dock_width(value: float)", "set_floating_rect(value: Rect2)", "set_scroll_offset(value: float)", "state_snapshot() -> Dictionary", "restore_snapshot(snapshot: Dictionary)"]

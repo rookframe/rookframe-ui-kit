@@ -111,9 +111,10 @@ var retry_icon := load("res://rookframe/ui/icons/retry.svg")
 ```
 
 Choose the meaning (`retry`, `close`, `dock`, `warning`) rather than an
-upstream drawing or a consuming screen's name. `clear.svg` and `close.svg`
-share compatible source geometry but remain distinct semantic actions. No
-Manager-, Character Sheet-, or Package-named alias is present.
+upstream drawing or a consuming screen's name. Every semantic role has distinct
+source geometry; for example, `clear.svg` uses a backspace drawing while
+`close.svg` uses a plain close mark. No Manager-, Character Sheet-, or
+Package-named alias is present.
 
 ## Compatibility
 

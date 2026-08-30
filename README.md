@@ -99,8 +99,8 @@ Open this repository as a Godot 4.7 project or run it with the pinned toolchain:
 
 The project opens the complete catalogue at
 `examples/catalogue/visual_catalogue.tscn`. Its Native, Forms, Layout,
-Feedback, Data, and Managed tabs are manual visual and interaction evidence,
-not an automated validation suite or release gate.
+Feedback, Data, Icons, and Managed tabs are manual visual and interaction
+evidence, not an automated validation suite or release gate.
 
 ## License
 

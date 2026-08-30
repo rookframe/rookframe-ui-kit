@@ -16,7 +16,9 @@ published.
   open/minimized state without host registry or application policy.
 - Human-readable and machine-readable public API references.
 - A complete visual catalogue for native controls, forms, responsive layout,
-  feedback, structured data, and Managed Surface behavior.
+  feedback, structured data, all 62 semantic icons, and Managed Surface
+  behavior.
+- Distinct pinned upstream drawings for every semantic icon role.
 
 ### Compatibility
 

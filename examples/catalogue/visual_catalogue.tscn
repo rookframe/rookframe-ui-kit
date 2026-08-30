@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://wibauqmqfimwx"]
+[gd_scene load_steps=26 format=3 uid="uid://wibauqmqfimwx"]
 
 [ext_resource type="Theme" path="res://rookframe/ui/theme/rookframe_theme.tres" id="1_theme"]
 [ext_resource type="Script" path="res://examples/catalogue/visual_catalogue.gd" id="2_script"]
@@ -24,6 +24,7 @@
 [ext_resource type="Texture2D" path="res://rookframe/ui/icons/info.svg" id="22_info"]
 [ext_resource type="Texture2D" path="res://rookframe/ui/icons/warning.svg" id="23_warning"]
 [ext_resource type="Texture2D" path="res://rookframe/ui/icons/world.svg" id="24_world"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/components/layout/adaptive_grid.tscn" id="25_adaptive_grid"]
 
 [node name="VisualCatalogue" type="Control"]
 layout_mode = 3
@@ -146,12 +147,46 @@ layout_mode = 2
 theme_type_variation = &"RookframeDangerButton"
 text = "Danger"
 
+[node name="TabRole" type="Button" parent="Canvas/Page/Stack/Tabs/Native/Margin/Content/Buttons"]
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+theme_type_variation = &"RookframeTabButton"
+text = "Tab role"
+
 [node name="Disabled" type="Button" parent="Canvas/Page/Stack/Tabs/Native/Margin/Content/Buttons"]
 custom_minimum_size = Vector2(0, 52)
 layout_mode = 2
 theme_type_variation = &"RookframePrimaryButton"
 disabled = true
 text = "Disabled"
+
+[node name="SemanticSurfaces" type="HBoxContainer" parent="Canvas/Page/Stack/Tabs/Native/Margin/Content"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Raised" type="PanelContainer" parent="Canvas/Page/Stack/Tabs/Native/Margin/Content/SemanticSurfaces"]
+custom_minimum_size = Vector2(280, 72)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"RookframeRaisedSurface"
+
+[node name="Copy" type="Label" parent="Canvas/Page/Stack/Tabs/Native/Margin/Content/SemanticSurfaces/Raised"]
+layout_mode = 2
+theme_type_variation = &"RookframeBody"
+text = "Raised surface variation"
+vertical_alignment = 1
+
+[node name="Notice" type="PanelContainer" parent="Canvas/Page/Stack/Tabs/Native/Margin/Content/SemanticSurfaces"]
+custom_minimum_size = Vector2(280, 72)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"RookframeNotice"
+
+[node name="Copy" type="Label" parent="Canvas/Page/Stack/Tabs/Native/Margin/Content/SemanticSurfaces/Notice"]
+layout_mode = 2
+theme_type_variation = &"RookframeBody"
+text = "Generic notice variation"
+vertical_alignment = 1
 
 [node name="Inputs" type="GridContainer" parent="Canvas/Page/Stack/Tabs/Native/Margin/Content"]
 layout_mode = 2
@@ -632,6 +667,40 @@ layout_mode = 2
 variant = 11
 title = "Pending subrow"
 status_text = "Waiting for approval"
+
+[node name="Icons" type="ScrollContainer" parent="Canvas/Page/Stack/Tabs"]
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="Margin" type="MarginContainer" parent="Canvas/Page/Stack/Tabs/Icons"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Content" type="VBoxContainer" parent="Canvas/Page/Stack/Tabs/Icons/Margin"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 12
+
+[node name="Heading" type="Label" parent="Canvas/Page/Stack/Tabs/Icons/Margin/Content"]
+layout_mode = 2
+theme_type_variation = &"RookframeHeading"
+text = "62 SEMANTIC ICON ROLES"
+
+[node name="Body" type="Label" parent="Canvas/Page/Stack/Tabs/Icons/Margin/Content"]
+layout_mode = 2
+theme_type_variation = &"RookframeBody"
+text = "Every public semantic name is shown once with its accessible label. This gallery is also the direct AdaptiveGrid catalogue example."
+autowrap_mode = 2
+
+[node name="IconGallery" parent="Canvas/Page/Stack/Tabs/Icons/Margin/Content" instance=ExtResource("25_adaptive_grid")]
+unique_name_in_owner = true
+layout_mode = 2
+maximum_columns = 6
+minimum_column_width = 160.0
 
 [node name="Managed" type="MarginContainer" parent="Canvas/Page/Stack/Tabs"]
 layout_mode = 2

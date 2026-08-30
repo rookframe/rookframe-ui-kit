@@ -1,4 +1,5 @@
 @tool
+class_name RookframeManagedSurfaceState
 extends Resource
 
 ## Serializable presentation state for one retained Managed Surface task tree.
@@ -113,7 +114,7 @@ func state_snapshot() -> Dictionary:
 		"minimized": minimized,
 		"focused": focused,
 		"dock_width": dock_width,
-		"floating_rect": floating_rect,
+		"floating_rect": _rect_snapshot(floating_rect),
 		"scroll_offset": scroll_offset,
 	}
 
@@ -126,9 +127,16 @@ func restore_snapshot(snapshot: Dictionary) -> void:
 	minimized = bool(snapshot.get("minimized", minimized)) and not closed
 	focused = bool(snapshot.get("focused", focused)) and is_visible()
 	dock_width = maxf(240.0, float(snapshot.get("dock_width", dock_width)))
-	var restored_rect: Variant = snapshot.get("floating_rect", floating_rect)
+	var restored_rect: Variant = snapshot.get("floating_rect", _rect_snapshot(floating_rect))
 	if restored_rect is Rect2:
 		floating_rect = restored_rect
+	elif restored_rect is Dictionary:
+		floating_rect = Rect2(
+			float(restored_rect.get("x", floating_rect.position.x)),
+			float(restored_rect.get("y", floating_rect.position.y)),
+			float(restored_rect.get("width", floating_rect.size.x)),
+			float(restored_rect.get("height", floating_rect.size.y)),
+		)
 	scroll_offset = maxf(0.0, float(snapshot.get("scroll_offset", scroll_offset)))
 	_mark_changed()
 
@@ -136,3 +144,12 @@ func restore_snapshot(snapshot: Dictionary) -> void:
 func _mark_changed() -> void:
 	emit_changed()
 	state_changed.emit(state_snapshot())
+
+
+func _rect_snapshot(value: Rect2) -> Dictionary:
+	return {
+		"x": value.position.x,
+		"y": value.position.y,
+		"width": value.size.x,
+		"height": value.size.y,
+	}

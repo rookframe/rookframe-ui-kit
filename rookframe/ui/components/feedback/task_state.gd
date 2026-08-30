@@ -77,5 +77,7 @@ func _refresh() -> void:
 	if progress != null:
 		progress.visible = state == State.LOADING
 		progress.indeterminate = state == State.LOADING
+		progress.accessibility_name = "%s: %s" % [STATE_NAMES[state], title]
+		progress.accessibility_description = description
 	accessibility_name = "%s: %s" % [STATE_NAMES[state], title]
 	accessibility_description = description

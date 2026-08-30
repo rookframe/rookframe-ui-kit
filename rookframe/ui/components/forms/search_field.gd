@@ -112,4 +112,5 @@ func _refresh() -> void:
 	if clear_button != null:
 		clear_button.visible = not _value.is_empty()
 		clear_button.accessibility_name = "Clear %s" % label_text.to_lower()
+		clear_button.tooltip_text = clear_button.accessibility_name
 	_refresh_focus()

@@ -10,19 +10,20 @@ signal restored
 signal close_requested
 signal lifecycle_changed(snapshot: Dictionary)
 
-const STATE_SCRIPT := preload("res://rookframe/ui/components/surfaces/managed_surface_state.gd")
 const PLACEMENT_DOCKED := 0
 const PLACEMENT_FLOATING := 1
+const DOCK_ICON := preload("res://rookframe/ui/icons/dock.svg")
+const FLOAT_ICON := preload("res://rookframe/ui/icons/pop-out.svg")
 
 @export var surface_title := "Managed surface":
 	set(value):
 		surface_title = value
 		_refresh()
 
-@export var state: Resource = STATE_SCRIPT.new():
+@export var state: RookframeManagedSurfaceState = RookframeManagedSurfaceState.new():
 	set(value):
 		_disconnect_state()
-		state = value if value != null else STATE_SCRIPT.new()
+		state = value if value != null else RookframeManagedSurfaceState.new()
 		_connect_state()
 		_refresh()
 
@@ -66,6 +67,7 @@ func set_task(task: Control) -> Control:
 		previous = slot.get_child(0) as Control
 		if previous == task:
 			return previous
+		_disconnect_focus_tracking(previous)
 		slot.remove_child(previous)
 	if task != null:
 		var existing_parent := task.get_parent()
@@ -77,59 +79,59 @@ func set_task(task: Control) -> Control:
 
 
 func open_surface() -> void:
-	state.call(&"open_surface")
+	state.open_surface()
 	_refresh()
 	_restore_focus()
 
 
 func close_surface() -> void:
 	_capture_focus()
-	state.call(&"close_surface")
+	state.close_surface()
 	_refresh()
 
 
 func minimize_surface() -> void:
 	_capture_focus()
-	if bool(state.call(&"minimize_surface")):
+	if state.minimize_surface():
 		_refresh()
 		minimized.emit()
 
 
 func restore_surface() -> void:
-	if bool(state.call(&"restore_surface")):
+	if state.restore_surface():
 		_refresh()
 		_restore_focus()
 		restored.emit()
 
 
 func set_placement(placement: int) -> void:
-	state.call(&"set_placement", placement)
+	state.set_placement(placement)
 	_refresh()
-	placement_changed.emit(int(state.get("placement")))
+	placement_changed.emit(state.placement)
 
 
 func toggle_placement() -> void:
-	var next := PLACEMENT_FLOATING if int(state.get("placement")) == PLACEMENT_DOCKED else PLACEMENT_DOCKED
+	var next := PLACEMENT_FLOATING if state.placement == PLACEMENT_DOCKED else PLACEMENT_DOCKED
 	set_placement(next)
 
 
 func set_dock_width(width: float) -> void:
-	state.call(&"set_dock_width", width)
+	state.set_dock_width(width)
 
 
 func set_floating_rect(rect: Rect2) -> void:
-	state.call(&"set_floating_rect", rect)
+	state.set_floating_rect(rect)
 
 
 func capture_state() -> Dictionary:
 	_sync_scroll_state()
-	return state.call(&"state_snapshot") as Dictionary
+	return state.state_snapshot()
 
 
 func restore_state(snapshot: Dictionary) -> void:
-	state.call(&"restore_snapshot", snapshot)
+	state.restore_snapshot(snapshot)
 	_refresh()
-	if bool(state.get("focused")) and bool(state.call(&"is_visible")):
+	if state.focused and state.is_visible():
 		_restore_focus()
 
 
@@ -145,7 +147,7 @@ func _on_close_pressed() -> void:
 
 
 func _on_scroll_changed(value: float) -> void:
-	state.call(&"set_scroll_offset", value)
+	state.set_scroll_offset(value)
 
 
 func _on_state_changed(snapshot: Dictionary) -> void:
@@ -154,21 +156,21 @@ func _on_state_changed(snapshot: Dictionary) -> void:
 
 func _on_focus_entered(control: Control) -> void:
 	_last_focus_owner = control
-	state.call(&"focus_surface")
+	state.focus_surface()
 
 
 func _connect_state() -> void:
-	if state == null or not state.has_signal(&"state_changed"):
+	if state == null:
 		return
-	if not state.is_connected(&"state_changed", _on_state_changed):
-		state.connect(&"state_changed", _on_state_changed)
+	if not state.state_changed.is_connected(_on_state_changed):
+		state.state_changed.connect(_on_state_changed)
 
 
 func _disconnect_state() -> void:
-	if state == null or not state.has_signal(&"state_changed"):
+	if state == null:
 		return
-	if state.is_connected(&"state_changed", _on_state_changed):
-		state.disconnect(&"state_changed", _on_state_changed)
+	if state.state_changed.is_connected(_on_state_changed):
+		state.state_changed.disconnect(_on_state_changed)
 
 
 func _connect_focus_tracking(node: Node) -> void:
@@ -178,6 +180,16 @@ func _connect_focus_tracking(node: Node) -> void:
 			control.focus_entered.connect(_on_focus_entered.bind(control))
 	for child in node.get_children():
 		_connect_focus_tracking(child)
+
+
+func _disconnect_focus_tracking(node: Node) -> void:
+	if node is Control:
+		var control := node as Control
+		var callback := _on_focus_entered.bind(control)
+		if control.focus_entered.is_connected(callback):
+			control.focus_entered.disconnect(callback)
+	for child in node.get_children():
+		_disconnect_focus_tracking(child)
 
 
 func _capture_focus() -> void:
@@ -208,7 +220,7 @@ func _first_focusable(node: Node) -> Control:
 func _sync_scroll_state() -> void:
 	var scroll := get_node_or_null(^"Sections/Body") as ScrollContainer
 	if scroll != null:
-		state.call(&"set_scroll_offset", scroll.scroll_vertical)
+		state.set_scroll_offset(scroll.scroll_vertical)
 
 
 func _refresh() -> void:
@@ -220,11 +232,12 @@ func _refresh() -> void:
 	if title_label != null:
 		title_label.text = surface_title
 	if toggle != null:
-		var floating := int(state.get("placement")) == PLACEMENT_FLOATING
+		var floating := state.placement == PLACEMENT_FLOATING
 		toggle.tooltip_text = "Dock surface" if floating else "Float surface"
 		toggle.accessibility_name = toggle.tooltip_text
-	visible = bool(state.call(&"is_visible"))
+		toggle.icon = DOCK_ICON if floating else FLOAT_ICON
+	visible = state.is_visible()
 	if scroll != null:
-		scroll.scroll_vertical = roundi(float(state.get("scroll_offset")))
+		scroll.scroll_vertical = roundi(state.scroll_offset)
 	accessibility_name = surface_title
 	accessibility_description = "Managed surface with one scrolling task body"

@@ -40,13 +40,14 @@ the table does not convert them into wrapper scenes.
 | Data, detail, compact-detail, stacked-detail, table rows | `structured_row.tscn` variants | Data tab |
 | Header, selection-banner, catalogue, portrait, pending subrows | `structured_row.tscn` variants | Data tab |
 | Classification badge | `badge.tscn`; native themed frame plus semantic icon/text | Data tab |
-| Adaptive content/section stacks and summary regions | Native containers, `adaptive_grid.tscn`, `responsive_split.tscn`, and documented recipes | Layout and Data tabs |
+| Adaptive content/section stacks and summary regions | Native containers, `adaptive_grid.tscn`, `responsive_split.tscn`, and documented recipes | Layout, Data, and Icons tabs |
 | Semantic image replacement field | `image_field.tscn`; host/consumer admission and persistence excluded | Forms tab |
 
 ## Semantic assets and public contracts
 
-- The existing 62-role semantic icon manifest remains complete and contains no
-  Manager-, Character Sheet-, or Package-named alias.
+- The 62-role semantic icon manifest is shown in full by the Icons catalogue
+  tab. Every role has distinct source geometry, with no Manager-, Character
+  Sheet-, or Package-named alias.
 - `res://rookframe/ui/catalogue.json` records Theme variation names, native
   types, every public scene/script UID, root type, property/default, signal,
   method, slot, variant, and supported state.
