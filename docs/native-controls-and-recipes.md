@@ -41,9 +41,22 @@ pass-through scene or script around an adequate built-in node.
 - Use `Window` directly for a normal native or embedded window. Rookframe Theme
   styles embedded borders and the title. Connect `close_requested`; Godot does
   not automatically close a Window.
-- Use `AcceptDialog` for acknowledgement, `ConfirmationDialog` for a confirmed
-  decision, and `FileDialog` for file selection. Keep platform button ordering
-  and focus trapping native.
+- Use the public `Dialog` for Rookframe acknowledgement and confirmed decisions.
+  It keeps native `Window` modality and keyboard focus while supplying the
+  blocking scrim, semantic icon header, bounded message, optional body,
+  content-driven height, and one explicit footer action hierarchy. Choose a
+  visible tone that matches the decision; do not encode semantics in color
+  alone.
+- Use the public `FilePickerDialog` when selecting a file is part of a
+  Rookframe task. It provides places, history, breadcrumbs, folder search,
+  extension filters, compact icon-left file rows, preview context, and explicit
+  confirmation. Paths remain in the preview instead of covering file rows as
+  hover tooltips. The host remains responsible for validating and loading the
+  emitted path.
+- Built-in `AcceptDialog`, `ConfirmationDialog`, and `FileDialog` remain valid
+  for platform-default utilities that intentionally do not use the Rookframe
+  composition. Do not style or traverse their private child trees to imitate
+  the public components.
 - Use `PopupPanel` for temporary custom content and `PopupMenu`/`MenuButton`
   for action or option menus. Godot already owns viewport placement,
   incremental search, keyboard movement, activation, Escape, and click-away
@@ -73,6 +86,8 @@ when floating.
 | Summary region | `HFlowContainer` for independent facts or `MetricStrip` for equal facts |
 | Task actions | `ActionBar`; related controls remain nested in source-order groups |
 | Search/count/filter/actions | `AdaptiveToolbar` |
+| Acknowledgement or confirmed decision | `Dialog` |
+| Designed open-file task | `FilePickerDialog` |
 | Semantic icon actions | `IconActionGrid` plus native Buttons |
 | Body scrolling | one `ScrollContainer` |
 

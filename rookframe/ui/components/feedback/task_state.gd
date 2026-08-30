@@ -29,6 +29,7 @@ const ICONS := [
 	preload("res://rookframe/ui/icons/check.svg"),
 	preload("res://rookframe/ui/icons/error.svg"),
 ]
+const SPINNER_SPEED := TAU * 0.8
 
 @export var state := State.EMPTY:
 	set(value):
@@ -50,6 +51,14 @@ func _ready() -> void:
 	_refresh()
 
 
+func _process(delta: float) -> void:
+	var icon := get_node_or_null(^"Content/Icon") as TextureRect
+	if icon == null:
+		return
+	icon.pivot_offset = icon.size * 0.5
+	icon.rotation = fmod(icon.rotation + SPINNER_SPEED * delta, TAU)
+
+
 func get_action_slot() -> Container:
 	return get_node(^"Content/ActionSlot") as Container
 
@@ -62,10 +71,11 @@ func _refresh() -> void:
 	var state_label := get_node_or_null(^"Content/State") as Label
 	var title_label := get_node_or_null(^"Content/Title") as Label
 	var description_label := get_node_or_null(^"Content/Description") as Label
-	var progress := get_node_or_null(^"Content/Progress") as ProgressBar
 	if icon != null:
 		icon.texture = ICONS[state]
 		icon.accessibility_name = "%s state" % STATE_NAMES[state]
+		if state != State.LOADING:
+			icon.rotation = 0.0
 	if state_label != null:
 		state_label.text = STATE_NAMES[state].to_upper()
 		state_label.theme_type_variation = TEXT_VARIATIONS[state]
@@ -74,10 +84,6 @@ func _refresh() -> void:
 	if description_label != null:
 		description_label.text = description
 		description_label.visible = not description.is_empty()
-	if progress != null:
-		progress.visible = state == State.LOADING
-		progress.indeterminate = state == State.LOADING
-		progress.accessibility_name = "%s: %s" % [STATE_NAMES[state], title]
-		progress.accessibility_description = description
+	set_process(state == State.LOADING)
 	accessibility_name = "%s: %s" % [STATE_NAMES[state], title]
 	accessibility_description = description

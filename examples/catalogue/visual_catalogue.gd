@@ -164,9 +164,9 @@ func _populate_managed_surface() -> void:
 
 
 func _connect_overlays() -> void:
-	%OpenAccept.pressed.connect(func() -> void: %AcceptDialogDemo.popup_centered(Vector2i(480, 240)))
-	%OpenConfirm.pressed.connect(func() -> void: %ConfirmationDialogDemo.popup_centered(Vector2i(480, 240)))
-	%OpenFile.pressed.connect(func() -> void: %FileDialogDemo.popup_centered_ratio(0.65))
+	%OpenAccept.pressed.connect(func() -> void: %AcceptDialogDemo.call(&"open_dialog"))
+	%OpenConfirm.pressed.connect(func() -> void: %ConfirmationDialogDemo.call(&"open_dialog"))
+	%OpenFile.pressed.connect(func() -> void: %FileDialogDemo.call(&"open_picker", ProjectSettings.globalize_path("res://")))
 
 
 func _add_panel_copy(parent: Node, heading: String, body: String) -> void:

@@ -32,7 +32,7 @@ var _last_focus_owner: Control
 
 func _ready() -> void:
 	_connect_state()
-	var scroll := get_node(^"Sections/Body") as ScrollContainer
+	var scroll := get_node(^"Sections/BodyRegion/BodyPadding/Body") as ScrollContainer
 	var toggle := get_node(^"Sections/Chrome/Row/TogglePlacement") as Button
 	var minimize_button := get_node(^"Sections/Chrome/Row/Minimize") as Button
 	var close_button := get_node(^"Sections/Chrome/Row/Close") as Button
@@ -53,7 +53,7 @@ func get_header_slot() -> Container:
 
 
 func get_task_slot() -> Container:
-	return get_node(^"Sections/Body/TaskSlot") as Container
+	return get_node(^"Sections/BodyRegion/BodyPadding/Body/TaskSlot") as Container
 
 
 func get_footer_slot() -> Container:
@@ -218,7 +218,7 @@ func _first_focusable(node: Node) -> Control:
 
 
 func _sync_scroll_state() -> void:
-	var scroll := get_node_or_null(^"Sections/Body") as ScrollContainer
+	var scroll := get_node_or_null(^"Sections/BodyRegion/BodyPadding/Body") as ScrollContainer
 	if scroll != null:
 		state.set_scroll_offset(scroll.scroll_vertical)
 
@@ -228,7 +228,7 @@ func _refresh() -> void:
 		return
 	var title_label := get_node_or_null(^"Sections/Chrome/Row/Title") as Label
 	var toggle := get_node_or_null(^"Sections/Chrome/Row/TogglePlacement") as Button
-	var scroll := get_node_or_null(^"Sections/Body") as ScrollContainer
+	var scroll := get_node_or_null(^"Sections/BodyRegion/BodyPadding/Body") as ScrollContainer
 	if title_label != null:
 		title_label.text = surface_title
 	if toggle != null:

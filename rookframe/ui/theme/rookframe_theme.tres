@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=58 format=3 uid="uid://s4dv3jijmvy1"]
+[gd_resource type="Theme" load_steps=66 format=3 uid="uid://s4dv3jijmvy1"]
 
 [ext_resource type="FontFile" path="res://rookframe/ui/assets/fonts/Inter-VariableFont_opsz,wght.ttf" id="1_inter"]
 [ext_resource type="FontFile" path="res://rookframe/ui/assets/fonts/Exo2-VariableFont_wght.ttf" id="2_exo"]
@@ -99,6 +99,42 @@ corner_radius_top_right = 7
 corner_radius_bottom_right = 7
 corner_radius_bottom_left = 7
 
+[sub_resource type="StyleBoxFlat" id="StepPending"]
+bg_color = Color(0.031373, 0.078431, 0.090196, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.133333, 0.196078, 0.215686, 1)
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 18
+
+[sub_resource type="StyleBoxFlat" id="StepCurrent"]
+bg_color = Color(0.062745, 0.105882, 0.117647, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.941176, 0.733333, 0.196078, 1)
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 18
+
+[sub_resource type="StyleBoxFlat" id="StepComplete"]
+bg_color = Color(0.043137, 0.066667, 0.078431, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.490196, 0.85098, 0.537255, 1)
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 18
+
 [sub_resource type="StyleBoxFlat" id="Input"]
 content_margin_left = 12.0
 content_margin_top = 10.0
@@ -142,6 +178,38 @@ border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
 border_color = Color(0.133333, 0.196078, 0.215686, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="SearchInput"]
+content_margin_left = 12.0
+content_margin_top = 0.0
+content_margin_right = 12.0
+content_margin_bottom = 0.0
+bg_color = Color(0.027451, 0.062745, 0.082353, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.27451, 0.321569, 0.337255, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="SearchInputFocus"]
+content_margin_left = 12.0
+content_margin_top = 0.0
+content_margin_right = 12.0
+content_margin_bottom = 0.0
+bg_color = Color(0.027451, 0.062745, 0.082353, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.509804, 0.972549, 0.956863, 1)
 corner_radius_top_left = 4
 corner_radius_top_right = 4
 corner_radius_bottom_right = 4
@@ -233,6 +301,54 @@ content_margin_top = 10.0
 content_margin_right = 12.0
 content_margin_bottom = 10.0
 bg_color = Color(0, 0, 0, 0)
+
+[sub_resource type="StyleBoxFlat" id="QuietHover"]
+content_margin_left = 12.0
+content_margin_top = 10.0
+content_margin_right = 12.0
+content_margin_bottom = 10.0
+bg_color = Color(0.070588, 0.164706, 0.168627, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.266667, 0.913725, 0.913725, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="QuietPressed"]
+content_margin_left = 12.0
+content_margin_top = 10.0
+content_margin_right = 12.0
+content_margin_bottom = 10.0
+bg_color = Color(0.070588, 0.290196, 0.282353, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.509804, 0.972549, 0.956863, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="QuietFocus"]
+content_margin_left = 12.0
+content_margin_top = 10.0
+content_margin_right = 12.0
+content_margin_bottom = 10.0
+bg_color = Color(0, 0, 0, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.509804, 0.972549, 0.956863, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
 
 [sub_resource type="StyleBoxFlat" id="DangerHover"]
 content_margin_left = 12.0
@@ -587,18 +703,32 @@ Button/styles/focus = SubResource("ButtonFocus")
 Button/styles/disabled = SubResource("ButtonDisabled")
 CheckBox/colors/font_color = Color(0.85098, 0.831373, 0.819608, 1)
 CheckBox/colors/font_hover_color = Color(0.509804, 0.972549, 0.956863, 1)
+CheckBox/colors/font_pressed_color = Color(0.85098, 0.831373, 0.819608, 1)
+CheckBox/colors/font_hover_pressed_color = Color(0.509804, 0.972549, 0.956863, 1)
 CheckBox/colors/font_focus_color = Color(0.85098, 0.831373, 0.819608, 1)
 CheckBox/colors/font_disabled_color = Color(0.4, 0.48, 0.47, 0.62)
 CheckBox/constants/h_separation = 12
 CheckBox/font_sizes/font_size = 16
-CheckBox/styles/focus = SubResource("ButtonFocus")
+CheckBox/styles/normal = SubResource("Quiet")
+CheckBox/styles/pressed = SubResource("Quiet")
+CheckBox/styles/disabled = SubResource("Quiet")
+CheckBox/styles/hover = SubResource("QuietHover")
+CheckBox/styles/hover_pressed = SubResource("QuietHover")
+CheckBox/styles/focus = SubResource("QuietFocus")
 CheckButton/colors/font_color = Color(0.85098, 0.831373, 0.819608, 1)
 CheckButton/colors/font_hover_color = Color(0.509804, 0.972549, 0.956863, 1)
+CheckButton/colors/font_pressed_color = Color(0.85098, 0.831373, 0.819608, 1)
+CheckButton/colors/font_hover_pressed_color = Color(0.509804, 0.972549, 0.956863, 1)
 CheckButton/colors/font_focus_color = Color(0.85098, 0.831373, 0.819608, 1)
 CheckButton/colors/font_disabled_color = Color(0.4, 0.48, 0.47, 0.62)
 CheckButton/constants/h_separation = 12
 CheckButton/font_sizes/font_size = 16
-CheckButton/styles/focus = SubResource("ButtonFocus")
+CheckButton/styles/normal = SubResource("Quiet")
+CheckButton/styles/pressed = SubResource("Quiet")
+CheckButton/styles/disabled = SubResource("Quiet")
+CheckButton/styles/hover = SubResource("QuietHover")
+CheckButton/styles/hover_pressed = SubResource("QuietHover")
+CheckButton/styles/focus = SubResource("QuietFocus")
 GridContainer/constants/h_separation = 16
 GridContainer/constants/v_separation = 12
 HBoxContainer/constants/separation = 12
@@ -726,6 +856,10 @@ Tree/colors/font_selected_color = Color(0.003922, 0.047059, 0.062745, 1)
 Tree/colors/guide_color = Color(0.133333, 0.196078, 0.215686, 1)
 Tree/constants/h_separation = 12
 Tree/constants/item_margin = 16
+Tree/constants/inner_item_margin_left = 12
+Tree/constants/inner_item_margin_top = 6
+Tree/constants/inner_item_margin_right = 12
+Tree/constants/inner_item_margin_bottom = 6
 Tree/constants/v_separation = 8
 Tree/font_sizes/font_size = 16
 Tree/styles/cursor = SubResource("ButtonFocus")
@@ -748,6 +882,11 @@ Window/icons/close = ExtResource("12_close")
 Window/icons/close_pressed = ExtResource("12_close")
 Window/styles/embedded_border = SubResource("WindowBorder")
 Window/styles/embedded_unfocused_border = SubResource("Surface")
+AcceptDialog/constants/buttons_separation = 12
+AcceptDialog/styles/panel = SubResource("Raised")
+FileDialog/colors/folder_icon_color = Color(0.509804, 0.972549, 0.956863, 1)
+FileDialog/colors/file_icon_color = Color(0.85098, 0.831373, 0.819608, 1)
+FileDialog/colors/file_disabled_color = Color(0.4, 0.48, 0.47, 0.62)
 RookframeCanvas/base_type = &"PanelContainer"
 RookframeCanvas/styles/panel = SubResource("Canvas")
 RookframeSurface/base_type = &"PanelContainer"
@@ -771,15 +910,23 @@ RookframeNoticeSuccess/styles/panel = SubResource("NoticeSuccess")
 RookframeNoticeError/base_type = &"PanelContainer"
 RookframeNoticeError/styles/panel = SubResource("NoticeError")
 RookframeSearchField/base_type = &"PanelContainer"
-RookframeSearchField/styles/panel = SubResource("Input")
+RookframeSearchField/styles/panel = SubResource("SearchInput")
 RookframeSearchFieldFocus/base_type = &"PanelContainer"
-RookframeSearchFieldFocus/styles/panel = SubResource("ComponentFocus")
+RookframeSearchFieldFocus/styles/panel = SubResource("SearchInputFocus")
 RookframeStructuredRow/base_type = &"PanelContainer"
 RookframeStructuredRow/styles/panel = SubResource("Row")
 RookframeStructuredRowSelected/base_type = &"PanelContainer"
 RookframeStructuredRowSelected/styles/panel = SubResource("RowSelected")
 RookframeBadge/base_type = &"PanelContainer"
 RookframeBadge/styles/panel = SubResource("Badge")
+RookframeStepPending/base_type = &"PanelContainer"
+RookframeStepPending/styles/panel = SubResource("StepPending")
+RookframeStepCurrent/base_type = &"PanelContainer"
+RookframeStepCurrent/styles/panel = SubResource("StepCurrent")
+RookframeStepComplete/base_type = &"PanelContainer"
+RookframeStepComplete/styles/panel = SubResource("StepComplete")
+RookframeDialogSurface/base_type = &"PanelContainer"
+RookframeDialogSurface/styles/panel = SubResource("ManagedFrame")
 RookframeTitle/base_type = &"Label"
 RookframeTitle/colors/font_color = Color(0.941176, 0.733333, 0.196078, 1)
 RookframeTitle/fonts/font = ExtResource("2_exo")
@@ -827,6 +974,7 @@ RookframePrimaryButton/base_type = &"Button"
 RookframePrimaryButton/colors/font_color = Color(0.003922, 0.047059, 0.062745, 1)
 RookframePrimaryButton/colors/font_hover_color = Color(0.003922, 0.047059, 0.062745, 1)
 RookframePrimaryButton/colors/font_pressed_color = Color(0.003922, 0.047059, 0.062745, 1)
+RookframePrimaryButton/colors/font_focus_color = Color(0.003922, 0.047059, 0.062745, 1)
 RookframePrimaryButton/styles/normal = SubResource("PrimaryNormal")
 RookframePrimaryButton/styles/hover = SubResource("PrimaryHover")
 RookframePrimaryButton/styles/pressed = SubResource("PrimaryPressed")
@@ -842,9 +990,9 @@ RookframeSecondaryButton/styles/focus = SubResource("FocusFrame")
 RookframeSecondaryButton/styles/disabled = SubResource("ButtonDisabled")
 RookframeQuietButton/base_type = &"Button"
 RookframeQuietButton/styles/normal = SubResource("Quiet")
-RookframeQuietButton/styles/hover = SubResource("ButtonHover")
-RookframeQuietButton/styles/pressed = SubResource("ButtonPressed")
-RookframeQuietButton/styles/focus = SubResource("ButtonFocus")
+RookframeQuietButton/styles/hover = SubResource("QuietHover")
+RookframeQuietButton/styles/pressed = SubResource("QuietPressed")
+RookframeQuietButton/styles/focus = SubResource("QuietFocus")
 RookframeDangerButton/base_type = &"Button"
 RookframeDangerButton/colors/font_color = Color(0.937255, 0.356863, 0.329412, 1)
 RookframeDangerButton/colors/font_hover_color = Color(0.937255, 0.356863, 0.329412, 1)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://wibauqmqfimwx"]
+[gd_scene load_steps=28 format=3 uid="uid://wibauqmqfimwx"]
 
 [ext_resource type="Theme" path="res://rookframe/ui/theme/rookframe_theme.tres" id="1_theme"]
 [ext_resource type="Script" path="res://examples/catalogue/visual_catalogue.gd" id="2_script"]
@@ -25,6 +25,8 @@
 [ext_resource type="Texture2D" path="res://rookframe/ui/icons/warning.svg" id="23_warning"]
 [ext_resource type="Texture2D" path="res://rookframe/ui/icons/world.svg" id="24_world"]
 [ext_resource type="PackedScene" path="res://rookframe/ui/components/layout/adaptive_grid.tscn" id="25_adaptive_grid"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/components/overlays/dialog.tscn" id="26_dialog"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/components/overlays/file_picker_dialog.tscn" id="27_file_picker"]
 
 [node name="VisualCatalogue" type="Control"]
 layout_mode = 3
@@ -261,7 +263,7 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 44)
 layout_mode = 2
 theme_type_variation = &"RookframeSecondaryButton"
-text = "Accept dialog"
+text = "Information dialog"
 
 [node name="OpenConfirm" type="Button" parent="Canvas/Page/Stack/Tabs/Native/Margin/Content/Overlays"]
 unique_name_in_owner = true
@@ -275,7 +277,7 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 44)
 layout_mode = 2
 theme_type_variation = &"RookframeSecondaryButton"
-text = "File dialog"
+text = "File picker"
 
 [node name="NativeTabs" type="TabContainer" parent="Canvas/Page/Stack/Tabs/Native/Margin/Content"]
 custom_minimum_size = Vector2(0, 160)
@@ -369,9 +371,10 @@ description = "Disabled state stays readable and cannot receive focus."
 
 [node name="ImageField" parent="Canvas/Page/Stack/Tabs/Forms/Margin/Content" instance=ExtResource("7_image")]
 layout_mode = 2
-title = "Portrait or media"
-help_text = "The component emits replace_requested; the consumer owns file admission and persistence."
-preview = ExtResource("24_world")
+title = "Record artwork"
+help_text = "Current image preview. Choose replacement emits a request; the host still owns file admission and persistence."
+preview = ExtResource("21_rook")
+change_label = "Choose replacement"
 
 [node name="Layout" type="ScrollContainer" parent="Canvas/Page/Stack/Tabs"]
 layout_mode = 2
@@ -497,23 +500,96 @@ state = 3
 title = "Task failed"
 description = "Recovery actions belong in the provided action slot."
 
-[node name="FullProgress" parent="Canvas/Page/Stack/Tabs/Feedback/Margin/Content" instance=ExtResource("15_step")]
+[node name="ProgressHeading" type="Label" parent="Canvas/Page/Stack/Tabs/Feedback/Margin/Content"]
 layout_mode = 2
-accessible_label = "Character workflow"
+theme_type_variation = &"RookframeLabel"
+text = "CHARACTER CREATION WIZARD"
+
+[node name="Wizard" type="PanelContainer" parent="Canvas/Page/Stack/Tabs/Feedback/Margin/Content"]
+layout_mode = 2
+theme_type_variation = &"RookframeRaisedSurface"
+
+[node name="Content" type="VBoxContainer" parent="Canvas/Page/Stack/Tabs/Feedback/Margin/Content/Wizard"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Header" type="HBoxContainer" parent="Canvas/Page/Stack/Tabs/Feedback/Margin/Content/Wizard/Content"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Copy" type="VBoxContainer" parent="Canvas/Page/Stack/Tabs/Feedback/Margin/Content/Wizard/Content/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 4
+
+[node name="Eyebrow" type="Label" parent="Canvas/Page/Stack/Tabs/Feedback/Margin/Content/Wizard/Content/Header/Copy"]
+layout_mode = 2
+theme_type_variation = &"RookframeLabel"
+text = "NEW CHARACTER"
+
+[node name="Title" type="Label" parent="Canvas/Page/Stack/Tabs/Feedback/Margin/Content/Wizard/Content/Header/Copy"]
+layout_mode = 2
+theme_type_variation = &"RookframeSubtitle"
+text = "Build your character"
+
+[node name="Description" type="Label" parent="Canvas/Page/Stack/Tabs/Feedback/Margin/Content/Wizard/Content/Header/Copy"]
+layout_mode = 2
+theme_type_variation = &"RookframeMeta"
+text = "Complete each step. Your choices remain editable until review."
+autowrap_mode = 2
+
+[node name="Save" type="Label" parent="Canvas/Page/Stack/Tabs/Feedback/Margin/Content/Wizard/Content/Header"]
+layout_mode = 2
+theme_type_variation = &"RookframeSuccess"
+text = "Saved"
+vertical_alignment = 1
+
+[node name="Progress" parent="Canvas/Page/Stack/Tabs/Feedback/Margin/Content/Wizard/Content" instance=ExtResource("15_step")]
+layout_mode = 2
+accessible_label = "Character creation progress"
 steps = PackedStringArray("Class", "Abilities", "Origin", "Equipment", "Identity", "Review")
 current_step = 3
 
-[node name="Constrained" type="PanelContainer" parent="Canvas/Page/Stack/Tabs/Feedback/Margin/Content"]
-custom_minimum_size = Vector2(520, 0)
+[node name="CurrentStep" type="PanelContainer" parent="Canvas/Page/Stack/Tabs/Feedback/Margin/Content/Wizard/Content"]
 layout_mode = 2
-size_flags_horizontal = 0
 theme_type_variation = &"RookframeInsetSurface"
 
-[node name="CompactProgress" parent="Canvas/Page/Stack/Tabs/Feedback/Margin/Content/Constrained" instance=ExtResource("15_step")]
+[node name="Content" type="VBoxContainer" parent="Canvas/Page/Stack/Tabs/Feedback/Margin/Content/Wizard/Content/CurrentStep"]
 layout_mode = 2
-accessible_label = "Constrained workflow"
-steps = PackedStringArray("Select", "Configure", "Review", "Publish")
-current_step = 2
+theme_override_constants/separation = 8
+
+[node name="Eyebrow" type="Label" parent="Canvas/Page/Stack/Tabs/Feedback/Margin/Content/Wizard/Content/CurrentStep/Content"]
+layout_mode = 2
+theme_type_variation = &"RookframeLabel"
+text = "CURRENT STEP · 3 OF 6"
+
+[node name="Title" type="Label" parent="Canvas/Page/Stack/Tabs/Feedback/Margin/Content/Wizard/Content/CurrentStep/Content"]
+layout_mode = 2
+theme_type_variation = &"RookframeHeading"
+text = "Choose an origin"
+
+[node name="Description" type="Label" parent="Canvas/Page/Stack/Tabs/Feedback/Margin/Content/Wizard/Content/CurrentStep/Content"]
+layout_mode = 2
+theme_type_variation = &"RookframeBody"
+text = "Select the history that shaped your character. Your origin influences starting knowledge and story prompts."
+autowrap_mode = 2
+
+[node name="Actions" type="HBoxContainer" parent="Canvas/Page/Stack/Tabs/Feedback/Margin/Content/Wizard/Content"]
+layout_mode = 2
+alignment = 2
+theme_override_constants/separation = 12
+
+[node name="Back" type="Button" parent="Canvas/Page/Stack/Tabs/Feedback/Margin/Content/Wizard/Content/Actions"]
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+theme_type_variation = &"RookframeSecondaryButton"
+text = "Back"
+
+[node name="Continue" type="Button" parent="Canvas/Page/Stack/Tabs/Feedback/Margin/Content/Wizard/Content/Actions"]
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+theme_type_variation = &"RookframePrimaryButton"
+text = "Continue"
 
 [node name="Data" type="ScrollContainer" parent="Canvas/Page/Stack/Tabs"]
 layout_mode = 2
@@ -732,7 +808,7 @@ autowrap_mode = 2
 [node name="Status" type="Label" parent="Canvas/Page/Stack/Tabs/Managed/Columns/Explanation"]
 layout_mode = 2
 theme_type_variation = &"RookframeSuccess"
-text = "One retained task tree - no duplicate docked/floating composition"
+text = "Header and footer stay fixed; the inset record list is the only scrolling region."
 autowrap_mode = 2
 
 [node name="ManagedDemo" parent="Canvas/Page/Stack/Tabs/Managed/Columns" instance=ExtResource("20_managed")]
@@ -741,18 +817,25 @@ custom_minimum_size = Vector2(680, 0)
 layout_mode = 2
 surface_title = "Retained package task"
 
-[node name="AcceptDialogDemo" type="AcceptDialog" parent="."]
+[node name="AcceptDialogDemo" parent="." instance=ExtResource("26_dialog")]
 unique_name_in_owner = true
-title = "Native AcceptDialog"
-dialog_text = "Godot owns focus trapping, confirmation, and dismissal. The shared Theme supplies Rookframe styling."
+eyebrow = "INFORMATION"
+heading = "Ready for the next stage"
+description = "Your current choices are saved. Continue when you are ready to configure the remaining details."
+confirm_label = "Got it"
+show_cancel = false
 
-[node name="ConfirmationDialogDemo" type="ConfirmationDialog" parent="."]
+[node name="ConfirmationDialogDemo" parent="." instance=ExtResource("26_dialog")]
 unique_name_in_owner = true
-title = "Native ConfirmationDialog"
-dialog_text = "Confirm and cancel button order follows Godot and the host platform."
+tone = 1
+eyebrow = "CONFIRM ACTION"
+heading = "Archive this character?"
+description = "The character leaves your active roster. You can restore it later from the archive."
+confirm_label = "Archive character"
 
-[node name="FileDialogDemo" type="FileDialog" parent="."]
+[node name="FileDialogDemo" parent="." instance=ExtResource("27_file_picker")]
 unique_name_in_owner = true
-title = "Native FileDialog"
-file_mode = 0
-access = 2
+heading = "Choose a character portrait"
+description = "Browse project or local files. Select an image to preview its details before opening."
+initial_directory = "res://"
+allowed_extensions = PackedStringArray("png", "jpg", "jpeg", "webp", "svg")

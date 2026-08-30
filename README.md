@@ -19,8 +19,8 @@ The current pre-release candidate includes:
   62-role icon registry;
 - small editor-authored public scenes only for reusable relationships Godot
   does not provide as a built-in node;
-- responsive layout, accessible forms and search, feedback, Managed Surface,
-  and structured-data contracts; and
+- responsive layout, accessible forms and search, designed dialogs and file
+  selection, feedback, Managed Surface, and structured-data contracts; and
 - a complete manual visual and interaction catalogue.
 
 Application screens, workflows, domain state, host orchestration, redundant

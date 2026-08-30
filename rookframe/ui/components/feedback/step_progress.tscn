@@ -5,80 +5,95 @@
 [node name="StepProgress" type="VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/separation = 8
+theme_override_constants/separation = 12
 script = ExtResource("1_script")
 
-[node name="Full" type="HBoxContainer" parent="."]
+[node name="Wide" type="VBoxContainer" parent="."]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 12
 
-[node name="Step1" type="Label" parent="Full"]
+[node name="Context" type="HBoxContainer" parent="Wide"]
 layout_mode = 2
-size_flags_horizontal = 3
-theme_type_variation = &"RookframePending"
-text = "1. First step - current"
-autowrap_mode = 2
+theme_override_constants/separation = 16
 
-[node name="Step2" type="Label" parent="Full"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_type_variation = &"RookframeMeta"
-text = "2. Second step - pending"
-autowrap_mode = 2
-
-[node name="Step3" type="Label" parent="Full"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_type_variation = &"RookframeMeta"
-autowrap_mode = 2
-
-[node name="Step4" type="Label" parent="Full"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_type_variation = &"RookframeMeta"
-autowrap_mode = 2
-
-[node name="Step5" type="Label" parent="Full"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_type_variation = &"RookframeMeta"
-autowrap_mode = 2
-
-[node name="Step6" type="Label" parent="Full"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_type_variation = &"RookframeMeta"
-autowrap_mode = 2
-
-[node name="Step7" type="Label" parent="Full"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_type_variation = &"RookframeMeta"
-autowrap_mode = 2
-
-[node name="Step8" type="Label" parent="Full"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_type_variation = &"RookframeMeta"
-autowrap_mode = 2
-
-[node name="Compact" type="VBoxContainer" parent="."]
+[node name="Summary" type="Label" parent="Wide/Context"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_constants/separation = 8
+size_flags_horizontal = 3
+theme_type_variation = &"RookframeLabel"
+text = "STEP 1 OF 2"
 
-[node name="Copy" type="Label" parent="Compact"]
+[node name="CurrentTitle" type="Label" parent="Wide/Context"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"RookframeHeading"
+text = "First step"
+horizontal_alignment = 2
+
+[node name="Track" type="HBoxContainer" parent="Wide"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="Compact" type="PanelContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"RookframeInsetSurface"
+
+[node name="Content" type="VBoxContainer" parent="Compact"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Row" type="HBoxContainer" parent="Compact/Content"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="CurrentMarker" type="PanelContainer" parent="Compact/Content/Row"]
+custom_minimum_size = Vector2(44, 44)
+layout_mode = 2
+theme_type_variation = &"RookframeStepCurrent"
+
+[node name="CurrentNumber" type="Label" parent="Compact/Content/Row/CurrentMarker"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_type_variation = &"RookframePending"
-text = "Step 1 of 2: First step"
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Copy" type="VBoxContainer" parent="Compact/Content/Row"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 2
+
+[node name="CompactSummary" type="Label" parent="Compact/Content/Row/Copy"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"RookframeLabel"
+text = "STEP 1 OF 2"
+
+[node name="CompactTitle" type="Label" parent="Compact/Content/Row/Copy"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"RookframeIdentity"
+text = "First step"
 autowrap_mode = 2
 
-[node name="Progress" type="ProgressBar" parent="Compact"]
+[node name="Percent" type="Label" parent="Compact/Content/Row"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 16)
+custom_minimum_size = Vector2(64, 44)
+layout_mode = 2
+theme_type_variation = &"RookframeValue"
+text = "50%"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Progress" type="ProgressBar" parent="Compact/Content"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 12)
 layout_mode = 2
 max_value = 2.0
 value = 1.0

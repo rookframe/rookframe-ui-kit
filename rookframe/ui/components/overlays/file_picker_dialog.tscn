@@ -1,0 +1,338 @@
+[gd_scene format=3 uid="uid://g4tupp4dkeeb"]
+
+[ext_resource type="Script" path="res://rookframe/ui/components/overlays/file_picker_dialog.gd" id="1_script"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/components/forms/search_field.tscn" id="2_search"]
+[ext_resource type="Texture2D" path="res://rookframe/ui/icons/back.svg" id="4_back"]
+[ext_resource type="Texture2D" path="res://rookframe/ui/icons/chevron-up.svg" id="5_up"]
+[ext_resource type="Texture2D" path="res://rookframe/ui/icons/folder.svg" id="6_folder"]
+[ext_resource type="Texture2D" path="res://rookframe/ui/icons/document.svg" id="7_document"]
+[ext_resource type="Texture2D" path="res://rookframe/ui/icons/rook.svg" id="8_rook"]
+[ext_resource type="Texture2D" path="res://rookframe/ui/icons/check.svg" id="9_check"]
+[ext_resource type="Theme" path="res://rookframe/ui/theme/rookframe_theme.tres" id="10_theme"]
+
+[node name="FilePickerDialog" type="Window"]
+visible = false
+size = Vector2i(1120, 800)
+min_size = Vector2i(900, 600)
+unresizable = false
+borderless = true
+transient = true
+exclusive = true
+wrap_controls = false
+theme = ExtResource("10_theme")
+script = ExtResource("1_script")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.043137, 0.066667, 0.078431, 1)
+mouse_filter = 2
+
+[node name="Shell" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"RookframeDialogSurface"
+
+[node name="Content" type="VBoxContainer" parent="Shell"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Header" type="HBoxContainer" parent="Shell/Content"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Accent" type="ColorRect" parent="Shell/Content/Header"]
+custom_minimum_size = Vector2(4, 0)
+layout_mode = 2
+color = Color(0.941176, 0.733333, 0.196078, 1)
+mouse_filter = 2
+
+[node name="Mark" type="PanelContainer" parent="Shell/Content/Header"]
+custom_minimum_size = Vector2(52, 52)
+layout_mode = 2
+theme_type_variation = &"RookframeInsetSurface"
+
+[node name="Icon" type="TextureRect" parent="Shell/Content/Header/Mark"]
+layout_mode = 2
+texture = ExtResource("8_rook")
+expand_mode = 1
+stretch_mode = 5
+mouse_filter = 2
+
+[node name="Copy" type="VBoxContainer" parent="Shell/Content/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 4
+
+[node name="Eyebrow" type="Label" parent="Shell/Content/Header/Copy"]
+layout_mode = 2
+theme_type_variation = &"RookframeLabel"
+text = "FILE BROWSER"
+
+[node name="Title" type="Label" parent="Shell/Content/Header/Copy"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"RookframeSubtitle"
+text = "Open a file"
+
+[node name="Description" type="Label" parent="Shell/Content/Header/Copy"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"RookframeMeta"
+text = "Choose a file from your project or computer."
+autowrap_mode = 2
+
+[node name="Navigation" type="HBoxContainer" parent="Shell/Content"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Back" type="Button" parent="Shell/Content/Navigation"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(44, 44)
+layout_mode = 2
+theme_type_variation = &"RookframeQuietButton"
+icon = ExtResource("4_back")
+tooltip_text = "Previous location"
+accessibility_name = "Previous location"
+
+[node name="Up" type="Button" parent="Shell/Content/Navigation"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(44, 44)
+layout_mode = 2
+theme_type_variation = &"RookframeQuietButton"
+icon = ExtResource("5_up")
+tooltip_text = "Parent folder"
+accessibility_name = "Parent folder"
+
+[node name="Path" type="PanelContainer" parent="Shell/Content/Navigation"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"RookframeInsetSurface"
+
+[node name="BreadcrumbScroll" type="ScrollContainer" parent="Shell/Content/Navigation/Path"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+horizontal_scroll_mode = 2
+vertical_scroll_mode = 0
+
+[node name="Breadcrumbs" type="HBoxContainer" parent="Shell/Content/Navigation/Path/BreadcrumbScroll"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 4
+
+[node name="Search" parent="Shell/Content/Navigation" instance=ExtResource("2_search")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+label_text = "Search files"
+show_label = false
+placeholder = "Search this folder"
+
+[node name="Browser" type="HBoxContainer" parent="Shell/Content"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 12
+
+[node name="PlacesPanel" type="PanelContainer" parent="Shell/Content/Browser"]
+custom_minimum_size = Vector2(190, 0)
+layout_mode = 2
+theme_type_variation = &"RookframeInsetSurface"
+
+[node name="Stack" type="VBoxContainer" parent="Shell/Content/Browser/PlacesPanel"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Label" type="Label" parent="Shell/Content/Browser/PlacesPanel/Stack"]
+layout_mode = 2
+theme_type_variation = &"RookframeLabel"
+text = "PLACES"
+
+[node name="Places" type="ItemList" parent="Shell/Content/Browser/PlacesPanel/Stack"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+allow_reselect = true
+fixed_icon_size = Vector2i(24, 24)
+icon_mode = 1
+same_column_width = true
+accessibility_name = "Common locations"
+
+[node name="FilesPanel" type="PanelContainer" parent="Shell/Content/Browser"]
+custom_minimum_size = Vector2(430, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"RookframeInsetSurface"
+
+[node name="Stack" type="VBoxContainer" parent="Shell/Content/Browser/FilesPanel"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Header" type="HBoxContainer" parent="Shell/Content/Browser/FilesPanel/Stack"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Shell/Content/Browser/FilesPanel/Stack/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"RookframeLabel"
+text = "FILES"
+
+[node name="BrowserStatus" type="Label" parent="Shell/Content/Browser/FilesPanel/Stack/Header"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"RookframeMeta"
+text = "0 items"
+
+[node name="FileList" type="ItemList" parent="Shell/Content/Browser/FilesPanel/Stack"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+allow_reselect = true
+fixed_icon_size = Vector2i(28, 28)
+icon_mode = 1
+same_column_width = true
+accessibility_name = "Files and folders"
+
+[node name="Preview" type="PanelContainer" parent="Shell/Content/Browser"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(280, 0)
+layout_mode = 2
+theme_type_variation = &"RookframeRaisedSurface"
+
+[node name="Stack" type="VBoxContainer" parent="Shell/Content/Browser/Preview"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Label" type="Label" parent="Shell/Content/Browser/Preview/Stack"]
+layout_mode = 2
+theme_type_variation = &"RookframeLabel"
+text = "SELECTION"
+
+[node name="PreviewIconFrame" type="PanelContainer" parent="Shell/Content/Browser/Preview/Stack"]
+custom_minimum_size = Vector2(0, 132)
+layout_mode = 2
+theme_type_variation = &"RookframeInsetSurface"
+
+[node name="PreviewIcon" type="TextureRect" parent="Shell/Content/Browser/Preview/Stack/PreviewIconFrame"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(72, 72)
+layout_mode = 2
+texture = ExtResource("7_document")
+expand_mode = 1
+stretch_mode = 5
+mouse_filter = 2
+
+[node name="PreviewEyebrow" type="Label" parent="Shell/Content/Browser/Preview/Stack"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"RookframeLabel"
+text = "NO FILE SELECTED"
+
+[node name="PreviewTitle" type="Label" parent="Shell/Content/Browser/Preview/Stack"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"RookframeHeading"
+text = "Select a file"
+autowrap_mode = 2
+
+[node name="PreviewDetail" type="Label" parent="Shell/Content/Browser/Preview/Stack"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"RookframeBody"
+text = "Choose a file to inspect its name, type, and location."
+autowrap_mode = 2
+
+[node name="PreviewPath" type="Label" parent="Shell/Content/Browser/Preview/Stack"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_type_variation = &"RookframeMeta"
+autowrap_mode = 3
+
+[node name="Selection" type="HBoxContainer" parent="Shell/Content"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="File" type="VBoxContainer" parent="Shell/Content/Selection"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 4
+
+[node name="Label" type="Label" parent="Shell/Content/Selection/File"]
+layout_mode = 2
+theme_type_variation = &"RookframeLabel"
+text = "SELECTED FILE"
+
+[node name="FileName" type="LineEdit" parent="Shell/Content/Selection/File"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+editable = false
+placeholder_text = "Choose a file above"
+accessibility_name = "Selected file"
+
+[node name="Filter" type="VBoxContainer" parent="Shell/Content/Selection"]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="Label" type="Label" parent="Shell/Content/Selection/Filter"]
+layout_mode = 2
+theme_type_variation = &"RookframeLabel"
+text = "FILE TYPES"
+
+[node name="FilterSummary" type="Label" parent="Shell/Content/Selection/Filter"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+theme_type_variation = &"RookframeBody"
+text = "All files"
+vertical_alignment = 1
+
+[node name="Rule" type="HSeparator" parent="Shell/Content"]
+layout_mode = 2
+
+[node name="Actions" type="HBoxContainer" parent="Shell/Content"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="HintIcon" type="TextureRect" parent="Shell/Content/Actions"]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+texture = ExtResource("9_check")
+modulate = Color(0.568627, 0.6, 0.603922, 1)
+expand_mode = 1
+stretch_mode = 5
+mouse_filter = 2
+
+[node name="Hint" type="Label" parent="Shell/Content/Actions"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"RookframeMeta"
+text = "Double-click a folder to browse or a file to open"
+vertical_alignment = 1
+
+[node name="Cancel" type="Button" parent="Shell/Content/Actions"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+theme_type_variation = &"RookframeSecondaryButton"
+text = "Cancel"
+
+[node name="Open" type="Button" parent="Shell/Content/Actions"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 52)
+layout_mode = 2
+theme_type_variation = &"RookframePrimaryButton"
+disabled = true
+text = "Open"

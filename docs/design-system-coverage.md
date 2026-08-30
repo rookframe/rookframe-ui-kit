@@ -58,7 +58,7 @@ Kit implementation is permitted without a later product decision.
 | Body scrolling and scrollbars | Bevy one-scroll-owner rule; Godot `ScrollContainer` | Native + Theme | Foundation |
 | Rules and separators | Bevy ruled rows/sections; Godot separators | Native + Theme | Foundation |
 | Bounded image display | Bevy Image; Godot `TextureRect` | Native + Theme | Foundation |
-| Windows, dialogs, confirmations, file dialogs, and popup placement | Bevy overlay roles; current Godot modal factory | Native + Theme | RFG-161 |
+| Ordinary windows and popup placement | Bevy overlay placement; Godot `Window` and Popup behavior | Native + Theme | RFG-161 |
 | Numeric input, ranges, sliders, and spin controls | Bevy field/control inventory; Godot built-ins | Native + Theme | RFG-161 |
 | Dense list, tree, and item selection | Bevy list/table catalogue; current Godot dynamic rows | Native + Theme | RFG-161 |
 | Native disabled, hover, pressed, selected, empty, pending, success, and error states | Both implementations' state families | Native + Theme | RFG-161 |
@@ -68,6 +68,8 @@ Kit implementation is permitted without a later product decision.
 | Reusable role | Evidence normalized | Classification | Delivery |
 | --- | --- | --- | --- |
 | Managed Surface anatomy: fixed task header, one scrolling body, fixed footer | Bevy managed-surface contract; Godot static factory | Kit relationship | RFG-161 |
+| Designed acknowledgement and confirmed-decision dialog | Bevy overlay hierarchy; Godot built-ins lack the Rookframe visual/content relationship | Kit relationship over native `Window` behavior | RFG-161 |
+| Designed open-file browser | Bevy file task hierarchy; Godot `FileDialog` lacks the Rookframe places/preview composition | Kit relationship over native filesystem and selection Controls | RFG-161 |
 | Managed placement, docking/floating restoration, focus, and one retained task tree | Bevy host relationship; Godot `managed_surface_state.gd` | Kit relationship, with host registries excluded | RFG-161 |
 | Task header composition | Bevy `TaskHeader`; current Godot chrome/title factories | Kit relationship | RFG-161 |
 | Action bar with arbitrary leading/trailing groups and source-order focus | Bevy `ActionBar`; Godot managed footer | Kit relationship | RFG-161 |

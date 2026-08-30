@@ -8,7 +8,7 @@ the table does not convert them into wrapper scenes.
 
 | Inventory role | Delivery | Catalogue evidence |
 | --- | --- | --- |
-| Windows, dialogs, confirmations, file dialogs, popup placement | `Window`, `AcceptDialog`, `ConfirmationDialog`, `FileDialog`, and Popup Theme coverage plus native recipe | Native tab; interactive overlay buttons |
+| Ordinary windows and popup placement | `Window`, Popup Theme coverage, and native recipe | Native tab; interactive menu |
 | Numeric input, ranges, sliders, and spin controls | `SpinBox`, `HSlider`, and `VSlider` Theme coverage | Native tab |
 | Dense list, tree, and item selection | `ItemList` and `Tree` Theme coverage | Native tab, selected/disabled records |
 | Disabled, hover, pressed, selected, pending, empty, loading, success, error | Native Theme states plus semantic component states | Every catalogue tab |
@@ -30,7 +30,7 @@ the table does not convert them into wrapper scenes.
 | Adaptive toolbar | `adaptive_toolbar.tscn` | Layout tab |
 | Section header with stable trailing lane | `section.tscn` | Layout tab |
 | Two-column icon action grid | `icon_action_grid.tscn` plus native Buttons | Layout tab |
-| Full/compact workflow progress | `step_progress.tscn` | Feedback tab, full and 520px constrained examples |
+| Full/compact workflow progress | `step_progress.tscn` | Feedback tab, one connected character-creation wizard that adapts at compact width |
 | Equal metric strip and cells | `metric_strip.tscn`, `metric.tscn` | Data tab |
 | Roll/result row and four markers | `roll_row.tscn` | Data tab, complete/current/pending/locked |
 | Whole-task lifecycle region | `task_state.tscn` | Feedback tab, all four states |
@@ -42,6 +42,8 @@ the table does not convert them into wrapper scenes.
 | Classification badge | `badge.tscn`; native themed frame plus semantic icon/text | Data tab |
 | Adaptive content/section stacks and summary regions | Native containers, `adaptive_grid.tscn`, `responsive_split.tscn`, and documented recipes | Layout, Data, and Icons tabs |
 | Semantic image replacement field | `image_field.tscn`; host/consumer admission and persistence excluded | Forms tab |
+| Designed acknowledgement and decision modal | `overlays/dialog.tscn`; native `Window` modality with blocking scrim, semantic tone, Rookframe command-briefing hierarchy, and optional body slot | Native tab, information and confirmation buttons |
+| Designed file selection browser | `overlays/file_picker_dialog.tscn`; places, history, breadcrumbs, filtering, native item selection, and preview | Native tab, file picker button |
 
 ## Semantic assets and public contracts
 

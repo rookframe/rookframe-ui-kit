@@ -54,6 +54,10 @@ validation or release gate.
 | `RookframeSearchFieldFocus` | `PanelContainer` | Focused Search Field perimeter |
 | `RookframeStructuredRow` | `PanelContainer` | Neutral structured record frame |
 | `RookframeStructuredRowSelected` | `PanelContainer` | Selected structured record frame |
+| `RookframeStepPending` | `PanelContainer` | Pending workflow-step marker |
+| `RookframeStepCurrent` | `PanelContainer` | Current workflow-step marker |
+| `RookframeStepComplete` | `PanelContainer` | Completed workflow-step marker |
+| `RookframeDialogSurface` | `PanelContainer` | Outer frame for designed modal compositions |
 
 ### Text
 

@@ -21,7 +21,11 @@
         "RookframeSearchField",
         "RookframeSearchFieldFocus",
         "RookframeStructuredRow",
-        "RookframeStructuredRowSelected"
+        "RookframeStructuredRowSelected",
+        "RookframeStepPending",
+        "RookframeStepCurrent",
+        "RookframeStepComplete",
+        "RookframeDialogSurface"
       ],
       "text": [
         "RookframeTitle",
@@ -230,6 +234,32 @@
       "contract": "The consumer owns file admission and persistence; the component never exposes or stores a filesystem path."
     },
     {
+      "name": "Dialog",
+      "scene": "res://rookframe/ui/components/overlays/dialog.tscn",
+      "sceneUid": "uid://87uetn404lqb",
+      "script": "res://rookframe/ui/components/overlays/dialog.gd",
+      "scriptUid": "uid://do77iyssrgyr2",
+      "rootType": "Window",
+      "properties": {"tone": "INFORMATION", "eyebrow": "ROOKFRAME", "heading": "Dialog title", "description": "Explain the decision and its consequence.", "confirm_label": "Continue", "cancel_label": "Cancel", "show_cancel": true},
+      "signals": ["confirmed", "cancelled"],
+      "methods": ["get_body_slot() -> Container", "open_dialog()", "close_dialog()"],
+      "slots": ["BodySlot"],
+      "tones": ["INFORMATION", "CONFIRMATION", "DANGER", "SUCCESS"],
+      "contract": "Owns one semantic command-briefing hierarchy, blocking scrim, bounded message region, content-sized window, and footer-only actions while native Window retains modality, focus, and keyboard input."
+    },
+    {
+      "name": "FilePickerDialog",
+      "scene": "res://rookframe/ui/components/overlays/file_picker_dialog.tscn",
+      "sceneUid": "uid://g4tupp4dkeeb",
+      "script": "res://rookframe/ui/components/overlays/file_picker_dialog.gd",
+      "scriptUid": "uid://2iqy4kt4qdkx",
+      "rootType": "Window",
+      "properties": {"heading": "Open a file", "description": "Choose a file from your project or computer.", "initial_directory": "res://", "allowed_extensions": [], "confirm_label": "Open", "show_hidden": false},
+      "signals": ["file_selected(path: String)", "cancelled", "directory_changed(path: String)"],
+      "methods": ["open_picker(directory: String = \"\")", "current_directory() -> String", "selected_path() -> String"],
+      "contract": "Owns filesystem browsing, compact icon-left places and file rows, history, breadcrumbs, search, filtering, selection preview, and confirmation without depending on FileDialog's private child tree."
+    },
+    {
       "name": "Notice",
       "scene": "res://rookframe/ui/components/feedback/notice.tscn",
       "sceneUid": "uid://mvkyfkqyexkga",
@@ -264,7 +294,7 @@
       "properties": {"accessible_label": "Workflow progress", "steps": ["First step", "Second step"], "current_step": 1, "compact_width": 720.0},
       "signals": ["layout_profile_changed(profile: StringName)"],
       "states": ["complete", "current", "pending"],
-      "contract": "Accepts two to eight labels and a one-based current step; switches to current/total plus ProgressBar in compact width."
+      "contract": "Accepts two to eight labels and a one-based current step; renders a connected status rail at wide width and a current-step completion card at compact width."
     },
     {
       "name": "Metric",

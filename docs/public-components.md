@@ -58,9 +58,34 @@ description. A `ChoiceRow` is one native toggle-button target; assign a shared
 `ButtonGroup` for exclusive selection.
 
 `ImageField` never opens a file or persists an image. Connect
-`replace_requested` to consumer- or host-owned admission. Call `set_preview()`
-only after a replacement is ready; cancel does nothing, and failures use
+`replace_requested` to consumer- or host-owned admission, which may open the
+public `FilePickerDialog`. Call `set_preview()` only after the consumer admits
+and loads the selected file; cancel does nothing, and failures use
 `set_error()`.
+
+## Dialogs and file selection
+
+| Scene | Public properties | Signals and methods |
+| --- | --- | --- |
+| `components/overlays/dialog.tscn` | `tone`, `eyebrow`, `heading`, `description`, action labels, `show_cancel` | `confirmed`, `cancelled`; `get_body_slot()`, `open_dialog()`, `close_dialog()` |
+| `components/overlays/file_picker_dialog.tscn` | `heading`, `description`, `initial_directory`, `allowed_extensions`, `confirm_label`, `show_hidden` | `file_selected`, `cancelled`, `directory_changed`; `open_picker()`, `current_directory()`, `selected_path()` |
+
+`Dialog` is a native modal `Window` with a blocking host scrim, semantic icon
+header, bounded message region, optional `BodySlot`, content-driven height,
+Escape cancellation, and an initial confirm focus target. Its `tone` is one of
+`INFORMATION`, `CONFIRMATION`, `DANGER`, or `SUCCESS`; tone changes the visible
+icon and semantic accent, never behavior by itself. An acknowledgement exposes
+only Confirm; a decision exposes Cancel and Confirm. The header never duplicates
+those footer actions with a third close button. It is a decision composition,
+not an `AcceptDialog` child-tree wrapper.
+
+`FilePickerDialog` is the designed open-file relationship. It owns navigation
+history, places, breadcrumbs, per-folder search, extension filtering, a native
+`ItemList` in compact icon-left row mode, selection preview, and explicit
+confirmation. Paths are shown in the inspector rather than transient row
+tooltips. The host still owns file admission, loading, persistence, and domain
+meaning. Do not reach into its internal nodes; configure the documented
+properties and consume `file_selected(path)`.
 
 ## Feedback and workflow
 
@@ -68,13 +93,15 @@ only after a replacement is ready; cancel does nothing, and failures use
 | --- | --- | --- |
 | `components/feedback/notice.tscn` | `INFO`, `PENDING`, `SUCCESS`, `ERROR` | `ActionSlot`, optional dismissal, `dismissed` signal |
 | `components/feedback/task_state.tscn` | `LOADING`, `EMPTY`, `SUCCESS`, `ERROR` | Whole-task `ActionSlot` for retry, create, or continue |
-| `components/feedback/step_progress.tscn` | complete, current, pending | Two to eight labels, one-based `current_step`, wide/compact profile signal |
+| `components/feedback/step_progress.tscn` | complete, current, pending | Two to eight steps; connected wide rail, compact current-step completion card, wide/compact profile signal |
 
-Every feedback state includes an icon or shape and a visible state word. Color
-is supplementary. `Notice` stays inside the owning task instead of creating a
-notification subsystem. `TaskState` replaces the whole current body while a
-task is blocked or terminal. Bounded numeric progress remains native
-`ProgressBar`.
+`Notice` and `TaskState` include an icon or shape and a visible state word;
+color is supplementary. `StepProgress` uses checks, numbered markers, and a
+current-step summary without printing implementation-state words beside every
+label. `Notice` stays inside the owning task instead of creating a notification
+subsystem. `TaskState` replaces the whole current body while a task is blocked
+or terminal; open-ended loading uses a rotating spinner. Bounded numeric
+progress remains native `ProgressBar`.
 
 ## Structured data display
 
@@ -124,7 +151,10 @@ last valid task focus when possible, or the first focusable task Control.
 ## Native-only relationships
 
 No public scene wraps a native Button, checkbox, radio group, numeric input,
-slider, list, tree, tab set, menu, popup, window, dialog, file dialog, grid,
-separator, image display, or ordinary progress bar. Use those Controls directly
-with the shared Theme and the configuration in
-[native controls and recipes](native-controls-and-recipes.md).
+slider, list, tree, tab set, menu, popup, ordinary window, grid, separator,
+image display, or ordinary progress bar. Use those Controls directly with the
+shared Theme and the configuration in
+[native controls and recipes](native-controls-and-recipes.md). `Dialog` and
+`FilePickerDialog` are public because they own reusable hierarchy and behavior
+beyond the adequate built-in nodes; they do not wrap private native child
+trees.

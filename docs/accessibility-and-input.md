@@ -16,6 +16,18 @@ polish.
 - Disabled controls remain readable but do not receive focus or activation.
 - A Managed Surface remembers the last valid focus owner in its retained task
   and restores it after minimize/restore when possible.
+- `Dialog` and `FilePickerDialog` retain native modal focus. Escape follows the
+  same cancellation path as the footer cancel action; acknowledgement dialogs
+  intentionally expose only their single confirm action.
+- An open `Dialog` inserts one blocking scrim into its Control host. The scrim
+  removes background pointer competition while the semantic icon, eyebrow,
+  title, and accessibility description communicate the interruption without
+  relying on accent color.
+- File-picker places, breadcrumbs, file rows, and actions are native focusable
+  controls. Places and files use compact icon-left `ItemList` rows. Folder and
+  file activation use the native activation signal; the selected filename and
+  path remain readable outside the list instead of depending on hover-only
+  path tooltips.
 
 ## Fields and validation
 
@@ -29,8 +41,11 @@ polish.
 
 ## Status communication
 
-- Notice, TaskState, StepProgress, RollRow, and pending StructuredRow states use
-  a visible state word and an icon or shape. Color is supplementary.
+- Notice, TaskState, RollRow, and pending StructuredRow states use a visible
+  state word and an icon or shape. Color is supplementary.
+- StepProgress uses completion checks, numbered markers, a visible current-step
+  summary, and a complete accessibility description instead of appending raw
+  implementation-state words to every step label.
 - Loading, pending, empty, success, and error remain in the owning task. Do not
   announce state by silently changing a border color.
 - Progress bars receive an accessible label. Step progress also communicates
@@ -64,5 +79,6 @@ At 1440x900 and a constrained width, verify:
    ActionBar, AdaptiveGrid, RollRow, and StructuredRow profiles.
 5. Replace catalogue copy with a long localized sentence and confirm it wraps
    without covering values or actions.
-6. Open the native menu and dialogs; verify keyboard movement, Escape/cancel,
-   and focus restoration follow Godot behavior.
+6. Open the native menu, `Dialog`, and `FilePickerDialog`; verify keyboard
+   movement, Escape/cancel, initial focus, folder activation, selection, and
+   confirmation follow Godot behavior.
