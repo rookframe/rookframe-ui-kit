@@ -39,7 +39,7 @@ extends "res://addons/gd-plug/plug.gd"
 
 func _plugging() -> void:
 	plug("rookframe/rookframe-ui-kit", {
-		"commit": "<full-ui-kit-commit>",
+		"commit": "c7e3c9277436c062dfad29d533fce16ec59c7978",
 		"include": ["rookframe/ui"],
 	})
 ```
