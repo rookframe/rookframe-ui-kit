@@ -54,11 +54,11 @@ color = Color(0.796078, 0.662745, 0.415686, 1)
 mouse_filter = 2
 
 [node name="ArrowHead" type="Control" parent="Content/Tail"]
-custom_minimum_size = Vector2(18, 20)
+custom_minimum_size = Vector2(12, 16)
 layout_mode = 2
 size_flags_vertical = 4
 mouse_filter = 2
 
 [node name="Head" type="Polygon2D" parent="Content/Tail/ArrowHead"]
-polygon = PackedVector2Array(0, 0, 15, 10, 0, 20)
+polygon = PackedVector2Array(0, 0, 12, 8, 0, 16)
 color = Color(0.796078, 0.662745, 0.415686, 1)
