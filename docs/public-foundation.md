@@ -75,6 +75,7 @@ a variation only for its current color or font is unsupported.
 | `RookframeCanvas` | `PanelContainer` | Full application or catalogue canvas |
 | `RookframeSurface` | `PanelContainer` | Ordinary content surface |
 | `RookframeRaisedSurface` | `PanelContainer` | Elevated local surface |
+| `RookframeRaisedFrame` | `PanelContainer` | Elevated frame whose caller owns the inner inset |
 | `RookframeInsetSurface` | `PanelContainer` | Sunken or nested content region |
 | `RookframeSection` | `PanelContainer` | Framed semantic section |
 | `RookframeManagedSurface` | `PanelContainer` | Outer frame for a reusable managed presentation |
