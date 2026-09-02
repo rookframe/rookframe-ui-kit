@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=66 format=3 uid="uid://s4dv3jijmvy1"]
+[gd_resource type="Theme" load_steps=70 format=3 uid="uid://s4dv3jijmvy1"]
 
 [ext_resource type="FontFile" path="res://rookframe/ui/assets/fonts/Inter-VariableFont_opsz,wght.ttf" id="1_inter"]
 [ext_resource type="FontFile" path="res://rookframe/ui/assets/fonts/Exo2-VariableFont_wght.ttf" id="2_exo"]
@@ -676,6 +676,54 @@ content_margin_top = 10.0
 content_margin_right = 16.0
 content_margin_bottom = 10.0
 
+[sub_resource type="StyleBoxFlat" id="GoldNormal"]
+content_margin_left = 16.0
+content_margin_top = 10.0
+content_margin_right = 16.0
+content_margin_bottom = 10.0
+bg_color = Color(0.698039, 0.541176, 0.298039, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.698039, 0.541176, 0.298039, 1)
+
+[sub_resource type="StyleBoxFlat" id="GoldHover"]
+content_margin_left = 16.0
+content_margin_top = 10.0
+content_margin_right = 16.0
+content_margin_bottom = 10.0
+bg_color = Color(0.772549, 0.627451, 0.380392, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.772549, 0.627451, 0.380392, 1)
+
+[sub_resource type="StyleBoxFlat" id="GoldPressed"]
+content_margin_left = 16.0
+content_margin_top = 11.0
+content_margin_right = 16.0
+content_margin_bottom = 9.0
+bg_color = Color(0.560784, 0.415686, 0.211765, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.560784, 0.415686, 0.211765, 1)
+
+[sub_resource type="StyleBoxFlat" id="GoldFocus"]
+content_margin_left = 15.0
+content_margin_top = 9.0
+content_margin_right = 15.0
+content_margin_bottom = 9.0
+bg_color = Color(0.698039, 0.541176, 0.298039, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.772549, 0.627451, 0.380392, 1)
+
 [sub_resource type="StyleBoxTexture" id="FocusFrame"]
 texture = ExtResource("11_focus")
 texture_margin_left = 8.0
@@ -980,6 +1028,16 @@ RookframePrimaryButton/styles/hover = SubResource("PrimaryHover")
 RookframePrimaryButton/styles/pressed = SubResource("PrimaryPressed")
 RookframePrimaryButton/styles/focus = SubResource("FocusFrame")
 RookframePrimaryButton/styles/disabled = SubResource("ButtonDisabled")
+RookframeGoldButton/base_type = &"Button"
+RookframeGoldButton/colors/font_color = Color(0.968627, 0.94902, 0.909804, 1)
+RookframeGoldButton/colors/font_hover_color = Color(0.968627, 0.94902, 0.909804, 1)
+RookframeGoldButton/colors/font_pressed_color = Color(0.968627, 0.94902, 0.909804, 1)
+RookframeGoldButton/colors/font_focus_color = Color(0.968627, 0.94902, 0.909804, 1)
+RookframeGoldButton/styles/normal = SubResource("GoldNormal")
+RookframeGoldButton/styles/hover = SubResource("GoldHover")
+RookframeGoldButton/styles/pressed = SubResource("GoldPressed")
+RookframeGoldButton/styles/focus = SubResource("GoldFocus")
+RookframeGoldButton/styles/disabled = SubResource("ButtonDisabled")
 RookframeSecondaryButton/base_type = &"Button"
 RookframeSecondaryButton/colors/font_color = Color(0.266667, 0.913725, 0.913725, 1)
 RookframeSecondaryButton/colors/font_hover_color = Color(0.509804, 0.972549, 0.956863, 1)

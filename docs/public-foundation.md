@@ -119,6 +119,7 @@ exact visual values may change compatibly while the role's purpose remains.
 | Variation | Base type | Meaning |
 | --- | --- | --- |
 | `RookframePrimaryButton` | `Button` | Advances or commits the current task |
+| `RookframeGoldButton` | `Button` | Prominent warm commitment action within a staged workflow |
 | `RookframeSecondaryButton` | `Button` | Important alternative that does not advance the task |
 | `RookframeQuietButton` | `Button` | Compact reveal, retry, or row-local action |
 | `RookframeDangerButton` | `Button` | Destructive or abandoning action |
