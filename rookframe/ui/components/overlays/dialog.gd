@@ -104,7 +104,7 @@ func open_dialog() -> void:
 	var initial_height := 480 if get_body_slot().get_child_count() > 0 else 320
 	var initial_width := DIALOG_WIDTH
 	if compact:
-		initial_width = roundi(get_viewport().get_visible_rect().size.x)
+		initial_width = roundi(_host_viewport_size().x)
 	popup_centered(Vector2i(initial_width, initial_height))
 	if not _fit_pending:
 		_fit_pending = true
@@ -131,7 +131,7 @@ func _fit_open_dialog() -> void:
 			_fit_pending = false
 			return
 		var compact := _configure_compact_layout()
-		var viewport_size := get_viewport().get_visible_rect().size
+		var viewport_size := _host_viewport_size()
 		var shell := get_node(^"Shell") as PanelContainer
 		var content_height := ceili(shell.get_combined_minimum_size().y / 4.0) * 4
 		var target_height := maxi(MINIMUM_DIALOG_HEIGHT, content_height)
@@ -223,11 +223,19 @@ func _refresh_body_visibility() -> void:
 
 
 func _is_compact_viewport() -> bool:
+	var viewport_size := _host_viewport_size()
 	return (
 		is_inside_tree()
-		and get_viewport().get_visible_rect().size.x > 0.0
-		and get_viewport().get_visible_rect().size.x <= COMPACT_VIEWPORT_WIDTH
+		and viewport_size.x > 0.0
+		and viewport_size.x <= COMPACT_VIEWPORT_WIDTH
 	)
+
+
+func _host_viewport_size() -> Vector2:
+	var host := get_parent() as Control
+	if host != null:
+		return host.get_viewport().get_visible_rect().size
+	return get_viewport().get_visible_rect().size
 
 
 func _configure_compact_layout() -> bool:
