@@ -59,6 +59,13 @@ var _scrim: ColorRect
 		show_cancel = value
 		_refresh()
 
+## Hosts may withhold a destructive or validation-gated confirmation until
+## their current dynamic input satisfies the domain rule.
+@export var confirm_enabled := true:
+	set(value):
+		confirm_enabled = value
+		_refresh()
+
 
 func _ready() -> void:
 	var cancel_button := get_node(^"Shell/Content/Actions/Cancel") as Button
@@ -104,7 +111,10 @@ func close_dialog() -> void:
 
 func _focus_initial() -> void:
 	var target := get_node(^"Shell/Content/Actions/Confirm") as Button
-	target.grab_focus()
+	if target.disabled:
+		target = get_node(^"Shell/Content/Actions/Cancel") as Button
+	if target.visible and not target.disabled:
+		target.grab_focus()
 
 
 func _fit_open_dialog() -> void:
@@ -128,6 +138,8 @@ func _fit_open_dialog() -> void:
 
 
 func _confirm() -> void:
+	if not confirm_enabled:
+		return
 	hide()
 	_remove_scrim()
 	confirmed.emit()
@@ -219,6 +231,10 @@ func _refresh() -> void:
 	if confirm_button != null:
 		confirm_button.text = confirm_label
 		confirm_button.accessibility_name = confirm_label
+		confirm_button.disabled = not confirm_enabled
+		confirm_button.theme_type_variation = (
+			&"RookframeDangerButton" if tone == Tone.DANGER else &"RookframePrimaryButton"
+		)
 	_refresh_body_visibility()
 	title = heading
 	accessibility_name = heading

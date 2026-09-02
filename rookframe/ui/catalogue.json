@@ -275,7 +275,7 @@
       "script": "res://rookframe/ui/components/overlays/dialog.gd",
       "scriptUid": "uid://do77iyssrgyr2",
       "rootType": "Window",
-      "properties": {"tone": "INFORMATION", "eyebrow": "ROOKFRAME", "heading": "Dialog title", "description": "Explain the decision and its consequence.", "confirm_label": "Continue", "cancel_label": "Cancel", "show_cancel": true},
+      "properties": {"tone": "INFORMATION", "eyebrow": "ROOKFRAME", "heading": "Dialog title", "description": "Explain the decision and its consequence.", "confirm_label": "Continue", "cancel_label": "Cancel", "show_cancel": true, "confirm_enabled": true},
       "signals": ["confirmed", "cancelled"],
       "methods": ["get_body_slot() -> Container", "open_dialog()", "close_dialog()"],
       "slots": ["BodySlot"],

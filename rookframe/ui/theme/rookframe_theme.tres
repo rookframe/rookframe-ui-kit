@@ -1058,6 +1058,7 @@ RookframeDangerButton/styles/normal = SubResource("Quiet")
 RookframeDangerButton/styles/hover = SubResource("DangerHover")
 RookframeDangerButton/styles/pressed = SubResource("DangerHover")
 RookframeDangerButton/styles/focus = SubResource("ButtonFocus")
+RookframeDangerButton/styles/disabled = SubResource("ButtonDisabled")
 RookframeTabButton/base_type = &"Button"
 RookframeTabButton/colors/font_color = Color(0.568627, 0.6, 0.603922, 1)
 RookframeTabButton/colors/font_hover_color = Color(0.509804, 0.972549, 0.956863, 1)

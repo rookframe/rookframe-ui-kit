@@ -108,12 +108,14 @@ and loads the selected file; cancel does nothing, and failures use
 
 | Scene / root | Public properties and defaults | Signals, methods, and slots | Behavior, focus, input, and accessibility |
 | --- | --- | --- | --- |
-| `dialog.tscn` / `Window` | `tone = INFORMATION`; `eyebrow = "ROOKFRAME"`; `heading = "Dialog title"`; `description = "Explain the decision and its consequence."`; `confirm_label = "Continue"`; `cancel_label = "Cancel"`; `show_cancel = true` | `confirmed`, `cancelled`; `get_body_slot()`, `open_dialog()`, `close_dialog()`; `BodySlot` | Opens as a native modal Window with one blocking scrim and initial focus on Confirm. `ui_cancel`, the cancel action, and `close_requested` emit `cancelled`; Confirm emits `confirmed`. Visible icon, eyebrow, heading, description, and semantic tone describe the interruption without color alone. |
+| `dialog.tscn` / `Window` | `tone = INFORMATION`; `eyebrow = "ROOKFRAME"`; `heading = "Dialog title"`; `description = "Explain the decision and its consequence."`; `confirm_label = "Continue"`; `cancel_label = "Cancel"`; `show_cancel = true`; `confirm_enabled = true` | `confirmed`, `cancelled`; `get_body_slot()`, `open_dialog()`, `close_dialog()`; `BodySlot` | Opens as a native modal Window with one blocking scrim and initial focus on the enabled confirmation action. `ui_cancel`, the cancel action, and `close_requested` emit `cancelled`; an enabled Confirm emits `confirmed`. Visible icon, eyebrow, heading, description, and semantic tone describe the interruption without color alone. |
 | `file_picker_dialog.tscn` / `Window` | `heading = "Open a file"`; `description = "Choose a file from your project or computer."`; `initial_directory = "res://"`; `allowed_extensions = []`; `confirm_label = "Open"`; `show_hidden = false` | `file_selected(path)`, `cancelled`, `directory_changed(path)`; `open_picker(directory = "")`, `current_directory()`, `selected_path()` | Initial focus enters Search. Native focusable places, breadcrumbs, file rows, and actions support keyboard/controller navigation; activation opens folders or selects files, `ui_accept` confirms a selection, and `ui_cancel` cancels. Selected name/path and filter summary stay visible and accessible outside hover tooltips. |
 
 `Dialog` is a native modal `Window` with a blocking host scrim, semantic icon
 header, bounded message region, optional `BodySlot`, content-driven height,
-Escape cancellation, and an initial confirm focus target. Its `tone` is one of
+Escape cancellation, and an initial enabled confirmation focus target. Hosts
+set `confirm_enabled = false` while a dynamic validation requirement is unmet;
+the native confirmation target then remains visible but unavailable. Its `tone` is one of
 `INFORMATION`, `CONFIRMATION`, `DANGER`, or `SUCCESS`; tone changes the visible
 icon and semantic accent, never behavior by itself. An acknowledgement exposes
 only Confirm; a decision exposes Cancel and Confirm. The header never duplicates
