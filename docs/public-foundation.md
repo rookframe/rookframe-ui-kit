@@ -15,6 +15,7 @@ The filesystem is authoritative: normal resources under
 | `assets/fonts/*.ttf` | Path and import UID below | UI and display typography assigned by the shared Theme |
 | `assets/frames/*.png` | Semantic path and import UID below | Nine-slice managed surface, section, primary/secondary action, and focus frames |
 | `icons/<semantic-name>.svg` | Path and import UID in the [semantic icon reference](semantic-icons.md) | Stable, context-neutral interface pictogram |
+| `icons/compass_rose.svg` | `uid://beea526jspe3i` | Rookframe-owned decorative navigation motif; it is non-semantic and never the only carrier of status, meaning, or an action label |
 | `icons/manifest.json` | Stable path | Ordered semantic registry and upstream provenance |
 
 The two font license texts under `assets/fonts/` and the Tabler license at
@@ -160,6 +161,9 @@ kit adds a public scene only when Godot lacks the reusable relationship; see
 The [semantic icon reference](semantic-icons.md) documents all 62 public paths,
 import UIDs, purposes, accessible labels, and composition rules.
 `icons/manifest.json` records the same names and the pinned Tabler source.
+`icons/compass_rose.svg` is intentionally outside that semantic registry: it is
+a Rookframe-owned decorative backdrop, has no default accessible label, and
+must not be used as an icon-only control or status indicator.
 Consumers load the semantic path, for example:
 
 ```gdscript

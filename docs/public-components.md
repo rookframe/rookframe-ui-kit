@@ -161,6 +161,9 @@ progress remains native `ProgressBar`.
 | `key_value_row.tscn` / `PanelContainer` | `key_text = "Key"`; `value_text = ""` | No signals or methods | Compact read-only fact with a visible key, trailing value, and divider. It receives no input; key and value are combined into its accessibility name and description. |
 | `action_row.tscn` / `Button` | `title = "Action"`; `description = "Supporting action detail"`; `action_label = "›"`; `tone = STANDARD`; native `disabled = false`; tones `STANDARD`, `DANGER` | Native `pressed` | Complete native button target for a compact navigation or management action. Title, supporting detail, and trailing action label remain visible; the root uses a secondary or danger semantic action style. Callers own policy and persistence. |
 | `action_link.tscn` / `Button` | `title = "Action"`; `title_lane_width = 150.0`; `title_font_size = 15`; native `disabled = false` | Native `pressed` | Complete quiet navigation target with a label lane, intentional gap, continuous trailing rule, and scene-authored arrow head. The rule never touches the label and meets the arrow base; callers own policy and connect `pressed`. |
+| `world_row.tscn` / `Button` | `title = "World"`; `detail_text = ""`; `selected = false`; native `disabled = false` | Native `pressed` | Selectable World record with a cyan diamond, textual identity/metadata, selected outline, and gold disclosure. The full root is the only target; callers own selection and navigation policy. |
+| `world_summary_card.tscn` / `VBoxContainer` | `facts_visible = true`; `actions_visible = false`; `kicker_text = "SELECTED WORLD"`; `privacy_text = "PRIVATE"`; `package_name = "Package"`; `detail_text = ""` | Native child `OpenWorld` and `WorldDetails` Buttons when actions are visible | Retained World identity, Package, availability, optional facts, and optional actions as one scene-authored relationship. Callers supply dynamic text/data and connect action Buttons; policy, persistence, and navigation remain outside the component. |
+| `disclosure_row.tscn` / `Button` | `title = "Action"`; `description = "Supporting action detail"`; `action_label = "›"`; `tone = STANDARD`; native `disabled = false`; tones `STANDARD`, `DANGER` | Native `pressed` | Plain settings-list action with textual title/detail, a scene-authored disclosure, and one bottom divider. The root is the only interactive target; callers own policy and connect `pressed`. |
 | `package_row.tscn` / `PanelContainer` | `package_name = "Package"`; `detail_text = ""`; `selected = false`; `locked = false`; `locked_state_label = "INCLUDED"` | No signals or methods | Read-only Package identity, role/version detail, marker, and status. `locked` represents an included required Package; application policy and persistence stay outside the component. |
 | `package_card.tscn` / `PanelContainer` | Same properties and states as `package_row.tscn`; `locked_state_label = "REQUIRED"` | No signals or methods | Detailed read-only Package card for wide task surfaces. It retains the compact Package row's identity, status, and accessibility behavior. |
 
@@ -168,7 +171,10 @@ The result slot in `RollRow` remains empty before a result exists; do not add
 decorative punctuation. The state marker always names its state and uses a
 semantic icon. `StructuredRow` exposes a stable `ActionSlot`; selection itself
 uses `ChoiceRow` so a non-interactive record does not grow fake button
-behavior.
+behavior. `WorldRow` and `DisclosureRow` intentionally use a native root
+Button because selection or navigation is their complete documented behavior;
+the summary Card keeps its static relationship scene-authored while callers
+inject only dynamic World data.
 
 ## Managed Surface
 

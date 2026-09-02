@@ -441,6 +441,41 @@
       "contract": "One quiet native navigation target with a separate label lane, a continuous trailing rule, and a scene-authored arrow head. The rule meets the arrow base without touching the label; callers own policy and connect pressed."
     },
     {
+      "name": "WorldRow",
+      "scene": "res://rookframe/ui/components/data/world_row.tscn",
+      "sceneUid": "uid://vxsjcvw0woxb",
+      "script": "res://rookframe/ui/components/data/world_row.gd",
+      "scriptUid": "uid://226s6l12jqsn",
+      "rootType": "Button",
+      "properties": {"title": "World", "detail_text": "", "selected": false, "disabled": false},
+      "signals": ["pressed"],
+      "states": ["unselected", "selected"],
+      "contract": "One complete selectable World record with a scene-authored marker, identity/metadata hierarchy, selected outline, and disclosure; callers own selection and navigation policy."
+    },
+    {
+      "name": "WorldSummaryCard",
+      "scene": "res://rookframe/ui/components/data/world_summary_card.tscn",
+      "sceneUid": "uid://8q13agek8dan",
+      "script": "res://rookframe/ui/components/data/world_summary_card.gd",
+      "scriptUid": "uid://dugby61hex8yk",
+      "rootType": "VBoxContainer",
+      "properties": {"facts_visible": true, "actions_visible": false, "kicker_text": "SELECTED WORLD", "privacy_text": "PRIVATE", "package_name": "Package", "detail_text": ""},
+      "slots": ["OpenWorld", "WorldDetails"],
+      "contract": "One retained World identity, Package, availability, optional facts, and optional action relationship. Callers inject dynamic World data and own policy, persistence, and action handling."
+    },
+    {
+      "name": "DisclosureRow",
+      "scene": "res://rookframe/ui/components/data/disclosure_row.tscn",
+      "sceneUid": "uid://dblphm0hfotvo",
+      "script": "res://rookframe/ui/components/data/disclosure_row.gd",
+      "scriptUid": "uid://c7n6c2h221uhp",
+      "rootType": "Button",
+      "properties": {"title": "Action", "description": "Supporting action detail", "action_label": "›", "tone": "STANDARD", "disabled": false},
+      "signals": ["pressed"],
+      "states": ["STANDARD", "DANGER"],
+      "contract": "One complete plain settings-list action with textual title/detail, a scene-authored disclosure, and a divider; callers own policy and connect pressed."
+    },
+    {
       "name": "PackageRow",
       "scene": "res://rookframe/ui/components/data/package_row.tscn",
       "sceneUid": "uid://c6dihfeyukjh",

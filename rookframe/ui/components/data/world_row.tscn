@@ -1,0 +1,112 @@
+[gd_scene load_steps=5 format=3 uid="uid://vxsjcvw0woxb"]
+
+[ext_resource type="Script" path="res://rookframe/ui/components/data/world_row.gd" id="1_script"]
+[ext_resource type="FontFile" path="res://rookframe/ui/assets/fonts/Exo2-VariableFont_wght.ttf" id="2_exo"]
+
+[sub_resource type="FontVariation" id="WorldRowBold"]
+base_font = ExtResource("2_exo")
+variation_embolden = 0.38
+variation_opentype = {"wght": 700.0}
+
+[sub_resource type="StyleBoxFlat" id="NormalSurface"]
+bg_color = Color(0.027451, 0.062745, 0.082353, 0.96)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.176471, 0.294118, 0.301961, 1)
+
+[sub_resource type="StyleBoxFlat" id="SelectedSurface"]
+bg_color = Color(0.070588, 0.137255, 0.145098, 0.98)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.329412, 0.882353, 0.878431, 1)
+
+[node name="WorldRow" type="Button"]
+custom_minimum_size = Vector2(0, 76)
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 2
+mouse_default_cursor_shape = 2
+theme_type_variation = &"RookframeQuietButton"
+text = ""
+script = ExtResource("1_script")
+
+[node name="NormalSurface" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("NormalSurface")
+mouse_filter = 2
+
+[node name="SelectedSurface" type="Panel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("SelectedSurface")
+mouse_filter = 2
+
+[node name="Content" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 13.0
+offset_top = 10.0
+offset_right = -13.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 11
+mouse_filter = 2
+
+[node name="Marker" type="Label" parent="Content"]
+custom_minimum_size = Vector2(18, 0)
+layout_mode = 2
+size_flags_vertical = 4
+theme_type_variation = &"RookframeStatus"
+theme_override_colors/font_color = Color(0.329412, 0.882353, 0.878431, 1)
+theme_override_font_sizes/font_size = 16
+text = "◆"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Copy" type="VBoxContainer" parent="Content"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_constants/separation = 2
+
+[node name="Title" type="Label" parent="Content/Copy"]
+layout_mode = 2
+theme_type_variation = &"RookframeIdentity"
+theme_override_colors/font_color = Color(0.968627, 0.94902, 0.909804, 1)
+theme_override_fonts/font = SubResource("WorldRowBold")
+theme_override_font_sizes/font_size = 13
+autowrap_mode = 3
+
+[node name="Detail" type="Label" parent="Content/Copy"]
+layout_mode = 2
+theme_type_variation = &"RookframeMeta"
+theme_override_font_sizes/font_size = 10
+autowrap_mode = 3
+
+[node name="Disclosure" type="Label" parent="Content"]
+custom_minimum_size = Vector2(22, 0)
+layout_mode = 2
+size_flags_vertical = 4
+theme_type_variation = &"RookframeLabel"
+theme_override_colors/font_color = Color(0.796078, 0.662745, 0.415686, 1)
+theme_override_font_sizes/font_size = 22
+text = "›"
+horizontal_alignment = 2
+vertical_alignment = 1
