@@ -12,6 +12,8 @@
         "RookframeRaisedFrame",
         "RookframeActiveSurface",
         "RookframeInsetFrame",
+        "RookframeTaskFrame",
+        "RookframeSubtleFrame",
         "RookframeInsetSurface",
         "RookframeSection",
         "RookframeManagedSurface",
@@ -44,6 +46,9 @@
         "RookframeError",
         "RookframeIdentity",
         "RookframeBadgeText"
+      ],
+      "inputs": [
+        "RookframeSearchInput"
       ],
       "actions": [
         "RookframePrimaryButton",

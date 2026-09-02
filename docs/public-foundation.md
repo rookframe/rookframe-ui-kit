@@ -78,6 +78,8 @@ a variation only for its current color or font is unsupported.
 | `RookframeRaisedFrame` | `PanelContainer` | Elevated frame whose caller owns the inner inset |
 | `RookframeActiveSurface` | `PanelContainer` | Prominent current-item surface with an active top rule |
 | `RookframeInsetFrame` | `PanelContainer` | Low-emphasis inset frame whose caller owns the inner inset |
+| `RookframeTaskFrame` | `PanelContainer` | Deep framed workflow surface whose caller owns the inner inset |
+| `RookframeSubtleFrame` | `PanelContainer` | Quiet framed record or collection surface whose caller owns the inner inset |
 | `RookframeInsetSurface` | `PanelContainer` | Sunken or nested content region |
 | `RookframeSection` | `PanelContainer` | Framed semantic section |
 | `RookframeManagedSurface` | `PanelContainer` | Outer frame for a reusable managed presentation |
@@ -116,6 +118,16 @@ a variation only for its current color or font is unsupported.
 
 Text roles express meaning, not a request for one color or font size. Their
 exact visual values may change compatibly while the role's purpose remains.
+
+### Fields
+
+| Variation | Base type | Meaning |
+| --- | --- | --- |
+| `RookframeSearchInput` | `LineEdit` | Native compact search input with shared field perimeter and focus treatment |
+
+Use the public `SearchField` scene when the field needs a visible label, clear
+action, or shared composite focus perimeter. Use this native variation for a
+compact search control already situated in a screen-authored toolbar.
 
 ### Actions
 
