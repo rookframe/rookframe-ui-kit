@@ -10,6 +10,8 @@
         "RookframeSurface",
         "RookframeRaisedSurface",
         "RookframeRaisedFrame",
+        "RookframeActiveSurface",
+        "RookframeInsetFrame",
         "RookframeInsetSurface",
         "RookframeSection",
         "RookframeManagedSurface",

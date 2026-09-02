@@ -76,6 +76,8 @@ a variation only for its current color or font is unsupported.
 | `RookframeSurface` | `PanelContainer` | Ordinary content surface |
 | `RookframeRaisedSurface` | `PanelContainer` | Elevated local surface |
 | `RookframeRaisedFrame` | `PanelContainer` | Elevated frame whose caller owns the inner inset |
+| `RookframeActiveSurface` | `PanelContainer` | Prominent current-item surface with an active top rule |
+| `RookframeInsetFrame` | `PanelContainer` | Low-emphasis inset frame whose caller owns the inner inset |
 | `RookframeInsetSurface` | `PanelContainer` | Sunken or nested content region |
 | `RookframeSection` | `PanelContainer` | Framed semantic section |
 | `RookframeManagedSurface` | `PanelContainer` | Outer frame for a reusable managed presentation |
