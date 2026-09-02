@@ -250,7 +250,7 @@
       "script": "res://rookframe/ui/components/forms/package_choice.gd",
       "scriptUid": "uid://bacunik1ndif2",
       "rootType": "Button",
-      "properties": {"package_name": "Package", "detail_text": "", "action_label": "ADD", "button_pressed": false, "disabled": false},
+      "properties": {"package_name": "Package", "detail_text": "", "action_label": "INCLUDE", "button_pressed": false, "disabled": false},
       "signals": ["pressed", "toggled(toggled_on: bool)"],
       "states": ["available", "included"],
       "contract": "The detailed multi-select Package card keeps the marker, Package identity, supporting detail, and included state in one native target; callers own Package policy and persistence."

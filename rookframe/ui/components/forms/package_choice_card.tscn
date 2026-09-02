@@ -68,6 +68,7 @@ theme_override_font_sizes/font_size = 1
 alignment = 0
 text = ""
 script = ExtResource("1_script")
+action_label = "INCLUDE"
 
 [node name="Content" type="HBoxContainer" parent="."]
 layout_mode = 1
