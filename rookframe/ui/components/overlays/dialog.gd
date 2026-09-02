@@ -17,7 +17,6 @@ const DIALOG_WIDTH := 720
 const MINIMUM_DIALOG_HEIGHT := 300
 const COMPACT_VIEWPORT_WIDTH := 600.0
 const COMPACT_BODY_TOP_INSET := 136
-const COMPACT_BODY_MINIMUM_HEIGHT := 560
 const INFORMATION_ICON := preload("res://rookframe/ui/icons/info.svg")
 const CONFIRMATION_ICON := preload("res://rookframe/ui/icons/warning.svg")
 const DANGER_ICON := preload("res://rookframe/ui/icons/error.svg")
@@ -145,10 +144,7 @@ func _fit_open_dialog() -> void:
 				roundi(viewport_size.y) - COMPACT_BODY_TOP_INSET
 			)
 			if get_body_slot().get_child_count() > 0:
-				target_height = maxi(
-					target_height,
-					mini(COMPACT_BODY_MINIMUM_HEIGHT, maximum_height)
-				)
+				target_height = maximum_height
 			target_height = mini(target_height, maximum_height)
 		else:
 			target_height = mini(target_height, 680)
