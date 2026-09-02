@@ -12,8 +12,8 @@ images, and fixed layouts.
   media replacement.
 - `feedback/` contains in-task Notice, Task State, and Step Progress regions.
 - `data/` contains metrics, badges, compact key/value and compact/detailed
-  Package records, roll/result rows, icon-action grids, and the
-  context-neutral Structured Row family.
+  Package records, compact action rows and inline action links, roll/result
+  rows, icon-action grids, and the context-neutral Structured Row family.
 - `surfaces/` contains the retained Managed Surface relationship and its
   serializable semantic state.
 
