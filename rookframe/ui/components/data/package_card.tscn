@@ -16,6 +16,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/panel = SubResource("PackageCardSurface")
 script = ExtResource("1_script")
+locked_state_label = "REQUIRED"
 
 [node name="Margin" type="MarginContainer" parent="."]
 layout_mode = 2

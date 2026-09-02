@@ -415,7 +415,7 @@
       "script": "res://rookframe/ui/components/data/package_row.gd",
       "scriptUid": "uid://dxok8xtr1f1ai",
       "rootType": "PanelContainer",
-      "properties": {"package_name": "Package", "detail_text": "", "selected": false, "locked": false},
+      "properties": {"package_name": "Package", "detail_text": "", "selected": false, "locked": false, "locked_state_label": "INCLUDED"},
       "states": ["available", "selected", "included"],
       "contract": "Read-only package identity, role/version detail, marker, and status relationship; callers own Package policy and persistence."
     },
@@ -426,7 +426,7 @@
       "script": "res://rookframe/ui/components/data/package_row.gd",
       "scriptUid": "uid://dxok8xtr1f1ai",
       "rootType": "PanelContainer",
-      "properties": {"package_name": "Package", "detail_text": "", "selected": false, "locked": false},
+      "properties": {"package_name": "Package", "detail_text": "", "selected": false, "locked": false, "locked_state_label": "REQUIRED"},
       "states": ["available", "selected", "included"],
       "contract": "The detailed read-only Package card keeps identity, role/version detail, marker, and status together; callers own Package policy and persistence."
     },

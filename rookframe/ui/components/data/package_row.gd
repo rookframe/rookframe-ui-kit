@@ -24,6 +24,11 @@ extends PanelContainer
 		locked = value
 		_refresh()
 
+@export var locked_state_label := "INCLUDED":
+	set(value):
+		locked_state_label = value
+		_refresh()
+
 
 func _ready() -> void:
 	_refresh()
@@ -45,7 +50,7 @@ func _refresh() -> void:
 		detail_label.text = detail_text
 		detail_label.visible = not detail_text.is_empty()
 	if state_label != null:
-		state_label.text = "INCLUDED" if locked else ("SELECTED" if selected else "ADD")
+		state_label.text = locked_state_label if locked else ("SELECTED" if selected else "ADD")
 		state_label.theme_type_variation = &"RookframeStatus" if selected else &"RookframeMeta"
 	accessibility_name = package_name
 	accessibility_description = detail_text
