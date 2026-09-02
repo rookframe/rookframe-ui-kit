@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://wibauqmqfimwx"]
+[gd_scene load_steps=35 format=3 uid="uid://wibauqmqfimwx"]
 
 [ext_resource type="Theme" path="res://rookframe/ui/theme/rookframe_theme.tres" id="1_theme"]
 [ext_resource type="Script" path="res://examples/catalogue/visual_catalogue.gd" id="2_script"]
@@ -33,6 +33,7 @@
 [ext_resource type="PackedScene" path="res://rookframe/ui/components/data/package_row.tscn" id="31_package_row"]
 [ext_resource type="PackedScene" path="res://rookframe/ui/components/forms/package_choice_card.tscn" id="32_package_choice_card"]
 [ext_resource type="PackedScene" path="res://rookframe/ui/components/data/package_card.tscn" id="33_package_card"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/components/data/action_row.tscn" id="34_action_row"]
 
 [node name="VisualCatalogue" type="Control"]
 layout_mode = 3
@@ -658,6 +659,11 @@ icon = ExtResource("23_warning")
 layout_mode = 2
 key_text = "WORLD ADDRESS"
 value_text = "f13a9c31"
+
+[node name="ActionRow" parent="Canvas/Page/Stack/Tabs/Data/Margin/Content" instance=ExtResource("34_action_row")]
+layout_mode = 2
+title = "WORLD SETTINGS"
+description = "Open a compact management action"
 
 [node name="PackageRow" parent="Canvas/Page/Stack/Tabs/Data/Margin/Content" instance=ExtResource("31_package_row")]
 layout_mode = 2

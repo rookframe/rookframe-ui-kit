@@ -410,6 +410,18 @@
       "contract": "A compact read-only fact with one visible key, trailing value, and a divider; it receives no input."
     },
     {
+      "name": "ActionRow",
+      "scene": "res://rookframe/ui/components/data/action_row.tscn",
+      "sceneUid": "uid://bevq4pos03l4p",
+      "script": "res://rookframe/ui/components/data/action_row.gd",
+      "scriptUid": "uid://xrhweteo63hd",
+      "rootType": "Button",
+      "properties": {"title": "Action", "description": "Supporting action detail", "action_label": "›", "tone": "STANDARD", "disabled": false},
+      "signals": ["pressed"],
+      "states": ["STANDARD", "DANGER"],
+      "contract": "One native button target for a compact navigation or management action. The title, supporting detail, and trailing action label remain visible; callers own policy and connect pressed."
+    },
+    {
       "name": "PackageRow",
       "scene": "res://rookframe/ui/components/data/package_row.tscn",
       "sceneUid": "uid://c6dihfeyukjh",
