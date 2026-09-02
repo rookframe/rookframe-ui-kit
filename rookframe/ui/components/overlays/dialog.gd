@@ -15,6 +15,9 @@ enum Tone {
 
 const DIALOG_WIDTH := 720
 const MINIMUM_DIALOG_HEIGHT := 300
+const COMPACT_VIEWPORT_WIDTH := 600.0
+const COMPACT_BODY_TOP_INSET := 136
+const COMPACT_BODY_MINIMUM_HEIGHT := 560
 const INFORMATION_ICON := preload("res://rookframe/ui/icons/info.svg")
 const CONFIRMATION_ICON := preload("res://rookframe/ui/icons/warning.svg")
 const DANGER_ICON := preload("res://rookframe/ui/icons/error.svg")
@@ -97,8 +100,12 @@ func get_body_slot() -> Container:
 func open_dialog() -> void:
 	_refresh()
 	_ensure_scrim()
+	var compact := _configure_compact_layout()
 	var initial_height := 480 if get_body_slot().get_child_count() > 0 else 320
-	popup_centered(Vector2i(DIALOG_WIDTH, initial_height))
+	var initial_width := DIALOG_WIDTH
+	if compact:
+		initial_width = roundi(get_viewport().get_visible_rect().size.x)
+	popup_centered(Vector2i(initial_width, initial_height))
 	if not _fit_pending:
 		_fit_pending = true
 		_fit_open_dialog()
@@ -123,16 +130,36 @@ func _fit_open_dialog() -> void:
 		if not visible:
 			_fit_pending = false
 			return
+		var compact := _configure_compact_layout()
+		var viewport_size := get_viewport().get_visible_rect().size
 		var shell := get_node(^"Shell") as PanelContainer
 		var content_height := ceili(shell.get_combined_minimum_size().y / 4.0) * 4
 		var target_height := maxi(MINIMUM_DIALOG_HEIGHT, content_height)
 		if get_body_slot().get_child_count() > 0:
 			target_height = maxi(480, target_height)
-		target_height = mini(target_height, 680)
-		if size.y != target_height or size.x != DIALOG_WIDTH:
-			var previous_center := position + size / 2
-			size = Vector2i(DIALOG_WIDTH, target_height)
-			position = previous_center - size / 2
+		var target_width := DIALOG_WIDTH
+		if compact:
+			target_width = roundi(viewport_size.x)
+			var maximum_height := maxi(
+				MINIMUM_DIALOG_HEIGHT,
+				roundi(viewport_size.y) - COMPACT_BODY_TOP_INSET
+			)
+			if get_body_slot().get_child_count() > 0:
+				target_height = maxi(
+					target_height,
+					mini(COMPACT_BODY_MINIMUM_HEIGHT, maximum_height)
+				)
+			target_height = mini(target_height, maximum_height)
+		else:
+			target_height = mini(target_height, 680)
+		if size.y != target_height or size.x != target_width:
+			if compact:
+				size = Vector2i(target_width, target_height)
+				position = Vector2i(0, roundi(viewport_size.y) - target_height)
+			else:
+				var previous_center := position + size / 2
+				size = Vector2i(target_width, target_height)
+				position = previous_center - size / 2
 	_fit_pending = false
 	call_deferred(&"_focus_initial")
 
@@ -195,6 +222,26 @@ func _refresh_body_visibility() -> void:
 	body.visible = get_body_slot().get_child_count() > 0
 
 
+func _is_compact_viewport() -> bool:
+	return (
+		is_inside_tree()
+		and get_viewport().get_visible_rect().size.x > 0.0
+		and get_viewport().get_visible_rect().size.x <= COMPACT_VIEWPORT_WIDTH
+	)
+
+
+func _configure_compact_layout() -> bool:
+	var compact := _is_compact_viewport()
+	min_size = Vector2i(0 if compact else 600, MINIMUM_DIALOG_HEIGHT)
+	var tone_frame := get_node_or_null(^"Shell/Content/Header/ToneFrame") as Control
+	if tone_frame != null:
+		tone_frame.visible = not compact
+	var shortcut_hint := get_node_or_null(^"Shell/Content/Actions/ShortcutHint") as Label
+	if shortcut_hint != null:
+		shortcut_hint.visible = not compact
+	return compact
+
+
 func _refresh() -> void:
 	if not is_inside_tree():
 		return
@@ -236,6 +283,7 @@ func _refresh() -> void:
 			&"RookframeDangerButton" if tone == Tone.DANGER else &"RookframePrimaryButton"
 		)
 	_refresh_body_visibility()
+	_configure_compact_layout()
 	title = heading
 	accessibility_name = heading
 	accessibility_description = description

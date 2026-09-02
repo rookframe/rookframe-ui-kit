@@ -7,7 +7,7 @@
 [node name="Dialog" type="Window"]
 visible = false
 size = Vector2i(720, 320)
-min_size = Vector2i(600, 300)
+min_size = Vector2i(0, 300)
 unresizable = true
 borderless = true
 transient = true

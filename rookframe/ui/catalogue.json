@@ -280,7 +280,7 @@
       "methods": ["get_body_slot() -> Container", "open_dialog()", "close_dialog()"],
       "slots": ["BodySlot"],
       "tones": ["INFORMATION", "CONFIRMATION", "DANGER", "SUCCESS"],
-      "contract": "Owns one semantic command-briefing hierarchy, blocking scrim, bounded message region, content-sized window, and footer-only actions while native Window retains modality, focus, and keyboard input."
+      "contract": "Owns one semantic command-briefing hierarchy, blocking scrim, bounded message region, content-sized desktop window or compact embedded bottom sheet, and footer-only actions while native Window retains modality, focus, and keyboard input."
     },
     {
       "name": "FilePickerDialog",
