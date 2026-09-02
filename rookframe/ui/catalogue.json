@@ -436,9 +436,9 @@
       "script": "res://rookframe/ui/components/data/action_link.gd",
       "scriptUid": "uid://b1bbo4068gdqi",
       "rootType": "Button",
-      "properties": {"title": "Action", "action_label": "›", "title_lane_width": 150.0, "title_font_size": 15, "disabled": false},
+      "properties": {"title": "Action", "title_lane_width": 150.0, "title_font_size": 15, "disabled": false},
       "signals": ["pressed"],
-      "contract": "One quiet native navigation target with a separate label lane, a continuous trailing rule, and an action marker; callers own policy and connect pressed."
+      "contract": "One quiet native navigation target with a separate label lane, a continuous trailing rule, and a scene-authored arrow head. The rule meets the arrow base without touching the label; callers own policy and connect pressed."
     },
     {
       "name": "PackageRow",
