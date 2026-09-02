@@ -5,13 +5,14 @@ does not provide as one built-in Control. Use native Controls directly for
 ordinary inputs, choices, tabs, lists, trees, menus, dialogs, windows, progress,
 images, and fixed layouts.
 
-- `layout/` contains adaptive grids and splits, task hierarchy, sections,
-  action groups, and toolbars.
+- `layout/` contains adaptive grids and splits, task hierarchy, compact route
+  headings, sections, action groups, and toolbars.
 - `forms/` contains labelled field relationships, one-perimeter search,
-  complete choice targets, and neutral media replacement.
+  complete generic and Package choice targets, and neutral media replacement.
 - `feedback/` contains in-task Notice, Task State, and Step Progress regions.
-- `data/` contains metrics, badges, roll/result rows, icon-action grids, and
-  the context-neutral Structured Row family.
+- `data/` contains metrics, badges, compact key/value and Package rows,
+  roll/result rows, icon-action grids, and the context-neutral Structured Row
+  family.
 - `surfaces/` contains the retained Managed Surface relationship and its
   serializable semantic state.
 

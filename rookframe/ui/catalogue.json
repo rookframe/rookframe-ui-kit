@@ -136,6 +136,16 @@
       "slots": ["ActionsSlot", "ProgressSlot", "TabsSlot"]
     },
     {
+      "name": "CompactRouteHeading",
+      "scene": "res://rookframe/ui/components/layout/compact_route_heading.tscn",
+      "sceneUid": "uid://bc8nlg3pfa3ub",
+      "script": "res://rookframe/ui/components/layout/compact_route_heading.gd",
+      "scriptUid": "uid://c3gfgsec40cac",
+      "rootType": "VBoxContainer",
+      "properties": {"kicker_text": "", "title_text": "Route title", "detail_text": ""},
+      "contract": "Owns the compact route label, title, supporting detail, and divider relationship; navigation remains consumer-owned."
+    },
+    {
       "name": "Section",
       "scene": "res://rookframe/ui/components/layout/section.tscn",
       "sceneUid": "uid://eakyhwvofovql",
@@ -220,6 +230,18 @@
       "methods": ["set_selected(selected: bool)", "is_selected() -> bool"],
       "variants": ["DETAILED", "COMPACT"],
       "contract": "The complete native toggle button is one target; assign ButtonGroup for an exclusive set."
+    },
+    {
+      "name": "PackageChoice",
+      "scene": "res://rookframe/ui/components/forms/package_choice.tscn",
+      "sceneUid": "uid://cj1dtt1u2dghw",
+      "script": "res://rookframe/ui/components/forms/package_choice.gd",
+      "scriptUid": "uid://bacunik1ndif2",
+      "rootType": "Button",
+      "properties": {"package_name": "Package", "detail_text": "", "action_label": "ADD", "button_pressed": false, "disabled": false},
+      "signals": ["pressed", "toggled(toggled_on: bool)"],
+      "states": ["available", "included"],
+      "contract": "One native multi-select target that keeps the package marker, identity, supporting detail, and included state together; callers own Package policy and persistence."
     },
     {
       "name": "ImageField",
@@ -363,6 +385,27 @@
       "methods": ["get_action_slot() -> Container"],
       "slots": ["ActionSlot"],
       "variants": ["DATA", "DETAIL", "COMPACT_DETAIL", "STACKED_DETAIL", "SUMMARY", "TABLE", "HEADER", "SELECTION_BANNER", "CATEGORY", "CATALOGUE", "PORTRAIT", "PENDING"]
+    },
+    {
+      "name": "KeyValueRow",
+      "scene": "res://rookframe/ui/components/data/key_value_row.tscn",
+      "sceneUid": "uid://bj0vmkr6mxuyw",
+      "script": "res://rookframe/ui/components/data/key_value_row.gd",
+      "scriptUid": "uid://decjv735jvpfy",
+      "rootType": "PanelContainer",
+      "properties": {"key_text": "Key", "value_text": ""},
+      "contract": "A compact read-only fact with one visible key, trailing value, and a divider; it receives no input."
+    },
+    {
+      "name": "PackageRow",
+      "scene": "res://rookframe/ui/components/data/package_row.tscn",
+      "sceneUid": "uid://c6dihfeyukjh",
+      "script": "res://rookframe/ui/components/data/package_row.gd",
+      "scriptUid": "uid://dxok8xtr1f1ai",
+      "rootType": "PanelContainer",
+      "properties": {"package_name": "Package", "detail_text": "", "selected": false, "locked": false},
+      "states": ["available", "selected", "included"],
+      "contract": "Read-only package identity, role/version detail, marker, and status relationship; callers own Package policy and persistence."
     },
     {
       "name": "ManagedSurface",
