@@ -1,0 +1,74 @@
+[gd_scene load_steps=3 format=3 uid="uid://d5mye7ybbq7rj"]
+
+[ext_resource type="Script" path="res://rookframe/ui/components/data/package_row.gd" id="1_script"]
+
+[sub_resource type="StyleBoxFlat" id="PackageCardSurface"]
+bg_color = Color(0.043137, 0.086275, 0.094118, 0.92)
+border_width_left = 1
+border_width_top = 3
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.329412, 0.882353, 0.878431, 1)
+
+[node name="PackageCard" type="PanelContainer"]
+custom_minimum_size = Vector2(0, 112)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("PackageCardSurface")
+script = ExtResource("1_script")
+
+[node name="Margin" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 18
+theme_override_constants/margin_bottom = 16
+
+[node name="Content" type="HBoxContainer" parent="Margin"]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="Marker" type="Label" parent="Margin/Content"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+size_flags_vertical = 4
+theme_type_variation = &"RookframeStatus"
+theme_override_colors/font_color = Color(0.329412, 0.882353, 0.878431, 1)
+theme_override_font_sizes/font_size = 20
+text = "◆"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Copy" type="VBoxContainer" parent="Margin/Content"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_constants/separation = 3
+
+[node name="Name" type="Label" parent="Margin/Content/Copy"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"RookframeBody"
+theme_override_colors/font_color = Color(0.968627, 0.94902, 0.909804, 1)
+theme_override_font_sizes/font_size = 16
+autowrap_mode = 2
+
+[node name="Detail" type="Label" parent="Margin/Content/Copy"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"RookframeMeta"
+theme_override_font_sizes/font_size = 12
+autowrap_mode = 2
+
+[node name="State" type="Label" parent="Margin/Content"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(96, 0)
+layout_mode = 2
+size_flags_vertical = 4
+theme_type_variation = &"RookframeStatus"
+theme_override_colors/font_color = Color(0.329412, 0.882353, 0.878431, 1)
+theme_override_font_sizes/font_size = 10
+text = "INCLUDED"
+horizontal_alignment = 2
+vertical_alignment = 1

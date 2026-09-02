@@ -244,6 +244,18 @@
       "contract": "One native multi-select target that keeps the package marker, identity, supporting detail, and included state together; callers own Package policy and persistence."
     },
     {
+      "name": "PackageChoiceCard",
+      "scene": "res://rookframe/ui/components/forms/package_choice_card.tscn",
+      "sceneUid": "uid://cdlme6itdqmki",
+      "script": "res://rookframe/ui/components/forms/package_choice.gd",
+      "scriptUid": "uid://bacunik1ndif2",
+      "rootType": "Button",
+      "properties": {"package_name": "Package", "detail_text": "", "action_label": "ADD", "button_pressed": false, "disabled": false},
+      "signals": ["pressed", "toggled(toggled_on: bool)"],
+      "states": ["available", "included"],
+      "contract": "The detailed multi-select Package card keeps the marker, Package identity, supporting detail, and included state in one native target; callers own Package policy and persistence."
+    },
+    {
       "name": "ImageField",
       "scene": "res://rookframe/ui/components/forms/image_field.tscn",
       "sceneUid": "uid://ljsdqcdmawsqy",
@@ -406,6 +418,17 @@
       "properties": {"package_name": "Package", "detail_text": "", "selected": false, "locked": false},
       "states": ["available", "selected", "included"],
       "contract": "Read-only package identity, role/version detail, marker, and status relationship; callers own Package policy and persistence."
+    },
+    {
+      "name": "PackageCard",
+      "scene": "res://rookframe/ui/components/data/package_card.tscn",
+      "sceneUid": "uid://d5mye7ybbq7rj",
+      "script": "res://rookframe/ui/components/data/package_row.gd",
+      "scriptUid": "uid://dxok8xtr1f1ai",
+      "rootType": "PanelContainer",
+      "properties": {"package_name": "Package", "detail_text": "", "selected": false, "locked": false},
+      "states": ["available", "selected", "included"],
+      "contract": "The detailed read-only Package card keeps identity, role/version detail, marker, and status together; callers own Package policy and persistence."
     },
     {
       "name": "ManagedSurface",

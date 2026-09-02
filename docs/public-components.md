@@ -25,6 +25,7 @@ The machine-readable form of this reference is
 | `components/forms/search_field.tscn` | `uid://jhuolgtvtefyi` | `components/forms/search_field.gd`, `uid://bnvqayp06k4ud` | `VBoxContainer` |
 | `components/forms/choice_row.tscn` | `uid://kipsbpkvppkfb` | `components/forms/choice_row.gd`, `uid://cneqvtm4mj43s` | `Button` |
 | `components/forms/package_choice.tscn` | `uid://cj1dtt1u2dghw` | `components/forms/package_choice.gd`, `uid://bacunik1ndif2` | `Button` |
+| `components/forms/package_choice_card.tscn` | `uid://cdlme6itdqmki` | `components/forms/package_choice.gd`, `uid://bacunik1ndif2` | `Button` |
 | `components/forms/image_field.tscn` | `uid://ljsdqcdmawsqy` | `components/forms/image_field.gd`, `uid://cgrcfqykt0c7o` | `VBoxContainer` |
 | `components/overlays/dialog.tscn` | `uid://87uetn404lqb` | `components/overlays/dialog.gd`, `uid://do77iyssrgyr2` | `Window` |
 | `components/overlays/file_picker_dialog.tscn` | `uid://g4tupp4dkeeb` | `components/overlays/file_picker_dialog.gd`, `uid://2iqy4kt4qdkx` | `Window` |
@@ -39,6 +40,7 @@ The machine-readable form of this reference is
 | `components/data/structured_row.tscn` | `uid://ukteoalflguqe` | `components/data/structured_row.gd`, `uid://vrrt25g1ko53` | `PanelContainer` |
 | `components/data/key_value_row.tscn` | `uid://bj0vmkr6mxuyw` | `components/data/key_value_row.gd`, `uid://decjv735jvpfy` | `PanelContainer` |
 | `components/data/package_row.tscn` | `uid://c6dihfeyukjh` | `components/data/package_row.gd`, `uid://dxok8xtr1f1ai` | `PanelContainer` |
+| `components/data/package_card.tscn` | `uid://d5mye7ybbq7rj` | `components/data/package_row.gd`, `uid://dxok8xtr1f1ai` | `PanelContainer` |
 | `components/surfaces/managed_surface.tscn` | `uid://vhwxjcowiuacj` | `components/surfaces/managed_surface.gd`, `uid://dbt641tlogj02` | `PanelContainer` |
 
 `components/surfaces/managed_surface_state.gd` is the public
@@ -87,6 +89,7 @@ semantic minimum cell width. Fixed grids remain ordinary native
 | `search_field.tscn` / `VBoxContainer` | `label_text = "Search"`; `show_label = true`; `value = ""`; `placeholder = "Search"` | `value_changed(value)`, `value_committed(value)`, `cleared`; `focus_editor()`, `clear()` | Icon, editor, and clear action share one visible focus perimeter. Return commits; clear emits `cleared` and returns focus to the editor. The label remains the editor's accessibility name even when visually hidden. |
 | `choice_row.tscn` / `Button` | `title = "Choice"`; `description = "Supporting decision copy"`; `action_label = "Select"`; `variant = DETAILED`; native `button_group = null`, `button_pressed = false`, `disabled = false` | `selection_changed(selected)` plus native `pressed` and `toggled`; `set_selected(selected)`, `is_selected()` | The complete native toggle Button is one 44px-minimum target. Title, description, and selected/not-selected state form its accessibility description. Assign a shared `ButtonGroup` for exclusive keyboard/controller selection. |
 | `package_choice.tscn` / `Button` | `package_name = "Package"`; `detail_text = ""`; `action_label = "ADD"`; native `button_pressed = false`, `disabled = false` | Native `pressed` and `toggled` | Complete multi-select Package target. The marker, Package identity, detail, and visible `ADD`/`INCLUDED` state form one accessible toggle; callers own Package selection policy and persistence. |
+| `package_choice_card.tscn` / `Button` | Same properties and native state as `package_choice.tscn` | Native `pressed` and `toggled` | Detailed multi-select Package card for wide task surfaces. It retains the same one-target selection and accessibility behavior as the compact Package choice. |
 | `image_field.tscn` / `VBoxContainer` | `title = "Image"`; `help_text = ""`; `error_text = ""`; `preview = null`; `change_label = "Replace image"`; `disabled = false` | `replace_requested`; `set_preview(texture)`, `set_error(message)` | The native replace Button is the only input target and follows source-order focus. `change_label` is its accessible name, help/error is its description, and the preview is named from `title`. Disabled state prevents focus/activation. The component never opens, admits, or persists a path. |
 
 `SearchField` deliberately supplies one shared focus perimeter for its icon,
@@ -153,6 +156,7 @@ progress remains native `ProgressBar`.
 | `structured_row.tscn` / `PanelContainer` | `variant = DATA`; `title = "Row identity"`; `detail = ""`; `value_text = ""`; `status_text = ""`; `leading_image = null`; `compact_width = 620.0`; variants `DATA`, `DETAIL`, `COMPACT_DETAIL`, `STACKED_DETAIL`, `SUMMARY`, `TABLE`, `HEADER`, `SELECTION_BANNER`, `CATEGORY`, `CATALOGUE`, `PORTRAIT`, `PENDING` | `layout_profile_changed(profile)`; `get_action_slot()`; `ActionSlot` | Context-neutral read-only row family with one stable trailing lane. Compact reflow retains content and focus order. Title/status remain textual; pending state is not color-only. Use `ChoiceRow`, not this scene, when the entire row must be selectable. |
 | `key_value_row.tscn` / `PanelContainer` | `key_text = "Key"`; `value_text = ""` | No signals or methods | Compact read-only fact with a visible key, trailing value, and divider. It receives no input; key and value are combined into its accessibility name and description. |
 | `package_row.tscn` / `PanelContainer` | `package_name = "Package"`; `detail_text = ""`; `selected = false`; `locked = false` | No signals or methods | Read-only Package identity, role/version detail, marker, and status. `locked` represents an included required Package; application policy and persistence stay outside the component. |
+| `package_card.tscn` / `PanelContainer` | Same properties and states as `package_row.tscn` | No signals or methods | Detailed read-only Package card for wide task surfaces. It retains the compact Package row's identity, status, and accessibility behavior. |
 
 The result slot in `RollRow` remains empty before a result exists; do not add
 decorative punctuation. The state marker always names its state and uses a

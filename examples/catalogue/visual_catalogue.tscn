@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://wibauqmqfimwx"]
+[gd_scene load_steps=34 format=3 uid="uid://wibauqmqfimwx"]
 
 [ext_resource type="Theme" path="res://rookframe/ui/theme/rookframe_theme.tres" id="1_theme"]
 [ext_resource type="Script" path="res://examples/catalogue/visual_catalogue.gd" id="2_script"]
@@ -31,6 +31,8 @@
 [ext_resource type="PackedScene" path="res://rookframe/ui/components/forms/package_choice.tscn" id="29_package_choice"]
 [ext_resource type="PackedScene" path="res://rookframe/ui/components/data/key_value_row.tscn" id="30_key_value"]
 [ext_resource type="PackedScene" path="res://rookframe/ui/components/data/package_row.tscn" id="31_package_row"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/components/forms/package_choice_card.tscn" id="32_package_choice_card"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/components/data/package_card.tscn" id="33_package_card"]
 
 [node name="VisualCatalogue" type="Control"]
 layout_mode = 3
@@ -379,6 +381,12 @@ package_name = "Rookframe Fixture Essentials"
 detail_text = "Optional Package · 1.0.1\nCrate, Lantern, and Miniature"
 button_pressed = true
 
+[node name="PackageChoiceCard" parent="Canvas/Page/Stack/Tabs/Forms/Margin/Content" instance=ExtResource("32_package_choice_card")]
+layout_mode = 2
+package_name = "Rookframe Fixture Essentials"
+detail_text = "Optional Package · 1.0.1\nCrate, Lantern, and Miniature"
+button_pressed = true
+
 [node name="ImageField" parent="Canvas/Page/Stack/Tabs/Forms/Margin/Content" instance=ExtResource("7_image")]
 layout_mode = 2
 title = "Record artwork"
@@ -652,6 +660,13 @@ key_text = "WORLD ADDRESS"
 value_text = "f13a9c31"
 
 [node name="PackageRow" parent="Canvas/Page/Stack/Tabs/Data/Margin/Content" instance=ExtResource("31_package_row")]
+layout_mode = 2
+package_name = "Rookframe Fixture System"
+detail_text = "Required System · 1.0.1"
+selected = true
+locked = true
+
+[node name="PackageCard" parent="Canvas/Page/Stack/Tabs/Data/Margin/Content" instance=ExtResource("33_package_card")]
 layout_mode = 2
 package_name = "Rookframe Fixture System"
 detail_text = "Required System · 1.0.1"
