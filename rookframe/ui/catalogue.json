@@ -57,7 +57,10 @@
         "RookframeQuietButton",
         "RookframeDangerButton",
         "RookframeTabButton",
-        "RookframeChoiceRow"
+        "RookframeChoiceRow",
+        "RookframeCircularAction",
+        "RookframeCompactAction",
+        "RookframeCompactActionTouch"
       ]
     },
     "nativeTypes": [

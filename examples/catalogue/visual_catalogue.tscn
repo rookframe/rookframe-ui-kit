@@ -170,6 +170,38 @@ theme_type_variation = &"RookframePrimaryButton"
 disabled = true
 text = "Disabled"
 
+[node name="CircularAction" type="Button" parent="Canvas/Page/Stack/Tabs/Native/Margin/Content/Buttons"]
+custom_minimum_size = Vector2(62, 62)
+layout_mode = 2
+theme_type_variation = &"RookframeCircularAction"
+icon = ExtResource("21_rook")
+icon_alignment = 1
+expand_icon = true
+accessibility_name = "Circular action example"
+
+[node name="CircularDisabled" type="Button" parent="Canvas/Page/Stack/Tabs/Native/Margin/Content/Buttons"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+theme_type_variation = &"RookframeCircularAction"
+theme_override_constants/icon_max_width = 24
+icon = ExtResource("21_rook")
+icon_alignment = 1
+expand_icon = true
+disabled = true
+accessibility_name = "Disabled circular action example"
+
+[node name="CompactAction" type="Button" parent="Canvas/Page/Stack/Tabs/Native/Margin/Content/Buttons"]
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+theme_type_variation = &"RookframeCompactAction"
+text = "COMPACT ACTION"
+
+[node name="CompactActionTouch" type="Button" parent="Canvas/Page/Stack/Tabs/Native/Margin/Content/Buttons"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+theme_type_variation = &"RookframeCompactActionTouch"
+text = "TOUCH ACTION"
+
 [node name="SemanticSurfaces" type="HBoxContainer" parent="Canvas/Page/Stack/Tabs/Native/Margin/Content"]
 layout_mode = 2
 theme_override_constants/separation = 12

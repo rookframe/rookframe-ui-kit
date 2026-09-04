@@ -141,10 +141,23 @@ compact search control already situated in a screen-authored toolbar.
 | `RookframeDangerButton` | `Button` | Destructive or abandoning action |
 | `RookframeTabButton` | `Button` | Changes a visible section without changing domain state |
 | `RookframeChoiceRow` | `Button` | Complete detailed or compact choice target |
+| `RookframeCircularAction` | `Button` | Circular icon action with brass normal edge, aqua hover/pressed, distinct outer focus ring, and muted disabled state |
+| `RookframeCompactAction` | `Button` | Intrinsic outlined action in a managed task; 11px display type and 18px horizontal padding |
+| `RookframeCompactActionTouch` | `Button` | Touch density of the same compact action; 10px display type and 16px horizontal padding |
 
 Use native `Button`; these are Theme variations, not wrappers. Ordinary icon-
 only actions retain a semantic accessible name and at least a 44×44 interaction
 target.
+
+Circular actions use a square minimum target of 62px on desktop, 56px on
+tablet, or 48px on phone, with a 30/28/24px semantic icon respectively.
+Consumers set `custom_minimum_size`, `expand_icon`, and `icon_max_width` for
+their active density, set `icon_alignment = HORIZONTAL_ALIGNMENT_CENTER`,
+supply an icon and accessible name, and connect native
+`pressed`. Keep visible text empty. Compact actions use a minimum height of
+44px on desktop and 48px for touch. Their containing row owns placement and
+focus order. These appearances project the approved RFG-177 Tabletop authority;
+they add no custom input handler or Package-specific callback API.
 
 ## Native defaults covered by the foundation
 

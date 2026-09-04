@@ -7,6 +7,10 @@ published.
 
 ### Added
 
+- Shared circular icon actions and compact outlined task actions, including
+  touch density, normal/hover/pressed/disabled states and visible focus, for
+  the approved RFG-177 contribution composition.
+
 - Complete native Godot Theme coverage for windows/dialogs, tabs, lists,
   trees, ranges, choices, menus, flow/grid containers, and state families.
 - Public editor-authored scenes for the inventory-backed layout, form/search,

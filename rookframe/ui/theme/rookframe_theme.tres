@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=75 format=3 uid="uid://s4dv3jijmvy1"]
+[gd_resource type="Theme" load_steps=87 format=3 uid="uid://s4dv3jijmvy1"]
 
 [ext_resource type="FontFile" path="res://rookframe/ui/assets/fonts/Inter-VariableFont_opsz,wght.ttf" id="1_inter"]
 [ext_resource type="FontFile" path="res://rookframe/ui/assets/fonts/Exo2-VariableFont_wght.ttf" id="2_exo"]
@@ -775,6 +775,138 @@ content_margin_top = 9.0
 content_margin_right = 15.0
 content_margin_bottom = 9.0
 
+[sub_resource type="FontVariation" id="CompactActionDisplayBold"]
+base_font = ExtResource("2_exo")
+variation_embolden = 0.42
+variation_opentype = {"wght": 700.0}
+
+[sub_resource type="StyleBoxFlat" id="CircularActionNormal"]
+bg_color = Color(0.015686, 0.070588, 0.078431, 0.99)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.886275, 0.768627, 0.427451, 1)
+corner_radius_top_left = 31
+corner_radius_top_right = 31
+corner_radius_bottom_right = 31
+corner_radius_bottom_left = 31
+shadow_color = Color(0, 0, 0, 0.72)
+shadow_size = 10
+shadow_offset = Vector2(0, 6)
+
+[sub_resource type="StyleBoxFlat" id="CircularActionHover"]
+bg_color = Color(0.070588, 0.290196, 0.282353, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.541176, 0.956863, 0.909804, 1)
+corner_radius_top_left = 31
+corner_radius_top_right = 31
+corner_radius_bottom_right = 31
+corner_radius_bottom_left = 31
+
+[sub_resource type="StyleBoxFlat" id="CircularActionFocus"]
+bg_color = Color(0, 0, 0, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.541176, 0.956863, 0.909804, 1)
+corner_radius_top_left = 34
+corner_radius_top_right = 34
+corner_radius_bottom_right = 34
+corner_radius_bottom_left = 34
+expand_margin_left = 3.0
+expand_margin_top = 3.0
+expand_margin_right = 3.0
+expand_margin_bottom = 3.0
+
+[sub_resource type="StyleBoxFlat" id="CircularActionDisabled"]
+bg_color = Color(0.015686, 0.070588, 0.078431, 0.72)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.886275, 0.768627, 0.427451, 0.5)
+corner_radius_top_left = 31
+corner_radius_top_right = 31
+corner_radius_bottom_right = 31
+corner_radius_bottom_left = 31
+
+[sub_resource type="StyleBoxFlat" id="CompactActionNormal"]
+content_margin_left = 18.0
+content_margin_right = 18.0
+bg_color = Color(0, 0, 0, 0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.27451, 0.321569, 0.337255, 1)
+
+[sub_resource type="StyleBoxFlat" id="CompactActionHover"]
+content_margin_left = 18.0
+content_margin_right = 18.0
+bg_color = Color(0.070588, 0.290196, 0.282353, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.541176, 0.956863, 0.909804, 1)
+
+[sub_resource type="StyleBoxFlat" id="CompactActionFocus"]
+bg_color = Color(0, 0, 0, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.541176, 0.956863, 0.909804, 1)
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxFlat" id="CompactActionDisabled"]
+content_margin_left = 18.0
+content_margin_right = 18.0
+bg_color = Color(0, 0, 0, 0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.27451, 0.321569, 0.337255, 0.5)
+
+[sub_resource type="StyleBoxFlat" id="CompactActionTouchNormal"]
+content_margin_left = 16.0
+content_margin_right = 16.0
+bg_color = Color(0, 0, 0, 0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.27451, 0.321569, 0.337255, 1)
+
+[sub_resource type="StyleBoxFlat" id="CompactActionTouchHover"]
+content_margin_left = 16.0
+content_margin_right = 16.0
+bg_color = Color(0.070588, 0.290196, 0.282353, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.541176, 0.956863, 0.909804, 1)
+
+[sub_resource type="StyleBoxFlat" id="CompactActionTouchDisabled"]
+content_margin_left = 16.0
+content_margin_right = 16.0
+bg_color = Color(0, 0, 0, 0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.27451, 0.321569, 0.337255, 0.5)
+
 [resource]
 default_font = ExtResource("1_inter")
 default_font_size = 16
@@ -1133,3 +1265,33 @@ RookframeChoiceRow/styles/hover = SubResource("RowHover")
 RookframeChoiceRow/styles/pressed = SubResource("RowSelected")
 RookframeChoiceRow/styles/focus = SubResource("ButtonFocus")
 RookframeChoiceRow/styles/disabled = SubResource("ButtonDisabled")
+RookframeCircularAction/base_type = &"Button"
+RookframeCircularAction/colors/icon_normal_color = Color(0.886275, 0.768627, 0.427451, 1)
+RookframeCircularAction/colors/icon_hover_color = Color(0.541176, 0.956863, 0.909804, 1)
+RookframeCircularAction/colors/icon_pressed_color = Color(0.541176, 0.956863, 0.909804, 1)
+RookframeCircularAction/colors/icon_focus_color = Color(0.541176, 0.956863, 0.909804, 1)
+RookframeCircularAction/colors/icon_disabled_color = Color(0.886275, 0.768627, 0.427451, 0.5)
+RookframeCircularAction/constants/icon_max_width = 30
+RookframeCircularAction/styles/normal = SubResource("CircularActionNormal")
+RookframeCircularAction/styles/hover = SubResource("CircularActionHover")
+RookframeCircularAction/styles/pressed = SubResource("CircularActionHover")
+RookframeCircularAction/styles/focus = SubResource("CircularActionFocus")
+RookframeCircularAction/styles/disabled = SubResource("CircularActionDisabled")
+RookframeCompactAction/base_type = &"Button"
+RookframeCompactAction/colors/font_color = Color(0.85098, 0.831373, 0.819608, 1)
+RookframeCompactAction/colors/font_hover_color = Color(0.541176, 0.956863, 0.909804, 1)
+RookframeCompactAction/colors/font_pressed_color = Color(0.541176, 0.956863, 0.909804, 1)
+RookframeCompactAction/colors/font_focus_color = Color(0.541176, 0.956863, 0.909804, 1)
+RookframeCompactAction/fonts/font = SubResource("CompactActionDisplayBold")
+RookframeCompactAction/font_sizes/font_size = 11
+RookframeCompactAction/styles/normal = SubResource("CompactActionNormal")
+RookframeCompactAction/styles/hover = SubResource("CompactActionHover")
+RookframeCompactAction/styles/pressed = SubResource("CompactActionHover")
+RookframeCompactAction/styles/focus = SubResource("CompactActionFocus")
+RookframeCompactAction/styles/disabled = SubResource("CompactActionDisabled")
+RookframeCompactActionTouch/base_type = &"RookframeCompactAction"
+RookframeCompactActionTouch/font_sizes/font_size = 10
+RookframeCompactActionTouch/styles/normal = SubResource("CompactActionTouchNormal")
+RookframeCompactActionTouch/styles/hover = SubResource("CompactActionTouchHover")
+RookframeCompactActionTouch/styles/pressed = SubResource("CompactActionTouchHover")
+RookframeCompactActionTouch/styles/disabled = SubResource("CompactActionTouchDisabled")
