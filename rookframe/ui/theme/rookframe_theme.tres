@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=87 format=3 uid="uid://s4dv3jijmvy1"]
+[gd_resource type="Theme" load_steps=107 format=3 uid="uid://s4dv3jijmvy1"]
 
 [ext_resource type="FontFile" path="res://rookframe/ui/assets/fonts/Inter-VariableFont_opsz,wght.ttf" id="1_inter"]
 [ext_resource type="FontFile" path="res://rookframe/ui/assets/fonts/Exo2-VariableFont_wght.ttf" id="2_exo"]
@@ -16,8 +16,39 @@
 [ext_resource type="Texture2D" path="res://rookframe/ui/icons/chevron-left.svg" id="14_previous"]
 [ext_resource type="Texture2D" path="res://rookframe/ui/icons/chevron-right.svg" id="15_next"]
 
+[sub_resource type="FontVariation" id="DisplayExtraBold"]
+base_font = ExtResource("2_exo")
+variation_embolden = 0.45
+variation_opentype = {"wght": 800.0}
+
+[sub_resource type="FontVariation" id="DisplayBold"]
+base_font = ExtResource("2_exo")
+variation_embolden = 0.42
+variation_opentype = {"wght": 700.0}
+
+[sub_resource type="FontVariation" id="DisplaySemiBold"]
+base_font = ExtResource("2_exo")
+variation_embolden = 0.26
+variation_opentype = {"wght": 600.0}
+
+[sub_resource type="FontVariation" id="UiSemiBold"]
+base_font = ExtResource("1_inter")
+variation_embolden = 0.24
+variation_opentype = {"wght": 600.0}
+
 [sub_resource type="StyleBoxFlat" id="Canvas"]
 bg_color = Color(0.027451, 0.043137, 0.05098, 1)
+
+[sub_resource type="StyleBoxFlat" id="PackageInk"]
+bg_color = Color(0.00392157, 0.0470588, 0.0627451, 1)
+
+[sub_resource type="StyleBoxFlat" id="PackageFrame"]
+bg_color = Color(0.00392157, 0.0470588, 0.0627451, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.27451, 0.321569, 0.337255, 1)
 
 [sub_resource type="StyleBoxFlat" id="Surface"]
 content_margin_left = 16.0
@@ -82,6 +113,184 @@ border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
 border_color = Color(0.12549, 0.219608, 0.227451, 1)
+
+[sub_resource type="StyleBoxFlat" id="GoldFrame"]
+bg_color = Color(0.0156863, 0.0470588, 0.054902, 0.98)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.886275, 0.768627, 0.427451, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="GoldBadge"]
+content_margin_left = 8.0
+content_margin_top = 4.0
+content_margin_right = 8.0
+content_margin_bottom = 4.0
+bg_color = Color(0.0156863, 0.0470588, 0.054902, 0.98)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.886275, 0.768627, 0.427451, 1)
+corner_radius_top_left = 22
+corner_radius_top_right = 22
+corner_radius_bottom_right = 22
+corner_radius_bottom_left = 22
+
+[sub_resource type="StyleBoxFlat" id="ShellRail"]
+bg_color = Color(0.0156863, 0.0470588, 0.054902, 0.98)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.886275, 0.768627, 0.427451, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="ManagedChrome"]
+content_margin_left = 18.0
+content_margin_top = 10.0
+content_margin_right = 12.0
+content_margin_bottom = 10.0
+bg_color = Color(0.00392157, 0.0470588, 0.0627451, 0.88)
+border_width_bottom = 1
+border_color = Color(0.133333, 0.196078, 0.215686, 1)
+
+[sub_resource type="StyleBoxFlat" id="ManagedChromeCompact"]
+content_margin_left = 16.0
+content_margin_top = 8.0
+content_margin_right = 10.0
+content_margin_bottom = 8.0
+bg_color = Color(0.00392157, 0.0470588, 0.0627451, 0.88)
+border_width_bottom = 1
+border_color = Color(0.133333, 0.196078, 0.215686, 1)
+
+[sub_resource type="StyleBoxFlat" id="ShellControl"]
+content_margin_left = 11.0
+content_margin_top = 11.0
+content_margin_right = 11.0
+content_margin_bottom = 11.0
+bg_color = Color(0.0431373, 0.0666667, 0.0784314, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.886275, 0.768627, 0.427451, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="ShellControlActive"]
+content_margin_left = 11.0
+content_margin_top = 11.0
+content_margin_right = 11.0
+content_margin_bottom = 11.0
+bg_color = Color(0.0705882, 0.290196, 0.282353, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.541176, 0.956863, 0.909804, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="ShellControlFocus"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.0705882, 0.290196, 0.282353, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.541176, 0.956863, 0.909804, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="ManagedControl"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0, 0, 0, 0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.27451, 0.321569, 0.337255, 1)
+
+[sub_resource type="StyleBoxFlat" id="ManagedControlHover"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.0705882, 0.164706, 0.168627, 0.5)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.541176, 0.956863, 0.909804, 1)
+
+[sub_resource type="StyleBoxFlat" id="ManagedControlFocus"]
+content_margin_left = 9.0
+content_margin_top = 9.0
+content_margin_right = 9.0
+content_margin_bottom = 9.0
+bg_color = Color(0.0705882, 0.164706, 0.168627, 0.5)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.541176, 0.956863, 0.909804, 1)
+
+[sub_resource type="StyleBoxFlat" id="ManagedAffirm"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0, 0, 0, 0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.541176, 0.956863, 0.909804, 1)
+
+[sub_resource type="StyleBoxFlat" id="ManagedCommit"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.0705882, 0.290196, 0.282353, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.541176, 0.956863, 0.909804, 1)
+
+[sub_resource type="StyleBoxFlat" id="ManagedCommitFocus"]
+content_margin_left = 9.0
+content_margin_top = 9.0
+content_margin_right = 9.0
+content_margin_bottom = 9.0
+bg_color = Color(0.0705882, 0.290196, 0.282353, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.541176, 0.956863, 0.909804, 1)
 
 [sub_resource type="StyleBoxFlat" id="SubtleFrame"]
 bg_color = Color(0.027451, 0.070588, 0.078431, 0.98)
@@ -396,6 +605,38 @@ content_margin_top = 10.0
 content_margin_right = 12.0
 content_margin_bottom = 10.0
 bg_color = Color(0.164706, 0.062745, 0.070588, 0.45)
+
+[sub_resource type="StyleBoxFlat" id="DangerOutline"]
+content_margin_left = 12.0
+content_margin_top = 10.0
+content_margin_right = 12.0
+content_margin_bottom = 10.0
+bg_color = Color(0, 0, 0, 0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.937255, 0.356863, 0.329412, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="DangerOutlineHover"]
+content_margin_left = 12.0
+content_margin_top = 10.0
+content_margin_right = 12.0
+content_margin_bottom = 10.0
+bg_color = Color(0.164706, 0.062745, 0.070588, 0.45)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.937255, 0.356863, 0.329412, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
 
 [sub_resource type="StyleBoxFlat" id="Tab"]
 content_margin_left = 16.0
@@ -1109,6 +1350,10 @@ FileDialog/colors/file_icon_color = Color(0.85098, 0.831373, 0.819608, 1)
 FileDialog/colors/file_disabled_color = Color(0.4, 0.48, 0.47, 0.62)
 RookframeCanvas/base_type = &"PanelContainer"
 RookframeCanvas/styles/panel = SubResource("Canvas")
+RookframePackageInk/base_type = &"PanelContainer"
+RookframePackageInk/styles/panel = SubResource("PackageInk")
+RookframePackageFrame/base_type = &"PanelContainer"
+RookframePackageFrame/styles/panel = SubResource("PackageFrame")
 RookframeSurface/base_type = &"PanelContainer"
 RookframeSurface/styles/panel = SubResource("Surface")
 RookframeRaisedSurface/base_type = &"PanelContainer"
@@ -1121,6 +1366,16 @@ RookframeInsetFrame/base_type = &"PanelContainer"
 RookframeInsetFrame/styles/panel = SubResource("InsetFrame")
 RookframeTaskFrame/base_type = &"PanelContainer"
 RookframeTaskFrame/styles/panel = SubResource("TaskFrame")
+RookframeGoldFrame/base_type = &"PanelContainer"
+RookframeGoldFrame/styles/panel = SubResource("GoldFrame")
+RookframeGoldBadge/base_type = &"PanelContainer"
+RookframeGoldBadge/styles/panel = SubResource("GoldBadge")
+RookframeShellRail/base_type = &"PanelContainer"
+RookframeShellRail/styles/panel = SubResource("ShellRail")
+RookframeManagedChrome/base_type = &"PanelContainer"
+RookframeManagedChrome/styles/panel = SubResource("ManagedChrome")
+RookframeManagedChromeCompact/base_type = &"PanelContainer"
+RookframeManagedChromeCompact/styles/panel = SubResource("ManagedChromeCompact")
 RookframeSubtleFrame/base_type = &"PanelContainer"
 RookframeSubtleFrame/styles/panel = SubResource("SubtleFrame")
 RookframeInsetSurface/base_type = &"PanelContainer"
@@ -1166,19 +1421,19 @@ RookframeDialogSurface/base_type = &"PanelContainer"
 RookframeDialogSurface/styles/panel = SubResource("ManagedFrame")
 RookframeTitle/base_type = &"Label"
 RookframeTitle/colors/font_color = Color(0.941176, 0.733333, 0.196078, 1)
-RookframeTitle/fonts/font = ExtResource("2_exo")
+RookframeTitle/fonts/font = SubResource("DisplayExtraBold")
 RookframeTitle/font_sizes/font_size = 34
 RookframeSubtitle/base_type = &"Label"
 RookframeSubtitle/colors/font_color = Color(0.85098, 0.831373, 0.819608, 1)
-RookframeSubtitle/fonts/font = ExtResource("2_exo")
+RookframeSubtitle/fonts/font = SubResource("DisplayExtraBold")
 RookframeSubtitle/font_sizes/font_size = 28
 RookframeHeading/base_type = &"Label"
 RookframeHeading/colors/font_color = Color(0.941176, 0.733333, 0.196078, 1)
-RookframeHeading/fonts/font = ExtResource("2_exo")
+RookframeHeading/fonts/font = SubResource("DisplayBold")
 RookframeHeading/font_sizes/font_size = 16
 RookframeLabel/base_type = &"Label"
 RookframeLabel/colors/font_color = Color(0.941176, 0.733333, 0.196078, 1)
-RookframeLabel/fonts/font = ExtResource("2_exo")
+RookframeLabel/fonts/font = SubResource("DisplaySemiBold")
 RookframeLabel/font_sizes/font_size = 15
 RookframeValue/base_type = &"Label"
 RookframeValue/colors/font_color = Color(0.266667, 0.913725, 0.913725, 1)
@@ -1203,9 +1458,11 @@ RookframeError/colors/font_color = Color(0.937255, 0.356863, 0.329412, 1)
 RookframeError/font_sizes/font_size = 16
 RookframeIdentity/base_type = &"Label"
 RookframeIdentity/colors/font_color = Color(0.85098, 0.831373, 0.819608, 1)
+RookframeIdentity/fonts/font = SubResource("UiSemiBold")
 RookframeIdentity/font_sizes/font_size = 17
 RookframeBadgeText/base_type = &"Label"
 RookframeBadgeText/colors/font_color = Color(0.85098, 0.831373, 0.819608, 1)
+RookframeBadgeText/fonts/font = SubResource("UiSemiBold")
 RookframeBadgeText/font_sizes/font_size = 13
 RookframePrimaryButton/base_type = &"Button"
 RookframePrimaryButton/colors/font_color = Color(0.003922, 0.047059, 0.062745, 1)
@@ -1227,6 +1484,61 @@ RookframeGoldButton/styles/hover = SubResource("GoldHover")
 RookframeGoldButton/styles/pressed = SubResource("GoldPressed")
 RookframeGoldButton/styles/focus = SubResource("GoldFocus")
 RookframeGoldButton/styles/disabled = SubResource("ButtonDisabled")
+RookframeShellControl/base_type = &"Button"
+RookframeShellControl/colors/font_color = Color(0.886275, 0.768627, 0.427451, 1)
+RookframeShellControl/colors/font_hover_color = Color(0.541176, 0.956863, 0.909804, 1)
+RookframeShellControl/colors/font_pressed_color = Color(0.541176, 0.956863, 0.909804, 1)
+RookframeShellControl/colors/font_focus_color = Color(0.541176, 0.956863, 0.909804, 1)
+RookframeShellControl/fonts/font = SubResource("DisplayBold")
+RookframeShellControl/styles/normal = SubResource("ShellControl")
+RookframeShellControl/styles/hover = SubResource("ShellControlActive")
+RookframeShellControl/styles/pressed = SubResource("ShellControlActive")
+RookframeShellControl/styles/focus = SubResource("ShellControlFocus")
+RookframeShellControl/styles/disabled = SubResource("ButtonDisabled")
+RookframeManagedControl/base_type = &"Button"
+RookframeManagedControl/colors/font_color = Color(0.85098, 0.831373, 0.819608, 1)
+RookframeManagedControl/colors/font_hover_color = Color(0.541176, 0.956863, 0.909804, 1)
+RookframeManagedControl/colors/font_pressed_color = Color(0.541176, 0.956863, 0.909804, 1)
+RookframeManagedControl/colors/font_focus_color = Color(0.541176, 0.956863, 0.909804, 1)
+RookframeManagedControl/fonts/font = SubResource("DisplayBold")
+RookframeManagedControl/styles/normal = SubResource("ManagedControl")
+RookframeManagedControl/styles/hover = SubResource("ManagedControlHover")
+RookframeManagedControl/styles/pressed = SubResource("ManagedControlHover")
+RookframeManagedControl/styles/focus = SubResource("ManagedControlFocus")
+RookframeManagedControl/styles/disabled = SubResource("ButtonDisabled")
+RookframeManagedAffirm/base_type = &"Button"
+RookframeManagedAffirm/colors/font_color = Color(0.541176, 0.956863, 0.909804, 1)
+RookframeManagedAffirm/colors/font_hover_color = Color(0.541176, 0.956863, 0.909804, 1)
+RookframeManagedAffirm/colors/font_pressed_color = Color(0.541176, 0.956863, 0.909804, 1)
+RookframeManagedAffirm/colors/font_focus_color = Color(0.541176, 0.956863, 0.909804, 1)
+RookframeManagedAffirm/fonts/font = SubResource("DisplayBold")
+RookframeManagedAffirm/styles/normal = SubResource("ManagedAffirm")
+RookframeManagedAffirm/styles/hover = SubResource("ManagedControlHover")
+RookframeManagedAffirm/styles/pressed = SubResource("ManagedControlHover")
+RookframeManagedAffirm/styles/focus = SubResource("ManagedControlFocus")
+RookframeManagedAffirm/styles/disabled = SubResource("ButtonDisabled")
+RookframeManagedCommit/base_type = &"Button"
+RookframeManagedCommit/colors/font_color = Color(0.541176, 0.956863, 0.909804, 1)
+RookframeManagedCommit/colors/font_hover_color = Color(0.541176, 0.956863, 0.909804, 1)
+RookframeManagedCommit/colors/font_pressed_color = Color(0.541176, 0.956863, 0.909804, 1)
+RookframeManagedCommit/colors/font_focus_color = Color(0.541176, 0.956863, 0.909804, 1)
+RookframeManagedCommit/fonts/font = SubResource("DisplayBold")
+RookframeManagedCommit/styles/normal = SubResource("ManagedCommit")
+RookframeManagedCommit/styles/hover = SubResource("ManagedCommit")
+RookframeManagedCommit/styles/pressed = SubResource("ManagedCommit")
+RookframeManagedCommit/styles/focus = SubResource("ManagedCommitFocus")
+RookframeManagedCommit/styles/disabled = SubResource("ButtonDisabled")
+RookframeManagedSelected/base_type = &"Button"
+RookframeManagedSelected/colors/font_color = Color(0.541176, 0.956863, 0.909804, 1)
+RookframeManagedSelected/colors/font_hover_color = Color(0.541176, 0.956863, 0.909804, 1)
+RookframeManagedSelected/colors/font_pressed_color = Color(0.541176, 0.956863, 0.909804, 1)
+RookframeManagedSelected/colors/font_focus_color = Color(0.541176, 0.956863, 0.909804, 1)
+RookframeManagedSelected/fonts/font = SubResource("DisplayBold")
+RookframeManagedSelected/styles/normal = SubResource("ManagedCommit")
+RookframeManagedSelected/styles/hover = SubResource("ManagedCommit")
+RookframeManagedSelected/styles/pressed = SubResource("ManagedCommit")
+RookframeManagedSelected/styles/focus = SubResource("ManagedCommitFocus")
+RookframeManagedSelected/styles/disabled = SubResource("ButtonDisabled")
 RookframeSecondaryButton/base_type = &"Button"
 RookframeSecondaryButton/colors/font_color = Color(0.266667, 0.913725, 0.913725, 1)
 RookframeSecondaryButton/colors/font_hover_color = Color(0.509804, 0.972549, 0.956863, 1)
@@ -1248,6 +1560,17 @@ RookframeDangerButton/styles/hover = SubResource("DangerHover")
 RookframeDangerButton/styles/pressed = SubResource("DangerHover")
 RookframeDangerButton/styles/focus = SubResource("ButtonFocus")
 RookframeDangerButton/styles/disabled = SubResource("ButtonDisabled")
+RookframeDangerOutline/base_type = &"Button"
+RookframeDangerOutline/colors/font_color = Color(0.937255, 0.356863, 0.329412, 1)
+RookframeDangerOutline/colors/font_hover_color = Color(0.937255, 0.356863, 0.329412, 1)
+RookframeDangerOutline/colors/font_pressed_color = Color(0.937255, 0.356863, 0.329412, 1)
+RookframeDangerOutline/colors/font_focus_color = Color(0.937255, 0.356863, 0.329412, 1)
+RookframeDangerOutline/fonts/font = SubResource("DisplayBold")
+RookframeDangerOutline/styles/normal = SubResource("DangerOutline")
+RookframeDangerOutline/styles/hover = SubResource("DangerOutlineHover")
+RookframeDangerOutline/styles/pressed = SubResource("DangerOutlineHover")
+RookframeDangerOutline/styles/focus = SubResource("ButtonFocus")
+RookframeDangerOutline/styles/disabled = SubResource("ButtonDisabled")
 RookframeTabButton/base_type = &"Button"
 RookframeTabButton/colors/font_color = Color(0.568627, 0.6, 0.603922, 1)
 RookframeTabButton/colors/font_hover_color = Color(0.509804, 0.972549, 0.956863, 1)

@@ -74,6 +74,8 @@ a variation only for its current color or font is unsupported.
 | Variation | Base type | Meaning |
 | --- | --- | --- |
 | `RookframeCanvas` | `PanelContainer` | Full application or catalogue canvas |
+| `RookframePackageInk` | `PanelContainer` | Opaque package-authored task canvas with no outer frame |
+| `RookframePackageFrame` | `PanelContainer` | Opaque package-authored task canvas with its package edge |
 | `RookframeSurface` | `PanelContainer` | Ordinary content surface |
 | `RookframeRaisedSurface` | `PanelContainer` | Elevated local surface |
 | `RookframeRaisedFrame` | `PanelContainer` | Elevated frame whose caller owns the inner inset |
@@ -84,6 +86,11 @@ a variation only for its current color or font is unsupported.
 | `RookframeInsetSurface` | `PanelContainer` | Sunken or nested content region |
 | `RookframeSection` | `PanelContainer` | Framed semantic section |
 | `RookframeManagedSurface` | `PanelContainer` | Outer frame for a reusable managed presentation |
+| `RookframeGoldFrame` | `PanelContainer` | Prominent framed shell or blocking overlay whose caller owns the inner inset |
+| `RookframeGoldBadge` | `PanelContainer` | Short live-session or shell-status chip |
+| `RookframeShellRail` | `PanelContainer` | Narrow vertical shell rail whose caller owns the action stack |
+| `RookframeManagedChrome` | `PanelContainer` | Wide fixed chrome region within a managed task surface |
+| `RookframeManagedChromeCompact` | `PanelContainer` | Compact fixed chrome region within a managed task surface |
 | `RookframeNotice` | `PanelContainer` | Compact in-place status or recovery region |
 | `RookframeNoticeInfo` | `PanelContainer` | Informational Notice tone |
 | `RookframeNoticePending` | `PanelContainer` | In-progress Notice tone |
@@ -119,6 +126,11 @@ a variation only for its current color or font is unsupported.
 
 Text roles express meaning, not a request for one color or font size. Their
 exact visual values may change compatibly while the role's purpose remains.
+The shared Theme uses Exo 2 extra-bold for `RookframeTitle` and
+`RookframeSubtitle`, Exo 2 bold for `RookframeHeading`, Exo 2 semibold for
+`RookframeLabel`, and Inter semibold for `RookframeIdentity` and
+`RookframeBadgeText`; callers may adjust a role's size only when their
+authored layout requires the documented hierarchy at a different density.
 
 ### Fields
 
@@ -139,6 +151,12 @@ compact search control already situated in a screen-authored toolbar.
 | `RookframeSecondaryButton` | `Button` | Important alternative that does not advance the task |
 | `RookframeQuietButton` | `Button` | Compact reveal, retry, or row-local action |
 | `RookframeDangerButton` | `Button` | Destructive or abandoning action |
+| `RookframeShellControl` | `Button` | Compact icon-only shell navigation or action |
+| `RookframeManagedControl` | `Button` | Bordered contextual action inside a managed task or shell overlay |
+| `RookframeManagedAffirm` | `Button` | Bordered affirmative action inside a managed task or shell overlay |
+| `RookframeManagedCommit` | `Button` | Filled commitment action that saves the current managed-task state |
+| `RookframeManagedSelected` | `Button` | Persistent selected disclosure or mutually exclusive choice inside a managed task |
+| `RookframeDangerOutline` | `Button` | Low-emphasis destructive or abandoning action |
 | `RookframeTabButton` | `Button` | Changes a visible section without changing domain state |
 | `RookframeChoiceRow` | `Button` | Complete detailed or compact choice target |
 | `RookframeCircularAction` | `Button` | Circular icon action with brass normal edge, aqua hover/pressed, distinct outer focus ring, and muted disabled state |
@@ -184,10 +202,10 @@ var retry_icon := load("res://rookframe/ui/icons/retry.svg")
 ```
 
 Choose the meaning (`retry`, `close`, `dock`, `warning`) rather than an
-upstream drawing or a consuming screen's name. Every semantic role has distinct
-source geometry; for example, `clear.svg` uses a backspace drawing while
-`close.svg` uses a plain close mark. No Manager-, Character Sheet-, or
-Package-named alias is present.
+upstream drawing or a consuming screen's name. Semantic paths remain distinct
+even when the approved context shares a drawing: `clear.svg` and `close.svg`
+use the close mark, while `minimize.svg` and `remove.svg` use the minus mark.
+No Manager-, Character Sheet-, or Package-named alias is present.
 
 ## Compatibility
 

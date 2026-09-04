@@ -35,7 +35,9 @@ polish.
 - Help or error copy becomes its accessibility description. Error copy starts
   with the visible word `Error:` and is never color-only.
 - Search has one focus perimeter for icon, editor, and clear action. Clearing
-  returns focus to the editor.
+  returns focus to the editor. `show_clear_when_empty` keeps that reset action
+  discoverable when the route requires it; `clear_minimum_size` preserves its
+  target size.
 - A complete Choice Row is one target. Supporting description and selected/not
   selected state are included in its accessibility description.
 

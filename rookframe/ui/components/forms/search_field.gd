@@ -31,6 +31,26 @@ var _value := ""
 		placeholder = value
 		_refresh()
 
+@export var show_clear_when_empty := false:
+	set(value):
+		show_clear_when_empty = value
+		_refresh()
+
+@export var perimeter_minimum_height := 44.0:
+	set(value):
+		perimeter_minimum_height = value
+		_refresh()
+
+@export var clear_minimum_size := Vector2(44.0, 44.0):
+	set(value):
+		clear_minimum_size = value
+		_refresh()
+
+@export var editor_font_size := 14:
+	set(value):
+		editor_font_size = value
+		_refresh()
+
 
 func _ready() -> void:
 	var editor := get_node(^"Perimeter/Row/Editor") as LineEdit
@@ -99,18 +119,23 @@ func _refresh() -> void:
 	if not is_inside_tree():
 		return
 	var label := get_node_or_null(^"Label") as Label
+	var perimeter := get_node_or_null(^"Perimeter") as PanelContainer
 	var editor := get_node_or_null(^"Perimeter/Row/Editor") as LineEdit
 	var clear_button := get_node_or_null(^"Perimeter/Row/Clear") as Button
 	if label != null:
 		label.text = label_text
 		label.visible = show_label
+	if perimeter != null:
+		perimeter.custom_minimum_size = Vector2(0.0, perimeter_minimum_height)
 	if editor != null:
 		if editor.text != _value:
 			editor.text = _value
 		editor.placeholder_text = placeholder
 		editor.accessibility_name = label_text
+		editor.add_theme_font_size_override(&"font_size", editor_font_size)
 	if clear_button != null:
-		clear_button.visible = not _value.is_empty()
+		clear_button.custom_minimum_size = clear_minimum_size
+		clear_button.visible = show_clear_when_empty or not _value.is_empty()
 		clear_button.accessibility_name = "Clear %s" % label_text.to_lower()
 		clear_button.tooltip_text = clear_button.accessibility_name
 	_refresh_focus()

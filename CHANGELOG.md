@@ -7,6 +7,9 @@ published.
 
 ### Added
 
+- Public shell and managed-task Theme roles, with catalogue examples and native
+  focus/disabled states, for the unchanged approved Tabletop composition.
+- Search Field density and persistent-clear options for managed tasks.
 - Shared circular icon actions and compact outlined task actions, including
   touch density, normal/hover/pressed/disabled states and visible focus, for
   the approved RFG-177 contribution composition.
@@ -22,7 +25,7 @@ published.
 - A complete visual catalogue for native controls, forms, responsive layout,
   feedback, structured data, all 62 semantic icons, and Managed Surface
   behavior.
-- Distinct pinned upstream drawings for every semantic icon role.
+- Pinned upstream drawings for every semantic icon role.
 - Complete public identity, component, semantic icon, native composition,
   accessibility/input, compatibility, licensing, attribution, and migration
   documentation.
@@ -31,6 +34,9 @@ published.
 
 ### Fixed
 
+- Approved display/UI font weights and context-appropriate clear/minimize
+  drawings now ship in the public dependency, making clean consumers match
+  the existing reference appearance.
 - Image Field forwards visible help or error copy to the replace action's
   accessibility description.
 

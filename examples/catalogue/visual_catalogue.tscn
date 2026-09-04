@@ -903,6 +903,225 @@ custom_minimum_size = Vector2(680, 0)
 layout_mode = 2
 surface_title = "Retained package task"
 
+[node name="Shell" type="ScrollContainer" parent="Canvas/Page/Stack/Tabs"]
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="Margin" type="MarginContainer" parent="Canvas/Page/Stack/Tabs/Shell"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Content" type="VBoxContainer" parent="Canvas/Page/Stack/Tabs/Shell/Margin"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 12
+
+[node name="Heading" type="Label" parent="Canvas/Page/Stack/Tabs/Shell/Margin/Content"]
+layout_mode = 2
+theme_type_variation = &"RookframeHeading"
+text = "SHELL AND MANAGED TASK ROLES"
+
+[node name="Instructions" type="Label" parent="Canvas/Page/Stack/Tabs/Shell/Margin/Content"]
+layout_mode = 2
+theme_type_variation = &"RookframeBody"
+text = "Tab through enabled actions to inspect native focus. Hover and press them for active states; disabled examples are skipped. The host owns composition and target dimensions."
+autowrap_mode = 2
+
+[node name="Panels" type="HFlowContainer" parent="Canvas/Page/Stack/Tabs/Shell/Margin/Content"]
+layout_mode = 2
+
+[node name="PackageInk" type="PanelContainer" parent="Canvas/Page/Stack/Tabs/Shell/Margin/Content/Panels"]
+custom_minimum_size = Vector2(160, 52)
+layout_mode = 2
+theme_type_variation = &"RookframePackageInk"
+
+[node name="Label" type="Label" parent="Canvas/Page/Stack/Tabs/Shell/Margin/Content/Panels/PackageInk"]
+layout_mode = 2
+text = "PackageInk"
+horizontal_alignment = 1
+
+[node name="PackageFrame" type="PanelContainer" parent="Canvas/Page/Stack/Tabs/Shell/Margin/Content/Panels"]
+custom_minimum_size = Vector2(160, 52)
+layout_mode = 2
+theme_type_variation = &"RookframePackageFrame"
+
+[node name="Label" type="Label" parent="Canvas/Page/Stack/Tabs/Shell/Margin/Content/Panels/PackageFrame"]
+layout_mode = 2
+text = "PackageFrame"
+horizontal_alignment = 1
+
+[node name="GoldFrame" type="PanelContainer" parent="Canvas/Page/Stack/Tabs/Shell/Margin/Content/Panels"]
+custom_minimum_size = Vector2(160, 52)
+layout_mode = 2
+theme_type_variation = &"RookframeGoldFrame"
+
+[node name="Label" type="Label" parent="Canvas/Page/Stack/Tabs/Shell/Margin/Content/Panels/GoldFrame"]
+layout_mode = 2
+text = "GoldFrame"
+horizontal_alignment = 1
+
+[node name="GoldBadge" type="PanelContainer" parent="Canvas/Page/Stack/Tabs/Shell/Margin/Content/Panels"]
+custom_minimum_size = Vector2(160, 52)
+layout_mode = 2
+theme_type_variation = &"RookframeGoldBadge"
+
+[node name="Label" type="Label" parent="Canvas/Page/Stack/Tabs/Shell/Margin/Content/Panels/GoldBadge"]
+layout_mode = 2
+text = "GoldBadge"
+horizontal_alignment = 1
+
+[node name="ShellRail" type="PanelContainer" parent="Canvas/Page/Stack/Tabs/Shell/Margin/Content/Panels"]
+custom_minimum_size = Vector2(160, 52)
+layout_mode = 2
+theme_type_variation = &"RookframeShellRail"
+
+[node name="Label" type="Label" parent="Canvas/Page/Stack/Tabs/Shell/Margin/Content/Panels/ShellRail"]
+layout_mode = 2
+text = "ShellRail"
+horizontal_alignment = 1
+
+[node name="ManagedChrome" type="PanelContainer" parent="Canvas/Page/Stack/Tabs/Shell/Margin/Content/Panels"]
+custom_minimum_size = Vector2(160, 52)
+layout_mode = 2
+theme_type_variation = &"RookframeManagedChrome"
+
+[node name="Label" type="Label" parent="Canvas/Page/Stack/Tabs/Shell/Margin/Content/Panels/ManagedChrome"]
+layout_mode = 2
+text = "ManagedChrome"
+horizontal_alignment = 1
+
+[node name="ManagedChromeCompact" type="PanelContainer" parent="Canvas/Page/Stack/Tabs/Shell/Margin/Content/Panels"]
+custom_minimum_size = Vector2(160, 52)
+layout_mode = 2
+theme_type_variation = &"RookframeManagedChromeCompact"
+
+[node name="Label" type="Label" parent="Canvas/Page/Stack/Tabs/Shell/Margin/Content/Panels/ManagedChromeCompact"]
+layout_mode = 2
+text = "ManagedChromeCompact"
+horizontal_alignment = 1
+
+[node name="ShellControl" type="HBoxContainer" parent="Canvas/Page/Stack/Tabs/Shell/Margin/Content"]
+layout_mode = 2
+
+[node name="Enabled" type="Button" parent="Canvas/Page/Stack/Tabs/Shell/Margin/Content/ShellControl"]
+custom_minimum_size = Vector2(280, 44)
+layout_mode = 2
+theme_type_variation = &"RookframeShellControl"
+text = "ShellControl"
+accessibility_name = "ShellControl enabled example"
+
+[node name="Disabled" type="Button" parent="Canvas/Page/Stack/Tabs/Shell/Margin/Content/ShellControl"]
+custom_minimum_size = Vector2(280, 44)
+layout_mode = 2
+theme_type_variation = &"RookframeShellControl"
+disabled = true
+text = "ShellControl disabled"
+accessibility_name = "ShellControl disabled example"
+
+[node name="ManagedControl" type="HBoxContainer" parent="Canvas/Page/Stack/Tabs/Shell/Margin/Content"]
+layout_mode = 2
+
+[node name="Enabled" type="Button" parent="Canvas/Page/Stack/Tabs/Shell/Margin/Content/ManagedControl"]
+custom_minimum_size = Vector2(280, 44)
+layout_mode = 2
+theme_type_variation = &"RookframeManagedControl"
+text = "ManagedControl"
+accessibility_name = "ManagedControl enabled example"
+
+[node name="Disabled" type="Button" parent="Canvas/Page/Stack/Tabs/Shell/Margin/Content/ManagedControl"]
+custom_minimum_size = Vector2(280, 44)
+layout_mode = 2
+theme_type_variation = &"RookframeManagedControl"
+disabled = true
+text = "ManagedControl disabled"
+accessibility_name = "ManagedControl disabled example"
+
+[node name="ManagedAffirm" type="HBoxContainer" parent="Canvas/Page/Stack/Tabs/Shell/Margin/Content"]
+layout_mode = 2
+
+[node name="Enabled" type="Button" parent="Canvas/Page/Stack/Tabs/Shell/Margin/Content/ManagedAffirm"]
+custom_minimum_size = Vector2(280, 44)
+layout_mode = 2
+theme_type_variation = &"RookframeManagedAffirm"
+text = "ManagedAffirm"
+accessibility_name = "ManagedAffirm enabled example"
+
+[node name="Disabled" type="Button" parent="Canvas/Page/Stack/Tabs/Shell/Margin/Content/ManagedAffirm"]
+custom_minimum_size = Vector2(280, 44)
+layout_mode = 2
+theme_type_variation = &"RookframeManagedAffirm"
+disabled = true
+text = "ManagedAffirm disabled"
+accessibility_name = "ManagedAffirm disabled example"
+
+[node name="ManagedCommit" type="HBoxContainer" parent="Canvas/Page/Stack/Tabs/Shell/Margin/Content"]
+layout_mode = 2
+
+[node name="Enabled" type="Button" parent="Canvas/Page/Stack/Tabs/Shell/Margin/Content/ManagedCommit"]
+custom_minimum_size = Vector2(280, 44)
+layout_mode = 2
+theme_type_variation = &"RookframeManagedCommit"
+text = "ManagedCommit"
+accessibility_name = "ManagedCommit enabled example"
+
+[node name="Disabled" type="Button" parent="Canvas/Page/Stack/Tabs/Shell/Margin/Content/ManagedCommit"]
+custom_minimum_size = Vector2(280, 44)
+layout_mode = 2
+theme_type_variation = &"RookframeManagedCommit"
+disabled = true
+text = "ManagedCommit disabled"
+accessibility_name = "ManagedCommit disabled example"
+
+[node name="ManagedSelected" type="HBoxContainer" parent="Canvas/Page/Stack/Tabs/Shell/Margin/Content"]
+layout_mode = 2
+
+[node name="Enabled" type="Button" parent="Canvas/Page/Stack/Tabs/Shell/Margin/Content/ManagedSelected"]
+custom_minimum_size = Vector2(280, 44)
+layout_mode = 2
+theme_type_variation = &"RookframeManagedSelected"
+text = "ManagedSelected"
+accessibility_name = "ManagedSelected enabled example"
+
+[node name="Disabled" type="Button" parent="Canvas/Page/Stack/Tabs/Shell/Margin/Content/ManagedSelected"]
+custom_minimum_size = Vector2(280, 44)
+layout_mode = 2
+theme_type_variation = &"RookframeManagedSelected"
+disabled = true
+text = "ManagedSelected disabled"
+accessibility_name = "ManagedSelected disabled example"
+
+[node name="DangerOutline" type="HBoxContainer" parent="Canvas/Page/Stack/Tabs/Shell/Margin/Content"]
+layout_mode = 2
+
+[node name="Enabled" type="Button" parent="Canvas/Page/Stack/Tabs/Shell/Margin/Content/DangerOutline"]
+custom_minimum_size = Vector2(280, 44)
+layout_mode = 2
+theme_type_variation = &"RookframeDangerOutline"
+text = "DangerOutline"
+accessibility_name = "DangerOutline enabled example"
+
+[node name="Disabled" type="Button" parent="Canvas/Page/Stack/Tabs/Shell/Margin/Content/DangerOutline"]
+custom_minimum_size = Vector2(280, 44)
+layout_mode = 2
+theme_type_variation = &"RookframeDangerOutline"
+disabled = true
+text = "DangerOutline disabled"
+accessibility_name = "DangerOutline disabled example"
+
+[node name="ManagedSearch" parent="Canvas/Page/Stack/Tabs/Shell/Margin/Content" instance=ExtResource("5_search")]
+layout_mode = 2
+show_label = false
+placeholder = "Managed search with persistent clear target"
+show_clear_when_empty = true
+perimeter_minimum_height = 50.0
+clear_minimum_size = Vector2(50, 50)
+editor_font_size = 16
+
+
 [node name="AcceptDialogDemo" parent="." instance=ExtResource("26_dialog")]
 unique_name_in_owner = true
 eyebrow = "INFORMATION"
