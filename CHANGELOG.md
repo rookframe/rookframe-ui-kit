@@ -1,5 +1,12 @@
 # Changelog
 
+## Unreleased
+
+- Document optional Catalogue search, exact release details, pagination and
+  accountless acquisition composition with existing native controls. No public
+  resource, Theme token, candidate tag or SDK boundary changes.
+
+
 This repository follows independent UI Kit SemVer. Stable v1.0.0 has not been
 published.
 
