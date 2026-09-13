@@ -16,7 +16,7 @@ Selection, enable/disable and update belong here. Repair and removal open their
 own pages so routine inspection is not a wall of maintenance actions.
 
 Installation is a separate task reached by **Install Package**. Offer local
-archive import and a public Manifest link. Show a System compatibility selector
+archive import, a public Manifest link, and optional Catalogue discovery. Show a System compatibility selector
 only when installation context needs a choice. Show progress/cancel during work
 and Retry after a retryable outcome; hide idle progress controls. Storage has a
 separate page with installed package files, ready-to-run files, pending cleanup and
@@ -46,3 +46,30 @@ recovery. Preserve a general host failure when Package causation was not establi
 Review the same task at desktop 1920 × 1080, phone 390 × 844 and tablet 1024 × 768
 using the application's canonical authority. The phone changes composition and
 scrolling, never the release, recovery or confirmation semantics.
+
+## Catalogue discovery and exact release detail
+
+**Browse Catalogue** opens a separate page with one labeled search field,
+Search, a result count and exact release rows. Reuse the public
+`world_row.tscn` component (`title` and `detail_text`), including its keyboard
+activation, disclosure arrow and touch target. A Catalogue row describes one
+release, so its detail is Publisher · version · Kind. Previous/Next pagination
+belongs below the rows. Empty, unavailable and retry outcomes stay in the task;
+local archive and direct-link installation remain available through Back.
+
+A row opens Catalogue release details: name, ordinary summary, Publisher,
+exact version, Package ID, optional license/homepage, and the authoritative
+Manifest URL in a selectable read-only native field. **Install this release**
+is an explicit primary action. Readback and acquisition belong to Manager;
+they do not become UI Kit behavior. A Publisher website opens only after the
+user chooses it. Do not add rating, trust, tested, compatible, platform-support
+or operational badges. Publisher identity describes the Catalogue record and
+does not authenticate downloaded contents.
+
+Use `RookframeQuietButton` for search, pagination and optional website actions;
+use existing body/meta/title roles for copy, with long links and metadata kept
+inside the viewport. Back returns from release → Catalogue → Install Package.
+All three form factors retain that hierarchy, the same exact release, existing
+progress/cancellation and installation-wide replacement review. This recipe
+adds no UI Kit release requirement or public API; existing exact commit pins
+remain valid, including `238339d390ec01873585c002917c164948a0578d`.

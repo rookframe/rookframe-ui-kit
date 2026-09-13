@@ -37,13 +37,13 @@ unique_name_in_owner = true
 layout_mode = 2
 theme_type_variation = &"RookframeIdentity"
 text = "Notice"
-autowrap_mode = 2
+autowrap_mode = 3
 
 [node name="Description" type="Label" parent="Content/Copy"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_type_variation = &"RookframeMeta"
-autowrap_mode = 2
+autowrap_mode = 3
 
 [node name="ActionSlot" type="HFlowContainer" parent="Content/Copy"]
 unique_name_in_owner = true
