@@ -4,24 +4,32 @@ Compose Package management from the existing Theme and authored native Controls.
 The application owns release data, acquisition, selection and recovery. This
 recipe adds no public widget or Package lifecycle service to the UI Kit.
 
-Use a `VBoxContainer` inside a scrolling managed task. Keep the required System
-and independent optional choices visible first. An **Installed releases & recovery**
-disclosure contains a public Manifest `LineEdit`, acquisition actions, readable
-progress, cancel/retry, storage totals, and exact-release cards. An installation
-library can use this same content before a World exists.
+Start with a compact list: one disclosure row per Package identity, showing its
+name, Kind and version (or version count). Reuse the same authored record-row
+role as World Select. The Main Menu entry uses the same quiet, left-aligned
+navigation row, trailing arrow and touch height as its World Select sibling.
 
-Each card is an authored `PanelContainer` with `RookframeRaisedSurface`, 16 px
-margins and a vertical content stack. Show name/version, Kind and ID, ordinary
-summary, installed/missing state, enabled state in the selected World and affected
-local Worlds. Use `RookframeHeading`, `RookframeBody` and `RookframeMeta` according
-to hierarchy. Identity, metadata and compatibility are text; they do not imply
-security approval or a safety badge.
+Selecting a row opens a separate detail page. Show the exact version, ordinary
+summary, installed/missing state, use in the selected World and affected local
+Worlds. When multiple versions exist, use a version selector on this page.
+Selection, enable/disable and update belong here. Repair and removal open their
+own pages so routine inspection is not a wall of maintenance actions.
 
-Use an `HFlowContainer` for independent actions. Native buttons keep at least
-44 px height, keyboard focus and accessible names. Use `RookframeQuietButton`
-for ordinary choices and the existing danger variation for deletion. Long IDs,
-source errors, affected World names and storage descriptions wrap. Dialogs fit
-the phone canvas and keep their native cancel/confirm actions reachable.
+Installation is a separate task reached by **Install Package**. Offer local
+archive import and a public Manifest link. Show a System compatibility selector
+only when installation context needs a choice. Show progress/cancel during work
+and Retry after a retryable outcome; hide idle progress controls. Storage has a
+separate page with installed package files, ready-to-run files, pending cleanup and
+in-use bytes. Explain that in-use bytes are included in the totals.
+
+Compose these pages with authored `VBoxContainer`, `Label`, `OptionButton`,
+`LineEdit` and the existing Theme button roles. Identity and metadata are text,
+not approval badges. Native buttons keep at least 44 px touch height, keyboard
+focus and accessible names. Use `RookframeQuietButton` for ordinary choices and
+the existing danger variation for deletion. Long names and outcomes wrap.
+Dialogs fit the phone canvas. Back returns to the previous package page before
+leaving Package management. A fixed action divider appears only when its action
+dock is present; it must never cross the scrolling page content.
 
 | Action | Review content owned by the application |
 | --- | --- |
