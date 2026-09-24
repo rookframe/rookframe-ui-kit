@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=107 format=3 uid="uid://s4dv3jijmvy1"]
+[gd_resource type="Theme" load_steps=111 format=3 uid="uid://s4dv3jijmvy1"]
 
 [ext_resource type="FontFile" path="res://rookframe/ui/assets/fonts/Inter-VariableFont_opsz,wght.ttf" id="1_inter"]
 [ext_resource type="FontFile" path="res://rookframe/ui/assets/fonts/Exo2-VariableFont_wght.ttf" id="2_exo"]
@@ -16,6 +16,10 @@
 [ext_resource type="Texture2D" path="res://rookframe/ui/icons/chevron-left.svg" id="14_previous"]
 [ext_resource type="Texture2D" path="res://rookframe/ui/icons/chevron-right.svg" id="15_next"]
 
+[ext_resource type="Texture2D" path="res://rookframe/ui/assets/controls/checkbox-checked.svg" id="checkbox-checked"]
+[ext_resource type="Texture2D" path="res://rookframe/ui/assets/controls/checkbox-unchecked.svg" id="checkbox-unchecked"]
+[ext_resource type="Texture2D" path="res://rookframe/ui/assets/controls/checkbox-checked-disabled.svg" id="checkbox-checked-disabled"]
+[ext_resource type="Texture2D" path="res://rookframe/ui/assets/controls/checkbox-unchecked-disabled.svg" id="checkbox-unchecked-disabled"]
 [sub_resource type="FontVariation" id="DisplayExtraBold"]
 base_font = ExtResource("2_exo")
 variation_embolden = 0.45
@@ -1162,6 +1166,10 @@ Button/styles/hover = SubResource("ButtonHover")
 Button/styles/pressed = SubResource("ButtonPressed")
 Button/styles/focus = SubResource("ButtonFocus")
 Button/styles/disabled = SubResource("ButtonDisabled")
+CheckBox/icons/checked = ExtResource("checkbox-checked")
+CheckBox/icons/unchecked = ExtResource("checkbox-unchecked")
+CheckBox/icons/checked_disabled = ExtResource("checkbox-checked-disabled")
+CheckBox/icons/unchecked_disabled = ExtResource("checkbox-unchecked-disabled")
 CheckBox/colors/font_color = Color(0.85098, 0.831373, 0.819608, 1)
 CheckBox/colors/font_hover_color = Color(0.509804, 0.972549, 0.956863, 1)
 CheckBox/colors/font_pressed_color = Color(0.85098, 0.831373, 0.819608, 1)

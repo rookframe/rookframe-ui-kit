@@ -15,6 +15,9 @@ pass-through scene or script around an adequate built-in node.
 - Use `CheckBox` or `CheckButton` for independent booleans. Use `CheckBox`
   instances with one `ButtonGroup` for an exclusive radio set when ordinary
   labelled options are sufficient.
+- The shared `CheckBox` theme supplies 22px aqua outlined/filled indicators and
+  disabled variants from the canonical controlled-field recipe. Retain a 44px
+  minimum label row and native keyboard/accessibility state.
 - Use `OptionButton` for one selection from a compact closed list.
 - A form stack is an ordinary `VBoxContainer` with 16px semantic separation.
   Compose `TextField`, `TextArea`, native choices, and actions in source-order
