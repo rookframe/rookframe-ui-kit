@@ -124,7 +124,9 @@
         "maximum_columns": 4,
         "minimum_column_width": 220.0
       },
-      "signals": ["column_count_changed(column_count: int)"],
+      "signals": [
+        "column_count_changed(column_count: int)"
+      ],
       "contract": "Chooses a bounded column count from its own measured width; direct Control children are equal-priority cells."
     },
     {
@@ -139,9 +141,17 @@
         "primary_ratio": 0.4,
         "compact_secondary_first": false
       },
-      "signals": ["layout_profile_changed(profile: StringName)"],
-      "methods": ["get_primary_slot() -> Container", "get_secondary_slot() -> Container"],
-      "slots": ["PrimarySlot", "SecondarySlot"],
+      "signals": [
+        "layout_profile_changed(profile: StringName)"
+      ],
+      "methods": [
+        "get_primary_slot() -> Container",
+        "get_secondary_slot() -> Container"
+      ],
+      "slots": [
+        "PrimarySlot",
+        "SecondarySlot"
+      ],
       "contract": "Implements stage-content or task-detail as one retained two-region tree that stacks at its own threshold."
     },
     {
@@ -157,8 +167,16 @@
         "subtitle": "",
         "use_large_title": false
       },
-      "methods": ["get_actions_slot() -> Container", "get_progress_slot() -> Container", "get_tabs_slot() -> Container"],
-      "slots": ["ActionsSlot", "ProgressSlot", "TabsSlot"]
+      "methods": [
+        "get_actions_slot() -> Container",
+        "get_progress_slot() -> Container",
+        "get_tabs_slot() -> Container"
+      ],
+      "slots": [
+        "ActionsSlot",
+        "ProgressSlot",
+        "TabsSlot"
+      ]
     },
     {
       "name": "CompactRouteHeading",
@@ -167,7 +185,11 @@
       "script": "res://rookframe/ui/components/layout/compact_route_heading.gd",
       "scriptUid": "uid://c3gfgsec40cac",
       "rootType": "VBoxContainer",
-      "properties": {"kicker_text": "", "title_text": "Route title", "detail_text": ""},
+      "properties": {
+        "kicker_text": "",
+        "title_text": "Route title",
+        "detail_text": ""
+      },
       "contract": "Owns the compact route label, title, supporting detail, and divider relationship; navigation remains consumer-owned."
     },
     {
@@ -177,9 +199,18 @@
       "script": "res://rookframe/ui/components/layout/section.gd",
       "scriptUid": "uid://cnqkqncrm3noo",
       "rootType": "PanelContainer",
-      "properties": {"title": "Section", "description": ""},
-      "methods": ["get_action_slot() -> Container", "get_body_slot() -> Container"],
-      "slots": ["ActionSlot", "BodySlot"]
+      "properties": {
+        "title": "Section",
+        "description": ""
+      },
+      "methods": [
+        "get_action_slot() -> Container",
+        "get_body_slot() -> Container"
+      ],
+      "slots": [
+        "ActionSlot",
+        "BodySlot"
+      ]
     },
     {
       "name": "ActionBar",
@@ -188,10 +219,20 @@
       "script": "res://rookframe/ui/components/layout/action_bar.gd",
       "scriptUid": "uid://bhv4hi8nxqudi",
       "rootType": "BoxContainer",
-      "properties": {"compact_width": 560.0},
-      "signals": ["layout_profile_changed(profile: StringName)"],
-      "methods": ["get_leading_slot() -> Container", "get_trailing_slot() -> Container"],
-      "slots": ["LeadingSlot", "TrailingSlot"],
+      "properties": {
+        "compact_width": 560.0
+      },
+      "signals": [
+        "layout_profile_changed(profile: StringName)"
+      ],
+      "methods": [
+        "get_leading_slot() -> Container",
+        "get_trailing_slot() -> Container"
+      ],
+      "slots": [
+        "LeadingSlot",
+        "TrailingSlot"
+      ],
       "contract": "Leading and trailing source-order action lanes stack as a unit below the threshold."
     },
     {
@@ -201,10 +242,20 @@
       "script": "res://rookframe/ui/components/layout/action_bar.gd",
       "scriptUid": "uid://bhv4hi8nxqudi",
       "rootType": "BoxContainer",
-      "properties": {"compact_width": 700.0},
-      "signals": ["layout_profile_changed(profile: StringName)"],
-      "methods": ["get_leading_slot() -> Container", "get_trailing_slot() -> Container"],
-      "slots": ["LeadingSlot", "TrailingSlot"],
+      "properties": {
+        "compact_width": 700.0
+      },
+      "signals": [
+        "layout_profile_changed(profile: StringName)"
+      ],
+      "methods": [
+        "get_leading_slot() -> Container",
+        "get_trailing_slot() -> Container"
+      ],
+      "slots": [
+        "LeadingSlot",
+        "TrailingSlot"
+      ],
       "contract": "Compose search/count in the leading lane and filters/actions in the trailing lane."
     },
     {
@@ -214,10 +265,29 @@
       "script": "res://rookframe/ui/components/forms/text_field.gd",
       "scriptUid": "uid://14x5hvhd0hgd",
       "rootType": "VBoxContainer",
-      "properties": {"label_text": "Field label", "value": "", "placeholder": "", "help_text": "", "error_text": "", "editable": true},
-      "signals": ["value_changed(value: String)", "value_committed(value: String)"],
-      "methods": ["focus_editor()", "set_error(message: String)"],
-      "states": ["normal", "focused", "read-only", "help", "error"]
+      "properties": {
+        "label_text": "Field label",
+        "value": "",
+        "placeholder": "",
+        "help_text": "",
+        "error_text": "",
+        "editable": true
+      },
+      "signals": [
+        "value_changed(value: String)",
+        "value_committed(value: String)"
+      ],
+      "methods": [
+        "focus_editor()",
+        "set_error(message: String)"
+      ],
+      "states": [
+        "normal",
+        "focused",
+        "read-only",
+        "help",
+        "error"
+      ]
     },
     {
       "name": "TextArea",
@@ -226,10 +296,29 @@
       "script": "res://rookframe/ui/components/forms/text_area.gd",
       "scriptUid": "uid://bb8xvwqqnaxb3",
       "rootType": "VBoxContainer",
-      "properties": {"label_text": "Field label", "value": "", "placeholder": "", "help_text": "", "error_text": "", "editable": true},
-      "signals": ["value_changed(value: String)", "value_committed(value: String)"],
-      "methods": ["focus_editor()", "set_error(message: String)"],
-      "states": ["normal", "focused", "read-only", "help", "error"]
+      "properties": {
+        "label_text": "Field label",
+        "value": "",
+        "placeholder": "",
+        "help_text": "",
+        "error_text": "",
+        "editable": true
+      },
+      "signals": [
+        "value_changed(value: String)",
+        "value_committed(value: String)"
+      ],
+      "methods": [
+        "focus_editor()",
+        "set_error(message: String)"
+      ],
+      "states": [
+        "normal",
+        "focused",
+        "read-only",
+        "help",
+        "error"
+      ]
     },
     {
       "name": "SearchField",
@@ -238,9 +327,28 @@
       "script": "res://rookframe/ui/components/forms/search_field.gd",
       "scriptUid": "uid://bnvqayp06k4ud",
       "rootType": "VBoxContainer",
-      "properties": {"label_text": "Search", "show_label": true, "value": "", "placeholder": "Search", "show_clear_when_empty": false, "perimeter_minimum_height": 44.0, "clear_minimum_size": [44.0, 44.0], "editor_font_size": 14},
-      "signals": ["value_changed(value: String)", "value_committed(value: String)", "cleared"],
-      "methods": ["focus_editor()", "clear()"],
+      "properties": {
+        "label_text": "Search",
+        "show_label": true,
+        "value": "",
+        "placeholder": "Search",
+        "show_clear_when_empty": false,
+        "perimeter_minimum_height": 44.0,
+        "clear_minimum_size": [
+          44.0,
+          44.0
+        ],
+        "editor_font_size": 14
+      },
+      "signals": [
+        "value_changed(value: String)",
+        "value_committed(value: String)",
+        "cleared"
+      ],
+      "methods": [
+        "focus_editor()",
+        "clear()"
+      ],
       "contract": "The icon, editor, and clear action share one visible focus perimeter."
     },
     {
@@ -250,10 +358,25 @@
       "script": "res://rookframe/ui/components/forms/choice_row.gd",
       "scriptUid": "uid://cneqvtm4mj43s",
       "rootType": "Button",
-      "properties": {"title": "Choice", "description": "Supporting decision copy", "action_label": "Select", "variant": "DETAILED"},
-      "signals": ["selection_changed(selected: bool)", "pressed", "toggled(toggled_on: bool)"],
-      "methods": ["set_selected(selected: bool)", "is_selected() -> bool"],
-      "variants": ["DETAILED", "COMPACT"],
+      "properties": {
+        "title": "Choice",
+        "description": "Supporting decision copy",
+        "action_label": "Select",
+        "variant": "DETAILED"
+      },
+      "signals": [
+        "selection_changed(selected: bool)",
+        "pressed",
+        "toggled(toggled_on: bool)"
+      ],
+      "methods": [
+        "set_selected(selected: bool)",
+        "is_selected() -> bool"
+      ],
+      "variants": [
+        "DETAILED",
+        "COMPACT"
+      ],
       "contract": "The complete native toggle button is one target; assign ButtonGroup for an exclusive set."
     },
     {
@@ -263,9 +386,21 @@
       "script": "res://rookframe/ui/components/forms/package_choice.gd",
       "scriptUid": "uid://bacunik1ndif2",
       "rootType": "Button",
-      "properties": {"package_name": "Package", "detail_text": "", "action_label": "ADD", "button_pressed": false, "disabled": false},
-      "signals": ["pressed", "toggled(toggled_on: bool)"],
-      "states": ["available", "included"],
+      "properties": {
+        "package_name": "Package",
+        "detail_text": "",
+        "action_label": "ADD",
+        "button_pressed": false,
+        "disabled": false
+      },
+      "signals": [
+        "pressed",
+        "toggled(toggled_on: bool)"
+      ],
+      "states": [
+        "available",
+        "included"
+      ],
       "contract": "One native multi-select target that keeps the package marker, identity, supporting detail, and included state together; callers own Package policy and persistence."
     },
     {
@@ -275,9 +410,21 @@
       "script": "res://rookframe/ui/components/forms/package_choice.gd",
       "scriptUid": "uid://bacunik1ndif2",
       "rootType": "Button",
-      "properties": {"package_name": "Package", "detail_text": "", "action_label": "INCLUDE", "button_pressed": false, "disabled": false},
-      "signals": ["pressed", "toggled(toggled_on: bool)"],
-      "states": ["available", "included"],
+      "properties": {
+        "package_name": "Package",
+        "detail_text": "",
+        "action_label": "INCLUDE",
+        "button_pressed": false,
+        "disabled": false
+      },
+      "signals": [
+        "pressed",
+        "toggled(toggled_on: bool)"
+      ],
+      "states": [
+        "available",
+        "included"
+      ],
       "contract": "The detailed multi-select Package card keeps the marker, Package identity, supporting detail, and included state in one native target; callers own Package policy and persistence."
     },
     {
@@ -287,9 +434,21 @@
       "script": "res://rookframe/ui/components/forms/image_field.gd",
       "scriptUid": "uid://cgrcfqykt0c7o",
       "rootType": "VBoxContainer",
-      "properties": {"title": "Image", "help_text": "", "error_text": "", "preview": null, "change_label": "Replace image", "disabled": false},
-      "signals": ["replace_requested"],
-      "methods": ["set_preview(texture: Texture2D)", "set_error(message: String)"],
+      "properties": {
+        "title": "Image",
+        "help_text": "",
+        "error_text": "",
+        "preview": null,
+        "change_label": "Replace image",
+        "disabled": false
+      },
+      "signals": [
+        "replace_requested"
+      ],
+      "methods": [
+        "set_preview(texture: Texture2D)",
+        "set_error(message: String)"
+      ],
       "contract": "The consumer owns file admission and persistence; the component never exposes or stores a filesystem path."
     },
     {
@@ -299,11 +458,34 @@
       "script": "res://rookframe/ui/components/overlays/dialog.gd",
       "scriptUid": "uid://do77iyssrgyr2",
       "rootType": "Window",
-      "properties": {"tone": "INFORMATION", "eyebrow": "ROOKFRAME", "heading": "Dialog title", "description": "Explain the decision and its consequence.", "confirm_label": "Continue", "cancel_label": "Cancel", "show_cancel": true, "confirm_enabled": true},
-      "signals": ["confirmed", "cancelled"],
-      "methods": ["get_body_slot() -> Container", "open_dialog()", "close_dialog()"],
-      "slots": ["BodySlot"],
-      "tones": ["INFORMATION", "CONFIRMATION", "DANGER", "SUCCESS"],
+      "properties": {
+        "tone": "INFORMATION",
+        "eyebrow": "ROOKFRAME",
+        "heading": "Dialog title",
+        "description": "Explain the decision and its consequence.",
+        "confirm_label": "Continue",
+        "cancel_label": "Cancel",
+        "show_cancel": true,
+        "confirm_enabled": true
+      },
+      "signals": [
+        "confirmed",
+        "cancelled"
+      ],
+      "methods": [
+        "get_body_slot() -> Container",
+        "open_dialog()",
+        "close_dialog()"
+      ],
+      "slots": [
+        "BodySlot"
+      ],
+      "tones": [
+        "INFORMATION",
+        "CONFIRMATION",
+        "DANGER",
+        "SUCCESS"
+      ],
       "contract": "Owns one semantic command-briefing hierarchy, blocking scrim, bounded message region, content-sized desktop window or compact embedded bottom sheet, and footer-only actions while native Window retains modality, focus, and keyboard input."
     },
     {
@@ -313,9 +495,24 @@
       "script": "res://rookframe/ui/components/overlays/file_picker_dialog.gd",
       "scriptUid": "uid://2iqy4kt4qdkx",
       "rootType": "Window",
-      "properties": {"heading": "Open a file", "description": "Choose a file from your project or computer.", "initial_directory": "res://", "allowed_extensions": [], "confirm_label": "Open", "show_hidden": false},
-      "signals": ["file_selected(path: String)", "cancelled", "directory_changed(path: String)"],
-      "methods": ["open_picker(directory: String = \"\")", "current_directory() -> String", "selected_path() -> String"],
+      "properties": {
+        "heading": "Open a file",
+        "description": "Choose a file from your project or computer.",
+        "initial_directory": "res://",
+        "allowed_extensions": [],
+        "confirm_label": "Open",
+        "show_hidden": false
+      },
+      "signals": [
+        "file_selected(path: String)",
+        "cancelled",
+        "directory_changed(path: String)"
+      ],
+      "methods": [
+        "open_picker(directory: String = \"\")",
+        "current_directory() -> String",
+        "selected_path() -> String"
+      ],
       "contract": "Owns filesystem browsing, compact icon-left places and file rows, history, breadcrumbs, search, filtering, selection preview, and confirmation without depending on FileDialog's private child tree."
     },
     {
@@ -325,11 +522,27 @@
       "script": "res://rookframe/ui/components/feedback/notice.gd",
       "scriptUid": "uid://d1yvhlo6e2o2n",
       "rootType": "PanelContainer",
-      "properties": {"tone": "INFO", "title": "Notice", "description": "", "dismissible": false},
-      "signals": ["dismissed"],
-      "methods": ["get_action_slot() -> Container"],
-      "slots": ["ActionSlot"],
-      "tones": ["INFO", "PENDING", "SUCCESS", "ERROR"]
+      "properties": {
+        "tone": "INFO",
+        "title": "Notice",
+        "description": "",
+        "dismissible": false
+      },
+      "signals": [
+        "dismissed"
+      ],
+      "methods": [
+        "get_action_slot() -> Container"
+      ],
+      "slots": [
+        "ActionSlot"
+      ],
+      "tones": [
+        "INFO",
+        "PENDING",
+        "SUCCESS",
+        "ERROR"
+      ]
     },
     {
       "name": "TaskState",
@@ -338,10 +551,23 @@
       "script": "res://rookframe/ui/components/feedback/task_state.gd",
       "scriptUid": "uid://c4soskilw12h6",
       "rootType": "PanelContainer",
-      "properties": {"state": "EMPTY", "title": "Nothing here yet", "description": ""},
-      "methods": ["get_action_slot() -> Container"],
-      "slots": ["ActionSlot"],
-      "states": ["LOADING", "EMPTY", "SUCCESS", "ERROR"]
+      "properties": {
+        "state": "EMPTY",
+        "title": "Nothing here yet",
+        "description": ""
+      },
+      "methods": [
+        "get_action_slot() -> Container"
+      ],
+      "slots": [
+        "ActionSlot"
+      ],
+      "states": [
+        "LOADING",
+        "EMPTY",
+        "SUCCESS",
+        "ERROR"
+      ]
     },
     {
       "name": "StepProgress",
@@ -350,9 +576,23 @@
       "script": "res://rookframe/ui/components/feedback/step_progress.gd",
       "scriptUid": "uid://du3i8msed1xq7",
       "rootType": "VBoxContainer",
-      "properties": {"accessible_label": "Workflow progress", "steps": ["First step", "Second step"], "current_step": 1, "compact_width": 720.0},
-      "signals": ["layout_profile_changed(profile: StringName)"],
-      "states": ["complete", "current", "pending"],
+      "properties": {
+        "accessible_label": "Workflow progress",
+        "steps": [
+          "First step",
+          "Second step"
+        ],
+        "current_step": 1,
+        "compact_width": 720.0
+      },
+      "signals": [
+        "layout_profile_changed(profile: StringName)"
+      ],
+      "states": [
+        "complete",
+        "current",
+        "pending"
+      ],
       "contract": "Accepts two to eight labels and a one-based current step; renders a connected status rail at wide width and a current-step completion card at compact width."
     },
     {
@@ -362,9 +602,17 @@
       "script": "res://rookframe/ui/components/data/metric.gd",
       "scriptUid": "uid://b5m4p5k5ksqh7",
       "rootType": "PanelContainer",
-      "properties": {"label_text": "Metric", "value_text": "Value", "detail_text": ""},
-      "methods": ["get_action_slot() -> Container"],
-      "slots": ["ActionSlot"]
+      "properties": {
+        "label_text": "Metric",
+        "value_text": "Value",
+        "detail_text": ""
+      },
+      "methods": [
+        "get_action_slot() -> Container"
+      ],
+      "slots": [
+        "ActionSlot"
+      ]
     },
     {
       "name": "MetricStrip",
@@ -373,8 +621,14 @@
       "script": "res://rookframe/ui/components/layout/adaptive_grid.gd",
       "scriptUid": "uid://cwgli747u0cv2",
       "rootType": "GridContainer",
-      "properties": {"minimum_columns": 1, "maximum_columns": 4, "minimum_column_width": 160.0},
-      "signals": ["column_count_changed(column_count: int)"],
+      "properties": {
+        "minimum_columns": 1,
+        "maximum_columns": 4,
+        "minimum_column_width": 160.0
+      },
+      "signals": [
+        "column_count_changed(column_count: int)"
+      ],
       "contract": "Add three or four Metric instances as direct children; cells remain equal priority and reflow by measured width."
     },
     {
@@ -384,8 +638,14 @@
       "script": "res://rookframe/ui/components/layout/adaptive_grid.gd",
       "scriptUid": "uid://cwgli747u0cv2",
       "rootType": "GridContainer",
-      "properties": {"minimum_columns": 1, "maximum_columns": 2, "minimum_column_width": 220.0},
-      "signals": ["column_count_changed(column_count: int)"],
+      "properties": {
+        "minimum_columns": 1,
+        "maximum_columns": 2,
+        "minimum_column_width": 220.0
+      },
+      "signals": [
+        "column_count_changed(column_count: int)"
+      ],
       "contract": "Add native semantic icon Buttons directly; the grid uses at most two columns and the entire Button remains the target."
     },
     {
@@ -395,7 +655,10 @@
       "script": "res://rookframe/ui/components/data/badge.gd",
       "scriptUid": "uid://5m6r41nop671",
       "rootType": "PanelContainer",
-      "properties": {"label_text": "Badge", "icon": null}
+      "properties": {
+        "label_text": "Badge",
+        "icon": null
+      }
     },
     {
       "name": "RollRow",
@@ -404,11 +667,30 @@
       "script": "res://rookframe/ui/components/data/roll_row.gd",
       "scriptUid": "uid://wo8rkw0btjpa",
       "rootType": "GridContainer",
-      "properties": {"state": "PENDING", "ordinal": "1", "title": "Roll", "detail": "", "result": "", "die_icon": "res://rookframe/ui/icons/dice.svg", "compact_width": 720.0},
-      "signals": ["layout_profile_changed(profile: StringName)"],
-      "methods": ["get_action_slot() -> Container"],
-      "slots": ["ActionSlot"],
-      "states": ["COMPLETE", "CURRENT", "PENDING", "LOCKED"]
+      "properties": {
+        "state": "PENDING",
+        "ordinal": "1",
+        "title": "Roll",
+        "detail": "",
+        "result": "",
+        "die_icon": "res://rookframe/ui/icons/dice.svg",
+        "compact_width": 720.0
+      },
+      "signals": [
+        "layout_profile_changed(profile: StringName)"
+      ],
+      "methods": [
+        "get_action_slot() -> Container"
+      ],
+      "slots": [
+        "ActionSlot"
+      ],
+      "states": [
+        "COMPLETE",
+        "CURRENT",
+        "PENDING",
+        "LOCKED"
+      ]
     },
     {
       "name": "StructuredRow",
@@ -417,11 +699,38 @@
       "script": "res://rookframe/ui/components/data/structured_row.gd",
       "scriptUid": "uid://vrrt25g1ko53",
       "rootType": "PanelContainer",
-      "properties": {"variant": "DATA", "title": "Row identity", "detail": "", "value_text": "", "status_text": "", "leading_image": null, "compact_width": 620.0},
-      "signals": ["layout_profile_changed(profile: StringName)"],
-      "methods": ["get_action_slot() -> Container"],
-      "slots": ["ActionSlot"],
-      "variants": ["DATA", "DETAIL", "COMPACT_DETAIL", "STACKED_DETAIL", "SUMMARY", "TABLE", "HEADER", "SELECTION_BANNER", "CATEGORY", "CATALOGUE", "PORTRAIT", "PENDING"]
+      "properties": {
+        "variant": "DATA",
+        "title": "Row identity",
+        "detail": "",
+        "value_text": "",
+        "status_text": "",
+        "leading_image": null,
+        "compact_width": 620.0
+      },
+      "signals": [
+        "layout_profile_changed(profile: StringName)"
+      ],
+      "methods": [
+        "get_action_slot() -> Container"
+      ],
+      "slots": [
+        "ActionSlot"
+      ],
+      "variants": [
+        "DATA",
+        "DETAIL",
+        "COMPACT_DETAIL",
+        "STACKED_DETAIL",
+        "SUMMARY",
+        "TABLE",
+        "HEADER",
+        "SELECTION_BANNER",
+        "CATEGORY",
+        "CATALOGUE",
+        "PORTRAIT",
+        "PENDING"
+      ]
     },
     {
       "name": "KeyValueRow",
@@ -430,7 +739,10 @@
       "script": "res://rookframe/ui/components/data/key_value_row.gd",
       "scriptUid": "uid://decjv735jvpfy",
       "rootType": "PanelContainer",
-      "properties": {"key_text": "Key", "value_text": ""},
+      "properties": {
+        "key_text": "Key",
+        "value_text": ""
+      },
       "contract": "A compact read-only fact with one visible key, trailing value, and a divider; it receives no input."
     },
     {
@@ -440,9 +752,20 @@
       "script": "res://rookframe/ui/components/data/action_row.gd",
       "scriptUid": "uid://xrhweteo63hd",
       "rootType": "Button",
-      "properties": {"title": "Action", "description": "Supporting action detail", "action_label": "›", "tone": "STANDARD", "disabled": false},
-      "signals": ["pressed"],
-      "states": ["STANDARD", "DANGER"],
+      "properties": {
+        "title": "Action",
+        "description": "Supporting action detail",
+        "action_label": "\u203a",
+        "tone": "STANDARD",
+        "disabled": false
+      },
+      "signals": [
+        "pressed"
+      ],
+      "states": [
+        "STANDARD",
+        "DANGER"
+      ],
       "contract": "One native button target for a compact navigation or management action. The title, supporting detail, and trailing action label remain visible; callers own policy and connect pressed."
     },
     {
@@ -452,8 +775,15 @@
       "script": "res://rookframe/ui/components/data/action_link.gd",
       "scriptUid": "uid://b1bbo4068gdqi",
       "rootType": "Button",
-      "properties": {"title": "Action", "title_lane_width": 150.0, "title_font_size": 15, "disabled": false},
-      "signals": ["pressed"],
+      "properties": {
+        "title": "Action",
+        "title_lane_width": 150.0,
+        "title_font_size": 15,
+        "disabled": false
+      },
+      "signals": [
+        "pressed"
+      ],
       "contract": "One quiet native navigation target with a separate label lane, a continuous trailing rule, and a scene-authored arrow head. The rule meets the arrow base without touching the label; callers own policy and connect pressed."
     },
     {
@@ -463,9 +793,19 @@
       "script": "res://rookframe/ui/components/data/world_row.gd",
       "scriptUid": "uid://226s6l12jqsn",
       "rootType": "Button",
-      "properties": {"title": "World", "detail_text": "", "selected": false, "disabled": false},
-      "signals": ["pressed"],
-      "states": ["unselected", "selected"],
+      "properties": {
+        "title": "World",
+        "detail_text": "",
+        "selected": false,
+        "disabled": false
+      },
+      "signals": [
+        "pressed"
+      ],
+      "states": [
+        "unselected",
+        "selected"
+      ],
       "contract": "One complete selectable World record with a scene-authored marker, identity/metadata hierarchy, selected outline, and disclosure; callers own selection and navigation policy."
     },
     {
@@ -475,8 +815,18 @@
       "script": "res://rookframe/ui/components/data/world_summary_card.gd",
       "scriptUid": "uid://dugby61hex8yk",
       "rootType": "VBoxContainer",
-      "properties": {"facts_visible": true, "actions_visible": false, "kicker_text": "SELECTED WORLD", "privacy_text": "PRIVATE", "package_name": "Package", "detail_text": ""},
-      "slots": ["OpenWorld", "WorldDetails"],
+      "properties": {
+        "facts_visible": true,
+        "actions_visible": false,
+        "kicker_text": "SELECTED WORLD",
+        "privacy_text": "PRIVATE",
+        "package_name": "Package",
+        "detail_text": ""
+      },
+      "slots": [
+        "OpenWorld",
+        "WorldDetails"
+      ],
       "contract": "One retained World identity, Package, availability, optional facts, and optional action relationship. Callers inject dynamic World data and own policy, persistence, and action handling."
     },
     {
@@ -486,9 +836,20 @@
       "script": "res://rookframe/ui/components/data/disclosure_row.gd",
       "scriptUid": "uid://c7n6c2h221uhp",
       "rootType": "Button",
-      "properties": {"title": "Action", "description": "Supporting action detail", "action_label": "›", "tone": "STANDARD", "disabled": false},
-      "signals": ["pressed"],
-      "states": ["STANDARD", "DANGER"],
+      "properties": {
+        "title": "Action",
+        "description": "Supporting action detail",
+        "action_label": "\u203a",
+        "tone": "STANDARD",
+        "disabled": false
+      },
+      "signals": [
+        "pressed"
+      ],
+      "states": [
+        "STANDARD",
+        "DANGER"
+      ],
       "contract": "One complete plain settings-list action with textual title/detail, a scene-authored disclosure, and a divider; callers own policy and connect pressed."
     },
     {
@@ -498,8 +859,18 @@
       "script": "res://rookframe/ui/components/data/package_row.gd",
       "scriptUid": "uid://dxok8xtr1f1ai",
       "rootType": "PanelContainer",
-      "properties": {"package_name": "Package", "detail_text": "", "selected": false, "locked": false, "locked_state_label": "INCLUDED"},
-      "states": ["available", "selected", "included"],
+      "properties": {
+        "package_name": "Package",
+        "detail_text": "",
+        "selected": false,
+        "locked": false,
+        "locked_state_label": "INCLUDED"
+      },
+      "states": [
+        "available",
+        "selected",
+        "included"
+      ],
       "contract": "Read-only package identity, role/version detail, marker, and status relationship; callers own Package policy and persistence."
     },
     {
@@ -509,8 +880,18 @@
       "script": "res://rookframe/ui/components/data/package_row.gd",
       "scriptUid": "uid://dxok8xtr1f1ai",
       "rootType": "PanelContainer",
-      "properties": {"package_name": "Package", "detail_text": "", "selected": false, "locked": false, "locked_state_label": "REQUIRED"},
-      "states": ["available", "selected", "included"],
+      "properties": {
+        "package_name": "Package",
+        "detail_text": "",
+        "selected": false,
+        "locked": false,
+        "locked_state_label": "REQUIRED"
+      },
+      "states": [
+        "available",
+        "selected",
+        "included"
+      ],
       "contract": "The detailed read-only Package card keeps identity, role/version detail, marker, and status together; callers own Package policy and persistence."
     },
     {
@@ -520,8 +901,17 @@
       "script": "res://rookframe/ui/components/surfaces/managed_surface.gd",
       "scriptUid": "uid://dbt641tlogj02",
       "rootType": "PanelContainer",
-      "properties": {"surface_title": "Managed surface", "state": "RookframeManagedSurfaceState Resource"},
-      "signals": ["placement_changed(placement: int)", "minimized", "restored", "close_requested", "lifecycle_changed(snapshot: Dictionary)"],
+      "properties": {
+        "surface_title": "Managed surface",
+        "state": "RookframeManagedSurfaceState Resource"
+      },
+      "signals": [
+        "placement_changed(placement: int)",
+        "minimized",
+        "restored",
+        "close_requested",
+        "lifecycle_changed(snapshot: Dictionary)"
+      ],
       "methods": [
         "get_header_slot() -> Container",
         "get_task_slot() -> Container",
@@ -539,7 +929,11 @@
         "restore_state(snapshot: Dictionary)",
         "focus_task()"
       ],
-      "slots": ["HeaderSlot", "TaskSlot", "FooterSlot"],
+      "slots": [
+        "HeaderSlot",
+        "TaskSlot",
+        "FooterSlot"
+      ],
       "contract": "Retains one task tree and one ScrollContainer while a host reparents the same scene between docked and floating presentation parents."
     },
     {
@@ -547,9 +941,52 @@
       "script": "res://rookframe/ui/components/surfaces/managed_surface_state.gd",
       "scriptUid": "uid://q51dth77eqqb",
       "rootType": "RookframeManagedSurfaceState Resource",
-      "properties": {"surface_id": "surface", "task_instance_id": "task", "placement": "DOCKED", "closed": false, "minimized": false, "focused": false, "dock_width": 560.0, "floating_rect": "Rect2(80, 80, 720, 720)", "scroll_offset": 0.0},
-      "signals": ["state_changed(snapshot: Dictionary)"],
-      "methods": ["is_visible() -> bool", "placement_name() -> StringName", "open_surface()", "close_surface()", "minimize_surface() -> bool", "restore_surface() -> bool", "focus_surface() -> bool", "set_placement(next_placement: int)", "set_dock_width(value: float)", "set_floating_rect(value: Rect2)", "set_scroll_offset(value: float)", "state_snapshot() -> Dictionary", "restore_snapshot(snapshot: Dictionary)"]
+      "properties": {
+        "surface_id": "surface",
+        "task_instance_id": "task",
+        "placement": "DOCKED",
+        "closed": false,
+        "minimized": false,
+        "focused": false,
+        "dock_width": 560.0,
+        "floating_rect": "Rect2(80, 80, 720, 720)",
+        "scroll_offset": 0.0
+      },
+      "signals": [
+        "state_changed(snapshot: Dictionary)"
+      ],
+      "methods": [
+        "is_visible() -> bool",
+        "placement_name() -> StringName",
+        "open_surface()",
+        "close_surface()",
+        "minimize_surface() -> bool",
+        "restore_surface() -> bool",
+        "focus_surface() -> bool",
+        "set_placement(next_placement: int)",
+        "set_dock_width(value: float)",
+        "set_floating_rect(value: Rect2)",
+        "set_scroll_offset(value: float)",
+        "state_snapshot() -> Dictionary",
+        "restore_snapshot(snapshot: Dictionary)"
+      ]
+    },
+    {
+      "name": "MiniatureBrowser",
+      "scene": "res://rookframe/ui/components/content/miniature_browser.tscn",
+      "script": "res://rookframe/ui/components/content/miniature_browser.gd",
+      "rootType": "VBoxContainer",
+      "properties": {},
+      "signals": [
+        "selection_changed",
+        "preview_requested",
+        "retry_requested"
+      ],
+      "methods": [
+        "configure",
+        "selection",
+        "set_state"
+      ]
     }
   ],
   "semanticIcons": {

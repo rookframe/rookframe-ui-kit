@@ -219,3 +219,19 @@ shared Theme and the configuration in
 `FilePickerDialog` are public because they own reusable hierarchy and behavior
 beyond the adequate built-in nodes; they do not wrap private native child
 trees.
+
+## Miniature browser
+
+`res://rookframe/ui/components/content/miniature_browser.tscn` combines search,
+source-labelled native choice buttons, one scrolling result list and a preview
+placeholder. `configure(entries, selected_id, labels)` accepts Dictionaries with
+`id`, `title`, `package`, `available`; IDs are opaque to the kit. `selection()`
+returns the selected available entry. `selection_changed(entry)` is draft-only;
+`preview_requested(entry, target)` lets the consumer render via the SDK. The kit
+never loads Package resources or writes World data. The consumer owns its workflow
+footer, commit/cancel, read-only policy and persistence feedback.
+
+`set_state("loading" | "ready" | "error", message)` and `retry_requested` support
+loading/failure. Labels accept `search`, `retry`, `unavailable`, `loading`, `empty`,
+`no_match`; supply translated strings. Equal names remain distinguished by Package.
+Native focus, keyboard activation, search, scroll and release-based buttons apply.
