@@ -16,7 +16,7 @@ The current pre-release candidate includes:
 - one shared Theme with complete coverage for the native Controls in the
   reviewed design-system inventory;
 - semantic colors, type, spacing, geometry, focus, surfaces, frames, and a
-  62-role icon registry;
+  65-role icon registry plus seven attributed RPG pictograms;
 - small editor-authored public scenes only for reusable relationships Godot
   does not provide as a built-in node;
 - responsive layout, accessible forms and search, designed dialogs and file

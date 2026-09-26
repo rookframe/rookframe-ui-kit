@@ -113,20 +113,22 @@ func _populate_icon_gallery() -> void:
 	if not manifest is Dictionary:
 		push_error("Could not parse the semantic icon manifest.")
 		return
-	for definition: Dictionary in manifest.get("icons", []):
+	for definition: Dictionary in manifest.get("icons", []) + manifest.get("domainPictograms", []):
 		var semantic_name := str(definition.get("name", ""))
 		var accessible_label := str(definition.get("label", semantic_name))
 		var cell := PanelContainer.new()
 		cell.custom_minimum_size = Vector2(160, 96)
 		cell.theme_type_variation = &"RookframeInsetSurface"
 		cell.accessibility_name = "%s icon" % accessible_label
+		if definition.has("author"):
+			cell.tooltip_text = "%s — %s, CC BY 3.0\n%s" % [accessible_label, definition.author, definition.source]
 		var stack := VBoxContainer.new()
 		stack.alignment = BoxContainer.ALIGNMENT_CENTER
 		stack.add_theme_constant_override(&"separation", 8)
 		cell.add_child(stack)
 		var icon := TextureRect.new()
 		icon.custom_minimum_size = Vector2(32, 32)
-		icon.texture = load("res://rookframe/ui/icons/%s.svg" % semantic_name)
+		icon.texture = load("res://rookframe/ui/icons/" + str(definition.get("path", semantic_name + ".svg")))
 		icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 		icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 		icon.mouse_filter = Control.MOUSE_FILTER_IGNORE

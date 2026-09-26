@@ -13,7 +13,8 @@ var retry_icon := load("res://rookframe/ui/icons/retry.svg")
 
 Use a 24px visual inside an interaction target of at least 44×44px. An
 icon-only action needs an `accessibility_name` and matching tooltip that name
-the action in context. Tint through `CanvasItem.modulate`; do not edit or copy
+the action in context. Native Buttons use their Theme icon colors; TextureRects may use
+`CanvasItem.modulate`. Do not edit or copy
 the SVG to create consumer-named color variants. Decorative icons must not be
 the only carrier of status or meaning.
 
@@ -84,3 +85,46 @@ pinned Tabler source name and license provenance.
 | `region-ellipse.svg` | `uid://cfd6wqe8dwm7t` | Ellipse Region tool |
 | `region-polygon.svg` | `uid://cvtthuykofiaw` | Polygon Region tool |
 | `region-free-form.svg` | `uid://dr8frgswqv7q7` | Free-form Region tool |
+| `collision.svg` | `uid://c2oytsj410jy4` | Collision |
+| `light-on.svg` | `uid://dl48x0w43v6ev` | Light on |
+| `light-off.svg` | `uid://bjgirs1syk7e5` | Light off |
+
+Collision uses Tabler **barrier-block**; light-on and light-off use **bulb**
+and **bulb-off** from the same pinned 3.46.0 source. Delete keeps `delete.svg`
+(trash). Light textures are available for working light capabilities; ordinary
+Props must not expose a placeholder light action.
+
+For collision toggles, compose a native Button with `toggle_mode`, a centered
+24px icon and a 44×44 minimum target. Update `set_pressed_no_signal()` from the
+accepted state and give `accessibility_name` and `tooltip_text` the same
+contextual label, for example “Toggle collision, currently on”. The existing
+`RookframeManagedControl` and `RookframeDangerOutline` roles tint native icons
+with their established text colors, including focus, pressed and disabled states.
+
+## Illustrated RPG selection
+
+Game-icons.net is a supported supplemental source. These curated, public
+Texture2D resources appear alongside semantic actions in the Icons catalogue,
+under `domainPictograms` in the same manifest. They remain outside the general
+Tabler action registry. Use them in a narrowly scoped, authored domain UI (for
+example an item illustration or spell selector) using ordinary TextureRects
+or native Button icons; do not replace navigation, collision, light or delete
+roles with them. No additional icon loader or component framework is required.
+
+Use `expand_mode = EXPAND_IGNORE_SIZE` and `STRETCH_KEEP_ASPECT_CENTERED` on a
+TextureRect; for a Button, set `icon_max_width` to the desired visual size.
+The original artwork is 512×512. Retain attribution when distributing it.
+
+| Public path (under `res://rookframe/ui/icons/`) | Resource UID | Author / source |
+| --- | --- | --- |
+| `game-icons/broadsword.svg` | `uid://ch2nkllltcpwr` | [Broadsword — Lorc](https://game-icons.net/1x1/lorc/broadsword.html) |
+| `game-icons/fairy-wand.svg` | `uid://baat32b4wg2af` | [Fairy wand — Lorc](https://game-icons.net/1x1/lorc/fairy-wand.html) |
+| `game-icons/fireball.svg` | `uid://yvjjjviqbcy1` | [Fireball — Lorc](https://game-icons.net/1x1/lorc/fireball.html) |
+| `game-icons/spell-book.svg` | `uid://7dhicqd2u0wm` | [Spell book — Delapouite](https://game-icons.net/1x1/delapouite/spell-book.html) |
+| `game-icons/beer-stein.svg` | `uid://d0mi35pujsr22` | [Beer stein — Lorc](https://game-icons.net/1x1/lorc/beer-stein.html) |
+| `game-icons/spiral-tentacle.svg` | `uid://ctgofbh0ualhw` | [Spiral tentacle — Lorc](https://game-icons.net/1x1/lorc/spiral-tentacle.html) |
+| `game-icons/evil-book.svg` | `uid://cwcbpnwnc14jx` | [Evil book — Lorc](https://game-icons.net/1x1/lorc/evil-book.html) |
+
+All seven use [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/).
+The installed [attribution](../rookframe/ui/icons/game-icons/ATTRIBUTION.md)
+and manifest retain titles, authors, source/download URLs, changes and hashes.

@@ -2,7 +2,7 @@
 
 ## Tabler Icons
 
-The public semantic icon registry vendors a curated 62-icon subset of
+The public semantic icon registry vendors a curated 65-icon subset of
 [Tabler Icons](https://tabler.io/icons), version 3.46.0, from commit
 `8ac7d81b72ece11072ef25ea9fd92e80c6f3c9fc`.
 
@@ -39,9 +39,8 @@ The nine-slice assets under `rookframe/ui/assets/frames/` are deterministic
 Rookframe-owned renderings of the checked-in Rookframe frame geometry. They are
 distributed under this repository's MIT License.
 
-No legacy shell atlas, example portrait, Game-icons.net domain pictogram, Font
-Awesome artwork, or asset with unclear provenance is included in the public
-foundation.
+No legacy shell atlas, example portrait, Font Awesome artwork, or asset with
+unclear provenance is included in the public foundation.
 
 ## gd-plug development consumer
 
@@ -51,3 +50,13 @@ The clean consumer example vendors gd-plug at commit
 material outside `rookframe/ui` and is not installed with the UI Kit. The
 consumer declaration adds a local exit-status override without modifying the
 vendored gd-plug runtime.
+
+## Game-icons.net
+
+Seven selected illustrated RPG pictograms by Lorc and Delapouite are supplied
+as unmodified white-on-transparent SVGs under **CC BY 3.0**, separately from
+the Tabler general-action registry. See the installed
+[per-artwork attribution](rookframe/ui/icons/game-icons/ATTRIBUTION.md) and
+`domainPictograms` in `rookframe/ui/icons/manifest.json` for source links,
+authors, download URLs and content hashes. Preserve these credits in
+distributions; identify changes to adapted artwork.

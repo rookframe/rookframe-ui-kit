@@ -72,6 +72,95 @@
     { "name": "region-circle", "variant": "RegionCircle", "upstream": "circle", "label": "Circle Region tool" },
     { "name": "region-ellipse", "variant": "RegionEllipse", "upstream": "oval-vertical", "label": "Ellipse Region tool" },
     { "name": "region-polygon", "variant": "RegionPolygon", "upstream": "polygon", "label": "Polygon Region tool" },
-    { "name": "region-free-form", "variant": "RegionFreeForm", "upstream": "scribble", "label": "Free-form Region tool" }
+    { "name": "region-free-form", "variant": "RegionFreeForm", "upstream": "scribble", "label": "Free-form Region tool" },
+    {"name": "collision", "variant": "Collision", "upstream": "barrier-block", "label": "Collision"},
+    {"name": "light-on", "variant": "LightOn", "upstream": "bulb", "label": "Light on"},
+    {"name": "light-off", "variant": "LightOff", "upstream": "bulb-off", "label": "Light off"}
+  ],
+  "domainPictograms": [
+    {
+      "name": "broadsword",
+      "label": "Broadsword",
+      "path": "game-icons/broadsword.svg",
+      "source": "https://game-icons.net/1x1/lorc/broadsword.html",
+      "download": "https://game-icons.net/icons/ffffff/transparent/1x1/lorc/broadsword.svg",
+      "author": "Lorc",
+      "license": "CC BY 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+      "sha256": "cdc7e9388edc4e626bbbc904ba76aaf013ad329cc9e6c38ec762240a35d82cfc",
+      "changes": "Unmodified upstream white-on-transparent SVG"
+    },
+    {
+      "name": "fairy-wand",
+      "label": "Fairy wand",
+      "path": "game-icons/fairy-wand.svg",
+      "source": "https://game-icons.net/1x1/lorc/fairy-wand.html",
+      "download": "https://game-icons.net/icons/ffffff/transparent/1x1/lorc/fairy-wand.svg",
+      "author": "Lorc",
+      "license": "CC BY 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+      "sha256": "11a1d925662586b39ff5ccb531daf55121a7cd2f6ca26ac0cddbc855ca75d313",
+      "changes": "Unmodified upstream white-on-transparent SVG"
+    },
+    {
+      "name": "fireball",
+      "label": "Fireball",
+      "path": "game-icons/fireball.svg",
+      "source": "https://game-icons.net/1x1/lorc/fireball.html",
+      "download": "https://game-icons.net/icons/ffffff/transparent/1x1/lorc/fireball.svg",
+      "author": "Lorc",
+      "license": "CC BY 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+      "sha256": "96f6fb9469697e149a3b585ec9eb465a6ed16a2452338bf25d0039517dc980f1",
+      "changes": "Unmodified upstream white-on-transparent SVG"
+    },
+    {
+      "name": "spell-book",
+      "label": "Spell book",
+      "path": "game-icons/spell-book.svg",
+      "source": "https://game-icons.net/1x1/delapouite/spell-book.html",
+      "download": "https://game-icons.net/icons/ffffff/transparent/1x1/delapouite/spell-book.svg",
+      "author": "Delapouite",
+      "license": "CC BY 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+      "sha256": "08de431135b987ebc600a4851827633969aca711650cfa8a5fa6e7c9c1ac2d81",
+      "changes": "Unmodified upstream white-on-transparent SVG"
+    },
+    {
+      "name": "beer-stein",
+      "label": "Beer stein",
+      "path": "game-icons/beer-stein.svg",
+      "source": "https://game-icons.net/1x1/lorc/beer-stein.html",
+      "download": "https://game-icons.net/icons/ffffff/transparent/1x1/lorc/beer-stein.svg",
+      "author": "Lorc",
+      "license": "CC BY 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+      "sha256": "f02d9a4afd8534dde288f518561a860a98e5caddad18eefd5300f9a6cf6579cc",
+      "changes": "Unmodified upstream white-on-transparent SVG"
+    },
+    {
+      "name": "spiral-tentacle",
+      "label": "Spiral tentacle",
+      "path": "game-icons/spiral-tentacle.svg",
+      "source": "https://game-icons.net/1x1/lorc/spiral-tentacle.html",
+      "download": "https://game-icons.net/icons/ffffff/transparent/1x1/lorc/spiral-tentacle.svg",
+      "author": "Lorc",
+      "license": "CC BY 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+      "sha256": "d3a592456d178c92ea2c7974b89325a331486b3b1259574b9faf5100f0fe5d8b",
+      "changes": "Unmodified upstream white-on-transparent SVG"
+    },
+    {
+      "name": "evil-book",
+      "label": "Evil book",
+      "path": "game-icons/evil-book.svg",
+      "source": "https://game-icons.net/1x1/lorc/evil-book.html",
+      "download": "https://game-icons.net/icons/ffffff/transparent/1x1/lorc/evil-book.svg",
+      "author": "Lorc",
+      "license": "CC BY 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+      "sha256": "62e86bdf649685bcd52feee02f73f5de7aae0045c96ad117d2b4ab6e6869a3e9",
+      "changes": "Unmodified upstream white-on-transparent SVG"
+    }
   ]
 }

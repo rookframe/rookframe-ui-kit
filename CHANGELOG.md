@@ -14,6 +14,11 @@ published.
 
 ### Added
 
+- RFG-304: collision, light-on and light-off semantic roles from pinned Tabler
+  3.46.0, seven attributed Game-icons.net domain pictograms, and native icon
+  tinting for existing managed-control and danger-outline Theme roles. Public
+  resource paths and catalogue entries remain additive.
+
 - Public shell and managed-task Theme roles, with catalogue examples and native
   focus/disabled states, for the unchanged approved Tabletop composition.
 - Search Field density and persistent-clear options for managed tasks.
