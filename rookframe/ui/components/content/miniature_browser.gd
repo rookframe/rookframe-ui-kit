@@ -5,7 +5,7 @@ extends VBoxContainer
 signal selection_changed(entry: Dictionary)
 signal preview_requested(entry: Dictionary, target: Control)
 signal retry_requested
-const ROW = preload("res://rookframe/ui/components/content/miniature_browser_row.tscn")
+const ROW = preload("res://rookframe/ui/_internal/content/miniature_browser_row.tscn")
 var _entries: Array[Dictionary] = []
 var _selection := ""
 var _rows: Array[Button] = []
@@ -93,3 +93,6 @@ func _arrange() -> void:
 
 func _text(key: String, fallback: String) -> String:
 	return str(_labels.get(key, fallback))
+
+func focus_search() -> void:
+	get_node(^"Search").grab_focus()

@@ -235,3 +235,7 @@ footer, commit/cancel, read-only policy and persistence feedback.
 loading/failure. Labels accept `search`, `retry`, `unavailable`, `loading`, `empty`,
 `no_match`; supply translated strings. Equal names remain distinguished by Package.
 Native focus, keyboard activation, search, scroll and release-based buttons apply.
+
+`MiniatureBrowser.focus_search()` moves native keyboard focus into its search
+editor. Child paths and helper rows under `_internal/content` are implementation
+details; consumers use the documented signals and methods.

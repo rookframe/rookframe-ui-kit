@@ -1,5 +1,5 @@
 [gd_scene load_steps=2 format=3]
-[ext_resource type="Script" path="res://rookframe/ui/components/content/miniature_browser_row.gd" id="1"]
+[ext_resource type="Script" path="res://rookframe/ui/_internal/content/miniature_browser_row.gd" id="1"]
 [node name="MiniatureChoice" type="Button"]
 custom_minimum_size = Vector2(0, 60)
 size_flags_horizontal = 3

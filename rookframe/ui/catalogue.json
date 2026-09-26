@@ -985,7 +985,8 @@
       "methods": [
         "configure",
         "selection",
-        "set_state"
+        "set_state",
+        "focus_search"
       ]
     }
   ],
