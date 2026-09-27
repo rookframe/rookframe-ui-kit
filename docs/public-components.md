@@ -223,8 +223,9 @@ trees.
 ## Miniature browser
 
 `res://rookframe/ui/components/content/miniature_browser.tscn` combines search,
-source-labelled native choice buttons, one scrolling result list and a preview
-placeholder. `configure(entries, selected_id, labels)` accepts Dictionaries with
+a responsive scrolling grid of native choice cards. Every available card has its
+own preview target, readable title and optional Package name. A check mark and the
+pressed style identify the selected card. `configure(entries, selected_id, labels)` accepts Dictionaries with
 `id`, `title`, `package`, `available`; IDs are opaque to the kit. `selection()`
 returns the selected available entry. `selection_changed(entry)` is draft-only;
 `preview_requested(entry, target)` lets the consumer render via the SDK. The kit
@@ -233,7 +234,9 @@ footer, commit/cancel, read-only policy and persistence feedback.
 
 `set_state("loading" | "ready" | "error", message)` and `retry_requested` support
 loading/failure. Labels accept `search`, `retry`, `unavailable`, `loading`, `empty`,
-`no_match`; supply translated strings. Equal names remain distinguished by Package.
+`no_match`, `selected`, `preview_unavailable`; supply translated strings. Equal names remain distinguished by Package when a readable Package name is supplied.
+The component never derives visible copy from opaque IDs. Preview requests occur
+once per available entry during configuration, rather than on every selection.
 Native focus, keyboard activation, search, scroll and release-based buttons apply.
 
 `MiniatureBrowser.focus_search()` moves native keyboard focus into its search
