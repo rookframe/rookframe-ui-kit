@@ -6,7 +6,7 @@ func _initialize() -> void:
 func _check() -> void:
 	var browser = load("res://rookframe/ui/components/content/miniature_browser.tscn").instantiate()
 	root.add_child(browser)
-	browser.size = Vector2(351, 229)
+	browser.size = Vector2(303, 160)
 	var previews: Array[Control] = []
 	browser.preview_requested.connect(func(_entry, target): previews.append(target))
 	var entries: Array[Dictionary] = [{"id": "one/goblin", "title": "Гоблин", "package": "Первый пакет", "available": true}, {"id": "two/goblin", "title": "Гоблин", "package": "Второй пакет", "available": true}, {"id": "gone", "title": "Недоступная миниатюра", "package": "Пакет", "available": false}]
@@ -30,7 +30,7 @@ func _check() -> void:
 	browser.configure(entries, "gone")
 	assert(browser.selection().is_empty())
 	await process_frame
-	assert(browser.get_combined_minimum_size().x <= 351)
+	assert(browser.get_combined_minimum_size().x <= 303)
 	assert(browser.get_node("Results/Rows").columns == 2)
 	assert(browser.get_node("Results/Rows").get_child(0).get_node("Content/Stage").custom_minimum_size.y >= 96)
 	browser.focus_search()

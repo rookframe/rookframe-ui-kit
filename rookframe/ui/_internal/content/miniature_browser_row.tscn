@@ -1,7 +1,7 @@
 [gd_scene load_steps=2 format=3]
 [ext_resource type="Script" path="res://rookframe/ui/_internal/content/miniature_browser_row.gd" id="1"]
 [node name="MiniatureChoice" type="Button"]
-custom_minimum_size = Vector2(148, 148)
+custom_minimum_size = Vector2(136, 148)
 size_flags_horizontal = 3
 script = ExtResource("1")
 mouse_filter = 1
@@ -35,6 +35,7 @@ autowrap_mode = 2
 horizontal_alignment = 1
 vertical_alignment = 1
 theme_type_variation = &"RookframeMeta"
+theme_override_font_sizes/font_size = 12
 [node name="Preview" type="Control" parent="Content/Stage"]
 layout_mode = 1
 anchors_preset = 15
@@ -50,11 +51,13 @@ layout_mode = 2
 mouse_filter = 2
 autowrap_mode = 2
 theme_type_variation = &"RookframeBody"
+theme_override_font_sizes/font_size = 14
 [node name="Package" type="Label" parent="Content/Copy"]
 layout_mode = 2
 mouse_filter = 2
 autowrap_mode = 2
 theme_type_variation = &"RookframeMeta"
+theme_override_font_sizes/font_size = 12
 [node name="Selected" type="Label" parent="."]
 visible = false
 layout_mode = 1

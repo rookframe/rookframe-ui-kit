@@ -96,7 +96,7 @@ func _arrange() -> void:
 		return
 	var results := get_node(^"Results") as ScrollContainer
 	var width := results.size.x - results.get_v_scroll_bar().get_combined_minimum_size().x
-	var columns := clampi(int((width + 12) / 160), 1, 4)
+	var columns := clampi(int((width + 12) / 148), 1, 4)
 	get_node(^"Results/Rows").columns = columns
 	var caption_height := 44.0
 	for row in _rows:
