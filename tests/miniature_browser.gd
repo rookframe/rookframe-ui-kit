@@ -32,7 +32,7 @@ func _check() -> void:
 	await process_frame
 	assert(browser.get_combined_minimum_size().x <= 351)
 	assert(browser.get_node("Results/Rows").columns == 2)
-	assert(browser.get_node("Results/Rows").get_child(0).get_node("Content/Stage").custom_minimum_size.y >= 120)
+	assert(browser.get_node("Results/Rows").get_child(0).get_node("Content/Stage").custom_minimum_size.y >= 96)
 	browser.focus_search()
 	assert(browser.get_node("Search").has_focus())
 	browser.queue_free()

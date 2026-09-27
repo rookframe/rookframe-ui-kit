@@ -96,7 +96,15 @@ func _arrange() -> void:
 		return
 	var results := get_node(^"Results") as ScrollContainer
 	var width := results.size.x - results.get_v_scroll_bar().get_combined_minimum_size().x
-	get_node(^"Results/Rows").columns = clampi(int((width + 12) / 160), 1, 4)
+	var columns := clampi(int((width + 12) / 160), 1, 4)
+	get_node(^"Results/Rows").columns = columns
+	var caption_height := 44.0
+	for row in _rows:
+		caption_height = maxf(caption_height, row.get_node(^"Content/Copy").get_combined_minimum_size().y)
+	var preview_height := clampf(minf((width - (columns - 1) * 12) / columns - 16,
+		results.size.y - caption_height - 24), 96, 220)
+	for row in _rows:
+		row.get_node(^"Content/Stage").custom_minimum_size.y = preview_height
 
 func _text(key: String, fallback: String) -> String:
 	return str(_labels.get(key, fallback))
