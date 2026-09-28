@@ -40,6 +40,7 @@
     { "name": "list", "variant": "List", "upstream": "list", "label": "List" },
     { "name": "copy", "variant": "Copy", "upstream": "copy", "label": "Copy" },
     { "name": "delete", "variant": "Delete", "upstream": "trash", "label": "Delete" },
+    { "name": "rotate", "variant": "Rotate", "upstream": "rotate", "label": "Rotate" },
     { "name": "retry", "variant": "Retry", "upstream": "refresh", "label": "Retry" },
     { "name": "settings", "variant": "Settings", "upstream": "settings", "label": "Settings" },
     { "name": "lock", "variant": "Lock", "upstream": "lock", "label": "Locked" },

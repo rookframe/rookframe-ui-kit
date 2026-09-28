@@ -52,6 +52,7 @@ pinned Tabler source name and license provenance.
 | `list.svg` | `uid://4py4osjfhken` | List |
 | `copy.svg` | `uid://dagbu436kdxh7` | Copy |
 | `delete.svg` | `uid://d180ytrhnbhgu` | Delete |
+| `rotate.svg` | `uid://bv74i27rnqg0b` | Rotate |
 | `retry.svg` | `uid://dpyppyv8nobib` | Retry |
 | `settings.svg` | `uid://dp27gmw0xucgf` | Settings |
 | `lock.svg` | `uid://cr2kirnybk6vq` | Locked |
@@ -128,3 +129,9 @@ The original artwork is 512×512. Retain attribution when distributing it.
 All seven use [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/).
 The installed [attribution](../rookframe/ui/icons/game-icons/ATTRIBUTION.md)
 and manifest retain titles, authors, source/download URLs, changes and hashes.
+
+Rotation uses the pinned Tabler **rotate** glyph. Compose a centered 24px icon
+in a native toggle Button with at least a 44px target. Name its context through
+the tooltip and accessible name, for example "Show Prop rotation controls" or
+"Hide Prop rotation controls". The consuming application owns the spatial
+interaction; this asset supplies only the semantic rotation affordance.
