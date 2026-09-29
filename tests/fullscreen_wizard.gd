@@ -47,6 +47,8 @@ func _run() -> void:
 	wizard.set_primary("Create character", false)
 	wizard.get_node(^"Layout/Footer/Row/Primary").pressed.emit()
 	assert(action == ["primary"])
+	await process_frame
+	await process_frame
 	if DisplayServer.get_name() != "headless":
 		RenderingServer.force_draw()
 		for argument in OS.get_cmdline_user_args():

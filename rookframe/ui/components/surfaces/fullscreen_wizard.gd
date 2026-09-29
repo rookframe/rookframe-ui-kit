@@ -59,7 +59,9 @@ func set_primary(text: String, disabled: bool) -> void:
 	get_node(^"Layout/Footer/Row/Primary").text = text
 	get_node(^"Layout/Footer/Row/Primary").disabled = disabled
 	var symbol := "book" if _index == 4 else "dice" if _index in [1, 2, 3] else "character"
-	get_node(^"Layout/Footer/Row/Primary").icon = load("res://rookframe/ui/icons/character/" + symbol + ".svg")
+	get_node(^"Layout/Footer/Row/Primary/Center/Content/Label").text = text
+	get_node(^"Layout/Footer/Row/Primary/Center/Content").modulate.a = 0.45 if disabled else 1.0
+	get_node(^"Layout/Footer/Row/Primary/Center/Content/Icon").texture = load("res://rookframe/ui/icons/character/" + symbol + ".svg")
 
 func set_back_enabled(enabled: bool) -> void:
 	get_node(^"Layout/Footer/Row/Back").disabled = not enabled

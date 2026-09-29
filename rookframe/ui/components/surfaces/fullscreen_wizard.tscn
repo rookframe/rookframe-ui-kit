@@ -1,5 +1,7 @@
 [gd_scene format=3 uid="uid://g2qaay7nuc7s"]
 
+[ext_resource type="FontVariation" path="res://rookframe/ui/theme/task_action.tres" id="action"]
+
 [ext_resource type="Theme" path="res://rookframe/ui/theme/fullscreen_task_theme.tres" id="theme"]
 
 [ext_resource type="FontVariation" path="res://rookframe/ui/theme/task_display.tres" id="display"]
@@ -202,9 +204,43 @@ custom_minimum_size = Vector2(204, 46)
 theme_type_variation = "TaskPrimary"
 size_flags_vertical = 4
 
-icon = ExtResource("character")
-icon_alignment = 1
-expand_icon = true
+theme_override_colors/font_color = Color(0, 0, 0, 0)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 0)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 0)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 0)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 0)
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 0)
+
+[node name="Center" type="CenterContainer" parent="Layout/Footer/Row/Primary"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Content" type="HBoxContainer" parent="Layout/Footer/Row/Primary/Center"]
+layout_mode = 2
+theme_override_constants/separation = 10
+mouse_filter = 2
+
+[node name="Icon" type="TextureRect" parent="Layout/Footer/Row/Primary/Center/Content"]
+layout_mode = 2
+custom_minimum_size = Vector2(22, 22)
+texture = ExtResource("character")
+expand_mode = 1
+stretch_mode = 5
+self_modulate = Color(0.003922, 0.047059, 0.062745, 1)
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="Layout/Footer/Row/Primary/Center/Content"]
+layout_mode = 2
+text = "Continue"
+theme_override_colors/font_color = Color(0.003922, 0.047059, 0.062745, 1)
+theme_override_font_sizes/font_size = 15
+theme_override_fonts/font = ExtResource("action")
+mouse_filter = 2
 
 [node name="Title" type="Label" parent="Layout/Header"]
 layout_mode = 2
