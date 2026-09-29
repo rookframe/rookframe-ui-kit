@@ -160,7 +160,10 @@ func _arrange() -> void:
 	_area.visible = not matches.is_empty()
 	_pager.visible = matches.size() > _grid.columns
 	_update_state(matches.size())
-	await get_tree().process_frame
+	_grid.modulate.a = 0
+	get_tree().process_frame.connect(_measure_width.bind(revision, matches, gap, phone, tablet), CONNECT_ONE_SHOT)
+
+func _measure_width(revision: int, matches: Array[int], gap: int, phone: bool, tablet: bool) -> void:
 	if revision != _revision:
 		_arrange_pending = false
 		_queue_arrange()
@@ -168,8 +171,12 @@ func _arrange() -> void:
 	var width := (_area.size.x - gap * (_grid.columns - 1)) / _grid.columns
 	for card in _cards:
 		card.arrange(width, phone, tablet)
-	await get_tree().process_frame
-	await get_tree().process_frame
+	get_tree().process_frame.connect(_measure_rows.bind(revision, matches, gap, 1), CONNECT_ONE_SHOT)
+
+func _measure_rows(revision: int, matches: Array[int], gap: int, frames: int) -> void:
+	if frames > 0:
+		get_tree().process_frame.connect(_measure_rows.bind(revision, matches, gap, frames - 1), CONNECT_ONE_SHOT)
+		return
 	if revision != _revision:
 		_arrange_pending = false
 		_queue_arrange()
@@ -200,6 +207,7 @@ func _arrange() -> void:
 	_arrange_pending = false
 
 func _show_page() -> void:
+	_grid.modulate.a = 1
 	_page = clampi(_page, 0, maxi(0, _pages.size() - 1))
 	var current: Array = [] if _pages.is_empty() else _pages[_page]
 	for index in range(_cards.size()):
