@@ -183,12 +183,22 @@ inject only dynamic World data.
 | `managed_surface.tscn` / `PanelContainer` | `surface_title = "Managed surface"`; `state = new RookframeManagedSurfaceState` | `placement_changed(placement)`, `minimized`, `restored`, `close_requested`, `lifecycle_changed(snapshot)`; `get_header_slot()`, `get_task_slot()`, `get_footer_slot()`, `set_task(task)`, `open_surface()`, `close_surface()`, `minimize_surface()`, `restore_surface()`, `set_placement(placement)`, `toggle_placement()`, `set_dock_width(width)`, `set_floating_rect(rect)`, `capture_state()`, `restore_state(snapshot)`, `focus_task()` | Chrome controls are native 44px-minimum targets with accessible names/tooltips. One retained task tree keeps its focus state across dock/float and minimize/restore. Header/footer stay fixed; TaskSlot has the only body scroll owner. Close/minimize retain content and emit state instead of owning host policy. |
 | `RookframeManagedSurfaceState` / `Resource` | `surface_id = "surface"`; `task_instance_id = "task"`; `placement = DOCKED`; `closed = false`; `minimized = false`; `focused = false`; `dock_width = 560.0`; `floating_rect = Rect2(80, 80, 720, 720)`; `scroll_offset = 0.0` | `state_changed(snapshot)`; `is_visible()`, `placement_name()`, `open_surface()`, `close_surface()`, `minimize_surface()`, `restore_surface()`, `focus_surface()`, `set_placement(next_placement)`, `set_dock_width(value)`, `set_floating_rect(value)`, `set_scroll_offset(value)`, `state_snapshot()`, `restore_snapshot(snapshot)` | Serializable semantic state only; it receives no input and owns no UI. `focus_surface()` records focus only while visible. Snapshot geometry uses numeric `x`, `y`, `width`, and `height` fields so consumer persistence can remain JSON-safe. |
 
-`components/surfaces/managed_surface.tscn` owns exactly four regions:
+The default docked/floating presentation of
+`components/surfaces/managed_surface.tscn` owns four regions:
 
 1. component chrome with presentation, minimize, and close controls;
 2. fixed `HeaderSlot`;
 3. one `ScrollContainer` and retained `TaskSlot`; and
 4. fixed `FooterSlot`.
+
+`RookframeManagedSurfaceState.Placement.FULL_VIEWPORT` (snapshot name
+`full-viewport`, component constant `PLACEMENT_FULL_VIEWPORT`) is a fixed task
+presentation. It fills its host allocation with `TaskSlot`, disables outer
+scrolling, and removes host chrome, padding, HeaderSlot and FooterSlot. The
+authored task supplies its full composition, including its top-right Close
+control wired to the SDK window operation. The host retains Escape, stacking,
+focus and lifetime policy. This type cannot float, dock or minimize; its
+geometry is assigned by the host, and the task should expand vertically.
 
 `set_task(task)` moves one caller-owned Control tree into the body and returns
 the previous tree without freeing it. Docking or floating never creates a

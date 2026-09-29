@@ -12,6 +12,7 @@ signal lifecycle_changed(snapshot: Dictionary)
 
 const PLACEMENT_DOCKED := 0
 const PLACEMENT_FLOATING := 1
+const PLACEMENT_FULL_VIEWPORT := 2
 const DOCK_ICON := preload("res://rookframe/ui/icons/dock.svg")
 const FLOAT_ICON := preload("res://rookframe/ui/icons/pop-out.svg")
 
@@ -28,6 +29,7 @@ const FLOAT_ICON := preload("res://rookframe/ui/icons/pop-out.svg")
 		_refresh()
 
 var _last_focus_owner: Control
+var _empty_frame := StyleBoxEmpty.new()
 
 
 func _ready() -> void:
@@ -237,7 +239,22 @@ func _refresh() -> void:
 		toggle.accessibility_name = toggle.tooltip_text
 		toggle.icon = DOCK_ICON if floating else FLOAT_ICON
 	visible = state.is_visible()
+	var full_viewport := state.placement == PLACEMENT_FULL_VIEWPORT
+	get_node(^"Sections/Chrome").visible = not full_viewport
+	if full_viewport:
+		custom_minimum_size = Vector2.ZERO
+		add_theme_stylebox_override("panel", _empty_frame)
+		get_node(^"Sections/BodyRegion").add_theme_stylebox_override("panel", _empty_frame)
+		get_node(^"Sections/Header").hide()
+		get_node(^"Sections/Footer").hide()
+		var padding := get_node(^"Sections/BodyRegion/BodyPadding") as MarginContainer
+		for edge in ["left", "top", "right", "bottom"]:
+			padding.add_theme_constant_override("margin_" + edge, 0)
+		scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+		scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+		scroll.follow_focus = false
+		get_task_slot().size_flags_vertical = Control.SIZE_EXPAND_FILL
 	if scroll != null:
 		scroll.scroll_vertical = roundi(state.scroll_offset)
 	accessibility_name = surface_title
-	accessibility_description = "Managed surface with one scrolling task body"
+	accessibility_description = "Full-viewport task" if full_viewport else "Managed surface with one scrolling task body"

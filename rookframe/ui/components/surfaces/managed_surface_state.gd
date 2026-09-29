@@ -10,6 +10,7 @@ signal state_changed(snapshot: Dictionary)
 enum Placement {
 	DOCKED,
 	FLOATING,
+	FULL_VIEWPORT,
 }
 
 @export var surface_id := "surface"
@@ -28,6 +29,8 @@ func is_visible() -> bool:
 
 
 func placement_name() -> StringName:
+	if placement == Placement.FULL_VIEWPORT:
+		return &"full-viewport"
 	return &"floating" if placement == Placement.FLOATING else &"docked"
 
 
@@ -46,7 +49,7 @@ func close_surface() -> void:
 
 
 func minimize_surface() -> bool:
-	if closed:
+	if closed or placement == Placement.FULL_VIEWPORT:
 		return false
 	minimized = true
 	focused = false
@@ -74,6 +77,8 @@ func focus_surface() -> bool:
 
 
 func set_placement(next_placement: int) -> void:
+	if placement == Placement.FULL_VIEWPORT:
+		return
 	var normalized := clampi(next_placement, Placement.DOCKED, Placement.FLOATING)
 	if placement == normalized:
 		return
@@ -122,7 +127,8 @@ func state_snapshot() -> Dictionary:
 func restore_snapshot(snapshot: Dictionary) -> void:
 	surface_id = str(snapshot.get("surface_id", surface_id))
 	task_instance_id = str(snapshot.get("task_instance_id", task_instance_id))
-	placement = Placement.FLOATING if snapshot.get("placement", placement_name()) == "floating" else Placement.DOCKED
+	var presentation: String = str(snapshot.get("placement", placement_name()))
+	placement = Placement.FULL_VIEWPORT if presentation == "full-viewport" else (Placement.FLOATING if presentation == "floating" else Placement.DOCKED)
 	closed = bool(snapshot.get("closed", closed))
 	minimized = bool(snapshot.get("minimized", minimized)) and not closed
 	focused = bool(snapshot.get("focused", focused)) and is_visible()
