@@ -54,6 +54,14 @@ func _run() -> void:
 		for argument in OS.get_cmdline_user_args():
 			if argument.begins_with("--capture="):
 				viewport.get_texture().get_image().save_png(argument.trim_prefix("--capture="))
+	wizard.set_primary("Rolling…", true)
+	await process_frame
+	await process_frame
+	if DisplayServer.get_name() != "headless":
+		RenderingServer.force_draw()
+		for argument in OS.get_cmdline_user_args():
+			if argument.begins_with("--capture="):
+				viewport.get_texture().get_image().save_png(argument.trim_prefix("--capture=").get_basename() + "-disabled.png")
 	for scene in ["task_text_field", "task_text_area"]:
 		var field := load("res://rookframe/ui/components/forms/" + scene + ".tscn").instantiate() as Control
 		wizard.get_stage_slot().add_child(field)

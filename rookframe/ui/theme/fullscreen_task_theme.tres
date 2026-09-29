@@ -141,6 +141,7 @@ TaskPrimary/colors/font_pressed_color = Color(0.003922, 0.047059, 0.062745, 1)
 TaskPrimary/styles/normal = SubResource("Primary")
 TaskPrimary/styles/hover = SubResource("Primary")
 TaskPrimary/styles/pressed = SubResource("Primary")
+TaskPrimary/styles/disabled = SubResource("Primary")
 TaskQuiet/base_type = &"Button"
 TaskQuiet/colors/font_color = Color(0.568627, 0.6, 0.603922, 1)
 TaskQuiet/styles/normal = SubResource("Quiet")
