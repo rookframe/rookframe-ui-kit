@@ -1,0 +1,152 @@
+[gd_resource type="Theme" format=3]
+
+[ext_resource type="FontFile" path="res://rookframe/ui/assets/fonts/Inter-VariableFont_opsz,wght.ttf" id="ui"]
+
+[ext_resource type="FontFile" path="res://rookframe/ui/assets/fonts/Exo2-VariableFont_wght.ttf" id="display"]
+
+[sub_resource type="StyleBoxFlat" id="Button"]
+bg_color = Color(0.003922, 0.047059, 0.062745, 1)
+border_color = Color(0.27451, 0.321569, 0.337255, 1)
+border_width_left = 1
+border_width_right = 1
+border_width_top = 1
+border_width_bottom = 1
+content_margin_left = 12.0
+content_margin_right = 12.0
+content_margin_top = 12.0
+content_margin_bottom = 12.0
+
+[sub_resource type="StyleBoxFlat" id="Hover"]
+bg_color = Color(0.039216, 0.145098, 0.160784, 1)
+border_color = Color(0.266667, 0.913725, 0.913725, 1)
+border_width_left = 1
+border_width_right = 1
+border_width_top = 1
+border_width_bottom = 1
+content_margin_left = 12.0
+content_margin_right = 12.0
+content_margin_top = 12.0
+content_margin_bottom = 12.0
+
+[sub_resource type="StyleBoxFlat" id="Primary"]
+bg_color = Color(0.266667, 0.913725, 0.913725, 1)
+border_color = Color(0.52549, 1.0, 1.0, 1)
+border_width_left = 1
+border_width_right = 1
+border_width_top = 1
+border_width_bottom = 1
+content_margin_left = 12.0
+content_margin_right = 12.0
+content_margin_top = 12.0
+content_margin_bottom = 12.0
+
+[sub_resource type="StyleBoxFlat" id="Quiet"]
+bg_color = Color(0.015686, 0.066667, 0.082353, 1)
+border_color = Color(0.015686, 0.066667, 0.082353, 1)
+border_width_left = 0
+border_width_right = 0
+border_width_top = 0
+border_width_bottom = 0
+content_margin_left = 12.0
+content_margin_right = 12.0
+content_margin_top = 12.0
+content_margin_bottom = 12.0
+
+[sub_resource type="StyleBoxFlat" id="Choice"]
+bg_color = Color(0.003922, 0.047059, 0.062745, 1)
+border_color = Color(0.133333, 0.196078, 0.215686, 1)
+border_width_left = 0
+border_width_right = 0
+border_width_top = 0
+border_width_bottom = 0
+content_margin_left = 0.0
+content_margin_right = 0.0
+content_margin_top = 0.0
+content_margin_bottom = 0.0
+
+[sub_resource type="StyleBoxFlat" id="Selected"]
+bg_color = Color(0.039216, 0.145098, 0.160784, 1)
+border_color = Color(0.266667, 0.913725, 0.913725, 1)
+border_width_left = 1
+border_width_right = 1
+border_width_top = 1
+border_width_bottom = 1
+content_margin_left = 0.0
+content_margin_right = 0.0
+content_margin_top = 0.0
+content_margin_bottom = 0.0
+
+[sub_resource type="StyleBoxFlat" id="Input"]
+bg_color = Color(0.027451, 0.062745, 0.082353, 1)
+border_color = Color(0.27451, 0.321569, 0.337255, 1)
+border_width_left = 1
+border_width_right = 1
+border_width_top = 1
+border_width_bottom = 1
+content_margin_left = 14.0
+content_margin_right = 14.0
+content_margin_top = 14.0
+content_margin_bottom = 14.0
+
+[sub_resource type="StyleBoxFlat" id="Focus"]
+bg_color = Color(0, 0, 0, 0)
+border_color = Color(0.509804, 0.972549, 0.956863, 1)
+border_width_left = 2
+border_width_right = 2
+border_width_top = 2
+border_width_bottom = 2
+content_margin_left = 0.0
+content_margin_right = 0.0
+content_margin_top = 0.0
+content_margin_bottom = 0.0
+
+[sub_resource type="StyleBoxFlat" id="Detail"]
+bg_color = Color(0.015686, 0.066667, 0.082353, 1)
+border_color = Color(0.133333, 0.196078, 0.215686, 1)
+border_width_left = 1
+border_width_right = 1
+border_width_top = 1
+border_width_bottom = 1
+content_margin_left = 30.0
+content_margin_right = 30.0
+content_margin_top = 30.0
+content_margin_bottom = 30.0
+
+[resource]
+default_font = ExtResource("ui")
+default_font_size = 15
+Label/colors/font_color = Color(0.85098, 0.831373, 0.819608, 1)
+Label/constants/line_spacing = 4
+Button/fonts/font = ExtResource("ui")
+Button/font_sizes/font_size = 15
+Button/colors/font_color = Color(0.85098, 0.831373, 0.819608, 1)
+Button/colors/font_hover_color = Color(0.85098, 0.831373, 0.819608, 1)
+Button/colors/font_pressed_color = Color(0.85098, 0.831373, 0.819608, 1)
+Button/styles/normal = SubResource("Button")
+Button/styles/hover = SubResource("Hover")
+Button/styles/pressed = SubResource("Hover")
+Button/styles/disabled = SubResource("Button")
+Button/styles/focus = SubResource("Focus")
+TaskButton/base_type = &"Button"
+TaskPrimary/base_type = &"Button"
+TaskPrimary/colors/font_color = Color(0.003922, 0.047059, 0.062745, 1)
+TaskPrimary/colors/font_hover_color = Color(0.003922, 0.047059, 0.062745, 1)
+TaskPrimary/colors/font_pressed_color = Color(0.003922, 0.047059, 0.062745, 1)
+TaskPrimary/styles/normal = SubResource("Primary")
+TaskPrimary/styles/hover = SubResource("Primary")
+TaskPrimary/styles/pressed = SubResource("Primary")
+TaskQuiet/base_type = &"Button"
+TaskQuiet/colors/font_color = Color(0.568627, 0.6, 0.603922, 1)
+TaskQuiet/styles/normal = SubResource("Quiet")
+TaskChoice/base_type = &"Button"
+TaskChoice/styles/normal = SubResource("Choice")
+TaskChoice/styles/pressed = SubResource("Selected")
+TaskChoice/styles/hover = SubResource("Selected")
+LineEdit/styles/normal = SubResource("Input")
+LineEdit/styles/focus = SubResource("Focus")
+LineEdit/colors/font_color = Color(0.85098, 0.831373, 0.819608, 1)
+TextEdit/styles/normal = SubResource("Input")
+TextEdit/styles/focus = SubResource("Focus")
+TextEdit/colors/font_color = Color(0.85098, 0.831373, 0.819608, 1)
+TaskDetail/base_type = &"PanelContainer"
+TaskDetail/styles/panel = SubResource("Detail")

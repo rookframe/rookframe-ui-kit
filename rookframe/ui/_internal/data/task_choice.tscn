@@ -1,0 +1,67 @@
+[gd_scene format=3]
+
+[ext_resource type="Theme" path="res://rookframe/ui/theme/fullscreen_task_theme.tres" id="theme"]
+
+[ext_resource type="FontFile" path="res://rookframe/ui/assets/fonts/Exo2-VariableFont_wght.ttf" id="display"]
+
+[node name="TaskChoice" type="Button"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 68)
+toggle_mode = true
+theme_type_variation = &"TaskChoice"
+
+[node name="Inset" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_top = 9
+theme_override_constants/margin_bottom = 9
+mouse_filter = 2
+
+[node name="Row" type="HBoxContainer" parent="Inset"]
+layout_mode = 2
+theme_override_constants/separation = 14
+mouse_filter = 2
+
+[node name="Icon" type="TextureRect" parent="Inset/Row"]
+layout_mode = 2
+custom_minimum_size = Vector2(30, 30)
+size_flags_vertical = 4
+expand_mode = 1
+stretch_mode = 5
+mouse_filter = 2
+self_modulate = Color(0.568627, 0.6, 0.603922, 1)
+
+[node name="Copy" type="VBoxContainer" parent="Inset/Row"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_constants/separation = 3
+mouse_filter = 2
+
+[node name="Title" type="Label" parent="Inset/Row/Copy"]
+layout_mode = 2
+text = ""
+theme_override_font_sizes/font_size = 20
+theme_override_colors/font_color = Color(0.85098, 0.831373, 0.819608, 1)
+theme_override_fonts/font = ExtResource("display")
+text_overrun_behavior = 3
+
+[node name="Subtitle" type="Label" parent="Inset/Row/Copy"]
+layout_mode = 2
+text = ""
+theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(0.568627, 0.6, 0.603922, 1)
+text_overrun_behavior = 3
+
+[node name="Value" type="Label" parent="Inset/Row"]
+layout_mode = 2
+text = ""
+theme_override_font_sizes/font_size = 20
+theme_override_colors/font_color = Color(0.266667, 0.913725, 0.913725, 1)
+theme_override_fonts/font = ExtResource("display")

@@ -1,0 +1,70 @@
+[gd_scene format=3]
+
+[ext_resource type="Theme" path="res://rookframe/ui/theme/fullscreen_task_theme.tres" id="theme"]
+
+[ext_resource type="FontFile" path="res://rookframe/ui/assets/fonts/Exo2-VariableFont_wght.ttf" id="display"]
+
+[ext_resource type="Script" path="res://rookframe/ui/components/data/paginated_choices.gd" id="script"]
+
+[node name="PaginatedChoices" type="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("theme")
+script = ExtResource("script")
+theme_override_constants/separation = 0
+
+[node name="Caption" type="HBoxContainer" parent="."]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 42)
+
+[node name="Title" type="Label" parent="Caption"]
+layout_mode = 2
+text = "Choose a class"
+theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(0.568627, 0.6, 0.603922, 1)
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("display")
+
+[node name="Count" type="Label" parent="Caption"]
+layout_mode = 2
+text = ""
+theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(0.568627, 0.6, 0.603922, 1)
+
+[node name="Area" type="Control" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+clip_contents = true
+
+[node name="Rows" type="VBoxContainer" parent="Area"]
+layout_mode = 1
+anchor_right = 1.0
+theme_override_constants/separation = 4
+
+[node name="Pager" type="HBoxContainer" parent="."]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 53)
+theme_override_constants/separation = 8
+
+[node name="Previous" type="Button" parent="Pager"]
+layout_mode = 2
+text = "Previous"
+custom_minimum_size = Vector2(44, 44)
+theme_type_variation = "TaskButton"
+size_flags_vertical = 8
+
+[node name="Range" type="Label" parent="Pager"]
+layout_mode = 2
+text = ""
+theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(0.568627, 0.6, 0.603922, 1)
+size_flags_horizontal = 3
+horizontal_alignment = 1
+
+[node name="Next" type="Button" parent="Pager"]
+layout_mode = 2
+text = "Next"
+custom_minimum_size = Vector2(44, 44)
+theme_type_variation = "TaskButton"
+size_flags_vertical = 8

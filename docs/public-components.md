@@ -159,11 +159,11 @@ progress remains native `ProgressBar`.
 | `roll_row.tscn` / `GridContainer` | `state = PENDING`; `ordinal = "1"`; `title = "Roll"`; `detail = ""`; `result = ""`; `die_icon = dice.svg`; `compact_width = 720.0`; states `COMPLETE`, `CURRENT`, `PENDING`, `LOCKED` | `layout_profile_changed(profile)`; `get_action_slot()`; `ActionSlot` | Reflows the same state/ordinal/die/identity/result/action regions. Result stays empty until available. Visible state word and semantic icon communicate state; only the slotted action receives source-order focus. |
 | `structured_row.tscn` / `PanelContainer` | `variant = DATA`; `title = "Row identity"`; `detail = ""`; `value_text = ""`; `status_text = ""`; `leading_image = null`; `compact_width = 620.0`; variants `DATA`, `DETAIL`, `COMPACT_DETAIL`, `STACKED_DETAIL`, `SUMMARY`, `TABLE`, `HEADER`, `SELECTION_BANNER`, `CATEGORY`, `CATALOGUE`, `PORTRAIT`, `PENDING` | `layout_profile_changed(profile)`; `get_action_slot()`; `ActionSlot` | Context-neutral read-only row family with one stable trailing lane. Compact reflow retains content and focus order. Title/status remain textual; pending state is not color-only. Use `ChoiceRow`, not this scene, when the entire row must be selectable. |
 | `key_value_row.tscn` / `PanelContainer` | `key_text = "Key"`; `value_text = ""` | No signals or methods | Compact read-only fact with a visible key, trailing value, and divider. It receives no input; key and value are combined into its accessibility name and description. |
-| `action_row.tscn` / `Button` | `title = "Action"`; `description = "Supporting action detail"`; `action_label = "›"`; `tone = STANDARD`; native `disabled = false`; tones `STANDARD`, `DANGER` | Native `pressed` | Complete native button target for a compact navigation or management action. Title, supporting detail, and trailing action label remain visible; the root uses a secondary or danger semantic action style. Callers own policy and persistence. |
+| `action_row.tscn` / `Button` | `title = "Action"`; `description = "Supporting action detail"`; `action_label = "â€º"`; `tone = STANDARD`; native `disabled = false`; tones `STANDARD`, `DANGER` | Native `pressed` | Complete native button target for a compact navigation or management action. Title, supporting detail, and trailing action label remain visible; the root uses a secondary or danger semantic action style. Callers own policy and persistence. |
 | `action_link.tscn` / `Button` | `title = "Action"`; `title_lane_width = 150.0`; `title_font_size = 15`; native `disabled = false` | Native `pressed` | Complete quiet navigation target with a label lane, intentional gap, continuous trailing rule, and scene-authored arrow head. The rule never touches the label and meets the arrow base; callers own policy and connect `pressed`. |
 | `world_row.tscn` / `Button` | `title = "World"`; `detail_text = ""`; `selected = false`; native `disabled = false` | Native `pressed` | Selectable World record with a cyan diamond, textual identity/metadata, selected outline, and gold disclosure. The full root is the only target; callers own selection and navigation policy. |
 | `world_summary_card.tscn` / `VBoxContainer` | `facts_visible = true`; `actions_visible = false`; `kicker_text = "SELECTED WORLD"`; `privacy_text = "PRIVATE"`; `package_name = "Package"`; `detail_text = ""` | Native child `OpenWorld` and `WorldDetails` Buttons when actions are visible | Retained World identity, Package, availability, optional facts, and optional actions as one scene-authored relationship. Callers supply dynamic text/data and connect action Buttons; policy, persistence, and navigation remain outside the component. |
-| `disclosure_row.tscn` / `Button` | `title = "Action"`; `description = "Supporting action detail"`; `action_label = "›"`; `tone = STANDARD`; native `disabled = false`; tones `STANDARD`, `DANGER` | Native `pressed` | Plain settings-list action with textual title/detail, a scene-authored disclosure, and one bottom divider. The root is the only interactive target; callers own policy and connect `pressed`. |
+| `disclosure_row.tscn` / `Button` | `title = "Action"`; `description = "Supporting action detail"`; `action_label = "â€º"`; `tone = STANDARD`; native `disabled = false`; tones `STANDARD`, `DANGER` | Native `pressed` | Plain settings-list action with textual title/detail, a scene-authored disclosure, and one bottom divider. The root is the only interactive target; callers own policy and connect `pressed`. |
 | `package_row.tscn` / `PanelContainer` | `package_name = "Package"`; `detail_text = ""`; `selected = false`; `locked = false`; `locked_state_label = "INCLUDED"` | No signals or methods | Read-only Package identity, role/version detail, marker, and status. `locked` represents an included required Package; application policy and persistence stay outside the component. |
 | `package_card.tscn` / `PanelContainer` | Same properties and states as `package_row.tscn`; `locked_state_label = "REQUIRED"` | No signals or methods | Detailed read-only Package card for wide task surfaces. It retains the compact Package row's identity, status, and accessibility behavior. |
 
@@ -235,8 +235,8 @@ trees.
 `res://rookframe/ui/components/content/fullscreen_miniature_browser.tscn` is the
 approved full-viewport composition: top heading and Close, name/Package search,
 preview cards, measured complete-row pagination, and fixed Cancel/Choose actions.
-The landscape references show 3 cards at 844 × 390, 6 at 1024 × 768, and 8 at
-1920 × 1080. Collection and page content do not scroll. The component uses the
+The landscape references show 3 cards at 844 Ã— 390, 6 at 1024 Ã— 768, and 8 at
+1920 Ã— 1080. Collection and page content do not scroll. The component uses the
 unchanged Rookframe palette and the approved wizard's square buttons.
 
 It accepts `configure(entries, selected_id, labels)` with the same opaque entry
@@ -254,7 +254,7 @@ Choose is disabled. Configuration reveals the page containing the saved choice.
 Preview targets are created once per available entry, and retained across page
 changes. The caller supplies localized labels, including `title`, `library`,
 `search`, `close`, `cancel`, `choose`, `selection`, `none`, `hint`,
-`saved_unavailable`, `previous`, `next`, `range` (`%d–%d of %d`), `count`
+`saved_unavailable`, `previous`, `next`, `range` (`%dâ€“%d of %d`), `count`
 (`%d miniatures`), and state headings/copy (`loading`, `loading_copy`, `empty`,
 `empty_copy`, `no_match`, `no_match_copy`, `error`, `error_copy`, `retry`,
 `unavailable`, `preview_unavailable`, `selected`). Child paths remain internal.
@@ -279,3 +279,30 @@ Native focus, keyboard activation, search, scroll and release-based buttons appl
 `MiniatureBrowser.focus_search()` moves native keyboard focus into its search
 editor. Child paths and helper rows under `_internal/content` are implementation
 details; consumers use the documented signals and methods.
+
+
+## Full-screen wizard frame
+
+`components/surfaces/fullscreen_wizard.tscn` is a native `Control` for fixed
+full-viewport tasks. `configure(brand, title, steps, labels)` supplies copy;
+`set_step(index)`, `set_primary(text, disabled)` and `set_back_enabled(enabled)`
+update presentation. `back_requested`, `restart_requested`, `primary_requested`
+and `close_requested` carry user intent to the consumer. The consumer owns draft
+state, confirmation, rules and window lifecycle. `get_context_slot()` and
+`get_stage_slot()` expose the authored MarginContainers at
+`Layout/Body/ContextSlot` and `Layout/Body/StageSlot`; these are public composition
+paths. The frame retains its header, progress and footer while slots fill the
+remaining viewport. It has no collection scroll region.
+
+`components/data/paginated_choices.tscn` accepts ordered dictionaries with `id`,
+`title`, `subtitle`, `value`, and optional `icon` through
+`configure(entries, selected_id, caption, count)`. It emits `selected(id)`.
+Pagination displays complete rows, reveals a changed selection, and retains
+native row Controls when their identities stay the same. Previous and Next
+change only the visible page. The consumer decides whether selection changes
+rules or merely inspects a recorded result.
+
+`theme/fullscreen_task_theme.tres` supplies the approved square task actions,
+inputs, choice rows and detail panels using unchanged package design tokens.
+The unchanged character pictograms and original attribution are under
+`icons/character/`.
