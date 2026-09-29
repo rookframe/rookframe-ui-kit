@@ -18,6 +18,7 @@ func test_fixed_frame_measured_choices_and_actions() -> void:
 	var entries: Array[Dictionary] = []
 	for index in 15:
 		entries.append({"id": str(index), "title": "Choice %d" % (index + 1), "subtitle": "Retained result", "value": "12"})
+	entries[4]["value"] = "A long resolved outcome remains within its row while the selected detail shows the full text"
 	choices.configure(entries, "14", "RECORDED RESULTS", "15 / 15")
 	for frame in 6:
 		await get_tree().process_frame
@@ -34,6 +35,7 @@ func test_fixed_frame_measured_choices_and_actions() -> void:
 		for row in choices.get_node(^"Area/Rows").get_children():
 			if row.visible:
 				assert_bool(row.get_global_rect().end.y <= choices.get_node(^"Pager").global_position.y).is_true()
+				assert_bool(row.get_node("Inset/Row/Value").get_global_rect().end.x <= row.get_global_rect().end.x).is_true()
 				seen.append(row.accessibility_name)
 		if next.disabled:
 			break

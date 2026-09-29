@@ -61,6 +61,9 @@ text_overrun_behavior = 3
 
 [node name="Value" type="Label" parent="Inset/Row"]
 layout_mode = 2
+size_flags_horizontal = 3
+text_overrun_behavior = 3
+horizontal_alignment = 2
 text = ""
 theme_override_font_sizes/font_size = 20
 theme_override_colors/font_color = Color(0.266667, 0.913725, 0.913725, 1)
