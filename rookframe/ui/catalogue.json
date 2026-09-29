@@ -755,7 +755,7 @@
       "properties": {
         "title": "Action",
         "description": "Supporting action detail",
-        "action_label": "\u203a",
+        "action_label": "›",
         "tone": "STANDARD",
         "disabled": false
       },
@@ -839,7 +839,7 @@
       "properties": {
         "title": "Action",
         "description": "Supporting action detail",
-        "action_label": "\u203a",
+        "action_label": "›",
         "tone": "STANDARD",
         "disabled": false
       },
@@ -988,6 +988,115 @@
         "set_state",
         "focus_search"
       ]
+    },
+    {
+      "name": "FullscreenMiniatureBrowser",
+      "scene": "res://rookframe/ui/components/content/fullscreen_miniature_browser.tscn",
+      "sceneUid": "uid://bvol8o8tejrba",
+      "rootType": "Control",
+      "properties": {},
+      "methods": [
+        "configure",
+        "selection",
+        "set_state",
+        "focus_search"
+      ],
+      "signals": [
+        "choose_requested",
+        "cancel_requested",
+        "close_requested",
+        "selection_changed",
+        "preview_requested",
+        "retry_requested"
+      ],
+      "script": "res://rookframe/ui/components/content/fullscreen_miniature_browser.gd",
+      "scriptUid": "uid://cuj3idkf7gtbt"
+    },
+    {
+      "name": "FullscreenWizard",
+      "scene": "res://rookframe/ui/components/surfaces/fullscreen_wizard.tscn",
+      "sceneUid": "uid://g2qaay7nuc7s",
+      "rootType": "Control",
+      "properties": {},
+      "methods": [
+        "configure",
+        "set_step",
+        "set_primary",
+        "set_back_enabled",
+        "get_context_slot",
+        "get_stage_slot"
+      ],
+      "signals": [
+        "back_requested",
+        "restart_requested",
+        "primary_requested",
+        "close_requested"
+      ],
+      "script": "res://rookframe/ui/components/surfaces/fullscreen_wizard.gd",
+      "scriptUid": "uid://b7i4022j38vyr"
+    },
+    {
+      "name": "PaginatedChoices",
+      "scene": "res://rookframe/ui/components/data/paginated_choices.tscn",
+      "sceneUid": "uid://daedsgd1whpdn",
+      "rootType": "VBoxContainer",
+      "properties": {},
+      "methods": [
+        "configure"
+      ],
+      "signals": [
+        "selected"
+      ],
+      "script": "res://rookframe/ui/components/data/paginated_choices.gd",
+      "scriptUid": "uid://du52yvlnd41y8"
+    },
+    {
+      "name": "SummaryBlock",
+      "scene": "res://rookframe/ui/components/data/summary_block.tscn",
+      "sceneUid": "uid://cxu3q4m6ldbha",
+      "rootType": "VBoxContainer",
+      "properties": {},
+      "methods": [
+        "configure",
+        "set_stats"
+      ],
+      "signals": [],
+      "script": "res://rookframe/ui/components/data/summary_block.gd",
+      "scriptUid": "uid://chvyh67qxt22k"
+    },
+    {
+      "name": "TaskTextField",
+      "scene": "res://rookframe/ui/components/forms/task_text_field.tscn",
+      "sceneUid": "uid://c0of87liqui3k",
+      "rootType": "VBoxContainer",
+      "properties": {},
+      "methods": [
+        "focus_editor",
+        "set_error"
+      ],
+      "signals": [
+        "value_changed",
+        "value_committed"
+      ],
+      "script": "res://rookframe/ui/components/forms/text_field.gd",
+      "scriptUid": "uid://14x5hvhd0hgd"
+    },
+    {
+      "name": "TaskTextArea",
+      "scene": "res://rookframe/ui/components/forms/task_text_area.tscn",
+      "sceneUid": "uid://cammbybvgdssm",
+      "rootType": "VBoxContainer",
+      "properties": {},
+      "methods": [
+        "focus_editor",
+        "set_error"
+      ],
+      "signals": [
+        "value_changed",
+        "value_committed"
+      ],
+      "script": "res://rookframe/ui/components/forms/text_area.gd",
+      "scriptUid": "uid://bb8xvwqqnaxb3"
     }
   ],
   "semanticIcons": {
@@ -1003,5 +1112,10 @@
     "consumer-named duplicates",
     "redundant native wrappers",
     "public C# widget hierarchy"
-  ]
+  ],
+  "taskTheme": {
+    "path": "res://rookframe/ui/theme/fullscreen_task_theme.tres",
+    "uid": "uid://cyf74fj0m2vqa",
+    "purpose": "Fixed full-screen tasks using unchanged package design tokens."
+  }
 }

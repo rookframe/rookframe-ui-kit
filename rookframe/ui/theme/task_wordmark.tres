@@ -1,0 +1,7 @@
+[gd_resource type="FontVariation" format=3 uid="uid://ctur8bdv62on4"]
+
+[ext_resource type="FontFile" path="res://rookframe/ui/assets/fonts/Exo2-VariableFont_wght.ttf" id="font"]
+
+[resource]
+base_font = ExtResource("font")
+variation_opentype = {"wght": 800.0}

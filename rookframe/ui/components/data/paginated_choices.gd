@@ -42,8 +42,13 @@ func configure(entries: Array[Dictionary], selected_id: String, caption: String 
 		var row := _rows[index]
 		row.get_node(^"Inset/Row/Copy/Title").text = str(entry.get("title", ""))
 		row.get_node(^"Inset/Row/Copy/Subtitle").text = str(entry.get("subtitle", ""))
+		row.get_node(^"Inset/Row/Copy/Subtitle").visible = not str(entry.get("subtitle", "")).is_empty()
 		row.get_node(^"Inset/Row/Value").text = str(entry.get("value", ""))
 		row.get_node(^"Inset/Row/Icon").texture = entry.get("icon")
+		row.get_node(^"Inset/Row/Icon").self_modulate = Color("44e9e9") if str(entry.id) == selected_id else Color("91999a")
+		var pending := bool(entry.get("pending", false))
+		row.get_node(^"Inset/Row/Value").add_theme_font_size_override("font_size", 12 if pending else 20)
+		row.get_node(^"Inset/Row/Value").add_theme_color_override("font_color", Color("91999a") if pending else Color("44e9e9"))
 		row.set_pressed_no_signal(str(entry.id) == selected_id)
 		row.accessibility_name = "%s. %s. %s" % [entry.get("title", ""), entry.get("subtitle", ""), entry.get("value", "")]
 	get_node(^"Caption/Title").text = caption
@@ -76,6 +81,13 @@ func _fit() -> void:
 	_reveal = false
 	_show_page()
 	_pending = false
+	queue_redraw()
+
+func _draw() -> void:
+	draw_line(Vector2.ZERO, Vector2(size.x, 0), Color("465256"))
+	var pager := get_node_or_null(^"Pager") as Control
+	if pager != null and pager.visible:
+		draw_line(Vector2(0, pager.position.y), Vector2(size.x, pager.position.y), Color("465256"))
 
 func _show_page() -> void:
 	var pages := maxi(1, ceili(float(_rows.size()) / _capacity))

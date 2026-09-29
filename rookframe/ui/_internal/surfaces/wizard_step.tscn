@@ -1,8 +1,19 @@
 [gd_scene format=3]
 
 [ext_resource type="Theme" path="res://rookframe/ui/theme/fullscreen_task_theme.tres" id="theme"]
+[ext_resource type="FontVariation" path="res://rookframe/ui/theme/task_display.tres" id="display"]
+[ext_resource type="Texture2D" path="res://rookframe/ui/icons/character/dice.svg" id="dice"]
 
-[ext_resource type="FontFile" path="res://rookframe/ui/assets/fonts/Exo2-VariableFont_wght.ttf" id="display"]
+
+
+
+[sub_resource type="StyleBoxFlat" id="Frame"]
+bg_color = Color(0, 0, 0, 0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 1)
 
 [node name="WizardStep" type="Control"]
 layout_mode = 2
@@ -18,18 +29,35 @@ grow_vertical = 2
 theme_override_constants/separation = 12
 mouse_filter = 2
 
-[node name="Number" type="Label" parent="Row"]
+
+[node name="Marker" type="PanelContainer" parent="Row"]
+layout_mode = 2
+custom_minimum_size = Vector2(26, 26)
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_styles/panel = SubResource("Frame")
+
+[node name="Number" type="Label" parent="Row/Marker"]
 layout_mode = 2
 text = "01"
-theme_override_font_sizes/font_size = 13
-theme_override_colors/font_color = Color(0.85098, 0.831373, 0.819608, 1)
+horizontal_alignment = 1
 vertical_alignment = 1
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 13
+
+[node name="Done" type="TextureRect" parent="Row/Marker"]
+layout_mode = 2
+visible = false
+texture = ExtResource("dice")
+expand_mode = 1
+stretch_mode = 5
+mouse_filter = 2
 
 [node name="Name" type="Label" parent="Row"]
 layout_mode = 2
 text = "Step"
 theme_override_font_sizes/font_size = 16
-theme_override_colors/font_color = Color(0.85098, 0.831373, 0.819608, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("display")
 vertical_alignment = 1
 

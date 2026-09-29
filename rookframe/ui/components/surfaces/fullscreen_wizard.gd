@@ -20,7 +20,7 @@ func _ready() -> void:
 
 func configure(brand: String, title: String, steps: Array[String], labels: Dictionary = {}) -> void:
 	get_node(^"Layout/Header/Row/Brand/Name").text = brand
-	get_node(^"Layout/Header/Row/Title").text = title
+	get_node(^"Layout/Header/Title").text = title
 	get_node(^"Layout/Header/Row/Brand/Subtitle").text = str(labels.get("subtitle", "Character creation"))
 	get_node(^"Layout/Footer/Row/Back").text = str(labels.get("back", "Back"))
 	get_node(^"Layout/Footer/Row/Restart").text = str(labels.get("restart", "Start over"))
@@ -32,7 +32,7 @@ func configure(brand: String, title: String, steps: Array[String], labels: Dicti
 	_steps.clear()
 	for index in steps.size():
 		var step := STEP.instantiate() as Control
-		step.get_node(^"Row/Number").text = "%02d" % (index + 1)
+		step.get_node(^"Row/Marker/Number").text = "%02d" % (index + 1)
 		step.get_node(^"Row/Name").text = steps[index]
 		get_node(^"Layout/Steps/Row").add_child(step)
 		_steps.append(step)
@@ -44,6 +44,8 @@ func set_step(index: int) -> void:
 	for number in _steps.size():
 		var color := Color("f0bb32") if number == index else Color("d9d4d1") if number < index else Color("91999a")
 		_steps[number].get_node(^"Row").modulate = color
+		_steps[number].get_node(^"Row/Marker/Number").visible = number >= index
+		_steps[number].get_node(^"Row/Marker/Done").visible = number < index
 		_steps[number].get_node(^"Rule").color = Color("f0bb32") if number == index else Color("44e9e9") if number < index else Color("223237")
 		_steps[number].get_node(^"Rule").visible = size.y <= 560 or number == index
 	get_node(^"Layout/Footer/Row/Back").disabled = index == 0
@@ -51,6 +53,8 @@ func set_step(index: int) -> void:
 func set_primary(text: String, disabled: bool) -> void:
 	get_node(^"Layout/Footer/Row/Primary").text = text
 	get_node(^"Layout/Footer/Row/Primary").disabled = disabled
+	var symbol := "book" if _index == 4 else "dice" if _index in [1, 2, 3] else "character"
+	get_node(^"Layout/Footer/Row/Primary").icon = load("res://rookframe/ui/icons/character/" + symbol + ".svg")
 
 func set_back_enabled(enabled: bool) -> void:
 	get_node(^"Layout/Footer/Row/Back").disabled = not enabled
@@ -78,10 +82,27 @@ func _fit() -> void:
 	for edge in ["left", "right", "top", "bottom"]:
 		get_context_slot().add_theme_constant_override("margin_" + edge, context_inset)
 		get_stage_slot().add_theme_constant_override("margin_" + edge, (16 if edge in ["left", "right"] else 8) if phone else 22 if tablet else (42 if edge in ["left", "right"] else 36))
-	get_node(^"Layout/Header/Row/Title").visible = not phone
+	get_node(^"Layout/Header/Title").visible = not phone
 	get_node(^"Layout/Header/Row/Brand/Subtitle").visible = not phone
 	get_node(^"Layout/Footer/Row/Hint").visible = not phone and not tablet
+	var header: float = get_node(^"Layout/Header").custom_minimum_size.y
+	var progress: float = get_node(^"Layout/Steps").custom_minimum_size.y
+	var footer: float = get_node(^"Layout/Footer").custom_minimum_size.y
+	var context: float = get_context_slot().custom_minimum_size.x
+	_set_surface(^"CanvasSurface", Rect2(Vector2.ONE, size - Vector2(2, 2)))
+	_set_surface(^"HeaderSurface", Rect2(1, 1, size.x - 2, header))
+	_set_surface(^"ContextSurface", Rect2(1, 1 + header + progress, context, size.y - header - progress - footer - 2))
+	_set_surface(^"FooterSurface", Rect2(1, size.y - footer - 1, size.x - 2, footer))
+	_set_surface(^"HeaderRuleSurface", Rect2(1, header, size.x - 2, 1))
+	_set_surface(^"StepsRuleSurface", Rect2(1, header + progress, size.x - 2, 1))
+	_set_surface(^"ContextRuleSurface", Rect2(context, header + progress, 1, size.y - header - progress - footer - 1))
+	_set_surface(^"FooterRuleSurface", Rect2(1, size.y - footer - 1, size.x - 2, 1))
 	for step in _steps:
 		step.get_node(^"Row").visible = not phone
 		step.get_node(^"Row/Name").add_theme_font_size_override("font_size", 13 if tablet else 16)
 	set_step(_index)
+
+func _set_surface(path: NodePath, rect: Rect2) -> void:
+	var surface := get_node(path) as Control
+	surface.position = rect.position
+	surface.size = rect.size

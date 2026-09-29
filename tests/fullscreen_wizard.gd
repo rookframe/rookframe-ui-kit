@@ -23,7 +23,7 @@ func _run() -> void:
 		await process_frame
 	assert(wizard.get_global_rect() == Rect2(0, 0, 1920, 1080))
 	assert(wizard.get_context_slot().size.x == 400)
-	assert(wizard.get_node(^"Layout/Footer").get_global_rect().end.y == 1080)
+	assert(wizard.get_node(^"Layout/Footer").get_global_rect().end.y == 1079)
 	var seen: Array[String] = []
 	var previous := choices.get_node(^"Pager/Previous") as Button
 	while not previous.disabled:
@@ -49,6 +49,17 @@ func _run() -> void:
 		for argument in OS.get_cmdline_user_args():
 			if argument.begins_with("--capture="):
 				viewport.get_texture().get_image().save_png(argument.trim_prefix("--capture="))
+	for scene in ["task_text_field", "task_text_area"]:
+		var field := load("res://rookframe/ui/components/forms/" + scene + ".tscn").instantiate() as Control
+		wizard.get_stage_slot().add_child(field)
+		assert(field.get_node(^"Help").get_index() < field.get_node(^"Editor").get_index())
+		assert(field.get_node(^"Editor").custom_minimum_size.y == (48 if scene == "task_text_field" else 152))
+		field.free()
+	var summary := load("res://rookframe/ui/components/data/summary_block.tscn").instantiate() as Control
+	wizard.get_stage_slot().add_child(summary)
+	var pairs: Array[Dictionary] = [{"label": "Name", "value": "Retained identity"}]
+	summary.configure("Character", null, pairs)
+	assert(summary.get_node(^"Content/Rows").get_child(0).get_node(^"Inset/Row/Value").text == "Retained identity")
 	viewport.free()
 	print("FULLSCREEN_WIZARD fixed frame, measured rows, retained selection and actions PASS")
 	quit()

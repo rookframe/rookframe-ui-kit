@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3]
+[gd_scene load_steps=13 format=3 uid="uid://bvol8o8tejrba"]
 [ext_resource type="Script" path="res://rookframe/ui/components/content/fullscreen_miniature_browser.gd" id="1"]
 [ext_resource type="Theme" path="res://rookframe/ui/theme/rookframe_theme.tres" id="theme"]
 [ext_resource type="FontFile" path="res://rookframe/ui/assets/fonts/Exo2-VariableFont_wght.ttf" id="display"]

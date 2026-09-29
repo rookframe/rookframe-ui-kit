@@ -235,8 +235,8 @@ trees.
 `res://rookframe/ui/components/content/fullscreen_miniature_browser.tscn` is the
 approved full-viewport composition: top heading and Close, name/Package search,
 preview cards, measured complete-row pagination, and fixed Cancel/Choose actions.
-The landscape references show 3 cards at 844 Ã— 390, 6 at 1024 Ã— 768, and 8 at
-1920 Ã— 1080. Collection and page content do not scroll. The component uses the
+The landscape references show 3 cards at 844 × 390, 6 at 1024 × 768, and 8 at
+1920 × 1080. Collection and page content do not scroll. The component uses the
 unchanged Rookframe palette and the approved wizard's square buttons.
 
 It accepts `configure(entries, selected_id, labels)` with the same opaque entry
@@ -254,7 +254,7 @@ Choose is disabled. Configuration reveals the page containing the saved choice.
 Preview targets are created once per available entry, and retained across page
 changes. The caller supplies localized labels, including `title`, `library`,
 `search`, `close`, `cancel`, `choose`, `selection`, `none`, `hint`,
-`saved_unavailable`, `previous`, `next`, `range` (`%dâ€“%d of %d`), `count`
+`saved_unavailable`, `previous`, `next`, `range` (`%d–%d of %d`), `count`
 (`%d miniatures`), and state headings/copy (`loading`, `loading_copy`, `empty`,
 `empty_copy`, `no_match`, `no_match_copy`, `error`, `error_copy`, `retry`,
 `unavailable`, `preview_unavailable`, `selected`). Child paths remain internal.
@@ -306,3 +306,12 @@ rules or merely inspects a recorded result.
 inputs, choice rows and detail panels using unchanged package design tokens.
 The unchanged character pictograms and original attribution are under
 `icons/character/`.
+
+`components/data/summary_block.tscn` is an authored heading, optional stat strip,
+label/value rows and supporting copy. `configure(title, icon, pairs, copy)` accepts
+`label`/`value` dictionaries; `set_stats(stats)` uses the same fields. Content
+remains consumer-owned. Text wraps within the measured block width.
+
+`components/forms/task_text_field.tscn` and `task_text_area.tscn` retain the public
+TextField/TextArea script contracts with help above the native editor, task spacing,
+and 48/152 px editor minimum heights. They inherit their consumer Theme.

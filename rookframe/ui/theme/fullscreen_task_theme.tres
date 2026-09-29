@@ -1,8 +1,10 @@
-[gd_resource type="Theme" format=3]
+[gd_resource type="Theme" format=3 uid="uid://cyf74fj0m2vqa"]
 
 [ext_resource type="FontFile" path="res://rookframe/ui/assets/fonts/Inter-VariableFont_opsz,wght.ttf" id="ui"]
-
 [ext_resource type="FontFile" path="res://rookframe/ui/assets/fonts/Exo2-VariableFont_wght.ttf" id="display"]
+[ext_resource type="FontVariation" path="res://rookframe/ui/theme/task_action.tres" id="action"]
+
+
 
 [sub_resource type="StyleBoxFlat" id="Button"]
 bg_color = Color(0.003922, 0.047059, 0.062745, 1)
@@ -58,7 +60,7 @@ border_color = Color(0.133333, 0.196078, 0.215686, 1)
 border_width_left = 0
 border_width_right = 0
 border_width_top = 0
-border_width_bottom = 0
+border_width_bottom = 1
 content_margin_left = 0.0
 content_margin_right = 0.0
 content_margin_top = 0.0
@@ -67,7 +69,7 @@ content_margin_bottom = 0.0
 [sub_resource type="StyleBoxFlat" id="Selected"]
 bg_color = Color(0.039216, 0.145098, 0.160784, 1)
 border_color = Color(0.266667, 0.913725, 0.913725, 1)
-border_width_left = 1
+border_width_left = 3
 border_width_right = 1
 border_width_top = 1
 border_width_bottom = 1
@@ -112,6 +114,7 @@ content_margin_right = 30.0
 content_margin_top = 30.0
 content_margin_bottom = 30.0
 
+
 [resource]
 default_font = ExtResource("ui")
 default_font_size = 15
@@ -129,6 +132,9 @@ Button/styles/disabled = SubResource("Button")
 Button/styles/focus = SubResource("Focus")
 TaskButton/base_type = &"Button"
 TaskPrimary/base_type = &"Button"
+TaskPrimary/fonts/font = ExtResource("action")
+TaskPrimary/constants/h_separation = 10
+TaskPrimary/constants/icon_max_width = 22
 TaskPrimary/colors/font_color = Color(0.003922, 0.047059, 0.062745, 1)
 TaskPrimary/colors/font_hover_color = Color(0.003922, 0.047059, 0.062745, 1)
 TaskPrimary/colors/font_pressed_color = Color(0.003922, 0.047059, 0.062745, 1)
@@ -150,3 +156,16 @@ TextEdit/styles/focus = SubResource("Focus")
 TextEdit/colors/font_color = Color(0.85098, 0.831373, 0.819608, 1)
 TaskDetail/base_type = &"PanelContainer"
 TaskDetail/styles/panel = SubResource("Detail")
+
+RookframeLabel/base_type = &"Label"
+RookframeLabel/font_sizes/font_size = 13
+RookframeLabel/colors/font_color = Color(0.941176, 0.733333, 0.196078, 1)
+RookframeMeta/base_type = &"Label"
+RookframeMeta/font_sizes/font_size = 12
+RookframeMeta/colors/font_color = Color(0.568627, 0.6, 0.603922, 1)
+RookframeError/base_type = &"Label"
+RookframeError/font_sizes/font_size = 12
+RookframeError/colors/font_color = Color(1, 0.466667, 0.466667, 1)
+
+TaskDetailPanel/base_type = &"Panel"
+TaskDetailPanel/styles/panel = SubResource("Detail")
