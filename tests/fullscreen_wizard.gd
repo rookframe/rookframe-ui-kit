@@ -4,6 +4,9 @@ func _initialize() -> void:
 	_run.call_deferred()
 
 func _run() -> void:
+	var display := load("res://rookframe/ui/theme/task_display.tres") as FontVariation
+	var wordmark := load("res://rookframe/ui/theme/task_wordmark.tres") as FontVariation
+	assert(wordmark.get_string_size("MÖRK BORG", HORIZONTAL_ALIGNMENT_LEFT, -1, 22).x > display.get_string_size("MÖRK BORG", HORIZONTAL_ALIGNMENT_LEFT, -1, 22).x)
 	var viewport := SubViewport.new()
 	viewport.size = Vector2i(1920, 1080)
 	viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS

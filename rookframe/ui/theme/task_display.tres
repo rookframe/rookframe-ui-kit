@@ -4,4 +4,4 @@
 
 [resource]
 base_font = ExtResource("font")
-variation_opentype = {"wght": 500.0}
+variation_opentype = {2003265652: 500.0}

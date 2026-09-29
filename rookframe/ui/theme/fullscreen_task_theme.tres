@@ -169,3 +169,7 @@ RookframeError/colors/font_color = Color(1, 0.466667, 0.466667, 1)
 
 TaskDetailPanel/base_type = &"Panel"
 TaskDetailPanel/styles/panel = SubResource("Detail")
+
+TaskPrimary/colors/icon_normal_color = Color(0.003922, 0.047059, 0.062745, 1)
+TaskPrimary/colors/icon_hover_color = Color(0.003922, 0.047059, 0.062745, 1)
+TaskPrimary/colors/icon_pressed_color = Color(0.003922, 0.047059, 0.062745, 1)

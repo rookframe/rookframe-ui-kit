@@ -43,7 +43,12 @@ func set_step(index: int) -> void:
 	_index = index
 	for number in _steps.size():
 		var color := Color("f0bb32") if number == index else Color("d9d4d1") if number < index else Color("91999a")
-		_steps[number].get_node(^"Row").modulate = color
+		_steps[number].get_node(^"Row/Name").add_theme_color_override("font_color", color)
+		_steps[number].get_node(^"Row/Marker/Number").add_theme_color_override("font_color", color)
+		_steps[number].get_node(^"Row/Marker/Done").self_modulate = Color("44e9e9")
+		var frame := _steps[number].get_node(^"Row/Marker").get_theme_stylebox("panel").duplicate() as StyleBoxFlat
+		frame.border_color = Color("f0bb32") if number == index else Color("223237")
+		_steps[number].get_node(^"Row/Marker").add_theme_stylebox_override("panel", frame)
 		_steps[number].get_node(^"Row/Marker/Number").visible = number >= index
 		_steps[number].get_node(^"Row/Marker/Done").visible = number < index
 		_steps[number].get_node(^"Rule").color = Color("f0bb32") if number == index else Color("44e9e9") if number < index else Color("223237")
