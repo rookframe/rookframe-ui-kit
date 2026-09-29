@@ -3,3 +3,7 @@
 *.translation
 examples/exact-commit-consumer/.plugged/
 examples/exact-commit-consumer/rookframe/ui/
+
+/addons/
+/.plugged/
+/reports/

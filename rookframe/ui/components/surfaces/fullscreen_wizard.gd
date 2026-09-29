@@ -55,13 +55,13 @@ func set_step(index: int) -> void:
 		_steps[number].get_node(^"Rule").visible = size.y <= 560 or number == index
 	get_node(^"Layout/Footer/Row/Back").disabled = index == 0
 
-func set_primary(text: String, disabled: bool) -> void:
+func set_primary(text: String, disabled: bool, icon: Texture2D = null) -> void:
 	get_node(^"Layout/Footer/Row/Primary").text = text
 	get_node(^"Layout/Footer/Row/Primary").disabled = disabled
-	var symbol := "book" if _index == 4 else "dice" if _index in [1, 2, 3] else "character"
 	get_node(^"Layout/Footer/Row/Primary/Center/Content/Label").text = text
 	get_node(^"Layout/Footer/Row/Primary").modulate.a = 0.48 if disabled else 1.0
-	get_node(^"Layout/Footer/Row/Primary/Center/Content/Icon").texture = load("res://rookframe/ui/icons/character/" + symbol + ".svg")
+	get_node(^"Layout/Footer/Row/Primary/Center/Content/Icon").texture = icon
+	get_node(^"Layout/Footer/Row/Primary/Center/Content/Icon").visible = icon != null
 
 func set_back_enabled(enabled: bool) -> void:
 	get_node(^"Layout/Footer/Row/Back").disabled = not enabled

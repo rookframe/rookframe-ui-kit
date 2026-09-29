@@ -115,3 +115,22 @@ evidence, not an automated validation suite or release gate.
 Rookframe-owned source and assets use the [MIT License](LICENSE). Third-party
 fonts and icons retain their compatible licenses and attribution in
 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+
+## Automated component checks
+
+The full-screen wizard and Miniature browser suites use GdUnit4 v6.2.1,
+pinned in `plug.gd`. Install the development dependency with gd-plug; consumers
+continue to install only `rookframe/ui/`.
+
+```sh
+mkdir -p addons/gd-plug
+curl -fsSL https://raw.githubusercontent.com/imjp94/gd-plug/209276d1f00d14b49b74403d9839f29598e9a8eb/addons/gd-plug/plug.gd -o addons/gd-plug/plug.gd
+godot --headless --path . --script plug.gd install
+godot --headless --editor --path . --import
+godot --headless --path . --script res://addons/gdUnit4/bin/GdUnitCmdTool.gd --ignoreHeadlessMode -a res://tests/fullscreen_wizard.gd -a res://tests/fullscreen_miniature_browser.gd -c -rd reports/fullscreen
+```
+
+Require both discovered cases to pass in the fresh JUnit report, with no
+errors, failures, skips, or flaky results. For graphical capture, omit
+`--headless` and `--ignoreHeadlessMode`; after `--`, pass `--capture=<file.png>`
+for the wizard and `--evidence-dir=<directory>` for the browser.

@@ -22,3 +22,6 @@ paths, and UIDs are documented in
 [the public component reference](https://github.com/rookframe/rookframe-ui-kit/blob/v1.0.0-rc.1/docs/public-components.md)
 and indexed by
 [`rookframe/ui/catalogue.json`](../catalogue.json).
+
+The wizard frame accepts an optional primary-action Texture2D in `set_primary`;
+the consumer chooses its meaning. Step indexes only control progress styling.
