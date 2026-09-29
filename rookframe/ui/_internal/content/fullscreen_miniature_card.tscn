@@ -1,0 +1,90 @@
+[gd_scene load_steps=6 format=3]
+[ext_resource type="Script" path="res://rookframe/ui/_internal/content/fullscreen_miniature_card.gd" id="1"]
+[ext_resource type="FontFile" path="res://rookframe/ui/assets/fonts/Exo2-VariableFont_wght.ttf" id="display"]
+[ext_resource type="Texture2D" path="res://rookframe/ui/icons/check.svg" id="check"]
+[sub_resource type="StyleBoxFlat" id="Card"]
+bg_color = Color(0.015686, 0.066667, 0.082353, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.133333, 0.196078, 0.215686, 1)
+[sub_resource type="StyleBoxFlat" id="Selected"]
+bg_color = Color(0.039216, 0.145098, 0.160784, 1)
+border_width_left = 3
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.266667, 0.913725, 0.913725, 1)
+[node name="MiniatureChoice" type="Button"]
+size_flags_horizontal = 3
+toggle_mode = true
+theme_type_variation = &"RookframeChoiceRow"
+theme_override_styles/normal = SubResource("Card")
+theme_override_styles/pressed = SubResource("Selected")
+script = ExtResource("1")
+[node name="Content" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 12.0
+offset_top = 12.0
+offset_right = -12.0
+offset_bottom = -12.0
+mouse_filter = 2
+theme_override_constants/separation = 16
+[node name="Stage" type="ColorRect" parent="Content"]
+custom_minimum_size = Vector2(0, 192)
+layout_mode = 2
+mouse_filter = 2
+clip_contents = true
+color = Color(0.003922, 0.047059, 0.062745, 1)
+[node name="Fallback" type="Label" parent="Content/Stage"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+text = "Preview unavailable"
+autowrap_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+theme_type_variation = &"RookframeMeta"
+theme_override_font_sizes/font_size = 14
+[node name="Preview" type="Control" parent="Content/Stage"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+[node name="Copy" type="VBoxContainer" parent="Content"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 4
+[node name="Title" type="Label" parent="Content/Copy"]
+layout_mode = 2
+mouse_filter = 2
+autowrap_mode = 2
+theme_override_fonts/font = ExtResource("display")
+theme_override_font_sizes/font_size = 22
+[node name="Package" type="Label" parent="Content/Copy"]
+layout_mode = 2
+mouse_filter = 2
+autowrap_mode = 2
+theme_type_variation = &"RookframeMeta"
+theme_override_font_sizes/font_size = 13
+[node name="Selected" type="TextureRect" parent="."]
+visible = false
+layout_mode = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -44.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = 44.0
+mouse_filter = 2
+modulate = Color(0.266667, 0.913725, 0.913725, 1)
+texture = ExtResource("check")
+expand_mode = 1
+stretch_mode = 5
