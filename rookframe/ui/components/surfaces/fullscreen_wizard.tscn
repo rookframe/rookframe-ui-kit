@@ -198,11 +198,12 @@ theme_override_colors/font_color = Color(0.568627, 0.6, 0.603922, 1)
 [node name="Primary" type="Button" parent="Layout/Footer/Row"]
 layout_mode = 2
 text = "Continue"
-custom_minimum_size = Vector2(204, 44)
+custom_minimum_size = Vector2(204, 46)
 theme_type_variation = "TaskPrimary"
 size_flags_vertical = 4
 
 icon = ExtResource("character")
+icon_alignment = 1
 expand_icon = true
 
 [node name="Title" type="Label" parent="Layout/Header"]

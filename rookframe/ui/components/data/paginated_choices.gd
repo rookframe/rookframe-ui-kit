@@ -84,7 +84,7 @@ func _fit() -> void:
 	queue_redraw()
 
 func _draw() -> void:
-	draw_line(Vector2.ZERO, Vector2(size.x, 0), Color("465256"))
+	draw_line(Vector2(0, 0.5), Vector2(size.x, 0.5), Color("465256"))
 	var pager := get_node_or_null(^"Pager") as Control
 	if pager != null and pager.visible:
 		draw_line(Vector2(0, pager.position.y), Vector2(size.x, pager.position.y), Color("465256"))
