@@ -115,6 +115,18 @@ content_margin_top = 30.0
 content_margin_bottom = 30.0
 
 
+[sub_resource type="StyleBoxFlat" id="ActiveSection"]
+bg_color = Color(0.003922, 0.047059, 0.062745, 1)
+border_color = Color(0.941176, 0.733333, 0.196078, 1)
+border_width_left = 1
+border_width_right = 1
+border_width_top = 1
+border_width_bottom = 1
+content_margin_left = 12.0
+content_margin_right = 12.0
+content_margin_top = 5.0
+content_margin_bottom = 5.0
+
 [resource]
 default_font = ExtResource("ui")
 default_font_size = 15
@@ -131,6 +143,9 @@ Button/styles/pressed = SubResource("Hover")
 Button/styles/disabled = SubResource("Button")
 Button/styles/focus = SubResource("Focus")
 TaskButton/base_type = &"Button"
+TaskSection/base_type = &"Button"
+TaskSection/styles/pressed = SubResource("ActiveSection")
+TaskSection/colors/font_pressed_color = Color(0.941176, 0.733333, 0.196078, 1)
 TaskPrimary/base_type = &"Button"
 TaskPrimary/fonts/font = ExtResource("action")
 TaskPrimary/constants/h_separation = 10
