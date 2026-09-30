@@ -19,6 +19,7 @@ func set_stats(stats: Array[Dictionary]) -> void:
 		if row.visible:
 			row.get_node(^"Label").text = str(stats[index].get("label", ""))
 			row.get_node(^"Value").text = str(stats[index].get("value", ""))
+	_fit()
 
 func configure(title: String, icon: Texture2D, pairs: Array[Dictionary], copy: String = "") -> void:
 	get_node(^"Content/Heading/Title").text = title
@@ -46,6 +47,9 @@ func _fit() -> void:
 	get_node(^"Content/Heading/Title").add_theme_font_size_override("font_size", 15 if phone else 17 if tablet else 22)
 	get_node(^"Content/Heading/Icon").custom_minimum_size = Vector2(18, 18) if phone else Vector2(23, 23)
 	get_node(^"Content/Copy").add_theme_font_size_override("font_size", 11 if phone else 12 if tablet else 16)
+	for row in get_node(^"Content/Stats").get_children():
+		row.get_node(^"Label").add_theme_font_size_override("font_size", 12 if tablet else 16)
+		row.get_node(^"Value").add_theme_font_size_override("font_size", 18 if tablet else 20)
 	for row in get_node(^"Content/Rows").get_children():
 		for edge in ["top", "bottom"]:
 			row.get_node(^"Inset").add_theme_constant_override("margin_" + edge, 5 if phone else 9 if tablet else 14)
