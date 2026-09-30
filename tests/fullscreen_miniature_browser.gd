@@ -89,3 +89,34 @@ func _capture(viewport: SubViewport, name: String) -> void:
 		if argument.begins_with("--evidence-dir="):
 			RenderingServer.force_draw()
 			viewport.get_texture().get_image().save_png(argument.trim_prefix("--evidence-dir=").path_join(name + ".png"))
+
+func test_resizing_an_open_browser_reflows_complete_cards() -> void:
+	var viewport: SubViewport = auto_free(SubViewport.new())
+	viewport.size = Vector2i(1920, 1080)
+	add_child(viewport)
+	var browser = load("res://rookframe/ui/components/content/fullscreen_miniature_browser.tscn").instantiate()
+	viewport.add_child(browser)
+	browser.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	var entries: Array[Dictionary] = []
+	for index in 15:
+		entries.append({"id": str(index), "title": "Existing Miniature %d" % index, "package": "Existing Package"})
+	browser.configure(entries, "0")
+	await _settle()
+	for size in [Vector2i(1024, 768), Vector2i(844, 390), Vector2i(1920, 1080)]:
+		# A selection update can already be measuring when the parent resizes.
+		browser.set_state("ready")
+		await get_tree().process_frame
+		viewport.size = size
+		await _settle()
+		await _settle()
+		var rows: GridContainer = browser.get_node("Layout/Results/Content/GridArea/Rows")
+		var visible := 0
+		for row in rows.get_children():
+			if row.visible:
+				visible += 1
+				assert_bool(row.get_global_rect().end.x <= size.x).is_true()
+				assert_bool(row.get_node("Content").get_global_rect().end.x <= row.get_global_rect().end.x).is_true()
+				assert_bool(row.get_node("Content/Stage").get_global_rect().end.y < row.get_node("Content/Copy").global_position.y).is_true()
+		assert_int(visible).is_equal(3 if size.y < 560 else 6 if size.x <= 1150 else 8)
+		assert_str(str(browser.selection().id)).is_equal("0")
+	viewport.free()

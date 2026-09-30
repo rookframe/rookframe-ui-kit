@@ -105,7 +105,10 @@ func _select(id: String, notify := true) -> void:
 		selection_changed.emit(selection())
 
 func _queue_arrange() -> void:
-	if not is_node_ready() or _arrange_pending:
+	if not is_node_ready():
+		return
+	_revision += 1
+	if _arrange_pending:
 		return
 	_arrange_pending = true
 	_arrange.call_deferred()
