@@ -302,6 +302,12 @@ native row Controls when their identities stay the same. Previous and Next
 change only the visible page. The consumer decides whether selection changes
 rules or merely inspects a recorded result.
 
+`columns` selects one or two equally sized native grid columns. Phone class
+collections use two; roll collections use one. Caption, complete 44 px rows and
+fixed page actions use the approved landscape phone density. `capture_state()`
+and `restore_state(state)` retain the visible page as plain data when restoring
+a consumer's draft; they do not change the selected entry or any domain state.
+
 `theme/fullscreen_task_theme.tres` supplies the approved square task actions,
 inputs, choice rows and detail panels using unchanged package design tokens.
 The unchanged character pictograms and original attribution are under

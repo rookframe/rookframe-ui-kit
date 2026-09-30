@@ -10,6 +10,18 @@ var _page := 0
 var _capacity := 1
 var _pending := false
 var _reveal := false
+@export_range(1, 2) var columns := 1:
+	set(value):
+		columns = value
+		_queue_fit()
+
+func capture_state() -> Dictionary:
+	return {"page": _page}
+
+func restore_state(state: Dictionary) -> void:
+	_page = maxi(0, int(state.get("page", 0)))
+	_reveal = false
+	_queue_fit()
 
 func _ready() -> void:
 	get_node(^"Pager/Previous").pressed.connect(func(): _page -= 1; _show_page())
@@ -65,14 +77,29 @@ func _fit() -> void:
 	var phone := get_viewport_rect().size.y <= 560
 	var tablet := get_viewport_rect().size.x <= 1150 and not phone
 	var height := 44 if phone else 56 if tablet else 68
+	get_node(^"Area/Rows").columns = columns
+	get_node(^"Area/Rows").add_theme_constant_override("v_separation", 2 if phone else 4)
+	get_node(^"Caption").custom_minimum_size.y = 28 if phone else 42
+	get_node(^"Pager").custom_minimum_size.y = 48 if phone else 53
+	for label in [^"Caption/Title", ^"Caption/Count", ^"Pager/Range"]:
+		get_node(label).add_theme_font_size_override("font_size", 10 if phone else 12)
+	for button in [^"Pager/Previous", ^"Pager/Next"]:
+		get_node(button).add_theme_font_size_override("font_size", 12 if phone else 15)
 	for row in _rows:
 		row.custom_minimum_size.y = height
-		row.get_node(^"Inset/Row/Copy/Title").add_theme_font_size_override("font_size", 15 if phone else 16 if tablet else 20)
+		row.get_node(^"Inset/Row/Copy/Title").add_theme_font_size_override("font_size", 14 if phone and columns == 2 else 15 if phone else 16 if tablet else 20)
 		row.get_node(^"Inset/Row/Copy/Subtitle").add_theme_font_size_override("font_size", 10 if phone else 11 if tablet else 12)
-	var available: float = size.y - get_node(^"Caption").size.y
-	_capacity = maxi(1, floori((available + 4) / (height + 4)))
+		row.get_node(^"Inset/Row/Icon").custom_minimum_size = Vector2(23, 23) if phone else Vector2(30, 30)
+		row.get_node(^"Inset/Row").add_theme_constant_override("separation", 8 if phone else 14)
+		for edge in ["left", "right", "top", "bottom"]:
+			row.get_node(^"Inset").add_theme_constant_override("margin_" + edge, (9 if edge in ["left", "right"] else 4) if phone else (16 if edge in ["left", "right"] else 9))
+		row.get_node(^"Inset/Row/Value").size_flags_horizontal = Control.SIZE_FILL if columns > 1 else Control.SIZE_EXPAND_FILL
+		row.get_node(^"Inset/Row/Value").custom_minimum_size.x = 14 if columns > 1 else 0
+	var available: float = size.y - get_node(^"Caption").get_combined_minimum_size().y
+	var gap := 2 if phone else 4
+	_capacity = maxi(columns, floori((available + gap) / (height + gap)) * columns)
 	if _capacity < _rows.size():
-		_capacity = maxi(1, floori((available - 53 + 4) / (height + 4)))
+		_capacity = maxi(columns, floori((available - get_node(^"Pager").get_combined_minimum_size().y + gap) / (height + gap)) * columns)
 	get_node(^"Pager").visible = _capacity < _rows.size()
 	if _reveal:
 		for index in _entries.size():

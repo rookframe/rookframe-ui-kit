@@ -54,6 +54,8 @@ func set_step(index: int) -> void:
 		_steps[number].get_node(^"Rule").color = Color("f0bb32") if number == index else Color("44e9e9") if number < index else Color("223237")
 		_steps[number].get_node(^"Rule").visible = size.y <= 560 or number == index
 	get_node(^"Layout/Footer/Row/Back").disabled = index == 0
+	if not _steps.is_empty():
+		get_node(^"Layout/Header/Row/CurrentStep").text = "%02d / %02d · %s" % [index + 1, _steps.size(), _steps[index].get_node(^"Row/Name").text]
 
 func set_primary(text: String, disabled: bool, icon: Texture2D = null) -> void:
 	get_node(^"Layout/Footer/Row/Primary").text = text
@@ -90,6 +92,18 @@ func _fit() -> void:
 		get_context_slot().add_theme_constant_override("margin_" + edge, context_inset)
 		get_stage_slot().add_theme_constant_override("margin_" + edge, (16 if edge in ["left", "right"] else 8) if phone else 22 if tablet else (42 if edge in ["left", "right"] else 36))
 	get_node(^"Layout/Header/Title").visible = not phone
+	get_node(^"Layout/Header/Row/CurrentStep").visible = phone
+	get_node(^"Layout/Header/Row/Icon").custom_minimum_size = Vector2(24, 24) if phone else Vector2(34, 34)
+	get_node(^"Layout/Header/Row/Brand/Name").add_theme_font_size_override("font_size", 16 if phone else 22)
+	get_node(^"Layout/Header/Row").add_theme_constant_override("separation", 10 if phone else 16)
+	get_node(^"Layout/Header/Row/Close").custom_minimum_size = Vector2(44, 44) if phone else Vector2(48, 48)
+	get_node(^"Layout/Steps/Row").add_theme_constant_override("separation", 3 if phone else 8)
+	get_node(^"Layout/Footer/Row").add_theme_constant_override("separation", 4 if phone else 16)
+	get_node(^"Layout/Footer/Row/Primary").custom_minimum_size = Vector2(175, 44) if phone else Vector2(204, 46)
+	for action in ["Back", "Restart", "Primary"]:
+		get_node("Layout/Footer/Row/" + action).add_theme_font_size_override("font_size", 11 if phone and action == "Restart" else 12 if phone else 15)
+	get_node(^"Layout/Footer/Row/Primary/Center/Content/Label").add_theme_font_size_override("font_size", 12 if phone else 15)
+	get_node(^"Layout/Footer/Row/Primary/Center/Content/Icon").custom_minimum_size = Vector2(20, 20) if phone else Vector2(22, 22)
 	get_node(^"Layout/Header/Row/Brand/Subtitle").visible = not phone
 	get_node(^"Layout/Footer/Row/Hint").visible = not phone and not tablet
 	var header: float = get_node(^"Layout/Header").custom_minimum_size.y

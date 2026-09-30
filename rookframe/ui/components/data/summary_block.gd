@@ -32,3 +32,14 @@ func configure(title: String, icon: Texture2D, pairs: Array[Dictionary], copy: S
 		row.get_node(^"Inset/Row/Value").text = str(pairs[index].get("value", ""))
 	get_node(^"Content/Copy").text = copy
 	get_node(^"Content/Copy").visible = not copy.is_empty()
+	var phone := get_viewport_rect().size.y <= 560
+	add_theme_constant_override("separation", 8 if phone else 20)
+	get_node(^"Content").add_theme_constant_override("separation", 4 if phone else 12)
+	get_node(^"Content/Heading/Title").add_theme_font_size_override("font_size", 15 if phone else 22)
+	get_node(^"Content/Heading/Icon").custom_minimum_size = Vector2(18, 18) if phone else Vector2(23, 23)
+	get_node(^"Content/Copy").add_theme_font_size_override("font_size", 11 if phone else 16)
+	for row in rows.get_children():
+		for edge in ["top", "bottom"]:
+			row.get_node(^"Inset").add_theme_constant_override("margin_" + edge, 5 if phone else 14)
+		for label in [^"Inset/Row/Label", ^"Inset/Row/Value"]:
+			row.get_node(label).add_theme_font_size_override("font_size", 11 if phone else 16)
