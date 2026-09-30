@@ -120,3 +120,22 @@ func test_resizing_an_open_browser_reflows_complete_cards() -> void:
 		assert_int(visible).is_equal(3 if size.y < 560 else 6 if size.x <= 1150 else 8)
 		assert_str(str(browser.selection().id)).is_equal("0")
 	viewport.free()
+
+func test_one_page_multiple_rows_remain_visible_after_layout() -> void:
+	var viewport: SubViewport = auto_free(SubViewport.new())
+	viewport.size = Vector2i(1920, 1080)
+	add_child(viewport)
+	var browser = load("res://rookframe/ui/components/content/fullscreen_miniature_browser.tscn").instantiate()
+	viewport.add_child(browser)
+	browser.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	var entries: Array[Dictionary] = []
+	for index in 6:
+		entries.append({"id": str(index), "title": "Existing Miniature %d" % index, "package": "Existing Package"})
+	browser.configure(entries, "0")
+	await _settle()
+	await _settle()
+	for frame in 12:
+		await get_tree().process_frame
+		assert_bool(not browser.get_node("Layout/Results/Content/Pager").visible).is_true()
+		assert_float(browser.get_node("Layout/Results/Content/GridArea/Rows").modulate.a).is_equal(1.0)
+	viewport.free()

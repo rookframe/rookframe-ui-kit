@@ -34,7 +34,6 @@ func _ready() -> void:
 	_pager.get_node(^"Previous").pressed.connect(func(): _page -= 1; _show_page())
 	_pager.get_node(^"Next").pressed.connect(func(): _page += 1; _show_page())
 	resized.connect(_queue_arrange)
-	_area.resized.connect(_queue_arrange)
 	_queue_arrange()
 
 func configure(entries: Array[Dictionary], selected_id: String = "", labels: Dictionary = {}) -> void:
