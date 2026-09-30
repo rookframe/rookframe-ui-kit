@@ -100,9 +100,12 @@ func _fit() -> void:
 		for edge in ["left", "right", "top", "bottom"]:
 			row.get_node(^"Inset").add_theme_constant_override("margin_" + edge, (9 if edge in ["left", "right"] else 4) if phone else (10 if edge in ["left", "right"] else 8) if tablet else (16 if edge in ["left", "right"] else 9))
 		row.get_node(^"Inset/Row/Value").size_flags_horizontal = Control.SIZE_FILL if columns > 1 or tablet else Control.SIZE_EXPAND_FILL
-		if tablet:
-			row.get_node(^"Inset/Row/Value").add_theme_font_size_override("font_size", 12 if bool(_entries[_rows.find(row)].get("pending", false)) else 17)
-		row.get_node(^"Inset/Row/Value").custom_minimum_size.x = 14 if columns > 1 else 0
+		var value := row.get_node(^"Inset/Row/Value") as Label
+		var pending := bool(_entries[_rows.find(row)].get("pending", false))
+		value.add_theme_font_size_override("font_size", 12 if pending else 17 if tablet else 20)
+		var measured := value.get_theme_font("font").get_string_size(value.text, HORIZONTAL_ALIGNMENT_LEFT, -1, value.get_theme_font_size("font_size")).x
+		value.custom_minimum_size.x = minf(ceilf(measured), size.x * 0.3) if tablet else 14 if columns > 1 else 0
+
 	# The authored row has an inset Control, so include its effective child
 	# minimum as well as the framed Button's minimum (ADR-0017).
 	for row in _rows:
