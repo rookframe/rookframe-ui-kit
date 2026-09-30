@@ -329,3 +329,20 @@ TaskAttribute, TaskFacts, TaskResult and TaskFormula with Compact variants for
 the approved landscape phone spacing. Consumers select native Theme variations;
 they do not rebuild or mutate StyleBoxes.
 
+
+
+`components/data/paginated_content.tscn` pages authored content using native
+Godot text and Control measurements. Compose one Container beneath its public
+`Area` Control. `refresh()` remeasures changed content; resizing and minimum-size
+changes also remeasure automatically. Previous/Next remain fixed and appear
+only when needed. Lines and interactive Controls stay whole at page boundaries;
+text must use ordinary Label or RichTextLabel, with controls smaller than a page.
+Native keyboard focus reveals its page. `capture_state()` / `restore_state(state)`
+retain the page without changing content. `enabled = false` keeps the original
+unpaginated layout for another viewport profile. No wheel or drag scrolling is
+added. The component owns only presentation, not domain data or routing.
+
+At 1024 × 768, task choices use 48 px title-only rows or 56 px rows with secondary
+copy. The task Theme exposes `TaskAttributeTablet` and `TaskFactsTablet` using the
+same colours and borders with the approved tablet insets. Summary blocks use
+17 px headings and 12 px wrapping label/value copy at this profile.

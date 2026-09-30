@@ -77,6 +77,12 @@ func _fit() -> void:
 	var phone := get_viewport_rect().size.y <= 560
 	var tablet := get_viewport_rect().size.x <= 1150 and not phone
 	var height := 44 if phone else 56 if tablet else 68
+	if tablet:
+		var titles_only := true
+		for entry in _entries:
+			titles_only = titles_only and str(entry.get("subtitle", "")).is_empty()
+		if titles_only:
+			height = 48
 	get_node(^"Area/Rows").columns = columns
 	get_node(^"Area/Rows").add_theme_constant_override("v_separation", 2 if phone else 4)
 	get_node(^"Caption").custom_minimum_size.y = 28 if phone else 42
