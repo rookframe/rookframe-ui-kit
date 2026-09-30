@@ -74,4 +74,11 @@ func test_fixed_frame_measured_choices_and_actions() -> void:
 	var pairs: Array[Dictionary] = [{"label": "Name", "value": "Retained identity"}]
 	summary.configure("Character", null, pairs)
 	assert_bool(summary.get_node(^"Content/Rows").get_child(0).get_node(^"Inset/Row/Value").text == "Retained identity").is_true()
+	for profile in [[Vector2i(844, 390), 11, 5], [Vector2i(1920, 1080), 16, 14]]:
+		viewport.size = profile[0]
+		for frame in 5:
+			await get_tree().process_frame
+		var row := summary.get_node(^"Content/Rows").get_child(0)
+		assert_int(row.get_node(^"Inset/Row/Value").get_theme_font_size("font_size")).is_equal(profile[1])
+		assert_int(row.get_node(^"Inset").get_theme_constant("margin_top")).is_equal(profile[2])
 	viewport.free()
