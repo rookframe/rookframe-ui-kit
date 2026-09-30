@@ -127,6 +127,92 @@ content_margin_right = 12.0
 content_margin_top = 5.0
 content_margin_bottom = 5.0
 
+[sub_resource type="StyleBoxFlat" id="Attribute"]
+bg_color = Color(0.015686, 0.066667, 0.082353, 1)
+border_color = Color(0.133333, 0.196078, 0.215686, 1)
+border_width_top = 1
+border_width_bottom = 1
+border_width_left = 1
+border_width_right = 1
+content_margin_left = 10.0
+content_margin_right = 10.0
+content_margin_top = 13.0
+content_margin_bottom = 13.0
+
+
+[sub_resource type="StyleBoxFlat" id="AttributeCompact"]
+bg_color = Color(0.015686, 0.066667, 0.082353, 1)
+border_color = Color(0.133333, 0.196078, 0.215686, 1)
+border_width_top = 1
+border_width_bottom = 1
+border_width_left = 1
+border_width_right = 1
+content_margin_left = 3.0
+content_margin_right = 3.0
+content_margin_top = 4.0
+content_margin_bottom = 4.0
+
+
+[sub_resource type="StyleBoxFlat" id="Facts"]
+bg_color = Color(0.015686, 0.066667, 0.082353, 1)
+border_color = Color(0.133333, 0.196078, 0.215686, 1)
+border_width_top = 1
+border_width_bottom = 1
+border_width_left = 0
+border_width_right = 0
+content_margin_left = 0.0
+content_margin_right = 0.0
+content_margin_top = 18.0
+content_margin_bottom = 18.0
+
+
+[sub_resource type="StyleBoxFlat" id="FactsCompact"]
+bg_color = Color(0.015686, 0.066667, 0.082353, 1)
+border_color = Color(0.133333, 0.196078, 0.215686, 1)
+border_width_top = 1
+border_width_bottom = 1
+border_width_left = 0
+border_width_right = 0
+content_margin_left = 0.0
+content_margin_right = 0.0
+content_margin_top = 6.0
+content_margin_bottom = 6.0
+
+
+[sub_resource type="StyleBoxFlat" id="ResultBanner"]
+bg_color = Color(0.039216, 0.145098, 0.160784, 1)
+border_color = Color(0.266667, 0.913725, 0.913725, 1)
+border_width_left = 2
+content_margin_left = 16.0
+content_margin_right = 16.0
+content_margin_top = 14.0
+content_margin_bottom = 14.0
+
+
+[sub_resource type="StyleBoxFlat" id="ResultBannerCompact"]
+bg_color = Color(0.039216, 0.145098, 0.160784, 1)
+border_color = Color(0.266667, 0.913725, 0.913725, 1)
+border_width_left = 2
+content_margin_left = 12.0
+content_margin_right = 12.0
+content_margin_top = 8.0
+content_margin_bottom = 8.0
+
+
+[sub_resource type="StyleBoxFlat" id="FormulaRule"]
+bg_color = Color(0, 0, 0, 0)
+border_color = Color(0.133333, 0.196078, 0.215686, 1)
+border_width_bottom = 1
+content_margin_bottom = 20.0
+
+
+[sub_resource type="StyleBoxFlat" id="FormulaRuleCompact"]
+bg_color = Color(0, 0, 0, 0)
+border_color = Color(0.133333, 0.196078, 0.215686, 1)
+border_width_bottom = 1
+content_margin_bottom = 9.0
+
+
 [resource]
 default_font = ExtResource("ui")
 default_font_size = 15
@@ -189,3 +275,23 @@ TaskDetailPanel/styles/panel = SubResource("Detail")
 TaskPrimary/colors/icon_normal_color = Color(0.003922, 0.047059, 0.062745, 1)
 TaskPrimary/colors/icon_hover_color = Color(0.003922, 0.047059, 0.062745, 1)
 TaskPrimary/colors/icon_pressed_color = Color(0.003922, 0.047059, 0.062745, 1)
+
+TaskAttribute/base_type = &"PanelContainer"
+TaskAttribute/styles/panel = SubResource("Attribute")
+TaskAttributeCompact/base_type = &"PanelContainer"
+TaskAttributeCompact/styles/panel = SubResource("AttributeCompact")
+
+TaskFacts/base_type = &"PanelContainer"
+TaskFacts/styles/panel = SubResource("Facts")
+TaskFactsCompact/base_type = &"PanelContainer"
+TaskFactsCompact/styles/panel = SubResource("FactsCompact")
+
+TaskResult/base_type = &"PanelContainer"
+TaskResult/styles/panel = SubResource("ResultBanner")
+TaskResultCompact/base_type = &"PanelContainer"
+TaskResultCompact/styles/panel = SubResource("ResultBannerCompact")
+
+TaskFormula/base_type = &"Label"
+TaskFormula/styles/normal = SubResource("FormulaRule")
+TaskFormulaCompact/base_type = &"Label"
+TaskFormulaCompact/styles/normal = SubResource("FormulaRuleCompact")

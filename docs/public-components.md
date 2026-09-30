@@ -323,3 +323,9 @@ TextField/TextArea script contracts with help above the native editor, task spac
 and 48/152 px editor minimum heights. They inherit their consumer Theme.
 Their `compact` property applies the approved phone relationship: 44/64 px
 native editors, smaller label spacing and help retained in accessibility copy.
+
+The task Theme also provides TaskSection for gold active review tabs, and
+TaskAttribute, TaskFacts, TaskResult and TaskFormula with Compact variants for
+the approved landscape phone spacing. Consumers select native Theme variations;
+they do not rebuild or mutate StyleBoxes.
+
