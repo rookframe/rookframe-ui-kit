@@ -64,7 +64,9 @@ func test_fixed_frame_measured_choices_and_actions() -> void:
 	for scene in ["task_text_field", "task_text_area"]:
 		var field := load("res://rookframe/ui/components/forms/" + scene + ".tscn").instantiate() as Control
 		wizard.get_stage_slot().add_child(field)
-		assert_bool(field.get_node(^"Help").get_index() < field.get_node(^"Editor").get_index()).is_true()
+		await get_tree().process_frame
+		await get_tree().process_frame
+		assert_bool(field.get_node(^"Help").get_global_rect().end.y <= field.get_node(^"Editor").global_position.y).is_true()
 		assert_bool(field.get_node(^"Editor").custom_minimum_size.y == (48 if scene == "task_text_field" else 152)).is_true()
 		field.free()
 	var summary := load("res://rookframe/ui/components/data/summary_block.tscn").instantiate() as Control
