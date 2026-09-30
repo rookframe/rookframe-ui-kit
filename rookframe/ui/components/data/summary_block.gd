@@ -40,13 +40,14 @@ func configure(title: String, icon: Texture2D, pairs: Array[Dictionary], copy: S
 
 func _fit() -> void:
 	var phone := get_viewport_rect().size.y <= 560
-	add_theme_constant_override("separation", 8 if phone else 20)
-	get_node(^"Content").add_theme_constant_override("separation", 4 if phone else 12)
-	get_node(^"Content/Heading/Title").add_theme_font_size_override("font_size", 15 if phone else 22)
+	var tablet := get_viewport_rect().size.x <= 1150 and not phone
+	add_theme_constant_override("separation", 8 if phone else 12 if tablet else 20)
+	get_node(^"Content").add_theme_constant_override("separation", 4 if phone else 8 if tablet else 12)
+	get_node(^"Content/Heading/Title").add_theme_font_size_override("font_size", 15 if phone else 17 if tablet else 22)
 	get_node(^"Content/Heading/Icon").custom_minimum_size = Vector2(18, 18) if phone else Vector2(23, 23)
-	get_node(^"Content/Copy").add_theme_font_size_override("font_size", 11 if phone else 16)
+	get_node(^"Content/Copy").add_theme_font_size_override("font_size", 11 if phone else 12 if tablet else 16)
 	for row in get_node(^"Content/Rows").get_children():
 		for edge in ["top", "bottom"]:
-			row.get_node(^"Inset").add_theme_constant_override("margin_" + edge, 5 if phone else 14)
+			row.get_node(^"Inset").add_theme_constant_override("margin_" + edge, 5 if phone else 9 if tablet else 14)
 		for label in [^"Inset/Row/Label", ^"Inset/Row/Value"]:
-			row.get_node(label).add_theme_font_size_override("font_size", 11 if phone else 16)
+			row.get_node(label).add_theme_font_size_override("font_size", 11 if phone else 12 if tablet else 16)

@@ -89,11 +89,13 @@ func _fit() -> void:
 		row.custom_minimum_size.y = height
 		row.get_node(^"Inset/Row/Copy/Title").add_theme_font_size_override("font_size", 14 if phone and columns == 2 else 15 if phone else 16 if tablet else 20)
 		row.get_node(^"Inset/Row/Copy/Subtitle").add_theme_font_size_override("font_size", 10 if phone else 11 if tablet else 12)
-		row.get_node(^"Inset/Row/Icon").custom_minimum_size = Vector2(23, 23) if phone else Vector2(30, 30)
-		row.get_node(^"Inset/Row").add_theme_constant_override("separation", 8 if phone else 14)
+		row.get_node(^"Inset/Row/Icon").custom_minimum_size = Vector2(23, 23) if phone else Vector2(26, 26) if tablet else Vector2(30, 30)
+		row.get_node(^"Inset/Row").add_theme_constant_override("separation", 8 if phone else 10 if tablet else 14)
 		for edge in ["left", "right", "top", "bottom"]:
-			row.get_node(^"Inset").add_theme_constant_override("margin_" + edge, (9 if edge in ["left", "right"] else 4) if phone else (16 if edge in ["left", "right"] else 9))
-		row.get_node(^"Inset/Row/Value").size_flags_horizontal = Control.SIZE_FILL if columns > 1 else Control.SIZE_EXPAND_FILL
+			row.get_node(^"Inset").add_theme_constant_override("margin_" + edge, (9 if edge in ["left", "right"] else 4) if phone else (10 if edge in ["left", "right"] else 8) if tablet else (16 if edge in ["left", "right"] else 9))
+		row.get_node(^"Inset/Row/Value").size_flags_horizontal = Control.SIZE_FILL if columns > 1 or tablet else Control.SIZE_EXPAND_FILL
+		if tablet:
+			row.get_node(^"Inset/Row/Value").add_theme_font_size_override("font_size", 12 if bool(_entries[_rows.find(row)].get("pending", false)) else 17)
 		row.get_node(^"Inset/Row/Value").custom_minimum_size.x = 14 if columns > 1 else 0
 	# The authored row has an inset Control, so include its effective child
 	# minimum as well as the framed Button's minimum (ADR-0017).
