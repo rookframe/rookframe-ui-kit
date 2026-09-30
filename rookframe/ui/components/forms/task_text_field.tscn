@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://c0of87liqui3k"]
 
-[ext_resource type="Script" path="res://rookframe/ui/components/forms/text_field.gd" id="1_script"]
+[ext_resource type="Script" path="res://rookframe/ui/components/forms/task_text_field.gd" id="1_script"]
 
 [node name="TextField" type="VBoxContainer"]
 layout_mode = 2

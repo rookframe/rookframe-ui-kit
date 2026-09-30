@@ -321,3 +321,5 @@ remains consumer-owned. Text wraps within the measured block width.
 `components/forms/task_text_field.tscn` and `task_text_area.tscn` retain the public
 TextField/TextArea script contracts with help above the native editor, task spacing,
 and 48/152 px editor minimum heights. They inherit their consumer Theme.
+Their `compact` property applies the approved phone relationship: 44/64 px
+native editors, smaller label spacing and help retained in accessibility copy.

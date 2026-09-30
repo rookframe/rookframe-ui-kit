@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cammbybvgdssm"]
 
-[ext_resource type="Script" path="res://rookframe/ui/components/forms/text_area.gd" id="1_script"]
+[ext_resource type="Script" path="res://rookframe/ui/components/forms/task_text_area.gd" id="1_script"]
 
 [node name="TextArea" type="VBoxContainer"]
 layout_mode = 2
