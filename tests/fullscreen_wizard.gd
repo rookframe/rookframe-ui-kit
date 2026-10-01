@@ -74,11 +74,76 @@ func test_fixed_frame_measured_choices_and_actions() -> void:
 	var pairs: Array[Dictionary] = [{"label": "Name", "value": "Retained identity"}]
 	summary.configure("Character", null, pairs)
 	assert_bool(summary.get_node(^"Content/Rows").get_child(0).get_node(^"Inset/Row/Value").text == "Retained identity").is_true()
-	for profile in [[Vector2i(844, 390), 11, 5], [Vector2i(1920, 1080), 16, 14]]:
+	for profile in [[Vector2i(844, 390), 11, 5], [Vector2i(1024, 768), 12, 9], [Vector2i(1920, 1080), 16, 14]]:
 		viewport.size = profile[0]
 		for frame in 5:
 			await get_tree().process_frame
 		var row := summary.get_node(^"Content/Rows").get_child(0)
 		assert_int(row.get_node(^"Inset/Row/Value").get_theme_font_size("font_size")).is_equal(profile[1])
 		assert_int(row.get_node(^"Inset").get_theme_constant("margin_top")).is_equal(profile[2])
+		for choice in choices.get_node(^"Area/Rows").get_children():
+			var value: Label = choice.get_node(^"Inset/Row/Value")
+			if choice.is_visible_in_tree() and value.text == "12":
+				assert_int(value.get_theme_font_size("font_size")).is_equal(17 if profile[0].x == 1024 else 20)
+				assert_float(value.size.x).is_greater_equal(value.get_theme_font("font").get_string_size("12", HORIZONTAL_ALIGNMENT_LEFT, -1, value.get_theme_font_size("font_size")).x)
+
+	viewport.free()
+
+func test_long_native_content_has_complete_readable_pages_and_retains_position() -> void:
+	var viewport: SubViewport = auto_free(SubViewport.new())
+	viewport.size = Vector2i(1024, 768)
+	add_child(viewport)
+	var pages = load("res://rookframe/ui/components/data/paginated_content.tscn").instantiate()
+	pages.size = Vector2(640, 380)
+	var columns := HBoxContainer.new()
+	columns.add_theme_constant_override("separation", 20)
+	pages.get_node(^"Area").add_child(columns)
+	for index in 1:
+		var column := VBoxContainer.new()
+		column.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		columns.add_child(column)
+		var summary = load("res://rookframe/ui/components/data/summary_block.tscn").instantiate()
+		column.add_child(summary)
+	viewport.add_child(pages)
+	var pairs: Array[Dictionary] = [{"label": "Origin", "value": "A long origin that wraps onto several lines in a narrow column."}, {"label": "Carried", "value": "Rope, lantern, oil, rations and a portable laboratory. ".repeat(12)}]
+	columns.get_child(0).get_child(0).configure("Character", null, pairs, "A long description with all its text retained. ".repeat(80))
+	for frame in 8:
+		await get_tree().process_frame
+	assert_bool(pages.get_node(^"Pager").visible).is_true()
+	var readable := {}
+	var labels := columns.find_children("*", "Label", true, false)
+	var count := 0
+	while true:
+		var bounds: Rect2 = pages.get_node(^"Area").get_global_rect()
+		for label in labels:
+			if not label.is_visible_in_tree():
+				continue
+			for character in label.text.length():
+				var rect: Rect2 = label.get_character_bounds(character)
+				if not rect.has_area():
+					continue
+				rect.position += label.global_position
+				if bounds.encloses(rect):
+					readable[str(label.get_instance_id()) + ":" + str(character)] = true
+		count += 1
+		if pages.get_node(^"Pager/Next").disabled or count > 100:
+			break
+		pages.get_node(^"Pager/Next").pressed.emit()
+	assert_int(count).is_greater(1)
+	assert_int(count).is_less(100)
+	for label in labels:
+		if not label.is_visible_in_tree():
+			continue
+		for character in label.text.length():
+			if label.get_character_bounds(character).has_area():
+				assert_bool(readable.has(str(label.get_instance_id()) + ":" + str(character))).is_true()
+	var retained: Dictionary = pages.capture_state()
+	pages.restore_state({"page": 0})
+	for frame in 3:
+		await get_tree().process_frame
+	assert_int(pages.capture_state().page).is_equal(0)
+	pages.restore_state(retained)
+	for frame in 3:
+		await get_tree().process_frame
+	assert_int(pages.capture_state().page).is_equal(retained.page)
 	viewport.free()

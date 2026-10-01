@@ -153,6 +153,28 @@ content_margin_top = 4.0
 content_margin_bottom = 4.0
 
 
+[sub_resource type="StyleBoxFlat" id="AttributeTablet"]
+bg_color = Color(0.015686, 0.066667, 0.082353, 1)
+border_color = Color(0.133333, 0.196078, 0.215686, 1)
+border_width_top = 1
+border_width_bottom = 1
+border_width_left = 1
+border_width_right = 1
+content_margin_left = 7.0
+content_margin_right = 7.0
+content_margin_top = 9.0
+content_margin_bottom = 9.0
+
+[sub_resource type="StyleBoxFlat" id="FactsTablet"]
+bg_color = Color(0.015686, 0.066667, 0.082353, 1)
+border_color = Color(0.133333, 0.196078, 0.215686, 1)
+border_width_top = 1
+border_width_bottom = 1
+content_margin_left = 0.0
+content_margin_right = 0.0
+content_margin_top = 14.0
+content_margin_bottom = 14.0
+
 [sub_resource type="StyleBoxFlat" id="Facts"]
 bg_color = Color(0.015686, 0.066667, 0.082353, 1)
 border_color = Color(0.133333, 0.196078, 0.215686, 1)
@@ -278,11 +300,15 @@ TaskPrimary/colors/icon_pressed_color = Color(0.003922, 0.047059, 0.062745, 1)
 
 TaskAttribute/base_type = &"PanelContainer"
 TaskAttribute/styles/panel = SubResource("Attribute")
+TaskAttributeTablet/base_type = &"PanelContainer"
+TaskAttributeTablet/styles/panel = SubResource("AttributeTablet")
 TaskAttributeCompact/base_type = &"PanelContainer"
 TaskAttributeCompact/styles/panel = SubResource("AttributeCompact")
 
 TaskFacts/base_type = &"PanelContainer"
 TaskFacts/styles/panel = SubResource("Facts")
+TaskFactsTablet/base_type = &"PanelContainer"
+TaskFactsTablet/styles/panel = SubResource("FactsTablet")
 TaskFactsCompact/base_type = &"PanelContainer"
 TaskFactsCompact/styles/panel = SubResource("FactsCompact")
 

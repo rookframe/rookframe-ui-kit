@@ -89,9 +89,10 @@ func _fit() -> void:
 	get_context_slot().custom_minimum_size.x = 210 if phone else 254 if tablet else 400 if size.x >= 1500 else 360
 	var context_inset := 12 if phone else 16 if tablet else 32
 	for edge in ["left", "right", "top", "bottom"]:
-		get_context_slot().add_theme_constant_override("margin_" + edge, context_inset)
+		get_context_slot().add_theme_constant_override("margin_" + edge, 20 if tablet and edge in ["top", "bottom"] else context_inset)
 		get_stage_slot().add_theme_constant_override("margin_" + edge, (16 if edge in ["left", "right"] else 8) if phone else 22 if tablet else (42 if edge in ["left", "right"] else 36))
 	get_node(^"Layout/Header/Title").visible = not phone
+	get_node(^"Layout/Header/Title").add_theme_font_size_override("font_size", 24 if tablet else 30)
 	get_node(^"Layout/Header/Row/CurrentStep").visible = phone
 	get_node(^"Layout/Header/Row/Icon").custom_minimum_size = Vector2(24, 24) if phone else Vector2(34, 34)
 	get_node(^"Layout/Header/Row/Brand/Name").add_theme_font_size_override("font_size", 16 if phone else 22)

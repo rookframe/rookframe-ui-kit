@@ -755,7 +755,7 @@
       "properties": {
         "title": "Action",
         "description": "Supporting action detail",
-        "action_label": "›",
+        "action_label": "\u00e2\u20ac\u00ba",
         "tone": "STANDARD",
         "disabled": false
       },
@@ -839,7 +839,7 @@
       "properties": {
         "title": "Action",
         "description": "Supporting action detail",
-        "action_label": "›",
+        "action_label": "\u00e2\u20ac\u00ba",
         "tone": "STANDARD",
         "disabled": false
       },
@@ -1097,6 +1097,25 @@
       ],
       "script": "res://rookframe/ui/components/forms/text_area.gd",
       "scriptUid": "uid://bb8xvwqqnaxb3"
+    },
+    {
+      "name": "PaginatedContent",
+      "scene": "res://rookframe/ui/components/data/paginated_content.tscn",
+      "rootType": "Control",
+      "properties": {
+        "enabled": {
+          "type": "bool",
+          "default": true
+        }
+      },
+      "methods": [
+        "refresh",
+        "capture_state",
+        "restore_state"
+      ],
+      "signals": [],
+      "script": "res://rookframe/ui/components/data/paginated_content.gd",
+      "scriptUid": "uid://cu4kmucnvjxu1"
     }
   ],
   "semanticIcons": {

@@ -77,6 +77,12 @@ func _fit() -> void:
 	var phone := get_viewport_rect().size.y <= 560
 	var tablet := get_viewport_rect().size.x <= 1150 and not phone
 	var height := 44 if phone else 56 if tablet else 68
+	if tablet:
+		var titles_only := true
+		for entry in _entries:
+			titles_only = titles_only and str(entry.get("subtitle", "")).is_empty()
+		if titles_only:
+			height = 48
 	get_node(^"Area/Rows").columns = columns
 	get_node(^"Area/Rows").add_theme_constant_override("v_separation", 2 if phone else 4)
 	get_node(^"Caption").custom_minimum_size.y = 28 if phone else 42
@@ -89,12 +95,17 @@ func _fit() -> void:
 		row.custom_minimum_size.y = height
 		row.get_node(^"Inset/Row/Copy/Title").add_theme_font_size_override("font_size", 14 if phone and columns == 2 else 15 if phone else 16 if tablet else 20)
 		row.get_node(^"Inset/Row/Copy/Subtitle").add_theme_font_size_override("font_size", 10 if phone else 11 if tablet else 12)
-		row.get_node(^"Inset/Row/Icon").custom_minimum_size = Vector2(23, 23) if phone else Vector2(30, 30)
-		row.get_node(^"Inset/Row").add_theme_constant_override("separation", 8 if phone else 14)
+		row.get_node(^"Inset/Row/Icon").custom_minimum_size = Vector2(23, 23) if phone else Vector2(26, 26) if tablet else Vector2(30, 30)
+		row.get_node(^"Inset/Row").add_theme_constant_override("separation", 8 if phone else 10 if tablet else 14)
 		for edge in ["left", "right", "top", "bottom"]:
-			row.get_node(^"Inset").add_theme_constant_override("margin_" + edge, (9 if edge in ["left", "right"] else 4) if phone else (16 if edge in ["left", "right"] else 9))
-		row.get_node(^"Inset/Row/Value").size_flags_horizontal = Control.SIZE_FILL if columns > 1 else Control.SIZE_EXPAND_FILL
-		row.get_node(^"Inset/Row/Value").custom_minimum_size.x = 14 if columns > 1 else 0
+			row.get_node(^"Inset").add_theme_constant_override("margin_" + edge, (9 if edge in ["left", "right"] else 4) if phone else (10 if edge in ["left", "right"] else 8) if tablet else (16 if edge in ["left", "right"] else 9))
+		row.get_node(^"Inset/Row/Value").size_flags_horizontal = Control.SIZE_FILL if columns > 1 or tablet else Control.SIZE_EXPAND_FILL
+		var value := row.get_node(^"Inset/Row/Value") as Label
+		var pending := bool(_entries[_rows.find(row)].get("pending", false))
+		value.add_theme_font_size_override("font_size", 12 if pending else 17 if tablet else 20)
+		var measured := value.get_theme_font("font").get_string_size(value.text, HORIZONTAL_ALIGNMENT_LEFT, -1, value.get_theme_font_size("font_size")).x
+		value.custom_minimum_size.x = minf(ceilf(measured), size.x * 0.3) if tablet else 14 if columns > 1 else 0
+
 	# The authored row has an inset Control, so include its effective child
 	# minimum as well as the framed Button's minimum (ADR-0017).
 	for row in _rows:
