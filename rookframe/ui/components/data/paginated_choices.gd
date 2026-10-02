@@ -49,6 +49,8 @@ func _ready() -> void:
 		get_node(^"Pager/Page").show()
 		get_node(^"Pager/Previous").text = "‹"
 		get_node(^"Pager/Next").text = "›"
+		get_node(^"Pager/Previous").accessibility_name = "Previous page"
+		get_node(^"Pager/Next").accessibility_name = "Next page"
 	get_node(^"Pager/Previous").pressed.connect(func(): _page -= 1; _show_page())
 	get_node(^"Pager/Next").pressed.connect(func(): _page += 1; _show_page())
 	resized.connect(_queue_fit)
