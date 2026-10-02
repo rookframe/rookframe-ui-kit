@@ -78,6 +78,9 @@ func _measure() -> void:
 		if _pages.is_empty():
 			_pages.append(Vector2(0, height))
 	_show_page()
+	var focused := get_viewport().gui_get_focus_owner()
+	if focused != null:
+		_reveal_focus(focused)
 
 func _collect_spans(node: Control, spans: Array[Vector2]) -> void:
 	if not node.is_visible_in_tree():

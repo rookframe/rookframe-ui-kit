@@ -302,13 +302,45 @@ native row Controls when their identities stay the same. Previous and Next
 change only the visible page. The consumer decides whether selection changes
 rules or merely inspects a recorded result.
 
+`empty_text: String` supplies the empty collection message (default “No entries in this group.”). The consuming screen owns domain copy; captions do not change behavior.
+
+`focus_entry(id) -> bool` reveals the entry’s page and gives its retained row
+native keyboard focus. It returns false when the collection is invisible or
+the entry is absent.
+
 `framed_collection` is an optional authored presentation with a gold caption,
 surface frame and persistent range, Previous, page number and Next footer.
 It reserves its footer on a single or empty page and retains native 44 px page
 actions. The default presentation and selection behavior stay the same.
 
-`columns` selects one or two equally sized native grid columns. Phone class
-collections use two; roll collections use one. Caption, complete 44 px rows and
+Framed row titles show at most two wrapped lines, with ellipsis for overflow.
+The measured row height uses the same line limit. The full title remains in the
+row's accessible name; consumers must expose complete copy in entry Details.
+This is a summary presentation limit, never a domain text-length restriction.
+
+`get_footer_slot() -> HBoxContainer` returns the public slot for ordinary
+Package-owned footer Controls. The consumer retains ownership: add children
+with `add_child()`, remove them with `remove_child()`, and free them only when
+their owning consumer is finished. The Kit does not free or replace these
+children during configuration or page changes. The slot is visible while it
+has children and the pager is visible; its combined minimum participates in
+the native pager row. In the default, unframed presentation a single-page
+collection hides the pager and its slot. Use framed presentation when footer
+content must remain visible on single or empty pages.
+In framed phone presentation the caption and separate range label are hidden,
+the range appears below the page number, and the slot shares the compact row
+with Previous/Next. Keep composed children bounded so the 44px paging targets
+and page indicator remain reachable.
+
+```gdscript
+# Both nodes are authored by the consuming Package.
+var actions := get_node(^"QuickResources")
+remove_child(actions)
+get_node(^"Collection").get_footer_slot().add_child(actions)
+```
+
+`columns` selects one or two equally sized native grid columns. The consuming
+screen selects the appropriate arrangement. Caption, complete 44 px rows and
 fixed page actions use the approved landscape phone density. `capture_state()`
 and `restore_state(state)` retain the visible page as plain data when restoring
 a consumer's draft; they do not change the selected entry or any domain state.
