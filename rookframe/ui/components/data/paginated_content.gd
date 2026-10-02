@@ -97,7 +97,7 @@ func _collect_spans(node: Control, spans: Array[Vector2]) -> void:
 		for line in node.get_line_count():
 			var offset: float = node.get_line_offset(line)
 			spans.append(Vector2(floorf(top + offset), ceilf(top + offset + node.get_line_height(line))))
-	elif node is BaseButton or node is TextureRect:
+	elif node is BaseButton or node is TextureRect or node is LineEdit or node is TextEdit or node is Range:
 		spans.append(Vector2(floorf(top), ceilf(top + node.size.y)))
 		return
 	for child in node.get_children():
