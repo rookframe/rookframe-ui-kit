@@ -10,6 +10,11 @@ var _page := 0
 var _capacity := 1
 var _pending := false
 var _reveal := false
+## The sheet collection frame retains its range and page controls even on one page.
+@export var framed_collection := false:
+	set(value):
+		framed_collection = value
+		_queue_fit()
 @export_range(1, 2) var columns := 1:
 	set(value):
 		columns = value
@@ -36,6 +41,14 @@ func focus_entry(id: String) -> bool:
 	return false
 
 func _ready() -> void:
+	if framed_collection:
+		var pager := get_node(^"Pager")
+		pager.move_child(get_node(^"Pager/Range"), 0)
+		pager.move_child(get_node(^"Pager/Page"), 2)
+		get_node(^"Pager/Range").horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
+		get_node(^"Pager/Page").show()
+		get_node(^"Pager/Previous").text = "‹"
+		get_node(^"Pager/Next").text = "›"
 	get_node(^"Pager/Previous").pressed.connect(func(): _page -= 1; _show_page())
 	get_node(^"Pager/Next").pressed.connect(func(): _page += 1; _show_page())
 	resized.connect(_queue_fit)
@@ -69,7 +82,7 @@ func configure(entries: Array[Dictionary], selected_id: String, caption: String 
 		row.get_node(^"Inset/Row/Copy/Subtitle").visible = not str(entry.get("subtitle", "")).is_empty()
 		row.get_node(^"Inset/Row/Value").text = str(entry.get("value", ""))
 		row.get_node(^"Inset/Row/Icon").texture = entry.get("icon")
-		row.get_node(^"Inset/Row/Icon").self_modulate = Color("44e9e9") if str(entry.id) == selected_id else Color("91999a")
+		row.get_node(^"Inset/Row/Icon").self_modulate = Color("44e9e9") if framed_collection or str(entry.id) == selected_id else Color("91999a")
 		var pending := bool(entry.get("pending", false))
 		row.get_node(^"Inset/Row/Value").add_theme_font_size_override("font_size", 12 if pending else 20)
 		row.get_node(^"Inset/Row/Value").add_theme_color_override("font_color", Color("91999a") if pending else Color("44e9e9"))
@@ -97,10 +110,15 @@ func _fit() -> void:
 			height = 48
 	get_node(^"Area/Rows").columns = columns
 	get_node(^"Area/Rows").add_theme_constant_override("v_separation", 2 if phone else 4)
-	get_node(^"Caption").custom_minimum_size.y = 28 if phone else 42
-	get_node(^"Pager").custom_minimum_size.y = 48 if phone else 53
-	for label in [^"Caption/Title", ^"Caption/Count", ^"Pager/Range"]:
+	get_node(^"Caption").custom_minimum_size.y = 28 if phone else 32 if tablet and framed_collection else 40 if framed_collection else 42
+	get_node(^"Pager").custom_minimum_size.y = 44 if framed_collection else 48 if phone else 53
+	for label in [^"Caption/Title", ^"Caption/Count", ^"Pager/Range", ^"Pager/Page"]:
 		get_node(label).add_theme_font_size_override("font_size", 10 if phone else 12)
+	if framed_collection:
+		get_node(^"Caption/Title").add_theme_font_size_override("font_size", 11 if phone else 14 if tablet else 18)
+		get_node(^"Caption/Title").add_theme_color_override("font_color", Color("f0bb32"))
+		for label in [^"Caption/Title", ^"Caption/Count", ^"Pager/Range"]:
+			get_node(label).add_theme_stylebox_override("normal", preload("res://rookframe/ui/_internal/data/collection_label.tres"))
 	for button in [^"Pager/Previous", ^"Pager/Next"]:
 		get_node(button).add_theme_font_size_override("font_size", 12 if phone else 15)
 	for row in _rows:
@@ -126,9 +144,9 @@ func _fit() -> void:
 	var available: float = size.y - get_node(^"Caption").get_combined_minimum_size().y
 	var gap := 2 if phone else 4
 	_capacity = maxi(columns, floori((available + gap) / (height + gap)) * columns)
-	if _capacity < _rows.size():
+	if framed_collection or _capacity < _rows.size():
 		_capacity = maxi(columns, floori((available - get_node(^"Pager").get_combined_minimum_size().y + gap) / (height + gap)) * columns)
-	get_node(^"Pager").visible = _capacity < _rows.size()
+	get_node(^"Pager").visible = framed_collection or _capacity < _rows.size()
 	if _reveal:
 		for index in _entries.size():
 			if str(_entries[index].id) == _selected:
@@ -139,6 +157,9 @@ func _fit() -> void:
 	queue_redraw()
 
 func _draw() -> void:
+	if framed_collection:
+		draw_style_box(preload("res://rookframe/ui/_internal/data/collection_frame.tres"), Rect2(Vector2.ZERO, size))
+		draw_style_box(preload("res://rookframe/ui/_internal/data/collection_caption.tres"), Rect2(Vector2.ZERO, Vector2(size.x, get_node(^"Caption").size.y)))
 	draw_line(Vector2(0, 0.5), Vector2(size.x, 0.5), Color("465256"))
 	var pager := get_node_or_null(^"Pager") as Control
 	if pager != null and pager.visible:
@@ -151,4 +172,5 @@ func _show_page() -> void:
 		_rows[index].visible = index >= _page * _capacity and index < (_page + 1) * _capacity
 	get_node(^"Pager/Previous").disabled = _page == 0
 	get_node(^"Pager/Next").disabled = _page == pages - 1
-	get_node(^"Pager/Range").text = "%d–%d of %d" % [_page * _capacity + 1, mini((_page + 1) * _capacity, _rows.size()), _rows.size()]
+	get_node(^"Pager/Page").text = "%d / %d" % [_page + 1, pages]
+	get_node(^"Pager/Range").text = "%d–%d of %d" % [0 if _rows.is_empty() else _page * _capacity + 1, mini((_page + 1) * _capacity, _rows.size()), _rows.size()]

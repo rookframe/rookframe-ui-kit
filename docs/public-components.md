@@ -302,6 +302,11 @@ native row Controls when their identities stay the same. Previous and Next
 change only the visible page. The consumer decides whether selection changes
 rules or merely inspects a recorded result.
 
+`framed_collection` is an optional authored presentation with a gold caption,
+surface frame and persistent range, Previous, page number and Next footer.
+It reserves its footer on a single or empty page and retains native 44 px page
+actions. The default presentation and selection behavior stay the same.
+
 `columns` selects one or two equally sized native grid columns. Phone class
 collections use two; roll collections use one. Caption, complete 44 px rows and
 fixed page actions use the approved landscape phone density. `capture_state()`

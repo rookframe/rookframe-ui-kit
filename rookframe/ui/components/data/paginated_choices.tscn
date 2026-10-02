@@ -69,3 +69,10 @@ text = "Next"
 custom_minimum_size = Vector2(44, 44)
 theme_type_variation = "TaskButton"
 size_flags_vertical = 8
+
+[node name="Page" type="Label" parent="Pager"]
+layout_mode = 2
+visible = false
+text = "1 / 1"
+theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(0.568627, 0.6, 0.603922, 1)
