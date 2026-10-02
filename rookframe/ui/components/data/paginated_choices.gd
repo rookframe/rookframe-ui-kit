@@ -161,9 +161,9 @@ func _fit() -> void:
 			var copy := row.get_node(^"Inset/Row/Copy") as VBoxContainer
 			var inset := row.get_node(^"Inset") as MarginContainer
 			var row_box := row.get_node(^"Inset/Row") as HBoxContainer
-			var width := (size.x - (columns - 1) * 8) / columns - inset.get_theme_constant("margin_left") - inset.get_theme_constant("margin_right") - row.get_node(^"Inset/Row/Icon").get_combined_minimum_size().x - row.get_node(^"Inset/Row/Value").get_combined_minimum_size().x - row_box.get_theme_constant("separation") * 2
+			var width: float = (size.x - (columns - 1) * 8) / columns - inset.get_theme_constant("margin_left") - inset.get_theme_constant("margin_right") - row.get_node(^"Inset/Row/Icon").get_combined_minimum_size().x - row.get_node(^"Inset/Row/Value").get_combined_minimum_size().x - row_box.get_theme_constant("separation") * 2
 			var title_height := title.get_theme_font("font").get_multiline_string_size(title.text, HORIZONTAL_ALIGNMENT_LEFT, maxf(1.0, width), title.get_theme_font_size("font_size")).y
-			var subtitle_height := row.get_node(^"Inset/Row/Copy/Subtitle").get_combined_minimum_size().y if row.get_node(^"Inset/Row/Copy/Subtitle").visible else 0.0
+			var subtitle_height: float = row.get_node(^"Inset/Row/Copy/Subtitle").get_combined_minimum_size().y if row.get_node(^"Inset/Row/Copy/Subtitle").visible else 0.0
 			height = maxi(height, ceili(title_height + subtitle_height + (copy.get_theme_constant("separation") if subtitle_height > 0 else 0) + inset.get_theme_constant("margin_top") + inset.get_theme_constant("margin_bottom")))
 		height = maxi(height, ceili(maxf(row.get_combined_minimum_size().y, row.get_node(^"Inset").get_combined_minimum_size().y)))
 		row.custom_minimum_size.y = height
