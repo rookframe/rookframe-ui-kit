@@ -23,6 +23,16 @@ func restore_state(state: Dictionary) -> void:
 	_reveal = false
 	_queue_fit()
 
+## Return keyboard focus to an entry after its detail task closes.
+func focus_entry(id: String) -> bool:
+	for index in range(_entries.size()):
+		if str(_entries[index].get("id", "")) == id and index < _rows.size():
+			_page = index / _capacity
+			_show_page()
+			_rows[index].grab_focus()
+			return true
+	return false
+
 func _ready() -> void:
 	get_node(^"Pager/Previous").pressed.connect(func(): _page -= 1; _show_page())
 	get_node(^"Pager/Next").pressed.connect(func(): _page += 1; _show_page())
