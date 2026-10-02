@@ -313,6 +313,12 @@ surface frame and persistent range, Previous, page number and Next footer.
 It reserves its footer on a single or empty page and retains native 44 px page
 actions. The default presentation and selection behavior stay the same.
 
+The fullscreen task theme supplies `TaskGlyphButton` for 44 px arrow/close
+targets: its compact margins accommodate 24–30 px glyphs in every button state.
+`TaskDetailTab` supplies the 14 px, weight-600 display face; consumers author
+their tab borders and equal expansion. `TaskFooter` and `TaskFooterPhone` are
+PanelContainer variations with a top rule and the standard/phone raised fill.
+
 Framed row titles show at most two wrapped lines, with ellipsis for overflow.
 The measured row height uses the same line limit. The full title remains in the
 row's accessible name; consumers must expose complete copy in entry Details.

@@ -235,6 +235,52 @@ border_width_bottom = 1
 content_margin_bottom = 9.0
 
 
+[sub_resource type="StyleBoxFlat" id="Glyph"]
+bg_color = Color(0.003922, 0.047059, 0.062745, 1)
+border_color = Color(0.27451, 0.321569, 0.337255, 1)
+border_width_left = 1
+border_width_right = 1
+border_width_top = 1
+border_width_bottom = 1
+content_margin_left = 4.0
+content_margin_right = 4.0
+content_margin_top = 2.0
+content_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxFlat" id="GlyphHover"]
+bg_color = Color(0.039216, 0.145098, 0.160784, 1)
+border_color = Color(0.266667, 0.913725, 0.913725, 1)
+border_width_left = 1
+border_width_right = 1
+border_width_top = 1
+border_width_bottom = 1
+content_margin_left = 4.0
+content_margin_right = 4.0
+content_margin_top = 2.0
+content_margin_bottom = 2.0
+
+[sub_resource type="FontVariation" id="TabFont"]
+base_font = ExtResource("display")
+variation_opentype = {2003265652: 600.0}
+
+[sub_resource type="StyleBoxFlat" id="Footer"]
+bg_color = Color(0.015686, 0.066667, 0.082353, 1)
+border_color = Color(0.27451, 0.321569, 0.337255, 1)
+border_width_top = 1
+content_margin_left = 0.0
+content_margin_right = 0.0
+content_margin_top = 1.0
+content_margin_bottom = 0.0
+
+[sub_resource type="StyleBoxFlat" id="FooterPhone"]
+bg_color = Color(0.062745, 0.105882, 0.117647, 1)
+border_color = Color(0.27451, 0.321569, 0.337255, 1)
+border_width_top = 1
+content_margin_left = 0.0
+content_margin_right = 0.0
+content_margin_top = 1.0
+content_margin_bottom = 0.0
+
 [resource]
 default_font = ExtResource("ui")
 default_font_size = 15
@@ -251,6 +297,19 @@ Button/styles/pressed = SubResource("Hover")
 Button/styles/disabled = SubResource("Button")
 Button/styles/focus = SubResource("Focus")
 TaskButton/base_type = &"Button"
+TaskGlyphButton/base_type = &"Button"
+TaskGlyphButton/font_sizes/font_size = 24
+TaskGlyphButton/styles/normal = SubResource("Glyph")
+TaskGlyphButton/styles/hover = SubResource("GlyphHover")
+TaskGlyphButton/styles/pressed = SubResource("GlyphHover")
+TaskGlyphButton/styles/disabled = SubResource("Glyph")
+TaskDetailTab/base_type = &"Button"
+TaskDetailTab/fonts/font = SubResource("TabFont")
+TaskDetailTab/font_sizes/font_size = 14
+TaskFooter/base_type = &"PanelContainer"
+TaskFooter/styles/panel = SubResource("Footer")
+TaskFooterPhone/base_type = &"PanelContainer"
+TaskFooterPhone/styles/panel = SubResource("FooterPhone")
 TaskSection/base_type = &"Button"
 TaskSection/styles/pressed = SubResource("ActiveSection")
 TaskSection/colors/font_pressed_color = Color(0.941176, 0.733333, 0.196078, 1)

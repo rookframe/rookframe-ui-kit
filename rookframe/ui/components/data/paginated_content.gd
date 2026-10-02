@@ -28,6 +28,8 @@ func get_pager() -> HBoxContainer:
 	_next.tooltip_text = "Next page"
 	_previous.accessibility_name = _previous.tooltip_text
 	_next.accessibility_name = _next.tooltip_text
+	_previous.theme_type_variation = "TaskGlyphButton"
+	_next.theme_type_variation = "TaskGlyphButton"
 	return _pager
 
 func _enter_tree() -> void:
