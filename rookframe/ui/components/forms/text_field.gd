@@ -50,6 +50,10 @@ func _ready() -> void:
 	_refresh()
 
 
+func is_editor_focused() -> bool:
+	return get_node(^"Editor").has_focus()
+
+
 func focus_editor() -> void:
 	(get_node(^"Editor") as LineEdit).grab_focus()
 

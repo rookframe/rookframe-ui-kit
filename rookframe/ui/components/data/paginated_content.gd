@@ -6,6 +6,38 @@ var _page := 0
 var _pages: Array[Vector2] = [Vector2.ZERO]
 var _pending := false
 var _content: Control
+var _focus_viewport: Viewport
+var _external_pager := false
+@onready var _pager: HBoxContainer = get_node(^"Pager")
+@onready var _previous: Button = get_node(^"Pager/Previous")
+@onready var _next: Button = get_node(^"Pager/Next")
+@onready var _range: Label = get_node(^"Pager/Range")
+
+## Reparent this native pager into an authored fixed footer when needed.
+## Its ownership and paging behavior remain with this component.
+func get_pager() -> HBoxContainer:
+	if _pager.get_parent() == self:
+		remove_child(_pager)
+	_pager.anchor_top = 0
+	_pager.anchor_bottom = 0
+	_pager.anchor_right = 0
+	_pager.custom_minimum_size = Vector2(0, 44)
+	_previous.text = "‹"
+	_next.text = "›"
+	_previous.tooltip_text = "Previous page"
+	_next.tooltip_text = "Next page"
+	_previous.accessibility_name = _previous.tooltip_text
+	_next.accessibility_name = _next.tooltip_text
+	return _pager
+
+func _enter_tree() -> void:
+	_focus_viewport = get_viewport()
+	if not _focus_viewport.gui_focus_changed.is_connected(_reveal_focus):
+		_focus_viewport.gui_focus_changed.connect(_reveal_focus)
+
+func _exit_tree() -> void:
+	if is_instance_valid(_focus_viewport) and _focus_viewport.gui_focus_changed.is_connected(_reveal_focus):
+		_focus_viewport.gui_focus_changed.disconnect(_reveal_focus)
 @export var enabled := true:
 	set(value):
 		enabled = value
@@ -20,7 +52,6 @@ func _ready() -> void:
 	resized.connect(refresh)
 	visibility_changed.connect(refresh)
 	_content.minimum_size_changed.connect(refresh)
-	get_viewport().gui_focus_changed.connect(_reveal_focus)
 	refresh()
 
 func capture_state() -> Dictionary:
@@ -41,11 +72,12 @@ func _fit() -> void:
 	if not is_visible_in_tree():
 		return
 	var height := size.y
+	_external_pager = _pager.get_parent() != self
 	_content.size = Vector2(size.x, maxf(height, _content.get_combined_minimum_size().y))
 	var overflow := enabled and _content.get_combined_minimum_size().y > height + 1
-	get_node(^"Pager").visible = overflow
-	if overflow:
-		height -= get_node(^"Pager").get_combined_minimum_size().y
+	_pager.visible = overflow
+	if overflow and not _external_pager:
+		height -= _pager.get_combined_minimum_size().y
 	_content.size.y = maxf(height, _content.get_combined_minimum_size().y)
 	get_node(^"Area").size = Vector2(size.x, height)
 	# Native Containers finish wrapping their children before measuring pages.
@@ -54,7 +86,7 @@ func _fit() -> void:
 func _measure() -> void:
 	var height: float = get_node(^"Area").size.y
 	_pages.clear()
-	if not get_node(^"Pager").visible or height <= 0:
+	if not _pager.visible or height <= 0:
 		_pages.append(Vector2(0, height))
 	else:
 		var spans: Array[Vector2] = []
@@ -111,12 +143,12 @@ func _show_page() -> void:
 	_page = clampi(_page, 0, _pages.size() - 1)
 	_content.position.y = -_pages[_page].x
 	get_node(^"Area").size.y = _pages[_page].y - _pages[_page].x
-	get_node(^"Pager/Previous").disabled = _page == 0
-	get_node(^"Pager/Next").disabled = _page == _pages.size() - 1
-	get_node(^"Pager/Range").text = "%d / %d" % [_page + 1, _pages.size()]
+	_previous.disabled = _page == 0
+	_next.disabled = _page == _pages.size() - 1
+	_range.text = "%d / %d" % [_page + 1, _pages.size()]
 
 func _reveal_focus(control: Control) -> void:
-	if not enabled or not _content.is_ancestor_of(control):
+	if not enabled or _content == null or not _content.is_ancestor_of(control):
 		return
 	var top := control.global_position.y - _content.global_position.y
 	for index in _pages.size():

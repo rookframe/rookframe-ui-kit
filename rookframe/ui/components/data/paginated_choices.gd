@@ -19,6 +19,10 @@ var _reveal := false
 	set(value):
 		framed_collection = value
 		_queue_fit()
+@export_enum("Ordinary", "Wide", "Inventory") var collection_layout := 0:
+	set(value):
+		collection_layout = value
+		_queue_fit()
 @export_range(1, 2) var columns := 1:
 	set(value):
 		columns = value
@@ -53,9 +57,9 @@ func _ready() -> void:
 		var pager := get_node(^"Pager")
 		pager.move_child(get_node(^"Pager/FooterContent"), 0)
 		pager.move_child(get_node(^"Pager/Range"), 1)
-		pager.move_child(get_node(^"Pager/Page"), 3)
+		pager.move_child(get_node(^"Pager/Indicator"), 3)
 		get_node(^"Pager/Range").horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
-		get_node(^"Pager/Page").show()
+		get_node(^"Pager/Indicator/Page").show()
 		get_node(^"Pager/Previous").text = "‹"
 		get_node(^"Pager/Next").text = "›"
 		get_node(^"Pager/Previous").accessibility_name = "Previous page"
@@ -116,50 +120,59 @@ func _queue_fit() -> void:
 func _fit() -> void:
 	var phone := get_viewport_rect().size.y <= 560
 	var tablet := get_viewport_rect().size.x <= 1150 and not phone
-	var height := 44 if phone else 56 if tablet else 68
-	if tablet:
-		var titles_only := true
-		for entry in _entries:
-			titles_only = titles_only and str(entry.get("subtitle", "")).is_empty()
-		if titles_only:
-			height = 48
+	var height := 48 if phone else 59 if tablet and collection_layout == 1 else 55 if tablet else 65 if collection_layout == 1 else 59
+	if not framed_collection:
+		height = 44 if phone else 56 if tablet else 68
+	var grid := get_node(^"Area/Rows") as GridContainer
+	var inset := 0 if phone or not framed_collection else 5 if tablet else 8
+	var vertical_inset := 8 if framed_collection and not phone else 0
+	grid.offset_left = inset
+	grid.offset_right = -inset
+	grid.offset_top = vertical_inset
+	grid.columns = columns
+	grid.add_theme_constant_override("h_separation", 12 if phone or tablet else 28)
+	grid.add_theme_constant_override("v_separation", 4)
 	get_node(^"Caption").visible = not (framed_collection and phone)
 	get_node(^"Pager/Range").visible = not (framed_collection and phone)
 	get_node(^"Pager/FooterContent").visible = get_node(^"Pager/FooterContent").get_child_count() > 0
 	get_node(^"Area/Empty").visible = _entries.is_empty()
 	get_node(^"Area/Empty").text = empty_text
-	get_node(^"Area/Rows").columns = columns
-	get_node(^"Area/Rows").add_theme_constant_override("v_separation", 2 if phone else 4)
-	get_node(^"Caption").custom_minimum_size.y = 28 if phone else 32 if tablet and framed_collection else 40 if framed_collection else 42
-	get_node(^"Pager").custom_minimum_size.y = 44 if framed_collection else 48 if phone else 53
-	for label in [^"Caption/Title", ^"Caption/Count", ^"Pager/Range", ^"Pager/Page"]:
-		get_node(label).add_theme_font_size_override("font_size", 10 if phone else 12)
+	get_node(^"Caption").custom_minimum_size.y = 32 if tablet else 39
+	get_node(^"Pager").custom_minimum_size.y = 44 if framed_collection else 53
+	get_node(^"Caption/Title").add_theme_font_size_override("font_size", 13 if tablet else 16)
+	get_node(^"Caption/Count").add_theme_font_size_override("font_size", 14 if tablet else 18)
+	get_node(^"Pager/Range").add_theme_font_size_override("font_size", 12)
+	get_node(^"Pager/Indicator/Page").add_theme_font_size_override("font_size", 15 if phone else 14)
+	get_node(^"Pager/Indicator/PhoneCount").visible = framed_collection and phone
 	if framed_collection:
-		get_node(^"Caption/Title").add_theme_font_size_override("font_size", 11 if phone else 14 if tablet else 18)
 		get_node(^"Caption/Title").add_theme_color_override("font_color", Color("f0bb32"))
 		for label in [^"Caption/Title", ^"Caption/Count", ^"Pager/Range"]:
 			get_node(label).add_theme_stylebox_override("normal", preload("res://rookframe/ui/_internal/data/collection_label.tres"))
 	for button in [^"Pager/Previous", ^"Pager/Next"]:
-		get_node(button).add_theme_font_size_override("font_size", 12 if phone else 15)
+		get_node(button).add_theme_font_size_override("font_size", 25 if phone else 24 if framed_collection else 15)
 	for row in _rows:
 		row.custom_minimum_size.y = height
+		var title := row.get_node(^"Inset/Row/Copy/Title") as Label
 		if framed_collection:
-			row.get_node(^"Inset/Row/Copy/Title").add_theme_font_override("font", get_theme_font("font"))
-			row.get_node(^"Inset/Row/Copy/Title").autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-			row.get_node(^"Inset/Row/Copy/Title").max_lines_visible = 2
-			row.get_node(^"Inset/Row/Copy/Title").text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
-		row.get_node(^"Inset/Row/Copy/Title").add_theme_font_size_override("font_size", 14 if phone and columns == 2 else 15 if phone else 16 if tablet else 20)
-		row.get_node(^"Inset/Row/Copy/Subtitle").add_theme_font_size_override("font_size", 10 if phone else 11 if tablet else 12)
-		row.get_node(^"Inset/Row/Icon").custom_minimum_size = Vector2(23, 23) if phone else Vector2(26, 26) if tablet else Vector2(30, 30)
-		row.get_node(^"Inset/Row").add_theme_constant_override("separation", 8 if phone else 10 if tablet else 14)
+			title.add_theme_font_override("font", preload("res://rookframe/ui/_internal/data/collection_title.tres"))
+			title.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+			title.max_lines_visible = 2
+			title.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
+		title.add_theme_font_size_override("font_size", 16 if phone and collection_layout == 2 else 17 if phone else 15 if tablet else 19)
+		row.get_node(^"Inset/Row/Copy/Subtitle").add_theme_font_size_override("font_size", 13 if phone else 12 if tablet else 14)
+		row.get_node(^"Inset/Row/Icon").custom_minimum_size = Vector2(29, 29) if phone or tablet else Vector2(38, 38)
+		row.get_node(^"Inset/Row").add_theme_constant_override("separation", 8 if phone else 7 if tablet else 12)
 		for edge in ["left", "right", "top", "bottom"]:
-			row.get_node(^"Inset").add_theme_constant_override("margin_" + edge, (9 if edge in ["left", "right"] else 4) if phone else (10 if edge in ["left", "right"] else 8) if tablet else (16 if edge in ["left", "right"] else 9))
-		row.get_node(^"Inset/Row/Value").size_flags_horizontal = Control.SIZE_FILL
+			var horizontal: bool = edge in ["left", "right"]
+			var padding := (6 if horizontal else 4) if phone else (6 if horizontal else 7) if tablet else (12 if horizontal else 10) if collection_layout == 2 else (10 if horizontal else 9)
+			row.get_node(^"Inset").add_theme_constant_override("margin_" + edge, padding)
 		var value := row.get_node(^"Inset/Row/Value") as Label
+		value.size_flags_horizontal = Control.SIZE_FILL
+		value.add_theme_font_override("font", get_theme_font("font"))
 		var pending := bool(_entries[_rows.find(row)].get("pending", false))
-		value.add_theme_font_size_override("font_size", 12 if pending else 17 if tablet else 20)
+		value.add_theme_font_size_override("font_size", 12 if pending else 18 if phone else (14 if collection_layout == 2 else 16) if tablet else 18 if collection_layout == 2 else 20)
 		var measured := value.get_theme_font("font").get_string_size(value.text, HORIZONTAL_ALIGNMENT_LEFT, -1, value.get_theme_font_size("font_size")).x
-		value.custom_minimum_size.x = minf(ceilf(measured), size.x / columns * 0.3)
+		value.custom_minimum_size.x = minf(ceilf(measured), (size.x - inset * 2) / columns * 0.3)
 
 	# The authored row has an inset Control, so include its effective child
 	# minimum as well as the framed Button's minimum (ADR-0017).
@@ -169,13 +182,13 @@ func _fit() -> void:
 		if framed_collection:
 			var title := row.get_node(^"Inset/Row/Copy/Title") as Label
 			var copy := row.get_node(^"Inset/Row/Copy") as VBoxContainer
-			var inset := row.get_node(^"Inset") as MarginContainer
+			var row_inset := row.get_node(^"Inset") as MarginContainer
 			var row_box := row.get_node(^"Inset/Row") as HBoxContainer
-			var width: float = (size.x - (columns - 1) * 8) / columns - inset.get_theme_constant("margin_left") - inset.get_theme_constant("margin_right") - row.get_node(^"Inset/Row/Icon").get_combined_minimum_size().x - row.get_node(^"Inset/Row/Value").get_combined_minimum_size().x - row_box.get_theme_constant("separation") * 2
+			var width: float = (size.x - inset * 2 - (columns - 1) * grid.get_theme_constant("h_separation")) / columns - row_inset.get_theme_constant("margin_left") - row_inset.get_theme_constant("margin_right") - row.get_node(^"Inset/Row/Icon").get_combined_minimum_size().x - row.get_node(^"Inset/Row/Value").get_combined_minimum_size().x - row_box.get_theme_constant("separation") * 2
 			var title_height := title.get_theme_font("font").get_multiline_string_size(title.text, HORIZONTAL_ALIGNMENT_LEFT, maxf(1.0, width), title.get_theme_font_size("font_size"), title.max_lines_visible, TextServer.BREAK_MANDATORY | TextServer.BREAK_WORD_BOUND | TextServer.BREAK_ADAPTIVE).y
 			title_height += title.get_theme_constant("line_spacing") * (title.max_lines_visible - 1)
 			var subtitle_height: float = row.get_node(^"Inset/Row/Copy/Subtitle").get_combined_minimum_size().y if row.get_node(^"Inset/Row/Copy/Subtitle").visible else 0.0
-			row_height = maxf(row_height, ceilf(title_height + subtitle_height + (copy.get_theme_constant("separation") if subtitle_height > 0 else 0) + inset.get_theme_constant("margin_top") + inset.get_theme_constant("margin_bottom")))
+			row_height = maxf(row_height, ceilf(title_height + subtitle_height + (copy.get_theme_constant("separation") if subtitle_height > 0 else 0) + row_inset.get_theme_constant("margin_top") + row_inset.get_theme_constant("margin_bottom")))
 		row_height = maxf(row_height, maxf(row.get_combined_minimum_size().y, row.get_node(^"Inset").get_combined_minimum_size().y))
 		row.custom_minimum_size.y = row_height
 		heights.append(row_height)
@@ -183,7 +196,8 @@ func _fit() -> void:
 	# a native 44px target; page ranges use only the rows on each page.
 	get_node(^"Area").custom_minimum_size.y = 44
 	var available: float = size.y - (get_node(^"Caption").get_combined_minimum_size().y if get_node(^"Caption").visible else 0.0)
-	var gap := 2 if phone else 4
+	available -= vertical_inset * 2
+	var gap := grid.get_theme_constant("v_separation")
 	_fit_pages(heights, available, gap)
 	var pager_visible := framed_collection or _pages.size() > 1
 	if pager_visible:
@@ -236,8 +250,8 @@ func _show_page() -> void:
 		_rows[index].visible = index >= _pages[_page].x and index < _pages[_page].y
 	get_node(^"Pager/Previous").disabled = _page == 0
 	get_node(^"Pager/Next").disabled = _page == pages - 1
-	get_node(^"Pager/Page").text = "%d / %d" % [_page + 1, pages]
+	get_node(^"Pager/Indicator/Page").text = "%d / %d" % [_page + 1, pages]
 	var range_text := "%d–%d of %d" % [_pages[_page].x + 1, _pages[_page].y, _rows.size()] if not _rows.is_empty() else "0 entries"
 	get_node(^"Pager/Range").text = range_text
 	if framed_collection and get_viewport_rect().size.y <= 560:
-		get_node(^"Pager/Page").text += "\n" + range_text
+		get_node(^"Pager/Indicator/PhoneCount").text = range_text

@@ -388,3 +388,27 @@ same colours and borders with the approved tablet insets. Summary blocks use
 The pager's authored `Pager/Previous` and `Pager/Next` Buttons expose their native
 `text` property for localized labels. These are public composition paths, alongside
 `Area`; no custom text wrapper is needed.
+
+
+`collection_layout` selects the framed collection density: `0` (Ordinary),
+`1` (Wide) or `2` (Inventory). It changes only native row spacing and typography;
+the caller still selects `columns` and supplies the collection records.
+
+TextField, TextArea and both task variants expose `is_editor_focused() -> bool`
+to preserve the native input focus when replacing an owned form. It returns
+only whether the component's native editor holds focus. Pair it with
+`focus_editor()`; consumers do not inspect component children.
+
+Task fields accept native theme constant overrides `label_font_size` and
+`editor_font_size`. TaskTextArea also accepts `editor_minimum_height`. Omitted
+overrides use the existing `compact` defaults. These are presentation values;
+validation, editability and value signals retain their ordinary contracts.
+
+PaginatedContent exposes `get_pager() -> HBoxContainer` for a consumer's fixed
+footer. On the first call the component detaches its native pager; add the
+returned Container to an authored footer with `add_child()`. It retains its
+signals and page behavior, and subsequent calls return the same pager. Do not
+inspect its children. The caller owns the footer lifetime and must retain it
+while the content is alive. The component then measures the whole body without
+reserving a second internal pager. Focus tracking follows its current Viewport
+when native content is reparented into or out of a Window.
