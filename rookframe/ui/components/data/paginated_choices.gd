@@ -20,6 +20,10 @@ var _reveal := false
 		columns = value
 		_queue_fit()
 
+## Package-owned footer content shares the stock collection pager row.
+func get_footer_slot() -> HBoxContainer:
+	return get_node(^"Pager/FooterContent")
+
 func capture_state() -> Dictionary:
 	return {"page": _page}
 
@@ -43,8 +47,9 @@ func focus_entry(id: String) -> bool:
 func _ready() -> void:
 	if framed_collection:
 		var pager := get_node(^"Pager")
-		pager.move_child(get_node(^"Pager/Range"), 0)
-		pager.move_child(get_node(^"Pager/Page"), 2)
+		pager.move_child(get_node(^"Pager/FooterContent"), 0)
+		pager.move_child(get_node(^"Pager/Range"), 1)
+		pager.move_child(get_node(^"Pager/Page"), 3)
 		get_node(^"Pager/Range").horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
 		get_node(^"Pager/Page").show()
 		get_node(^"Pager/Previous").text = "‹"
@@ -53,6 +58,8 @@ func _ready() -> void:
 		get_node(^"Pager/Next").accessibility_name = "Next page"
 	get_node(^"Pager/Previous").pressed.connect(func(): _page -= 1; _show_page())
 	get_node(^"Pager/Next").pressed.connect(func(): _page += 1; _show_page())
+	get_node(^"Pager/FooterContent").child_entered_tree.connect(func(_child: Node): _queue_fit())
+	get_node(^"Pager/FooterContent").child_exiting_tree.connect(func(_child: Node): _queue_fit())
 	resized.connect(_queue_fit)
 	_queue_fit()
 
@@ -110,6 +117,11 @@ func _fit() -> void:
 			titles_only = titles_only and str(entry.get("subtitle", "")).is_empty()
 		if titles_only:
 			height = 48
+	get_node(^"Caption").visible = not (framed_collection and phone)
+	get_node(^"Pager/Range").visible = not (framed_collection and phone)
+	get_node(^"Pager/FooterContent").visible = get_node(^"Pager/FooterContent").get_child_count() > 0
+	get_node(^"Area/Empty").visible = _entries.is_empty()
+	get_node(^"Area/Empty").text = "Travelling alone." if get_node(^"Caption/Title").text == "COMPANIONS" else "No entries in this group."
 	get_node(^"Area/Rows").columns = columns
 	get_node(^"Area/Rows").add_theme_constant_override("v_separation", 2 if phone else 4)
 	get_node(^"Caption").custom_minimum_size.y = 28 if phone else 32 if tablet and framed_collection else 40 if framed_collection else 42
@@ -125,6 +137,9 @@ func _fit() -> void:
 		get_node(button).add_theme_font_size_override("font_size", 12 if phone else 15)
 	for row in _rows:
 		row.custom_minimum_size.y = height
+		if framed_collection:
+			row.get_node(^"Inset/Row/Copy/Title").add_theme_font_override("font", get_theme_font("font"))
+			row.get_node(^"Inset/Row/Copy/Title").autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		row.get_node(^"Inset/Row/Copy/Title").add_theme_font_size_override("font_size", 14 if phone and columns == 2 else 15 if phone else 16 if tablet else 20)
 		row.get_node(^"Inset/Row/Copy/Subtitle").add_theme_font_size_override("font_size", 10 if phone else 11 if tablet else 12)
 		row.get_node(^"Inset/Row/Icon").custom_minimum_size = Vector2(23, 23) if phone else Vector2(26, 26) if tablet else Vector2(30, 30)
@@ -141,9 +156,19 @@ func _fit() -> void:
 	# The authored row has an inset Control, so include its effective child
 	# minimum as well as the framed Button's minimum (ADR-0017).
 	for row in _rows:
+		if framed_collection:
+			var title := row.get_node(^"Inset/Row/Copy/Title") as Label
+			var copy := row.get_node(^"Inset/Row/Copy") as VBoxContainer
+			var inset := row.get_node(^"Inset") as MarginContainer
+			var row_box := row.get_node(^"Inset/Row") as HBoxContainer
+			var width := (size.x - (columns - 1) * 8) / columns - inset.get_theme_constant("margin_left") - inset.get_theme_constant("margin_right") - row.get_node(^"Inset/Row/Icon").get_combined_minimum_size().x - row.get_node(^"Inset/Row/Value").get_combined_minimum_size().x - row_box.get_theme_constant("separation") * 2
+			var title_height := title.get_theme_font("font").get_multiline_string_size(title.text, HORIZONTAL_ALIGNMENT_LEFT, maxf(1.0, width), title.get_theme_font_size("font_size")).y
+			var subtitle_height := row.get_node(^"Inset/Row/Copy/Subtitle").get_combined_minimum_size().y if row.get_node(^"Inset/Row/Copy/Subtitle").visible else 0.0
+			height = maxi(height, ceili(title_height + subtitle_height + (copy.get_theme_constant("separation") if subtitle_height > 0 else 0) + inset.get_theme_constant("margin_top") + inset.get_theme_constant("margin_bottom")))
 		height = maxi(height, ceili(maxf(row.get_combined_minimum_size().y, row.get_node(^"Inset").get_combined_minimum_size().y)))
 		row.custom_minimum_size.y = height
-	var available: float = size.y - get_node(^"Caption").get_combined_minimum_size().y
+	get_node(^"Area").custom_minimum_size.y = height if not _rows.is_empty() else 44
+	var available: float = size.y - (get_node(^"Caption").get_combined_minimum_size().y if get_node(^"Caption").visible else 0.0)
 	var gap := 2 if phone else 4
 	_capacity = maxi(columns, floori((available + gap) / (height + gap)) * columns)
 	if framed_collection or _capacity < _rows.size():
@@ -161,7 +186,8 @@ func _fit() -> void:
 func _draw() -> void:
 	if framed_collection:
 		draw_style_box(preload("res://rookframe/ui/_internal/data/collection_frame.tres"), Rect2(Vector2.ZERO, size))
-		draw_style_box(preload("res://rookframe/ui/_internal/data/collection_caption.tres"), Rect2(Vector2.ZERO, Vector2(size.x, get_node(^"Caption").size.y)))
+		if get_node(^"Caption").visible:
+			draw_style_box(preload("res://rookframe/ui/_internal/data/collection_caption.tres"), Rect2(Vector2.ZERO, Vector2(size.x, get_node(^"Caption").size.y)))
 	draw_line(Vector2(0, 0.5), Vector2(size.x, 0.5), Color("465256"))
 	var pager := get_node_or_null(^"Pager") as Control
 	if pager != null and pager.visible:
@@ -175,4 +201,7 @@ func _show_page() -> void:
 	get_node(^"Pager/Previous").disabled = _page == 0
 	get_node(^"Pager/Next").disabled = _page == pages - 1
 	get_node(^"Pager/Page").text = "%d / %d" % [_page + 1, pages]
-	get_node(^"Pager/Range").text = "%d–%d of %d" % [0 if _rows.is_empty() else _page * _capacity + 1, mini((_page + 1) * _capacity, _rows.size()), _rows.size()]
+	var range_text := "%d–%d of %d" % [_page * _capacity + 1, mini((_page + 1) * _capacity, _rows.size()), _rows.size()] if not _rows.is_empty() else "0 entries"
+	get_node(^"Pager/Range").text = range_text
+	if framed_collection and get_viewport_rect().size.y <= 560:
+		get_node(^"Pager/Page").text += "\n" + range_text
