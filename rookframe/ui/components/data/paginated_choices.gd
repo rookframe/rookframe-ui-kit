@@ -25,6 +25,8 @@ func restore_state(state: Dictionary) -> void:
 
 ## Return keyboard focus to an entry after its detail task closes.
 func focus_entry(id: String) -> bool:
+	if not is_visible_in_tree():
+		return false
 	for index in range(_entries.size()):
 		if str(_entries[index].get("id", "")) == id and index < _rows.size():
 			_page = index / _capacity
