@@ -418,3 +418,6 @@ inspect its children. The caller owns the footer lifetime and must retain it
 while the content is alive. The component then measures the whole body without
 reserving a second internal pager. Focus tracking follows its current Viewport
 when native content is reparented into or out of a Window.
+TextField, TextArea and their task variants stay together on one page, including
+the field label and validation copy. Their authored minimum height must fit the
+available content viewport, like every other indivisible interactive control.

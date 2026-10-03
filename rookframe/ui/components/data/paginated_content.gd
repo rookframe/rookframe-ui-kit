@@ -2,6 +2,9 @@
 extends Control
 ## Pages authored native content at measured text/Control boundaries.
 ## Compose a single Container under Area; no wheel or drag scrolling is used.
+const TEXT_FIELD = preload("res://rookframe/ui/components/forms/text_field.gd")
+const TEXT_AREA = preload("res://rookframe/ui/components/forms/text_area.gd")
+
 var _page := 0
 var _pages: Array[Vector2] = [Vector2.ZERO]
 var _pending := false
@@ -120,7 +123,11 @@ func _collect_spans(node: Control, spans: Array[Vector2]) -> void:
 	if not node.is_visible_in_tree():
 		return
 	var top := node.global_position.y - _content.global_position.y
-	if node is Label:
+	if node is TEXT_FIELD or node is TEXT_AREA:
+		# A field's label, editor and validation copy are one interaction.
+		spans.append(Vector2(floorf(top), ceilf(top + node.size.y)))
+		return
+	elif node is Label:
 		var last := Vector2(-1, -1)
 		for character in node.text.length():
 			var rect: Rect2 = node.get_character_bounds(character)
