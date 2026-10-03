@@ -43,9 +43,26 @@ anchor_right = 1.0
 theme_override_constants/h_separation = 8
 theme_override_constants/v_separation = 4
 
+[node name="Empty" type="Label" parent="Area"]
+layout_mode = 1
+anchor_right = 1.0
+offset_left = 10.0
+offset_top = 12.0
+offset_right = -10.0
+text = "No entries in this group."
+autowrap_mode = 3
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(0.568627, 0.6, 0.603922, 1)
+
 [node name="Pager" type="HBoxContainer" parent="."]
 layout_mode = 2
 custom_minimum_size = Vector2(0, 53)
+theme_override_constants/separation = 8
+
+[node name="FooterContent" type="HBoxContainer" parent="Pager"]
+layout_mode = 2
+visible = false
+size_flags_horizontal = 3
 theme_override_constants/separation = 8
 
 [node name="Previous" type="Button" parent="Pager"]
@@ -69,3 +86,21 @@ text = "Next"
 custom_minimum_size = Vector2(44, 44)
 theme_type_variation = "TaskButton"
 size_flags_vertical = 8
+
+[node name="Indicator" type="VBoxContainer" parent="Pager"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 0
+
+[node name="Page" type="Label" parent="Pager/Indicator"]
+layout_mode = 2
+visible = false
+text = "1 / 1"
+theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(0.568627, 0.6, 0.603922, 1)
+
+[node name="PhoneCount" type="Label" parent="Pager/Indicator"]
+layout_mode = 2
+visible = false
+theme_override_font_sizes/font_size = 11
+theme_override_colors/font_color = Color(0.568627, 0.6, 0.603922, 1)

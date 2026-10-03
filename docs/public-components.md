@@ -302,8 +302,51 @@ native row Controls when their identities stay the same. Previous and Next
 change only the visible page. The consumer decides whether selection changes
 rules or merely inspects a recorded result.
 
-`columns` selects one or two equally sized native grid columns. Phone class
-collections use two; roll collections use one. Caption, complete 44 px rows and
+`empty_text: String` supplies the empty collection message (default “No entries in this group.”). The consuming screen owns domain copy; captions do not change behavior.
+
+`focus_entry(id) -> bool` reveals the entry’s page and gives its retained row
+native keyboard focus. It returns false when the collection is invisible or
+the entry is absent.
+
+`framed_collection` is an optional authored presentation with a gold caption,
+surface frame and persistent range, Previous, page number and Next footer.
+It reserves its footer on a single or empty page and retains native 44 px page
+actions. The default presentation and selection behavior stay the same.
+
+The fullscreen task theme supplies `TaskGlyphButton` for 44 px arrow/close
+targets: its compact margins accommodate 24–30 px glyphs in every button state.
+`TaskDetailTab` supplies the 14 px, weight-600 display face; consumers author
+their tab borders and equal expansion. `TaskFooter` and `TaskFooterPhone` are
+PanelContainer variations with a top rule and the standard/phone raised fill.
+
+Framed row titles show at most two wrapped lines, with ellipsis for overflow.
+The measured row height uses the same line limit. The full title remains in the
+row's accessible name; consumers must expose complete copy in entry Details.
+This is a summary presentation limit, never a domain text-length restriction.
+
+`get_footer_slot() -> HBoxContainer` returns the public slot for ordinary
+Package-owned footer Controls. The consumer retains ownership: add children
+with `add_child()`, remove them with `remove_child()`, and free them only when
+their owning consumer is finished. The Kit does not free or replace these
+children during configuration or page changes. The slot is visible while it
+has children and the pager is visible; its combined minimum participates in
+the native pager row. In the default, unframed presentation a single-page
+collection hides the pager and its slot. Use framed presentation when footer
+content must remain visible on single or empty pages.
+In framed phone presentation the caption and separate range label are hidden,
+the range appears below the page number, and the slot shares the compact row
+with Previous/Next. Keep composed children bounded so the 44px paging targets
+and page indicator remain reachable.
+
+```gdscript
+# Both nodes are authored by the consuming Package.
+var actions := get_node(^"QuickResources")
+remove_child(actions)
+get_node(^"Collection").get_footer_slot().add_child(actions)
+```
+
+`columns` selects one or two equally sized native grid columns. The consuming
+screen selects the appropriate arrangement. Caption, complete 44 px rows and
 fixed page actions use the approved landscape phone density. `capture_state()`
 and `restore_state(state)` retain the visible page as plain data when restoring
 a consumer's draft; they do not change the selected entry or any domain state.
@@ -351,3 +394,30 @@ same colours and borders with the approved tablet insets. Summary blocks use
 The pager's authored `Pager/Previous` and `Pager/Next` Buttons expose their native
 `text` property for localized labels. These are public composition paths, alongside
 `Area`; no custom text wrapper is needed.
+
+
+`collection_layout` selects the framed collection density: `0` (Ordinary),
+`1` (Wide) or `2` (Inventory). It changes only native row spacing and typography;
+the caller still selects `columns` and supplies the collection records.
+
+TextField, TextArea and both task variants expose `is_editor_focused() -> bool`
+to preserve the native input focus when replacing an owned form. It returns
+only whether the component's native editor holds focus. Pair it with
+`focus_editor()`; consumers do not inspect component children.
+
+Task fields accept native theme constant overrides `label_font_size` and
+`editor_font_size`. TaskTextArea also accepts `editor_minimum_height`. Omitted
+overrides use the existing `compact` defaults. These are presentation values;
+validation, editability and value signals retain their ordinary contracts.
+
+PaginatedContent exposes `get_pager() -> HBoxContainer` for a consumer's fixed
+footer. On the first call the component detaches its native pager; add the
+returned Container to an authored footer with `add_child()`. It retains its
+signals and page behavior, and subsequent calls return the same pager. Do not
+inspect its children. The caller owns the footer lifetime and must retain it
+while the content is alive. The component then measures the whole body without
+reserving a second internal pager. Focus tracking follows its current Viewport
+when native content is reparented into or out of a Window.
+TextField, TextArea and their task variants stay together on one page, including
+the field label and validation copy. Their authored minimum height must fit the
+available content viewport, like every other indivisible interactive control.
