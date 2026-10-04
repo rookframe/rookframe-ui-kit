@@ -14,15 +14,28 @@ The fix keeps layout work inside the stock Node lifecycle. `_queue_fit` does not
 
 ## Verification
 
-Stock Godot 4.7.2 Mono. `pagination-green-minimized.log` shows the exact minimized remove/free loop drains without native errors. `pagination-green-lifecycle.log` shows four native scenarios with 20 lifecycle checks in 2.715 seconds: framed collections with/without footer content on phone, ordinary phone collections, and framed desktop collections. They check already-queued removal, pending reset, offline configuration, reattachment after/before callback drain, page clamping, retained selection/focus, native row mouse input, hidden fitting, resize, and ordinary remove/free. Selection continues to emit intent; the consumer projects that selected ID back through `configure`, as documented. No errors are filtered or hidden.
+Stock Godot 4.7.2 Mono. The earlier standalone `--script` runs are diagnostic evidence only: `pagination-green-minimized.log` records the minimized remove/free loop, and `pagination-green-lifecycle.log` records a console counter for four scenarios. That counter is not GdUnit acceptance evidence.
 
-The disposable native command was:
+The accepted lifecycle coverage is the later disposable **GdUnit4 6.2.1** suite. `pagination-gdunit-lifecycle.xml` and `pagination-gdunit-lifecycle.log` report **four cases passed in 2.137 seconds**, with zero errors, failures, skips, flaky results or orphans. The cases instantiate the actual public collection scene in stock native SubViewports: phone framed with footer, phone framed without footer, phone ordinary with footer (844 × 390), and desktop framed without footer (1920 × 1080). The suite makes 20 explicit GdUnit assertions, five per case; JUnit reports cases rather than assertion counts. Each case checks:
+
+1. Already-queued layout drains after removal and clears pending state.
+2. Detached configuration fits after re-entry, clamps the restored page, retains selected-row visibility/focus, and handles actual native mouse input. Selection emits intent; the consumer projects that ID back through `configure`, as documented.
+3. Hidden fitting and resize retain the selected entry and recover focus.
+4. Reattachment before a queued callback drains completes fitting and retains focus.
+5. Ordinary `remove_child` and `queue_free`, including footer exit, leave no live collection or viewport.
+
+The same suite was run against the original public `b8aa5fa929f0f352096d63a53f01bf1e0af39b70` collection script as a temporary baseline probe. `pagination-gdunit-baseline.xml` and `pagination-gdunit-baseline.log` report four failing cases, 16 errors and exit 100, including the exact native detached `get_viewport_rect` errors. This proves those errors are detected by the framework. The approved `e2a1e807d73c907bf360aa38a21a55b1773965e2` production source was restored byte-for-byte before the passing run. Native runtime and script error reporting were enabled; no expected-error matching, filtering or suppression was used.
+
+The disposable GdUnit acceptance command was:
 
 ```sh
-/Applications/Godot_mono.app/Contents/MacOS/Godot --path . --script tests/pagination_lifecycle_disposable.gd
+/Applications/Godot_mono.app/Contents/MacOS/Godot --path . \
+  --script res://addons/gdUnit4/bin/GdUnitCmdTool.gd \
+  -a res://tests/pagination_lifecycle_disposable.gd -c \
+  -rd reports/pagination-lifecycle-gdunit
 ```
 
-`affected.xml` and `pagination-affected.log`: the two existing fullscreen-wizard/content cases passed in 0.717 seconds, with zero errors/failures/skips/flaky/orphans. The suite includes ordinary measured choice pagination, profile changes, native field layout and retained content pages. GdUnit4 6.2.1 was acquired from its exact public commit through the pinned public gd-plug bootstrap. The temporary fixture, UID and temporary acquisition wiring were removed; no retained test matrix was added. The coordinating task owns the original public application rerun after public dependency acquisition.
+`affected.xml` and `pagination-affected.log` retain the earlier two existing fullscreen-wizard/content cases passed in 0.717 seconds, with zero errors/failures/skips/flaky/orphans. Those cases cover measured choice pagination, profile changes, native field layout and retained content pages; they do not stand in for the four lifecycle cases. GdUnit4 6.2.1 was acquired from its exact public commit through the pinned public gd-plug bootstrap. The disposable lifecycle suite, UID and temporary project settings were removed after saving its reports; no retained test matrix was added. This follow-up changes evidence only: production source and consumer pins remain byte-identical to public `e2a1e807`. The coordinating task owns the original public application rerun after public dependency acquisition.
 
 ## Public acquisition pointers
 
