@@ -1,0 +1,136 @@
+Godot Engine v4.7.2.stable.mono.official.ed1daf0bf - https://godotengine.org
+OpenGL API 4.1 Metal - 90.5 - Compatibility - Using Device: Apple - Apple M3 Pro
+
+[2J[H[38;2;233;150;122m
+--------------------------------------------------------------------------------------------------
+GdUnit4 Comandline Tool
+--------------------------------------------------------------------------------------------------[0m
+[38;2;0;191;255mDisabled fail fast![0m
+[38;2;0;191;255mSet write reports to reports/pagination-lifecycle-gdunit-baseline[0m
+[38;2;100;149;237mInstalling GdUnit4 session system hooks.[0m
+[38;2;100;149;237mSession hook 'GdUnitHtmlTestReporter' installed.[0m
+[38;2;100;149;237mSession hook 'GdUnitXMLTestReporter' installed.[0m
+[38;2;0;206;209mRun Test Suite: [0m[38;2;250;235;215mres://tests/pagination_lifecycle_disposable.gd[0m
+  [38;2;250;235;215mres://tests/pagination_lifecycle_disposable.gd[0m[38;2;128;128;128m > [0m[38;2;250;235;215mtest_phone_framed_footer_lifecycle[0m[38;2;34;139;34m STARTED[0m[38;2;128;128;128m[0m
+ERROR: Condition "!is_inside_tree()" is true. Returning: Rect2()
+   at: get_viewport_rect (scene/main/canvas_item.cpp:1231)
+   GDScript backtrace (most recent call first):
+       [0] _fit (res://rookframe/ui/components/data/paginated_choices.gd:121)
+ERROR: Condition "!is_inside_tree()" is true. Returning: Rect2()
+   at: get_viewport_rect (scene/main/canvas_item.cpp:1231)
+   GDScript backtrace (most recent call first):
+       [0] _fit (res://rookframe/ui/components/data/paginated_choices.gd:122)
+ERROR: Condition "!is_inside_tree()" is true. Returning: Rect2()
+   at: get_viewport_rect (scene/main/canvas_item.cpp:1231)
+   GDScript backtrace (most recent call first):
+       [0] _show_page (res://rookframe/ui/components/data/paginated_choices.gd:266)
+       [1] _fit (res://rookframe/ui/components/data/paginated_choices.gd:221)
+ERROR: Condition "!is_inside_tree()" is true. Returning: Rect2()
+   at: get_viewport_rect (scene/main/canvas_item.cpp:1231)
+   GDScript backtrace (most recent call first):
+       [0] _fit (res://rookframe/ui/components/data/paginated_choices.gd:121)
+ERROR: Condition "!is_inside_tree()" is true. Returning: Rect2()
+   at: get_viewport_rect (scene/main/canvas_item.cpp:1231)
+   GDScript backtrace (most recent call first):
+       [0] _fit (res://rookframe/ui/components/data/paginated_choices.gd:122)
+ERROR: Condition "!is_inside_tree()" is true. Returning: Rect2()
+   at: get_viewport_rect (scene/main/canvas_item.cpp:1231)
+   GDScript backtrace (most recent call first):
+       [0] _show_page (res://rookframe/ui/components/data/paginated_choices.gd:266)
+       [1] _fit (res://rookframe/ui/components/data/paginated_choices.gd:221)
+  [38;2;250;235;215mres://tests/pagination_lifecycle_disposable.gd[0m[38;2;128;128;128m > [0m[38;2;250;235;215mtest_phone_framed_footer_lifecycle[0m[38;2;178;34;34m[1m FAILED[0m[38;2;100;149;237m 533ms[0m
+  [38;2;0;206;209m[1m[4mReport:[0m
+  [38;2;128;128;128m[38;2;255;69;0mGodot Runtime Error ![0m
+  '[38;2;30;144;255mCondition "!is_inside_tree()" is true. Returning: Rect2()[0m'[0m[38;2;173;216;230m	at '_fit' in res://rookframe/ui/components/data/paginated_choices.gd:121[0m  [38;2;128;128;128m[38;2;255;69;0mGodot Runtime Error ![0m
+  '[38;2;30;144;255mCondition "!is_inside_tree()" is true. Returning: Rect2()[0m'[0m[38;2;173;216;230m	at '_fit' in res://rookframe/ui/components/data/paginated_choices.gd:122[0m  [38;2;128;128;128m[38;2;255;69;0mGodot Runtime Error ![0m
+  '[38;2;30;144;255mCondition "!is_inside_tree()" is true. Returning: Rect2()[0m'[0m[38;2;173;216;230m	at '_show_page' in res://rookframe/ui/components/data/paginated_choices.gd:266
+	at '_fit' in res://rookframe/ui/components/data/paginated_choices.gd:221[0m  [38;2;128;128;128m[38;2;255;69;0mGodot Runtime Error ![0m
+  '[38;2;30;144;255mCondition "!is_inside_tree()" is true. Returning: Rect2()[0m'[0m[38;2;173;216;230m	at '_fit' in res://rookframe/ui/components/data/paginated_choices.gd:121[0m  [38;2;128;128;128m[38;2;255;69;0mGodot Runtime Error ![0m
+  '[38;2;30;144;255mCondition "!is_inside_tree()" is true. Returning: Rect2()[0m'[0m[38;2;173;216;230m	at '_fit' in res://rookframe/ui/components/data/paginated_choices.gd:122[0m  [38;2;128;128;128m[38;2;255;69;0mGodot Runtime Error ![0m
+  '[38;2;30;144;255mCondition "!is_inside_tree()" is true. Returning: Rect2()[0m'[0m[38;2;173;216;230m	at '_show_page' in res://rookframe/ui/components/data/paginated_choices.gd:266
+	at '_fit' in res://rookframe/ui/components/data/paginated_choices.gd:221[0m  [38;2;128;128;128mOffline configuration must fit on re-entry, clamp pages and retain selection/focus through native row input.[0m[38;2;173;216;230m	at '_exercise' in res://tests/pagination_lifecycle_disposable.gd:68
+	at '_settle' in res://tests/pagination_lifecycle_disposable.gd:100[0m[38;2;128;128;128m[0m
+[38;2;128;128;128m[0m
+  [38;2;250;235;215mres://tests/pagination_lifecycle_disposable.gd[0m[38;2;128;128;128m > [0m[38;2;250;235;215mtest_phone_framed_without_footer_lifecycle[0m[38;2;34;139;34m STARTED[0m[38;2;128;128;128m[0m
+ERROR: Condition "!is_inside_tree()" is true. Returning: Rect2()
+   at: get_viewport_rect (scene/main/canvas_item.cpp:1231)
+   GDScript backtrace (most recent call first):
+       [0] _fit (res://rookframe/ui/components/data/paginated_choices.gd:121)
+ERROR: Condition "!is_inside_tree()" is true. Returning: Rect2()
+   at: get_viewport_rect (scene/main/canvas_item.cpp:1231)
+   GDScript backtrace (most recent call first):
+       [0] _fit (res://rookframe/ui/components/data/paginated_choices.gd:122)
+ERROR: Condition "!is_inside_tree()" is true. Returning: Rect2()
+   at: get_viewport_rect (scene/main/canvas_item.cpp:1231)
+   GDScript backtrace (most recent call first):
+       [0] _show_page (res://rookframe/ui/components/data/paginated_choices.gd:266)
+       [1] _fit (res://rookframe/ui/components/data/paginated_choices.gd:221)
+  [38;2;250;235;215mres://tests/pagination_lifecycle_disposable.gd[0m[38;2;128;128;128m > [0m[38;2;250;235;215mtest_phone_framed_without_footer_lifecycle[0m[38;2;178;34;34m[1m FAILED[0m[38;2;100;149;237m 532ms[0m
+  [38;2;0;206;209m[1m[4mReport:[0m
+  [38;2;128;128;128m[38;2;255;69;0mGodot Runtime Error ![0m
+  '[38;2;30;144;255mCondition "!is_inside_tree()" is true. Returning: Rect2()[0m'[0m[38;2;173;216;230m	at '_fit' in res://rookframe/ui/components/data/paginated_choices.gd:121[0m  [38;2;128;128;128m[38;2;255;69;0mGodot Runtime Error ![0m
+  '[38;2;30;144;255mCondition "!is_inside_tree()" is true. Returning: Rect2()[0m'[0m[38;2;173;216;230m	at '_fit' in res://rookframe/ui/components/data/paginated_choices.gd:122[0m  [38;2;128;128;128m[38;2;255;69;0mGodot Runtime Error ![0m
+  '[38;2;30;144;255mCondition "!is_inside_tree()" is true. Returning: Rect2()[0m'[0m[38;2;173;216;230m	at '_show_page' in res://rookframe/ui/components/data/paginated_choices.gd:266
+	at '_fit' in res://rookframe/ui/components/data/paginated_choices.gd:221[0m  [38;2;128;128;128mOffline configuration must fit on re-entry, clamp pages and retain selection/focus through native row input.[0m[38;2;173;216;230m	at '_exercise' in res://tests/pagination_lifecycle_disposable.gd:68
+	at '_settle' in res://tests/pagination_lifecycle_disposable.gd:100[0m[38;2;128;128;128m[0m
+[38;2;128;128;128m[0m
+  [38;2;250;235;215mres://tests/pagination_lifecycle_disposable.gd[0m[38;2;128;128;128m > [0m[38;2;250;235;215mtest_phone_ordinary_footer_lifecycle[0m[38;2;34;139;34m STARTED[0m[38;2;128;128;128m[0m
+ERROR: Condition "!is_inside_tree()" is true. Returning: Rect2()
+   at: get_viewport_rect (scene/main/canvas_item.cpp:1231)
+   GDScript backtrace (most recent call first):
+       [0] _fit (res://rookframe/ui/components/data/paginated_choices.gd:121)
+ERROR: Condition "!is_inside_tree()" is true. Returning: Rect2()
+   at: get_viewport_rect (scene/main/canvas_item.cpp:1231)
+   GDScript backtrace (most recent call first):
+       [0] _fit (res://rookframe/ui/components/data/paginated_choices.gd:122)
+ERROR: Condition "!is_inside_tree()" is true. Returning: Rect2()
+   at: get_viewport_rect (scene/main/canvas_item.cpp:1231)
+   GDScript backtrace (most recent call first):
+       [0] _fit (res://rookframe/ui/components/data/paginated_choices.gd:121)
+ERROR: Condition "!is_inside_tree()" is true. Returning: Rect2()
+   at: get_viewport_rect (scene/main/canvas_item.cpp:1231)
+   GDScript backtrace (most recent call first):
+       [0] _fit (res://rookframe/ui/components/data/paginated_choices.gd:122)
+  [38;2;250;235;215mres://tests/pagination_lifecycle_disposable.gd[0m[38;2;128;128;128m > [0m[38;2;250;235;215mtest_phone_ordinary_footer_lifecycle[0m[38;2;178;34;34m[1m FAILED[0m[38;2;100;149;237m 534ms[0m
+  [38;2;0;206;209m[1m[4mReport:[0m
+  [38;2;128;128;128m[38;2;255;69;0mGodot Runtime Error ![0m
+  '[38;2;30;144;255mCondition "!is_inside_tree()" is true. Returning: Rect2()[0m'[0m[38;2;173;216;230m	at '_fit' in res://rookframe/ui/components/data/paginated_choices.gd:121[0m  [38;2;128;128;128m[38;2;255;69;0mGodot Runtime Error ![0m
+  '[38;2;30;144;255mCondition "!is_inside_tree()" is true. Returning: Rect2()[0m'[0m[38;2;173;216;230m	at '_fit' in res://rookframe/ui/components/data/paginated_choices.gd:122[0m  [38;2;128;128;128m[38;2;255;69;0mGodot Runtime Error ![0m
+  '[38;2;30;144;255mCondition "!is_inside_tree()" is true. Returning: Rect2()[0m'[0m[38;2;173;216;230m	at '_fit' in res://rookframe/ui/components/data/paginated_choices.gd:121[0m  [38;2;128;128;128m[38;2;255;69;0mGodot Runtime Error ![0m
+  '[38;2;30;144;255mCondition "!is_inside_tree()" is true. Returning: Rect2()[0m'[0m[38;2;173;216;230m	at '_fit' in res://rookframe/ui/components/data/paginated_choices.gd:122[0m  [38;2;128;128;128mOffline configuration must fit on re-entry, clamp pages and retain selection/focus through native row input.[0m[38;2;173;216;230m	at '_exercise' in res://tests/pagination_lifecycle_disposable.gd:68
+	at '_settle' in res://tests/pagination_lifecycle_disposable.gd:100[0m[38;2;128;128;128m[0m
+[38;2;128;128;128m[0m
+  [38;2;250;235;215mres://tests/pagination_lifecycle_disposable.gd[0m[38;2;128;128;128m > [0m[38;2;250;235;215mtest_desktop_framed_without_footer_lifecycle[0m[38;2;34;139;34m STARTED[0m[38;2;128;128;128m[0m
+ERROR: Condition "!is_inside_tree()" is true. Returning: Rect2()
+   at: get_viewport_rect (scene/main/canvas_item.cpp:1231)
+   GDScript backtrace (most recent call first):
+       [0] _fit (res://rookframe/ui/components/data/paginated_choices.gd:121)
+ERROR: Condition "!is_inside_tree()" is true. Returning: Rect2()
+   at: get_viewport_rect (scene/main/canvas_item.cpp:1231)
+   GDScript backtrace (most recent call first):
+       [0] _fit (res://rookframe/ui/components/data/paginated_choices.gd:122)
+ERROR: Condition "!is_inside_tree()" is true. Returning: Rect2()
+   at: get_viewport_rect (scene/main/canvas_item.cpp:1231)
+   GDScript backtrace (most recent call first):
+       [0] _show_page (res://rookframe/ui/components/data/paginated_choices.gd:266)
+       [1] _fit (res://rookframe/ui/components/data/paginated_choices.gd:221)
+  [38;2;250;235;215mres://tests/pagination_lifecycle_disposable.gd[0m[38;2;128;128;128m > [0m[38;2;250;235;215mtest_desktop_framed_without_footer_lifecycle[0m[38;2;178;34;34m[1m FAILED[0m[38;2;100;149;237m 529ms[0m
+  [38;2;0;206;209m[1m[4mReport:[0m
+  [38;2;128;128;128m[38;2;255;69;0mGodot Runtime Error ![0m
+  '[38;2;30;144;255mCondition "!is_inside_tree()" is true. Returning: Rect2()[0m'[0m[38;2;173;216;230m	at '_fit' in res://rookframe/ui/components/data/paginated_choices.gd:121[0m  [38;2;128;128;128m[38;2;255;69;0mGodot Runtime Error ![0m
+  '[38;2;30;144;255mCondition "!is_inside_tree()" is true. Returning: Rect2()[0m'[0m[38;2;173;216;230m	at '_fit' in res://rookframe/ui/components/data/paginated_choices.gd:122[0m  [38;2;128;128;128m[38;2;255;69;0mGodot Runtime Error ![0m
+  '[38;2;30;144;255mCondition "!is_inside_tree()" is true. Returning: Rect2()[0m'[0m[38;2;173;216;230m	at '_show_page' in res://rookframe/ui/components/data/paginated_choices.gd:266
+	at '_fit' in res://rookframe/ui/components/data/paginated_choices.gd:221[0m  [38;2;128;128;128mOffline configuration must fit on re-entry, clamp pages and retain selection/focus through native row input.[0m[38;2;173;216;230m	at '_exercise' in res://tests/pagination_lifecycle_disposable.gd:68
+	at '_settle' in res://tests/pagination_lifecycle_disposable.gd:100[0m[38;2;128;128;128m[0m
+[38;2;128;128;128m[0m
+[38;2;30;144;255mStatistics:[0m[38;2;128;128;128m 4 test cases | 16 errors | 4 failures | 0 flaky | 0 skipped | 0 orphans |[0m[38;2;34;139;34m PASSED[0m[38;2;100;149;237m 2s 136ms[0m
+[38;2;128;128;128m[0m
+[38;2;128;128;128m[0m
+[38;2;30;144;255mOverall Summary:[0m[38;2;255;255;255m 4 test cases | 16 errors | 4 failures | 0 flaky | 0 skipped | 0 orphans |[0m
+[38;2;233;150;122mExecuted test suites: (1/1)[0m
+[38;2;233;150;122mExecuted test cases : (4/4)[0m
+[38;2;233;150;122mTotal execution time: 2s 136ms[0m
+[38;2;255;255;255m [0m[38;2;100;149;237mOpen XML Report at: file://reports/pagination-lifecycle-gdunit-baseline/report_1/results.xml[0m
+[38;2;100;149;237mOpen HTML Report at: file://reports/pagination-lifecycle-gdunit-baseline/report_1/index.html[0m
+[38;2;178;34;34mExit code: 100[0m
+Run dispose test resources

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites id="2026-10-04" name="report_1" tests="4" failures="0" skipped="0" flaky="0" time="0.000">
+	<testsuite id="0" name="pagination_lifecycle_disposable" package="tests" timestamp="2026-10-04T03:12:15" hostname="localhost" tests="4" failures="0" errors="0" skipped="0" flaky="0" time="2.137">
+		<testcase name="test_phone_framed_footer_lifecycle" classname="pagination_lifecycle_disposable" time="0.530">
+		</testcase>
+		<testcase name="test_phone_framed_without_footer_lifecycle" classname="pagination_lifecycle_disposable" time="0.533">
+		</testcase>
+		<testcase name="test_phone_ordinary_footer_lifecycle" classname="pagination_lifecycle_disposable" time="0.532">
+		</testcase>
+		<testcase name="test_desktop_framed_without_footer_lifecycle" classname="pagination_lifecycle_disposable" time="0.534">
+		</testcase>
+	</testsuite>
+</testsuites>

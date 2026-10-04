@@ -52,6 +52,9 @@ func focus_entry(id: String) -> bool:
 			return true
 	return false
 
+func _enter_tree() -> void:
+	_queue_fit()
+
 func _ready() -> void:
 	if framed_collection:
 		var pager := get_node(^"Pager")
@@ -112,12 +115,15 @@ func configure(entries: Array[Dictionary], selected_id: String, caption: String 
 	_queue_fit()
 
 func _queue_fit() -> void:
-	if not is_node_ready() or _pending:
+	if not is_inside_tree() or not is_node_ready() or _pending:
 		return
 	_pending = true
 	_fit.call_deferred()
 
 func _fit() -> void:
+	if not is_inside_tree():
+		_pending = false
+		return
 	var phone := get_viewport_rect().size.y <= 560
 	var tablet := get_viewport_rect().size.x <= 1150 and not phone
 	var height := 48 if phone else 59 if tablet and collection_layout == 1 else 55 if tablet else 65 if collection_layout == 1 else 59

@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites id="2026-10-04" name="report_1" tests="4" failures="4" skipped="0" flaky="0" time="0.000">
+	<testsuite id="0" name="pagination_lifecycle_disposable" package="tests" timestamp="2026-10-04T03:12:00" hostname="localhost" tests="4" failures="4" errors="16" skipped="0" flaky="0" time="2.136">
+		<testcase name="test_phone_framed_footer_lifecycle" classname="pagination_lifecycle_disposable" time="0.533">
+			<error message="ERROR: res://tests/pagination_lifecycle_disposable.gd:121" type="ABORT">
+<![CDATA[
+Godot Runtime Error !
+  'Condition "!is_inside_tree()" is true. Returning: Rect2()'
+	at '_fit' in res://rookframe/ui/components/data/paginated_choices.gd:121
+]]>
+			</error>
+			<error message="ERROR: res://tests/pagination_lifecycle_disposable.gd:122" type="ABORT">
+<![CDATA[
+Godot Runtime Error !
+  'Condition "!is_inside_tree()" is true. Returning: Rect2()'
+	at '_fit' in res://rookframe/ui/components/data/paginated_choices.gd:122
+]]>
+			</error>
+			<error message="ERROR: res://tests/pagination_lifecycle_disposable.gd:266" type="ABORT">
+<![CDATA[
+Godot Runtime Error !
+  'Condition "!is_inside_tree()" is true. Returning: Rect2()'
+	at '_show_page' in res://rookframe/ui/components/data/paginated_choices.gd:266
+	at '_fit' in res://rookframe/ui/components/data/paginated_choices.gd:221
+]]>
+			</error>
+			<error message="ERROR: res://tests/pagination_lifecycle_disposable.gd:121" type="ABORT">
+<![CDATA[
+Godot Runtime Error !
+  'Condition "!is_inside_tree()" is true. Returning: Rect2()'
+	at '_fit' in res://rookframe/ui/components/data/paginated_choices.gd:121
+]]>
+			</error>
+			<error message="ERROR: res://tests/pagination_lifecycle_disposable.gd:122" type="ABORT">
+<![CDATA[
+Godot Runtime Error !
+  'Condition "!is_inside_tree()" is true. Returning: Rect2()'
+	at '_fit' in res://rookframe/ui/components/data/paginated_choices.gd:122
+]]>
+			</error>
+			<error message="ERROR: res://tests/pagination_lifecycle_disposable.gd:266" type="ABORT">
+<![CDATA[
+Godot Runtime Error !
+  'Condition "!is_inside_tree()" is true. Returning: Rect2()'
+	at '_show_page' in res://rookframe/ui/components/data/paginated_choices.gd:266
+	at '_fit' in res://rookframe/ui/components/data/paginated_choices.gd:221
+]]>
+			</error>
+			<failure message="FAILED: res://tests/pagination_lifecycle_disposable.gd:68" type="FAILURE">
+<![CDATA[
+Offline configuration must fit on re-entry, clamp pages and retain selection/focus through native row input.
+	at '_exercise' in res://tests/pagination_lifecycle_disposable.gd:68
+	at '_settle' in res://tests/pagination_lifecycle_disposable.gd:100
+]]>
+			</failure>
+		</testcase>
+		<testcase name="test_phone_framed_without_footer_lifecycle" classname="pagination_lifecycle_disposable" time="0.532">
+			<error message="ERROR: res://tests/pagination_lifecycle_disposable.gd:121" type="ABORT">
+<![CDATA[
+Godot Runtime Error !
+  'Condition "!is_inside_tree()" is true. Returning: Rect2()'
+	at '_fit' in res://rookframe/ui/components/data/paginated_choices.gd:121
+]]>
+			</error>
+			<error message="ERROR: res://tests/pagination_lifecycle_disposable.gd:122" type="ABORT">
+<![CDATA[
+Godot Runtime Error !
+  'Condition "!is_inside_tree()" is true. Returning: Rect2()'
+	at '_fit' in res://rookframe/ui/components/data/paginated_choices.gd:122
+]]>
+			</error>
+			<error message="ERROR: res://tests/pagination_lifecycle_disposable.gd:266" type="ABORT">
+<![CDATA[
+Godot Runtime Error !
+  'Condition "!is_inside_tree()" is true. Returning: Rect2()'
+	at '_show_page' in res://rookframe/ui/components/data/paginated_choices.gd:266
+	at '_fit' in res://rookframe/ui/components/data/paginated_choices.gd:221
+]]>
+			</error>
+			<failure message="FAILED: res://tests/pagination_lifecycle_disposable.gd:68" type="FAILURE">
+<![CDATA[
+Offline configuration must fit on re-entry, clamp pages and retain selection/focus through native row input.
+	at '_exercise' in res://tests/pagination_lifecycle_disposable.gd:68
+	at '_settle' in res://tests/pagination_lifecycle_disposable.gd:100
+]]>
+			</failure>
+		</testcase>
+		<testcase name="test_phone_ordinary_footer_lifecycle" classname="pagination_lifecycle_disposable" time="0.534">
+			<error message="ERROR: res://tests/pagination_lifecycle_disposable.gd:121" type="ABORT">
+<![CDATA[
+Godot Runtime Error !
+  'Condition "!is_inside_tree()" is true. Returning: Rect2()'
+	at '_fit' in res://rookframe/ui/components/data/paginated_choices.gd:121
+]]>
+			</error>
+			<error message="ERROR: res://tests/pagination_lifecycle_disposable.gd:122" type="ABORT">
+<![CDATA[
+Godot Runtime Error !
+  'Condition "!is_inside_tree()" is true. Returning: Rect2()'
+	at '_fit' in res://rookframe/ui/components/data/paginated_choices.gd:122
+]]>
+			</error>
+			<error message="ERROR: res://tests/pagination_lifecycle_disposable.gd:121" type="ABORT">
+<![CDATA[
+Godot Runtime Error !
+  'Condition "!is_inside_tree()" is true. Returning: Rect2()'
+	at '_fit' in res://rookframe/ui/components/data/paginated_choices.gd:121
+]]>
+			</error>
+			<error message="ERROR: res://tests/pagination_lifecycle_disposable.gd:122" type="ABORT">
+<![CDATA[
+Godot Runtime Error !
+  'Condition "!is_inside_tree()" is true. Returning: Rect2()'
+	at '_fit' in res://rookframe/ui/components/data/paginated_choices.gd:122
+]]>
+			</error>
+			<failure message="FAILED: res://tests/pagination_lifecycle_disposable.gd:68" type="FAILURE">
+<![CDATA[
+Offline configuration must fit on re-entry, clamp pages and retain selection/focus through native row input.
+	at '_exercise' in res://tests/pagination_lifecycle_disposable.gd:68
+	at '_settle' in res://tests/pagination_lifecycle_disposable.gd:100
+]]>
+			</failure>
+		</testcase>
+		<testcase name="test_desktop_framed_without_footer_lifecycle" classname="pagination_lifecycle_disposable" time="0.529">
+			<error message="ERROR: res://tests/pagination_lifecycle_disposable.gd:121" type="ABORT">
+<![CDATA[
+Godot Runtime Error !
+  'Condition "!is_inside_tree()" is true. Returning: Rect2()'
+	at '_fit' in res://rookframe/ui/components/data/paginated_choices.gd:121
+]]>
+			</error>
+			<error message="ERROR: res://tests/pagination_lifecycle_disposable.gd:122" type="ABORT">
+<![CDATA[
+Godot Runtime Error !
+  'Condition "!is_inside_tree()" is true. Returning: Rect2()'
+	at '_fit' in res://rookframe/ui/components/data/paginated_choices.gd:122
+]]>
+			</error>
+			<error message="ERROR: res://tests/pagination_lifecycle_disposable.gd:266" type="ABORT">
+<![CDATA[
+Godot Runtime Error !
+  'Condition "!is_inside_tree()" is true. Returning: Rect2()'
+	at '_show_page' in res://rookframe/ui/components/data/paginated_choices.gd:266
+	at '_fit' in res://rookframe/ui/components/data/paginated_choices.gd:221
+]]>
+			</error>
+			<failure message="FAILED: res://tests/pagination_lifecycle_disposable.gd:68" type="FAILURE">
+<![CDATA[
+Offline configuration must fit on re-entry, clamp pages and retain selection/focus through native row input.
+	at '_exercise' in res://tests/pagination_lifecycle_disposable.gd:68
+	at '_settle' in res://tests/pagination_lifecycle_disposable.gd:100
+]]>
+			</failure>
+		</testcase>
+	</testsuite>
+</testsuites>
