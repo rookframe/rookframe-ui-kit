@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites id="2026-10-04" name="report_1" tests="2" failures="0" skipped="0" flaky="0" time="0.000">
+	<testsuite id="0" name="fullscreen_wizard" package="tests" timestamp="2026-10-04T02:49:46" hostname="localhost" tests="2" failures="0" errors="0" skipped="0" flaky="0" time="0.717">
+		<testcase name="test_fixed_frame_measured_choices_and_actions" classname="fullscreen_wizard" time="0.231">
+		</testcase>
+		<testcase name="test_long_native_content_has_complete_readable_pages_and_retains_position" classname="fullscreen_wizard" time="0.475">
+		</testcase>
+	</testsuite>
+</testsuites>
