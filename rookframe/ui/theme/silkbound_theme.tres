@@ -6,7 +6,9 @@
 
 
 
-[ext_resource type="FontFile" path="res://rookframe/ui/assets/fonts/eb-garamond/EBGaramond[wght].ttf" id="garamond"]
+[ext_resource type="FontFile" path="res://rookframe/ui/assets/fonts/eb-garamond/prerendered/roman.res" id="garamond"]
+
+[ext_resource type="FontFile" path="res://rookframe/ui/assets/fonts/eb-garamond/prerendered/ink.res" id="garamond_ink"]
 
 [sub_resource type="StyleBoxFlat" id="Button"]
 bg_color = Color(0.082353, 0.090196, 0.098039, 1)
@@ -458,6 +460,20 @@ variation_opentype = {2003265652: 400.0}
 spacing_top = -1
 spacing_bottom = 0
 
+[sub_resource type="FontVariation" id="line_0_ink"]
+base_font = ExtResource("garamond_ink")
+variation_opentype = {2003265652: 500.0}
+spacing_top = -3
+spacing_bottom = -3
+opentype_features = {1953396077: 1}
+
+[sub_resource type="FontVariation" id="line_9_ink"]
+base_font = ExtResource("garamond_ink")
+variation_opentype = {2003265652: 500.0}
+spacing_top = -3
+spacing_bottom = -2
+opentype_features = {1953396077: 1}
+
 [resource]
 default_font = ExtResource("ui")
 default_font_size = 20
@@ -898,3 +914,18 @@ SilkCreatureDialogAmountDesktop/base_type = &"Label"
 SilkCreatureDialogAmountDesktop/fonts/font = SubResource("SilkCreatureDialogAmountDesktop")
 SilkCreatureDialogAmountDesktop/font_sizes/font_size = 20
 SilkCreatureDialogAmountDesktop/constants/line_spacing = 0
+
+SilkCreatureTabSelectedPhone/base_type = &"Label"
+SilkCreatureTabSelectedPhone/fonts/font = SubResource("line_9_ink")
+SilkCreatureTabSelectedPhone/font_sizes/font_size = 18
+SilkCreatureTabSelectedPhone/constants/line_spacing = 0
+
+SilkCreatureTabSelectedTablet/base_type = &"Label"
+SilkCreatureTabSelectedTablet/fonts/font = SubResource("line_9_ink")
+SilkCreatureTabSelectedTablet/font_sizes/font_size = 19
+SilkCreatureTabSelectedTablet/constants/line_spacing = 0
+
+SilkCreatureTabSelectedDesktop/base_type = &"Label"
+SilkCreatureTabSelectedDesktop/fonts/font = SubResource("line_0_ink")
+SilkCreatureTabSelectedDesktop/font_sizes/font_size = 23
+SilkCreatureTabSelectedDesktop/constants/line_spacing = 0
