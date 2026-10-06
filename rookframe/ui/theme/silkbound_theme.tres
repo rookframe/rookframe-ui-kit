@@ -6,6 +6,8 @@
 
 
 
+[ext_resource type="FontFile" path="res://rookframe/ui/assets/fonts/eb-garamond/EBGaramond[wght].ttf" id="garamond"]
+
 [sub_resource type="StyleBoxFlat" id="Button"]
 bg_color = Color(0.082353, 0.090196, 0.098039, 1)
 border_color = Color(0.356863, 0.384314, 0.396078, 1)
@@ -318,6 +320,90 @@ content_margin_top = 0.0
 border_width_bottom = 1
 content_margin_bottom = 0.0
 
+[sub_resource type="FontVariation" id="line_0"]
+base_font = ExtResource("garamond")
+variation_opentype = {2003265652: 500.0}
+spacing_top = -3
+spacing_bottom = -3
+opentype_features = {1953396077: 1}
+
+[sub_resource type="FontVariation" id="line_1"]
+base_font = ExtResource("garamond")
+variation_opentype = {2003265652: 500.0}
+spacing_top = -4
+spacing_bottom = -3
+opentype_features = {1953396077: 1}
+
+[sub_resource type="FontVariation" id="line_2"]
+base_font = ExtResource("garamond")
+variation_opentype = {2003265652: 500.0}
+spacing_top = -5
+spacing_bottom = -4
+opentype_features = {1953396077: 1}
+
+[sub_resource type="FontVariation" id="line_3"]
+base_font = ExtResource("garamond")
+variation_opentype = {2003265652: 400.0}
+spacing_top = -3
+spacing_bottom = -2
+opentype_features = {1953396077: 1}
+
+[sub_resource type="FontVariation" id="line_4"]
+base_font = ExtResource("garamond")
+variation_opentype = {2003265652: 400.0}
+spacing_top = -1
+spacing_bottom = 0
+opentype_features = {1953396077: 1}
+
+[sub_resource type="FontVariation" id="line_5"]
+base_font = ExtResource("garamond")
+variation_opentype = {2003265652: 500.0}
+spacing_top = -2
+spacing_bottom = -1
+opentype_features = {1953396077: 1}
+
+[sub_resource type="FontVariation" id="line_6"]
+base_font = ExtResource("garamond")
+variation_opentype = {2003265652: 500.0}
+spacing_top = -2
+spacing_bottom = -2
+opentype_features = {1953396077: 1}
+
+[sub_resource type="FontVariation" id="line_7"]
+base_font = ExtResource("garamond")
+variation_opentype = {2003265652: 400.0}
+spacing_top = -1
+spacing_bottom = -1
+opentype_features = {1953396077: 1}
+
+[sub_resource type="FontVariation" id="line_8"]
+base_font = ExtResource("garamond")
+variation_opentype = {2003265652: 400.0}
+spacing_top = -2
+spacing_bottom = -1
+opentype_features = {1953396077: 1}
+
+[sub_resource type="FontVariation" id="line_9"]
+base_font = ExtResource("garamond")
+variation_opentype = {2003265652: 500.0}
+spacing_top = -3
+spacing_bottom = -2
+opentype_features = {1953396077: 1}
+
+[sub_resource type="FontVariation" id="line_10"]
+base_font = ExtResource("garamond")
+variation_opentype = {2003265652: 400.0}
+spacing_top = 0
+spacing_bottom = 0
+opentype_features = {1953396077: 1}
+
+[sub_resource type="FontVariation" id="line_11"]
+base_font = ExtResource("garamond")
+variation_opentype = {2003265652: 400.0}
+spacing_top = -2
+spacing_bottom = -2
+opentype_features = {1953396077: 1}
+
 [resource]
 default_font = ExtResource("ui")
 default_font_size = 20
@@ -443,3 +529,273 @@ SilkPrimaryIcon/colors/icon_normal_color = Color(0.082353, 0.090196, 0.098039, 1
 SilkPrimaryIcon/colors/icon_hover_color = Color(0.082353, 0.090196, 0.098039, 1)
 SilkPrimaryIcon/colors/icon_pressed_color = Color(0.082353, 0.090196, 0.098039, 1)
 SilkPrimaryIcon/colors/icon_disabled_color = Color(0.082353, 0.090196, 0.098039, 1)
+
+SilkCreatureNamePhone/base_type = &"Label"
+SilkCreatureNamePhone/fonts/font = SubResource("line_0")
+SilkCreatureNamePhone/font_sizes/font_size = 23
+SilkCreatureNamePhone/constants/line_spacing = 0
+
+SilkCreatureNameTablet/base_type = &"Label"
+SilkCreatureNameTablet/fonts/font = SubResource("line_1")
+SilkCreatureNameTablet/font_sizes/font_size = 29
+SilkCreatureNameTablet/constants/line_spacing = 0
+
+SilkCreatureNameDesktop/base_type = &"Label"
+SilkCreatureNameDesktop/fonts/font = SubResource("line_2")
+SilkCreatureNameDesktop/font_sizes/font_size = 40
+SilkCreatureNameDesktop/constants/line_spacing = 0
+
+SilkCreatureClassificationPhone/base_type = &"Label"
+SilkCreatureClassificationPhone/fonts/font = SubResource("line_3")
+SilkCreatureClassificationPhone/font_sizes/font_size = 14
+SilkCreatureClassificationPhone/constants/line_spacing = 0
+
+SilkCreatureClassificationTablet/base_type = &"Label"
+SilkCreatureClassificationTablet/fonts/font = SubResource("line_4")
+SilkCreatureClassificationTablet/font_sizes/font_size = 16
+SilkCreatureClassificationTablet/constants/line_spacing = 0
+
+SilkCreatureClassificationDesktop/base_type = &"Label"
+SilkCreatureClassificationDesktop/fonts/font = SubResource("line_4")
+SilkCreatureClassificationDesktop/font_sizes/font_size = 20
+SilkCreatureClassificationDesktop/constants/line_spacing = 0
+
+SilkCreatureSectionPhone/base_type = &"Label"
+SilkCreatureSectionPhone/fonts/font = SubResource("line_5")
+SilkCreatureSectionPhone/font_sizes/font_size = 20
+SilkCreatureSectionPhone/constants/line_spacing = 0
+
+SilkCreatureSectionTablet/base_type = &"Label"
+SilkCreatureSectionTablet/fonts/font = SubResource("line_5")
+SilkCreatureSectionTablet/font_sizes/font_size = 20
+SilkCreatureSectionTablet/constants/line_spacing = 0
+
+SilkCreatureSectionDesktop/base_type = &"Label"
+SilkCreatureSectionDesktop/fonts/font = SubResource("line_6")
+SilkCreatureSectionDesktop/font_sizes/font_size = 24
+SilkCreatureSectionDesktop/constants/line_spacing = 0
+
+SilkCreatureHealthTitlePhone/base_type = &"Label"
+SilkCreatureHealthTitlePhone/fonts/font = SubResource("line_7")
+SilkCreatureHealthTitlePhone/font_sizes/font_size = 15
+SilkCreatureHealthTitlePhone/constants/line_spacing = 0
+
+SilkCreatureHealthTitleTablet/base_type = &"Label"
+SilkCreatureHealthTitleTablet/fonts/font = SubResource("line_8")
+SilkCreatureHealthTitleTablet/font_sizes/font_size = 17
+SilkCreatureHealthTitleTablet/constants/line_spacing = 0
+
+SilkCreatureHealthTitleDesktop/base_type = &"Label"
+SilkCreatureHealthTitleDesktop/fonts/font = SubResource("line_7")
+SilkCreatureHealthTitleDesktop/font_sizes/font_size = 20
+SilkCreatureHealthTitleDesktop/constants/line_spacing = 0
+
+SilkCreatureHealthCaptionPhone/base_type = &"Label"
+SilkCreatureHealthCaptionPhone/fonts/font = SubResource("line_4")
+SilkCreatureHealthCaptionPhone/font_sizes/font_size = 12
+SilkCreatureHealthCaptionPhone/constants/line_spacing = 0
+
+SilkCreatureHealthCaptionTablet/base_type = &"Label"
+SilkCreatureHealthCaptionTablet/fonts/font = SubResource("line_7")
+SilkCreatureHealthCaptionTablet/font_sizes/font_size = 14
+SilkCreatureHealthCaptionTablet/constants/line_spacing = 0
+
+SilkCreatureHealthCaptionDesktop/base_type = &"Label"
+SilkCreatureHealthCaptionDesktop/fonts/font = SubResource("line_4")
+SilkCreatureHealthCaptionDesktop/font_sizes/font_size = 16
+SilkCreatureHealthCaptionDesktop/constants/line_spacing = 0
+
+SilkCreatureHealthValuePhone/base_type = &"Label"
+SilkCreatureHealthValuePhone/fonts/font = SubResource("line_0")
+SilkCreatureHealthValuePhone/font_sizes/font_size = 25
+SilkCreatureHealthValuePhone/constants/line_spacing = 0
+
+SilkCreatureHealthValueTablet/base_type = &"Label"
+SilkCreatureHealthValueTablet/fonts/font = SubResource("line_1")
+SilkCreatureHealthValueTablet/font_sizes/font_size = 28
+SilkCreatureHealthValueTablet/constants/line_spacing = 0
+
+SilkCreatureHealthValueDesktop/base_type = &"Label"
+SilkCreatureHealthValueDesktop/fonts/font = SubResource("line_2")
+SilkCreatureHealthValueDesktop/font_sizes/font_size = 34
+SilkCreatureHealthValueDesktop/constants/line_spacing = 0
+
+SilkCreatureVitalCaptionPhone/base_type = &"Label"
+SilkCreatureVitalCaptionPhone/fonts/font = SubResource("line_8")
+SilkCreatureVitalCaptionPhone/font_sizes/font_size = 14
+SilkCreatureVitalCaptionPhone/constants/line_spacing = 0
+
+SilkCreatureVitalCaptionTablet/base_type = &"Label"
+SilkCreatureVitalCaptionTablet/fonts/font = SubResource("line_8")
+SilkCreatureVitalCaptionTablet/font_sizes/font_size = 15
+SilkCreatureVitalCaptionTablet/constants/line_spacing = 0
+
+SilkCreatureVitalCaptionDesktop/base_type = &"Label"
+SilkCreatureVitalCaptionDesktop/fonts/font = SubResource("line_8")
+SilkCreatureVitalCaptionDesktop/font_sizes/font_size = 18
+SilkCreatureVitalCaptionDesktop/constants/line_spacing = 0
+
+SilkCreatureVitalValuePhone/base_type = &"Label"
+SilkCreatureVitalValuePhone/fonts/font = SubResource("line_9")
+SilkCreatureVitalValuePhone/font_sizes/font_size = 21
+SilkCreatureVitalValuePhone/constants/line_spacing = 0
+
+SilkCreatureVitalValueTablet/base_type = &"Label"
+SilkCreatureVitalValueTablet/fonts/font = SubResource("line_9")
+SilkCreatureVitalValueTablet/font_sizes/font_size = 23
+SilkCreatureVitalValueTablet/constants/line_spacing = 0
+
+SilkCreatureVitalValueDesktop/base_type = &"Label"
+SilkCreatureVitalValueDesktop/fonts/font = SubResource("line_0")
+SilkCreatureVitalValueDesktop/font_sizes/font_size = 28
+SilkCreatureVitalValueDesktop/constants/line_spacing = 0
+
+SilkCreatureTabPhone/base_type = &"Label"
+SilkCreatureTabPhone/fonts/font = SubResource("line_9")
+SilkCreatureTabPhone/font_sizes/font_size = 18
+SilkCreatureTabPhone/constants/line_spacing = 0
+
+SilkCreatureTabTablet/base_type = &"Label"
+SilkCreatureTabTablet/fonts/font = SubResource("line_9")
+SilkCreatureTabTablet/font_sizes/font_size = 19
+SilkCreatureTabTablet/constants/line_spacing = 0
+
+SilkCreatureTabDesktop/base_type = &"Label"
+SilkCreatureTabDesktop/fonts/font = SubResource("line_0")
+SilkCreatureTabDesktop/font_sizes/font_size = 23
+SilkCreatureTabDesktop/constants/line_spacing = 0
+
+SilkCreatureRuleTitlePhone/base_type = &"Label"
+SilkCreatureRuleTitlePhone/fonts/font = SubResource("line_6")
+SilkCreatureRuleTitlePhone/font_sizes/font_size = 19
+SilkCreatureRuleTitlePhone/constants/line_spacing = 0
+
+SilkCreatureRuleTitleTablet/base_type = &"Label"
+SilkCreatureRuleTitleTablet/fonts/font = SubResource("line_5")
+SilkCreatureRuleTitleTablet/font_sizes/font_size = 20
+SilkCreatureRuleTitleTablet/constants/line_spacing = 0
+
+SilkCreatureRuleTitleDesktop/base_type = &"Label"
+SilkCreatureRuleTitleDesktop/fonts/font = SubResource("line_6")
+SilkCreatureRuleTitleDesktop/font_sizes/font_size = 24
+SilkCreatureRuleTitleDesktop/constants/line_spacing = 0
+
+SilkCreatureRuleCopyPhone/base_type = &"Label"
+SilkCreatureRuleCopyPhone/fonts/font = SubResource("line_8")
+SilkCreatureRuleCopyPhone/font_sizes/font_size = 16
+SilkCreatureRuleCopyPhone/constants/line_spacing = 0
+
+SilkCreatureRuleCopyTablet/base_type = &"Label"
+SilkCreatureRuleCopyTablet/fonts/font = SubResource("line_4")
+SilkCreatureRuleCopyTablet/font_sizes/font_size = 18
+SilkCreatureRuleCopyTablet/constants/line_spacing = 0
+
+SilkCreatureRuleCopyDesktop/base_type = &"Label"
+SilkCreatureRuleCopyDesktop/fonts/font = SubResource("line_10")
+SilkCreatureRuleCopyDesktop/font_sizes/font_size = 21
+SilkCreatureRuleCopyDesktop/constants/line_spacing = 0
+
+SilkCreatureRollCaptionPhone/base_type = &"Label"
+SilkCreatureRollCaptionPhone/fonts/font = SubResource("line_8")
+SilkCreatureRollCaptionPhone/font_sizes/font_size = 14
+SilkCreatureRollCaptionPhone/constants/line_spacing = 0
+
+SilkCreatureRollCaptionTablet/base_type = &"Label"
+SilkCreatureRollCaptionTablet/fonts/font = SubResource("line_8")
+SilkCreatureRollCaptionTablet/font_sizes/font_size = 14
+SilkCreatureRollCaptionTablet/constants/line_spacing = 0
+
+SilkCreatureRollCaptionDesktop/base_type = &"Label"
+SilkCreatureRollCaptionDesktop/fonts/font = SubResource("line_11")
+SilkCreatureRollCaptionDesktop/font_sizes/font_size = 17
+SilkCreatureRollCaptionDesktop/constants/line_spacing = 0
+
+SilkCreatureRollValuePhone/base_type = &"Label"
+SilkCreatureRollValuePhone/fonts/font = SubResource("line_9")
+SilkCreatureRollValuePhone/font_sizes/font_size = 21
+SilkCreatureRollValuePhone/constants/line_spacing = 0
+
+SilkCreatureRollValueTablet/base_type = &"Label"
+SilkCreatureRollValueTablet/fonts/font = SubResource("line_9")
+SilkCreatureRollValueTablet/font_sizes/font_size = 22
+SilkCreatureRollValueTablet/constants/line_spacing = 0
+
+SilkCreatureRollValueDesktop/base_type = &"Label"
+SilkCreatureRollValueDesktop/fonts/font = SubResource("line_9")
+SilkCreatureRollValueDesktop/font_sizes/font_size = 26
+SilkCreatureRollValueDesktop/constants/line_spacing = 0
+
+SilkCreatureAppearanceTitlePhone/base_type = &"Label"
+SilkCreatureAppearanceTitlePhone/fonts/font = SubResource("line_6")
+SilkCreatureAppearanceTitlePhone/font_sizes/font_size = 24
+SilkCreatureAppearanceTitlePhone/constants/line_spacing = 0
+
+SilkCreatureAppearanceTitleTablet/base_type = &"Label"
+SilkCreatureAppearanceTitleTablet/fonts/font = SubResource("line_6")
+SilkCreatureAppearanceTitleTablet/font_sizes/font_size = 24
+SilkCreatureAppearanceTitleTablet/constants/line_spacing = 0
+
+SilkCreatureAppearanceTitleDesktop/base_type = &"Label"
+SilkCreatureAppearanceTitleDesktop/fonts/font = SubResource("line_6")
+SilkCreatureAppearanceTitleDesktop/font_sizes/font_size = 30
+SilkCreatureAppearanceTitleDesktop/constants/line_spacing = 0
+
+SilkCreatureAppearanceCopyPhone/base_type = &"Label"
+SilkCreatureAppearanceCopyPhone/fonts/font = SubResource("line_10")
+SilkCreatureAppearanceCopyPhone/font_sizes/font_size = 16
+SilkCreatureAppearanceCopyPhone/constants/line_spacing = 0
+
+SilkCreatureAppearanceCopyTablet/base_type = &"Label"
+SilkCreatureAppearanceCopyTablet/fonts/font = SubResource("line_10")
+SilkCreatureAppearanceCopyTablet/font_sizes/font_size = 16
+SilkCreatureAppearanceCopyTablet/constants/line_spacing = 0
+
+SilkCreatureAppearanceCopyDesktop/base_type = &"Label"
+SilkCreatureAppearanceCopyDesktop/fonts/font = SubResource("line_4")
+SilkCreatureAppearanceCopyDesktop/font_sizes/font_size = 18
+SilkCreatureAppearanceCopyDesktop/constants/line_spacing = 0
+
+SilkCreatureAppearanceHeadingPhone/base_type = &"Label"
+SilkCreatureAppearanceHeadingPhone/fonts/font = SubResource("line_5")
+SilkCreatureAppearanceHeadingPhone/font_sizes/font_size = 20
+SilkCreatureAppearanceHeadingPhone/constants/line_spacing = 0
+
+SilkCreatureAppearanceHeadingTablet/base_type = &"Label"
+SilkCreatureAppearanceHeadingTablet/fonts/font = SubResource("line_6")
+SilkCreatureAppearanceHeadingTablet/font_sizes/font_size = 21
+SilkCreatureAppearanceHeadingTablet/constants/line_spacing = 0
+
+SilkCreatureAppearanceHeadingDesktop/base_type = &"Label"
+SilkCreatureAppearanceHeadingDesktop/fonts/font = SubResource("line_6")
+SilkCreatureAppearanceHeadingDesktop/font_sizes/font_size = 24
+SilkCreatureAppearanceHeadingDesktop/constants/line_spacing = 0
+
+SilkCreatureAppearanceNotePhone/base_type = &"Label"
+SilkCreatureAppearanceNotePhone/fonts/font = SubResource("line_7")
+SilkCreatureAppearanceNotePhone/font_sizes/font_size = 14
+SilkCreatureAppearanceNotePhone/constants/line_spacing = 0
+
+SilkCreatureAppearanceNoteTablet/base_type = &"Label"
+SilkCreatureAppearanceNoteTablet/fonts/font = SubResource("line_4")
+SilkCreatureAppearanceNoteTablet/font_sizes/font_size = 15
+SilkCreatureAppearanceNoteTablet/constants/line_spacing = 0
+
+SilkCreatureAppearanceNoteDesktop/base_type = &"Label"
+SilkCreatureAppearanceNoteDesktop/fonts/font = SubResource("line_7")
+SilkCreatureAppearanceNoteDesktop/font_sizes/font_size = 17
+SilkCreatureAppearanceNoteDesktop/constants/line_spacing = 0
+
+SilkCreatureMiniatureTitlePhone/base_type = &"Label"
+SilkCreatureMiniatureTitlePhone/fonts/font = SubResource("line_5")
+SilkCreatureMiniatureTitlePhone/font_sizes/font_size = 18
+SilkCreatureMiniatureTitlePhone/constants/line_spacing = 0
+
+SilkCreatureMiniatureTitleTablet/base_type = &"Label"
+SilkCreatureMiniatureTitleTablet/fonts/font = SubResource("line_5")
+SilkCreatureMiniatureTitleTablet/font_sizes/font_size = 19
+SilkCreatureMiniatureTitleTablet/constants/line_spacing = 0
+
+SilkCreatureMiniatureTitleDesktop/base_type = &"Label"
+SilkCreatureMiniatureTitleDesktop/fonts/font = SubResource("line_5")
+SilkCreatureMiniatureTitleDesktop/font_sizes/font_size = 23
+SilkCreatureMiniatureTitleDesktop/constants/line_spacing = 0
