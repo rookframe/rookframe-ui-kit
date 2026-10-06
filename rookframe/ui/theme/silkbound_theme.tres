@@ -404,6 +404,60 @@ spacing_top = -2
 spacing_bottom = -2
 opentype_features = {1953396077: 1}
 
+[sub_resource type="FontVariation" id="SilkCreatureDialogKickerPhone"]
+base_font = ExtResource("garamond")
+variation_opentype = {2003265652: 400.0}
+spacing_top = -2
+spacing_bottom = -1
+
+[sub_resource type="FontVariation" id="SilkCreatureDialogKickerTablet"]
+base_font = ExtResource("garamond")
+variation_opentype = {2003265652: 400.0}
+spacing_top = -2
+spacing_bottom = -1
+
+[sub_resource type="FontVariation" id="SilkCreatureDialogKickerDesktop"]
+base_font = ExtResource("garamond")
+variation_opentype = {2003265652: 400.0}
+spacing_top = -2
+spacing_bottom = -1
+
+[sub_resource type="FontVariation" id="SilkCreatureDialogSummaryPhone"]
+base_font = ExtResource("garamond")
+variation_opentype = {2003265652: 400.0}
+spacing_top = -1
+spacing_bottom = -1
+
+[sub_resource type="FontVariation" id="SilkCreatureDialogSummaryTablet"]
+base_font = ExtResource("garamond")
+variation_opentype = {2003265652: 400.0}
+spacing_top = 0
+spacing_bottom = 0
+
+[sub_resource type="FontVariation" id="SilkCreatureDialogSummaryDesktop"]
+base_font = ExtResource("garamond")
+variation_opentype = {2003265652: 400.0}
+spacing_top = 0
+spacing_bottom = 0
+
+[sub_resource type="FontVariation" id="SilkCreatureDialogAmountPhone"]
+base_font = ExtResource("garamond")
+variation_opentype = {2003265652: 400.0}
+spacing_top = -1
+spacing_bottom = 0
+
+[sub_resource type="FontVariation" id="SilkCreatureDialogAmountTablet"]
+base_font = ExtResource("garamond")
+variation_opentype = {2003265652: 400.0}
+spacing_top = -1
+spacing_bottom = 0
+
+[sub_resource type="FontVariation" id="SilkCreatureDialogAmountDesktop"]
+base_font = ExtResource("garamond")
+variation_opentype = {2003265652: 400.0}
+spacing_top = -1
+spacing_bottom = 0
+
 [resource]
 default_font = ExtResource("ui")
 default_font_size = 20
@@ -799,3 +853,48 @@ SilkCreatureMiniatureTitleDesktop/base_type = &"Label"
 SilkCreatureMiniatureTitleDesktop/fonts/font = SubResource("line_5")
 SilkCreatureMiniatureTitleDesktop/font_sizes/font_size = 23
 SilkCreatureMiniatureTitleDesktop/constants/line_spacing = 0
+
+SilkCreatureDialogKickerPhone/base_type = &"Label"
+SilkCreatureDialogKickerPhone/fonts/font = SubResource("SilkCreatureDialogKickerPhone")
+SilkCreatureDialogKickerPhone/font_sizes/font_size = 14
+SilkCreatureDialogKickerPhone/constants/line_spacing = 0
+
+SilkCreatureDialogKickerTablet/base_type = &"Label"
+SilkCreatureDialogKickerTablet/fonts/font = SubResource("SilkCreatureDialogKickerTablet")
+SilkCreatureDialogKickerTablet/font_sizes/font_size = 16
+SilkCreatureDialogKickerTablet/constants/line_spacing = 0
+
+SilkCreatureDialogKickerDesktop/base_type = &"Label"
+SilkCreatureDialogKickerDesktop/fonts/font = SubResource("SilkCreatureDialogKickerDesktop")
+SilkCreatureDialogKickerDesktop/font_sizes/font_size = 16
+SilkCreatureDialogKickerDesktop/constants/line_spacing = 0
+
+SilkCreatureDialogSummaryPhone/base_type = &"Label"
+SilkCreatureDialogSummaryPhone/fonts/font = SubResource("SilkCreatureDialogSummaryPhone")
+SilkCreatureDialogSummaryPhone/font_sizes/font_size = 18
+SilkCreatureDialogSummaryPhone/constants/line_spacing = 0
+
+SilkCreatureDialogSummaryTablet/base_type = &"Label"
+SilkCreatureDialogSummaryTablet/fonts/font = SubResource("SilkCreatureDialogSummaryTablet")
+SilkCreatureDialogSummaryTablet/font_sizes/font_size = 21
+SilkCreatureDialogSummaryTablet/constants/line_spacing = 0
+
+SilkCreatureDialogSummaryDesktop/base_type = &"Label"
+SilkCreatureDialogSummaryDesktop/fonts/font = SubResource("SilkCreatureDialogSummaryDesktop")
+SilkCreatureDialogSummaryDesktop/font_sizes/font_size = 21
+SilkCreatureDialogSummaryDesktop/constants/line_spacing = 0
+
+SilkCreatureDialogAmountPhone/base_type = &"Label"
+SilkCreatureDialogAmountPhone/fonts/font = SubResource("SilkCreatureDialogAmountPhone")
+SilkCreatureDialogAmountPhone/font_sizes/font_size = 20
+SilkCreatureDialogAmountPhone/constants/line_spacing = 0
+
+SilkCreatureDialogAmountTablet/base_type = &"Label"
+SilkCreatureDialogAmountTablet/fonts/font = SubResource("SilkCreatureDialogAmountTablet")
+SilkCreatureDialogAmountTablet/font_sizes/font_size = 20
+SilkCreatureDialogAmountTablet/constants/line_spacing = 0
+
+SilkCreatureDialogAmountDesktop/base_type = &"Label"
+SilkCreatureDialogAmountDesktop/fonts/font = SubResource("SilkCreatureDialogAmountDesktop")
+SilkCreatureDialogAmountDesktop/font_sizes/font_size = 20
+SilkCreatureDialogAmountDesktop/constants/line_spacing = 0
