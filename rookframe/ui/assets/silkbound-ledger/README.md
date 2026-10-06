@@ -26,3 +26,8 @@ To regenerate, provide Playwright on `NODE_PATH` and run
 uses Chromium 149.0.7827.55 on macOS. The script captures an interior repeated
 tile; exporting an isolated SVG image does not preserve the reference's edge
 coverage. No browser is required at runtime.
+
+The character pictogram imports include native mipmaps. Use linear filtering with
+mipmaps on their containing Control when reducing the 512px sources to UI sizes;
+this preserves the thin details without undersampling the source. Action focus
+uses a 2px outline with a 2px gap; text-field focus uses one 1px perimeter.

@@ -106,6 +106,23 @@ content_margin_right = 0.0
 content_margin_top = 0.0
 content_margin_bottom = 0.0
 
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxFlat" id="InputFocus"]
+bg_color = Color(0, 0, 0, 0)
+border_color = Color(0.905882, 0.905882, 0.866667, 1)
+border_width_left = 1
+border_width_right = 1
+border_width_top = 1
+border_width_bottom = 1
+content_margin_left = 0.0
+content_margin_right = 0.0
+content_margin_top = 0.0
+content_margin_bottom = 0.0
+
 [sub_resource type="StyleBoxFlat" id="Detail"]
 bg_color = Color(0.137255, 0.156863, 0.168627, 1)
 border_color = Color(0.243137, 0.262745, 0.274510, 1)
@@ -525,10 +542,10 @@ TaskChoice/styles/normal = SubResource("Choice")
 TaskChoice/styles/pressed = SubResource("Selected")
 TaskChoice/styles/hover = SubResource("Selected")
 LineEdit/styles/normal = SubResource("Input")
-LineEdit/styles/focus = SubResource("Focus")
+LineEdit/styles/focus = SubResource("InputFocus")
 LineEdit/colors/font_color = Color(0.905882, 0.905882, 0.866667, 1)
 TextEdit/styles/normal = SubResource("Input")
-TextEdit/styles/focus = SubResource("Focus")
+TextEdit/styles/focus = SubResource("InputFocus")
 TextEdit/colors/font_color = Color(0.905882, 0.905882, 0.866667, 1)
 TaskDetail/base_type = &"PanelContainer"
 TaskDetail/styles/panel = SubResource("Detail")
