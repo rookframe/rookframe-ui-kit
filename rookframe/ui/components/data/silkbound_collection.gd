@@ -7,6 +7,7 @@ signal action_requested(id: String)
 const ROW = preload("res://rookframe/ui/_internal/data/silkbound_collection_row.tscn")
 @export var empty_text := "No entries in this group."
 @export var framed_collection := true
+@export var divider_top := false
 @export_enum("Ordinary", "Wide", "Inventory") var collection_layout := 0
 @export_range(1, 2) var columns := 1
 var _entries: Array[Dictionary] = []
@@ -16,8 +17,14 @@ var _page := 0
 var _pending := true
 var _settle := 0
 var _restore_focus: Control
+const MEDIUM = preload("res://rookframe/ui/theme/silkbound_medium.tres")
+const REGULAR = preload("res://rookframe/ui/theme/silkbound_regular.tres")
+var _title_font: FontVariation
+var _subtitle_font: FontVariation
 
 func _ready() -> void:
+	_title_font = MEDIUM.duplicate()
+	_subtitle_font = REGULAR.duplicate()
 	get_node(^"Content/Pager/Previous").pressed.connect(_turn.bind(-1))
 	get_node(^"Content/Pager/Next").pressed.connect(_turn.bind(1))
 	resized.connect(_queue_fit)
@@ -122,6 +129,7 @@ func _fit() -> void:
 	var inset := 0 if phone else 4 if get_viewport_rect().size.x <= 1300 else 10
 	add_theme_constant_override("margin_left", inset)
 	add_theme_constant_override("margin_right", inset)
+	add_theme_constant_override("margin_top", 11 if divider_top and not phone else 0)
 	var tablet := get_viewport_rect().size.x <= 1300 and not phone
 	var grid := get_node(^"Content/Area/Rows") as GridContainer
 	grid.columns = 1 if phone else columns
@@ -133,6 +141,9 @@ func _fit() -> void:
 	get_node(^"Content/Caption/Title").add_theme_font_size_override("font_size", 20 if tablet else 25)
 	get_node(^"Content/Caption/Count").add_theme_font_size_override("font_size", 17 if tablet else 20)
 	get_node(^"Content/Pager/Range").visible = not phone
+	for path in [^"Content/Pager/Previous", ^"Content/Pager/Next"]:
+		get_node(path).add_theme_stylebox_override("normal", preload("res://rookframe/ui/theme/silkbound_plain.tres"))
+		get_node(path).add_theme_stylebox_override("disabled", preload("res://rookframe/ui/theme/silkbound_plain.tres"))
 	get_node(^"Content/Pager/FooterContent").visible = get_node(^"Content/Pager/FooterContent").get_child_count() > 0
 	get_node(^"Content/Pager/Indicator/PhoneCount").visible = phone
 	for path in [^"Content/Pager/Range", ^"Content/Pager/Indicator/Page"]:
@@ -140,6 +151,10 @@ func _fit() -> void:
 	get_node(^"Content/Pager/Indicator/PhoneCount").add_theme_font_size_override("font_size", 12)
 	for path in [^"Content/Pager/Previous", ^"Content/Pager/Next"]:
 		get_node(path).add_theme_font_size_override("font_size", 28)
+	_title_font.spacing_top = -1 if phone or tablet else -2
+	_title_font.spacing_bottom = -1 if phone or tablet else -2
+	_subtitle_font.spacing_top = -1
+	_subtitle_font.spacing_bottom = 0 if phone or tablet else -1
 	var heights: Array[float] = []
 	var width: float = (get_node(^"Content").size.x - (grid.columns - 1) * grid.get_theme_constant("h_separation")) / grid.columns
 	for index in _rows.size():
@@ -154,11 +169,13 @@ func _fit() -> void:
 		var row_inset := row.get_node(^"Details/Inset") as MarginContainer
 		var title_size := 19 if phone else (20 if inventory else 19) if tablet else 23 if inventory else 24
 		var subtitle_size := (15 if inventory else 14) if phone else (16 if inventory else 14) if tablet else 17 if inventory else 18
+		title.add_theme_font_override("font", _title_font)
+		subtitle.add_theme_font_override("font", _subtitle_font)
 		title.add_theme_font_size_override("font_size", title_size)
 		subtitle.add_theme_font_size_override("font_size", subtitle_size)
 		value.add_theme_font_size_override("font_size", 20 if phone else 19 if tablet else 25)
 		icon.custom_minimum_size = Vector2.ONE * (24 if phone or tablet else 30 if inventory else 34)
-		var gap := 8 if phone or tablet else 12 if inventory else 14
+		var gap := 8 if phone or tablet else 12 if inventory else 18
 		row.get_node(^"Details/Inset/Row").add_theme_constant_override("separation", gap)
 		var px := 4 if phone else 2 if tablet else 6 if inventory else 8
 		var py := 4 if phone else 6 if tablet else 10
@@ -215,7 +232,9 @@ func _turn(step: int) -> void:
 func _draw() -> void:
 	if not is_node_ready():
 		return
+	if divider_top and get_node(^"Content/Caption").visible:
+		draw_line(Vector2.ZERO, Vector2(size.x, 0), Color("3e4346"))
 	if get_node(^"Content/Caption").visible:
-		draw_line(Vector2(0, get_node(^"Content/Caption").size.y), Vector2(size.x, get_node(^"Content/Caption").size.y), Color("5b6265"))
+		draw_line(Vector2(0, get_node(^"Content/Caption").size.y + get_theme_constant("margin_top")), Vector2(size.x, get_node(^"Content/Caption").size.y + get_theme_constant("margin_top")), Color("5b6265"))
 	var pager := get_node(^"Content/Pager") as Control
-	draw_line(Vector2(0, pager.position.y), Vector2(size.x, pager.position.y), Color("3e4346"))
+	draw_line(Vector2(get_theme_constant("margin_left"), pager.position.y + get_theme_constant("margin_top")), Vector2(size.x - get_theme_constant("margin_right"), pager.position.y + get_theme_constant("margin_top")), Color("3e4346"))
