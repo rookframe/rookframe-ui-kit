@@ -60,7 +60,7 @@ content_margin_bottom = 12.0
 
 [sub_resource type="StyleBoxFlat" id="Choice"]
 bg_color = Color(0.082353, 0.090196, 0.098039, 1)
-border_color = Color(0.133333, 0.196078, 0.215686, 1)
+border_color = Color(0.243137, 0.262745, 0.274510, 1)
 border_width_left = 0
 border_width_right = 0
 border_width_top = 0
@@ -96,7 +96,7 @@ content_margin_bottom = 8.0
 
 [sub_resource type="StyleBoxFlat" id="Focus"]
 bg_color = Color(0, 0, 0, 0)
-border_color = Color(0.815686, 0.745098, 0.556863, 1)
+border_color = Color(0.905882, 0.905882, 0.866667, 1)
 border_width_left = 2
 border_width_right = 2
 border_width_top = 2
@@ -108,7 +108,7 @@ content_margin_bottom = 0.0
 
 [sub_resource type="StyleBoxFlat" id="Detail"]
 bg_color = Color(0.137255, 0.156863, 0.168627, 1)
-border_color = Color(0.133333, 0.196078, 0.215686, 1)
+border_color = Color(0.243137, 0.262745, 0.274510, 1)
 border_width_left = 1
 border_width_right = 1
 border_width_top = 1
@@ -133,7 +133,7 @@ content_margin_bottom = 5.0
 
 [sub_resource type="StyleBoxFlat" id="Attribute"]
 bg_color = Color(0.137255, 0.156863, 0.168627, 1)
-border_color = Color(0.133333, 0.196078, 0.215686, 1)
+border_color = Color(0.243137, 0.262745, 0.274510, 1)
 border_width_top = 1
 border_width_bottom = 1
 border_width_left = 1
@@ -146,7 +146,7 @@ content_margin_bottom = 13.0
 
 [sub_resource type="StyleBoxFlat" id="AttributeCompact"]
 bg_color = Color(0.137255, 0.156863, 0.168627, 1)
-border_color = Color(0.133333, 0.196078, 0.215686, 1)
+border_color = Color(0.243137, 0.262745, 0.274510, 1)
 border_width_top = 1
 border_width_bottom = 1
 border_width_left = 1
@@ -159,7 +159,7 @@ content_margin_bottom = 4.0
 
 [sub_resource type="StyleBoxFlat" id="AttributeTablet"]
 bg_color = Color(0.137255, 0.156863, 0.168627, 1)
-border_color = Color(0.133333, 0.196078, 0.215686, 1)
+border_color = Color(0.243137, 0.262745, 0.274510, 1)
 border_width_top = 1
 border_width_bottom = 1
 border_width_left = 1
@@ -171,7 +171,7 @@ content_margin_bottom = 9.0
 
 [sub_resource type="StyleBoxFlat" id="FactsTablet"]
 bg_color = Color(0.137255, 0.156863, 0.168627, 1)
-border_color = Color(0.133333, 0.196078, 0.215686, 1)
+border_color = Color(0.243137, 0.262745, 0.274510, 1)
 border_width_top = 1
 border_width_bottom = 1
 content_margin_left = 0.0
@@ -181,7 +181,7 @@ content_margin_bottom = 14.0
 
 [sub_resource type="StyleBoxFlat" id="Facts"]
 bg_color = Color(0.137255, 0.156863, 0.168627, 1)
-border_color = Color(0.133333, 0.196078, 0.215686, 1)
+border_color = Color(0.243137, 0.262745, 0.274510, 1)
 border_width_top = 1
 border_width_bottom = 1
 border_width_left = 0
@@ -194,7 +194,7 @@ content_margin_bottom = 18.0
 
 [sub_resource type="StyleBoxFlat" id="FactsCompact"]
 bg_color = Color(0.137255, 0.156863, 0.168627, 1)
-border_color = Color(0.133333, 0.196078, 0.215686, 1)
+border_color = Color(0.243137, 0.262745, 0.274510, 1)
 border_width_top = 1
 border_width_bottom = 1
 border_width_left = 0
@@ -227,14 +227,14 @@ content_margin_bottom = 8.0
 
 [sub_resource type="StyleBoxFlat" id="FormulaRule"]
 bg_color = Color(0, 0, 0, 0)
-border_color = Color(0.133333, 0.196078, 0.215686, 1)
+border_color = Color(0.243137, 0.262745, 0.274510, 1)
 border_width_bottom = 1
 content_margin_bottom = 20.0
 
 
 [sub_resource type="StyleBoxFlat" id="FormulaRuleCompact"]
 bg_color = Color(0, 0, 0, 0)
-border_color = Color(0.133333, 0.196078, 0.215686, 1)
+border_color = Color(0.243137, 0.262745, 0.274510, 1)
 border_width_bottom = 1
 content_margin_bottom = 9.0
 
@@ -277,7 +277,7 @@ content_margin_top = 1.0
 content_margin_bottom = 0.0
 
 [sub_resource type="StyleBoxFlat" id="FooterPhone"]
-bg_color = Color(0.062745, 0.105882, 0.117647, 1)
+bg_color = Color(0.137255, 0.156863, 0.168627, 1)
 border_color = Color(0.356863, 0.384314, 0.396078, 1)
 border_width_top = 1
 content_margin_left = 0.0

@@ -3,7 +3,7 @@
 The approved HTML reference rasterizes EB Garamond differently from Godot's
 unmodified dynamic-font renderer. These build tools record that glyph coverage
 in ordinary Godot `FontFile` resources. Runtime Labels, Buttons, LineEdits and
-TextEdits remain native. There is no runtime browser, font renderer or shader.
+TextEdits remain native. There is no runtime browser, custom font renderer or shader.
 
 The resources retain the original licensed TTF bytes, shaping tables and full
 character coverage. Cached sizes cover the migrated Creature surface; other
