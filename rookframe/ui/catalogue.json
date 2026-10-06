@@ -1138,6 +1138,28 @@
       ],
       "script": "res://rookframe/ui/components/content/silkbound_miniature_browser.gd",
       "scriptUid": "uid://csbj2ehev7qc7"
+    },
+    {
+      "name": "SilkboundCollection",
+      "scene": "res://rookframe/ui/components/data/silkbound_collection.tscn",
+      "rootType": "MarginContainer",
+      "properties": {
+        "columns": "int",
+        "collection_layout": "int",
+        "empty_text": "String"
+      },
+      "methods": [
+        "configure",
+        "capture_state",
+        "restore_state",
+        "focus_entry",
+        "get_footer_slot"
+      ],
+      "signals": [
+        "selected",
+        "action_requested"
+      ],
+      "script": "res://rookframe/ui/components/data/silkbound_collection.gd"
     }
   ],
   "semanticIcons": {

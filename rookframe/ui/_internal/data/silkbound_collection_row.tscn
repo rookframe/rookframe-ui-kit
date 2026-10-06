@@ -1,0 +1,55 @@
+[gd_scene format=3]
+[ext_resource type="StyleBox" path="res://rookframe/ui/theme/silkbound_row.tres" id="row"]
+[ext_resource type="StyleBox" path="res://rookframe/ui/theme/silkbound_row_hover.tres" id="hover"]
+[ext_resource type="FontVariation" path="res://rookframe/ui/theme/silkbound_medium.tres" id="medium"]
+[node name="CollectionRow" type="HBoxContainer"]
+size_flags_horizontal = 3
+theme_override_constants/separation = 12
+[node name="Details" type="Button" parent="."]
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0, 74)
+theme_type_variation = &"TaskGlyphButton"
+theme_override_styles/normal = ExtResource("row")
+theme_override_styles/hover = ExtResource("hover")
+theme_override_styles/pressed = ExtResource("hover")
+[node name="Inset" type="MarginContainer" parent="Details"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+[node name="Row" type="HBoxContainer" parent="Details/Inset"]
+mouse_filter = 2
+theme_override_constants/separation = 14
+[node name="Icon" type="TextureRect" parent="Details/Inset/Row"]
+custom_minimum_size = Vector2(34, 34)
+size_flags_vertical = 4
+expand_mode = 1
+stretch_mode = 5
+mouse_filter = 2
+self_modulate = Color(0.815686, 0.745098, 0.556863, 1)
+[node name="Copy" type="VBoxContainer" parent="Details/Inset/Row"]
+size_flags_horizontal = 3
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_constants/separation = 4
+[node name="Title" type="Label" parent="Details/Inset/Row/Copy"]
+theme_override_fonts/font = ExtResource("medium")
+theme_override_font_sizes/font_size = 24
+autowrap_mode = 3
+mouse_filter = 2
+[node name="Subtitle" type="Label" parent="Details/Inset/Row/Copy"]
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(0.682353, 0.729412, 0.745098, 1)
+autowrap_mode = 3
+mouse_filter = 2
+[node name="Value" type="Label" parent="Details/Inset/Row"]
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("medium")
+theme_override_font_sizes/font_size = 25
+mouse_filter = 2
+[node name="Action" type="Button" parent="."]
+visible = false
+custom_minimum_size = Vector2(44, 44)
+size_flags_vertical = 4
+theme_type_variation = &"SilkIcon"
+expand_icon = true
+theme_override_constants/icon_max_width = 28
