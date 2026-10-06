@@ -421,3 +421,14 @@ when native content is reparented into or out of a Window.
 TextField, TextArea and their task variants stay together on one page, including
 the field label and validation copy. Their authored minimum height must fit the
 available content viewport, like every other indivisible interactive control.
+
+`components/content/silkbound_miniature_browser.tscn` composes the approved
+Silkbound Ledger full-viewport Miniature list and adjacent preview. It supports
+`configure(entries, selected_id, labels)`, `selection()`, `focus_search()` and
+`set_state(state, message)`, with the same entry dictionaries and six signals
+as FullscreenMiniatureBrowser. The consumer supplies Miniature data, SDK previews,
+permission checks and save operations; the component handles only native search,
+selection, bounded list pages and responsive composition. The `library` label
+is the owning Actor/definition name; `none_copy`, `empty_preview` and `find`
+localize the empty choice, preview and search caption. Widths through 900px use
+the phone composition; through 1300px use tablet; larger widths use desktop.

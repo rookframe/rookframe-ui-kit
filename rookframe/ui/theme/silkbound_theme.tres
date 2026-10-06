@@ -82,19 +82,19 @@ content_margin_bottom = 0.0
 
 [sub_resource type="StyleBoxFlat" id="Input"]
 bg_color = Color(0.137255, 0.156863, 0.168627, 1)
-border_color = Color(0.356863, 0.384314, 0.396078, 1)
+border_color = Color(0.560784, 0.6, 0.615686, 1)
 border_width_left = 1
 border_width_right = 1
 border_width_top = 1
 border_width_bottom = 1
-content_margin_left = 14.0
-content_margin_right = 14.0
-content_margin_top = 14.0
-content_margin_bottom = 14.0
+content_margin_left = 12.0
+content_margin_right = 12.0
+content_margin_top = 8.0
+content_margin_bottom = 8.0
 
 [sub_resource type="StyleBoxFlat" id="Focus"]
 bg_color = Color(0, 0, 0, 0)
-border_color = Color(0.509804, 0.972549, 0.956863, 1)
+border_color = Color(0.815686, 0.745098, 0.556863, 1)
 border_width_left = 2
 border_width_right = 2
 border_width_top = 2

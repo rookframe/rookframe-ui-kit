@@ -1116,6 +1116,28 @@
       "signals": [],
       "script": "res://rookframe/ui/components/data/paginated_content.gd",
       "scriptUid": "uid://cu4kmucnvjxu1"
+    },
+    {
+      "name": "SilkboundMiniatureBrowser",
+      "scene": "res://rookframe/ui/components/content/silkbound_miniature_browser.tscn",
+      "rootType": "Control",
+      "properties": {},
+      "methods": [
+        "configure",
+        "selection",
+        "set_state",
+        "focus_search"
+      ],
+      "signals": [
+        "choose_requested",
+        "cancel_requested",
+        "close_requested",
+        "selection_changed",
+        "preview_requested",
+        "retry_requested"
+      ],
+      "script": "res://rookframe/ui/components/content/silkbound_miniature_browser.gd",
+      "scriptUid": "uid://csbj2ehev7qc7"
     }
   ],
   "semanticIcons": {
