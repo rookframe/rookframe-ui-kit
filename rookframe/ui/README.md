@@ -29,3 +29,13 @@ include. Read the candidate's
 [accessibility and input contract](https://github.com/rookframe/rookframe-ui-kit/blob/v1.0.0-rc.1/docs/accessibility-and-input.md),
 [semantic icon identities](https://github.com/rookframe/rookframe-ui-kit/blob/v1.0.0-rc.1/docs/semantic-icons.md),
 and [compatibility model](https://github.com/rookframe/rookframe-ui-kit/blob/v1.0.0-rc.1/docs/compatibility.md).
+
+### Silkbound Ledger
+
+`theme/silkbound_theme.tres` is the approved task theme for migrated surfaces.
+Use `silkbound_regular.tres`, `silkbound_medium.tres`, `silkbound_semibold.tres`
+and `silkbound_italic.tres` for ordinary FontVariation roles. `SilkIcon` and
+`SilkPrimaryIcon` are native Button variations for named 44px actions; supply
+an icon, tooltip and accessibility name. Material assets and their source are
+in `assets/silkbound-ledger/README.md`. This release supplies the shared theme;
+individual application and Package scenes select it as they migrate.
