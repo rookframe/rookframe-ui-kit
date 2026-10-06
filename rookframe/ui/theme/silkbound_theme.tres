@@ -12,7 +12,7 @@
 
 [sub_resource type="StyleBoxFlat" id="Button"]
 bg_color = Color(0.082353, 0.090196, 0.098039, 1)
-border_color = Color(0.356863, 0.384314, 0.396078, 1)
+border_color = Color(0.560784, 0.600000, 0.615686, 1)
 border_width_left = 1
 border_width_right = 1
 border_width_top = 1
@@ -24,7 +24,7 @@ content_margin_bottom = 12.0
 
 [sub_resource type="StyleBoxFlat" id="Hover"]
 bg_color = Color(0.203922, 0.239216, 0.254902, 1)
-border_color = Color(0.807843, 0.800000, 0.701961, 1)
+border_color = Color(0.560784, 0.600000, 0.615686, 1)
 border_width_left = 1
 border_width_right = 1
 border_width_top = 1
@@ -36,6 +36,30 @@ content_margin_bottom = 12.0
 
 [sub_resource type="StyleBoxFlat" id="Primary"]
 bg_color = Color(0.807843, 0.800000, 0.701961, 1)
+border_color = Color(0.807843, 0.800000, 0.701961, 1)
+border_width_left = 1
+border_width_right = 1
+border_width_top = 1
+border_width_bottom = 1
+content_margin_left = 12.0
+content_margin_right = 12.0
+content_margin_top = 12.0
+content_margin_bottom = 12.0
+
+[sub_resource type="StyleBoxFlat" id="PrimaryHover"]
+bg_color = Color(0.905882, 0.905882, 0.866667, 1)
+border_color = Color(0.807843, 0.800000, 0.701961, 1)
+border_width_left = 1
+border_width_right = 1
+border_width_top = 1
+border_width_bottom = 1
+content_margin_left = 12.0
+content_margin_right = 12.0
+content_margin_top = 12.0
+content_margin_bottom = 12.0
+
+[sub_resource type="StyleBoxFlat" id="PrimaryPressed"]
+bg_color = Color(0.713725, 0.705882, 0.619608, 1)
 border_color = Color(0.807843, 0.800000, 0.701961, 1)
 border_width_left = 1
 border_width_right = 1
@@ -496,8 +520,8 @@ default_font = ExtResource("ui")
 default_font_size = 20
 Label/colors/font_color = Color(0.905882, 0.905882, 0.866667, 1)
 Label/constants/line_spacing = 0
-Button/fonts/font = ExtResource("ui")
-Button/font_sizes/font_size = 15
+Button/fonts/font = ExtResource("action")
+Button/font_sizes/font_size = 20
 Button/colors/font_color = Color(0.905882, 0.905882, 0.866667, 1)
 Button/colors/font_hover_color = Color(0.905882, 0.905882, 0.866667, 1)
 Button/colors/font_pressed_color = Color(0.905882, 0.905882, 0.866667, 1)
@@ -531,8 +555,8 @@ TaskPrimary/colors/font_color = Color(0.082353, 0.090196, 0.098039, 1)
 TaskPrimary/colors/font_hover_color = Color(0.082353, 0.090196, 0.098039, 1)
 TaskPrimary/colors/font_pressed_color = Color(0.082353, 0.090196, 0.098039, 1)
 TaskPrimary/styles/normal = SubResource("Primary")
-TaskPrimary/styles/hover = SubResource("Primary")
-TaskPrimary/styles/pressed = SubResource("Primary")
+TaskPrimary/styles/hover = SubResource("PrimaryHover")
+TaskPrimary/styles/pressed = SubResource("PrimaryPressed")
 TaskPrimary/styles/disabled = SubResource("Primary")
 TaskQuiet/base_type = &"Button"
 TaskQuiet/colors/font_color = Color(0.682353, 0.729412, 0.745098, 1)
@@ -545,9 +569,18 @@ LineEdit/styles/normal = SubResource("Input")
 LineEdit/styles/focus = SubResource("InputFocus")
 LineEdit/colors/font_color = Color(0.905882, 0.905882, 0.866667, 1)
 LineEdit/colors/font_placeholder_color = Color(0.682353, 0.729412, 0.745098, 1)
+LineEdit/font_sizes/font_size = 20
+LineEdit/colors/caret_color = Color(0.905882, 0.905882, 0.866667, 1)
+LineEdit/colors/selection_color = Color(0.203922, 0.239216, 0.254902, 1)
+LineEdit/colors/font_selected_color = Color(0.905882, 0.905882, 0.866667, 1)
 TextEdit/styles/normal = SubResource("Input")
 TextEdit/styles/focus = SubResource("InputFocus")
 TextEdit/colors/font_color = Color(0.905882, 0.905882, 0.866667, 1)
+TextEdit/font_sizes/font_size = 20
+TextEdit/colors/font_placeholder_color = Color(0.682353, 0.729412, 0.745098, 1)
+TextEdit/colors/caret_color = Color(0.905882, 0.905882, 0.866667, 1)
+TextEdit/colors/selection_color = Color(0.203922, 0.239216, 0.254902, 1)
+TextEdit/colors/font_selected_color = Color(0.905882, 0.905882, 0.866667, 1)
 TaskDetail/base_type = &"PanelContainer"
 TaskDetail/styles/panel = SubResource("Detail")
 
