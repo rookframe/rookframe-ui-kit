@@ -1,8 +1,10 @@
 [gd_scene format=3]
-[ext_resource type="StyleBox" path="res://rookframe/ui/theme/silkbound_row.tres" id="row"]
+[ext_resource type="StyleBox" path="res://rookframe/ui/theme/silkbound_plain.tres" id="row"]
 [ext_resource type="StyleBox" path="res://rookframe/ui/theme/silkbound_row_hover.tres" id="hover"]
 [ext_resource type="FontVariation" path="res://rookframe/ui/theme/silkbound_medium.tres" id="medium"]
+[ext_resource type="Script" path="res://rookframe/ui/_internal/data/silkbound_collection_row.gd" id="script"]
 [node name="CollectionRow" type="HBoxContainer"]
+script = ExtResource("script")
 size_flags_horizontal = 3
 theme_override_constants/separation = 12
 [node name="Details" type="Button" parent="."]
@@ -53,3 +55,10 @@ size_flags_vertical = 4
 theme_type_variation = &"SilkIcon"
 expand_icon = true
 theme_override_constants/icon_max_width = 28
+
+[node name="Arrow" type="Label" parent="Details/Inset/Row"]
+visible = false
+text = "›"
+mouse_filter = 2
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 18

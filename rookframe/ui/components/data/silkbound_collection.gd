@@ -97,6 +97,8 @@ func configure(entries: Array[Dictionary], _selected_id: String, caption: String
 		action.icon = entry.get("action_icon")
 		action.disabled = bool(entry.get("action_disabled", false))
 		action.tooltip_text = str(entry.get("action", ""))
+		action.toggle_mode = entry.has("action_pressed")
+		action.set_pressed_no_signal(bool(entry.get("action_pressed", false)))
 		action.accessibility_name = action.tooltip_text
 		action.theme_type_variation = &"SilkPrimaryIcon" if entry.get("action_pressed", false) else &"SilkIcon"
 	get_node(^"Content/Caption/Title").text = caption
@@ -166,6 +168,11 @@ func _fit() -> void:
 		var subtitle := row.get_node(^"Details/Inset/Row/Copy/Subtitle") as Label
 		var icon := row.get_node(^"Details/Inset/Row/Icon") as TextureRect
 		var value := row.get_node(^"Details/Inset/Row/Value") as Label
+		subtitle.text = str(entry.get("phone_subtitle", entry.get("subtitle", ""))) if phone else str(entry.get("subtitle", ""))
+		subtitle.visible = not subtitle.text.is_empty()
+		value.text = str(entry.get("phone_value", entry.get("value", ""))) if phone else str(entry.get("value", ""))
+		value.visible = not value.text.is_empty()
+		row.get_node(^"Details/Inset/Row/Arrow").visible = phone and not inventory
 		var row_inset := row.get_node(^"Details/Inset") as MarginContainer
 		var title_size := 19 if phone else (20 if inventory else 19) if tablet else 23 if inventory else 24
 		var subtitle_size := (15 if inventory else 14) if phone else (16 if inventory else 14) if tablet else 17 if inventory else 18
@@ -173,15 +180,17 @@ func _fit() -> void:
 		subtitle.add_theme_font_override("font", _subtitle_font)
 		title.add_theme_font_size_override("font_size", title_size)
 		subtitle.add_theme_font_size_override("font_size", subtitle_size)
-		value.add_theme_font_size_override("font_size", 20 if phone else 19 if tablet else 25)
+		value.add_theme_font_size_override("font_size", 13 if phone and entry.get("phone_value_meta", false) else 20 if phone else 19 if tablet else 25)
 		icon.custom_minimum_size = Vector2.ONE * (24 if phone or tablet else 30 if inventory else 34)
 		var gap := 8 if phone or tablet else 12 if inventory else 18
 		row.get_node(^"Details/Inset/Row").add_theme_constant_override("separation", gap)
 		var px := 4 if phone else 2 if tablet else 6 if inventory else 8
 		var py := 4 if phone else 6 if tablet else 10
+		var text_gap := 3 if phone or tablet else 4
+		row.get_node(^"Details/Inset/Row/Copy").add_theme_constant_override("separation", text_gap)
 		for edge in ["left", "right", "top", "bottom"]:
 			row_inset.add_theme_constant_override("margin_" + edge, px if edge in ["left", "right"] else py)
-		var copy_width := width - 2 * px - icon.custom_minimum_size.x - gap
+		var copy_width := width - 2 * px - icon.custom_minimum_size.x - gap - (16 if phone and not inventory else 0)
 		if value.visible:
 			copy_width -= value.get_minimum_size().x + gap
 		if row.get_node(^"Action").visible:
@@ -189,7 +198,7 @@ func _fit() -> void:
 		var flags := TextServer.BREAK_MANDATORY | TextServer.BREAK_WORD_BOUND | TextServer.BREAK_ADAPTIVE
 		var title_height := title.get_theme_font("font").get_multiline_string_size(title.text, HORIZONTAL_ALIGNMENT_LEFT, maxf(1, copy_width), title_size, -1, flags).y
 		var subtitle_height := subtitle.get_theme_font("font").get_multiline_string_size(subtitle.text, HORIZONTAL_ALIGNMENT_LEFT, maxf(1, copy_width), subtitle_size, -1, flags).y if subtitle.visible else 0.0
-		var height := maxf(54 if phone else 64 if inventory and tablet else 62 if tablet else 74, title_height + subtitle_height + 2 * py + (4 if subtitle.visible else 0))
+		var height := maxf(54 if phone else 64 if inventory and tablet else 62 if tablet else 74, title_height + subtitle_height + 2 * py + (text_gap if subtitle.visible else 0) + (0 if phone else 1))
 		button.custom_minimum_size.y = height
 		heights.append(height)
 	_pages.clear()

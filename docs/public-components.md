@@ -432,3 +432,26 @@ selection, bounded list pages and responsive composition. The `library` label
 is the owning Actor/definition name; `none_copy`, `empty_preview` and `find`
 localize the empty choice, preview and search caption. Widths through 900px use
 the phone composition; through 1300px use tablet; larger widths use desktop.
+
+## SilkboundCollection
+
+`res://rookframe/ui/components/data/silkbound_collection.tscn` is a bounded,
+whole-row collection for the Silkbound sheet. It uses one column on phone and
+one or two authored columns on larger canvases. `collection_layout` selects
+ordinary, wide, or inventory row metrics; `divider_top` adds a secondary section
+divider. The owning surface supplies its Theme.
+
+`configure(entries, selected_id, caption, count)` accepts stable `id`, `title`,
+`subtitle`, `value`, and optional `icon` Texture2D fields. Phone copy can use
+`phone_subtitle`, `phone_value`, and `phone_value_meta`. An optional separate
+button uses `action` (accessible action name), `action_text`, `action_icon`,
+`action_pressed`, and `action_disabled`. `selected(id)` opens details;
+`action_requested(id)` requests a domain action. The collection never performs
+that action itself.
+
+`capture_state()` / `restore_state()` preserve the page, `focus_entry(id)`
+reveals and focuses a record, and `get_footer_slot()` accepts owned footer
+Controls. Updating stable IDs retains row focus and page state. Pagination
+keeps complete rows within the available area; long text wraps using native
+font metrics. Keyboard focus, hover, pressed and disabled states remain
+separate. Consumers must use these public methods rather than internal paths.

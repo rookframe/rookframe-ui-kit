@@ -1146,7 +1146,8 @@
       "properties": {
         "columns": "int",
         "collection_layout": "int",
-        "empty_text": "String"
+        "empty_text": "String",
+        "divider_top": "bool"
       },
       "methods": [
         "configure",
@@ -1159,7 +1160,8 @@
         "selected",
         "action_requested"
       ],
-      "script": "res://rookframe/ui/components/data/silkbound_collection.gd"
+      "script": "res://rookframe/ui/components/data/silkbound_collection.gd",
+      "scriptUid": "uid://bhswcvuj0kpbd"
     }
   ],
   "semanticIcons": {
