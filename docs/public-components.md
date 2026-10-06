@@ -378,7 +378,8 @@ they do not rebuild or mutate StyleBoxes.
 Godot text and Control measurements. Compose one reading column beneath its public
 `Area` Control. `refresh()` remeasures changed content; resizing and minimum-size
 changes also remeasure automatically. Previous/Next remain fixed and appear
-only when needed. Independent reading columns each use their own pager, so staggered lines do not
+only when needed. `always_show_pager = true` retains a centered compact pager
+even for a single reading page. Independent reading columns each use their own pager, so staggered lines do not
 require a shared break. Lines and interactive Controls stay whole at page boundaries;
 text must use ordinary Label or RichTextLabel, with controls smaller than a page.
 Native keyboard focus reveals its page. `capture_state()` / `restore_state(state)`
@@ -455,3 +456,10 @@ Controls. Updating stable IDs retains row focus and page state. Pagination
 keeps complete rows within the available area; long text wraps using native
 font metrics. Keyboard focus, hover, pressed and disabled states remain
 separate. Consumers must use these public methods rather than internal paths.
+
+`components/forms/paginated_text_area.tscn` is the Silkbound fixed-page notepad.
+Set `value` to the complete text and consume `value_changed(value)` to retain the
+complete draft; `compact` applies landscape phone typography. Native Label shaping
+measures pages and native TextEdit handles input. Edits, page turns and resize
+retain all text and the editing caret. Reparent the `get_pager()` HBoxContainer
+into an authored fixed footer. The pager always appears, including a single page.
