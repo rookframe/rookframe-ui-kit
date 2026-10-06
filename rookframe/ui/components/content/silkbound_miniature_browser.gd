@@ -13,7 +13,7 @@ var _rows: Array[Button] = []
 var _labels: Dictionary = {}
 var _selection := ""
 var _state := "ready"
-var _layout_pending := false
+var _layout_frames := 0
 @onready var _search: LineEdit = get_node("Inset/Layout/Body/Search/Editor")
 @onready var _list: Control = get_node("Inset/Layout/Body/Columns/List")
 @onready var _preview: Control = get_node("Inset/Layout/Body/Columns/Preview/Stage")
@@ -144,6 +144,9 @@ func _arrange() -> void:
 	var density := "Phone" if phone else "Desktop"
 	get_node(HEADER+"Copy/Kicker").theme_type_variation = "SilkCreatureDialogKicker"+density
 	get_node(HEADER+"Copy/Title").theme_type_variation = "SilkCreatureAppearanceTitle"+density
+	get_node(BODY+"Columns").add_theme_constant_override("separation", 12 if phone else 20)
+	get_node(BODY+"Columns/Preview/Empty/Copy").add_theme_constant_override("separation", 6 if phone else 20)
+	get_node(BODY+"Columns/Preview/Empty/Copy/Icon").custom_minimum_size = Vector2(28,28) if phone else Vector2(50,50)
 	get_node(BODY).add_theme_constant_override("separation", 6 if phone else 12)
 	get_node(BODY+"Note").add_theme_font_size_override("font_size",14 if phone else 18)
 	get_node(BODY+"Search/Label").add_theme_font_size_override("font_size",16 if phone else 18)
@@ -154,19 +157,25 @@ func _arrange() -> void:
 		row.custom_minimum_size.y = 52 if phone else 64
 		row.get_node("Inset/Row/Copy/Title").add_theme_font_size_override("font_size",18 if phone else 20)
 		row.get_node("Inset/Row/Copy/Package").add_theme_font_size_override("font_size",14 if phone else 16)
+		_line_height(row.get_node("Inset/Row/Copy/Title"), 21.6 if phone else 24.0)
+		_line_height(row.get_node("Inset/Row/Copy/Package"), 18.2 if phone else 20.8)
 	_settle_layout()
+	_line_height(get_node(BODY+"Note"), 18.2 if phone else 23.4)
+	_line_height(get_node(BODY+"Columns/Preview/Empty/Copy/Title"), 23.4 if phone else 26.0)
 	_list.refresh()
 
 func _settle_layout() -> void:
-	if _layout_pending: return
-	_layout_pending = true
+	_layout_frames = 3
 	_list.enabled = false
-	await get_tree().process_frame
-	await get_tree().process_frame
-	_measure_rows()
-	await get_tree().process_frame
-	_list.enabled = true
-	_layout_pending = false
+	set_process(true)
+
+func _process(_delta: float) -> void:
+	if _layout_frames <= 0: return
+	_layout_frames -= 1
+	if _layout_frames == 1: _measure_rows()
+	if _layout_frames == 0:
+		_list.enabled = true
+		set_process(false)
 
 func _measure_rows() -> void:
 	for row in _rows:
@@ -175,3 +184,12 @@ func _measure_rows() -> void:
 
 func _text(key: String, fallback: String) -> String:
 	return str(_labels.get(key, fallback))
+
+func _line_height(label: Label, line_height: float) -> void:
+	var font: FontVariation = label.get_theme_font("font").duplicate()
+	font.spacing_top = 0
+	font.spacing_bottom = 0
+	var difference := roundi(line_height) - ceili(font.get_height(label.get_theme_font_size("font_size")))
+	font.spacing_top = floori(difference / 2.0)
+	font.spacing_bottom = difference - font.spacing_top
+	label.add_theme_font_override("font", font)
