@@ -84,15 +84,15 @@ content_margin_bottom = 0.0
 
 [sub_resource type="StyleBoxFlat" id="Input"]
 bg_color = Color(0.137255, 0.156863, 0.168627, 1)
-border_color = Color(0.560784, 0.6, 0.615686, 1)
+border_color = Color(0.356863, 0.384314, 0.396078, 1)
 border_width_left = 1
 border_width_right = 1
 border_width_top = 1
 border_width_bottom = 1
-content_margin_left = 12.0
-content_margin_right = 12.0
-content_margin_top = 8.0
-content_margin_bottom = 8.0
+content_margin_left = 13.0
+content_margin_right = 13.0
+content_margin_top = 9.0
+content_margin_bottom = 9.0
 
 [sub_resource type="StyleBoxFlat" id="Focus"]
 bg_color = Color(0, 0, 0, 0)
@@ -544,6 +544,7 @@ TaskChoice/styles/hover = SubResource("Selected")
 LineEdit/styles/normal = SubResource("Input")
 LineEdit/styles/focus = SubResource("InputFocus")
 LineEdit/colors/font_color = Color(0.905882, 0.905882, 0.866667, 1)
+LineEdit/colors/font_placeholder_color = Color(0.682353, 0.729412, 0.745098, 1)
 TextEdit/styles/normal = SubResource("Input")
 TextEdit/styles/focus = SubResource("InputFocus")
 TextEdit/colors/font_color = Color(0.905882, 0.905882, 0.866667, 1)
