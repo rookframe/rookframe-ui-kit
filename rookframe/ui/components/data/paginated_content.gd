@@ -117,6 +117,10 @@ func _fit() -> void:
 	_measure.call_deferred()
 
 func _measure() -> void:
+	# A route change or native Container reflow can invalidate a queued measure.
+	# The scheduled fit will measure the replacement content once it has settled.
+	if _pending or not is_visible_in_tree():
+		return
 	var height: float = get_node(^"Area").size.y
 	_pages.clear()
 	if not _pager.visible or height <= 0:
