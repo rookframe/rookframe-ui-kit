@@ -163,6 +163,19 @@ func _fit() -> void:
 		var row := _rows[index]
 		var entry := _entries[index]
 		var inventory := entry.has("action") or collection_layout == 2
+		var action := row.get_node(^"Action") as Button
+		action.custom_minimum_size = Vector2(44 if action.icon != null else 78 if phone or tablet else 86, 44)
+		action.add_theme_font_size_override("font_size", 17 if phone or tablet else 19)
+		action.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR
+		for state in ["normal", "hover", "pressed", "hover_pressed", "disabled"]:
+			var frame := action.get_theme_stylebox(state).duplicate() as StyleBoxFlat
+			frame.content_margin_left = 8 if action.icon != null else 10
+			frame.content_margin_right = frame.content_margin_left
+			frame.content_margin_top = 8 if action.icon != null else 6
+			frame.content_margin_bottom = frame.content_margin_top
+			frame.bg_color = Color("ceccb3") if action.button_pressed else Color("343d41") if state in ["hover", "pressed", "hover_pressed"] else Color("23282b")
+			frame.border_color = Color("ceccb3") if action.button_pressed else Color("5b6265")
+			action.add_theme_stylebox_override(state, frame)
 		var button := row.get_node(^"Details") as Button
 		var title := row.get_node(^"Details/Inset/Row/Copy/Title") as Label
 		var subtitle := row.get_node(^"Details/Inset/Row/Copy/Subtitle") as Label
@@ -201,6 +214,15 @@ func _fit() -> void:
 		var height := maxf(54 if phone else 64 if inventory and tablet else 62 if tablet else 74, title_height + subtitle_height + 2 * py + (text_gap if subtitle.visible else 0) + (0 if phone else 1))
 		button.custom_minimum_size.y = height
 		heights.append(height)
+	# Stock shrink sizing: sections without vertical EXPAND finish immediately
+	# after their records. Expanded collections still paginate in their allocation.
+	var natural_height := 0.0
+	for index in range(0, heights.size(), grid.columns):
+		var row_height := heights[index]
+		for column in range(1, mini(grid.columns, heights.size() - index)):
+			row_height = maxf(row_height, heights[index + column])
+		natural_height += row_height + (grid.get_theme_constant("v_separation") if index > 0 else 0)
+	custom_minimum_size.y = 0 if (size_flags_vertical & Control.SIZE_EXPAND) != 0 else get_node(^"Content/Caption").get_combined_minimum_size().y + maxf(44, natural_height + grid.offset_top * 2) + get_node(^"Content/Pager").get_combined_minimum_size().y + get_theme_constant("margin_top")
 	_pages.clear()
 	var available: float = get_node(^"Content/Area").size.y - grid.offset_top * 2
 	var start := 0

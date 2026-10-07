@@ -463,3 +463,8 @@ complete draft; `compact` applies landscape phone typography. Native Label shapi
 measures pages and native TextEdit handles input. Edits, page turns and resize
 retain all text and the editing caret. Reparent the `get_pager()` HBoxContainer
 into an authored fixed footer. The pager always appears, including a single page.
+
+SilkboundCollection follows native vertical size flags: `SIZE_EXPAND_FILL` fills
+its bounded page allocation; `SIZE_FILL` requests the natural height of its
+records and keeps the pager directly below them. Use shrink sizing for short
+secondary sections, and expanded sizing for collections requiring bounded paging.

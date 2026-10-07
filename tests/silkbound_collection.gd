@@ -57,3 +57,30 @@ func test_bounded_records_keep_details_and_actions_independent() -> void:
 func _settle() -> void:
 	for frame in 12:
 		await get_tree().process_frame
+
+func test_shrink_section_places_pager_after_last_row_and_pads_actions() -> void:
+	var viewport: SubViewport = auto_free(SubViewport.new())
+	viewport.size = Vector2i(1920,1080)
+	add_child(viewport)
+	var layout := VBoxContainer.new()
+	layout.size = Vector2(600,800)
+	viewport.add_child(layout)
+	var collection = load("res://rookframe/ui/components/data/silkbound_collection.tscn").instantiate()
+	collection.theme = load("res://rookframe/ui/theme/silkbound_theme.tres")
+	collection.size_flags_vertical = Control.SIZE_FILL
+	layout.add_child(collection)
+	var entries: Array[Dictionary] = [
+		{"id":"weapon", "title":"Sword", "action":"Unequip Sword", "action_icon":load("res://rookframe/ui/icons/character/equipped.svg"), "action_pressed":true},
+		{"id":"potion", "title":"Elixir", "action":"Use one", "action_text":"Use one"},
+		{"id":"resource", "title":"Power uses", "subtitle":"remaining", "value":"0"}]
+	collection.configure(entries,"","Resources","3")
+	await _settle()
+	var rows: GridContainer = collection.get_node("Content/Area/Rows")
+	var pager: Control = collection.get_node("Content/Pager")
+	assert_float(pager.global_position.y - rows.get_global_rect().end.y).is_between(0,16)
+	var equipment: Button = rows.get_child(0).get_node("Action")
+	assert_vector(equipment.size).is_equal(Vector2(44,44))
+	assert_float(equipment.get_theme_stylebox("normal").content_margin_left).is_equal(8.0)
+	var consume: Button = rows.get_child(1).get_node("Action")
+	assert_float(consume.size.x).is_greater_equal(86)
+	assert_float(consume.get_theme_stylebox("normal").content_margin_left).is_equal(10.0)
