@@ -16,6 +16,8 @@ static func apply(field: VBoxContainer, compact: bool, multiline: bool) -> void:
 		var frame := editor.get_theme_stylebox(state).duplicate() as StyleBoxFlat
 		if frame == null:
 			continue
+		if state == "normal":
+			frame.border_color = Color("8f999d")
 		frame.content_margin_left = 12
 		frame.content_margin_right = 12
 		frame.content_margin_top = 8 if compact else 10
