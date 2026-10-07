@@ -222,9 +222,25 @@ func _fit() -> void:
 		for column in range(1, mini(grid.columns, heights.size() - index)):
 			row_height = maxf(row_height, heights[index + column])
 		natural_height += row_height + (grid.get_theme_constant("v_separation") if index > 0 else 0)
-	custom_minimum_size.y = 0 if (size_flags_vertical & Control.SIZE_EXPAND) != 0 else get_node(^"Content/Caption").get_combined_minimum_size().y + maxf(44, natural_height + grid.offset_top) + get_node(^"Content/Pager").get_combined_minimum_size().y + get_theme_constant("margin_top")
+	var expanded := (size_flags_vertical & Control.SIZE_EXPAND) != 0
+	var footer := get_node(^"Content/Pager/FooterContent").get_child_count() > 0
+	var caption_height: float = get_node(^"Content/Caption").get_combined_minimum_size().y if not phone else 0.0
+	var pager_height: float = get_node(^"Content/Pager").get_combined_minimum_size().y
+	custom_minimum_size.y = 0 if expanded else caption_height + maxf(44, natural_height + grid.offset_top) + (pager_height if footer else 0.0) + get_theme_constant("margin_top")
+	# Measure with the whole area first, so hiding a single-page footer cannot
+	# oscillate around the page boundary on subsequent Container layouts.
+	var available: float = get_node(^"Content").size.y - caption_height - grid.offset_top * (2 if expanded else 1) - (pager_height if footer else 0.0)
+	_paginate(heights, available, grid)
+	if _pages.size() > 1 and not footer:
+		_paginate(heights, available - pager_height, grid)
+	_show_page()
+	if is_instance_valid(_restore_focus) and _restore_focus.is_visible_in_tree():
+		_restore_focus.grab_focus()
+	_restore_focus = null
+	queue_redraw()
+
+func _paginate(heights: Array[float], available: float, grid: GridContainer) -> void:
 	_pages.clear()
-	var available: float = get_node(^"Content/Area").size.y - grid.offset_top * (2 if (size_flags_vertical & Control.SIZE_EXPAND) != 0 else 1)
 	var start := 0
 	var used := 0.0
 	var row_gap := grid.get_theme_constant("v_separation")
@@ -238,13 +254,14 @@ func _fit() -> void:
 			used = 0
 		used += height + (row_gap if index > start else 0)
 	_pages.append(Vector2i(start, heights.size()))
-	_show_page()
-	if is_instance_valid(_restore_focus) and _restore_focus.is_visible_in_tree():
-		_restore_focus.grab_focus()
-	_restore_focus = null
-	queue_redraw()
 
 func _show_page() -> void:
+	var multiple := _pages.size() > 1
+	var footer := get_node(^"Content/Pager/FooterContent").get_child_count() > 0
+	get_node(^"Content/Pager").visible = multiple or footer
+	for path in [^"Content/Pager/Previous", ^"Content/Pager/Next", ^"Content/Pager/Indicator"]:
+		get_node(path).visible = multiple
+	get_node(^"Content/Pager/Range").visible = multiple and get_viewport_rect().size.x > 900
 	_page = clampi(_page, 0, _pages.size() - 1)
 	var bounds := _pages[_page]
 	for index in _rows.size():
@@ -268,4 +285,6 @@ func _draw() -> void:
 	if get_node(^"Content/Caption").visible:
 		draw_line(Vector2(0, get_node(^"Content/Caption").size.y + get_theme_constant("margin_top")), Vector2(size.x, get_node(^"Content/Caption").size.y + get_theme_constant("margin_top")), Color("5b6265"))
 	var pager := get_node(^"Content/Pager") as Control
+	if not pager.visible:
+		return
 	draw_line(Vector2(get_theme_constant("margin_left"), pager.position.y + get_theme_constant("margin_top")), Vector2(size.x - get_theme_constant("margin_right"), pager.position.y + get_theme_constant("margin_top")), Color("3e4346"))

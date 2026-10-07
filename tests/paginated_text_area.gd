@@ -10,6 +10,7 @@ func test_editing_and_resizing_preserve_every_character(width: int, height: int,
 	note.value = words
 	await _settle()
 	assert_int(note._pages.size()).is_greater(1)
+	assert_bool(note.get_node("Pager").visible).is_true()
 	assert_str("".join(note._pages)).is_equal(words)
 	for page in note._pages.size():
 		note._page = page
@@ -35,6 +36,7 @@ func test_editing_and_resizing_preserve_every_character(width: int, height: int,
 	assert_bool(note.get_node("Pager/Previous").disabled).is_true()
 	assert_bool(note.get_node("Pager/Next").disabled).is_true()
 	assert_str(note.get_node("Pager/Range").text).is_equal("1 / 1")
+	assert_bool(note.get_node("Pager").visible).is_false()
 
 func _settle() -> void:
 	for frame in 6:

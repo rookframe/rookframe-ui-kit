@@ -38,3 +38,5 @@ Changes: removed the solid square background; rendered the original silhouettes 
 | `heart.svg` | [heart-organ](https://game-icons.net/1x1/lorc/heart-organ.html) | [Lorc](https://lorcblog.blogspot.com/) |
 | `character.svg` | [hood](https://game-icons.net/1x1/lorc/hood.html) | [Lorc](https://lorcblog.blogspot.com/) |
 | `reaction.svg` | [shield-reflect](https://game-icons.net/1x1/lorc/shield-reflect.html) | [Lorc](https://lorcblog.blogspot.com/) |
+
+| `use.svg` | [hand](https://game-icons.net/1x1/lorc/hand.html) | [Lorc](https://lorcblog.blogspot.com/) |

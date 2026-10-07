@@ -22,6 +22,7 @@ var _caret := -1
 func _ready() -> void:
 	_editor.text_changed.connect(_changed)
 	resized.connect(func(): _pending = true)
+	visibility_changed.connect(_sync_pager)
 	get_node(^"Pager/Previous").pressed.connect(_turn.bind(-1))
 	get_node(^"Pager/Next").pressed.connect(_turn.bind(1))
 
@@ -31,7 +32,7 @@ func get_pager() -> HBoxContainer:
 	return _pager
 
 func _process(_delta: float) -> void:
-	if _pending and size.x > 0 and size.y > 0:
+	if _pending and is_visible_in_tree() and size.x > 0 and size.y > 0:
 		_pending = false
 		_reflow()
 
@@ -121,3 +122,7 @@ func _show_page() -> void:
 	_pager.get_node(^"Previous").disabled = _page == 0
 	_pager.get_node(^"Next").disabled = _page == _pages.size() - 1
 	_pager.get_node(^"Range").text = "%d / %d" % [_page + 1, _pages.size()]
+	_sync_pager()
+
+func _sync_pager() -> void:
+	_pager.visible = is_visible_in_tree() and _pages.size() > 1

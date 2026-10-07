@@ -60,7 +60,7 @@ func _ready() -> void:
 	get_node(^"Pager/Previous").pressed.connect(func(): _page -= 1; _show_page())
 	get_node(^"Pager/Next").pressed.connect(func(): _page += 1; _show_page())
 	resized.connect(refresh)
-	visibility_changed.connect(refresh)
+	visibility_changed.connect(_visibility_changed)
 	_content.minimum_size_changed.connect(refresh)
 	refresh()
 
@@ -174,3 +174,8 @@ func _reveal_focus(control: Control) -> void:
 			_page = index
 			_show_page()
 			return
+
+func _visibility_changed() -> void:
+	if not is_visible_in_tree():
+		_pager.hide()
+	refresh()

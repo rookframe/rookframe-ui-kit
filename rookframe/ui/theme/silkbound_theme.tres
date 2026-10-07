@@ -980,3 +980,8 @@ SilkCreatureTabSelectedDesktop/base_type = &"Label"
 SilkCreatureTabSelectedDesktop/fonts/font = SubResource("line_0_ink")
 SilkCreatureTabSelectedDesktop/font_sizes/font_size = 23
 SilkCreatureTabSelectedDesktop/constants/line_spacing = 0
+
+Button/colors/font_focus_color = Color(0.905882, 0.905882, 0.866667, 1)
+Button/colors/icon_focus_color = Color(0.815686, 0.745098, 0.556863, 1)
+SilkIcon/colors/icon_focus_color = Color(0.815686, 0.745098, 0.556863, 1)
+SilkPrimaryIcon/colors/icon_focus_color = Color(0.082353, 0.090196, 0.098039, 1)

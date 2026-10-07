@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dto5p4rhh602j"
-path="res://.godot/imported/equipped.svg-8ea17dd5cc4e92653e3d690495b11d6d.ctex"
+uid="uid://dd2bs23dtxlq3"
+path="res://.godot/imported/use.svg-162f4c8b25f2d31ea4f0180364c6a9c5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://rookframe/ui/icons/character/equipped.svg"
-dest_files=["res://.godot/imported/equipped.svg-8ea17dd5cc4e92653e3d690495b11d6d.ctex"]
+source_file="res://rookframe/ui/icons/character/use.svg"
+dest_files=["res://.godot/imported/use.svg-162f4c8b25f2d31ea4f0180364c6a9c5.ctex"]
 
 [params]
 

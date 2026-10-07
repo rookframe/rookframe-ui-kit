@@ -52,6 +52,7 @@ func test_bounded_records_keep_details_and_actions_independent() -> void:
 		await _settle()
 		assert_bool(collection.get_node("Content/Area/Empty").visible).is_true()
 		assert_bool(next.disabled).is_true()
+		assert_bool(collection.get_node("Content/Pager").visible).is_false()
 		viewport.free()
 
 func _settle() -> void:
@@ -77,10 +78,33 @@ func test_shrink_section_places_pager_after_last_row_and_pads_actions() -> void:
 	await _settle()
 	var rows: GridContainer = collection.get_node("Content/Area/Rows")
 	var pager: Control = collection.get_node("Content/Pager")
-	assert_float(pager.global_position.y - rows.get_global_rect().end.y).is_between(0,16)
+	assert_bool(pager.visible).is_false()
+	assert_float(collection.get_global_rect().end.y - rows.get_global_rect().end.y).is_between(0,16)
 	var equipment: Button = rows.get_child(0).get_node("Action")
 	assert_vector(equipment.size).is_equal(Vector2(44,44))
 	assert_float(equipment.get_theme_stylebox("normal").content_margin_left).is_equal(8.0)
 	var consume: Button = rows.get_child(1).get_node("Action")
 	assert_float(consume.size.x).is_greater_equal(86)
 	assert_float(consume.get_theme_stylebox("normal").content_margin_left).is_equal(10.0)
+
+func test_single_page_hides_controls_but_keeps_footer_actions() -> void:
+	var collection = auto_free(load("res://rookframe/ui/components/data/silkbound_collection.tscn").instantiate())
+	collection.theme = load("res://rookframe/ui/theme/silkbound_theme.tres")
+	collection.size = Vector2(500, 250)
+	add_child(collection)
+	var action := Button.new()
+	action.text = "Create"
+	collection.get_footer_slot().add_child(action)
+	var entries: Array[Dictionary] = [{"id":"one", "title":"One record"}]
+	collection.configure(entries, "", "Entries", "1")
+	await _settle()
+	assert_bool(action.is_visible_in_tree()).is_true()
+	for name in ["Previous", "Next", "Indicator", "Range"]:
+		assert_bool(collection.get_node("Content/Pager/" + name).visible).is_false()
+	entries.clear()
+	for index in 20:
+		entries.append({"id":str(index), "title":"Record " + str(index)})
+	collection.configure(entries, "", "Entries", "20")
+	await _settle()
+	assert_bool(collection.get_node("Content/Pager/Next").is_visible_in_tree()).is_true()
+	assert_bool(collection.get_node("Content/Pager/Next").disabled).is_false()
