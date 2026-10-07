@@ -43,6 +43,11 @@ func _enter_tree() -> void:
 func _exit_tree() -> void:
 	if is_instance_valid(_focus_viewport) and _focus_viewport.gui_focus_changed.is_connected(_reveal_focus):
 		_focus_viewport.gui_focus_changed.disconnect(_reveal_focus)
+@export var always_show_pager := false:
+	set(value):
+		always_show_pager = value
+		refresh()
+
 @export var enabled := true:
 	set(value):
 		enabled = value
@@ -55,7 +60,7 @@ func _ready() -> void:
 	get_node(^"Pager/Previous").pressed.connect(func(): _page -= 1; _show_page())
 	get_node(^"Pager/Next").pressed.connect(func(): _page += 1; _show_page())
 	resized.connect(refresh)
-	visibility_changed.connect(refresh)
+	visibility_changed.connect(_visibility_changed)
 	_content.minimum_size_changed.connect(refresh)
 	refresh()
 
@@ -79,8 +84,12 @@ func _fit() -> void:
 	var height := size.y
 	_external_pager = _pager.get_parent() != self
 	_content.size = Vector2(size.x, maxf(height, _content.get_combined_minimum_size().y))
+	_pager.alignment = BoxContainer.ALIGNMENT_CENTER if always_show_pager else BoxContainer.ALIGNMENT_BEGIN
+	_range.size_flags_horizontal = 0 if always_show_pager else Control.SIZE_EXPAND_FILL
+	_range.custom_minimum_size.x = 54 if always_show_pager else 0
+	_range.add_theme_font_size_override("font_size", 14 if always_show_pager else 12)
 	var overflow := enabled and _content.get_combined_minimum_size().y > height + 1
-	_pager.visible = overflow
+	_pager.visible = overflow or always_show_pager
 	if overflow and not _external_pager:
 		height -= _pager.get_combined_minimum_size().y
 	_content.size.y = maxf(height, _content.get_combined_minimum_size().y)
@@ -165,3 +174,8 @@ func _reveal_focus(control: Control) -> void:
 			_page = index
 			_show_page()
 			return
+
+func _visibility_changed() -> void:
+	if not is_visible_in_tree():
+		_pager.hide()
+	refresh()

@@ -378,7 +378,8 @@ they do not rebuild or mutate StyleBoxes.
 Godot text and Control measurements. Compose one reading column beneath its public
 `Area` Control. `refresh()` remeasures changed content; resizing and minimum-size
 changes also remeasure automatically. Previous/Next remain fixed and appear
-only when needed. Independent reading columns each use their own pager, so staggered lines do not
+only when needed. `always_show_pager = true` retains a centered compact pager
+even for a single reading page. Independent reading columns each use their own pager, so staggered lines do not
 require a shared break. Lines and interactive Controls stay whole at page boundaries;
 text must use ordinary Label or RichTextLabel, with controls smaller than a page.
 Native keyboard focus reveals its page. `capture_state()` / `restore_state(state)`
@@ -421,3 +422,66 @@ when native content is reparented into or out of a Window.
 TextField, TextArea and their task variants stay together on one page, including
 the field label and validation copy. Their authored minimum height must fit the
 available content viewport, like every other indivisible interactive control.
+
+`components/content/silkbound_miniature_browser.tscn` composes the approved
+Silkbound Ledger full-viewport Miniature list and adjacent preview. It supports
+`configure(entries, selected_id, labels)`, `selection()`, `focus_search()` and
+`set_state(state, message)`, with the same entry dictionaries and six signals
+as FullscreenMiniatureBrowser. The consumer supplies Miniature data, SDK previews,
+permission checks and save operations; the component handles only native search,
+selection, bounded list pages and responsive composition. The `library` label
+is the owning Actor/definition name; `none_copy`, `empty_preview` and `find`
+localize the empty choice, preview and search caption. Widths through 900px use
+the phone composition; through 1300px use tablet; larger widths use desktop.
+
+## SilkboundCollection
+
+`res://rookframe/ui/components/data/silkbound_collection.tscn` is a bounded,
+whole-row collection for the Silkbound sheet. It uses one column on phone and
+one or two authored columns on larger canvases. `collection_layout` selects
+ordinary, wide, or inventory row metrics; `divider_top` adds a secondary section
+divider. The owning surface supplies its Theme.
+
+`configure(entries, selected_id, caption, count)` accepts stable `id`, `title`,
+`subtitle`, `value`, and optional `icon` Texture2D fields. Phone copy can use
+`phone_subtitle`, `phone_value`, and `phone_value_meta`. An optional separate
+button uses `action` (accessible action name), `action_text`, `action_icon`,
+`action_pressed`, and `action_disabled`. `selected(id)` opens details;
+`action_requested(id)` requests a domain action. The collection never performs
+that action itself.
+
+`capture_state()` / `restore_state()` preserve the page, `focus_entry(id)`
+reveals and focuses a record, and `get_footer_slot()` accepts owned footer
+Controls. Updating stable IDs retains row focus and page state. Pagination
+keeps complete rows within the available area; long text wraps using native
+font metrics. Keyboard focus, hover, pressed and disabled states remain
+separate. Consumers must use these public methods rather than internal paths.
+
+`components/forms/paginated_text_area.tscn` is the Silkbound fixed-page notepad.
+Set `value` to the complete text and consume `value_changed(value)` to retain the
+complete draft; `compact` applies landscape phone typography. Native Label shaping
+measures pages and native TextEdit handles input. Edits, page turns and resize
+retain all text and the editing caret. Reparent the `get_pager()` HBoxContainer
+into an authored fixed footer. The pager appears only when the text needs more than one page.
+
+SilkboundCollection follows native vertical size flags: `SIZE_EXPAND_FILL` fills
+its bounded page allocation; `SIZE_FILL` requests the natural height of its
+records and keeps the pager directly below them. Use shrink sizing for short
+secondary sections, and expanded sizing for collections requiring bounded paging.
+
+Silkbound collection and notepad pagers are hidden when all content fits on one
+page, including empty collections. A collection footer slot remains available
+for caller-owned actions even when its page controls are hidden.
+
+## Silkbound hover hints
+
+`components/feedback/silkbound_tooltip.tscn` is authored content for Godot's
+`Control._make_custom_tooltip`: a title, wrapping summary and inspection
+prompt. Set its `Title` and `Summary` Labels before returning the instance. Godot
+owns delay, positioning, dismissal and lifetime; the Silkbound Theme supplies the
+TooltipPanel frame and padding. Keep all information reachable by activation.
+
+SilkboundCollection entries accept optional `hint` and `hint_title` strings. The
+details button shows these with the shared composition and exposes the summary
+as its accessibility description. An empty hint produces no tooltip. The separate
+action button retains its own action-specific tooltip.

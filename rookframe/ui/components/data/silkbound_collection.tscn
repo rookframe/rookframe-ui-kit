@@ -1,0 +1,62 @@
+[gd_scene format=3]
+[ext_resource type="Script" path="res://rookframe/ui/components/data/silkbound_collection.gd" id="script"]
+[ext_resource type="FontVariation" path="res://rookframe/ui/theme/silkbound_medium.tres" id="medium"]
+[node name="SilkboundCollection" type="MarginContainer"]
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 0
+script = ExtResource("script")
+[node name="Content" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 0
+
+[node name="Caption" type="HBoxContainer" parent="Content"]
+custom_minimum_size = Vector2(0, 50)
+[node name="Title" type="Label" parent="Content/Caption"]
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("medium")
+[node name="Count" type="Label" parent="Content/Caption"]
+theme_override_colors/font_color = Color(0.85098, 0.682353, 0.580392, 1)
+[node name="Area" type="Control" parent="Content"]
+size_flags_vertical = 3
+custom_minimum_size = Vector2(0, 44)
+clip_contents = true
+[node name="Rows" type="GridContainer" parent="Content/Area"]
+anchor_right = 1.0
+theme_override_constants/h_separation = 24
+theme_override_constants/v_separation = 6
+[node name="Empty" type="Label" parent="Content/Area"]
+anchor_right = 1.0
+offset_top = 12.0
+autowrap_mode = 3
+theme_override_colors/font_color = Color(0.682353, 0.729412, 0.745098, 1)
+[node name="Pager" type="HBoxContainer" parent="Content"]
+custom_minimum_size = Vector2(0, 44)
+theme_override_constants/separation = 8
+[node name="FooterContent" type="HBoxContainer" parent="Content/Pager"]
+visible = false
+size_flags_horizontal = 3
+[node name="Range" type="Label" parent="Content/Pager"]
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.682353, 0.729412, 0.745098, 1)
+[node name="Previous" type="Button" parent="Content/Pager"]
+custom_minimum_size = Vector2(44, 44)
+text = "‹"
+tooltip_text = "Previous page"
+accessibility_name = "Previous page"
+theme_type_variation = &"TaskGlyphButton"
+[node name="Indicator" type="VBoxContainer" parent="Content/Pager"]
+size_flags_vertical = 4
+theme_override_constants/separation = 0
+[node name="Page" type="Label" parent="Content/Pager/Indicator"]
+horizontal_alignment = 1
+[node name="PhoneCount" type="Label" parent="Content/Pager/Indicator"]
+visible = false
+horizontal_alignment = 1
+[node name="Next" type="Button" parent="Content/Pager"]
+custom_minimum_size = Vector2(44, 44)
+text = "›"
+tooltip_text = "Next page"
+accessibility_name = "Next page"
+theme_type_variation = &"TaskGlyphButton"

@@ -1116,6 +1116,60 @@
       "signals": [],
       "script": "res://rookframe/ui/components/data/paginated_content.gd",
       "scriptUid": "uid://cu4kmucnvjxu1"
+    },
+    {
+      "name": "SilkboundMiniatureBrowser",
+      "scene": "res://rookframe/ui/components/content/silkbound_miniature_browser.tscn",
+      "rootType": "Control",
+      "properties": {},
+      "methods": [
+        "configure",
+        "selection",
+        "set_state",
+        "focus_search"
+      ],
+      "signals": [
+        "choose_requested",
+        "cancel_requested",
+        "close_requested",
+        "selection_changed",
+        "preview_requested",
+        "retry_requested"
+      ],
+      "script": "res://rookframe/ui/components/content/silkbound_miniature_browser.gd",
+      "scriptUid": "uid://csbj2ehev7qc7"
+    },
+    {
+      "name": "SilkboundCollection",
+      "scene": "res://rookframe/ui/components/data/silkbound_collection.tscn",
+      "rootType": "MarginContainer",
+      "properties": {
+        "columns": "int",
+        "collection_layout": "int",
+        "empty_text": "String",
+        "divider_top": "bool"
+      },
+      "methods": [
+        "configure",
+        "capture_state",
+        "restore_state",
+        "focus_entry",
+        "get_footer_slot"
+      ],
+      "signals": [
+        "selected",
+        "action_requested"
+      ],
+      "script": "res://rookframe/ui/components/data/silkbound_collection.gd",
+      "scriptUid": "uid://bhswcvuj0kpbd"
+    },
+    {
+      "name": "SilkboundTooltip",
+      "scene": "res://rookframe/ui/components/feedback/silkbound_tooltip.tscn",
+      "rootType": "VBoxContainer",
+      "properties": {},
+      "methods": [],
+      "signals": []
     }
   ],
   "semanticIcons": {

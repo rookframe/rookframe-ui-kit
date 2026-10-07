@@ -1,0 +1,205 @@
+[gd_scene format=3]
+[ext_resource type="Script" path="res://rookframe/ui/components/content/silkbound_miniature_browser.gd" id="script"]
+[ext_resource type="Theme" path="res://rookframe/ui/theme/silkbound_theme.tres" id="theme"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/components/data/paginated_content.tscn" id="pages"]
+[ext_resource type="Texture2D" path="res://rookframe/ui/assets/silkbound-ledger/linen.png" id="linen"]
+[ext_resource type="Texture2D" path="res://rookframe/ui/icons/close.svg" id="close"]
+[ext_resource type="Texture2D" path="res://rookframe/ui/icons/check.svg" id="check"]
+[ext_resource type="Texture2D" path="res://rookframe/ui/icons/chevron-left.svg" id="chevron-left"]
+[ext_resource type="Texture2D" path="res://rookframe/ui/icons/chevron-right.svg" id="chevron-right"]
+[ext_resource type="Texture2D" path="res://rookframe/ui/icons/character/character.svg" id="character"]
+[sub_resource type="StyleBoxFlat" id="frame"]
+bg_color = Color(0.082353,0.090196,0.098039,1)
+border_color = Color(0.737255,0.572549,0.466667,1)
+border_width_top = 6
+border_width_bottom = 6
+[sub_resource type="StyleBoxFlat" id="header"]
+bg_color = Color(0,0,0,0)
+border_width_bottom = 1
+border_color = Color(0.243137,0.262745,0.274510,1)
+content_margin_bottom = 15.0
+[sub_resource type="StyleBoxFlat" id="preview"]
+bg_color = Color(0,0,0,0)
+border_color = Color(0.243137,0.262745,0.274510,1)
+border_width_top = 1
+border_width_bottom = 1
+border_width_left = 1
+border_width_right = 1
+[node name="SilkboundMiniatureBrowser" type="Control"]
+texture_filter = 4
+layout_mode = 1
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource("theme")
+script = ExtResource("script")
+
+[node name="Frame" type="Panel" parent="."]
+layout_mode = 0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("frame")
+
+[node name="Linen" type="TextureRect" parent="."]
+layout_mode = 0
+mouse_filter = 2
+texture = ExtResource("linen")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="Inset" type="MarginContainer" parent="."]
+layout_mode = 1
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+
+[node name="Layout" type="VBoxContainer" parent="Inset"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Header" type="PanelContainer" parent="Inset/Layout"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("header")
+
+[node name="Row" type="HBoxContainer" parent="Inset/Layout/Header"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Copy" type="VBoxContainer" parent="Inset/Layout/Header/Row"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 6
+
+[node name="Kicker" type="Label" parent="Inset/Layout/Header/Row/Copy"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.682353,0.729412,0.745098,1)
+
+[node name="Title" type="Label" parent="Inset/Layout/Header/Row/Copy"]
+layout_mode = 2
+text = "Tabletop miniature"
+
+[node name="Close" type="Button" parent="Inset/Layout/Header/Row"]
+layout_mode = 2
+size_flags_vertical = 0
+custom_minimum_size = Vector2(44,44)
+theme_type_variation = "SilkIcon"
+icon_alignment = 1
+icon = ExtResource("close")
+
+[node name="Body" type="VBoxContainer" parent="Inset/Layout"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 12
+
+[node name="Note" type="Label" parent="Inset/Layout/Body"]
+layout_mode = 2
+autowrap_mode = 3
+
+[node name="Search" type="HBoxContainer" parent="Inset/Layout/Body"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Label" type="Label" parent="Inset/Layout/Body/Search"]
+layout_mode = 2
+text = "Find miniature"
+
+[node name="Editor" type="LineEdit" parent="Inset/Layout/Body/Search"]
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0,48)
+
+[node name="Status" type="Label" parent="Inset/Layout/Body"]
+layout_mode = 2
+visible = false
+autowrap_mode = 3
+
+[node name="Retry" type="Button" parent="Inset/Layout/Body"]
+layout_mode = 2
+visible = false
+custom_minimum_size = Vector2(44,44)
+
+[node name="Columns" type="HBoxContainer" parent="Inset/Layout/Body"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 20
+
+[node name="List" parent="Inset/Layout/Body/Columns" instance=ExtResource("pages")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.1
+theme = ExtResource("theme")
+
+[node name="Rows" type="VBoxContainer" parent="Inset/Layout/Body/Columns/List/Area"]
+layout_mode = 0
+theme_override_constants/separation = 0
+
+[node name="Pager" parent="Inset/Layout/Body/Columns/List"]
+custom_minimum_size = Vector2(0,46)
+offset_top = -46.0
+
+[node name="Range" parent="Inset/Layout/Body/Columns/List/Pager"]
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(0.682353,0.729412,0.745098,1)
+
+[node name="Previous" parent="Inset/Layout/Body/Columns/List/Pager"]
+theme_type_variation = "SilkIcon"
+text = ""
+icon_alignment = 1
+icon = ExtResource("chevron-left")
+
+[node name="Next" parent="Inset/Layout/Body/Columns/List/Pager"]
+theme_type_variation = "SilkIcon"
+text = ""
+icon_alignment = 1
+icon = ExtResource("chevron-right")
+
+[node name="Preview" type="PanelContainer" parent="Inset/Layout/Body/Columns"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("preview")
+
+[node name="Stage" type="Control" parent="Inset/Layout/Body/Columns/Preview"]
+layout_mode = 2
+visible = false
+
+[node name="Empty" type="CenterContainer" parent="Inset/Layout/Body/Columns/Preview"]
+layout_mode = 2
+
+[node name="Copy" type="VBoxContainer" parent="Inset/Layout/Body/Columns/Preview/Empty"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Icon" type="TextureRect" parent="Inset/Layout/Body/Columns/Preview/Empty/Copy"]
+layout_mode = 2
+size_flags_horizontal = 4
+custom_minimum_size = Vector2(50,50)
+texture = ExtResource("character")
+expand_mode = 1
+stretch_mode = 5
+self_modulate = Color(0.815686,0.745098,0.556863,0.5)
+
+[node name="Title" type="Label" parent="Inset/Layout/Body/Columns/Preview/Empty/Copy"]
+layout_mode = 2
+text = "No miniature assigned"
+horizontal_alignment = 1
+
+[node name="Footer" type="HBoxContainer" parent="Inset/Layout"]
+layout_mode = 2
+custom_minimum_size = Vector2(0,44)
+
+[node name="Cancel" type="Button" parent="Inset/Layout/Footer"]
+layout_mode = 2
+custom_minimum_size = Vector2(44,44)
+theme_type_variation = "SilkIcon"
+icon_alignment = 1
+icon = ExtResource("close")
+
+[node name="Space" type="Control" parent="Inset/Layout/Footer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="Choose" type="Button" parent="Inset/Layout/Footer"]
+layout_mode = 2
+custom_minimum_size = Vector2(44,44)
+theme_type_variation = "SilkPrimaryIcon"
+icon_alignment = 1
+icon = ExtResource("check")

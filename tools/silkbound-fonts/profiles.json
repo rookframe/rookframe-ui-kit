@@ -1,0 +1,5 @@
+[
+  {"name":"roman","source":"EBGaramond[wght].ttf","weights":[400,500,600],"color":"#e7e7dd","sizes":[12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,28,29,30,32,34,36,40]},
+  {"name":"italic","source":"EBGaramond-Italic[wght].ttf","weights":[400],"color":"#e7e7dd","sizes":[12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,28,29,30,32,34,36,40]},
+  {"name":"ink","source":"EBGaramond[wght].ttf","weights":[500],"color":"#151719","sizes":[18,19,23]}
+]
