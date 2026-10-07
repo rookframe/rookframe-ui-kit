@@ -25,6 +25,7 @@ func _ready() -> void:
 	visibility_changed.connect(_sync_pager)
 	get_node(^"Pager/Previous").pressed.connect(_turn.bind(-1))
 	get_node(^"Pager/Next").pressed.connect(_turn.bind(1))
+	_sync_pager()
 
 func get_pager() -> HBoxContainer:
 	if _pager.get_parent() == self:
