@@ -791,6 +791,18 @@ content_margin_right = 0.0
 border_width_bottom = 1
 content_margin_bottom = 8.0
 
+[sub_resource type="StyleBoxFlat" id="Notice"]
+bg_color = Color(0.082353, 0.090196, 0.098039, 0.98)
+border_color = Color(0.356863, 0.384314, 0.396078, 1)
+border_width_left = 1
+border_width_right = 1
+border_width_top = 1
+border_width_bottom = 1
+content_margin_left = 16.0
+content_margin_right = 16.0
+content_margin_top = 16.0
+content_margin_bottom = 16.0
+
 [resource]
 default_font = ExtResource("ui")
 default_font_size = 20
@@ -1392,3 +1404,31 @@ WizardFormulaBoxTablet/base_type = &"PanelContainer"
 WizardFormulaBoxTablet/styles/panel = SubResource("WizardFormulaTablet")
 WizardFormulaBoxCompact/base_type = &"PanelContainer"
 WizardFormulaBoxCompact/styles/panel = SubResource("WizardFormulaCompact")
+
+SilkNotice/base_type = &"PanelContainer"
+SilkNotice/styles/panel = SubResource("Notice")
+SilkNoticeTitle/base_type = &"Label"
+SilkNoticeTitle/fonts/font = ExtResource("display")
+SilkNoticeTitle/font_sizes/font_size = 30
+SilkNoticeState/base_type = &"Label"
+SilkNoticeState/fonts/font = ExtResource("ui")
+SilkNoticeState/font_sizes/font_size = 18
+SilkNoticeBody/base_type = &"Label"
+SilkNoticeBody/fonts/font = ExtResource("ui")
+SilkNoticeBody/font_sizes/font_size = 21
+SilkNoticeBody/colors/font_color = Color(0.682353, 0.729412, 0.745098, 1)
+RookframeSecondaryButton/base_type = &"Button"
+RookframeSecondaryButton/fonts/font = ExtResource("action")
+RookframeSecondaryButton/font_sizes/font_size = 20
+RookframeSecondaryButton/styles/normal = SubResource("WizardButton")
+RookframeSecondaryButton/styles/hover = SubResource("WizardHover")
+RookframeSecondaryButton/styles/pressed = SubResource("WizardHover")
+RookframeSecondaryButton/styles/hover_pressed = SubResource("WizardHover")
+RookframeSecondaryButton/styles/disabled = SubResource("WizardButton")
+RookframeSecondaryButton/styles/focus = SubResource("Focus")
+RookframeSecondaryButton/colors/font_color = Color(0.905882, 0.905882, 0.866667, 1)
+RookframeSecondaryButton/colors/font_hover_color = Color(0.905882, 0.905882, 0.866667, 1)
+RookframeSecondaryButton/colors/font_pressed_color = Color(0.905882, 0.905882, 0.866667, 1)
+RookframeSecondaryButton/colors/font_hover_pressed_color = Color(0.905882, 0.905882, 0.866667, 1)
+RookframeSecondaryButton/colors/font_focus_color = Color(0.905882, 0.905882, 0.866667, 1)
+RookframeSecondaryButton/colors/font_disabled_color = Color(0.682353, 0.729412, 0.745098, 0.45)
