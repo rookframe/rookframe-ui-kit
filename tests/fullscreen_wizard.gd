@@ -1,9 +1,6 @@
 extends GdUnitTestSuite
 
 func test_fixed_frame_measured_choices_and_actions() -> void:
-	var display := load("res://rookframe/ui/theme/task_display.tres") as FontVariation
-	var wordmark := load("res://rookframe/ui/theme/task_wordmark.tres") as FontVariation
-	assert_bool(wordmark.get_string_size("MÖRK BORG", HORIZONTAL_ALIGNMENT_LEFT, -1, 22).x > display.get_string_size("MÖRK BORG", HORIZONTAL_ALIGNMENT_LEFT, -1, 22).x).is_true()
 	var viewport: SubViewport = auto_free(SubViewport.new())
 	viewport.size = Vector2i(1920, 1080)
 	viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS
@@ -23,8 +20,8 @@ func test_fixed_frame_measured_choices_and_actions() -> void:
 	for frame in 6:
 		await get_tree().process_frame
 	assert_bool(wizard.get_global_rect() == Rect2(0, 0, 1920, 1080)).is_true()
-	assert_bool(wizard.get_context_slot().size.x == 400).is_true()
-	assert_bool(wizard.get_node(^"Layout/Footer").get_global_rect().end.y == 1079).is_true()
+	assert_bool(wizard.get_context_slot().size.x == 336).is_true()
+	assert_bool(wizard.get_node(^"Layout/Footer").get_global_rect().end.y == 1042).is_true()
 	var seen: Array[String] = []
 	var previous := choices.get_node(^"Pager/Previous") as Button
 	while not previous.disabled:

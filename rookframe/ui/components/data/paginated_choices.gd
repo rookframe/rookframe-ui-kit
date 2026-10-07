@@ -3,6 +3,7 @@ extends VBoxContainer
 ## Measured whole-row pagination with a retained selected row.
 signal selected(id: String)
 const ROW = preload("res://rookframe/ui/_internal/data/task_choice.tscn")
+@export var silkbound := false
 var _entries: Array[Dictionary] = []
 var _rows: Array[Button] = []
 var _selected := ""
@@ -190,6 +191,8 @@ func _fit() -> void:
 		var measured := value.get_theme_font("font").get_string_size(value.text, HORIZONTAL_ALIGNMENT_LEFT, -1, value.get_theme_font_size("font_size")).x
 		value.custom_minimum_size.x = minf(ceilf(measured), (size.x - inset * 2) / columns * 0.3) if framed_collection else minf(ceilf(measured), size.x * 0.3) if tablet else 14 if columns > 1 else 0
 
+	if silkbound:
+		height = _fit_silkbound()
 	# The authored row has an inset Control, so include its effective child
 	# minimum as well as the framed Button's minimum (ADR-0017).
 	var heights: Array[float] = []
@@ -254,10 +257,10 @@ func _draw() -> void:
 		draw_style_box(preload("res://rookframe/ui/_internal/data/collection_frame.tres"), Rect2(Vector2.ZERO, size))
 		if get_node(^"Caption").visible:
 			draw_style_box(preload("res://rookframe/ui/_internal/data/collection_caption.tres"), Rect2(Vector2.ZERO, Vector2(size.x, get_node(^"Caption").size.y)))
-	draw_line(Vector2(0, 0.5), Vector2(size.x, 0.5), Color("465256"))
+	draw_line(Vector2(0, 0.5), Vector2(size.x, 0.5), Color("3e4346") if silkbound else Color("465256"))
 	var pager := get_node_or_null(^"Pager") as Control
 	if pager != null and pager.visible:
-		draw_line(Vector2(0, pager.position.y), Vector2(size.x, pager.position.y), Color("465256"))
+		draw_line(Vector2(0, pager.position.y), Vector2(size.x, pager.position.y), Color("3e4346") if silkbound else Color("465256"))
 
 func _show_page() -> void:
 	var pages := _pages.size()
@@ -271,3 +274,63 @@ func _show_page() -> void:
 	get_node(^"Pager/Range").text = range_text
 	if framed_collection and get_viewport_rect().size.y <= 560:
 		get_node(^"Pager/Indicator/PhoneCount").text = range_text
+
+
+func _fit_silkbound() -> int:
+	var phone := get_viewport_rect().size.y <= 560 or get_viewport_rect().size.x <= 740
+	var tablet := get_viewport_rect().size.x <= 1300 and not phone
+	theme = preload("res://rookframe/ui/theme/silkbound_theme.tres")
+	var titles_only := true
+	for entry in _entries:
+		titles_only = titles_only and str(entry.get("subtitle", "")).is_empty()
+	var height := 44 if phone else (48 if titles_only else 52) if tablet else 68
+	get_node(^"Caption").custom_minimum_size.y = 22 if phone else (32 if titles_only else 36) if tablet else 44
+	for path in [^"Caption/Title", ^"Caption/Count"]:
+		get_node(path).add_theme_font_override("font", preload("res://rookframe/ui/theme/silkbound_regular.tres"))
+		get_node(path).add_theme_font_size_override("font_size", 15 if phone else 16 if tablet else 18)
+	get_node(^"Caption/Title").add_theme_color_override("font_color", Color("aebabe"))
+	get_node(^"Caption/Count").add_theme_color_override("font_color", Color("d9ae94"))
+	get_node(^"Pager").custom_minimum_size.y = 53
+	get_node(^"Pager/Range").add_theme_font_size_override("font_size", 15 if phone else 17)
+	get_node(^"Pager/Range").add_theme_color_override("font_color", Color("aebabe"))
+	for key in ["Previous", "Next"]:
+		var action := get_node("Pager/" + key) as Button
+		action.theme_type_variation = "WizardButton"
+		action.text = ""
+		action.icon = preload("res://rookframe/ui/icons/chevron-left.svg") if key == "Previous" else preload("res://rookframe/ui/icons/chevron-right.svg")
+		action.expand_icon = true
+		action.accessibility_name = "Previous page" if key == "Previous" else "Next page"
+		action.tooltip_text = action.accessibility_name
+		for state in ["normal", "hover", "pressed", "disabled"]:
+			var box := action.get_theme_stylebox(state).duplicate() as StyleBoxFlat
+			box.content_margin_left = 0
+			box.content_margin_right = 0
+			action.add_theme_stylebox_override(state, box)
+	for index in _rows.size():
+		var row := _rows[index]
+		var selected := str(_entries[index].id) == _selected
+		var foreground := Color("151719") if selected else Color("e7e7dd")
+		row.theme_type_variation = "WizardChoice"
+		row.custom_minimum_size.y = height
+		row.get_node(^"Inset/Row/Icon").self_modulate = Color("151719") if selected else Color("d0be8e")
+		row.get_node(^"Inset/Row/Icon").custom_minimum_size = Vector2(24,24) if phone or tablet else Vector2(28,28)
+		for label in [^"Inset/Row/Copy/Title", ^"Inset/Row/Value"]:
+			row.get_node(label).add_theme_font_override("font", preload("res://rookframe/ui/theme/silkbound_medium.tres"))
+			row.get_node(label).add_theme_color_override("font_color", foreground)
+		row.get_node(^"Inset/Row/Copy/Title").add_theme_font_size_override("font_size", 19 if phone else 20 if tablet else 24)
+		row.get_node(^"Inset/Row/Copy/Subtitle").add_theme_font_size_override("font_size", 14 if phone else 15 if tablet else 18)
+		row.get_node(^"Inset/Row/Copy/Subtitle").add_theme_color_override("font_color", Color("151719") if selected else Color("aebabe"))
+		row.get_node(^"Inset/Row/Copy").add_theme_constant_override("separation", 2 if phone or tablet else 4)
+		row.get_node(^"Inset/Row").add_theme_constant_override("separation", 8 if phone or tablet else 12)
+		var pending := bool(_entries[index].get("pending", false))
+		var value := row.get_node(^"Inset/Row/Value") as Label
+		value.add_theme_font_size_override("font_size", (15 if phone else 16 if tablet else 18) if pending else 20 if phone or tablet else 24)
+		var measured := value.get_theme_font("font").get_string_size(value.text,HORIZONTAL_ALIGNMENT_LEFT,-1,value.get_theme_font_size("font_size")).x
+		value.custom_minimum_size.x = minf(ceilf(measured),size.x / columns * 0.3)
+		value.size_flags_horizontal = Control.SIZE_FILL
+		for edge in ["left","right","top","bottom"]:
+			row.get_node(^"Inset").add_theme_constant_override("margin_"+edge,(8 if phone or tablet else 12) if edge in ["left","right"] else 2 if phone or tablet else 8)
+		preload("res://rookframe/ui/theme/silkbound_line_height.gd").apply(row.get_node(^"Inset/Row/Copy/Title"),1.1 if phone else 1.15)
+		preload("res://rookframe/ui/theme/silkbound_line_height.gd").apply(row.get_node(^"Inset/Row/Copy/Subtitle"),1.1 if phone else 1.2)
+		preload("res://rookframe/ui/theme/silkbound_line_height.gd").apply(value,1.15)
+	return height

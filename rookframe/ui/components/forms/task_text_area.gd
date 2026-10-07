@@ -1,6 +1,7 @@
 @tool
 extends "res://rookframe/ui/components/forms/text_area.gd"
 ## Phone density for the existing task multiline field relationship.
+@export var silkbound := false
 @export var compact := false:
 	set(next):
 		compact = next
@@ -21,3 +22,6 @@ func _refresh() -> void:
 	frame.content_margin_left = 10 if compact else 14
 	frame.content_margin_right = 10 if compact else 14
 	get_node(^"Editor").add_theme_stylebox_override("normal", frame)
+
+	if silkbound:
+		preload("res://rookframe/ui/_internal/forms/silkbound_task_field.gd").apply(self,compact,true)

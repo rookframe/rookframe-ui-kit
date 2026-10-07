@@ -755,7 +755,7 @@
       "properties": {
         "title": "Action",
         "description": "Supporting action detail",
-        "action_label": "\u00e2\u20ac\u00ba",
+        "action_label": "â€º",
         "tone": "STANDARD",
         "disabled": false
       },
@@ -839,7 +839,7 @@
       "properties": {
         "title": "Action",
         "description": "Supporting action detail",
-        "action_label": "\u00e2\u20ac\u00ba",
+        "action_label": "â€º",
         "tone": "STANDARD",
         "disabled": false
       },
@@ -1024,7 +1024,9 @@
         "set_primary",
         "set_back_enabled",
         "get_context_slot",
-        "get_stage_slot"
+        "get_stage_slot",
+        "is_compact",
+        "is_tablet"
       ],
       "signals": [
         "back_requested",
@@ -1040,7 +1042,9 @@
       "scene": "res://rookframe/ui/components/data/paginated_choices.tscn",
       "sceneUid": "uid://daedsgd1whpdn",
       "rootType": "VBoxContainer",
-      "properties": {},
+      "properties": {
+        "silkbound": "bool"
+      },
       "methods": [
         "configure"
       ],
@@ -1055,7 +1059,9 @@
       "scene": "res://rookframe/ui/components/data/summary_block.tscn",
       "sceneUid": "uid://cxu3q4m6ldbha",
       "rootType": "VBoxContainer",
-      "properties": {},
+      "properties": {
+        "silkbound": "bool"
+      },
       "methods": [
         "configure",
         "set_stats"
@@ -1069,7 +1075,9 @@
       "scene": "res://rookframe/ui/components/forms/task_text_field.tscn",
       "sceneUid": "uid://c0of87liqui3k",
       "rootType": "VBoxContainer",
-      "properties": {},
+      "properties": {
+        "silkbound": "bool"
+      },
       "methods": [
         "focus_editor",
         "set_error"
@@ -1086,7 +1094,9 @@
       "scene": "res://rookframe/ui/components/forms/task_text_area.tscn",
       "sceneUid": "uid://cammbybvgdssm",
       "rootType": "VBoxContainer",
-      "properties": {},
+      "properties": {
+        "silkbound": "bool"
+      },
       "methods": [
         "focus_editor",
         "set_error"
@@ -1106,7 +1116,9 @@
         "enabled": {
           "type": "bool",
           "default": true
-        }
+        },
+        "silkbound": "bool",
+        "content_inset_left": "int"
       },
       "methods": [
         "refresh",

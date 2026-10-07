@@ -285,7 +285,8 @@ details; consumers use the documented signals and methods.
 
 `components/surfaces/fullscreen_wizard.tscn` is a native `Control` for fixed
 full-viewport tasks. `configure(brand, title, steps, labels)` supplies copy;
-`set_step(index)`, `set_primary(text, disabled)` and `set_back_enabled(enabled)`
+`set_step(index)`, `set_primary(text, disabled, icon = null, icon_only = false)`
+and `set_back_enabled(enabled)`
 update presentation. `back_requested`, `restart_requested`, `primary_requested`
 and `close_requested` carry user intent to the consumer. The consumer owns draft
 state, confirmation, rules and window lifecycle. `get_context_slot()` and
@@ -485,3 +486,32 @@ SilkboundCollection entries accept optional `hint` and `hint_title` strings. The
 details button shows these with the shared composition and exposes the summary
 as its accessibility description. An empty hint produces no tooltip. The separate
 action button retains its own action-specific tooltip.
+
+
+## Silkbound full-screen wizard
+
+`FullscreenWizard` follows the approved Silkbound Ledger frame: linen cover and
+context preview, one plain ink stage, copper cover rules, numbered steps and a
+fixed action row. It retains the existing signals and composition slots. The
+consumer supplies its content and rules. `is_compact()` identifies the landscape
+phone profile (height at most 560px or width at most 740px); `is_tablet()` identifies
+widths through 1300px outside that profile. `set_primary()` accepts an optional
+native icon and `icon_only` flag; the latter keeps its full action name in the
+adjacent footer label and accessibility name.
+
+`PaginatedChoices`, `PaginatedContent`, `SummaryBlock`, `TaskTextField` and
+`TaskTextArea` expose `silkbound = false`. Enable it in a Silkbound composition for
+the specimen's EB Garamond typography, neutral selection, brass icons and
+responsive spacing. Existing consumers retain their default presentation.
+Silkbound task editors are 48px high for a single line and 152px for multiple
+lines (64px in the compact profile). Empty errors reserve no blank line; error
+copy still participates in native minimum-size measurement and accessibility.
+
+`PaginatedContent.content_inset_left = 0` reserves an inset inside its reading
+area. In Silkbound mode, a nonzero inset also draws the internal column divider.
+Pagination measures the remaining content width and keeps whole native controls
+and text lines visible. It does not add another panel fill.
+
+`theme/silkbound_line_height.gd` provides `apply(control, multiplier)` for
+specimen line boxes using stock `FontVariation` top/bottom spacing. It preserves
+the resolved font and size and gives each Control its own font variation.

@@ -527,6 +527,270 @@ content_margin_right = 20.0
 content_margin_top = 16.0
 content_margin_bottom = 16.0
 
+[sub_resource type="StyleBoxFlat" id="WizardLedger"]
+bg_color = Color(0.082353, 0.090196, 0.098039, 0.94)
+border_color = Color(0.737255, 0.572549, 0.466667, 1)
+border_width_left = 0
+content_margin_left = 0.0
+border_width_top = 6
+content_margin_top = 0.0
+border_width_right = 0
+content_margin_right = 0.0
+border_width_bottom = 6
+content_margin_bottom = 0.0
+
+[sub_resource type="StyleBoxFlat" id="WizardPane"]
+bg_color = Color(0.082353, 0.090196, 0.098039, 0.78)
+border_color = Color(0.243137, 0.262745, 0.274510, 1)
+border_width_left = 1
+content_margin_left = 0.0
+border_width_top = 1
+content_margin_top = 0.0
+border_width_right = 1
+content_margin_right = 0.0
+border_width_bottom = 1
+content_margin_bottom = 0.0
+
+[sub_resource type="StyleBoxFlat" id="WizardDivider"]
+bg_color = Color(0, 0, 0, 0)
+border_color = Color(0.243137, 0.262745, 0.274510, 1)
+border_width_left = 1
+content_margin_left = 0.0
+border_width_top = 0
+content_margin_top = 0.0
+border_width_right = 0
+content_margin_right = 0.0
+border_width_bottom = 0
+content_margin_bottom = 0.0
+
+[sub_resource type="StyleBoxFlat" id="WizardPlain"]
+bg_color = Color(0, 0, 0, 0)
+border_color = Color(0.243137, 0.262745, 0.274510, 1)
+border_width_left = 0
+content_margin_left = 0.0
+border_width_top = 0
+content_margin_top = 0.0
+border_width_right = 0
+content_margin_right = 0.0
+border_width_bottom = 0
+content_margin_bottom = 0.0
+
+[sub_resource type="StyleBoxFlat" id="WizardAttribute"]
+bg_color = Color(0, 0, 0, 0)
+border_color = Color(0.243137, 0.262745, 0.274510, 1)
+border_width_left = 0
+content_margin_left = 0.0
+border_width_top = 0
+content_margin_top = 9.0
+border_width_right = 0
+content_margin_right = 0.0
+border_width_bottom = 1
+content_margin_bottom = 8.0
+
+[sub_resource type="StyleBoxFlat" id="WizardAttributeCompact"]
+bg_color = Color(0, 0, 0, 0)
+border_color = Color(0.243137, 0.262745, 0.274510, 1)
+border_width_left = 0
+content_margin_left = 0.0
+border_width_top = 0
+content_margin_top = 0.0
+border_width_right = 0
+content_margin_right = 0.0
+border_width_bottom = 1
+content_margin_bottom = 0.0
+
+[sub_resource type="StyleBoxFlat" id="WizardFacts"]
+bg_color = Color(0, 0, 0, 0)
+border_color = Color(0.243137, 0.262745, 0.274510, 1)
+border_width_left = 0
+content_margin_left = 0.0
+border_width_top = 1
+content_margin_top = 17.0
+border_width_right = 0
+content_margin_right = 0.0
+border_width_bottom = 1
+content_margin_bottom = 17.0
+
+[sub_resource type="StyleBoxFlat" id="WizardFactsTablet"]
+bg_color = Color(0, 0, 0, 0)
+border_color = Color(0.243137, 0.262745, 0.274510, 1)
+border_width_left = 0
+content_margin_left = 0.0
+border_width_top = 1
+content_margin_top = 9.0
+border_width_right = 0
+content_margin_right = 0.0
+border_width_bottom = 1
+content_margin_bottom = 9.0
+
+[sub_resource type="StyleBoxFlat" id="WizardFactsCompact"]
+bg_color = Color(0, 0, 0, 0)
+border_color = Color(0.243137, 0.262745, 0.274510, 1)
+border_width_left = 0
+content_margin_left = 0.0
+border_width_top = 1
+content_margin_top = 7.0
+border_width_right = 0
+content_margin_right = 0.0
+border_width_bottom = 1
+content_margin_bottom = 7.0
+
+[sub_resource type="StyleBoxFlat" id="WizardButton"]
+bg_color = Color(0.137255, 0.156863, 0.168627, 1)
+border_color = Color(0.560784, 0.600000, 0.615686, 1)
+border_width_left = 1
+content_margin_left = 16.0
+border_width_top = 1
+content_margin_top = 8.0
+border_width_right = 1
+content_margin_right = 16.0
+border_width_bottom = 1
+content_margin_bottom = 8.0
+
+[sub_resource type="StyleBoxFlat" id="WizardHover"]
+bg_color = Color(0.203922, 0.239216, 0.254902, 1)
+border_color = Color(0.560784, 0.600000, 0.615686, 1)
+border_width_left = 1
+content_margin_left = 16.0
+border_width_top = 1
+content_margin_top = 8.0
+border_width_right = 1
+content_margin_right = 16.0
+border_width_bottom = 1
+content_margin_bottom = 8.0
+
+[sub_resource type="StyleBoxFlat" id="WizardQuiet"]
+bg_color = Color(0, 0, 0, 0)
+border_color = Color(0.243137, 0.262745, 0.274510, 1)
+border_width_left = 0
+content_margin_left = 16.0
+border_width_top = 0
+content_margin_top = 8.0
+border_width_right = 0
+content_margin_right = 16.0
+border_width_bottom = 0
+content_margin_bottom = 8.0
+
+[sub_resource type="StyleBoxFlat" id="WizardPrimary"]
+bg_color = Color(0.807843, 0.800000, 0.701961, 1)
+border_color = Color(0.807843, 0.800000, 0.701961, 1)
+border_width_left = 1
+content_margin_left = 16.0
+border_width_top = 1
+content_margin_top = 8.0
+border_width_right = 1
+content_margin_right = 16.0
+border_width_bottom = 1
+content_margin_bottom = 8.0
+
+[sub_resource type="StyleBoxFlat" id="WizardPrimaryHover"]
+bg_color = Color(0.905882, 0.905882, 0.866667, 1)
+border_color = Color(0.807843, 0.800000, 0.701961, 1)
+border_width_left = 1
+content_margin_left = 16.0
+border_width_top = 1
+content_margin_top = 8.0
+border_width_right = 1
+content_margin_right = 16.0
+border_width_bottom = 1
+content_margin_bottom = 8.0
+
+[sub_resource type="StyleBoxFlat" id="WizardChoice"]
+bg_color = Color(0, 0, 0, 0)
+border_color = Color(0.243137, 0.262745, 0.274510, 1)
+border_width_left = 0
+content_margin_left = 0.0
+border_width_top = 0
+content_margin_top = 0.0
+border_width_right = 0
+content_margin_right = 0.0
+border_width_bottom = 1
+content_margin_bottom = 0.0
+
+[sub_resource type="StyleBoxFlat" id="WizardChoiceHover"]
+bg_color = Color(0.203922, 0.239216, 0.254902, 1)
+border_color = Color(0.243137, 0.262745, 0.274510, 1)
+border_width_left = 0
+content_margin_left = 0.0
+border_width_top = 0
+content_margin_top = 0.0
+border_width_right = 0
+content_margin_right = 0.0
+border_width_bottom = 1
+content_margin_bottom = 0.0
+
+[sub_resource type="StyleBoxFlat" id="WizardSelected"]
+bg_color = Color(0.807843, 0.800000, 0.701961, 1)
+border_color = Color(0.807843, 0.800000, 0.701961, 1)
+border_width_left = 0
+content_margin_left = 0.0
+border_width_top = 0
+content_margin_top = 0.0
+border_width_right = 0
+content_margin_right = 0.0
+border_width_bottom = 1
+content_margin_bottom = 0.0
+
+[sub_resource type="StyleBoxFlat" id="WizardResult"]
+bg_color = Color(0.137255, 0.156863, 0.168627, 1)
+border_color = Color(0.243137, 0.262745, 0.274510, 1)
+border_width_left = 0
+content_margin_left = 16.0
+border_width_top = 0
+content_margin_top = 12.0
+border_width_right = 0
+content_margin_right = 16.0
+border_width_bottom = 0
+content_margin_bottom = 12.0
+
+[sub_resource type="StyleBoxFlat" id="WizardResultCompact"]
+bg_color = Color(0.137255, 0.156863, 0.168627, 1)
+border_color = Color(0.243137, 0.262745, 0.274510, 1)
+border_width_left = 0
+content_margin_left = 10.0
+border_width_top = 0
+content_margin_top = 6.0
+border_width_right = 0
+content_margin_right = 10.0
+border_width_bottom = 0
+content_margin_bottom = 6.0
+
+[sub_resource type="StyleBoxFlat" id="WizardFormula"]
+bg_color = Color(0, 0, 0, 0)
+border_color = Color(0.243137, 0.262745, 0.274510, 1)
+border_width_left = 0
+content_margin_left = 0.0
+border_width_top = 0
+content_margin_top = 12.0
+border_width_right = 0
+content_margin_right = 0.0
+border_width_bottom = 1
+content_margin_bottom = 12.0
+
+[sub_resource type="StyleBoxFlat" id="WizardFormulaCompact"]
+bg_color = Color(0, 0, 0, 0)
+border_color = Color(0.243137, 0.262745, 0.274510, 1)
+border_width_left = 0
+content_margin_left = 0.0
+border_width_top = 0
+content_margin_top = 4.0
+border_width_right = 0
+content_margin_right = 0.0
+border_width_bottom = 1
+content_margin_bottom = 8.0
+
+[sub_resource type="StyleBoxFlat" id="WizardFormulaTablet"]
+bg_color = Color(0, 0, 0, 0)
+border_color = Color(0.243137, 0.262745, 0.274510, 1)
+border_width_left = 0
+content_margin_left = 0.0
+border_width_top = 0
+content_margin_top = 8.0
+border_width_right = 0
+content_margin_right = 0.0
+border_width_bottom = 1
+content_margin_bottom = 8.0
+
 [resource]
 default_font = ExtResource("ui")
 default_font_size = 20
@@ -1002,3 +1266,129 @@ TooltipPanel/styles/panel = SubResource("Tooltip")
 TooltipLabel/fonts/font = ExtResource("ui")
 TooltipLabel/font_sizes/font_size = 19
 TooltipLabel/colors/font_color = Color(0.905882, 0.905882, 0.866667, 1)
+
+WizardLedger/base_type = &"Panel"
+WizardLedger/styles/panel = SubResource("WizardLedger")
+WizardPane/base_type = &"Panel"
+WizardPane/styles/panel = SubResource("WizardPane")
+WizardDivider/base_type = &"Panel"
+WizardDivider/styles/panel = SubResource("WizardDivider")
+WizardPlain/base_type = &"Panel"
+WizardPlain/styles/panel = SubResource("WizardPlain")
+WizardAttribute/base_type = &"PanelContainer"
+WizardAttribute/styles/panel = SubResource("WizardAttribute")
+WizardAttributeCompact/base_type = &"PanelContainer"
+WizardAttributeCompact/styles/panel = SubResource("WizardAttributeCompact")
+WizardFacts/base_type = &"PanelContainer"
+WizardFacts/styles/panel = SubResource("WizardFacts")
+WizardFactsTablet/base_type = &"PanelContainer"
+WizardFactsTablet/styles/panel = SubResource("WizardFactsTablet")
+WizardFactsCompact/base_type = &"PanelContainer"
+WizardFactsCompact/styles/panel = SubResource("WizardFactsCompact")
+WizardResult/base_type = &"PanelContainer"
+WizardResult/styles/panel = SubResource("WizardResult")
+WizardResultCompact/base_type = &"PanelContainer"
+WizardResultCompact/styles/panel = SubResource("WizardResultCompact")
+WizardButton/base_type = &"Button"
+WizardButton/styles/normal = SubResource("WizardButton")
+WizardButton/styles/hover = SubResource("WizardHover")
+WizardButton/styles/pressed = SubResource("WizardHover")
+WizardButton/styles/hover_pressed = SubResource("WizardHover")
+WizardButton/styles/disabled = SubResource("WizardButton")
+WizardButton/colors/font_color = Color(0.905882, 0.905882, 0.866667, 1)
+WizardButton/colors/icon_normal_color = Color(0.815686, 0.745098, 0.556863, 1)
+WizardButton/colors/font_hover_color = Color(0.905882, 0.905882, 0.866667, 1)
+WizardButton/colors/icon_hover_color = Color(0.815686, 0.745098, 0.556863, 1)
+WizardButton/colors/font_pressed_color = Color(0.905882, 0.905882, 0.866667, 1)
+WizardButton/colors/icon_pressed_color = Color(0.815686, 0.745098, 0.556863, 1)
+WizardButton/colors/font_hover_pressed_color = Color(0.905882, 0.905882, 0.866667, 1)
+WizardButton/colors/icon_hover_pressed_color = Color(0.815686, 0.745098, 0.556863, 1)
+WizardButton/colors/font_focus_color = Color(0.905882, 0.905882, 0.866667, 1)
+WizardButton/colors/icon_focus_color = Color(0.815686, 0.745098, 0.556863, 1)
+WizardQuiet/base_type = &"Button"
+WizardQuiet/styles/normal = SubResource("WizardQuiet")
+WizardQuiet/styles/hover = SubResource("WizardHover")
+WizardQuiet/styles/pressed = SubResource("WizardHover")
+WizardQuiet/styles/hover_pressed = SubResource("WizardHover")
+WizardQuiet/styles/disabled = SubResource("WizardQuiet")
+WizardQuiet/colors/font_color = Color(0.682353, 0.729412, 0.745098, 1)
+WizardQuiet/colors/icon_normal_color = Color(0.815686, 0.745098, 0.556863, 1)
+WizardQuiet/colors/font_hover_color = Color(0.682353, 0.729412, 0.745098, 1)
+WizardQuiet/colors/icon_hover_color = Color(0.815686, 0.745098, 0.556863, 1)
+WizardQuiet/colors/font_pressed_color = Color(0.682353, 0.729412, 0.745098, 1)
+WizardQuiet/colors/icon_pressed_color = Color(0.815686, 0.745098, 0.556863, 1)
+WizardQuiet/colors/font_hover_pressed_color = Color(0.682353, 0.729412, 0.745098, 1)
+WizardQuiet/colors/icon_hover_pressed_color = Color(0.815686, 0.745098, 0.556863, 1)
+WizardQuiet/colors/font_focus_color = Color(0.682353, 0.729412, 0.745098, 1)
+WizardQuiet/colors/icon_focus_color = Color(0.815686, 0.745098, 0.556863, 1)
+WizardQuiet/colors/font_disabled_color = Color(0.682353, 0.729412, 0.745098, 1)
+WizardQuiet/colors/icon_disabled_color = Color(0.815686, 0.745098, 0.556863, 1)
+WizardPrimary/base_type = &"Button"
+WizardPrimary/styles/normal = SubResource("WizardPrimary")
+WizardPrimary/styles/hover = SubResource("WizardPrimaryHover")
+WizardPrimary/styles/pressed = SubResource("WizardPrimary")
+WizardPrimary/styles/hover_pressed = SubResource("WizardPrimaryHover")
+WizardPrimary/styles/disabled = SubResource("WizardPrimary")
+WizardPrimary/colors/font_color = Color(0.082353, 0.090196, 0.098039, 1)
+WizardPrimary/colors/icon_normal_color = Color(0.082353, 0.090196, 0.098039, 1)
+WizardPrimary/colors/font_hover_color = Color(0.082353, 0.090196, 0.098039, 1)
+WizardPrimary/colors/icon_hover_color = Color(0.082353, 0.090196, 0.098039, 1)
+WizardPrimary/colors/font_pressed_color = Color(0.082353, 0.090196, 0.098039, 1)
+WizardPrimary/colors/icon_pressed_color = Color(0.082353, 0.090196, 0.098039, 1)
+WizardPrimary/colors/font_hover_pressed_color = Color(0.082353, 0.090196, 0.098039, 1)
+WizardPrimary/colors/icon_hover_pressed_color = Color(0.082353, 0.090196, 0.098039, 1)
+WizardPrimary/colors/font_focus_color = Color(0.082353, 0.090196, 0.098039, 1)
+WizardPrimary/colors/icon_focus_color = Color(0.082353, 0.090196, 0.098039, 1)
+WizardPrimary/colors/font_disabled_color = Color(0.082353, 0.090196, 0.098039, 1)
+WizardPrimary/colors/icon_disabled_color = Color(0.082353, 0.090196, 0.098039, 1)
+WizardChoice/base_type = &"Button"
+WizardChoice/styles/normal = SubResource("WizardChoice")
+WizardChoice/styles/hover = SubResource("WizardChoiceHover")
+WizardChoice/styles/pressed = SubResource("WizardSelected")
+WizardChoice/styles/hover_pressed = SubResource("WizardSelected")
+WizardChoice/styles/disabled = SubResource("WizardButton")
+WizardChoice/colors/font_color = Color(0.905882, 0.905882, 0.866667, 1)
+WizardChoice/colors/icon_normal_color = Color(0.815686, 0.745098, 0.556863, 1)
+WizardChoice/colors/font_hover_color = Color(0.905882, 0.905882, 0.866667, 1)
+WizardChoice/colors/icon_hover_color = Color(0.815686, 0.745098, 0.556863, 1)
+WizardChoice/colors/font_pressed_color = Color(0.905882, 0.905882, 0.866667, 1)
+WizardChoice/colors/icon_pressed_color = Color(0.815686, 0.745098, 0.556863, 1)
+WizardChoice/colors/font_hover_pressed_color = Color(0.905882, 0.905882, 0.866667, 1)
+WizardChoice/colors/icon_hover_pressed_color = Color(0.815686, 0.745098, 0.556863, 1)
+WizardChoice/colors/font_focus_color = Color(0.905882, 0.905882, 0.866667, 1)
+WizardChoice/colors/icon_focus_color = Color(0.815686, 0.745098, 0.556863, 1)
+WizardChoice/colors/font_disabled_color = Color(0.905882, 0.905882, 0.866667, 1)
+WizardChoice/colors/icon_disabled_color = Color(0.815686, 0.745098, 0.556863, 1)
+WizardSection/base_type = &"Button"
+WizardSection/styles/normal = SubResource("WizardButton")
+WizardSection/styles/hover = SubResource("WizardHover")
+WizardSection/styles/pressed = SubResource("WizardSelected")
+WizardSection/styles/hover_pressed = SubResource("WizardSelected")
+WizardSection/styles/disabled = SubResource("WizardButton")
+WizardSection/colors/font_color = Color(0.905882, 0.905882, 0.866667, 1)
+WizardSection/colors/icon_normal_color = Color(0.815686, 0.745098, 0.556863, 1)
+WizardSection/colors/font_hover_color = Color(0.905882, 0.905882, 0.866667, 1)
+WizardSection/colors/icon_hover_color = Color(0.815686, 0.745098, 0.556863, 1)
+WizardSection/colors/font_pressed_color = Color(0.082353, 0.090196, 0.098039, 1)
+WizardSection/colors/icon_pressed_color = Color(0.082353, 0.090196, 0.098039, 1)
+WizardSection/colors/font_hover_pressed_color = Color(0.082353, 0.090196, 0.098039, 1)
+WizardSection/colors/icon_hover_pressed_color = Color(0.082353, 0.090196, 0.098039, 1)
+WizardSection/colors/font_focus_color = Color(0.905882, 0.905882, 0.866667, 1)
+WizardSection/colors/icon_focus_color = Color(0.815686, 0.745098, 0.556863, 1)
+WizardSection/colors/font_disabled_color = Color(0.905882, 0.905882, 0.866667, 1)
+WizardSection/colors/icon_disabled_color = Color(0.815686, 0.745098, 0.556863, 1)
+WizardFormula/base_type = &"Label"
+WizardFormula/styles/normal = SubResource("WizardFormula")
+WizardFormulaCompact/base_type = &"Label"
+WizardFormulaCompact/styles/normal = SubResource("WizardFormulaCompact")
+WizardButton/fonts/font = ExtResource("ui")
+WizardQuiet/fonts/font = ExtResource("ui")
+WizardSection/fonts/font = ExtResource("ui")
+WizardButton/colors/icon_disabled_color = Color(0.815686, 0.745098, 0.556863, 0.4)
+WizardButton/colors/font_disabled_color = Color(0.905882, 0.905882, 0.866667, 0.4)
+WizardFormulaBox/base_type = &"PanelContainer"
+WizardFormulaBox/styles/panel = SubResource("WizardFormula")
+WizardFormulaBoxTablet/base_type = &"PanelContainer"
+WizardFormulaBoxTablet/styles/panel = SubResource("WizardFormulaTablet")
+WizardFormulaBoxCompact/base_type = &"PanelContainer"
+WizardFormulaBoxCompact/styles/panel = SubResource("WizardFormulaCompact")
