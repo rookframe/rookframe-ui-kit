@@ -13,9 +13,6 @@ const MUTED := Color("aebabe")
 const NEUTRAL := Color("ceccb3")
 var _steps: Array[Control] = []
 var _index := 0
-var _primary_icon_only := false
-var _primary_text := "Continue"
-var _hint := "Results stay with you when you go back."
 
 func _ready() -> void:
 	get_node(^"Layout/Footer/Row/Back").pressed.connect(func(): back_requested.emit())
@@ -34,7 +31,6 @@ func configure(brand: String, title: String, steps: Array[String], labels: Dicti
 	get_node(^"Layout/Footer/Row/Back").accessibility_name = str(labels.get("back", "Back"))
 	get_node(^"Layout/Footer/Row/Back").tooltip_text = str(labels.get("back", "Back"))
 	get_node(^"Layout/Footer/Row/Restart").text = str(labels.get("restart", "Start over"))
-	_hint = str(labels.get("hint", "Results stay with you when you go back."))
 	get_node(^"Layout/Header/Row/Close").accessibility_name = str(labels.get("close", "Close character creation"))
 	get_node(^"Layout/Header/Row/Close").tooltip_text = str(labels.get("close", "Close character creation"))
 	for child in _steps:
@@ -70,13 +66,11 @@ func set_step(index: int) -> void:
 	if not _steps.is_empty():
 		get_node(^"Layout/Header/Row/CurrentStep").text = "%02d / %02d · %s" % [index + 1, _steps.size(), _steps[index].get_node(^"Row/Name").text]
 
-func set_primary(text: String, disabled: bool, icon: Texture2D = null, icon_only: bool = false) -> void:
-	_primary_text = text
-	_primary_icon_only = icon_only
+func set_primary(text: String, disabled: bool, icon: Texture2D = null) -> void:
 	var button := get_node(^"Layout/Footer/Row/Primary") as Button
-	button.text = "" if icon_only else text
+	button.text = text
 	button.accessibility_name = text
-	button.tooltip_text = text if icon_only else ""
+	button.tooltip_text = ""
 	button.disabled = disabled
 	button.modulate.a = 0.4 if disabled else 1.0
 	button.icon = icon
@@ -166,18 +160,14 @@ func _fit() -> void:
 func _fit_primary() -> void:
 	var phone := is_compact()
 	var tablet := is_tablet()
-	get_node(^"Layout/Footer/Row/Primary").custom_minimum_size = Vector2(44 if _primary_icon_only else 144 if phone else 152 if tablet else 180, 44)
+	get_node(^"Layout/Footer/Row/Primary").custom_minimum_size = Vector2(144 if phone else 152 if tablet else 180, 44)
 	for name in ["Back", "Primary", "Close"]:
 		var action := get_node(("Layout/Header/Row/" if name == "Close" else "Layout/Footer/Row/") + name) as Button
 		for state in ["normal", "hover", "pressed", "disabled"]:
 			var frame := action.get_theme_stylebox(state).duplicate() as StyleBoxFlat
-			frame.content_margin_left = 0 if name in ["Back", "Close"] or _primary_icon_only else 10 if phone else 16
+			frame.content_margin_left = 0 if name in ["Back", "Close"] else 10 if phone else 16
 			frame.content_margin_right = frame.content_margin_left
 			action.add_theme_stylebox_override(state, frame)
-	get_node(^"Layout/Footer/Row/Hint").text = _primary_text if _primary_icon_only else _hint
-	get_node(^"Layout/Footer/Row/Hint").visible = _primary_icon_only or not phone and not tablet
-	get_node(^"Layout/Footer/Row/Hint").add_theme_font_size_override("font_size", 18 if phone or not _primary_icon_only else 21)
-	get_node(^"Layout/Footer/Row/Hint").add_theme_color_override("font_color", TEXT if _primary_icon_only else MUTED)
 
 func _fit_surfaces() -> void:
 	if not is_node_ready():

@@ -270,7 +270,8 @@ func _show_page() -> void:
 	get_node(^"Pager/Previous").disabled = _page == 0
 	get_node(^"Pager/Next").disabled = _page == pages - 1
 	get_node(^"Pager/Indicator/Page").text = "%d / %d" % [_page + 1, pages]
-	var range_text := "%d–%d of %d" % [_pages[_page].x + 1, _pages[_page].y, _rows.size()] if not _rows.is_empty() else "0 entries"
+	var range_format := "%d–%d\u2002of\u2002%d" if silkbound else "%d–%d of %d"
+	var range_text := range_format % [_pages[_page].x + 1, _pages[_page].y, _rows.size()] if not _rows.is_empty() else "0 entries"
 	get_node(^"Pager/Range").text = range_text
 	if framed_collection and get_viewport_rect().size.y <= 560:
 		get_node(^"Pager/Indicator/PhoneCount").text = range_text
@@ -297,6 +298,7 @@ func _fit_silkbound() -> int:
 		var action := get_node("Pager/" + key) as Button
 		action.theme_type_variation = "WizardButton"
 		action.text = ""
+		action.icon_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		action.icon = preload("res://rookframe/ui/icons/chevron-left.svg") if key == "Previous" else preload("res://rookframe/ui/icons/chevron-right.svg")
 		action.expand_icon = true
 		action.accessibility_name = "Previous page" if key == "Previous" else "Next page"

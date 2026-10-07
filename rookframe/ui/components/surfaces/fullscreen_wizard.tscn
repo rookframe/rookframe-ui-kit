@@ -137,6 +137,8 @@ size_flags_vertical = 4
 expand_icon = false
 theme_override_constants/icon_max_width = 22
 
+icon_alignment = 1
+
 [node name="Steps" type="MarginContainer" parent="Layout"]
 layout_mode = 2
 custom_minimum_size = Vector2(0, 72)
@@ -183,6 +185,8 @@ custom_minimum_size = Vector2(44, 44)
 theme_type_variation = "WizardButton"
 size_flags_vertical = 4
 
+icon_alignment = 1
+
 [node name="Restart" type="Button" parent="Layout/Footer/Row"]
 layout_mode = 2
 text = "Start over"
@@ -196,12 +200,6 @@ size_flags_vertical = 4
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
-
-[node name="Hint" type="Label" parent="Layout/Footer/Row"]
-layout_mode = 2
-text = "Results stay with you when you go back."
-theme_override_font_sizes/font_size = 12
-theme_override_colors/font_color = Color(0.682353, 0.729412, 0.745098, 1)
 
 [node name="Primary" type="Button" parent="Layout/Footer/Row"]
 layout_mode = 2

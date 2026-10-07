@@ -96,6 +96,7 @@ func _fit() -> void:
 		for button in [_previous, _next]:
 			button.theme_type_variation = "WizardButton"
 			button.text = ""
+			button.icon_alignment = HORIZONTAL_ALIGNMENT_CENTER
 			button.icon = preload("res://rookframe/ui/icons/chevron-left.svg") if button == _previous else preload("res://rookframe/ui/icons/chevron-right.svg")
 			button.accessibility_name = "Previous page" if button == _previous else "Next page"
 			button.tooltip_text = button.accessibility_name

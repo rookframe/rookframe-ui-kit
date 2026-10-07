@@ -127,7 +127,7 @@ mkdir -p addons/gd-plug
 curl -fsSL https://raw.githubusercontent.com/imjp94/gd-plug/209276d1f00d14b49b74403d9839f29598e9a8eb/addons/gd-plug/plug.gd -o addons/gd-plug/plug.gd
 godot --headless --path . --script plug.gd install
 godot --headless --editor --path . --import
-godot --headless --path . --script res://addons/gdUnit4/bin/GdUnitCmdTool.gd --ignoreHeadlessMode -a res://tests/fullscreen_wizard.gd -a res://tests/fullscreen_miniature_browser.gd -c -rd reports/fullscreen
+godot --headless --path . --script res://addons/gdUnit4/bin/GdUnitCmdTool.gd --ignoreHeadlessMode -a res://tests/fullscreen_wizard.gd -a res://tests/silkbound_miniature_browser.gd -c -rd reports/fullscreen
 ```
 
 Require both discovered cases to pass in the fresh JUnit report, with no

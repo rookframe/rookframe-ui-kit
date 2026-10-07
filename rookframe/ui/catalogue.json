@@ -755,7 +755,7 @@
       "properties": {
         "title": "Action",
         "description": "Supporting action detail",
-        "action_label": "â€º",
+        "action_label": "\u00e2\u20ac\u00ba",
         "tone": "STANDARD",
         "disabled": false
       },
@@ -839,7 +839,7 @@
       "properties": {
         "title": "Action",
         "description": "Supporting action detail",
-        "action_label": "â€º",
+        "action_label": "\u00e2\u20ac\u00ba",
         "tone": "STANDARD",
         "disabled": false
       },
@@ -988,29 +988,6 @@
         "set_state",
         "focus_search"
       ]
-    },
-    {
-      "name": "FullscreenMiniatureBrowser",
-      "scene": "res://rookframe/ui/components/content/fullscreen_miniature_browser.tscn",
-      "sceneUid": "uid://bvol8o8tejrba",
-      "rootType": "Control",
-      "properties": {},
-      "methods": [
-        "configure",
-        "selection",
-        "set_state",
-        "focus_search"
-      ],
-      "signals": [
-        "choose_requested",
-        "cancel_requested",
-        "close_requested",
-        "selection_changed",
-        "preview_requested",
-        "retry_requested"
-      ],
-      "script": "res://rookframe/ui/components/content/fullscreen_miniature_browser.gd",
-      "scriptUid": "uid://cuj3idkf7gtbt"
     },
     {
       "name": "FullscreenWizard",

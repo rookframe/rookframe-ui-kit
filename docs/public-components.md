@@ -232,32 +232,10 @@ trees.
 
 ## Miniature browser
 
-`res://rookframe/ui/components/content/fullscreen_miniature_browser.tscn` is the
-approved full-viewport composition: top heading and Close, name/Package search,
-preview cards, measured complete-row pagination, and fixed Cancel/Choose actions.
-The landscape references show 3 cards at 844 × 390, 6 at 1024 × 768, and 8 at
-1920 × 1080. Collection and page content do not scroll. The component uses the
-unchanged Rookframe palette and the approved wizard's square buttons.
-
-It accepts `configure(entries, selected_id, labels)` with the same opaque entry
-IDs and `id`, `title`, `package`, `available` fields. Additional consumer fields
-are preserved. `selection()` returns an available entry. `selection_changed`,
-`preview_requested(entry, target)`, `retry_requested`, `set_state`, and
-`focus_search()` have the same ownership boundary as the compact browser below.
-`choose_requested(entry)`, `cancel_requested`, and `close_requested` let the
-consumer commit a draft choice or return through SDK child-window navigation.
-The browser itself never closes host windows or mutates World data.
-
-Search retains an off-page draft selection; selecting a different card alone
-does not commit it. A saved unavailable entry stays named in the footer while
-Choose is disabled. Configuration reveals the page containing the saved choice.
-Preview targets are created once per available entry, and retained across page
-changes. The caller supplies localized labels, including `title`, `library`,
-`search`, `close`, `cancel`, `choose`, `selection`, `none`, `hint`,
-`saved_unavailable`, `previous`, `next`, `range` (`%d–%d of %d`), `count`
-(`%d miniatures`), and state headings/copy (`loading`, `loading_copy`, `empty`,
-`empty_copy`, `no_match`, `no_match_copy`, `error`, `error_copy`, `retry`,
-`unavailable`, `preview_unavailable`, `selected`). Child paths remain internal.
+Use `res://rookframe/ui/components/content/silkbound_miniature_browser.tscn` for
+full-screen Miniature choice, including creation and sheet Appearance. Its
+list, search, preview and SDK-owned draft confirmation replace the former
+full-screen grid browser. See the Silkbound Miniature browser contract below.
 
 `res://rookframe/ui/components/content/miniature_browser.tscn` combines search,
 a responsive scrolling grid of native choice cards. Every available card has its
@@ -285,7 +263,7 @@ details; consumers use the documented signals and methods.
 
 `components/surfaces/fullscreen_wizard.tscn` is a native `Control` for fixed
 full-viewport tasks. `configure(brand, title, steps, labels)` supplies copy;
-`set_step(index)`, `set_primary(text, disabled, icon = null, icon_only = false)`
+`set_step(index)`, `set_primary(text, disabled, icon = null)`
 and `set_back_enabled(enabled)`
 update presentation. `back_requested`, `restart_requested`, `primary_requested`
 and `close_requested` carry user intent to the consumer. The consumer owns draft
@@ -496,8 +474,8 @@ fixed action row. It retains the existing signals and composition slots. The
 consumer supplies its content and rules. `is_compact()` identifies the landscape
 phone profile (height at most 560px or width at most 740px); `is_tablet()` identifies
 widths through 1300px outside that profile. `set_primary()` accepts an optional
-native icon and `icon_only` flag; the latter keeps its full action name in the
-adjacent footer label and accessibility name.
+native icon alongside the action text inside the button. Icon-only navigation
+buttons center their glyph; the footer has no redundant retention hint.
 
 `PaginatedChoices`, `PaginatedContent`, `SummaryBlock`, `TaskTextField` and
 `TaskTextArea` expose `silkbound = false`. Enable it in a Silkbound composition for
