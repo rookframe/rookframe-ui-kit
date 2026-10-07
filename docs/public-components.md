@@ -472,3 +472,16 @@ secondary sections, and expanded sizing for collections requiring bounded paging
 Silkbound collection and notepad pagers are hidden when all content fits on one
 page, including empty collections. A collection footer slot remains available
 for caller-owned actions even when its page controls are hidden.
+
+## Silkbound hover hints
+
+`components/feedback/silkbound_tooltip.tscn` is authored content for Godot's
+`Control._make_custom_tooltip`: a title, wrapping summary and inspection
+prompt. Set its `Title` and `Summary` Labels before returning the instance. Godot
+owns delay, positioning, dismissal and lifetime; the Silkbound Theme supplies the
+TooltipPanel frame and padding. Keep all information reachable by activation.
+
+SilkboundCollection entries accept optional `hint` and `hint_title` strings. The
+details button shows these with the shared composition and exposes the summary
+as its accessibility description. An empty hint produces no tooltip. The separate
+action button retains its own action-specific tooltip.

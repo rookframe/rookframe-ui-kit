@@ -91,6 +91,11 @@ func configure(entries: Array[Dictionary], _selected_id: String, caption: String
 		row.get_node(^"Details/Inset/Row/Value").visible = not str(entry.get("value", "")).is_empty()
 		row.get_node(^"Details/Inset/Row/Icon").texture = entry.get("icon")
 		row.get_node(^"Details").accessibility_name = "%s. %s. %s" % [entry.get("title", ""), entry.get("subtitle", ""), entry.get("value", "")]
+		var details = row.get_node(^"Details")
+		details.hint_title = str(entry.get("hint_title", entry.get("title", "")))
+		details.hint_summary = str(entry.get("hint", ""))
+		details.tooltip_text = details.hint_title + "\n" + details.hint_summary if not details.hint_summary.is_empty() else ""
+		details.accessibility_description = details.hint_summary
 		var action := row.get_node(^"Action") as Button
 		action.visible = entry.has("action")
 		action.text = str(entry.get("action_text", ""))

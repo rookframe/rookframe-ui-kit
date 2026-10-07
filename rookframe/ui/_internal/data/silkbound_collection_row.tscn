@@ -3,11 +3,13 @@
 [ext_resource type="StyleBox" path="res://rookframe/ui/theme/silkbound_row_hover.tres" id="hover"]
 [ext_resource type="FontVariation" path="res://rookframe/ui/theme/silkbound_medium.tres" id="medium"]
 [ext_resource type="Script" path="res://rookframe/ui/_internal/data/silkbound_collection_row.gd" id="script"]
+[ext_resource type="Script" path="res://rookframe/ui/_internal/data/silkbound_hint_button.gd" id="hint"]
 [node name="CollectionRow" type="HBoxContainer"]
 script = ExtResource("script")
 size_flags_horizontal = 3
 theme_override_constants/separation = 12
 [node name="Details" type="Button" parent="."]
+script = ExtResource("hint")
 size_flags_horizontal = 3
 custom_minimum_size = Vector2(0, 74)
 theme_type_variation = &"TaskGlyphButton"

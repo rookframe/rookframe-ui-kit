@@ -515,6 +515,18 @@ spacing_top = -3
 spacing_bottom = -2
 opentype_features = {1953396077: 1}
 
+[sub_resource type="StyleBoxFlat" id="Tooltip"]
+bg_color = Color(0.137255, 0.156863, 0.168627, 1)
+border_color = Color(0.356863, 0.384314, 0.396078, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+content_margin_left = 20.0
+content_margin_right = 20.0
+content_margin_top = 16.0
+content_margin_bottom = 16.0
+
 [resource]
 default_font = ExtResource("ui")
 default_font_size = 20
@@ -985,3 +997,8 @@ Button/colors/font_focus_color = Color(0.905882, 0.905882, 0.866667, 1)
 Button/colors/icon_focus_color = Color(0.815686, 0.745098, 0.556863, 1)
 SilkIcon/colors/icon_focus_color = Color(0.815686, 0.745098, 0.556863, 1)
 SilkPrimaryIcon/colors/icon_focus_color = Color(0.082353, 0.090196, 0.098039, 1)
+
+TooltipPanel/styles/panel = SubResource("Tooltip")
+TooltipLabel/fonts/font = ExtResource("ui")
+TooltipLabel/font_sizes/font_size = 19
+TooltipLabel/colors/font_color = Color(0.905882, 0.905882, 0.866667, 1)

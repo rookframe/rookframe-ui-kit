@@ -1162,6 +1162,14 @@
       ],
       "script": "res://rookframe/ui/components/data/silkbound_collection.gd",
       "scriptUid": "uid://bhswcvuj0kpbd"
+    },
+    {
+      "name": "SilkboundTooltip",
+      "scene": "res://rookframe/ui/components/feedback/silkbound_tooltip.tscn",
+      "rootType": "VBoxContainer",
+      "properties": {},
+      "methods": [],
+      "signals": []
     }
   ],
   "semanticIcons": {
