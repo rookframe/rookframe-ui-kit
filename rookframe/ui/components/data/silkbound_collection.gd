@@ -166,7 +166,7 @@ func _fit() -> void:
 		var action := row.get_node(^"Action") as Button
 		action.custom_minimum_size = Vector2(44 if action.icon != null else 78 if phone or tablet else 86, 44)
 		action.add_theme_font_size_override("font_size", 17 if phone or tablet else 19)
-		action.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR
+		action.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
 		for state in ["normal", "hover", "pressed", "hover_pressed", "disabled"]:
 			var frame := action.get_theme_stylebox(state).duplicate() as StyleBoxFlat
 			frame.content_margin_left = 8 if action.icon != null else 10
@@ -222,9 +222,9 @@ func _fit() -> void:
 		for column in range(1, mini(grid.columns, heights.size() - index)):
 			row_height = maxf(row_height, heights[index + column])
 		natural_height += row_height + (grid.get_theme_constant("v_separation") if index > 0 else 0)
-	custom_minimum_size.y = 0 if (size_flags_vertical & Control.SIZE_EXPAND) != 0 else get_node(^"Content/Caption").get_combined_minimum_size().y + maxf(44, natural_height + grid.offset_top * 2) + get_node(^"Content/Pager").get_combined_minimum_size().y + get_theme_constant("margin_top")
+	custom_minimum_size.y = 0 if (size_flags_vertical & Control.SIZE_EXPAND) != 0 else get_node(^"Content/Caption").get_combined_minimum_size().y + maxf(44, natural_height + grid.offset_top) + get_node(^"Content/Pager").get_combined_minimum_size().y + get_theme_constant("margin_top")
 	_pages.clear()
-	var available: float = get_node(^"Content/Area").size.y - grid.offset_top * 2
+	var available: float = get_node(^"Content/Area").size.y - grid.offset_top * (2 if (size_flags_vertical & Control.SIZE_EXPAND) != 0 else 1)
 	var start := 0
 	var used := 0.0
 	var row_gap := grid.get_theme_constant("v_separation")
