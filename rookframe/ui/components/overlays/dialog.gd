@@ -103,6 +103,7 @@ func open_dialog() -> void:
 	var initial_width := DIALOG_WIDTH
 	if compact:
 		initial_width = roundi(_host_viewport_size().x)
+	gui_release_focus()
 	popup_centered(Vector2i(initial_width, initial_height))
 	if not _fit_pending:
 		_fit_pending = true
@@ -115,11 +116,9 @@ func close_dialog() -> void:
 
 
 func _focus_initial() -> void:
-	var target := get_node(^"Shell/Content/Footer/Actions/Confirm") as Button
-	if target.disabled or (tone == Tone.DANGER and show_cancel):
-		target = get_node(^"Shell/Content/Footer/Actions/Cancel") as Button
-	if target.visible and not target.disabled:
-		target.grab_focus()
+	# Opening a decision does not choose an action. Tab still enters the
+	# native focus order when the user requests keyboard navigation.
+	gui_release_focus()
 
 
 func _fit_open_dialog() -> void:
