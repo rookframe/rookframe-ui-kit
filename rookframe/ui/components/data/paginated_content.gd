@@ -5,6 +5,9 @@ extends Control
 const TEXT_FIELD = preload("res://rookframe/ui/components/forms/text_field.gd")
 const TEXT_AREA = preload("res://rookframe/ui/components/forms/text_area.gd")
 
+@export var silkbound := false
+@export var content_inset_left := 0
+
 var _page := 0
 var _pages: Array[Vector2] = [Vector2.ZERO]
 var _pending := false
@@ -83,21 +86,42 @@ func _fit() -> void:
 		return
 	var height := size.y
 	_external_pager = _pager.get_parent() != self
-	_content.size = Vector2(size.x, maxf(height, _content.get_combined_minimum_size().y))
+	_content.size = Vector2(size.x - content_inset_left, maxf(height, _content.get_combined_minimum_size().y))
 	_pager.alignment = BoxContainer.ALIGNMENT_CENTER if always_show_pager else BoxContainer.ALIGNMENT_BEGIN
 	_range.size_flags_horizontal = 0 if always_show_pager else Control.SIZE_EXPAND_FILL
 	_range.custom_minimum_size.x = 54 if always_show_pager else 0
-	_range.add_theme_font_size_override("font_size", 14 if always_show_pager else 12)
+	_range.add_theme_font_size_override("font_size", 15 if silkbound and get_viewport_rect().size.y <= 560 else 17 if silkbound else 14 if always_show_pager else 12)
+	if silkbound:
+		_range.add_theme_color_override("font_color", Color("aebabe"))
+		for button in [_previous, _next]:
+			button.theme_type_variation = "WizardButton"
+			button.text = ""
+			button.icon_alignment = HORIZONTAL_ALIGNMENT_CENTER
+			button.icon = preload("res://rookframe/ui/icons/chevron-left.svg") if button == _previous else preload("res://rookframe/ui/icons/chevron-right.svg")
+			button.accessibility_name = "Previous page" if button == _previous else "Next page"
+			button.tooltip_text = button.accessibility_name
+			for state in ["normal", "hover", "pressed", "disabled"]:
+				var frame := button.get_theme_stylebox(state).duplicate() as StyleBoxFlat
+				frame.content_margin_left = 0
+				frame.content_margin_right = 0
+				button.add_theme_stylebox_override(state, frame)
 	var overflow := enabled and _content.get_combined_minimum_size().y > height + 1
 	_pager.visible = overflow or always_show_pager
 	if overflow and not _external_pager:
 		height -= _pager.get_combined_minimum_size().y
 	_content.size.y = maxf(height, _content.get_combined_minimum_size().y)
-	get_node(^"Area").size = Vector2(size.x, height)
+	get_node(^"Area").position.x = content_inset_left
+	get_node(^"Area").size = Vector2(size.x - content_inset_left, height)
+	_pager.offset_left = content_inset_left
+	queue_redraw()
 	# Native Containers finish wrapping their children before measuring pages.
 	_measure.call_deferred()
 
 func _measure() -> void:
+	# A route change or native Container reflow can invalidate a queued measure.
+	# The scheduled fit will measure the replacement content once it has settled.
+	if _pending or not is_visible_in_tree():
+		return
 	var height: float = get_node(^"Area").size.y
 	_pages.clear()
 	if not _pager.visible or height <= 0:
@@ -179,3 +203,7 @@ func _visibility_changed() -> void:
 	if not is_visible_in_tree():
 		_pager.hide()
 	refresh()
+
+func _draw() -> void:
+	if silkbound and content_inset_left > 0:
+		draw_line(Vector2.ZERO,Vector2(0,size.y),Color("3e4346"))

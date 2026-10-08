@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://g2qaay7nuc7s"]
 
-[ext_resource type="FontVariation" path="res://rookframe/ui/theme/task_action.tres" id="action"]
+[ext_resource type="FontVariation" path="res://rookframe/ui/theme/silkbound_medium.tres" id="action"]
 
-[ext_resource type="Theme" path="res://rookframe/ui/theme/fullscreen_task_theme.tres" id="theme"]
+[ext_resource type="Theme" path="res://rookframe/ui/theme/silkbound_theme.tres" id="theme"]
 
-[ext_resource type="FontVariation" path="res://rookframe/ui/theme/task_display.tres" id="display"]
+[ext_resource type="FontVariation" path="res://rookframe/ui/theme/silkbound_medium.tres" id="display"]
 
 [ext_resource type="Script" path="res://rookframe/ui/components/surfaces/fullscreen_wizard.gd" id="script"]
 
@@ -12,7 +12,12 @@
 
 [ext_resource type="Texture2D" path="res://rookframe/ui/icons/character/character.svg" id="character"]
 
-[ext_resource type="FontVariation" path="res://rookframe/ui/theme/task_wordmark.tres" id="wordmark"]
+[ext_resource type="FontVariation" path="res://rookframe/ui/theme/silkbound_medium.tres" id="wordmark"]
+
+[ext_resource type="Texture2D" path="res://rookframe/ui/assets/silkbound-ledger/linen.png" id="linen"]
+[ext_resource type="Texture2D" path="res://rookframe/ui/assets/silkbound-ledger/ribbon.svg" id="ribbon"]
+[ext_resource type="Texture2D" path="res://rookframe/ui/icons/back.svg" id="back"]
+[ext_resource type="Texture2D" path="res://rookframe/ui/icons/rotate.svg" id="restart"]
 
 [node name="FullscreenWizard" type="Control"]
 layout_mode = 1
@@ -26,48 +31,36 @@ script = ExtResource("script")
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Background" type="ColorRect" parent="."]
-layout_mode = 1
-anchors_preset = 15
+[node name="Ledger" type="Panel" parent="."]
+z_index = -1
+mouse_filter = 2
+theme_type_variation = &"WizardLedger"
+
+[node name="Linen" type="TextureRect" parent="Ledger"]
+texture_filter = 1
 anchor_right = 1.0
 anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.27451, 0.321569, 0.337255, 1)
+offset_top = 6.0
+offset_bottom = -6.0
 mouse_filter = 2
+texture = ExtResource("linen")
+expand_mode = 1
+stretch_mode = 1
 
-
-[node name="CanvasSurface" type="ColorRect" parent="."]
+[node name="Ribbon" type="TextureRect" parent="Ledger"]
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -60.0
+offset_right = -32.0
+offset_bottom = 100.0
 mouse_filter = 2
-color = Color(0.003922, 0.047059, 0.062745, 1)
+texture = ExtResource("ribbon")
+expand_mode = 1
 
-[node name="HeaderSurface" type="ColorRect" parent="."]
+[node name="StageSurface" type="Panel" parent="."]
+z_index = -1
 mouse_filter = 2
-color = Color(0.015686, 0.066667, 0.082353, 1)
-
-[node name="ContextSurface" type="ColorRect" parent="."]
-mouse_filter = 2
-color = Color(0.015686, 0.066667, 0.082353, 1)
-
-[node name="FooterSurface" type="ColorRect" parent="."]
-mouse_filter = 2
-color = Color(0.015686, 0.066667, 0.082353, 1)
-
-[node name="HeaderRuleSurface" type="ColorRect" parent="."]
-mouse_filter = 2
-color = Color(0.27451, 0.321569, 0.337255, 1)
-
-[node name="StepsRuleSurface" type="ColorRect" parent="."]
-mouse_filter = 2
-color = Color(0.27451, 0.321569, 0.337255, 1)
-
-[node name="ContextRuleSurface" type="ColorRect" parent="."]
-mouse_filter = 2
-color = Color(0.27451, 0.321569, 0.337255, 1)
-
-[node name="FooterRuleSurface" type="ColorRect" parent="."]
-mouse_filter = 2
-color = Color(0.27451, 0.321569, 0.337255, 1)
+theme_type_variation = &"WizardPane"
 
 [node name="Layout" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -97,7 +90,7 @@ theme_override_constants/separation = 16
 [node name="Icon" type="TextureRect" parent="Layout/Header/Row"]
 layout_mode = 2
 texture = ExtResource("character")
-self_modulate = Color(0.266667, 0.913725, 0.913725, 1)
+self_modulate = Color(0.815686, 0.745098, 0.556863, 1)
 custom_minimum_size = Vector2(34, 34)
 size_flags_vertical = 4
 expand_mode = 1
@@ -113,14 +106,14 @@ theme_override_constants/separation = 6
 layout_mode = 2
 text = "MÖRK BORG"
 theme_override_font_sizes/font_size = 22
-theme_override_colors/font_color = Color(0.85098, 0.831373, 0.819608, 1)
+theme_override_colors/font_color = Color(0.905882, 0.905882, 0.866667, 1)
 theme_override_fonts/font = ExtResource("wordmark")
 
 [node name="Subtitle" type="Label" parent="Layout/Header/Row/Brand"]
 layout_mode = 2
 text = "Character creation"
 theme_override_font_sizes/font_size = 12
-theme_override_colors/font_color = Color(0.568627, 0.6, 0.603922, 1)
+theme_override_colors/font_color = Color(0.682353, 0.729412, 0.745098, 1)
 
 [node name="Spacer" type="Control" parent="Layout/Header/Row"]
 layout_mode = 2
@@ -131,18 +124,20 @@ mouse_filter = 2
 layout_mode = 2
 visible = false
 theme_override_font_sizes/font_size = 12
-theme_override_colors/font_color = Color(0.941176, 0.733333, 0.196078, 1)
+theme_override_colors/font_color = Color(0.905882, 0.905882, 0.866667, 1)
 vertical_alignment = 1
 
 [node name="Close" type="Button" parent="Layout/Header/Row"]
 layout_mode = 2
 text = ""
 custom_minimum_size = Vector2(48, 48)
-theme_type_variation = "TaskQuiet"
+theme_type_variation = "WizardQuiet"
 icon = ExtResource("close")
 size_flags_vertical = 4
-expand_icon = true
+expand_icon = false
 theme_override_constants/icon_max_width = 22
+
+icon_alignment = 1
 
 [node name="Steps" type="MarginContainer" parent="Layout"]
 layout_mode = 2
@@ -181,16 +176,24 @@ theme_override_constants/separation = 12
 
 [node name="Back" type="Button" parent="Layout/Footer/Row"]
 layout_mode = 2
-text = "Back"
+text = ""
+icon = ExtResource("back")
+expand_icon = false
+accessibility_name = "Back"
+tooltip_text = "Back"
 custom_minimum_size = Vector2(44, 44)
-theme_type_variation = "TaskButton"
+theme_type_variation = "WizardButton"
 size_flags_vertical = 4
+
+icon_alignment = 1
 
 [node name="Restart" type="Button" parent="Layout/Footer/Row"]
 layout_mode = 2
 text = "Start over"
+icon = ExtResource("restart")
+expand_icon = false
 custom_minimum_size = Vector2(44, 44)
-theme_type_variation = "TaskQuiet"
+theme_type_variation = "WizardQuiet"
 size_flags_vertical = 4
 
 [node name="Spacer" type="Control" parent="Layout/Footer/Row"]
@@ -198,62 +201,21 @@ layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 
-[node name="Hint" type="Label" parent="Layout/Footer/Row"]
-layout_mode = 2
-text = "Results stay with you when you go back."
-theme_override_font_sizes/font_size = 12
-theme_override_colors/font_color = Color(0.568627, 0.6, 0.603922, 1)
-
 [node name="Primary" type="Button" parent="Layout/Footer/Row"]
 layout_mode = 2
 text = "Continue"
+expand_icon = false
+icon_alignment = 2
 custom_minimum_size = Vector2(204, 46)
-theme_type_variation = "TaskPrimary"
+theme_type_variation = "WizardPrimary"
 size_flags_vertical = 4
 
-theme_override_colors/font_color = Color(0, 0, 0, 0)
-theme_override_colors/font_hover_color = Color(0, 0, 0, 0)
-theme_override_colors/font_pressed_color = Color(0, 0, 0, 0)
-theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 0)
-theme_override_colors/font_focus_color = Color(0, 0, 0, 0)
-theme_override_colors/font_disabled_color = Color(0, 0, 0, 0)
-
-[node name="Center" type="CenterContainer" parent="Layout/Footer/Row/Primary"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-
-[node name="Content" type="HBoxContainer" parent="Layout/Footer/Row/Primary/Center"]
-layout_mode = 2
-theme_override_constants/separation = 10
-mouse_filter = 2
-
-[node name="Icon" type="TextureRect" parent="Layout/Footer/Row/Primary/Center/Content"]
-layout_mode = 2
-custom_minimum_size = Vector2(22, 22)
-texture = ExtResource("character")
-expand_mode = 1
-stretch_mode = 5
-self_modulate = Color(0.003922, 0.047059, 0.062745, 1)
-mouse_filter = 2
-
-[node name="Label" type="Label" parent="Layout/Footer/Row/Primary/Center/Content"]
-layout_mode = 2
-text = "Continue"
-theme_override_colors/font_color = Color(0.003922, 0.047059, 0.062745, 1)
-theme_override_font_sizes/font_size = 15
-theme_override_fonts/font = ExtResource("action")
-mouse_filter = 2
 
 [node name="Title" type="Label" parent="Layout/Header"]
 layout_mode = 2
 text = "Create a character"
 theme_override_font_sizes/font_size = 30
-theme_override_colors/font_color = Color(0.85098, 0.831373, 0.819608, 1)
+theme_override_colors/font_color = Color(0.905882, 0.905882, 0.866667, 1)
 size_flags_horizontal = 3
 horizontal_alignment = 1
 theme_override_fonts/font = ExtResource("display")

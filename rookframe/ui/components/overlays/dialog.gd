@@ -13,15 +13,12 @@ enum Tone {
 	SUCCESS,
 }
 
-const DIALOG_WIDTH := 720
-const MINIMUM_DIALOG_HEIGHT := 300
-const COMPACT_VIEWPORT_WIDTH := 600.0
-const COMPACT_BODY_TOP_INSET := 136
-const INFORMATION_ICON := preload("res://rookframe/ui/icons/info.svg")
-const CONFIRMATION_ICON := preload("res://rookframe/ui/icons/warning.svg")
-const DANGER_ICON := preload("res://rookframe/ui/icons/error.svg")
-const SUCCESS_ICON := preload("res://rookframe/ui/icons/check.svg")
-const SCRIM_COLOR := Color(0.0, 0.025, 0.032, 0.82)
+const DIALOG_WIDTH := 600
+const MINIMUM_DIALOG_HEIGHT := 0
+const COMPACT_VIEWPORT_WIDTH := 700.0
+const COMPACT_VIEWPORT_HEIGHT := 550.0
+const COMPACT_BODY_TOP_INSET := 12
+const SCRIM_COLOR := Color(0, 0, 0, 0.667)
 
 var _fit_pending := false
 var _scrim: ColorRect
@@ -31,7 +28,7 @@ var _scrim: ColorRect
 		tone = value
 		_refresh()
 
-@export var eyebrow := "ROOKFRAME":
+@export var eyebrow := "Rookframe":
 	set(value):
 		eyebrow = value
 		_refresh()
@@ -70,8 +67,8 @@ var _scrim: ColorRect
 
 
 func _ready() -> void:
-	var cancel_button := get_node(^"Shell/Content/Actions/Cancel") as Button
-	var confirm_button := get_node(^"Shell/Content/Actions/Confirm") as Button
+	var cancel_button := get_node(^"Shell/Content/Footer/Actions/Cancel") as Button
+	var confirm_button := get_node(^"Shell/Content/Footer/Actions/Confirm") as Button
 	if not close_requested.is_connected(_cancel):
 		close_requested.connect(_cancel)
 	if not visibility_changed.is_connected(_sync_scrim):
@@ -80,6 +77,8 @@ func _ready() -> void:
 		cancel_button.pressed.connect(_cancel)
 	if not confirm_button.pressed.is_connected(_confirm):
 		confirm_button.pressed.connect(_confirm)
+	if not confirm_button.draw.is_connected(_draw_confirmation_underline):
+		confirm_button.draw.connect(_draw_confirmation_underline)
 	var body_slot := get_body_slot()
 	if not body_slot.child_order_changed.is_connected(_refresh_body_visibility):
 		body_slot.child_order_changed.connect(_refresh_body_visibility)
@@ -100,10 +99,11 @@ func open_dialog() -> void:
 	_refresh()
 	_ensure_scrim()
 	var compact := _configure_compact_layout()
-	var initial_height := 480 if get_body_slot().get_child_count() > 0 else 320
+	var initial_height := 480 if get_body_slot().get_child_count() > 0 else 240
 	var initial_width := DIALOG_WIDTH
 	if compact:
 		initial_width = roundi(_host_viewport_size().x)
+	gui_release_focus()
 	popup_centered(Vector2i(initial_width, initial_height))
 	if not _fit_pending:
 		_fit_pending = true
@@ -116,11 +116,9 @@ func close_dialog() -> void:
 
 
 func _focus_initial() -> void:
-	var target := get_node(^"Shell/Content/Actions/Confirm") as Button
-	if target.disabled:
-		target = get_node(^"Shell/Content/Actions/Cancel") as Button
-	if target.visible and not target.disabled:
-		target.grab_focus()
+	# Opening a decision does not choose an action. Tab still enters the
+	# native focus order when the user requests keyboard navigation.
+	gui_release_focus()
 
 
 func _fit_open_dialog() -> void:
@@ -147,7 +145,7 @@ func _fit_open_dialog() -> void:
 				target_height = maximum_height
 			target_height = mini(target_height, maximum_height)
 		else:
-			target_height = mini(target_height, 680)
+			target_height = mini(target_height, mini(680, roundi(viewport_size.y) - 32))
 		if size.y != target_height or size.x != target_width:
 			if compact:
 				size = Vector2i(target_width, target_height)
@@ -223,7 +221,7 @@ func _is_compact_viewport() -> bool:
 	return (
 		is_inside_tree()
 		and viewport_size.x > 0.0
-		and viewport_size.x <= COMPACT_VIEWPORT_WIDTH
+		and (viewport_size.x <= COMPACT_VIEWPORT_WIDTH or viewport_size.y <= COMPACT_VIEWPORT_HEIGHT)
 	)
 
 
@@ -237,44 +235,62 @@ func _host_viewport_size() -> Vector2:
 func _configure_compact_layout() -> bool:
 	var compact := _is_compact_viewport()
 	min_size = Vector2i(0 if compact else 600, MINIMUM_DIALOG_HEIGHT)
-	var tone_frame := get_node_or_null(^"Shell/Content/Header/ToneFrame") as Control
-	if tone_frame != null:
-		tone_frame.visible = not compact
-	var shortcut_hint := get_node_or_null(^"Shell/Content/Actions/ShortcutHint") as Label
-	if shortcut_hint != null:
-		shortcut_hint.visible = not compact
+	var header := get_node_or_null(^"Shell/Content/Header") as MarginContainer
+	if header != null:
+		for side in [&"margin_left", &"margin_right", &"margin_top"]:
+			header.add_theme_constant_override(side, 16 if compact else 24)
+	for node_name in ["Message", "Body", "Footer"]:
+		var panel := get_node("Shell/Content/" + node_name) as PanelContainer
+		var style := panel.get_theme_stylebox("panel").duplicate() as StyleBox
+		style.content_margin_left = 16.0 if compact else 24.0
+		style.content_margin_right = 16.0 if compact else 24.0
+		if node_name == "Message":
+			style.content_margin_bottom = 32.0 if compact else 40.0
+		elif node_name == "Body":
+			style.content_margin_bottom = 16.0 if compact else 24.0
+		else:
+			style.content_margin_top = 13.0 if compact else 17.0
+			style.content_margin_bottom = 12.0 if compact else 16.0
+		panel.add_theme_stylebox_override("panel", style)
 	return compact
+
+
+func _draw_confirmation_underline() -> void:
+	var button := get_node(^"Shell/Content/Footer/Actions/Confirm") as Button
+	if tone != Tone.DANGER or button.disabled:
+		return
+	if button.get_draw_mode() not in [BaseButton.DRAW_HOVER, BaseButton.DRAW_PRESSED, BaseButton.DRAW_HOVER_PRESSED]:
+		return
+	# Native Button retains input and focus; its draw signal adds the specimen's
+	# text underline for the destructive hover/pressed state.
+	var font := button.get_theme_font("font")
+	var font_size := button.get_theme_font_size("font_size")
+	var width := font.get_string_size(button.tr(button.text), HORIZONTAL_ALIGNMENT_LEFT, -1, font_size).x
+	var left := floorf((button.size.x - width) * 0.5)
+	var baseline := floorf((button.size.y - font.get_height(font_size)) * 0.5) + font.get_ascent(font_size)
+	var y := baseline + 3.0
+	button.draw_line(Vector2(left, y), Vector2(left + width, y),
+		button.get_theme_color("font_hover_color"), maxf(1.0, font.get_underline_thickness(font_size)))
 
 
 func _refresh() -> void:
 	if not is_inside_tree():
 		return
-	var top_rule := get_node_or_null(^"Shell/Content/TopRule") as ColorRect
-	var tone_icon := get_node_or_null(^"Shell/Content/Header/ToneFrame/ToneIcon") as TextureRect
 	var eyebrow_label := get_node_or_null(^"Shell/Content/Header/Copy/Eyebrow") as Label
 	var title_label := get_node_or_null(^"Shell/Content/Header/Copy/Title") as Label
 	var message := get_node_or_null(^"Shell/Content/Message") as PanelContainer
 	var description_label := get_node_or_null(^"Shell/Content/Message/Description") as Label
-	var shortcut_hint := get_node_or_null(^"Shell/Content/Actions/ShortcutHint") as Label
-	var cancel_button := get_node_or_null(^"Shell/Content/Actions/Cancel") as Button
-	var confirm_button := get_node_or_null(^"Shell/Content/Actions/Confirm") as Button
-	var semantic_color := _tone_color()
-	if top_rule != null:
-		top_rule.color = semantic_color
-	if tone_icon != null:
-		tone_icon.texture = _tone_icon()
-		tone_icon.modulate = semantic_color
+	var cancel_button := get_node_or_null(^"Shell/Content/Footer/Actions/Cancel") as Button
+	var confirm_button := get_node_or_null(^"Shell/Content/Footer/Actions/Confirm") as Button
 	if eyebrow_label != null:
 		eyebrow_label.text = eyebrow
-		eyebrow_label.theme_type_variation = _tone_text_variation()
+		eyebrow_label.visible = not eyebrow.is_empty()
 	if title_label != null:
 		title_label.text = heading
 	if description_label != null:
 		description_label.text = description
 	if message != null:
 		message.visible = not description.is_empty()
-	if shortcut_hint != null:
-		shortcut_hint.text = "ESC · CANCEL    ENTER · CONFIRM" if show_cancel else "ENTER · CONTINUE"
 	if cancel_button != null:
 		cancel_button.text = cancel_label
 		cancel_button.visible = show_cancel
@@ -283,6 +299,7 @@ func _refresh() -> void:
 		confirm_button.text = confirm_label
 		confirm_button.accessibility_name = confirm_label
 		confirm_button.disabled = not confirm_enabled
+		confirm_button.custom_minimum_size.x = 44 if tone == Tone.DANGER else 120
 		confirm_button.theme_type_variation = (
 			&"RookframeDangerButton" if tone == Tone.DANGER else &"RookframePrimaryButton"
 		)
@@ -291,35 +308,3 @@ func _refresh() -> void:
 	title = heading
 	accessibility_name = heading
 	accessibility_description = description
-
-
-func _tone_icon() -> Texture2D:
-	match tone:
-		Tone.CONFIRMATION:
-			return CONFIRMATION_ICON
-		Tone.DANGER:
-			return DANGER_ICON
-		Tone.SUCCESS:
-			return SUCCESS_ICON
-		_:
-			return INFORMATION_ICON
-
-
-func _tone_color() -> Color:
-	match tone:
-		Tone.DANGER:
-			return RookframeUiTokens.COLOR_DANGER
-		Tone.SUCCESS:
-			return RookframeUiTokens.COLOR_SUCCESS
-		_:
-			return RookframeUiTokens.COLOR_HIERARCHY
-
-
-func _tone_text_variation() -> StringName:
-	match tone:
-		Tone.DANGER:
-			return &"RookframeError"
-		Tone.SUCCESS:
-			return &"RookframeSuccess"
-		_:
-			return &"RookframeLabel"

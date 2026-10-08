@@ -110,16 +110,18 @@ and loads the selected file; cancel does nothing, and failures use
 
 | Scene / root | Public properties and defaults | Signals, methods, and slots | Behavior, focus, input, and accessibility |
 | --- | --- | --- | --- |
-| `dialog.tscn` / `Window` | `tone = INFORMATION`; `eyebrow = "ROOKFRAME"`; `heading = "Dialog title"`; `description = "Explain the decision and its consequence."`; `confirm_label = "Continue"`; `cancel_label = "Cancel"`; `show_cancel = true`; `confirm_enabled = true` | `confirmed`, `cancelled`; `get_body_slot()`, `open_dialog()`, `close_dialog()`; `BodySlot` | Opens as a native modal Window with one blocking scrim and initial focus on the enabled confirmation action. At 600px or narrower it becomes an embedded bottom sheet, retaining the same source-order controls. `ui_cancel`, the cancel action, and `close_requested` emit `cancelled`; an enabled Confirm emits `confirmed`. Visible icon, eyebrow, heading, description, and semantic tone describe the interruption without color alone. |
+| `dialog.tscn` / `Window` | `tone = INFORMATION`; `eyebrow = "Rookframe"`; `heading = "Dialog title"`; `description = "Explain the decision and its consequence."`; `confirm_label = "Continue"`; `cancel_label = "Cancel"`; `show_cancel = true`; `confirm_enabled = true` | `confirmed`, `cancelled`; `get_body_slot()`, `open_dialog()`, `close_dialog()`; `BodySlot` | Opens as a native modal Window with one blocking scrim without pre-focusing either action. Tab enters the native control order when the user requests keyboard navigation. At 700px or narrower, or 550px or shorter, it becomes an embedded bottom sheet, retaining the same source-order controls. `ui_cancel`, the cancel action, and `close_requested` emit `cancelled`; an enabled Confirm emits `confirmed`. Silkbound Ledger uses a heading, optional eyebrow, unboxed message, ledger bands, and a trailing footer with Cancel before the confirmation. Destructive confirmation has explicit text and danger styling. |
 | `file_picker_dialog.tscn` / `Window` | `heading = "Open a file"`; `description = "Choose a file from your project or computer."`; `initial_directory = "res://"`; `allowed_extensions = []`; `confirm_label = "Open"`; `show_hidden = false` | `file_selected(path)`, `cancelled`, `directory_changed(path)`; `open_picker(directory = "")`, `current_directory()`, `selected_path()` | Initial focus enters Search. Native focusable places, breadcrumbs, file rows, and actions support keyboard/controller navigation; activation opens folders or selects files, `ui_accept` confirms a selection, and `ui_cancel` cancels. Selected name/path and filter summary stay visible and accessible outside hover tooltips. |
 
-`Dialog` is a native modal `Window` with a blocking host scrim, semantic icon
-header, bounded message region, optional `BodySlot`, content-driven height,
-Escape cancellation, and an initial enabled confirmation focus target. Hosts
+`Dialog` is a native modal `Window` with a blocking host scrim, a heading,
+bounded message region, optional `BodySlot`, content-driven height, and Escape
+cancellation. Its trailing footer puts Cancel before confirmation. Opening or
+reopening leaves both actions unfocused; Tab and Shift+Tab retain native focus
+navigation. Hosts
 set `confirm_enabled = false` while a dynamic validation requirement is unmet;
 the native confirmation target then remains visible but unavailable. Its `tone` is one of
-`INFORMATION`, `CONFIRMATION`, `DANGER`, or `SUCCESS`; tone changes the visible
-icon and semantic accent, never behavior by itself. An acknowledgement exposes
+`INFORMATION`, `CONFIRMATION`, `DANGER`, or `SUCCESS`; danger selects the red
+text action and its hover underline, while other tones use the primary action. An acknowledgement exposes
 only Confirm; a decision exposes Cancel and Confirm. The header never duplicates
 those footer actions with a third close button. It is a decision composition,
 not an `AcceptDialog` child-tree wrapper.
@@ -232,32 +234,10 @@ trees.
 
 ## Miniature browser
 
-`res://rookframe/ui/components/content/fullscreen_miniature_browser.tscn` is the
-approved full-viewport composition: top heading and Close, name/Package search,
-preview cards, measured complete-row pagination, and fixed Cancel/Choose actions.
-The landscape references show 3 cards at 844 × 390, 6 at 1024 × 768, and 8 at
-1920 × 1080. Collection and page content do not scroll. The component uses the
-unchanged Rookframe palette and the approved wizard's square buttons.
-
-It accepts `configure(entries, selected_id, labels)` with the same opaque entry
-IDs and `id`, `title`, `package`, `available` fields. Additional consumer fields
-are preserved. `selection()` returns an available entry. `selection_changed`,
-`preview_requested(entry, target)`, `retry_requested`, `set_state`, and
-`focus_search()` have the same ownership boundary as the compact browser below.
-`choose_requested(entry)`, `cancel_requested`, and `close_requested` let the
-consumer commit a draft choice or return through SDK child-window navigation.
-The browser itself never closes host windows or mutates World data.
-
-Search retains an off-page draft selection; selecting a different card alone
-does not commit it. A saved unavailable entry stays named in the footer while
-Choose is disabled. Configuration reveals the page containing the saved choice.
-Preview targets are created once per available entry, and retained across page
-changes. The caller supplies localized labels, including `title`, `library`,
-`search`, `close`, `cancel`, `choose`, `selection`, `none`, `hint`,
-`saved_unavailable`, `previous`, `next`, `range` (`%d–%d of %d`), `count`
-(`%d miniatures`), and state headings/copy (`loading`, `loading_copy`, `empty`,
-`empty_copy`, `no_match`, `no_match_copy`, `error`, `error_copy`, `retry`,
-`unavailable`, `preview_unavailable`, `selected`). Child paths remain internal.
+Use `res://rookframe/ui/components/content/silkbound_miniature_browser.tscn` for
+full-screen Miniature choice, including creation and sheet Appearance. Its
+list, search, preview and SDK-owned draft confirmation replace the former
+full-screen grid browser. See the Silkbound Miniature browser contract below.
 
 `res://rookframe/ui/components/content/miniature_browser.tscn` combines search,
 a responsive scrolling grid of native choice cards. Every available card has its
@@ -285,7 +265,8 @@ details; consumers use the documented signals and methods.
 
 `components/surfaces/fullscreen_wizard.tscn` is a native `Control` for fixed
 full-viewport tasks. `configure(brand, title, steps, labels)` supplies copy;
-`set_step(index)`, `set_primary(text, disabled)` and `set_back_enabled(enabled)`
+`set_step(index)`, `set_primary(text, disabled, icon = null)`
+and `set_back_enabled(enabled)`
 update presentation. `back_requested`, `restart_requested`, `primary_requested`
 and `close_requested` carry user intent to the consumer. The consumer owns draft
 state, confirmation, rules and window lifecycle. `get_context_slot()` and
@@ -485,3 +466,32 @@ SilkboundCollection entries accept optional `hint` and `hint_title` strings. The
 details button shows these with the shared composition and exposes the summary
 as its accessibility description. An empty hint produces no tooltip. The separate
 action button retains its own action-specific tooltip.
+
+
+## Silkbound full-screen wizard
+
+`FullscreenWizard` follows the approved Silkbound Ledger frame: linen cover and
+context preview, one plain ink stage, copper cover rules, numbered steps and a
+fixed action row. It retains the existing signals and composition slots. The
+consumer supplies its content and rules. `is_compact()` identifies the landscape
+phone profile (height at most 560px or width at most 740px); `is_tablet()` identifies
+widths through 1300px outside that profile. `set_primary()` accepts an optional
+native icon alongside the action text inside the button. Icon-only navigation
+buttons center their glyph; the footer has no redundant retention hint.
+
+`PaginatedChoices`, `PaginatedContent`, `SummaryBlock`, `TaskTextField` and
+`TaskTextArea` expose `silkbound = false`. Enable it in a Silkbound composition for
+the specimen's EB Garamond typography, neutral selection, brass icons and
+responsive spacing. Existing consumers retain their default presentation.
+Silkbound task editors are 48px high for a single line and 152px for multiple
+lines (64px in the compact profile). Empty errors reserve no blank line; error
+copy still participates in native minimum-size measurement and accessibility.
+
+`PaginatedContent.content_inset_left = 0` reserves an inset inside its reading
+area. In Silkbound mode, a nonzero inset also draws the internal column divider.
+Pagination measures the remaining content width and keeps whole native controls
+and text lines visible. It does not add another panel fill.
+
+`theme/silkbound_line_height.gd` provides `apply(control, multiplier)` for
+specimen line boxes using stock `FontVariation` top/bottom spacing. It preserves
+the resolved font and size and gives each Control its own font variation.

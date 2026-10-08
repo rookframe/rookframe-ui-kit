@@ -990,29 +990,6 @@
       ]
     },
     {
-      "name": "FullscreenMiniatureBrowser",
-      "scene": "res://rookframe/ui/components/content/fullscreen_miniature_browser.tscn",
-      "sceneUid": "uid://bvol8o8tejrba",
-      "rootType": "Control",
-      "properties": {},
-      "methods": [
-        "configure",
-        "selection",
-        "set_state",
-        "focus_search"
-      ],
-      "signals": [
-        "choose_requested",
-        "cancel_requested",
-        "close_requested",
-        "selection_changed",
-        "preview_requested",
-        "retry_requested"
-      ],
-      "script": "res://rookframe/ui/components/content/fullscreen_miniature_browser.gd",
-      "scriptUid": "uid://cuj3idkf7gtbt"
-    },
-    {
       "name": "FullscreenWizard",
       "scene": "res://rookframe/ui/components/surfaces/fullscreen_wizard.tscn",
       "sceneUid": "uid://g2qaay7nuc7s",
@@ -1024,7 +1001,9 @@
         "set_primary",
         "set_back_enabled",
         "get_context_slot",
-        "get_stage_slot"
+        "get_stage_slot",
+        "is_compact",
+        "is_tablet"
       ],
       "signals": [
         "back_requested",
@@ -1040,7 +1019,9 @@
       "scene": "res://rookframe/ui/components/data/paginated_choices.tscn",
       "sceneUid": "uid://daedsgd1whpdn",
       "rootType": "VBoxContainer",
-      "properties": {},
+      "properties": {
+        "silkbound": "bool"
+      },
       "methods": [
         "configure"
       ],
@@ -1055,7 +1036,9 @@
       "scene": "res://rookframe/ui/components/data/summary_block.tscn",
       "sceneUid": "uid://cxu3q4m6ldbha",
       "rootType": "VBoxContainer",
-      "properties": {},
+      "properties": {
+        "silkbound": "bool"
+      },
       "methods": [
         "configure",
         "set_stats"
@@ -1069,7 +1052,9 @@
       "scene": "res://rookframe/ui/components/forms/task_text_field.tscn",
       "sceneUid": "uid://c0of87liqui3k",
       "rootType": "VBoxContainer",
-      "properties": {},
+      "properties": {
+        "silkbound": "bool"
+      },
       "methods": [
         "focus_editor",
         "set_error"
@@ -1086,7 +1071,9 @@
       "scene": "res://rookframe/ui/components/forms/task_text_area.tscn",
       "sceneUid": "uid://cammbybvgdssm",
       "rootType": "VBoxContainer",
-      "properties": {},
+      "properties": {
+        "silkbound": "bool"
+      },
       "methods": [
         "focus_editor",
         "set_error"
@@ -1106,7 +1093,9 @@
         "enabled": {
           "type": "bool",
           "default": true
-        }
+        },
+        "silkbound": "bool",
+        "content_inset_left": "int"
       },
       "methods": [
         "refresh",
