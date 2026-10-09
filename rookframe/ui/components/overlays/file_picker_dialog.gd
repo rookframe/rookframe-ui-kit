@@ -60,12 +60,15 @@ func _ready() -> void:
 	%Back.pressed.connect(_go_back)
 	%Up.pressed.connect(_go_up)
 	%Places.item_activated.connect(_activate_place)
+	%CompactPlaces.item_selected.connect(_activate_place)
+	size_changed.connect(_fit_layout)
 	%FileList.item_selected.connect(_select_entry)
 	%FileList.item_activated.connect(_activate_entry)
 	%Search.value_changed.connect(_on_search_changed)
 	_refresh_copy()
 	_populate_places()
 	_refresh_filter_label()
+	_fit_layout()
 
 
 func _unhandled_key_input(event: InputEvent) -> void:
@@ -86,8 +89,27 @@ func open_picker(directory: String = "") -> void:
 	_history.clear()
 	_history_index = -1
 	_set_directory(requested, true)
-	popup_centered(Vector2i(1120, 800))
+	var available := get_parent().get_viewport().get_visible_rect().size
+	popup_centered(Vector2i(minf(1120, available.x), minf(800, available.y)))
+	_fit_layout()
 	call_deferred(&"_focus_initial")
+
+
+func _fit_layout() -> void:
+	if not is_node_ready():
+		return
+	var compact := size.x < 1000 or size.y < 600
+	%Preview.visible = not compact
+	$Shell/Content/Browser/PlacesPanel.visible = not compact
+	%CompactPlaces.visible = compact
+	$Shell/Content/Header.visible = not compact
+	$Shell/Content/Selection/File/Label.visible = not compact
+	$Shell/Content/Selection/Filter.visible = not compact
+	$Shell/Content/Actions/Hint.visible = not compact
+	$Shell/Content/Actions/HintIcon.visible = not compact
+	$Shell/Content/Actions/Space.visible = compact
+	$Shell/Content.add_theme_constant_override(&"separation", 8 if compact else 16)
+	%Search.custom_minimum_size.x = 220 if compact else 300
 
 
 func current_directory() -> String:
@@ -104,6 +126,7 @@ func _focus_initial() -> void:
 
 func _populate_places() -> void:
 	%Places.clear()
+	%CompactPlaces.clear()
 	_add_place("Project", "Godot project files", ProjectSettings.globalize_path("res://"), preload("res://rookframe/ui/icons/rook.svg"))
 	_add_place("Home", "Your home folder", _home_directory(), preload("res://rookframe/ui/icons/home.svg"))
 	var documents := OS.get_system_dir(OS.SYSTEM_DIR_DOCUMENTS)
@@ -116,6 +139,7 @@ func _add_place(label: String, tooltip: String, path: String, icon: Texture2D) -
 	%Places.add_item(label, icon)
 	%Places.set_item_metadata(index, path)
 	%Places.set_item_tooltip(index, tooltip)
+	%CompactPlaces.add_icon_item(icon, label)
 
 
 func _activate_place(index: int) -> void:
@@ -220,6 +244,7 @@ func _sync_place_selection() -> void:
 			best_length = place_path.length()
 	if best_index >= 0:
 		%Places.select(best_index)
+		%CompactPlaces.select(best_index)
 
 
 func _refresh_entries() -> void:
@@ -283,7 +308,7 @@ func _select_entry(index: int) -> void:
 		%FileName.text = ""
 		%Open.disabled = true
 		%PreviewIcon.texture = FOLDER_ICON
-		%PreviewEyebrow.text = "FOLDER"
+		%PreviewEyebrow.text = "Folder"
 		%PreviewTitle.text = str(entry["name"])
 		%PreviewDetail.text = "Open this folder to browse its contents."
 		%PreviewPath.text = str(entry["path"])
@@ -293,7 +318,7 @@ func _select_entry(index: int) -> void:
 		%Open.disabled = false
 		var preview := _preview_texture(_selected_path)
 		%PreviewIcon.texture = preview
-		%PreviewEyebrow.text = "SELECTED FILE"
+		%PreviewEyebrow.text = "Selected file"
 		%PreviewTitle.text = str(entry["name"])
 		var extension := str(entry["name"]).get_extension()
 		var type_label := extension.to_upper() if not extension.is_empty() else "Document"
@@ -335,7 +360,7 @@ func _clear_selection() -> void:
 	%FileName.text = ""
 	%Open.disabled = true
 	%PreviewIcon.texture = DOCUMENT_ICON
-	%PreviewEyebrow.text = "NO FILE SELECTED"
+	%PreviewEyebrow.text = "No file selected"
 	%PreviewTitle.text = "Select a file"
 	%PreviewDetail.text = "Choose a file to inspect its name, type, and location."
 	%PreviewPath.text = ""

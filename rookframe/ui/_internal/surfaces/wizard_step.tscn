@@ -83,7 +83,7 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = -3.0
-color = Color(0.941176, 0.733333, 0.196078, 1)
+color = Color(0.850980, 0.682353, 0.580392, 1.0)
 mouse_filter = 2
 
 [node name="Connector" type="ColorRect" parent="."]

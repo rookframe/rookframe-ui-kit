@@ -14,7 +14,7 @@ extends Button
 		title_lane_width = maxf(value, 0.0)
 		_refresh()
 
-@export_range(8, 72, 1) var title_font_size := 15:
+@export_range(8, 72, 1) var title_font_size := 20:
 	set(value):
 		title_font_size = clampi(value, 8, 72)
 		_refresh()

@@ -36,7 +36,7 @@ var _value := ""
 		show_clear_when_empty = value
 		_refresh()
 
-@export var perimeter_minimum_height := 44.0:
+@export var perimeter_minimum_height := 48.0:
 	set(value):
 		perimeter_minimum_height = value
 		_refresh()
@@ -46,7 +46,7 @@ var _value := ""
 		clear_minimum_size = value
 		_refresh()
 
-@export var editor_font_size := 14:
+@export var editor_font_size := 20:
 	set(value):
 		editor_font_size = value
 		_refresh()

@@ -82,7 +82,7 @@ func _rebuild_wide(normalized_steps: PackedStringArray, normalized_current: int)
 		track.remove_child(child)
 		child.queue_free()
 	if summary != null:
-		summary.text = "STEP %d OF %d" % [normalized_current, normalized_steps.size()]
+		summary.text = "Step %d of %d" % [normalized_current, normalized_steps.size()]
 	if current_title != null:
 		current_title.text = normalized_steps[normalized_current - 1]
 
@@ -99,7 +99,7 @@ func _rebuild_wide(normalized_steps: PackedStringArray, normalized_current: int)
 
 		var rail := HBoxContainer.new()
 		rail.name = "Rail"
-		rail.add_theme_constant_override(&"separation", 0)
+		rail.add_theme_constant_override(&"separation", 6)
 		cell.add_child(rail)
 
 		var left := _connector("Connector%dLeft" % position)
@@ -110,7 +110,7 @@ func _rebuild_wide(normalized_steps: PackedStringArray, normalized_current: int)
 
 		var marker := PanelContainer.new()
 		marker.name = "Marker%d" % position
-		marker.custom_minimum_size = Vector2(36, 36)
+		marker.custom_minimum_size = Vector2(30, 30)
 		marker.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		marker.theme_type_variation = _marker_variation(state_name)
 		rail.add_child(marker)
@@ -118,6 +118,7 @@ func _rebuild_wide(normalized_steps: PackedStringArray, normalized_current: int)
 			var icon := TextureRect.new()
 			icon.name = "Check"
 			icon.texture = CHECK_ICON
+			icon.self_modulate = RookframeUiTokens.COLOR_CONTENT
 			icon.custom_minimum_size = Vector2(20, 20)
 			icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 			icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
@@ -130,8 +131,11 @@ func _rebuild_wide(normalized_steps: PackedStringArray, normalized_current: int)
 			number.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 			number.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 			number.theme_type_variation = &"RookframePending" if state_name == "current" else &"RookframeMeta"
+			number.add_theme_font_size_override(&"font_size", 20)
+			number.add_theme_color_override(&"font_color", RookframeUiTokens.COLOR_INK if state_name == "current" else RookframeUiTokens.COLOR_CONTENT_MUTED)
 			number.mouse_filter = Control.MOUSE_FILTER_IGNORE
 			marker.add_child(number)
+			preload("res://rookframe/ui/theme/silkbound_line_height.gd").apply(number, 1.1)
 
 		var right := _connector("Connector%dRight" % position)
 		right.color = _connector_color(position < normalized_current)
@@ -162,7 +166,7 @@ func _connector(node_name: String) -> ColorRect:
 
 
 func _connector_color(complete: bool) -> Color:
-	return RookframeUiTokens.COLOR_SUCCESS if complete else RookframeUiTokens.COLOR_RULE
+	return RookframeUiTokens.COLOR_ACCENT if complete else RookframeUiTokens.COLOR_RULE
 
 
 func _marker_variation(state_name: String) -> StringName:
@@ -194,7 +198,7 @@ func _refresh_compact(normalized_steps: PackedStringArray, normalized_current: i
 	if current_number != null:
 		current_number.text = str(normalized_current)
 	if summary != null:
-		summary.text = "STEP %d OF %d" % [normalized_current, normalized_steps.size()]
+		summary.text = "Step %d of %d" % [normalized_current, normalized_steps.size()]
 	if title != null:
 		title.text = normalized_steps[normalized_current - 1]
 	if percent != null:

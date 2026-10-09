@@ -1,5 +1,5 @@
 [gd_resource type="FontVariation" format=3]
-[ext_resource type="FontFile" path="res://rookframe/ui/assets/fonts/Inter-VariableFont_opsz,wght.ttf" id="font"]
+[ext_resource type="Font" path="res://rookframe/ui/theme/silkbound_medium.tres" id="font"]
 [resource]
 base_font = ExtResource("font")
 variation_opentype = {2003265652: 500.0}

@@ -1,0 +1,40 @@
+[remap]
+
+importer="font_data_dynamic"
+type="FontFile"
+uid="uid://c3ifv506pkoa4"
+path="res://.godot/imported/NotoSerifSC[wght].ttf-9743e7745e4f8c54c5ae79ce18f6b903.fontdata"
+
+[deps]
+
+source_file="res://rookframe/ui/assets/fonts/noto-serif-sc/NotoSerifSC[wght].ttf"
+dest_files=["res://.godot/imported/NotoSerifSC[wght].ttf-9743e7745e4f8c54c5ae79ce18f6b903.fontdata"]
+
+[params]
+
+Rendering=null
+antialiasing=1
+generate_mipmaps=false
+disable_embedded_bitmaps=true
+multichannel_signed_distance_field=false
+msdf_pixel_range=8
+msdf_size=48
+allow_system_fallback=true
+force_autohinter=false
+modulate_color_glyphs=false
+hinting=3
+subpixel_positioning=4
+keep_rounding_remainders=true
+oversampling=0.0
+Fallbacks=null
+fallbacks=[]
+Compress=null
+compress=true
+preload=[]
+language_support={
+"ja": false,
+"ko": false,
+"zh": true
+}
+script_support={}
+opentype_features={}

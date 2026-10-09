@@ -1159,11 +1159,29 @@
       "properties": {},
       "methods": [],
       "signals": []
+    },
+    {
+      "name": "PaginatedTextArea",
+      "scene": "res://rookframe/ui/components/forms/paginated_text_area.tscn",
+      "script": "res://rookframe/ui/components/forms/paginated_text_area.gd",
+      "scriptUid": "uid://wsfuxrbwn4s8",
+      "rootType": "Control",
+      "properties": {
+        "value": "",
+        "compact": false
+      },
+      "methods": [
+        "get_pager() -> HBoxContainer"
+      ],
+      "signals": [
+        "value_changed(value: String)"
+      ],
+      "contract": "Fixed-page native editor; value retains the complete text across pages and resizing. Place get_pager() in the owning footer."
     }
   ],
   "semanticIcons": {
     "manifest": "res://rookframe/ui/icons/manifest.json",
-    "count": 62,
+    "count": 66,
     "rule": "Use reusable meanings; consumer-named aliases are not supported."
   },
   "excluded": [
@@ -1178,6 +1196,10 @@
   "taskTheme": {
     "path": "res://rookframe/ui/theme/fullscreen_task_theme.tres",
     "uid": "uid://cyf74fj0m2vqa",
-    "purpose": "Fixed full-screen tasks using unchanged package design tokens."
+    "purpose": "Silkbound Ledger density profile for fixed full-screen tasks; the legacy path remains supported."
+  },
+  "silkboundTheme": {
+    "path": "res://rookframe/ui/theme/silkbound_theme.tres",
+    "purpose": "Silkbound task and sheet typography with complete native and shared semantic role coverage."
   }
 }

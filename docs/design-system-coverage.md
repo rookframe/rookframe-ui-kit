@@ -39,8 +39,8 @@ Kit implementation is permitted without a later product decision.
 | Reusable role | Evidence normalized | Classification | Delivery |
 | --- | --- | --- | --- |
 | Semantic palette | Bevy token palette; Godot Theme and Manager color helpers | Native + Theme | Foundation |
-| Inter readable-copy typography | Bevy text roles; Godot default and Manager fonts | Native + Theme | Foundation |
-| Exo 2 managed hierarchy typography | Bevy title/heading roles; Godot display labels | Native + Theme | Foundation |
+| EB Garamond copy typography | Silkbound Ledger general text roles | Native + Theme | Foundation |
+| EB Garamond hierarchy and regional Noto Serif | Silkbound Ledger titles and locale-specific companions | Native + Theme | Foundation |
 | 4px spatial rhythm and named spacing | Bevy layout tokens; Godot repeated 4/8/12/16/24 insets | Native + Theme | Foundation |
 | Minimum target, border, radius, and frame geometry | Bevy control tokens; Godot 44/52px control factories | Native + Theme | Foundation |
 | Visible keyboard/controller focus | Bevy focus frame; Godot focused input/button styles | Native + Theme | Foundation |
@@ -138,3 +138,17 @@ foundation/native styling, an RFG-161 reusable relationship, or an intentional
 application-specific exclusion. The public foundation includes no application
 screen, feature workflow, domain state, host adapter, consumer-named duplicate,
 redundant native wrapper, or C# widget hierarchy.
+
+## Silkbound first pass
+
+The public default Theme, both task Theme paths, tokens, native control states,
+forms/search, feedback, structured records and Managed Surface now share the
+Silkbound foundation. The catalogue includes current native and common component
+examples; specialized wizard, collection, browser and notepad interaction
+scenarios are also exercised by their existing component suites.
+
+This is foundation coverage, not approval of every consumer screen. The host's
+Main Menu routes, invitation/networking workflows, tabletop managers and Action
+Log still need task-specific composition review. Package gameplay dialogs and
+workflows likewise need their own native viewport review. A new font or inherited
+palette alone does not make those screens complete.

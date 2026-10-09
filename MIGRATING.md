@@ -27,3 +27,22 @@ declaration; do not vendor an old UI Kit into the artifact.
 
 See [the complete compatibility model](docs/compatibility.md) for the protected
 public contract and the direct-Godot consequences.
+
+## Silkbound Ledger foundation
+
+All three existing Theme paths now supply Silkbound. No path, UID, scene root,
+signal, slot, domain operation or placement state has been removed. Historical
+font/frame assets remain installed for compatibility. The `silkbound` flags on
+common task components remain readable/serializable, but no longer select old
+typography. General visual defaults are larger (SearchField editor 20px,
+ActionLink title 20px, ordinary metadata 18px). Explicit caller density overrides
+remain a caller responsibility; remove old per-screen color/font overrides as
+each screen is reviewed.
+
+Repin the exact UI Kit commit, materialize it, then inspect each authored screen
+at its native viewport. Do not scale an entire desktop layout to fit touch.
+Use the [regional typography resources](docs/public-foundation.md#regional-typography)
+when text locale distinguishes Simplified and Traditional Chinese.
+
+This is an unpublished candidate change; it does not move candidate tags or
+publish SDK/application/Package releases.

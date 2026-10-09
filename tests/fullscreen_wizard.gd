@@ -71,7 +71,7 @@ func test_fixed_frame_measured_choices_and_actions() -> void:
 	var pairs: Array[Dictionary] = [{"label": "Name", "value": "Retained identity"}]
 	summary.configure("Character", null, pairs)
 	assert_bool(summary.get_node(^"Content/Rows").get_child(0).get_node(^"Inset/Row/Value").text == "Retained identity").is_true()
-	for profile in [[Vector2i(844, 390), 11, 5], [Vector2i(1024, 768), 12, 9], [Vector2i(1920, 1080), 16, 14]]:
+	for profile in [[Vector2i(844, 390), 18, 6], [Vector2i(1024, 768), 18, 2], [Vector2i(1920, 1080), 21, 8]]:
 		viewport.size = profile[0]
 		for frame in 5:
 			await get_tree().process_frame
@@ -81,7 +81,7 @@ func test_fixed_frame_measured_choices_and_actions() -> void:
 		for choice in choices.get_node(^"Area/Rows").get_children():
 			var value: Label = choice.get_node(^"Inset/Row/Value")
 			if choice.is_visible_in_tree() and value.text == "12":
-				assert_int(value.get_theme_font_size("font_size")).is_equal(17 if profile[0].x == 1024 else 20)
+				assert_int(value.get_theme_font_size("font_size")).is_equal(24 if profile[0].x == 1920 else 20)
 				assert_float(value.size.x).is_greater_equal(value.get_theme_font("font").get_string_size("12", HORIZONTAL_ALIGNMENT_LEFT, -1, value.get_theme_font_size("font_size")).x)
 
 	viewport.free()

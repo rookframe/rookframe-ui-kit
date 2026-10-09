@@ -105,10 +105,10 @@ func configure(entries: Array[Dictionary], selected_id: String, caption: String 
 		row.get_node(^"Inset/Row/Copy/Subtitle").visible = not str(entry.get("subtitle", "")).is_empty()
 		row.get_node(^"Inset/Row/Value").text = str(entry.get("value", ""))
 		row.get_node(^"Inset/Row/Icon").texture = entry.get("icon")
-		row.get_node(^"Inset/Row/Icon").self_modulate = Color("44e9e9") if framed_collection or str(entry.id) == selected_id else Color("91999a")
+		row.get_node(^"Inset/Row/Icon").self_modulate = Color("d0be8e") if framed_collection or str(entry.id) == selected_id else Color("aebabe")
 		var pending := bool(entry.get("pending", false))
 		row.get_node(^"Inset/Row/Value").add_theme_font_size_override("font_size", 12 if pending else 20)
-		row.get_node(^"Inset/Row/Value").add_theme_color_override("font_color", Color("91999a") if pending else Color("44e9e9"))
+		row.get_node(^"Inset/Row/Value").add_theme_color_override("font_color", Color("aebabe") if pending else Color("d0be8e"))
 		row.set_pressed_no_signal(str(entry.id) == selected_id)
 		row.accessibility_name = "%s. %s. %s" % [entry.get("title", ""), entry.get("subtitle", ""), entry.get("value", "")]
 	get_node(^"Caption/Title").text = caption
@@ -158,7 +158,7 @@ func _fit() -> void:
 	get_node(^"Pager/Indicator/Page").add_theme_font_size_override("font_size", 15 if phone else 14)
 	get_node(^"Pager/Indicator/PhoneCount").visible = framed_collection and phone
 	if framed_collection:
-		get_node(^"Caption/Title").add_theme_color_override("font_color", Color("f0bb32"))
+		get_node(^"Caption/Title").add_theme_color_override("font_color", Color("d9ae94"))
 		for label in [^"Caption/Title", ^"Caption/Count", ^"Pager/Range"]:
 			get_node(label).add_theme_stylebox_override("normal", preload("res://rookframe/ui/_internal/data/collection_label.tres"))
 	for button in [^"Pager/Previous", ^"Pager/Next"]:
@@ -191,8 +191,7 @@ func _fit() -> void:
 		var measured := value.get_theme_font("font").get_string_size(value.text, HORIZONTAL_ALIGNMENT_LEFT, -1, value.get_theme_font_size("font_size")).x
 		value.custom_minimum_size.x = minf(ceilf(measured), (size.x - inset * 2) / columns * 0.3) if framed_collection else minf(ceilf(measured), size.x * 0.3) if tablet else 14 if columns > 1 else 0
 
-	if silkbound:
-		height = _fit_silkbound()
+	height = _fit_silkbound()
 	# The authored row has an inset Control, so include its effective child
 	# minimum as well as the framed Button's minimum (ADR-0017).
 	var heights: Array[float] = []
@@ -257,10 +256,10 @@ func _draw() -> void:
 		draw_style_box(preload("res://rookframe/ui/_internal/data/collection_frame.tres"), Rect2(Vector2.ZERO, size))
 		if get_node(^"Caption").visible:
 			draw_style_box(preload("res://rookframe/ui/_internal/data/collection_caption.tres"), Rect2(Vector2.ZERO, Vector2(size.x, get_node(^"Caption").size.y)))
-	draw_line(Vector2(0, 0.5), Vector2(size.x, 0.5), Color("3e4346") if silkbound else Color("465256"))
+	draw_line(Vector2(0, 0.5), Vector2(size.x, 0.5), Color("3e4346"))
 	var pager := get_node_or_null(^"Pager") as Control
 	if pager != null and pager.visible:
-		draw_line(Vector2(0, pager.position.y), Vector2(size.x, pager.position.y), Color("3e4346") if silkbound else Color("465256"))
+		draw_line(Vector2(0, pager.position.y), Vector2(size.x, pager.position.y), Color("3e4346"))
 
 func _show_page() -> void:
 	var pages := _pages.size()

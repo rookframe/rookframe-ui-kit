@@ -3,12 +3,12 @@
 [ext_resource type="Script" path="res://rookframe/ui/components/data/package_row.gd" id="1_script"]
 
 [sub_resource type="StyleBoxFlat" id="PackageCardSurface"]
-bg_color = Color(0.043137, 0.086275, 0.094118, 0.92)
-border_width_left = 1
-border_width_top = 3
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0.329412, 0.882353, 0.878431, 1)
+bg_color = Color(0.203922, 0.239216, 0.254902, 1)
+border_width_left = 3
+border_width_top = 0
+border_width_right = 0
+border_width_bottom = 0
+border_color = Color(0.807843, 0.800000, 0.701961, 1.0)
 
 [node name="PackageCard" type="PanelContainer"]
 custom_minimum_size = Vector2(0, 112)
@@ -16,7 +16,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/panel = SubResource("PackageCardSurface")
 script = ExtResource("1_script")
-locked_state_label = "REQUIRED"
+locked_state_label = "Required"
 
 [node name="Margin" type="MarginContainer" parent="."]
 layout_mode = 2
@@ -35,7 +35,7 @@ custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 size_flags_vertical = 4
 theme_type_variation = &"RookframeStatus"
-theme_override_colors/font_color = Color(0.329412, 0.882353, 0.878431, 1)
+theme_override_colors/font_color = Color(0.815686, 0.745098, 0.556863, 1)
 theme_override_font_sizes/font_size = 20
 text = "◆"
 horizontal_alignment = 1
@@ -51,15 +51,15 @@ theme_override_constants/separation = 3
 unique_name_in_owner = true
 layout_mode = 2
 theme_type_variation = &"RookframeBody"
-theme_override_colors/font_color = Color(0.968627, 0.94902, 0.909804, 1)
-theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(0.905882, 0.905882, 0.866667, 1.0)
+theme_override_font_sizes/font_size = 18
 autowrap_mode = 2
 
 [node name="Detail" type="Label" parent="Margin/Content/Copy"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_type_variation = &"RookframeMeta"
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 18
 autowrap_mode = 2
 
 [node name="State" type="Label" parent="Margin/Content"]
@@ -68,8 +68,8 @@ custom_minimum_size = Vector2(96, 0)
 layout_mode = 2
 size_flags_vertical = 4
 theme_type_variation = &"RookframeStatus"
-theme_override_colors/font_color = Color(0.329412, 0.882353, 0.878431, 1)
-theme_override_font_sizes/font_size = 10
-text = "INCLUDED"
+theme_override_colors/font_color = Color(0.905882, 0.905882, 0.866667, 1.0)
+theme_override_font_sizes/font_size = 18
+text = "Included"
 horizontal_alignment = 2
 vertical_alignment = 1

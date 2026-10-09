@@ -14,6 +14,52 @@ func _ready() -> void:
 	_populate_icon_gallery()
 	_populate_managed_surface()
 	_connect_overlays()
+	resized.connect(_fit_catalogue)
+	%Tabs.tab_changed.connect(func(_index: int) -> void: _fit_catalogue())
+	_fit_catalogue()
+	_add_locale_samples()
+
+
+func _fit_catalogue() -> void:
+	# Reflow the catalogue itself, without scaling the controls being reviewed.
+	var compact := size.x < 1000
+	var native := %Tabs.get_node("Native/Margin/Content")
+	native.get_node("Inputs").columns = 2 if compact else 3
+	for name in ["SemanticSurfaces", "Dense"]:
+		native.get_node(name).vertical = compact
+	%Tabs.get_node("Feedback/Margin/Content/States").columns = 1 if compact else 2
+	%Tabs.get_node("Managed/Columns/Explanation").visible = not compact
+	%ManagedDemo.custom_minimum_size = Vector2(360, 0)
+	var header: Node = %ManagedDemo.call(&"get_header_slot").get_child(0)
+	header.set("eyebrow", "" if compact else "Package task")
+	header.set("subtitle", "" if compact else "The header, one scrolling task body, and footer remain one retained tree.")
+	$Canvas/Page/Stack/Header/Copy/Title.add_theme_font_size_override(&"font_size", 30 if compact else 40)
+	$Canvas/Page/Stack/Header/Copy/Subtitle.visible = size.y >= 600
+	$Canvas/Page.add_theme_constant_override(&"margin_top", 12 if compact else 24)
+	$Canvas/Page.add_theme_constant_override(&"margin_bottom", 12 if compact else 24)
+	var compact_managed: bool = compact and %Tabs.current_tab == 6
+	$Canvas/Page/Stack/Header.visible = not compact_managed
+	for edge in ["top", "bottom"]:
+		$Canvas/Page.add_theme_constant_override("margin_" + edge, 4 if compact_managed else 12 if compact else 24)
+	for edge in ["left", "right", "top", "bottom"]:
+		%Tabs.get_node("Managed").add_theme_constant_override("margin_" + edge, 0 if compact_managed else 16)
+
+
+func _add_locale_samples() -> void:
+	var content := %Tabs.get_node("Native/Margin/Content")
+	var heading := _copy("Regional serif companions")
+	heading.theme_type_variation = &"RookframeHeading"
+	content.add_child(heading)
+	for sample in [
+		["ja", "日本語 · Rookframe — 冒険の記録、骨と直感。"],
+		["ko", "한국어 · Rookframe — 모험의 기록과 세계."],
+		["zh_CN", "简体中文 · Rookframe — 世界与冒险的记录。"],
+		["zh_TW", "繁體中文 · Rookframe — 世界與冒險的記錄。"],
+	]:
+		var label := _copy(sample[1])
+		label.language = sample[0]
+		label.add_theme_font_override(&"font", load("res://rookframe/ui/theme/locales/%s_regular.tres" % sample[0]))
+		content.add_child(label)
 
 
 func _select_requested_tab() -> void:
@@ -58,8 +104,8 @@ func _populate_native_controls() -> void:
 
 func _populate_layout_relationships() -> void:
 	var split := %ResponsiveSplit
-	_add_panel_copy(split.call(&"get_primary_slot"), "STAGE", "Bounded stage context stays first in compact reading order.")
-	_add_panel_copy(split.call(&"get_secondary_slot"), "CONTENT", "The primary task owns more width in the wide profile and the same retained controls in the compact profile.")
+	_add_panel_copy(split.call(&"get_primary_slot"), "Stage", "Bounded stage context stays first in compact reading order.")
+	_add_panel_copy(split.call(&"get_secondary_slot"), "Content", "The primary task owns more width in the wide profile and the same retained controls in the compact profile.")
 
 	var section := %SectionDemo
 	section.call(&"get_action_slot").add_child(_button("Inspect", &"RookframeQuietButton"))
@@ -129,6 +175,7 @@ func _populate_icon_gallery() -> void:
 		var icon := TextureRect.new()
 		icon.custom_minimum_size = Vector2(32, 32)
 		icon.texture = load("res://rookframe/ui/icons/" + str(definition.get("path", semantic_name + ".svg")))
+		icon.self_modulate = RookframeUiTokens.COLOR_PICTOGRAM
 		icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 		icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 		icon.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -144,7 +191,7 @@ func _populate_icon_gallery() -> void:
 func _populate_managed_surface() -> void:
 	var surface := %ManagedDemo
 	var header := TASK_HEADER_SCENE.instantiate()
-	header.set("eyebrow", "PACKAGE TASK")
+	header.set("eyebrow", "Package task")
 	header.set("title", "Review admitted records")
 	header.set("subtitle", "The header, one scrolling task body, and footer remain one retained tree.")
 	surface.call(&"get_header_slot").add_child(header)

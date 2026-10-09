@@ -60,3 +60,12 @@ the Tabler general-action registry. See the installed
 `domainPictograms` in `rookframe/ui/icons/manifest.json` for source links,
 authors, download URLs and content hashes. Preserve these credits in
 distributions; identify changes to adapted artwork.
+
+## Noto Serif regional companions
+
+Full Noto Serif JP, KR, SC and TC variable fonts from `google/fonts` revision
+`7085eb89a950e85db5b166b7a58d414544b4140c` are installed under
+`rookframe/ui/assets/fonts/noto-serif-{jp,kr,sc,tc}/`. Each directory retains
+its unmodified OFL.txt and METADATA.pb, including upstream author and source
+revision. They are redistributed under SIL Open Font License 1.1. Native font
+imports set language priority; source font bytes are unchanged.

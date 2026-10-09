@@ -5,7 +5,7 @@
 [sub_resource type="StyleBoxFlat" id="ValueRowSurface"]
 bg_color = Color(0, 0, 0, 0)
 border_width_bottom = 1
-border_color = Color(0.133333, 0.196078, 0.215686, 1)
+border_color = Color(0.243137, 0.262745, 0.274510, 1.0)
 
 [node name="KeyValueRow" type="PanelContainer"]
 layout_mode = 2
@@ -21,13 +21,13 @@ theme_override_constants/separation = 24
 unique_name_in_owner = true
 layout_mode = 2
 theme_type_variation = &"RookframeMeta"
-theme_override_font_sizes/font_size = 9
+theme_override_font_sizes/font_size = 18
 
 [node name="Value" type="Label" parent="Content"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 theme_type_variation = &"RookframeBody"
-theme_override_font_sizes/font_size = 10
+theme_override_font_sizes/font_size = 18
 horizontal_alignment = 2
 autowrap_mode = 2

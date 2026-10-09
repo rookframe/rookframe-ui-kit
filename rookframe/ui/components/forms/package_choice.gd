@@ -14,7 +14,7 @@ extends Button
 		detail_text = value
 		_refresh()
 
-@export var action_label := "ADD":
+@export var action_label := "Add":
 	set(value):
 		action_label = value
 		_refresh()
@@ -48,7 +48,7 @@ func _refresh() -> void:
 		detail_label.text = detail_text
 		detail_label.visible = not detail_text.is_empty()
 	if state_label != null:
-		state_label.text = "INCLUDED" if button_pressed else action_label
+		state_label.text = "Included" if button_pressed else action_label
 		state_label.theme_type_variation = &"RookframeStatus" if button_pressed else &"RookframeMeta"
 	accessibility_name = package_name
 	accessibility_description = ("Included. " if button_pressed else "Not included. ") + detail_text
