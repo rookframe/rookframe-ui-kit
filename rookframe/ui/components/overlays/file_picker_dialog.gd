@@ -244,7 +244,7 @@ func _sync_place_selection() -> void:
 			best_length = place_path.length()
 	if best_index >= 0:
 		%Places.select(best_index)
-		%CompactPlaces.select(best_index)
+	%CompactPlaces.select(best_index)
 
 
 func _refresh_entries() -> void:

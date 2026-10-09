@@ -112,7 +112,7 @@ mouse_filter = 2
 
 [node name="Glyph" type="Label" parent="Content/SelectedMarker"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.082353, 0.090196, 0.098039, 1.0)
+theme_override_colors/font_color = Color(0.905882, 0.905882, 0.866667, 1.0)
 theme_override_font_sizes/font_size = 18
 text = "✓"
 horizontal_alignment = 1
