@@ -8,7 +8,7 @@ polish.
 - Interactive targets are at least 44x44px. The primary task action is normally
   52px high.
 - Every keyboard/controller target uses native Godot focus. The Theme renders
-  a two-pixel cyan focus perimeter that is distinct from selected or pressed
+  a two-pixel light neutral focus perimeter that is distinct from selected or pressed
   state.
 - Scene-tree source order is focus order. Responsive components move the same
   retained Controls; they do not create separate wide and compact trees.

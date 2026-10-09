@@ -289,7 +289,7 @@ rules or merely inspects a recorded result.
 native keyboard focus. It returns false when the collection is invisible or
 the entry is absent.
 
-`framed_collection` is an optional authored presentation with a gold caption,
+`framed_collection` is an optional authored presentation with a copper caption,
 surface frame and persistent range, Previous, page number and Next footer.
 It reserves its footer on a single or empty page and retains native 44 px page
 actions. The default presentation and selection behavior stay the same.
@@ -348,7 +348,7 @@ and 48/152 px editor minimum heights. They inherit their consumer Theme.
 Their `compact` property applies the approved phone relationship: 44/64 px
 native editors, smaller label spacing and help retained in accessibility copy.
 
-The task Theme also provides TaskSection for gold active review tabs, and
+The task Theme also provides TaskSection for neutral active review tabs, and
 TaskAttribute, TaskFacts, TaskResult and TaskFormula with Compact variants for
 the approved landscape phone spacing. Consumers select native Theme variations;
 they do not rebuild or mutate StyleBoxes.

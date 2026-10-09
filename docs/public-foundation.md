@@ -152,7 +152,7 @@ compact search control already situated in a screen-authored toolbar.
 | Variation | Base type | Meaning |
 | --- | --- | --- |
 | `RookframePrimaryButton` | `Button` | Advances or commits the current task |
-| `RookframeGoldButton` | `Button` | Prominent warm commitment action within a staged workflow |
+| `RookframeGoldButton` | `Button` | Legacy name for the neutral filled commitment action within a staged workflow |
 | `RookframeSecondaryButton` | `Button` | Important alternative that does not advance the task |
 | `RookframeQuietButton` | `Button` | Compact reveal, retry, or row-local action |
 | `RookframeDangerButton` | `Button` | Destructive or abandoning action |
@@ -164,9 +164,9 @@ compact search control already situated in a screen-authored toolbar.
 | `RookframeDangerOutline` | `Button` | Low-emphasis destructive or abandoning action |
 | `RookframeTabButton` | `Button` | Changes a visible section without changing domain state |
 | `RookframeChoiceRow` | `Button` | Complete detailed or compact choice target |
-| `RookframeCircularAction` | `Button` | Circular icon action with brass normal edge, aqua hover/pressed, distinct outer focus ring, and muted disabled state |
-| `RookframeCompactAction` | `Button` | Intrinsic outlined action in a managed task; 11px display type and 18px horizontal padding |
-| `RookframeCompactActionTouch` | `Button` | Touch density of the same compact action; 10px display type and 16px horizontal padding |
+| `RookframeCircularAction` | `Button` | Circular icon action with neutral edges, brass pictogram, raised hover/pressed fill, distinct outer focus ring, and muted disabled state |
+| `RookframeCompactAction` | `Button` | Intrinsic outlined action in a managed task; 18px EB Garamond and 18px horizontal padding |
+| `RookframeCompactActionTouch` | `Button` | Touch density of the same compact action; 18px EB Garamond and 16px horizontal padding |
 
 Use native `Button`; these are Theme variations, not wrappers. Ordinary icon-
 only actions retain a semantic accessible name and at least a 44×44 interaction
