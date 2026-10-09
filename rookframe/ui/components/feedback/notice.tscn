@@ -17,6 +17,7 @@ layout_mode = 2
 theme_override_constants/separation = 12
 
 [node name="Icon" type="TextureRect" parent="Content"]
+self_modulate = Color(0.815686, 0.745098, 0.556863, 1)
 unique_name_in_owner = true
 custom_minimum_size = Vector2(28, 28)
 size_flags_vertical = 0

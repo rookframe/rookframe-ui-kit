@@ -1,7 +1,7 @@
 [gd_scene format=3]
 [ext_resource type="Script" path="res://rookframe/ui/components/forms/paginated_text_area.gd" id="script"]
 [sub_resource type="StyleBoxFlat" id="input"]
-bg_color = Color(0.133333, 0.152941, 0.164706, 1)
+bg_color = Color(0.137255, 0.156863, 0.168627, 1.0)
 border_color = Color(0.244353, 0.262784, 0.272745, 1)
 border_width_left = 1
 border_width_right = 1

@@ -73,7 +73,9 @@ func _reflow() -> void:
 			var count := (low + high) / 2
 			_measure.text = value.substr(start, count)
 			_measure.size = Vector2(width, 0)
-			if _measure.get_minimum_size().y <= height:
+			# Label omits trailing interline spacing; TextEdit reserves a full
+			# line box for every line, including the last. Use its native metrics.
+			if _measure.get_line_count() * _editor.get_line_height() <= height:
 				best = count
 				low = count + 1
 			else:

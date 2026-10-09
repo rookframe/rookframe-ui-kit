@@ -41,24 +41,7 @@ func configure(title: String, icon: Texture2D, pairs: Array[Dictionary], copy: S
 	_fit()
 
 func _fit() -> void:
-	var phone := get_viewport_rect().size.y <= 560
-	var tablet := get_viewport_rect().size.x <= 1150 and not phone
-	add_theme_constant_override("separation", 8 if phone else 12 if tablet else 20)
-	get_node(^"Content").add_theme_constant_override("separation", 4 if phone else 8 if tablet else 12)
-	get_node(^"Content/Heading/Title").add_theme_font_size_override("font_size", 15 if phone else 17 if tablet else 22)
-	get_node(^"Content/Heading/Icon").custom_minimum_size = Vector2(18, 18) if phone else Vector2(23, 23)
-	get_node(^"Content/Copy").add_theme_font_size_override("font_size", 11 if phone else 12 if tablet else 16)
-	for row in get_node(^"Content/Stats").get_children():
-		row.get_node(^"Label").add_theme_font_size_override("font_size", 12 if tablet else 16)
-		row.get_node(^"Value").add_theme_font_size_override("font_size", 18 if tablet else 20)
-	for row in get_node(^"Content/Rows").get_children():
-		for edge in ["top", "bottom"]:
-			row.get_node(^"Inset").add_theme_constant_override("margin_" + edge, 5 if phone else 9 if tablet else 14)
-		for label in [^"Inset/Row/Label", ^"Inset/Row/Value"]:
-			row.get_node(label).add_theme_font_size_override("font_size", 11 if phone else 12 if tablet else 16)
-
-	if silkbound:
-		_fit_silkbound()
+	_fit_silkbound()
 
 
 func _fit_silkbound() -> void:

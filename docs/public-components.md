@@ -162,12 +162,12 @@ progress remains native `ProgressBar`.
 | `structured_row.tscn` / `PanelContainer` | `variant = DATA`; `title = "Row identity"`; `detail = ""`; `value_text = ""`; `status_text = ""`; `leading_image = null`; `compact_width = 620.0`; variants `DATA`, `DETAIL`, `COMPACT_DETAIL`, `STACKED_DETAIL`, `SUMMARY`, `TABLE`, `HEADER`, `SELECTION_BANNER`, `CATEGORY`, `CATALOGUE`, `PORTRAIT`, `PENDING` | `layout_profile_changed(profile)`; `get_action_slot()`; `ActionSlot` | Context-neutral read-only row family with one stable trailing lane. Compact reflow retains content and focus order. Title/status remain textual; pending state is not color-only. Use `ChoiceRow`, not this scene, when the entire row must be selectable. |
 | `key_value_row.tscn` / `PanelContainer` | `key_text = "Key"`; `value_text = ""` | No signals or methods | Compact read-only fact with a visible key, trailing value, and divider. It receives no input; key and value are combined into its accessibility name and description. |
 | `action_row.tscn` / `Button` | `title = "Action"`; `description = "Supporting action detail"`; `action_label = "â€º"`; `tone = STANDARD`; native `disabled = false`; tones `STANDARD`, `DANGER` | Native `pressed` | Complete native button target for a compact navigation or management action. Title, supporting detail, and trailing action label remain visible; the root uses a secondary or danger semantic action style. Callers own policy and persistence. |
-| `action_link.tscn` / `Button` | `title = "Action"`; `title_lane_width = 150.0`; `title_font_size = 15`; native `disabled = false` | Native `pressed` | Complete quiet navigation target with a label lane, intentional gap, continuous trailing rule, and scene-authored arrow head. The rule never touches the label and meets the arrow base; callers own policy and connect `pressed`. |
-| `world_row.tscn` / `Button` | `title = "World"`; `detail_text = ""`; `selected = false`; native `disabled = false` | Native `pressed` | Selectable World record with a cyan diamond, textual identity/metadata, selected outline, and gold disclosure. The full root is the only target; callers own selection and navigation policy. |
+| `action_link.tscn` / `Button` | `title = "Action"`; `title_lane_width = 150.0`; `title_font_size = 20`; native `disabled = false` | Native `pressed` | Complete quiet navigation target with a label lane, intentional gap, continuous trailing rule, and scene-authored arrow head. The rule never touches the label and meets the arrow base; callers own policy and connect `pressed`. |
+| `world_row.tscn` / `Button` | `title = "World"`; `detail_text = ""`; `selected = false`; native `disabled = false` | Native `pressed` | Selectable World record with a brass marker, textual identity/metadata, neutral selection, and brass disclosure. The full root is the only target; callers own selection and navigation policy. |
 | `world_summary_card.tscn` / `VBoxContainer` | `facts_visible = true`; `actions_visible = false`; `kicker_text = "SELECTED WORLD"`; `privacy_text = "PRIVATE"`; `package_name = "Package"`; `detail_text = ""` | Native child `OpenWorld` and `WorldDetails` Buttons when actions are visible | Retained World identity, Package, availability, optional facts, and optional actions as one scene-authored relationship. Callers supply dynamic text/data and connect action Buttons; policy, persistence, and navigation remain outside the component. |
 | `disclosure_row.tscn` / `Button` | `title = "Action"`; `description = "Supporting action detail"`; `action_label = "â€º"`; `tone = STANDARD`; native `disabled = false`; tones `STANDARD`, `DANGER` | Native `pressed` | Plain settings-list action with textual title/detail, a scene-authored disclosure, and one bottom divider. The root is the only interactive target; callers own policy and connect `pressed`. |
-| `package_row.tscn` / `PanelContainer` | `package_name = "Package"`; `detail_text = ""`; `selected = false`; `locked = false`; `locked_state_label = "INCLUDED"` | No signals or methods | Read-only Package identity, role/version detail, marker, and status. `locked` represents an included required Package; application policy and persistence stay outside the component. |
-| `package_card.tscn` / `PanelContainer` | Same properties and states as `package_row.tscn`; `locked_state_label = "REQUIRED"` | No signals or methods | Detailed read-only Package card for wide task surfaces. It retains the compact Package row's identity, status, and accessibility behavior. |
+| `package_row.tscn` / `PanelContainer` | `package_name = "Package"`; `detail_text = ""`; `selected = false`; `locked = false`; `locked_state_label = "Included"` | No signals or methods | Read-only Package identity, role/version detail, marker, and status. `locked` represents an included required Package; application policy and persistence stay outside the component. |
+| `package_card.tscn` / `PanelContainer` | Same properties and states as `package_row.tscn`; `locked_state_label = "Required"` | No signals or methods | Detailed read-only Package card for wide task surfaces. It retains the compact Package row's identity, status, and accessibility behavior. |
 
 The result slot in `RollRow` remains empty before a result exists; do not add
 decorative punctuation. The state marker always names its state and uses a
@@ -289,7 +289,7 @@ rules or merely inspects a recorded result.
 native keyboard focus. It returns false when the collection is invisible or
 the entry is absent.
 
-`framed_collection` is an optional authored presentation with a gold caption,
+`framed_collection` is an optional authored presentation with a copper caption,
 surface frame and persistent range, Previous, page number and Next footer.
 It reserves its footer on a single or empty page and retains native 44 px page
 actions. The default presentation and selection behavior stay the same.
@@ -348,7 +348,7 @@ and 48/152 px editor minimum heights. They inherit their consumer Theme.
 Their `compact` property applies the approved phone relationship: 44/64 px
 native editors, smaller label spacing and help retained in accessibility copy.
 
-The task Theme also provides TaskSection for gold active review tabs, and
+The task Theme also provides TaskSection for neutral active review tabs, and
 TaskAttribute, TaskFacts, TaskResult and TaskFormula with Compact variants for
 the approved landscape phone spacing. Consumers select native Theme variations;
 they do not rebuild or mutate StyleBoxes.
@@ -480,9 +480,10 @@ native icon alongside the action text inside the button. Icon-only navigation
 buttons center their glyph; the footer has no redundant retention hint.
 
 `PaginatedChoices`, `PaginatedContent`, `SummaryBlock`, `TaskTextField` and
-`TaskTextArea` expose `silkbound = false`. Enable it in a Silkbound composition for
-the specimen's EB Garamond typography, neutral selection, brass icons and
-responsive spacing. Existing consumers retain their default presentation.
+`TaskTextArea` retain their serialized `silkbound = false` property for source
+compatibility. Typography, neutral states, brass icons and responsive spacing
+now use Silkbound in both modes; the flag is no longer a design-system opt-in.
+`PaginatedContent` still uses it to opt into its optional column divider.
 Silkbound task editors are 48px high for a single line and 152px for multiple
 lines (64px in the compact profile). Empty errors reserve no blank line; error
 copy still participates in native minimum-size measurement and accessibility.
@@ -495,3 +496,12 @@ and text lines visible. It does not add another panel fill.
 `theme/silkbound_line_height.gd` provides `apply(control, multiplier)` for
 specimen line boxes using stock `FontVariation` top/bottom spacing. It preserves
 the resolved font and size and gives each Control its own font variation.
+
+The file picker preserves its Window/signals and places/preview desktop layout.
+Below 1000px width or 600px height, an ordinary OptionButton exposes the same
+places; optional preview/help gives way to the file list. Navigation, search,
+selected filename, Cancel and Open remain visible. The popup is bounded by its
+parent viewport rather than forcing a 1120 × 800 window onto a phone.
+
+General record metadata is at least 18px; SearchField defaults to a 20px editor
+and ActionLink to a 20px title. Explicit consumer density overrides still apply.

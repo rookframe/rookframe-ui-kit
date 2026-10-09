@@ -1,0 +1,10 @@
+[gd_resource type="FontVariation" format=3]
+[ext_resource type="FontFile" path="res://rookframe/ui/assets/fonts/eb-garamond/prerendered/roman.res" id="font"]
+
+[ext_resource type="FontVariation" path="res://rookframe/ui/_internal/fonts/jp_600.tres" id="regional"]
+
+[resource]
+base_font = ExtResource("font")
+variation_opentype = {2003265652: 600.0}
+opentype_features = {1953396077: 1}
+fallbacks = Array[Font]([ExtResource("regional")])

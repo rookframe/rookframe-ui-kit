@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- Migrate the shared default and task Themes, tokens, forms, records, progress,
+  and managed/file-picker surfaces to Silkbound Ledger using stock Godot.
+- Complete native control states and regional serif font resources; retain all
+  legacy public font/frame paths.
+- Remove design-system opt-in from common task components, reconcile catalogue
+  coverage, and make notepad pagination use the editor's full native line box.
+
 - Document optional Catalogue search, exact release details, pagination and
   accountless acquisition composition with existing native controls. No public
   resource, Theme token, candidate tag or SDK boundary changes.

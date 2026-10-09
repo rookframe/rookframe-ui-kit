@@ -35,7 +35,7 @@ autowrap_mode = 2
 horizontal_alignment = 1
 vertical_alignment = 1
 theme_type_variation = &"RookframeMeta"
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 18
 [node name="Preview" type="Control" parent="Content/Stage"]
 layout_mode = 1
 anchors_preset = 15
@@ -51,13 +51,13 @@ layout_mode = 2
 mouse_filter = 2
 autowrap_mode = 2
 theme_type_variation = &"RookframeBody"
-theme_override_font_sizes/font_size = 14
+theme_override_font_sizes/font_size = 18
 [node name="Package" type="Label" parent="Content/Copy"]
 layout_mode = 2
 mouse_filter = 2
 autowrap_mode = 2
 theme_type_variation = &"RookframeMeta"
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 18
 [node name="Selected" type="Label" parent="."]
 visible = false
 layout_mode = 1

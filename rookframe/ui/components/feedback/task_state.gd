@@ -73,11 +73,12 @@ func _refresh() -> void:
 	var description_label := get_node_or_null(^"Content/Description") as Label
 	if icon != null:
 		icon.texture = ICONS[state]
+		icon.self_modulate = get_theme_color(&"font_color", TEXT_VARIATIONS[state]) if state in [State.SUCCESS, State.ERROR] else RookframeUiTokens.COLOR_PICTOGRAM
 		icon.accessibility_name = "%s state" % STATE_NAMES[state]
 		if state != State.LOADING:
 			icon.rotation = 0.0
 	if state_label != null:
-		state_label.text = STATE_NAMES[state].to_upper()
+		state_label.text = STATE_NAMES[state]
 		state_label.theme_type_variation = TEXT_VARIATIONS[state]
 	if title_label != null:
 		title_label.text = title

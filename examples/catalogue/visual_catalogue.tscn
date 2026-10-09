@@ -71,6 +71,7 @@ layout_mode = 2
 theme_override_constants/separation = 16
 
 [node name="Mark" type="TextureRect" parent="Canvas/Page/Stack/Header"]
+self_modulate = Color(0.815686, 0.745098, 0.556863, 1)
 custom_minimum_size = Vector2(44, 44)
 layout_mode = 2
 texture = ExtResource("21_rook")
@@ -85,7 +86,7 @@ theme_override_constants/separation = 2
 [node name="Title" type="Label" parent="Canvas/Page/Stack/Header/Copy"]
 layout_mode = 2
 theme_type_variation = &"RookframeTitle"
-text = "Rookframe UI Kit catalogue"
+text = "Silkbound Ledger · UI Kit catalogue"
 
 [node name="Subtitle" type="Label" parent="Canvas/Page/Stack/Header/Copy"]
 layout_mode = 2
@@ -118,7 +119,7 @@ theme_override_constants/separation = 16
 [node name="Heading" type="Label" parent="Canvas/Page/Stack/Tabs/Native/Margin/Content"]
 layout_mode = 2
 theme_type_variation = &"RookframeHeading"
-text = "NATIVE GODOT + ROOKFRAME THEME"
+text = "Native Godot + Rookframe theme"
 
 [node name="Body" type="Label" parent="Canvas/Page/Stack/Tabs/Native/Margin/Content"]
 layout_mode = 2
@@ -194,15 +195,15 @@ accessibility_name = "Disabled circular action example"
 custom_minimum_size = Vector2(0, 44)
 layout_mode = 2
 theme_type_variation = &"RookframeCompactAction"
-text = "COMPACT ACTION"
+text = "Compact action"
 
 [node name="CompactActionTouch" type="Button" parent="Canvas/Page/Stack/Tabs/Native/Margin/Content/Buttons"]
 custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
 theme_type_variation = &"RookframeCompactActionTouch"
-text = "TOUCH ACTION"
+text = "Touch action"
 
-[node name="SemanticSurfaces" type="HBoxContainer" parent="Canvas/Page/Stack/Tabs/Native/Margin/Content"]
+[node name="SemanticSurfaces" type="BoxContainer" parent="Canvas/Page/Stack/Tabs/Native/Margin/Content"]
 layout_mode = 2
 theme_override_constants/separation = 12
 
@@ -273,7 +274,7 @@ layout_mode = 2
 placeholder_text = "Native multiline editor with constrained, wrapping copy"
 wrap_mode = 1
 
-[node name="Dense" type="HBoxContainer" parent="Canvas/Page/Stack/Tabs/Native/Margin/Content"]
+[node name="Dense" type="BoxContainer" parent="Canvas/Page/Stack/Tabs/Native/Margin/Content"]
 layout_mode = 2
 theme_override_constants/separation = 16
 
@@ -363,7 +364,7 @@ theme_override_constants/separation = 16
 [node name="Heading" type="Label" parent="Canvas/Page/Stack/Tabs/Forms/Margin/Content"]
 layout_mode = 2
 theme_type_variation = &"RookframeHeading"
-text = "FORMS, SEARCH, AND CHOICE"
+text = "Forms, search, and choice"
 
 [node name="TextField" parent="Canvas/Page/Stack/Tabs/Forms/Margin/Content" instance=ExtResource("3_text_field")]
 layout_mode = 2
@@ -448,12 +449,12 @@ theme_override_constants/separation = 16
 [node name="Heading" type="Label" parent="Canvas/Page/Stack/Tabs/Layout/Margin/Content"]
 layout_mode = 2
 theme_type_variation = &"RookframeHeading"
-text = "RESPONSIVE LAYOUT AND NAVIGATION RELATIONSHIPS"
+text = "Responsive layout and navigation relationships"
 
 [node name="CompactRouteHeading" parent="Canvas/Page/Stack/Tabs/Layout/Margin/Content" instance=ExtResource("28_compact_heading")]
 layout_mode = 2
-kicker_text = "WORLD SELECT"
-title_text = "YOUR WORLDS"
+kicker_text = "World select"
+title_text = "Your worlds"
 detail_text = "Compact route hierarchy stays together in constrained surfaces."
 
 [node name="ResponsiveSplit" parent="Canvas/Page/Stack/Tabs/Layout/Margin/Content" instance=ExtResource("8_split")]
@@ -504,7 +505,7 @@ theme_override_constants/separation = 12
 [node name="Heading" type="Label" parent="Canvas/Page/Stack/Tabs/Feedback/Margin/Content"]
 layout_mode = 2
 theme_type_variation = &"RookframeHeading"
-text = "FEEDBACK AND LIFECYCLE"
+text = "Feedback and lifecycle"
 
 [node name="Info" parent="Canvas/Page/Stack/Tabs/Feedback/Margin/Content" instance=ExtResource("13_notice")]
 layout_mode = 2
@@ -561,7 +562,7 @@ description = "Recovery actions belong in the provided action slot."
 [node name="ProgressHeading" type="Label" parent="Canvas/Page/Stack/Tabs/Feedback/Margin/Content"]
 layout_mode = 2
 theme_type_variation = &"RookframeLabel"
-text = "CHARACTER CREATION WIZARD"
+text = "Character creation wizard"
 
 [node name="Wizard" type="PanelContainer" parent="Canvas/Page/Stack/Tabs/Feedback/Margin/Content"]
 layout_mode = 2
@@ -583,7 +584,7 @@ theme_override_constants/separation = 4
 [node name="Eyebrow" type="Label" parent="Canvas/Page/Stack/Tabs/Feedback/Margin/Content/Wizard/Content/Header/Copy"]
 layout_mode = 2
 theme_type_variation = &"RookframeLabel"
-text = "NEW CHARACTER"
+text = "New character"
 
 [node name="Title" type="Label" parent="Canvas/Page/Stack/Tabs/Feedback/Margin/Content/Wizard/Content/Header/Copy"]
 layout_mode = 2
@@ -619,7 +620,7 @@ theme_override_constants/separation = 8
 [node name="Eyebrow" type="Label" parent="Canvas/Page/Stack/Tabs/Feedback/Margin/Content/Wizard/Content/CurrentStep/Content"]
 layout_mode = 2
 theme_type_variation = &"RookframeLabel"
-text = "CURRENT STEP · 3 OF 6"
+text = "Current step · 3 of 6"
 
 [node name="Title" type="Label" parent="Canvas/Page/Stack/Tabs/Feedback/Margin/Content/Wizard/Content/CurrentStep/Content"]
 layout_mode = 2
@@ -669,7 +670,7 @@ theme_override_constants/separation = 12
 [node name="Heading" type="Label" parent="Canvas/Page/Stack/Tabs/Data/Margin/Content"]
 layout_mode = 2
 theme_type_variation = &"RookframeHeading"
-text = "STRUCTURED DATA DISPLAY"
+text = "Structured data display"
 
 [node name="MetricStrip" parent="Canvas/Page/Stack/Tabs/Data/Margin/Content" instance=ExtResource("16_metric_strip")]
 unique_name_in_owner = true
@@ -680,27 +681,27 @@ layout_mode = 2
 
 [node name="Compatibility" parent="Canvas/Page/Stack/Tabs/Data/Margin/Content/Badges" instance=ExtResource("17_badge")]
 layout_mode = 2
-label_text = "GODOT 4.7"
+label_text = "Godot 4.7"
 icon = ExtResource("22_info")
 
 [node name="Warning" parent="Canvas/Page/Stack/Tabs/Data/Margin/Content/Badges" instance=ExtResource("17_badge")]
 layout_mode = 2
-label_text = "REVIEW NEEDED"
+label_text = "Review needed"
 icon = ExtResource("23_warning")
 
 [node name="KeyValueRow" parent="Canvas/Page/Stack/Tabs/Data/Margin/Content" instance=ExtResource("30_key_value")]
 layout_mode = 2
-key_text = "WORLD ADDRESS"
+key_text = "World address"
 value_text = "f13a9c31"
 
 [node name="ActionRow" parent="Canvas/Page/Stack/Tabs/Data/Margin/Content" instance=ExtResource("34_action_row")]
 layout_mode = 2
-title = "WORLD SETTINGS"
+title = "World settings"
 description = "Open a compact management action"
 
 [node name="ActionLink" parent="Canvas/Page/Stack/Tabs/Data/Margin/Content" instance=ExtResource("35_action_link")]
 layout_mode = 2
-title = "WORLD SETTINGS"
+title = "World settings"
 
 [node name="PackageRow" parent="Canvas/Page/Stack/Tabs/Data/Margin/Content" instance=ExtResource("31_package_row")]
 layout_mode = 2
@@ -850,7 +851,7 @@ theme_override_constants/separation = 12
 [node name="Heading" type="Label" parent="Canvas/Page/Stack/Tabs/Icons/Margin/Content"]
 layout_mode = 2
 theme_type_variation = &"RookframeHeading"
-text = "62 SEMANTIC ICON ROLES"
+text = "62 semantic icon roles"
 
 [node name="Body" type="Label" parent="Canvas/Page/Stack/Tabs/Icons/Margin/Content"]
 layout_mode = 2
@@ -883,7 +884,7 @@ theme_override_constants/separation = 12
 [node name="Heading" type="Label" parent="Canvas/Page/Stack/Tabs/Managed/Columns/Explanation"]
 layout_mode = 2
 theme_type_variation = &"RookframeHeading"
-text = "MANAGED SURFACE"
+text = "Managed surface"
 
 [node name="Body" type="Label" parent="Canvas/Page/Stack/Tabs/Managed/Columns/Explanation"]
 layout_mode = 2
@@ -923,7 +924,7 @@ theme_override_constants/separation = 12
 [node name="Heading" type="Label" parent="Canvas/Page/Stack/Tabs/Shell/Margin/Content"]
 layout_mode = 2
 theme_type_variation = &"RookframeHeading"
-text = "SHELL AND MANAGED TASK ROLES"
+text = "Shell and managed task roles"
 
 [node name="Instructions" type="Label" parent="Canvas/Page/Stack/Tabs/Shell/Margin/Content"]
 layout_mode = 2

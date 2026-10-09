@@ -1,13 +1,19 @@
-[gd_scene load_steps=8 format=3 uid="uid://vhwxjcowiuacj"]
+[gd_scene format=3 uid="uid://vhwxjcowiuacj"]
 
 [ext_resource type="Script" path="res://rookframe/ui/components/surfaces/managed_surface.gd" id="1_script"]
 [ext_resource type="Script" path="res://rookframe/ui/components/surfaces/managed_surface_state.gd" id="2_state_script"]
 [ext_resource type="Texture2D" path="res://rookframe/ui/icons/pop-out.svg" id="3_float"]
 [ext_resource type="Texture2D" path="res://rookframe/ui/icons/minimize.svg" id="4_minimize"]
 [ext_resource type="Texture2D" path="res://rookframe/ui/icons/close.svg" id="5_close"]
+[ext_resource type="Texture2D" path="res://rookframe/ui/assets/silkbound-ledger/linen.png" id="linen"]
+
+
+[ext_resource type="StyleBox" path="res://rookframe/ui/theme/silkbound_plain.tres" id="plain"]
+[ext_resource type="StyleBox" path="res://rookframe/ui/theme/silkbound_row.tres" id="rule"]
 
 [sub_resource type="Resource" id="Resource_state"]
 script = ExtResource("2_state_script")
+
 
 [node name="ManagedSurface" type="PanelContainer"]
 custom_minimum_size = Vector2(360, 420)
@@ -19,11 +25,19 @@ theme_type_variation = &"RookframeManagedSurface"
 script = ExtResource("1_script")
 state = SubResource("Resource_state")
 
+[node name="Linen" type="TextureRect" parent="."]
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("linen")
+expand_mode = 1
+stretch_mode = 1
+
 [node name="Sections" type="VBoxContainer" parent="."]
 layout_mode = 2
 theme_override_constants/separation = 0
 
 [node name="Chrome" type="PanelContainer" parent="Sections"]
+theme_override_styles/panel = ExtResource("rule")
 custom_minimum_size = Vector2(0, 52)
 layout_mode = 2
 theme_type_variation = &"RookframeInsetSurface"
@@ -68,6 +82,7 @@ tooltip_text = "Close surface"
 accessibility_name = "Close surface"
 
 [node name="Header" type="PanelContainer" parent="Sections"]
+theme_override_styles/panel = ExtResource("rule")
 layout_mode = 2
 theme_type_variation = &"RookframeSurface"
 
@@ -77,6 +92,7 @@ layout_mode = 2
 theme_override_constants/separation = 8
 
 [node name="BodyRegion" type="PanelContainer" parent="Sections"]
+theme_override_styles/panel = ExtResource("plain")
 layout_mode = 2
 size_flags_vertical = 3
 theme_type_variation = &"RookframeCanvas"
@@ -101,6 +117,7 @@ size_flags_horizontal = 3
 theme_override_constants/separation = 12
 
 [node name="Footer" type="PanelContainer" parent="Sections"]
+theme_override_styles/panel = ExtResource("rule")
 layout_mode = 2
 theme_type_variation = &"RookframeInsetSurface"
 

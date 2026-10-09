@@ -12,13 +12,13 @@ The filesystem is authoritative: normal resources under
 | `catalogue.json` | Stable path and schema version | Machine-readable Theme and public component contract index |
 | `components/**/*.tscn` | Scene UID in the [component reference](public-components.md#public-identities) | Editor-authored relationship that Godot does not provide as one built-in node |
 | `components/**/*.gd` | Script UID in the [component reference](public-components.md#public-identities) | Small behavior required by its associated public relationship |
-| `assets/fonts/*.ttf` | Path and import UID below | UI and display typography assigned by the shared Theme |
-| `assets/frames/*.png` | Semantic path and import UID below | Nine-slice managed surface, section, primary/secondary action, and focus frames |
+| `assets/fonts/*.ttf` | Path and import UID below | Legacy font assets retained for source compatibility |
+| `assets/frames/*.png` | Semantic path and import UID below | Legacy nine-slice assets retained for source compatibility |
 | `icons/<semantic-name>.svg` | Path and import UID in the [semantic icon reference](semantic-icons.md) | Stable, context-neutral interface pictogram |
 | `icons/compass_rose.svg` | `uid://beea526jspe3i` | Rookframe-owned decorative navigation motif; it is non-semantic and never the only carrier of status, meaning, or an action label |
 | `icons/manifest.json` | Stable path | Ordered semantic registry and upstream provenance |
 
-The two font license texts under `assets/fonts/` and the Tabler license at
+All font license texts under `assets/fonts/` and the Tabler license at
 `icons/LICENSE` are also public installed resources. Preserve them whenever
 redistributing the subtree.
 
@@ -26,14 +26,14 @@ redistributing the subtree.
 
 | Resource | Import UID | Purpose and composition |
 | --- | --- | --- |
-| `assets/fonts/Inter-VariableFont_opsz,wght.ttf` | `uid://cje80i18uults` | Readable copy, values, fields, and actions; assigned by the shared Theme rather than per-screen overrides |
-| `assets/fonts/Exo2-VariableFont_wght.ttf` | `uid://14n2hjuakwcl` | Condensed managed hierarchy for titles and headings; use through the documented text variations |
+| `assets/fonts/Inter-VariableFont_opsz,wght.ttf` | `uid://cje80i18uults` | Legacy face; retained at its public path, no longer assigned by the default Theme |
+| `assets/fonts/Exo2-VariableFont_wght.ttf` | `uid://14n2hjuakwcl` | Legacy face; retained at its public path, no longer assigned by the default Theme |
 
 ### Frame identities
 
-These are Theme implementation assets with public identities. Compose them by
-using the shared Theme or corresponding semantic variation; do not assign them
-directly to build a consumer-specific style family.
+These legacy assets keep their public identities for existing consumers. The
+default Theme now uses native square StyleBoxFlat controls and 6px copper owning
+rules. New compositions use semantic variations, not these old frame textures.
 
 | Resource | Import UID | Purpose |
 | --- | --- | --- |
@@ -55,7 +55,12 @@ express layout or state through Theme items alone. Godot serializes StyleBox
 values directly and cannot reference script constants from a `.tres`, so some
 exact colors and geometry appear in both files deliberately.
 
-When an exact value changes, maintainers update both representations in one
+The three Theme resources share palette and native control roles.
+`rookframe_theme.tres` is the general profile; `silkbound_theme.tres` and the
+retained `fullscreen_task_theme.tres` path supply the task/sheet density profile.
+They are authored native resources, with no runtime theme engine or picker.
+
+When an exact value changes, maintainers update all three Themes and tokens in one
 change and review the visual catalogue for drift. The semantic names and
 purposes are the compatibility contract; exact visual values may change within
 a SemVer major line. The manual review seam is intentionally not an automated
@@ -126,11 +131,11 @@ a variation only for its current color or font is unsupported.
 
 Text roles express meaning, not a request for one color or font size. Their
 exact visual values may change compatibly while the role's purpose remains.
-The shared Theme uses Exo 2 extra-bold for `RookframeTitle` and
-`RookframeSubtitle`, Exo 2 bold for `RookframeHeading`, Exo 2 semibold for
-`RookframeLabel`, and Inter semibold for `RookframeIdentity` and
-`RookframeBadgeText`; callers may adjust a role's size only when their
-authored layout requires the documented hierarchy at a different density.
+The default Theme uses EB Garamond regular, medium and semibold, with real Latin
+italics and tabular figures. General roles use 40px title, 30px subtitle/value,
+24px heading, 22px identity, 21px body, 20px label/input/action and 18px meta/status.
+The task/sheet Theme keeps its explicitly authored responsive density. Callers
+may adjust size when their layout requires that documented hierarchy.
 
 ### Fields
 
@@ -147,7 +152,7 @@ compact search control already situated in a screen-authored toolbar.
 | Variation | Base type | Meaning |
 | --- | --- | --- |
 | `RookframePrimaryButton` | `Button` | Advances or commits the current task |
-| `RookframeGoldButton` | `Button` | Prominent warm commitment action within a staged workflow |
+| `RookframeGoldButton` | `Button` | Legacy name for the neutral filled commitment action within a staged workflow |
 | `RookframeSecondaryButton` | `Button` | Important alternative that does not advance the task |
 | `RookframeQuietButton` | `Button` | Compact reveal, retry, or row-local action |
 | `RookframeDangerButton` | `Button` | Destructive or abandoning action |
@@ -159,9 +164,9 @@ compact search control already situated in a screen-authored toolbar.
 | `RookframeDangerOutline` | `Button` | Low-emphasis destructive or abandoning action |
 | `RookframeTabButton` | `Button` | Changes a visible section without changing domain state |
 | `RookframeChoiceRow` | `Button` | Complete detailed or compact choice target |
-| `RookframeCircularAction` | `Button` | Circular icon action with brass normal edge, aqua hover/pressed, distinct outer focus ring, and muted disabled state |
-| `RookframeCompactAction` | `Button` | Intrinsic outlined action in a managed task; 11px display type and 18px horizontal padding |
-| `RookframeCompactActionTouch` | `Button` | Touch density of the same compact action; 10px display type and 16px horizontal padding |
+| `RookframeCircularAction` | `Button` | Circular icon action with neutral edges, brass pictogram, raised hover/pressed fill, distinct outer focus ring, and muted disabled state |
+| `RookframeCompactAction` | `Button` | Intrinsic outlined action in a managed task; 18px EB Garamond and 18px horizontal padding |
+| `RookframeCompactActionTouch` | `Button` | Touch density of the same compact action; 18px EB Garamond and 16px horizontal padding |
 
 Use native `Button`; these are Theme variations, not wrappers. Ordinary icon-
 only actions retain a semantic accessible name and at least a 44×44 interaction
@@ -214,3 +219,38 @@ public paths and UIDs, variation names and meanings, and documented observable
 behavior remain stable. Exact visual values and `_internal/` implementation may
 change compatibly. Direct Godot API use is outside Rookframe's compatibility
 guarantee and remains part of a Package Publisher's Rookframe Version judgment.
+
+## Regional typography
+
+`theme/silkbound_{regular,medium,semibold,italic}.tres` uses EB Garamond first.
+Full licensed Noto Serif JP/KR/SC/TC companions are installed with the kit.
+For text with a known regional locale, assign the corresponding native Font
+resource and set the Control's `language` property:
+
+```gdscript
+label.language = "zh_TW"
+label.add_theme_font_override("font",
+    preload("res://rookframe/ui/theme/locales/zh_TW_regular.tres"))
+```
+
+The supported locale resource prefixes are `ja`, `ko`, `zh_CN` (also use for
+`zh_Hans`/`zh_SG`) and `zh_TW` (also use for `zh_Hant`). Each has `regular`,
+`medium`, `semibold` and `italic` variants. Latin stays EB Garamond; CJK uses
+the regional upright serif companion at the matching weight. There is no
+synthetic CJK italic. Applications may use stock resource localization remaps
+for a uniform application locale, or explicit font assignments for mixed locales.
+
+Godot 4.7's fallback priority considers the base language, so `language` alone
+cannot choose between SC and TC. The general fallback chain recognizes Japanese,
+Korean and default Chinese; use the named regional resources for Chinese regional
+forms. Do not claim Traditional Chinese support from the default chain. Other
+scripts and Hong Kong forms need an appropriate companion and native review.
+
+## Silkbound surface grammar
+
+Owning surfaces use ink, a single faint linen layer, and 6px copper top/bottom
+bands. Interior rows and sections use neutral rules. Pictograms are brass, counts
+are copper, selection is neutral, danger is coral and success is muted green.
+Selected/primary light fills use ink foregrounds; selected record rows use raised
+fill and a left rule. Keep focus, disabled, hover and error states distinct.
+The ribbon, rule, pictogram, count and ornament token roles remain independent.

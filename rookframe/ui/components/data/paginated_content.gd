@@ -90,7 +90,7 @@ func _fit() -> void:
 	_pager.alignment = BoxContainer.ALIGNMENT_CENTER if always_show_pager else BoxContainer.ALIGNMENT_BEGIN
 	_range.size_flags_horizontal = 0 if always_show_pager else Control.SIZE_EXPAND_FILL
 	_range.custom_minimum_size.x = 54 if always_show_pager else 0
-	_range.add_theme_font_size_override("font_size", 15 if silkbound and get_viewport_rect().size.y <= 560 else 17 if silkbound else 14 if always_show_pager else 12)
+	_range.add_theme_font_size_override("font_size", 15 if get_viewport_rect().size.y <= 560 else 18)
 	if silkbound:
 		_range.add_theme_color_override("font_color", Color("aebabe"))
 		for button in [_previous, _next]:

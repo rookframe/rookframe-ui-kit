@@ -36,7 +36,7 @@ size_flags_vertical = 4
 expand_mode = 1
 stretch_mode = 5
 mouse_filter = 2
-self_modulate = Color(0.568627, 0.6, 0.603922, 1)
+self_modulate = Color(0.682353, 0.729412, 0.745098, 1)
 
 [node name="Copy" type="VBoxContainer" parent="Inset/Row"]
 layout_mode = 2
@@ -49,7 +49,7 @@ mouse_filter = 2
 layout_mode = 2
 text = ""
 theme_override_font_sizes/font_size = 20
-theme_override_colors/font_color = Color(0.85098, 0.831373, 0.819608, 1)
+theme_override_colors/font_color = Color(0.905882, 0.905882, 0.866667, 1)
 theme_override_fonts/font = ExtResource("display")
 text_overrun_behavior = 3
 
@@ -57,7 +57,7 @@ text_overrun_behavior = 3
 layout_mode = 2
 text = ""
 theme_override_font_sizes/font_size = 12
-theme_override_colors/font_color = Color(0.568627, 0.6, 0.603922, 1)
+theme_override_colors/font_color = Color(0.682353, 0.729412, 0.745098, 1)
 text_overrun_behavior = 3
 
 [node name="Value" type="Label" parent="Inset/Row"]
@@ -67,5 +67,5 @@ text_overrun_behavior = 3
 horizontal_alignment = 2
 text = ""
 theme_override_font_sizes/font_size = 20
-theme_override_colors/font_color = Color(0.266667, 0.913725, 0.913725, 1)
+theme_override_colors/font_color = Color(0.905882, 0.905882, 0.866667, 1)
 theme_override_fonts/font = ExtResource("display")

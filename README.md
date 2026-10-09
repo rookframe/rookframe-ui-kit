@@ -1,7 +1,7 @@
 # Rookframe UI Kit
 
 The canonical, public source of Rookframe's native-first Godot UI Kit. It
-provides one shared Theme, semantic assets, and—where Godot does not already
+provides a shared Silkbound Ledger Theme, semantic assets, and—where Godot does not already
 own the behavior—small reusable scene relationships for Rookframe Package
 Publishers and Rookframe applications.
 
@@ -49,7 +49,7 @@ extends "res://addons/gd-plug/plug.gd"
 
 func _plugging() -> void:
 	plug("rookframe/rookframe-ui-kit", {
-		"commit": "1fe5bdb21d07dc06d407362eae4b3570cdcf16bf",
+		"commit": "839da122c44a231a70cc608a9fc121514fe64aa3",
 		"include": ["rookframe/ui"],
 	})
 ```
@@ -107,7 +107,7 @@ Open this repository as a Godot 4.7 project or run it with the pinned toolchain:
 
 The project opens the complete catalogue at
 `examples/catalogue/visual_catalogue.tscn`. Its Native, Forms, Layout,
-Feedback, Data, Icons, and Managed tabs are manual visual and interaction
+Feedback, Data, Icons, Managed, and Shell tabs are manual visual and interaction
 evidence, not an automated validation suite or release gate.
 
 ## License
