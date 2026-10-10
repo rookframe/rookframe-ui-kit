@@ -1,7 +1,5 @@
 [gd_resource type="Theme" format=3]
 
-[ext_resource type="Font" path="res://rookframe/ui/theme/silkbound_regular.tres" id="1_inter"]
-[ext_resource type="Font" path="res://rookframe/ui/theme/silkbound_regular.tres" id="2_exo"]
 [ext_resource type="Texture2D" path="res://rookframe/ui/icons/close.svg" id="12_close"]
 [ext_resource type="Texture2D" path="res://rookframe/ui/icons/search.svg" id="13_search"]
 [ext_resource type="Texture2D" path="res://rookframe/ui/icons/chevron-left.svg" id="14_previous"]
@@ -10,13 +8,8 @@
 [ext_resource type="Texture2D" path="res://rookframe/ui/assets/controls/checkbox-unchecked.svg" id="checkbox-unchecked"]
 [ext_resource type="Texture2D" path="res://rookframe/ui/assets/controls/checkbox-checked-disabled.svg" id="checkbox-checked-disabled"]
 [ext_resource type="Texture2D" path="res://rookframe/ui/assets/controls/checkbox-unchecked-disabled.svg" id="checkbox-unchecked-disabled"]
-[ext_resource type="FontVariation" path="res://rookframe/ui/theme/silkbound_regular.tres" id="silk_ui"]
-[ext_resource type="FontVariation" path="res://rookframe/ui/theme/silkbound_medium.tres" id="silk_display"]
-[ext_resource type="FontVariation" path="res://rookframe/ui/theme/silkbound_medium.tres" id="silk_action"]
 [ext_resource type="FontFile" path="res://rookframe/ui/assets/fonts/eb-garamond/prerendered/roman.res" id="silk_garamond"]
 [ext_resource type="FontFile" path="res://rookframe/ui/assets/fonts/eb-garamond/prerendered/ink.res" id="silk_garamond_ink"]
-
-
 [ext_resource type="Texture2D" path="res://rookframe/ui/_internal/assets/controls/radio-checked_disabled.svg" id="control_radio-checked_disabled"]
 [ext_resource type="Texture2D" path="res://rookframe/ui/_internal/assets/controls/slider-highlight.svg" id="control_slider-highlight"]
 [ext_resource type="Texture2D" path="res://rookframe/ui/_internal/assets/controls/radio-unchecked_disabled.svg" id="control_radio-unchecked_disabled"]
@@ -28,21 +21,69 @@
 [ext_resource type="Texture2D" path="res://rookframe/ui/_internal/assets/controls/radio-checked.svg" id="control_radio-checked"]
 [ext_resource type="Texture2D" path="res://rookframe/ui/_internal/assets/controls/switch-on_disabled.svg" id="control_switch-on_disabled"]
 [ext_resource type="Texture2D" path="res://rookframe/ui/_internal/assets/controls/radio-unchecked.svg" id="control_radio-unchecked"]
+[ext_resource type="FontFile" path="res://rookframe/ui/assets/fonts/noto-serif-jp/NotoSerifJP[wght].ttf" id="font_NotoSerifJP_wght_"]
+[ext_resource type="FontFile" path="res://rookframe/ui/assets/fonts/noto-serif-kr/NotoSerifKR[wght].ttf" id="font_NotoSerifKR_wght_"]
+[ext_resource type="FontFile" path="res://rookframe/ui/assets/fonts/noto-serif-sc/NotoSerifSC[wght].ttf" id="font_NotoSerifSC_wght_"]
+[ext_resource type="FontFile" path="res://rookframe/ui/assets/fonts/noto-serif-tc/NotoSerifTC[wght].ttf" id="font_NotoSerifTC_wght_"]
+
+[sub_resource type="FontVariation" id="Font_jp_400"]
+base_font = ExtResource("font_NotoSerifJP_wght_")
+variation_opentype = {2003265652: 400.0}
+
+[sub_resource type="FontVariation" id="Font_kr_400"]
+base_font = ExtResource("font_NotoSerifKR_wght_")
+variation_opentype = {2003265652: 400.0}
+
+[sub_resource type="FontVariation" id="Font_sc_400"]
+base_font = ExtResource("font_NotoSerifSC_wght_")
+variation_opentype = {2003265652: 400.0}
+
+[sub_resource type="FontVariation" id="Font_tc_400"]
+base_font = ExtResource("font_NotoSerifTC_wght_")
+variation_opentype = {2003265652: 400.0}
+
+[sub_resource type="FontVariation" id="Font_silkbound_regular"]
+base_font = ExtResource("silk_garamond")
+variation_opentype = {2003265652: 400.0}
+opentype_features = {1953396077: 1}
+fallbacks = Array[Font]([SubResource("Font_jp_400"), SubResource("Font_kr_400"), SubResource("Font_sc_400"), SubResource("Font_tc_400")])
+
+[sub_resource type="FontVariation" id="Font_jp_500"]
+base_font = ExtResource("font_NotoSerifJP_wght_")
+variation_opentype = {2003265652: 500.0}
+
+[sub_resource type="FontVariation" id="Font_kr_500"]
+base_font = ExtResource("font_NotoSerifKR_wght_")
+variation_opentype = {2003265652: 500.0}
+
+[sub_resource type="FontVariation" id="Font_sc_500"]
+base_font = ExtResource("font_NotoSerifSC_wght_")
+variation_opentype = {2003265652: 500.0}
+
+[sub_resource type="FontVariation" id="Font_tc_500"]
+base_font = ExtResource("font_NotoSerifTC_wght_")
+variation_opentype = {2003265652: 500.0}
+
+[sub_resource type="FontVariation" id="Font_silkbound_medium"]
+base_font = ExtResource("silk_garamond")
+variation_opentype = {2003265652: 500.0}
+opentype_features = {1953396077: 1}
+fallbacks = Array[Font]([SubResource("Font_jp_500"), SubResource("Font_kr_500"), SubResource("Font_sc_500"), SubResource("Font_tc_500")])
 
 [sub_resource type="FontVariation" id="DisplayExtraBold"]
-base_font = ExtResource("2_exo")
+base_font = SubResource("Font_silkbound_regular")
 variation_opentype = {"wght": 500.0}
 
 [sub_resource type="FontVariation" id="DisplayBold"]
-base_font = ExtResource("2_exo")
+base_font = SubResource("Font_silkbound_regular")
 variation_opentype = {"wght": 500.0}
 
 [sub_resource type="FontVariation" id="DisplaySemiBold"]
-base_font = ExtResource("2_exo")
+base_font = SubResource("Font_silkbound_regular")
 variation_opentype = {"wght": 500.0}
 
 [sub_resource type="FontVariation" id="UiSemiBold"]
-base_font = ExtResource("1_inter")
+base_font = SubResource("Font_silkbound_regular")
 variation_opentype = {"wght": 500.0}
 
 [sub_resource type="StyleBoxFlat" id="Canvas"]
@@ -880,7 +921,7 @@ border_width_bottom = 1
 bg_color = Color(0.082353, 0.090196, 0.098039, 0)
 border_color = Color(0.905882, 0.905882, 0.866667, 1)
 [sub_resource type="FontVariation" id="CompactActionDisplayBold"]
-base_font = ExtResource("2_exo")
+base_font = SubResource("Font_silkbound_regular")
 variation_opentype = {"wght": 500.0}
 
 [sub_resource type="StyleBoxFlat" id="CircularActionNormal"]
@@ -1308,7 +1349,7 @@ content_margin_top = 2.0
 content_margin_bottom = 2.0
 
 [sub_resource type="FontVariation" id="silk_TabFont"]
-base_font = ExtResource("silk_display")
+base_font = SubResource("Font_silkbound_medium")
 variation_opentype = {2003265652: 600.0}
 
 [sub_resource type="StyleBoxFlat" id="silk_Footer"]
@@ -1857,7 +1898,7 @@ content_margin_bottom = 8.0
 
 
 [resource]
-default_font = ExtResource("silk_ui")
+default_font = SubResource("Font_silkbound_regular")
 default_font_size = 20
 Button/colors/font_color = Color(0.905882, 0.905882, 0.866667, 1)
 Button/colors/font_hover_color = Color(0.905882, 0.905882, 0.866667, 1)
@@ -2048,7 +2089,7 @@ Window/constants/close_h_offset = 12
 Window/constants/close_v_offset = 12
 Window/constants/resize_margin = 8
 Window/constants/title_height = 44
-Window/fonts/title_font = ExtResource("2_exo")
+Window/fonts/title_font = SubResource("Font_silkbound_regular")
 Window/font_sizes/title_font_size = 20
 Window/icons/close = ExtResource("12_close")
 Window/icons/close_pressed = ExtResource("12_close")
@@ -2112,7 +2153,7 @@ RookframeSearchFieldFocus/styles/panel = SubResource("SearchInputFocus")
 RookframeSearchInput/base_type = &"LineEdit"
 RookframeSearchInput/colors/font_color = Color(0.905882, 0.905882, 0.866667, 1)
 RookframeSearchInput/colors/font_placeholder_color = Color(0.682353, 0.729412, 0.745098, 1)
-RookframeSearchInput/fonts/font = ExtResource("1_inter")
+RookframeSearchInput/fonts/font = SubResource("Font_silkbound_regular")
 RookframeSearchInput/font_sizes/font_size = 20
 RookframeSearchInput/styles/normal = SubResource("Empty")
 RookframeSearchInput/styles/focus = SubResource("Empty")
@@ -2456,9 +2497,9 @@ RookframeChoiceRow/colors/icon_pressed_color = Color(0.905882, 0.905882, 0.86666
 RookframeChoiceRow/colors/icon_hover_pressed_color = Color(0.905882, 0.905882, 0.866667, 1)
 RookframeSearchInput/styles/read_only = SubResource("Empty")
 ProgressBar/constants/outline_size = 3
-RichTextLabel/fonts/normal_font = ExtResource("1_inter")
+RichTextLabel/fonts/normal_font = SubResource("Font_silkbound_regular")
 Label/constants/line_spacing = 0
-Button/fonts/font = ExtResource("silk_action")
+Button/fonts/font = SubResource("Font_silkbound_medium")
 TaskButton/base_type = &"Button"
 TaskGlyphButton/base_type = &"Button"
 TaskGlyphButton/font_sizes/font_size = 24
@@ -2477,7 +2518,7 @@ TaskSection/base_type = &"Button"
 TaskSection/styles/pressed = SubResource("silk_ActiveSection")
 TaskSection/colors/font_pressed_color = Color(0.905882, 0.905882, 0.866667, 1)
 TaskPrimary/base_type = &"Button"
-TaskPrimary/fonts/font = ExtResource("silk_action")
+TaskPrimary/fonts/font = SubResource("Font_silkbound_medium")
 TaskPrimary/constants/h_separation = 10
 TaskPrimary/constants/icon_max_width = 22
 TaskPrimary/colors/font_color = Color(0.082353, 0.090196, 0.098039, 1)
@@ -2811,7 +2852,7 @@ SilkCreatureTabSelectedDesktop/constants/line_spacing = 0
 SilkIcon/colors/icon_focus_color = Color(0.815686, 0.745098, 0.556863, 1)
 SilkPrimaryIcon/colors/icon_focus_color = Color(0.082353, 0.090196, 0.098039, 1)
 TooltipPanel/styles/panel = SubResource("silk_Tooltip")
-TooltipLabel/fonts/font = ExtResource("silk_ui")
+TooltipLabel/fonts/font = SubResource("Font_silkbound_regular")
 TooltipLabel/font_sizes/font_size = 19
 TooltipLabel/colors/font_color = Color(0.905882, 0.905882, 0.866667, 1)
 WizardLedger/base_type = &"Panel"
@@ -2928,9 +2969,9 @@ WizardFormula/base_type = &"Label"
 WizardFormula/styles/normal = SubResource("silk_WizardFormula")
 WizardFormulaCompact/base_type = &"Label"
 WizardFormulaCompact/styles/normal = SubResource("silk_WizardFormulaCompact")
-WizardButton/fonts/font = ExtResource("silk_ui")
-WizardQuiet/fonts/font = ExtResource("silk_ui")
-WizardSection/fonts/font = ExtResource("silk_ui")
+WizardButton/fonts/font = SubResource("Font_silkbound_regular")
+WizardQuiet/fonts/font = SubResource("Font_silkbound_regular")
+WizardSection/fonts/font = SubResource("Font_silkbound_regular")
 WizardButton/colors/icon_disabled_color = Color(0.815686, 0.745098, 0.556863, 0.4)
 WizardButton/colors/font_disabled_color = Color(0.682353, 0.729412, 0.745098, 1)
 WizardFormulaBox/base_type = &"PanelContainer"
@@ -2942,16 +2983,16 @@ WizardFormulaBoxCompact/styles/panel = SubResource("silk_WizardFormulaCompact")
 SilkNotice/base_type = &"PanelContainer"
 SilkNotice/styles/panel = SubResource("silk_Notice")
 SilkNoticeTitle/base_type = &"Label"
-SilkNoticeTitle/fonts/font = ExtResource("silk_display")
+SilkNoticeTitle/fonts/font = SubResource("Font_silkbound_medium")
 SilkNoticeTitle/font_sizes/font_size = 30
 SilkNoticeState/base_type = &"Label"
-SilkNoticeState/fonts/font = ExtResource("silk_ui")
+SilkNoticeState/fonts/font = SubResource("Font_silkbound_regular")
 SilkNoticeState/font_sizes/font_size = 18
 SilkNoticeBody/base_type = &"Label"
-SilkNoticeBody/fonts/font = ExtResource("silk_ui")
+SilkNoticeBody/fonts/font = SubResource("Font_silkbound_regular")
 SilkNoticeBody/font_sizes/font_size = 21
 SilkNoticeBody/colors/font_color = Color(0.682353, 0.729412, 0.745098, 1)
-RookframeSecondaryButton/fonts/font = ExtResource("silk_action")
+RookframeSecondaryButton/fonts/font = SubResource("Font_silkbound_medium")
 RookframeSecondaryButton/font_sizes/font_size = 20
 RookframeSecondaryButton/styles/hover_pressed = SubResource("silk_WizardHover")
 RookframeSecondaryButton/colors/font_pressed_color = Color(0.905882, 0.905882, 0.866667, 1)
@@ -2966,16 +3007,16 @@ SilkDialogBody/styles/panel = SubResource("silk_DialogBody")
 SilkDialogFooter/base_type = &"PanelContainer"
 SilkDialogFooter/styles/panel = SubResource("silk_DialogFooter")
 SilkDialogTitle/base_type = &"Label"
-SilkDialogTitle/fonts/font = ExtResource("silk_display")
+SilkDialogTitle/fonts/font = SubResource("Font_silkbound_medium")
 SilkDialogTitle/font_sizes/font_size = 30
 SilkDialogCopy/base_type = &"Label"
 SilkDialogCopy/font_sizes/font_size = 20
 SilkDialogCopy/constants/line_spacing = 4
-RookframePrimaryButton/fonts/font = ExtResource("silk_action")
+RookframePrimaryButton/fonts/font = SubResource("Font_silkbound_medium")
 RookframePrimaryButton/font_sizes/font_size = 20
 RookframePrimaryButton/styles/hover_pressed = SubResource("silk_PrimaryPressed")
 RookframePrimaryButton/colors/font_disabled_color = Color(0.682353, 0.729412, 0.745098, 1)
-RookframeDangerButton/fonts/font = ExtResource("silk_action")
+RookframeDangerButton/fonts/font = SubResource("Font_silkbound_medium")
 RookframeDangerButton/font_sizes/font_size = 20
 RookframeDangerButton/styles/hover_pressed = SubResource("silk_DangerAction")
 RookframeDangerButton/colors/font_pressed_color = Color(1, 0.505882, 0.478431, 1)

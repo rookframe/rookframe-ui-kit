@@ -128,9 +128,16 @@ curl -fsSL https://raw.githubusercontent.com/imjp94/gd-plug/209276d1f00d14b49b74
 godot --headless --path . --script plug.gd install
 godot --headless --editor --path . --import
 godot --headless --path . --script res://addons/gdUnit4/bin/GdUnitCmdTool.gd --ignoreHeadlessMode -a res://tests/fullscreen_wizard.gd -a res://tests/silkbound_miniature_browser.gd -c -rd reports/fullscreen
+godot --headless --path . --script res://addons/gdUnit4/bin/GdUnitCmdTool.gd --ignoreHeadlessMode -a res://tests/theme_font_resources.gd -c -rd reports/theme-fonts
 ```
 
-Require both discovered cases to pass in the fresh JUnit report, with no
+Require every discovered case to pass in the fresh JUnit report, with no
 errors, failures, skips, or flaky results. For graphical capture, omit
 `--headless` and `--ignoreHeadlessMode`; after `--`, pass `--capture=<file.png>`
 for the wizard and `--evidence-dir=<directory>` for the browser.
+
+Themes define their font variations as subresources sharing one reference to
+each font file. This keeps a Theme loaded with Godot's `CACHE_MODE_IGNORE_DEEP`
+independent of the global cache without repeatedly loading the same Latin and
+CJK font data inside that Theme. The font-resource suite checks native memory
+growth and Latin/CJK measurements through this Package-loading path.
