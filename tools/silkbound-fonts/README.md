@@ -7,9 +7,10 @@ TextEdits remain native. There is no runtime browser, custom font renderer or sh
 
 The resources retain the original licensed TTF bytes, shaping tables and full
 character coverage. Cached sizes cover the migrated Creature surface; other
-characters and sizes use Godot's dynamic font and normal fallback. Latin,
-Cyrillic, accents, punctuation, common symbols, ligatures and tabular figures are
-prerendered. Font size, OpenType weight and the source font's metrics remain
+characters and sizes use Godot's dynamic font and normal fallback. Common Latin/Latin-1, Russian, punctuation, ligatures and tabular figures are
+prerendered. Extended Latin, combining marks and less common symbols are rendered
+on demand from the unchanged original font. Keeping the eager character set
+bounded avoids loading glyphs for unused writing systems at every cached size. Font size, OpenType weight and the source font's metrics remain
 unchanged. A separate small ink cache preserves coverage for the selected
 chapter's dark lettering. The other cache uses the primary text token.
 

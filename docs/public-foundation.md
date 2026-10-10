@@ -223,14 +223,16 @@ guarantee and remains part of a Package Publisher's Rookframe Version judgment.
 ## Regional typography
 
 `theme/silkbound_{regular,medium,semibold,italic}.tres` uses EB Garamond first.
-Full licensed Noto Serif JP/KR/SC/TC companions are installed with the kit.
+Full licensed Noto Serif JP/KR/SC/TC companions are installed with the kit,
+but the general fonts and Themes do not load them. Godot's native system-font
+fallback handles otherwise unsupported text on supported platforms.
 For text with a known regional locale, assign the corresponding native Font
 resource and set the Control's `language` property:
 
 ```gdscript
 label.language = "zh_TW"
 label.add_theme_font_override("font",
-    preload("res://rookframe/ui/theme/locales/zh_TW_regular.tres"))
+    load("res://rookframe/ui/theme/locales/zh_TW_regular.tres"))
 ```
 
 The supported locale resource prefixes are `ja`, `ko`, `zh_CN` (also use for
@@ -241,9 +243,11 @@ synthetic CJK italic. Applications may use stock resource localization remaps
 for a uniform application locale, or explicit font assignments for mixed locales.
 
 Godot 4.7's fallback priority considers the base language, so `language` alone
-cannot choose between SC and TC. The general fallback chain recognizes Japanese,
-Korean and default Chinese; use the named regional resources for Chinese regional
-forms. Do not claim Traditional Chinese support from the default chain. Other
+cannot choose between SC and TC. Load the named regional resource when that
+locale is needed, rather than preloading all companions for every English UI.
+Use text locale as well as application locale: user-entered names and notes can
+be multilingual. System fallback appearance depends on the platform; use the
+explicit bundled regional fonts when their precise forms are required. Other
 scripts and Hong Kong forms need an appropriate companion and native review.
 
 ## Silkbound surface grammar

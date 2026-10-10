@@ -16,13 +16,13 @@ TOOLS = Path(__file__).resolve().parent
 SOURCE = TOOLS.parents[1] / "rookframe/ui/assets/fonts/eb-garamond"
 # The migrated English/Russian UI plus accented names and common symbols.
 # Other characters and sizes continue through the original dynamic font.
+# Keep the eager atlas to common UI Latin/accents, Russian and punctuation.
+# Full source fonts and shaping tables remain embedded for dynamic glyphs.
 CHARACTERS = (
-    list(range(32, 0x250))
-    + list(range(0x300, 0x370))
-    + list(range(0x400, 0x530))
-    + list(range(0x2000, 0x2070))
-    + list(range(0x20A0, 0x20D0))
-    + list(range(0x2190, 0x2300))
+    list(range(32, 0x100))
+    + list(range(0x400, 0x460))
+    + list(range(0x2010, 0x203B))
+    + [0x20AC, 0x2212, 0x2260, 0x2264, 0x2265]
 )
 
 

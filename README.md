@@ -136,8 +136,9 @@ errors, failures, skips, or flaky results. For graphical capture, omit
 `--headless` and `--ignoreHeadlessMode`; after `--`, pass `--capture=<file.png>`
 for the wizard and `--evidence-dir=<directory>` for the browser.
 
-Themes define their font variations as subresources sharing one reference to
-each font file. This keeps a Theme loaded with Godot's `CACHE_MODE_IGNORE_DEEP`
-independent of the global cache without repeatedly loading the same Latin and
-CJK font data inside that Theme. The font-resource suite checks native memory
-growth and Latin/CJK measurements through this Package-loading path.
+Themes share their Latin font files. The default chain does not eagerly load
+all four CJK companions: load the explicit locale font when its text is needed
+(see regional typography), with stock system fallback for other supported text.
+The font-resource suite bounds a fresh uncached Theme to 64 MiB and checks
+Latin/CJK measurements. A small pre-rendered atlas covers common Latin, Russian
+and punctuation; the complete original font renders other glyphs on demand.
