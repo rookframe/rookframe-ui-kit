@@ -1,6 +1,6 @@
 [gd_resource type="Theme" format=3]
 [ext_resource type="FontVariation" path="res://rookframe/ui/theme/silkbound_regular.tres" id="font"]
-[ext_resource type="Texture2D" path="res://rookframe/ui/assets/action-panel/approved-roll-source.png" id="roll_source"]
+[ext_resource type="Texture2D" path="res://rookframe/ui/assets/action-panel/ai-generated-approved-roll-source.png" id="roll_source"]
 [sub_resource type="AtlasTexture" id="die"]
 atlas = ExtResource("roll_source")
 region = Rect2(1150, 408, 124, 116)

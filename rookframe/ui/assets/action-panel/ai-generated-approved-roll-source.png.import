@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b2c8cbuura30h"
-path="res://.godot/imported/leather-atlas.png-76f9dfce9cb3a40fec513cf673f1a155.ctex"
+uid="uid://dek2j3wtug63m"
+path="res://.godot/imported/ai-generated-approved-roll-source.png-ce55e9097abff217a1b98bf0e5cfdf70.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://rookframe/ui/assets/action-panel/leather-atlas.png"
-dest_files=["res://.godot/imported/leather-atlas.png-76f9dfce9cb3a40fec513cf673f1a155.ctex"]
+source_file="res://rookframe/ui/assets/action-panel/ai-generated-approved-roll-source.png"
+dest_files=["res://.godot/imported/ai-generated-approved-roll-source.png-ce55e9097abff217a1b98bf0e5cfdf70.ctex"]
 
 [params]
 
