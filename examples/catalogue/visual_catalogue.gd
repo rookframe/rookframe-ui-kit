@@ -19,7 +19,7 @@ func _ready() -> void:
 	%PageChoice.accessibility_name = "Component page"
 	%Editor.feedback.connect(func(message: String) -> void: %Feedback.text = message)
 	resized.connect(_fit_catalogue)
-	for states in [%PrimaryStates, %SecondaryStates]:
+	for states in [%PrimaryStates, %SecondaryStates, %DestructiveStates]:
 		states.get_node("Focused").focus_preview_requested.connect(_queue_focus_previews)
 	for button: Button in find_children("*", "Button", true, false):
 		if %Editor.is_ancestor_of(button):
@@ -77,7 +77,7 @@ func _apply_density() -> void:
 	for cell: Control in %Typography.get_node("Icons").get_children():
 		# Fantasy deliberately has no menu-action pictograms.
 		cell.visible = theme.has_icon("image", cell.get_node("Image").theme_type_variation)
-	for sample in %PrimaryStates.get_children() + %SecondaryStates.get_children():
+	for sample in %PrimaryStates.get_children() + %SecondaryStates.get_children() + %DestructiveStates.get_children():
 		sample.configure(theme, compact)
 	%Editor.configure(theme, compact)
 	# Match the host's existing action-row styling after its native ready hook.
@@ -107,7 +107,7 @@ func _capture_focus_previews() -> void:
 	var previous_focus := get_viewport().gui_get_focus_owner()
 	while _focus_preview_pending:
 		_focus_preview_pending = false
-		for states in [%PrimaryStates, %SecondaryStates]:
+		for states in [%PrimaryStates, %SecondaryStates, %DestructiveStates]:
 			if %Menu.is_visible_in_tree():
 				await states.get_node("Focused").capture_focus()
 	if is_instance_valid(previous_focus) and previous_focus.is_visible_in_tree():
@@ -120,6 +120,8 @@ func _fit_catalogue() -> void:
 	%Header.vertical = narrow
 	%SurfaceSamples.vertical = narrow
 	%ButtonKinds.vertical = narrow
+	%DestructiveExamples.vertical = narrow
+	%ConfirmationActions.vertical = narrow
 	%Settings.get_node("Language").vertical = narrow
 	%Settings.get_node("Quality").vertical = narrow
 	%Typography.get_node("Columns").vertical = narrow
