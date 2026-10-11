@@ -1,0 +1,8 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3]
+
+[ext_resource type="Texture2D" path="res://rookframe/ui/menu/materials/textures/AI_generated_brass_leaf_finial.png" id="art"]
+
+[resource]
+atlas = ExtResource("art")
+region = Rect2(65, 144, 1300, 816)
+filter_clip = true

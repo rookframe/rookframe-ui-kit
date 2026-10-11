@@ -1,0 +1,22 @@
+{
+  "tool": "built-in image_gen",
+  "date": "2026-10-10",
+  "assets": [
+    {
+      "material": "wood.brass.cap",
+      "filename": "AI_generated_walnut_brass_cartouche.png",
+      "prompt": "Use case: stylized-concept. Asset type: production raster UI button sprite for a tactile fantasy desktop game interface, not a mockup. Create ONE long, slim horizontal carved dark walnut button face with aged solid brass rim and substantial sculpted brass end fittings, isolated on genuine transparent background. The outline MUST be an elongated cartouche with stepped shoulders, clipped corners and inward-cut scalloped notches at the two ends: distinctly NOT a plain rectangle or rounded rectangle. Restrained late medieval craftsmanship. Readable silhouette at small sizes, broad simple end fittings with one engraved leaf incision, not lace or tiny filigree. Face is rich nearly black brown walnut with fine subtle horizontal grain. Brass border is a real thick inlaid metal band, worn golden top ridge and dark recessed joints, integral to the wood. Slight visible lower edge gives thickness. Straight-on orthographic front view, no perspective tilt. Warm light from upper left, natural material shading, no glow, no halo. Completely EMPTY center: no letters, symbols, icons, emblems, screws or text. Keep the entire middle 65 percent visually quiet for live engraved labels. The button is about 6.5 times as wide as tall and fills almost the full image width, with only a small transparent safety margin. Wide landscape canvas, ideally 1536 by 384. Show exactly one button, no sample sheet, no background, no floor, no surrounding objects. Crisp art suited to native Godot nine-patch resizing; straight parallel middle upper and lower rails, all sculpted silhouette detail at the ends.",
+      "width": 2048,
+      "height": 768,
+      "sha256": "5651200076b64bfe4b07979846080e9e87133a780424ca3001fa6425f6f3b62d"
+    },
+    {
+      "material": "brass.adornment",
+      "filename": "AI_generated_brass_leaf_finial.png",
+      "prompt": "Use case: stylized-concept. Asset type: a single small brass side ornament sprite for a physical fantasy UI button, isolated on true transparent background. One antique solid brass finial, points toward the LEFT. Short broad spearhead / leaf-shaped cast metal fitting with a flattened rectangular mounting heel on its right edge. Overall silhouette is wider than tall, approximately 1.3:1. One deeply chased central leaf vein and two quiet engraved curved channels, substantial clean silhouette, no tiny filigree. Aged warm brass, polished wear only on cut edges, dark crevices. Straight-on orthographic front view with shallow thickness, light from upper left. It will slide from behind the left end of a wooden plaque as a physical selection ornament. No letters, no text, no symbols, no jewels, no circle, no glow, no floor or shadow backdrop. Exactly one object centered on a transparent canvas, tight framing with a narrow transparent margin.",
+      "width": 1426,
+      "height": 1103,
+      "sha256": "c5e77f381c83055712dafae60a19e6a3aec8f8a3898f1ac5a220beac95fd76e1"
+    }
+  ]
+}

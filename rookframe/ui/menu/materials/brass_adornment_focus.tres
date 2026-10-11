@@ -1,0 +1,4 @@
+[gd_resource type="StyleBoxEmpty" format=3]
+
+; Keyboard focus is represented by the native TextureRect brass end ornaments.
+[resource]

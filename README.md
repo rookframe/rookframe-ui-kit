@@ -1,42 +1,20 @@
 # Rookframe UI Kit
 
-The canonical, public source of Rookframe's native-first Godot UI Kit. It
-provides a shared Silkbound Ledger Theme, semantic assets, and—where Godot does not already
-own the behavior—small reusable scene relationships for Rookframe Package
-Publishers and Rookframe applications.
+The public Godot UI Kit. The standalone catalogue now shows only the new
+Main Menu and Settings elements implemented in `rookframe-godot`, with the same
+**Cyberpunk** and **Fantasy** themes. Switch themes, regular/compact density,
+and Menu, Settings, or Type & icons pages from the catalogue header.
 
-This repository is not generated from `rookframe-godot`. Consumers materialize
-the exact source they select at the one canonical runtime root:
-`res://rookframe/ui/`.
+The copied resources live at `res://rookframe/ui/menu/`: native Themes, primary
+and standard menu Button scenes, a textured Panel scene, decorative illustrations,
+semantic mappings and their materials. Settings use native Controls and the
+existing action-row scene. No host application, SDK, C#, or Package is required.
 
-## Native-first public kit
-
-The current pre-release candidate includes:
-
-- one shared Theme with complete coverage for the native Controls in the
-  reviewed design-system inventory;
-- semantic colors, type, spacing, geometry, focus, surfaces, frames, and a
-  66-role icon registry plus seven attributed RPG pictograms;
-- small editor-authored public scenes only for reusable relationships Godot
-  does not provide as a built-in node;
-- responsive layout, accessible forms and search, designed dialogs and file
-  selection, feedback, Managed Surface, and structured-data contracts; and
-- a complete manual visual and interaction catalogue.
-
-Application screens, workflows, domain state, host orchestration, redundant
-native wrappers, and a public C# widget hierarchy remain outside this kit.
-
-See [the coverage inventory](docs/design-system-coverage.md),
-[the RFG-161 completion map](docs/rfg-161-coverage.md),
-[the public component reference](docs/public-components.md),
-[native recipes](docs/native-controls-and-recipes.md),
-[the exact-release management recipe](docs/package-management-recipe.md),
-[accessibility and input](docs/accessibility-and-input.md),
-[the public foundation reference](docs/public-foundation.md),
-[the semantic icon reference](docs/semantic-icons.md),
-[the compatibility model](docs/compatibility.md),
-[the release-candidate review](docs/release-candidate-review.md), and
-[third-party notices](THIRD_PARTY_NOTICES.md).
+The **Old catalogue** button opens the previous Silkbound Ledger catalogue,
+including its original tabs and interactive demos. **Current catalogue** returns
+to the new design with its theme, density and page selection preserved. Older
+components and their documentation remain available for existing consumers. The current theme covers only the
+implemented menu/settings vocabulary, not every Godot Control.
 
 ## Exact-commit installation
 
@@ -105,10 +83,25 @@ Open this repository as a Godot 4.7 project or run it with the pinned toolchain:
 /Applications/Godot_mono.app/Contents/MacOS/Godot --path .
 ```
 
-The project opens the complete catalogue at
-`examples/catalogue/visual_catalogue.tscn`. Its Native, Forms, Layout,
-Feedback, Data, Icons, Managed, and Shell tabs are manual visual and interaction
-evidence, not an automated validation suite or release gate.
+The project opens `examples/catalogue/visual_catalogue.tscn`. Menu samples retain native Normal, Hovered, Pressed, Disabled and Focused
+states inside a padded surface. Settings choices open themed popups.
+Samples do not change application settings.
+
+Use `rookframe/ui/menu/cyberpunk/CyberpunkTheme.tres` or
+`rookframe/ui/menu/MenuTheme.tres` (Fantasy) as a scene or project Theme. Instance
+`MenuButtonPrimary.tscn`, `MenuButtonStandard.tscn`, and `MenuSurface.tscn` from
+that directory. Native Settings controls use the `settings_*` Theme variations;
+set an OptionButton's popup variation to `settings_popup` and a ScrollContainer's
+vertical scrollbar variation to `settings_scrollbar`, as the catalogue does.
+The earlier pinned installation example above predates these additions;
+select a commit containing them when consuming the new design.
+
+Standalone smoke check (no test add-on needed), after the normal editor import:
+
+```sh
+/Applications/Godot_mono.app/Contents/MacOS/Godot --headless --editor --path . --import
+/Applications/Godot_mono.app/Contents/MacOS/Godot --headless --path . --script res://tests/current_design_system.gd
+```
 
 ## License
 

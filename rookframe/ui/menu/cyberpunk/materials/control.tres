@@ -1,0 +1,8 @@
+[gd_resource type="FontVariation" load_steps=2 format=3]
+
+[ext_resource type="FontFile" path="res://rookframe/ui/assets/fonts/Exo2-VariableFont_wght.ttf" id="font"]
+
+[resource]
+base_font = ExtResource("font")
+variation_opentype = {2003265652: 600.0}
+spacing_glyph = 1

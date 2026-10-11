@@ -1,0 +1,8 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3]
+
+[ext_resource type="Texture2D" path="res://rookframe/ui/menu/materials/textures/AI_generated_walnut_brass_cartouche.png" id="art"]
+
+[resource]
+atlas = ExtResource("art")
+region = Rect2(20, 178, 2008, 404)
+filter_clip = true

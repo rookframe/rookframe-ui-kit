@@ -1,0 +1,48 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://rookframe/ui/menu/menu_button.gd" id="recipe"]
+
+[node name="MenuButtonStandard" type="Button"]
+focus_mode = 2
+mouse_default_cursor_shape = 2
+script = ExtResource("recipe")
+usage = &"menu.button.standard"
+text = "Menu action"
+alignment = 1
+
+[node name="Shadow" type="NinePatchRect" parent="."]
+show_behind_parent = true
+layout_mode = 0
+mouse_filter = 2
+
+[node name="OrnamentLeft" type="TextureRect" parent="."]
+show_behind_parent = true
+layout_mode = 0
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 0
+
+[node name="OrnamentRight" type="TextureRect" parent="."]
+show_behind_parent = true
+layout_mode = 0
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 0
+flip_h = true
+
+[node name="Depth" type="NinePatchRect" parent="."]
+show_behind_parent = true
+layout_mode = 0
+mouse_filter = 2
+
+[node name="Surface" type="NinePatchRect" parent="."]
+show_behind_parent = true
+layout_mode = 0
+mouse_filter = 2
+
+[node name="Engraving" type="Label" parent="."]
+show_behind_parent = true
+layout_mode = 0
+mouse_filter = 2
+vertical_alignment = 1
+clip_text = true

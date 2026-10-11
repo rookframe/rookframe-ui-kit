@@ -26,10 +26,6 @@ window/stretch/mode="canvas_items"
 
 project/assembly_name="Rookframe UI Kit visual catalogue"
 
-[gui]
-
-theme/custom="res://rookframe/ui/theme/rookframe_theme.tres"
-
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
