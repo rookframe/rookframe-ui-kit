@@ -17,6 +17,13 @@ to the new design with its theme, density and page selection preserved. Older
 components and their documentation remain available for existing consumers. The current theme covers only the
 implemented menu/settings/editor vocabulary, not every Godot Control.
 
+## Design system
+
+The shared [design principles](docs/design-system/principles.md) and
+[design choices](docs/design-system/choices.md) are copied from the main app repo.
+The principles guide UI Kit design work. The choices remain a draft, including
+the proposed Theme Package selection capability.
+
 ## Exact-commit installation
 
 Commit `plug.gd` and gd-plug's runtime to the consuming Godot project, then
