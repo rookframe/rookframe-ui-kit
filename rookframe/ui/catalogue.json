@@ -1208,6 +1208,35 @@
       "methods": [],
       "signals": [],
       "contract": "Ordinary Container child; nine-patch leather skin, no game logic."
+    },
+    {
+      "name": "HingedLeaf",
+      "scene": "res://rookframe/ui/components/surfaces/hinged_leaf/hinged_leaf.tscn",
+      "script": "res://rookframe/ui/components/surfaces/hinged_leaf/hinged_leaf.gd",
+      "rootType": "Control",
+      "properties": {
+        "hinge_gap": 26,
+        "hinge_inset": 48,
+        "reduced_motion": false
+      },
+      "methods": [
+        "get_content() -> Control",
+        "set_open(value: bool, animated: bool = true)"
+      ],
+      "signals": [
+        "settled(open: bool)",
+        "reaction_changed(offset: float)"
+      ],
+      "contract": "docs/action-panel.md#hinged-category-leaf"
+    },
+    {
+      "name": "BindingPair",
+      "scene": "res://rookframe/ui/components/surfaces/hinged_leaf/binding_pair.tscn",
+      "rootType": "Control",
+      "properties": {},
+      "methods": [],
+      "signals": [],
+      "contract": "Decorative paired riveted tabs. Set normal Control bounds between the joined edges; input passes through."
     }
   ],
   "semanticIcons": {

@@ -70,3 +70,28 @@ This is an additive, opt-in extension of Silkbound Ledger, approved in the attac
 silhouette study. Existing screen skins do not change. Asset origin and generation
 prompts are recorded in `assets/action-panel/provenance.json`; existing game-icons
 SVG shapes remain independently attributed by their owning icon registry/Package.
+
+## Hinged category leaf
+
+`components/surfaces/hinged_leaf/hinged_leaf.tscn` is the matching animated
+Control. Instance it with **Editable Children** and author ordinary Controls in
+`Surface/Viewport/Root/Ink/Content`, or add them through `get_content()`.
+Set the root's position and size normally. `hinge_gap` (26px) and `hinge_inset`
+(48px) place its two bindings; those remain visible when the leaf is folded.
+
+`set_open(true)` performs the approved 800ms gather, flip, suspended approach,
+impact and rebound, with the content developing through ink after contact.
+`set_open(false)` fades and folds it away. Pass `false` as the second argument,
+or set `reduced_motion`, for immediate changes. Read `is_open` and `animating`;
+listen to `settled(open)` for completion. `reaction_changed(offset)` optionally
+lets an adjacent support respond to the impact. Hiding the leaf cancels motion
+and folds it; repeated calls safely replace an in-flight transition.
+
+The authored scene uses stock SubViewports, Camera3D, MeshInstance3D, Tween and
+canvas-item shaders. Its source Controls retain native input and focus when
+open; input is suspended during motion. The 3D viewport runs only while moving,
+and both viewports stop when folded. The soft shadow follows the moving corners.
+`binding_pair.tscn` supplies stationary riveted tabs between adjacent leaves.
+Neither component owns category semantics, selection, persistence or SDK calls.
+The identity and badge nine-patches reuse the existing AI-named leather atlas;
+this addition introduces no generated artwork.
