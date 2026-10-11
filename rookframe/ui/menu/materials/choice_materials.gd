@@ -1,11 +1,12 @@
 @tool
 extends RefCounted
-## Walnut and cast brass. All choice-specific appearance is authored here.
+## Quiet walnut choices. Ornate cast brass is reserved for primary actions.
 const Frame = preload("../../_internal/menu/choice_frame.gd")
 const Layers = preload("../../_internal/menu/layered_style.gd")
 const CAP = preload("walnut_brass_cap.tres")
-const FINIAL = preload("brass_leaf_finial.tres")
+const PLAIN_CAP = preload("walnut_plain_cap.tres")
 const GOLD := Color("f3d78e")
+const REST_TINT := Color("bfb6a6")
 static var VALUES := _materials()
 
 
@@ -23,16 +24,16 @@ static func _materials() -> Dictionary:
 		"choice.modulate_arrow": 0,
 		"choice.selection_disabled": Color("887c68"),
 		"choice.selection_inset": 22,
-		"choice.popup_inset": 30,
-		"choice.popup_inset.compact": 23,
+		"choice.popup_inset": 2,
+		"choice.popup_inset.compact": 2,
 		"choice.popup_overlap": 7,
 		"choice.popup_overlap.compact": 5,
 		"choice.font_size": 27,
 		"choice.font_size.compact": 22,
 		"choice.height": 64,
 		"choice.height.compact": 48,
-		"choice.arrow_margin": 54,
-		"choice.arrow_margin.compact": 47,
+		"choice.arrow_margin": 24,
+		"choice.arrow_margin.compact": 20,
 		"choice.copy_gap": 14,
 		"choice.popup_gap": 12,
 		"choice.popup_gap.compact": 10,
@@ -45,14 +46,18 @@ static func _materials() -> Dictionary:
 		var suffix := ".compact" if compact else ""
 		for state in ["normal", "hover", "pressed", "hover_pressed", "disabled"]:
 			var frame := Frame.new()
-			frame.texture = CAP
-			frame.finial = FINIAL
-			frame.content_margin_left = 46 if compact else 58
-			frame.content_margin_right = 58 if compact else 76
+			frame.texture = PLAIN_CAP
+			frame.source_margin = Vector2(140, 140)
+			frame.finial_fraction = Vector2.ZERO
+			frame.content_margin_left = 18 if compact else 24
+			frame.content_margin_right = 38 if compact else 46
 			frame.content_margin_top = 6 if compact else 10
 			frame.content_margin_bottom = 9 if compact else 13
-			frame.tint = Color("b5aaa0") if state == "disabled" else Color("fff2cf") if state == "hover" else Color("c7ad89") if state in ["pressed", "hover_pressed"] else Color.WHITE
-			frame.focus_tint = Color(1.4, 1.28, 1.12)
+			frame.tint = Color("b5aaa0") if state == "disabled" else Color("fff2cf") if state == "hover" else Color("c7ad89") if state in ["pressed", "hover_pressed"] else REST_TINT
+			frame.focus_tint = Color(1.3, 1.22, 1.12)
+			if state == "normal":
+				# Keep focus lighting while the unengaged casing rests in softer light.
+				frame.focus_tint /= REST_TINT
 			frame.pressed_offset = 1.5 if state in ["pressed", "hover_pressed"] else 0.0
 			values["choice." + state + suffix] = frame
 		# The textured frame supplies the focus light; no flat overlay on the wood.

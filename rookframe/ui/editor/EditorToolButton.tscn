@@ -1,0 +1,14 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://rookframe/ui/editor/editor_button.gd" id="script"]
+[ext_resource type="Texture2D" path="res://rookframe/ui/icons/builder.svg" id="icon"]
+
+[node name="EditorToolButton" type="Button"]
+mouse_default_cursor_shape = 2
+theme_type_variation = &"editor_button_tool"
+icon = ExtResource("icon")
+icon_alignment = 1
+expand_icon = false
+tooltip_text = "Build"
+accessibility_name = "Build"
+script = ExtResource("script")

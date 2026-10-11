@@ -28,6 +28,7 @@ func verify() -> void:
 	var choice: OptionButton = screen.get_node("%Settings").get_node("Language/Choice")
 	# Round-trip on the same instances catches stale texture/override state.
 	for theme_index in [0, 1, 0]:
+		screen.select_page(0)
 		screen.select_theme(theme_index)
 		for compact in [false, true, false]:
 			screen.set_compact(compact)
@@ -43,7 +44,7 @@ func verify() -> void:
 			for usage in [&"menu_button_primary", &"menu_button_standard", &"settings_choice", &"settings_action_primary", &"settings_action_secondary", &"settings_back", &"settings_navigation"]:
 				for state in [&"normal", &"hover", &"pressed", &"hover_pressed", &"disabled", &"focus"]:
 					check(screen.theme.has_stylebox(state, usage), "Missing %s/%s" % [usage, state])
-		for page in range(3):
+		for page in range(screen.get_node("%Pages").get_child_count()):
 			screen.select_page(page)
 			await settle()
 			for candidate: Control in screen.get_node("%Pages").get_children():
@@ -83,7 +84,7 @@ func verify() -> void:
 		DirAccess.make_dir_recursive_absolute(capture_dir)
 		for theme_index in [0, 1]:
 			screen.select_theme(theme_index)
-			for page in range(3):
+			for page in range(screen.get_node("%Pages").get_child_count()):
 				screen.select_page(page)
 				await settle()
 				await create_timer(0.4).timeout

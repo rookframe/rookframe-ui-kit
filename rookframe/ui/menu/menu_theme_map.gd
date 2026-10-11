@@ -116,6 +116,7 @@ const BUTTON_COMMON = {
     "ease": "metal.motion.ease",
     "cap": "wood.brass.cap",
     "cap_tint": "wood.cap.tint",
+    "rest_tint": "wood.resting.cap_tint",
     "edge_tint": "wood.edge.tint",
     "shadow_tint": "wood.shadow.tint",
     "adornment": "brass.adornment",
@@ -136,7 +137,14 @@ const BUTTON_COMMON = {
 }
 const BUTTON_MATERIALS = {
     Usage.PRIMARY: {"ornament_rest": "brass.primary.ornament_rest"},
-    Usage.STANDARD: {"ornament_rest": "brass.standard.ornament_rest"},
+    Usage.STANDARD: {
+        "ornament_rest": "brass.standard.ornament_rest",
+        "cap": "wood.plain.cap",
+        "patch_side": "wood.plain.patch_side",
+        "patch_rail": "wood.plain.patch_rail",
+        "ornament_width": "wood.plain.ornament_width",
+        "ornament_travel": "wood.plain.ornament_travel",
+    },
 }
 const BUTTON_DENSITY = {
     State.REGULAR: {
@@ -220,7 +228,7 @@ static func button(usage: StringName, state: Dictionary) -> Dictionary:
     references.merge(BUTTON_STATES[usage][condition], true)
     references["padding"] = BUTTON_PADDING[state.density][condition]
     if state.focus == State.FOCUSED:
-        references["focus"] = BUTTON_FOCUS.focus
+        references["focus"] = "wood.plain.focus" if usage == Usage.STANDARD else BUTTON_FOCUS.focus
         # Match native Button: focus ink applies at rest; hover/press keep their ink.
         if state.availability == State.ENABLED and state.interaction == State.RESTING:
             references["label"] = BUTTON_FOCUS.label

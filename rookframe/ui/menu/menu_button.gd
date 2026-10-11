@@ -119,6 +119,10 @@ func _process(_delta: float) -> void:
 		_layout_art()
 	var next_mode := get_draw_mode()
 	var selected := has_focus() or next_mode in [DRAW_HOVER, DRAW_HOVER_PRESSED]
+	var art_tint := get_theme_color("rest_tint") if next_mode == DRAW_NORMAL and not selected else get_theme_color("cap_tint")
+	for layer in [$Surface, $OrnamentLeft, $OrnamentRight]:
+		if layer.self_modulate != art_tint:
+			layer.self_modulate = art_tint
 	var reveal := 0.0 if disabled else 1.0 if selected else get_theme_constant("ornament_rest") / 100.0
 	if not is_equal_approx(reveal, _ornament_target):
 		_ornament_target = reveal

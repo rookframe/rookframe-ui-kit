@@ -1212,7 +1212,11 @@
       "res://rookframe/ui/menu/MenuButtonStandard.tscn",
       "res://rookframe/ui/menu/MenuChoice.tscn",
       "res://rookframe/ui/menu/MenuSurface.tscn",
-      "res://rookframe/ui/components/data/action_row.tscn"
+      "res://rookframe/ui/components/data/action_row.tscn",
+      "res://rookframe/ui/editor/EditorToolButton.tscn",
+      "res://rookframe/ui/editor/EditorActionButton.tscn",
+      "res://rookframe/ui/editor/EditorToolRail.tscn",
+      "res://rookframe/ui/editor/EditorSurface.tscn"
     ],
     "nativeControls": [
       "Label",
@@ -1224,6 +1228,22 @@
       "PanelContainer",
       "TextureRect"
     ],
-    "catalogue": "res://examples/catalogue/visual_catalogue.tscn"
+    "catalogue": "res://examples/catalogue/visual_catalogue.tscn",
+    "editor": {
+      "buttons": [
+        "editor_button_tool",
+        "editor_button_action",
+        "editor_button_standard"
+      ],
+      "surfaces": [
+        "editor_surface_rail",
+        "editor_surface_panel",
+        "editor_surface_inset",
+        "editor_surface_log"
+      ],
+      "density": "Append __compact to native variations; button recipes expose compact and set_compact(bool).",
+      "materials": "Fantasy reserves ornate brass for primary actions; tools, secondary actions and dropdowns use recessed walnut in a slim beveled brass casing with gently rounded corners. Surfaces use textured stone and walnut. Cyberpunk uses alloy/emissive switches and virtual chassis.",
+      "behavior": "Native Button signals, toggle_mode, ButtonGroup, shortcuts, tooltips and focus. Surface children use ordinary Containers; EditorToolRail exposes Tools, a BoxContainer."
+    }
   }
 }

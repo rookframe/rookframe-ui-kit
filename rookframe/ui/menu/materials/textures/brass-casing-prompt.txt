@@ -1,0 +1,12 @@
+Generated with the built-in image_gen tool on 2026-10-11.
+Asset: AI_generated_walnut_brass_casing.png
+Reference: AI_generated_walnut_brass_cartouche.png
+Transparent background: true
+
+Use case: precise-object-edit.
+Asset type: production nine-slice game UI button texture for the current Fantasy design kit.
+Input image: the existing ornate brass-and-walnut primary button is the edit target and material reference.
+Create its restrained SECONDARY version as ONE SQUARE button face, orthographic front view, axis aligned. Preserve the same dark finely grained horizontal walnut, warm aged brass, realistic handmade material and upper-left lighting.
+Replace the ornate outline with a continuous narrow solid brass casing of even thickness on ALL FOUR sides. Visible physical metal: slender outer bevel, softly polished highlight, warm brushed brass middle, dark inner bevel where walnut is recessed. Casing width about 4 percent of square side, corner radius about 5 percent of side: only gently rounded corners, long perfectly straight edges. Subtle irregular patina and fine scratches, finely crafted rather than battered.
+No leaves, finials, scrolls, corner ornaments, rivets, symbols, text, icons or decorative etching. The walnut face fills the interior. Keep brass restrained, not bright yellow. This must read as real brass casing, not a flat stroke.
+Composition: square 1024x1024 canvas; one square button centered with approximately 32px transparent padding on each side, occupying nearly the full image. No perspective, no plinth, no outer glow, no ambient background. Actual transparent pixels outside the rounded silhouette, tiny contact shadow only. Four corners symmetric. Edges suitable for nine-slice stretching into wide buttons.

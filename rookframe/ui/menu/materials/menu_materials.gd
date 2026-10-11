@@ -137,11 +137,18 @@ static var VALUES: Dictionary = {
 	"bronze.face_light": preload("bronze_face_light.tres"),
 	"type.inlay": preload("inlay_font.tres"),
 	"wood.brass.cap": preload("walnut_brass_cap.tres"),
+	"wood.plain.cap": preload("walnut_plain_cap.tres"),
+	"wood.plain.focus": preload("walnut_focus.tres"),
+	"wood.plain.patch_side": 140,
+	"wood.plain.patch_rail": 140,
+	"wood.plain.ornament_width": 0,
+	"wood.plain.ornament_travel": 0,
 	"brass.adornment": preload("brass_leaf_finial.tres"),
 	"brass.adornment.focus": preload("brass_adornment_focus.tres"),
 	"stone.tray": preload("stone_tray.tres"),
 	"stone.inner_edge": preload("stone_inner_edge.tres"),
 	"wood.cap.tint": Color(0.92, 0.88, 0.79, 1),
+	"wood.resting.cap_tint": preload("choice_materials.gd").REST_TINT,
 	"wood.edge.tint": Color(0.24, 0.19, 0.11, 1),
 	"wood.shadow.tint": Color(0, 0, 0, 0.72),
 	"wood.resting.surface": {"bg_color": Color("281d16"), "expand_margin_top": 0.0, "expand_margin_bottom": -6.0},
@@ -177,3 +184,4 @@ static func value(token: String) -> Variant:
 
 static func _static_init() -> void:
 	VALUES.merge(preload("settings_materials.gd").VALUES)
+	VALUES.merge(preload("editor_materials.gd").materials(VALUES))
