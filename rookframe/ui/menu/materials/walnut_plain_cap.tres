@@ -1,0 +1,9 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3]
+
+[ext_resource type="Texture2D" path="res://rookframe/ui/menu/materials/textures/AI_generated_walnut_brass_casing.png" id="art"]
+
+; Beveled brass casing and recessed walnut, without the primary's leaf fittings.
+[resource]
+atlas = ExtResource("art")
+region = Rect2(88, 105, 1080, 1044)
+filter_clip = true

@@ -1,0 +1,11 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://rookframe/ui/editor/editor_button.gd" id="script"]
+
+[node name="EditorActionButton" type="Button"]
+mouse_default_cursor_shape = 2
+theme_type_variation = &"editor_button_action"
+text = "Apply"
+expand_icon = false
+script = ExtResource("script")
+usage = "editor.button.action"

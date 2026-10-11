@@ -9,6 +9,8 @@
 
 [ext_resource type="PackedScene" path="res://rookframe/ui/menu/MenuChoice.tscn" id="choice"]
 
+[ext_resource type="PackedScene" path="res://examples/catalogue/editor_catalogue.tscn" id="editor"]
+
 [node name="VisualCatalogue" type="Control"]
 layout_mode = 1
 anchors_preset = 15
@@ -69,7 +71,7 @@ text = "ROOKFRAME UI KIT"
 [node name="Subtitle" type="Label" parent="Frame/Shell/Stack/Header/Copy"]
 layout_mode = 2
 theme_type_variation = &"settings_help"
-text = "Main Menu & Settings components"
+text = "Menu, Settings & In-game editor"
 
 [node name="Selectors" type="VBoxContainer" parent="Frame/Shell/Stack/Header"]
 layout_mode = 2
@@ -108,7 +110,7 @@ popup/item_1/id = 1
 [node name="PageChoice" parent="Frame/Shell/Stack/Header/Selectors/Choices" instance=ExtResource("choice")]
 layout_mode = 2
 theme_type_variation = &"settings_choice"
-item_count = 3
+item_count = 4
 selected = 0
 size_flags_vertical = 4
 unique_name_in_owner = true
@@ -118,6 +120,8 @@ popup/item_1/text = "Settings"
 popup/item_1/id = 1
 popup/item_2/text = "Type & icons"
 popup/item_2/id = 2
+popup/item_3/text = "In-game editor"
+popup/item_3/id = 3
 
 [node name="OldCatalogue" type="Button" parent="Frame/Shell/Stack/Header/Selectors"]
 unique_name_in_owner = true
@@ -601,3 +605,7 @@ layout_mode = 2
 theme_type_variation = &"settings_help"
 text = "Settings"
 horizontal_alignment = 1
+
+[node name="Editor" parent="Frame/Shell/Stack/Scroll/Pages" instance=ExtResource("editor")]
+unique_name_in_owner = true
+layout_mode = 2

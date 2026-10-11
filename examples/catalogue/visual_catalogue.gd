@@ -15,8 +15,11 @@ func _ready() -> void:
 	%ThemeChoice.accessibility_name = "Theme"
 	%DensityChoice.accessibility_name = "Density"
 	%PageChoice.accessibility_name = "Component page"
+	%Editor.feedback.connect(func(message: String) -> void: %Feedback.text = message)
 	resized.connect(_fit_catalogue)
 	for button: Button in find_children("*", "Button", true, false):
+		if %Editor.is_ancestor_of(button):
+			continue
 		button.pressed.connect(func() -> void:
 			%Feedback.text = "%s pressed." % (button.text if not button.text.is_empty() else "Navigation")
 		)
@@ -54,7 +57,8 @@ func _apply_density() -> void:
 		elif control.has_method("set_compact"):
 			control.set_compact(compact)
 			# The host's Main Menu uses these regular/short button heights.
-			control.custom_minimum_size.y = 44 if compact else 64 if control.usage == &"menu.button.primary" else 60
+			if control.get_script() == preload("res://rookframe/ui/menu/menu_button.gd"):
+				control.custom_minimum_size.y = 44 if compact else 64 if control.usage == &"menu.button.primary" else 60
 		elif theme.get_type_variation_base(usage + "__compact") != &"":
 			control.theme_type_variation = usage + ("__compact" if compact else "")
 		if control is OptionButton:
@@ -72,6 +76,7 @@ func _apply_density() -> void:
 		cell.visible = theme.has_icon("image", cell.get_node("Image").theme_type_variation)
 	for sample in %Menu.get_node("Buttons/Surface/States").get_children():
 		sample.configure(theme, compact)
+	%Editor.configure(theme, compact)
 	# Match the host's existing action-row styling after its native ready hook.
 	var row := %Settings.get_node("Navigation") as Button
 	row.theme_type_variation = "settings_navigation" + ("__compact" if compact else "")

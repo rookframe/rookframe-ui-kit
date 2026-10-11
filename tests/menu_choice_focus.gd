@@ -48,7 +48,7 @@ func longest_pale_bar(image: Image, baseline: Image) -> int:
 func check_focus_image(focused: Image, normal: Image, label: String) -> void:
 	var length := longest_pale_bar(focused, normal)
 	check(length < focused.get_width() / 2, label + ": focus painted a pale bar " + str(length) + " px wide")
-	# Removing focus altogether must not pass: both brass fittings must visibly
+	# Removing focus altogether must not pass: both walnut edges must visibly
 	# respond, beyond the native label's text-color change in the middle.
 	for right in [false, true]:
 		var lit := 0
@@ -58,7 +58,7 @@ func check_focus_image(focused: Image, normal: Image, label: String) -> void:
 				var x := focused.get_width() - 1 - offset if right else offset
 				if focused.get_pixel(x, y).get_luminance() > normal.get_pixel(x, y).get_luminance() + 0.06:
 					lit += 1
-		check(lit > end_width * focused.get_height() * 0.05, label + ": focus is not visible on the " + ("right" if right else "left") + " fitting")
+		check(lit > end_width * focused.get_height() * 0.05, label + ": focus is not visible on the " + ("right" if right else "left") + " edge")
 
 
 func move_pointer(position: Vector2) -> void:

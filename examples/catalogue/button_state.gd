@@ -11,6 +11,7 @@ func _ready() -> void:
 	button.usage = &"menu.button.primary" if primary else &"menu.button.standard"
 	button.text = ["Normal", "Hovered", "Pressed", "Disabled", "Focused"][state]
 	resized.connect(_resize_viewport)
+	visibility_changed.connect(_apply_state)
 	button.resized.connect(_apply_state, CONNECT_DEFERRED)
 	_resize_viewport()
 	_apply_state.call_deferred()
@@ -27,6 +28,8 @@ func configure(active_theme: Theme, compact: bool) -> void:
 
 func _apply_state() -> void:
 	button.release_focus()
+	if not is_visible_in_tree():
+		return
 	button.disabled = state == State.DISABLED
 	button.toggle_mode = state == State.PRESSED
 	button.set_pressed_no_signal(state == State.PRESSED)

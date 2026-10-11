@@ -1,10 +1,12 @@
 @tool
 extends StyleBox
-## A height-scaled nine-patch keeps the cast end fittings proportional.
+## A height-scaled nine-patch supports quiet walnut and ornate primary frames.
 @export var texture: Texture2D
 @export var finial: Texture2D
 @export var tint := Color.WHITE
 @export var focus_tint := Color.WHITE
+@export var selection_tint := Color.WHITE
+@export var maximum_side_fraction := 0.5
 @export var source_margin := Vector2(260, 40)
 @export var finial_fraction := Vector2(0.34, 0.25)
 @export var depth := 3.0
@@ -20,6 +22,8 @@ func _draw(canvas: RID, rect: Rect2) -> void:
 	var button := get_current_item_drawn() as BaseButton
 	if button and button.has_focus() and not button.disabled:
 		modulation *= focus_tint
+	elif button and button.toggle_mode and button.button_pressed and not button.disabled:
+		modulation *= selection_tint
 	var face := rect
 	face.size.y -= depth
 	face.position.y += pressed_offset
@@ -31,7 +35,7 @@ func _draw(canvas: RID, rect: Rect2) -> void:
 	face.size.x -= tip.x * 0.9
 	var source_size := texture.get_size()
 	var border := source_margin * face.size.y / source_size.y
-	border.x = minf(border.x, face.size.x / 2)
+	border.x = minf(border.x, face.size.x * maximum_side_fraction)
 	var sx := [0.0, source_margin.x, source_size.x - source_margin.x, source_size.x]
 	var sy := [0.0, source_margin.y, source_size.y - source_margin.y, source_size.y]
 	var dx := [0.0, border.x, face.size.x - border.x, face.size.x]

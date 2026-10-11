@@ -1,9 +1,10 @@
 # Rookframe UI Kit
 
-The public Godot UI Kit. The standalone catalogue now shows only the new
-Main Menu and Settings elements implemented in `rookframe-godot`, with the same
+The public Godot UI Kit. The standalone catalogue shows the new
+Main Menu and Settings elements implemented in `rookframe-godot`, plus an
+in-game editor foundation, with the same
 **Cyberpunk** and **Fantasy** themes. Switch themes, regular/compact density,
-and Menu, Settings, or Type & icons pages from the catalogue header.
+and Menu, Settings, Type & icons, or In-game editor pages from the catalogue header.
 
 The copied resources live at `res://rookframe/ui/menu/`: native Themes, primary
 and standard menu Button scenes, a textured Panel scene, decorative illustrations,
@@ -14,7 +15,7 @@ The **Old catalogue** button opens the previous Silkbound Ledger catalogue,
 including its original tabs and interactive demos. **Current catalogue** returns
 to the new design with its theme, density and page selection preserved. Older
 components and their documentation remain available for existing consumers. The current theme covers only the
-implemented menu/settings vocabulary, not every Godot Control.
+implemented menu/settings/editor vocabulary, not every Godot Control.
 
 ## Exact-commit installation
 
@@ -91,7 +92,7 @@ Use `rookframe/ui/menu/cyberpunk/CyberpunkTheme.tres` or
 `rookframe/ui/menu/MenuTheme.tres` (Fantasy) as a scene or project Theme. Instance
 `MenuButtonPrimary.tscn`, `MenuButtonStandard.tscn`, `MenuChoice.tscn`, and
 `MenuSurface.tscn` from that directory. `MenuChoice` is a native OptionButton
-recipe: Fantasy uses a walnut and brass frame with an inset tray; Cyberpunk
+recipe: Fantasy uses a restrained walnut frame with an inset tray; Cyberpunk
 retains its virtual blue surfaces and cyan signals. It binds its popup Theme,
 places the selected checkmark at the trailing edge, and keeps long menus within
 the available space above or below the control. Native keyboard navigation,
@@ -121,6 +122,49 @@ For dropdown visual evidence, run the second check without `--headless` and
 append `-- --capture-dir=<directory>`. This captures both themes and densities,
 open, closed and disabled states, a long scrolling list, RTL and scaled layout.
 Use `-- --preview` instead to leave the interactive Fantasy example open.
+
+### In-game editor buttons and surfaces
+
+The editor components extend the **new** Fantasy and Cyberpunk themes above.
+Fantasy reserves carved brass fittings for primary actions. Tools, secondary
+actions, and dropdowns use recessed walnut with a slim, beveled brass casing and
+gently rounded corners, alongside
+textured stone rails/panels and walnut inset/log surfaces.
+Cyberpunk uses the menu's alloy switches, emissive actions, and virtual
+chassis materials. There is no dependency on the legacy Silkbound theme.
+
+| Scene under `res://rookframe/ui/editor/` | Use |
+| --- | --- |
+| `EditorToolButton.tscn` | Square icon tool, 64px regular / 52px compact |
+| `EditorActionButton.tscn` | Primary labelled action; optional native icon |
+| `EditorToolRail.tscn` | Framed native `Tools` BoxContainer; set `vertical = false` for a horizontal rail |
+| `EditorSurface.tscn` | PanelContainer with native content sizing and material padding |
+
+Buttons expose `compact` / `set_compact(bool)` and `usage`:
+`editor.button.tool`, `editor.button.action`, or `editor.button.standard`.
+The `action` usage is primary; `standard` is secondary.
+Use native `icon`, `text`, `disabled`, `shortcut`, `pressed`, `toggled`, and
+`toggle_mode`. Give icon tools an explicit `accessibility_name` and `tooltip_text`.
+For exclusive selection, assign the same `ButtonGroup` to the participating
+buttons; create it once in the owning scene so instanced recipes share it.
+Selection survives live theme and density changes. The recipes reserve their
+target height and square tool width; native Button sizing accommodates copy.
+
+Surface variations are `editor_surface_panel`, `editor_surface_rail`,
+`editor_surface_inset`, and `editor_surface_log`. Append `__compact` for compact
+padding. Place a normal Container inside a surface and add content to that
+Container. Surface gaps stop pointer input from falling through to the world;
+hosts should handle world input through `_unhandled_input`. Hosts own tool
+actions, placement, dismissals, and scene data.
+
+The In-game editor catalogue page has native state previews and an interactive
+tool/layer/placement example. Run its input, layout and material checks with:
+
+```sh
+/Applications/Godot.app/Contents/MacOS/Godot --headless --path . --script res://tests/editor_components.gd
+# Omit --headless to render evidence for both themes and densities:
+/Applications/Godot.app/Contents/MacOS/Godot --path . --script res://tests/editor_components.gd -- --capture-dir=/tmp/editor-components
+```
 
 ## License
 

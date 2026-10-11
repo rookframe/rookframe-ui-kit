@@ -12,6 +12,7 @@ func _init(mapping: Script = Mapping, materials: Script = Materials) -> void:
 	default_font_size = materials.value(mapping.DEFAULTS.font_size)
 	var elements: Dictionary = mapping.ELEMENTS.duplicate()
 	elements.merge(preload("settings_theme_map.gd").ELEMENTS)
+	elements.merge(preload("../editor/editor_theme_map.gd").ELEMENTS)
 	for usage in elements:
 		var properties: Dictionary = elements[usage]
 		var native_usage := native_type(usage)
@@ -55,6 +56,7 @@ func _compile_button(usage: StringName, compact: bool, mapping: Script, material
 		set_icon(property, variant, materials.value(resting[property]))
 	for property in ["cap_tint", "edge_tint", "shadow_tint", "groove_color", "cut_edge_color"]:
 		set_color(property, variant, materials.value(resting[property]))
+	set_color("rest_tint", variant, materials.value(resting.get("rest_tint", resting.cap_tint)))
 	# Godot provides orthogonal focus rendering and the native input state machine.
 	# Each native draw slot is a projection of the semantic state dimensions.
 	var slots := {
