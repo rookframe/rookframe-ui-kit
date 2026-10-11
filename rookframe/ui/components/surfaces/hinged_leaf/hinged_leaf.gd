@@ -40,6 +40,7 @@ func _ready() -> void:
 	_image.texture = _render.get_texture()
 	resized.connect(_layout)
 	visibility_changed.connect(_visibility_changed)
+	_source.gui_focus_changed.connect(_content_focus_changed)
 	_layout()
 	_folded()
 
@@ -78,6 +79,7 @@ func set_open(value: bool, animated := true) -> void:
 	if not animated or reduced_motion or not is_visible_in_tree():
 		if value: _pose(1.0)
 		else: _folded()
+		if value: _focus_content.call_deferred()
 		settled.emit(value)
 		return
 	if value:
@@ -100,7 +102,28 @@ func _begin_open(generation: int) -> void:
 	_motion.tween_method(_pose, 0.0, 1.0, OPEN_SECONDS)
 	_motion.tween_callback(func():
 		animating = false
+		_focus_content()
 		settled.emit(true))
+
+func _focus_content() -> void:
+	if not is_open or animating or not is_visible_in_tree(): return
+	# SubViewports have independent focus chains. Transfer focus into the live
+	# Controls after the animated face settles.
+	var first := get_content().find_next_valid_focus()
+	if first != null:
+		first.grab_focus()
+
+func _content_focus_changed(control: Control) -> void:
+	# Stock SubViewportContainer forwards keys in _unhandled_input by default.
+	# While its child owns focus, forward in _input instead, before the parent
+	# viewport treats Tab as navigation into its own unrelated focus chain.
+	_surface.set_process_input(true)
+	_surface.set_process_unhandled_input(false)
+	control.focus_exited.connect(_content_focus_exited, CONNECT_ONE_SHOT)
+
+func _content_focus_exited() -> void:
+	_surface.set_process_input(false)
+	_surface.set_process_unhandled_input(true)
 
 func _pose(value: float) -> void:
 	_progress = value
@@ -179,6 +202,7 @@ func _surface_pose(angle: float, depth: float, compression := Vector2.ONE, dip :
 	_shadow.material.set_shader_parameter("opacity", lerpf(0.52, 0.27, loft) * exposure)
 
 func _begin_close() -> void:
+	_source.gui_release_focus()
 	if not _surface.visible:
 		_folded()
 		return
@@ -202,6 +226,7 @@ func _begin_close() -> void:
 		settled.emit(false))
 
 func _folded() -> void:
+	_source.gui_release_focus()
 	animating = false
 	_progress = 0.0
 	_surface.hide()
