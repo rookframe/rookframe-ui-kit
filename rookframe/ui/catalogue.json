@@ -1212,6 +1212,8 @@
       "res://rookframe/ui/menu/MenuButtonStandard.tscn",
       "res://rookframe/ui/menu/MenuButtonDestructive.tscn",
       "res://rookframe/ui/menu/MenuChoice.tscn",
+      "res://rookframe/ui/menu/Switch.tscn",
+      "res://rookframe/ui/menu/SwitchGroup.tscn",
       "res://rookframe/ui/menu/MenuSurface.tscn",
       "res://rookframe/ui/components/data/action_row.tscn",
       "res://rookframe/ui/editor/EditorToolButton.tscn",
@@ -1252,6 +1254,24 @@
       "density": "Append __compact to native variations; button recipes expose compact and set_compact(bool).",
       "materials": "Fantasy reserves ornate brass for primary actions; tools, secondary actions and dropdowns use recessed walnut in a slim beveled brass casing with gently rounded corners. Surfaces use textured stone and walnut. Cyberpunk uses alloy/emissive switches and virtual chassis.",
       "behavior": "Native Button signals, toggle_mode, ButtonGroup, shortcuts, tooltips and focus. Surface children use ordinary Containers; EditorToolRail exposes Tools, a BoxContainer."
+    },
+    "switch": {
+      "usage": "components.switch",
+      "scene": "res://rookframe/ui/menu/Switch.tscn",
+      "rootType": "Button",
+      "variations": [
+        "components_switch",
+        "components_switch__compact"
+      ],
+      "properties": {
+        "title": "Option",
+        "description": "",
+        "compact": false
+      },
+      "behavior": "Native toggle Button, button_pressed, toggled(bool), pressed, disabled, shortcut and keyboard focus. Share a host-owned ButtonGroup for exclusive selection. Theme and density changes preserve selection.",
+      "layout": "At least 116 px regular / 88 px compact. Title and description wrap. The trailing checkmark uses the same resource and disabled tint as MenuChoice, reserving its space when unselected.",
+      "materials": "Fantasy reuses the new walnut/brass button casing and inscription, with material lighting for selection and focus. Cyberpunk reuses the new alloy button faces, bevels, cut corners and cyan signals.",
+      "grouping": "SwitchGroup.tscn supplies the menu_group stone/chassis tray. Add Switch cards to get_options() (Inset/Options) and share a host-owned ButtonGroup for exclusive selection. The group keeps an equal-width row while each option fits at 320 px regular / 280 px compact, otherwise stacking vertically. compact / set_compact(bool) update the group and its cards."
     }
   }
 }

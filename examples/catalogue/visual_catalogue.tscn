@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" path="res://rookframe/ui/menu/MenuButtonDestructive.tscn" id="destructive"]
 
 [ext_resource type="PackedScene" path="res://examples/catalogue/editor_catalogue.tscn" id="editor"]
+[ext_resource type="PackedScene" path="res://examples/catalogue/switch_catalogue.tscn" id="switches"]
 
 [node name="VisualCatalogue" type="Control"]
 layout_mode = 1
@@ -490,6 +491,18 @@ layout_mode = 2
 theme_type_variation = &"settings_help"
 text = "Use a specific action label. When opening a confirmation, focus Cancel first."
 autowrap_mode = 2
+
+[node name="Switch" parent="Frame/Shell/Stack/Scroll/Pages/Menu" instance=ExtResource("section")]
+layout_mode = 2
+
+[node name="Heading" type="Label" parent="Frame/Shell/Stack/Scroll/Pages/Menu/Switch/Inset/Content"]
+layout_mode = 2
+theme_type_variation = &"settings_label"
+text = "Switch"
+
+[node name="Switches" parent="Frame/Shell/Stack/Scroll/Pages/Menu/Switch/Inset/Content" instance=ExtResource("switches")]
+unique_name_in_owner = true
+layout_mode = 2
 
 [node name="Settings" type="VBoxContainer" parent="Frame/Shell/Stack/Scroll/Pages"]
 layout_mode = 2

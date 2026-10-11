@@ -1,0 +1,47 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://rookframe/ui/menu/switch.gd" id="recipe"]
+
+[node name="Switch" type="Button"]
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+theme_type_variation = &"components_switch"
+toggle_mode = true
+script = ExtResource("recipe")
+
+[node name="Content" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Row" type="HBoxContainer" parent="Content"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Copy" type="VBoxContainer" parent="Content/Row"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+mouse_filter = 2
+
+[node name="Title" type="Label" parent="Content/Row/Copy"]
+layout_mode = 2
+mouse_filter = 2
+text = "Option"
+autowrap_mode = 3
+
+[node name="Description" type="Label" parent="Content/Row/Copy"]
+layout_mode = 2
+mouse_filter = 2
+autowrap_mode = 3
+
+[node name="SelectionMark" type="TextureRect" parent="Content/Row"]
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5

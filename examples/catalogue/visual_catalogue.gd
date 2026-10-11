@@ -18,11 +18,12 @@ func _ready() -> void:
 	%DensityChoice.accessibility_name = "Density"
 	%PageChoice.accessibility_name = "Component page"
 	%Editor.feedback.connect(func(message: String) -> void: %Feedback.text = message)
+	%Switches.feedback.connect(func(message: String) -> void: %Feedback.text = message)
 	resized.connect(_fit_catalogue)
 	for states in [%PrimaryStates, %SecondaryStates, %DestructiveStates]:
 		states.get_node("Focused").focus_preview_requested.connect(_queue_focus_previews)
 	for button: Button in find_children("*", "Button", true, false):
-		if %Editor.is_ancestor_of(button):
+		if %Editor.is_ancestor_of(button) or %Switches.is_ancestor_of(button):
 			continue
 		button.pressed.connect(func() -> void:
 			%Feedback.text = "%s pressed." % (button.text if not button.text.is_empty() else "Navigation")
