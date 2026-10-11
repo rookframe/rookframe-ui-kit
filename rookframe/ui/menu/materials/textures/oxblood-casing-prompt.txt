@@ -1,0 +1,11 @@
+Generated with the built-in image_gen tool in edit mode on 2026-10-11.
+Final asset: AI_generated_oxblood_steel_casing.png
+Initial edit target: AI_generated_walnut_brass_casing.png
+Transparent background: true
+
+Final metal edit prompt (applied to the oxblood/brass intermediate):
+undefined
+
+Initial oxblood wood edit prompt:
+
+Use case: precise-object-edit. Asset type: production nine-slice fantasy game UI button face. Image 1 is the existing square walnut-and-brass secondary button, used as the EDIT TARGET. Create its DESTRUCTIVE ACTION material variant. Change ONLY the recessed inner walnut from dark brown to deep oxblood red stained walnut: a rich muted burgundy/crimson, with fine natural horizontal wood grain still visible. Aim for representative wood color around sRGB(82,28,29), darker grain and subtle warm red highlights. Dark, restrained and tactile; no bright scarlet, pink, purple, glossy plastic, glow or gradient overlay. Keep the slim aged-brass casing gold, with the same metallic bevel, fine patina and upper-left lighting. Preserve the target's exact 1254x1254 square canvas, framing, transparent margins, corner radii, casing thickness, geometry, silhouette and shadow. The content rectangle remains x=88,y=105,width=1080,height=1044 for the existing atlas. This is a texture-only variant: no text, no icon, no symbols, no ornaments, no extra border, no background. Preserve genuine alpha outside the silhouette. Do not make a long button; return the same square nine-slice source.

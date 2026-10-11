@@ -1210,6 +1210,7 @@
     "components": [
       "res://rookframe/ui/menu/MenuButtonPrimary.tscn",
       "res://rookframe/ui/menu/MenuButtonStandard.tscn",
+      "res://rookframe/ui/menu/MenuButtonDestructive.tscn",
       "res://rookframe/ui/menu/MenuChoice.tscn",
       "res://rookframe/ui/menu/MenuSurface.tscn",
       "res://rookframe/ui/components/data/action_row.tscn",
@@ -1233,6 +1234,7 @@
     "menuButtons": {
       "layout": "menu.buttons (native menu_buttons) is a MarginContainer around the secondary action stack, excluding the primary. Append __compact for compact density.",
       "inset": "Fantasy reserves 34/22 px per side for the primary's carved ends; Cyberpunk reserves no inset. Buttons have no external margins.",
+      "destructive": "components.button.destructive (native components_button_destructive) shares secondary dimensions and native Button behavior. Fantasy uses oxblood wood and worn steel; Cyberpunk uses red alloy. Host owns confirmation and effects; focus Cancel first when opening a confirmation.",
       "height": "Button recipes own themed minimum heights: primary 64/44 px, Fantasy standard 50/34 px, Cyberpunk standard 60/44 px. Containers choose widths without imposing legacy minimum heights."
     },
     "editor": {

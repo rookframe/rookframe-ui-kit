@@ -29,7 +29,7 @@ func _init(mapping: Script = Mapping, materials: Script = Materials) -> void:
 				"constants": set_constant(path[1], native_usage, value)
 				"styles": set_stylebox(path[1], native_usage, value)
 				"icons": set_icon(path[1], native_usage, value)
-	for usage in [Usage.PRIMARY, Usage.STANDARD]:
+	for usage in [Usage.PRIMARY, Usage.STANDARD, Usage.DESTRUCTIVE]:
 		for compact in [false, true]:
 			_compile_button(usage, compact, mapping, materials)
 

@@ -157,6 +157,17 @@ const BUTTON_MATERIALS = {
         "ornament_width": "wood.plain.ornament_width",
         "ornament_travel": "wood.plain.ornament_travel",
     },
+    Usage.DESTRUCTIVE: {
+        "ornament_rest": "brass.standard.ornament_rest",
+        "cap": "wood.destructive.cap",
+        "cap_tint": "wood.destructive.cap_tint",
+        "rest_tint": "wood.destructive.rest_tint",
+        "edge_tint": "wood.destructive.edge_tint",
+        "patch_side": "wood.plain.patch_side",
+        "patch_rail": "wood.plain.patch_rail",
+        "ornament_width": "wood.plain.ornament_width",
+        "ornament_travel": "wood.plain.ornament_travel",
+    },
 }
 const BUTTON_DENSITY = {
     State.REGULAR: {
@@ -167,8 +178,9 @@ const BUTTON_DENSITY = {
     },
 }
 const BUTTON_FOCUS = {
-    "focus": "brass.adornment.focus",
-    "label": "button.standard.font_focus_color",
+    Usage.PRIMARY: {"focus": "brass.adornment.focus", "label": "button.primary.font_focus_color"},
+    Usage.STANDARD: {"focus": "wood.plain.focus", "label": "button.standard.font_focus_color"},
+    Usage.DESTRUCTIVE: {"focus": "wood.destructive.focus", "label": "button.destructive.font_focus_color"},
 }
 const BUTTON_STATES = {
     Usage.STANDARD: {
@@ -191,6 +203,28 @@ const BUTTON_STATES = {
             "surface": "wood.disabled.surface",
             "border": "wood.disabled.border",
             "label": "button.standard.font_disabled_color",
+        },
+    },
+    Usage.DESTRUCTIVE: {
+        State.RESTING: {
+            "surface": "wood.resting.surface",
+            "border": "wood.resting.border",
+            "label": "button.destructive.font_color",
+        },
+        State.HOVERED: {
+            "surface": "wood.hovered.surface",
+            "border": "wood.hovered.border",
+            "label": "button.destructive.font_hover_color",
+        },
+        State.PRESSED: {
+            "surface": "wood.pressed.surface",
+            "border": "wood.pressed.border",
+            "label": "button.destructive.font_pressed_color",
+        },
+        State.DISABLED: {
+            "surface": "wood.disabled.surface",
+            "border": "wood.disabled.border",
+            "label": "button.destructive.font_disabled_color",
         },
     },
     Usage.PRIMARY: {
@@ -247,6 +281,7 @@ const STANDARD_PADDING = {
 const BUTTON_HEIGHT = {
     Usage.PRIMARY: {State.REGULAR: "button.primary.height", State.COMPACT: "button.primary.height.compact"},
     Usage.STANDARD: {State.REGULAR: "button.standard.height", State.COMPACT: "button.standard.height.compact"},
+    Usage.DESTRUCTIVE: {State.REGULAR: "button.standard.height", State.COMPACT: "button.standard.height.compact"},
 }
 
 static func button(usage: StringName, state: Dictionary) -> Dictionary:
@@ -256,11 +291,11 @@ static func button(usage: StringName, state: Dictionary) -> Dictionary:
     references.merge(BUTTON_DENSITY[state.density], true)
     references.merge(BUTTON_MATERIALS[usage], true)
     references.merge(BUTTON_STATES[usage][condition], true)
-    references["padding"] = (STANDARD_PADDING if usage == Usage.STANDARD else BUTTON_PADDING)[state.density][condition]
+    references["padding"] = (BUTTON_PADDING if usage == Usage.PRIMARY else STANDARD_PADDING)[state.density][condition]
     references["minimum_height"] = BUTTON_HEIGHT[usage][state.density]
     if state.focus == State.FOCUSED:
-        references["focus"] = "wood.plain.focus" if usage == Usage.STANDARD else BUTTON_FOCUS.focus
+        references["focus"] = BUTTON_FOCUS[usage].focus
         # Match native Button: focus ink applies at rest; hover/press keep their ink.
         if state.availability == State.ENABLED and state.interaction == State.RESTING:
-            references["label"] = BUTTON_FOCUS.label
+            references["label"] = BUTTON_FOCUS[usage].label
     return references
