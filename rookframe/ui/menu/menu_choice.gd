@@ -10,12 +10,36 @@ const TrailingCheck = preload("../_internal/menu/trailing_check.gd")
 			_refresh_theme()
 var _refresh_pending := false
 var _configuring := false
+var _popup_items: Control
 
 
 func _ready() -> void:
 	get_popup().about_to_popup.connect(_prepare_popup)
 	get_popup().visibility_changed.connect(_popup_visibility_changed)
+	get_popup().window_input.connect(_update_popup_cursor)
+	_bind_popup_cursors(get_popup())
 	_refresh_theme()
+
+
+func _bind_popup_cursors(node: Node) -> void:
+	# PopupMenu is a Window; its item canvas and scrollbars own the cursor.
+	# Discover native controls by type instead of relying on internal node paths.
+	for child in node.get_children(true):
+		if child is ScrollBar:
+			child.mouse_default_cursor_shape = CURSOR_POINTING_HAND
+		elif child is Control and node is ScrollContainer and child.focus_mode == FOCUS_ALL:
+			_popup_items = child
+		_bind_popup_cursors(child)
+
+
+func _update_popup_cursor(event: InputEvent) -> void:
+	if not event is InputEventMouse or not is_instance_valid(_popup_items):
+		return
+	# Native popup hit testing precedes item input in embedded and separate windows.
+	var menu := get_popup()
+	var index := menu.get_focused_item()
+	var selectable := index >= 0 and not menu.is_item_disabled(index) and not menu.is_item_separator(index)
+	_popup_items.mouse_default_cursor_shape = CURSOR_POINTING_HAND if selectable else CURSOR_ARROW
 
 
 func set_compact(enabled: bool) -> void:

@@ -107,6 +107,10 @@ Native Settings controls use the `settings_*` Theme variations;
 for a bare OptionButton, set its popup variation to `settings_popup` (or
 `settings_popup__compact`). Set a ScrollContainer's
 vertical scrollbar variation to `settings_scrollbar`, as the catalogue does.
+Use `Control.CURSOR_POINTING_HAND` for native Settings buttons and scrollbars'
+`mouse_default_cursor_shape`. The menu/editor button recipes and `MenuChoice`
+already provide this cursor, including selectable dropdown items and popup
+scrollbars. Disabled dropdown items and separators retain the arrow cursor.
 The earlier pinned installation example above predates these additions;
 select a commit containing them when consuming the new design.
 
