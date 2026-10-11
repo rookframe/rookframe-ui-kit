@@ -12,6 +12,7 @@ func _init(mapping: Script = Mapping, materials: Script = Materials) -> void:
 	default_font_size = materials.value(mapping.DEFAULTS.font_size)
 	var elements: Dictionary = mapping.ELEMENTS.duplicate()
 	elements.merge(preload("settings_theme_map.gd").ELEMENTS)
+	elements.merge(preload("switch_theme_map.gd").ELEMENTS)
 	elements.merge(preload("../editor/editor_theme_map.gd").ELEMENTS)
 	for usage in elements:
 		var properties: Dictionary = elements[usage]

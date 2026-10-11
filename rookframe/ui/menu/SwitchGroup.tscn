@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://rookframe/ui/menu/switch_group.gd" id="recipe"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/menu/MenuSurface.tscn" id="surface"]
+
+[node name="SwitchGroup" type="MarginContainer"]
+mouse_filter = 0
+script = ExtResource("recipe")
+
+[node name="Background" parent="." instance=ExtResource("surface")]
+layout_mode = 2
+theme_type_variation = &"menu_group"
+
+[node name="Inset" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_type_variation = &"components_switch_group"
+
+[node name="Options" type="BoxContainer" parent="Inset"]
+layout_mode = 2
+theme_type_variation = &"components_switch_options"

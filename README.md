@@ -162,6 +162,51 @@ append `-- --capture-dir=<directory>`. This captures both themes and densities,
 open, closed and disabled states, a long scrolling list, RTL and scaled layout.
 Use `-- --preview` instead to leave the interactive Fantasy example open.
 
+### Switch
+
+Instance `res://rookframe/ui/menu/Switch.tscn` under either new Theme. The shared
+Usage token is `components.switch`, mapped to native `components_switch` and
+`components_switch__compact` variations. Fantasy uses the new buttons' textured
+walnut and beveled brass casing, with material lighting for selection and focus.
+Cyberpunk uses their alloy faces, cut corners, depth and cyan selection edges.
+
+Set `title` and optional `description` for the card's copy; leave native
+`Button.text` and `icon` empty. Selected cards show the same checkmark resource
+as the current theme's dropdown, including its disabled tint. Unselected cards
+reserve the icon's space, so selection never shifts the copy. The native toggle
+state supplies the accessible selection state.
+
+Set `compact` or call `set_compact(bool)` for density. The recipe manages its
+minimum size: at least 116 px regular / 88 px compact, growing for wrapped copy.
+Each card remains a native toggle Button with `button_pressed`, `toggled(bool)`,
+`pressed`, `disabled`, `shortcut`, and keyboard focus. Theme and density changes
+preserve selection. The title and description supply accessible copy; explicit
+`accessibility_name` and `accessibility_description` take precedence.
+
+Use `res://rookframe/ui/menu/SwitchGroup.tscn` for related options. Add Switch
+instances to `get_options()` (the native BoxContainer at `Inset/Options`), and
+assign the same host-owned `ButtonGroup` to those cards for exclusive selection.
+Set one card's initial `button_pressed = true`. Independent groups use separate
+ButtonGroups; standalone cards can toggle independently.
+
+SwitchGroup supplies the existing `menu_group` material: stone tray in Fantasy,
+chassis tray in Cyberpunk. It supports any number of options. Cards share a row
+using a preferred card width of 320 px regular / 280 px compact; when the row
+would not fit, the whole group stacks vertically. The threshold also accounts for padding, gaps and
+larger native card minimums. Adding, removing or hiding options recomputes the
+layout. Set `compact` on the group to update its padding, spacing and cards.
+The corresponding Theme variations are `components_switch_group` and
+`components_switch_options`, with `__compact` variants.
+
+The **Switch** catalogue page demonstrates two- and three-option groups,
+responsive stacking, and disabled selected/unselected states. Run its integration
+check with:
+
+```sh
+/Applications/Godot.app/Contents/MacOS/Godot --headless --path . --script res://tests/switch.gd
+# Omit --headless and append -- --capture-dir=/tmp/switch to render both themes.
+```
+
 ### In-game editor buttons and surfaces
 
 The editor components extend the **new** Fantasy and Cyberpunk themes above.
