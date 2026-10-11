@@ -58,3 +58,23 @@ func test_roll_states_share_one_crisp_image_and_change_material() -> void:
 		var style: StyleBoxTexture = theme.get_stylebox(state, "RookframeActionRoll")
 		assert_object(style.texture).is_same(normal.texture)
 		assert_bool(style.modulate_color == normal.modulate_color).is_false()
+
+func test_footer_keeps_actions_clear_of_the_stepped_edge(compact: bool, _test_parameters := [[false], [true]]) -> void:
+	var panel = auto_free(PANEL.instantiate())
+	panel.compact = compact
+	panel.custom_minimum_size.x = 320 if compact else 520
+	add_child(panel)
+	var row := HBoxContainer.new()
+	var name := Label.new()
+	name.text = "Target"
+	name.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	row.add_child(name)
+	var action := Button.new()
+	action.custom_minimum_size = Vector2(44, 44)
+	action.theme_type_variation = &"RookframeActionIcon"
+	row.add_child(action)
+	panel.get_footer_slot().add_child(row)
+	for i in range(5): await await_idle_frame()
+	var leaf: Control = panel.get_node("Footer/Leaf")
+	assert_float(action.get_global_rect().end.x).is_less_equal(leaf.get_global_rect().end.x - 28.0)
+	assert_float(action.size.x).is_greater_equal(44.0)

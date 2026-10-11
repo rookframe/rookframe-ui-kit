@@ -42,7 +42,9 @@ panel.show_footer = false
 ```
 
 Use the shared `RookframeActionIcon` Button variation for a centered 24px glyph
-inside a 44px target. `RookframeActionRoll` retains the approved illustrated D20;
+inside a 44px target. The footer's content inset reserves its stepped edge so
+hover and focus feedback stay on the material instead of crossing the cutout.
+`RookframeActionRoll` retains the approved illustrated D20;
 all four states use the same source image with material tint and pressed offset.
 Systems using another die or action supply an ordinary Button and their own icon.
 `RookframeActionDivider` supplies the thin copper separator. Labels and controls
