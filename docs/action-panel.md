@@ -37,7 +37,7 @@ var section = preload("res://rookframe/ui/components/surfaces/action_panel/actio
 var rows := VBoxContainer.new()
 section.add_child(rows)
 panel.get_sections_slot().add_child(section)
-# Add Labels, Buttons, SpinBoxes, authored scenes, etc. to rows.
+# Add Labels, Buttons, OptionButtons, authored scenes, etc. to rows.
 panel.show_footer = false
 ```
 

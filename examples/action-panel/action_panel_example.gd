@@ -20,10 +20,10 @@ func _add_section() -> void:
 	label.text = "Additional system control"
 	label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	row.add_child(label)
-	var amount := SpinBox.new()
-	amount.min_value = 0
-	amount.max_value = 10
-	amount.value = 3
+	var amount := OptionButton.new()
+	for value in [0, 3, 5, 10]:
+		amount.add_item(str(value))
+	amount.select(1)
 	row.add_child(amount)
 	panel.get_sections_slot().add_child(section)
 	LINE_HEIGHT.apply(label, 1.2)
