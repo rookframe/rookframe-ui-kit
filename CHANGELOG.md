@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Add the shared Chronicle surface for retained event histories, recaps, quest
+  journals and lore: worn, fibrous parchment in Fantasy and an archive panel
+  in Cyberpunk, with reading styles, compact density and catalogue guidance.
+
 - Migrate the shared default and task Themes, tokens, forms, records, progress,
   and managed/file-picker surfaces to Silkbound Ledger using stock Godot.
 - Complete native control states and regional serif font resources; retain all

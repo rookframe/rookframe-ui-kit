@@ -14,6 +14,7 @@ func _init(mapping: Script = Mapping, materials: Script = Materials) -> void:
 	elements.merge(preload("settings_theme_map.gd").ELEMENTS)
 	elements.merge(preload("switch_theme_map.gd").ELEMENTS)
 	elements.merge(preload("../editor/editor_theme_map.gd").ELEMENTS)
+	elements.merge(preload("../chronicle/chronicle_theme_map.gd").ELEMENTS)
 	for usage in elements:
 		var properties: Dictionary = elements[usage]
 		var native_usage := native_type(usage)
