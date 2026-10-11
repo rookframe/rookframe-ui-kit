@@ -69,6 +69,8 @@ func _apply_density() -> void:
 				control.custom_minimum_size.x = _metric("choice_width")
 		if control is ScrollContainer:
 			control.get_v_scroll_bar().theme_type_variation = &"settings_scrollbar"
+			control.get_v_scroll_bar().mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+			control.get_h_scroll_bar().mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 	for action: Button in %Settings.get_node("Actions").get_children():
 		action.custom_minimum_size = Vector2(_metric("action_width"), _metric("control_height"))
 	for cell: Control in %Typography.get_node("Icons").get_children():

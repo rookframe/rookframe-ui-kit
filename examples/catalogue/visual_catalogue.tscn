@@ -126,6 +126,7 @@ popup/item_3/id = 3
 [node name="OldCatalogue" type="Button" parent="Frame/Shell/Stack/Header/Selectors"]
 unique_name_in_owner = true
 layout_mode = 2
+mouse_default_cursor_shape = 2
 size_flags_horizontal = 8
 theme_type_variation = &"settings_back"
 text = "Old catalogue ›"
@@ -414,16 +415,19 @@ theme_override_constants/separation = 16
 
 [node name="Back" type="Button" parent="Frame/Shell/Stack/Scroll/Pages/Settings/Actions"]
 layout_mode = 2
+mouse_default_cursor_shape = 2
 text = "‹  BACK"
 theme_type_variation = &"settings_back"
 
 [node name="Secondary" type="Button" parent="Frame/Shell/Stack/Scroll/Pages/Settings/Actions"]
 layout_mode = 2
+mouse_default_cursor_shape = 2
 text = "Reset"
 theme_type_variation = &"settings_action_secondary"
 
 [node name="Primary" type="Button" parent="Frame/Shell/Stack/Scroll/Pages/Settings/Actions"]
 layout_mode = 2
+mouse_default_cursor_shape = 2
 text = "Apply"
 theme_type_variation = &"settings_action_primary"
 
