@@ -52,18 +52,11 @@ static func _materials() -> Dictionary:
 			frame.content_margin_top = 6 if compact else 10
 			frame.content_margin_bottom = 9 if compact else 13
 			frame.tint = Color("b5aaa0") if state == "disabled" else Color("fff2cf") if state == "hover" else Color("c7ad89") if state in ["pressed", "hover_pressed"] else Color.WHITE
+			frame.focus_tint = Color(1.4, 1.28, 1.12)
 			frame.pressed_offset = 1.5 if state in ["pressed", "hover_pressed"] else 0.0
 			values["choice." + state + suffix] = frame
-		var focus := StyleBoxFlat.new()
-		focus.bg_color = Color.TRANSPARENT
-		focus.border_color = Color("fff0b6")
-		focus.border_width_top = 2
-		focus.border_width_bottom = 2
-		focus.expand_margin_left = -42 if compact else -54
-		focus.expand_margin_right = focus.expand_margin_left
-		focus.expand_margin_top = -8
-		focus.expand_margin_bottom = -10
-		values["choice.focus" + suffix] = focus
+		# The textured frame supplies the focus light; no flat overlay on the wood.
+		values["choice.focus" + suffix] = StyleBoxEmpty.new()
 	values["choice.popup"] = _tray()
 	var hover := StyleBoxFlat.new()
 	hover.bg_color = Color("ad61044d")

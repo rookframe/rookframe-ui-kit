@@ -88,6 +88,7 @@ func verify() -> void:
 			var label := ("fantasy" if theme_index == 0 else "cyberpunk") + ("-compact" if compact else "-regular")
 			await capture(label + "-closed")
 			choice.grab_focus()
+			await capture(label + "-focused")
 			await key(KEY_ENTER)
 			check(menu.visible, label + ": keyboard did not open the menu")
 			check(menu.position.y >= choice.position.y + choice.size.y - choice.get_theme_constant("popup_overlap"), label + ": tray overlaps the trigger")
