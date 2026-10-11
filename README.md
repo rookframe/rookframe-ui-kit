@@ -89,9 +89,22 @@ Samples do not change application settings.
 
 Use `rookframe/ui/menu/cyberpunk/CyberpunkTheme.tres` or
 `rookframe/ui/menu/MenuTheme.tres` (Fantasy) as a scene or project Theme. Instance
-`MenuButtonPrimary.tscn`, `MenuButtonStandard.tscn`, and `MenuSurface.tscn` from
-that directory. Native Settings controls use the `settings_*` Theme variations;
-set an OptionButton's popup variation to `settings_popup` and a ScrollContainer's
+`MenuButtonPrimary.tscn`, `MenuButtonStandard.tscn`, `MenuChoice.tscn`, and
+`MenuSurface.tscn` from that directory. `MenuChoice` is a native OptionButton
+recipe: Fantasy uses a walnut and brass frame with an inset tray; Cyberpunk
+retains its virtual blue surfaces and cyan signals. It binds its popup Theme,
+places the selected checkmark at the trailing edge, and keeps long menus within
+the available space above or below the control. Native keyboard navigation,
+incremental search, item IDs, metadata, tooltips and selection signals remain
+available. Set `compact` or call `set_compact(true)` for the smaller density;
+the popup follows the same density. Theme or density changes dismiss an open
+tray before refreshing its materials. Give the control an `accessibility_name`
+that describes the setting. Its own minimum height is 64/48 px in Fantasy and
+52/48 px in Cyberpunk; containers choose the width.
+
+Native Settings controls use the `settings_*` Theme variations;
+for a bare OptionButton, set its popup variation to `settings_popup` (or
+`settings_popup__compact`). Set a ScrollContainer's
 vertical scrollbar variation to `settings_scrollbar`, as the catalogue does.
 The earlier pinned installation example above predates these additions;
 select a commit containing them when consuming the new design.
@@ -101,7 +114,13 @@ Standalone smoke check (no test add-on needed), after the normal editor import:
 ```sh
 /Applications/Godot_mono.app/Contents/MacOS/Godot --headless --editor --path . --import
 /Applications/Godot_mono.app/Contents/MacOS/Godot --headless --path . --script res://tests/current_design_system.gd
+/Applications/Godot_mono.app/Contents/MacOS/Godot --headless --path . --script res://tests/menu_choice.gd
 ```
+
+For dropdown visual evidence, run the second check without `--headless` and
+append `-- --capture-dir=<directory>`. This captures both themes and densities,
+open, closed and disabled states, a long scrolling list, RTL and scaled layout.
+Use `-- --preview` instead to leave the interactive Fantasy example open.
 
 ## License
 

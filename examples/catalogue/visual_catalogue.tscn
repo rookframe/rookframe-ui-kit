@@ -7,6 +7,8 @@
 [ext_resource type="Script" path="res://rookframe/ui/menu/menu_illustration.gd" id="art"]
 [ext_resource type="PackedScene" path="res://rookframe/ui/components/data/action_row.tscn" id="row"]
 
+[ext_resource type="PackedScene" path="res://rookframe/ui/menu/MenuChoice.tscn" id="choice"]
+
 [node name="VisualCatalogue" type="Control"]
 layout_mode = 1
 anchors_preset = 15
@@ -71,13 +73,15 @@ text = "Main Menu & Settings components"
 
 [node name="Selectors" type="VBoxContainer" parent="Frame/Shell/Stack/Header"]
 layout_mode = 2
+size_flags_horizontal = 3
 theme_override_constants/separation = 4
 
-[node name="Choices" type="HBoxContainer" parent="Frame/Shell/Stack/Header/Selectors"]
+[node name="Choices" type="HFlowContainer" parent="Frame/Shell/Stack/Header/Selectors"]
 layout_mode = 2
-theme_override_constants/separation = 12
+theme_override_constants/h_separation = 12
+theme_override_constants/v_separation = 8
 
-[node name="ThemeChoice" type="OptionButton" parent="Frame/Shell/Stack/Header/Selectors/Choices"]
+[node name="ThemeChoice" parent="Frame/Shell/Stack/Header/Selectors/Choices" instance=ExtResource("choice")]
 layout_mode = 2
 theme_type_variation = &"settings_choice"
 item_count = 2
@@ -89,7 +93,7 @@ popup/item_0/id = 0
 popup/item_1/text = "Fantasy"
 popup/item_1/id = 1
 
-[node name="DensityChoice" type="OptionButton" parent="Frame/Shell/Stack/Header/Selectors/Choices"]
+[node name="DensityChoice" parent="Frame/Shell/Stack/Header/Selectors/Choices" instance=ExtResource("choice")]
 layout_mode = 2
 theme_type_variation = &"settings_choice"
 item_count = 2
@@ -101,7 +105,7 @@ popup/item_0/id = 0
 popup/item_1/text = "Compact"
 popup/item_1/id = 1
 
-[node name="PageChoice" type="OptionButton" parent="Frame/Shell/Stack/Header/Selectors/Choices"]
+[node name="PageChoice" parent="Frame/Shell/Stack/Header/Selectors/Choices" instance=ExtResource("choice")]
 layout_mode = 2
 theme_type_variation = &"settings_choice"
 item_count = 3
@@ -338,19 +342,24 @@ text = "Language"
 [node name="Help" type="Label" parent="Frame/Shell/Stack/Scroll/Pages/Settings/Language/Copy"]
 layout_mode = 2
 theme_type_variation = &"settings_help"
-text = "Native OptionButton and themed PopupMenu"
+text = "Open the tray. Arrow keys navigate; Enter selects; Escape dismisses."
 autowrap_mode = 2
 
-[node name="Choice" type="OptionButton" parent="Frame/Shell/Stack/Scroll/Pages/Settings/Language"]
+[node name="Choice" parent="Frame/Shell/Stack/Scroll/Pages/Settings/Language" instance=ExtResource("choice")]
 layout_mode = 2
 theme_type_variation = &"settings_choice"
-item_count = 2
+item_count = 4
 selected = 0
 size_flags_vertical = 4
 popup/item_0/text = "English"
 popup/item_0/id = 0
-popup/item_1/text = "Русский"
+popup/item_1/text = "Deutsch"
 popup/item_1/id = 1
+
+popup/item_2/text = "Français"
+popup/item_2/id = 2
+popup/item_3/text = "Русский"
+popup/item_3/id = 3
 
 [node name="Quality" type="BoxContainer" parent="Frame/Shell/Stack/Scroll/Pages/Settings"]
 layout_mode = 2
@@ -371,7 +380,7 @@ theme_type_variation = &"settings_help"
 text = "A disabled selection"
 autowrap_mode = 2
 
-[node name="Choice" type="OptionButton" parent="Frame/Shell/Stack/Scroll/Pages/Settings/Quality"]
+[node name="Choice" parent="Frame/Shell/Stack/Scroll/Pages/Settings/Quality" instance=ExtResource("choice")]
 layout_mode = 2
 theme_type_variation = &"settings_choice"
 item_count = 1

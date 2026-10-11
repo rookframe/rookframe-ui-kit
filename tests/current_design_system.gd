@@ -39,7 +39,7 @@ func verify() -> void:
 			check(primary.get_node("Surface").texture == screen.theme.get_icon("cap", variant), "Button did not inherit theme artwork")
 			check(primary.get_theme_font("font") == screen.theme.get_font("font", variant), "Button font does not match the theme")
 			check(surface.get_node("Grain").texture == screen.theme.get_icon("grain", &"menu_world_record"), "Surface did not refresh its theme")
-			check(choice.get_popup().theme_type_variation == &"settings_popup", "Popup lost its theme")
+			check(choice.get_popup().theme_type_variation == (&"settings_popup__compact" if compact else &"settings_popup"), "Popup lost its theme or density")
 			for usage in [&"menu_button_primary", &"menu_button_standard", &"settings_choice", &"settings_action_primary", &"settings_action_secondary", &"settings_back", &"settings_navigation"]:
 				for state in [&"normal", &"hover", &"pressed", &"hover_pressed", &"disabled", &"focus"]:
 					check(screen.theme.has_stylebox(state, usage), "Missing %s/%s" % [usage, state])
@@ -73,6 +73,7 @@ func verify() -> void:
 		screen.size = Vector2(width, 900)
 		await settle()
 		check(screen.get_node("%Menu").vertical == (width < 1000), "Catalogue did not reflow")
+		check(screen.get_node("%Header").get_global_rect().end.x <= screen.get_global_rect().end.x, "Catalogue choices overflow the viewport")
 		_check_button_states(screen)
 	var capture_dir := ""
 	for argument in OS.get_cmdline_user_args():
@@ -86,7 +87,7 @@ func verify() -> void:
 				screen.select_page(page)
 				await settle()
 				await create_timer(0.4).timeout
-				await RenderingServer.frame_post_draw
+				RenderingServer.force_draw(false)
 				var path := "%s/%s-%s.png" % [capture_dir, "cyberpunk" if theme_index == 0 else "fantasy", page]
 				check(root.get_texture().get_image().save_png(path) == OK, "Could not save " + path)
 	screen.queue_free()
