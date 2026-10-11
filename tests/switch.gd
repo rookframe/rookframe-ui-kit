@@ -21,9 +21,15 @@ func check(condition: bool, message: String) -> void:
 func settle() -> void:
 	for frame in range(8):
 		await process_frame
+	var screen := root.get_node_or_null("VisualCatalogue")
+	var deadline := Time.get_ticks_msec() + 3000
+	while screen != null and (screen._capturing_focus or screen._focus_preview_pending) and Time.get_ticks_msec() < deadline:
+		await process_frame
 
 
 func click(button: Button) -> void:
+	root.get_node("VisualCatalogue/%Scroll").ensure_control_visible(button)
+	await settle()
 	var event := InputEventMouseButton.new()
 	event.button_index = MOUSE_BUTTON_LEFT
 	event.position = button.get_global_rect().get_center()
@@ -49,9 +55,18 @@ func key(code: Key) -> void:
 func capture(name: String) -> void:
 	if capture_dir.is_empty() or DisplayServer.get_name() == "headless":
 		return
+	await show_switch_section()
 	await create_timer(0.1).timeout
 	RenderingServer.force_draw(false)
 	check(root.get_texture().get_image().save_png(capture_dir.path_join(name + ".png")) == OK, "Capture failed: " + name)
+
+
+func show_switch_section() -> void:
+	var screen := root.get_node("VisualCatalogue")
+	var scroll: ScrollContainer = screen.get_node("%Scroll")
+	var section: Control = screen.get_node("%Menu/Switch")
+	scroll.scroll_vertical += roundi(section.global_position.y - scroll.global_position.y)
+	await settle()
 
 
 func verify() -> void:
@@ -66,8 +81,9 @@ func verify() -> void:
 	root.content_scale_size = root.size
 	var screen := Catalogue.instantiate()
 	root.add_child(screen)
-	screen.select_page(4)
+	screen.select_page(0)
 	await settle()
+	await show_switch_section()
 	var page: Control = screen.get_node("%Switches")
 	var device: Button = page.get_node("Group/Inset/Options/Device")
 	var server: Button = page.get_node("Group/Inset/Options/Server")
@@ -83,6 +99,7 @@ func verify() -> void:
 		for compact in [false, true]:
 			screen.set_compact(compact)
 			await settle()
+			await show_switch_section()
 			var variant := "components_switch" + ("__compact" if compact else "")
 			check(device.theme_type_variation == variant, "Switch did not apply density")
 			check(device.button_pressed and not server.button_pressed, "Theme/density lost the host's selection")

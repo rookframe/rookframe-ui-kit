@@ -92,8 +92,8 @@ Open this repository as a Godot 4.7 project or run it with the pinned toolchain:
 ```
 
 The project opens `examples/catalogue/visual_catalogue.tscn`. The Menu showcase
-stacks Structure-framed sections: Surfaces, then Buttons, with future component
-families appended below. Primary, secondary and destructive buttons retain native Normal,
+stacks Structure-framed sections: Surfaces, Buttons, then Switch, with future
+component families appended below. Primary, secondary and destructive buttons retain native Normal,
 Hovered, Pressed, Hovered + pressed, Disabled and Focused states. Focused previews
 are captured in turn so all appearances remain visible without competing for
 keyboard focus. Their columns
@@ -198,8 +198,9 @@ layout. Set `compact` on the group to update its padding, spacing and cards.
 The corresponding Theme variations are `components_switch_group` and
 `components_switch_options`, with `__compact` variants.
 
-The **Switch** catalogue page demonstrates two- and three-option groups,
-responsive stacking, and disabled selected/unselected states. Run its integration
+The **Switch** section follows Buttons in the Menu showcase and demonstrates
+two- and three-option groups, responsive stacking, and disabled selected/unselected
+states. Run its integration
 check with:
 
 ```sh

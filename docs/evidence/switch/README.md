@@ -1,7 +1,8 @@
 # Switch material and interaction evidence
 
 The two regular-density captures come from `tests/switch.gd` under Godot
-4.7.2, using the current Fantasy and Cyberpunk Themes. Fantasy shares the new
+4.7.2, scrolled to the Switch section after Buttons in the Menu showcase,
+using the shared Structure frame and current Fantasy and Cyberpunk Themes. Fantasy shares the new
 buttons' walnut grain, beveled brass casing and inset lettering. Cyberpunk
 shares the alloy button faces, cut corners, shadow depth and cyan edge signals.
 Related cards sit together in the existing `menu_group` surface: a textured stone
