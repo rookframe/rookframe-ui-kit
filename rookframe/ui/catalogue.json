@@ -1210,6 +1210,7 @@
     "components": [
       "res://rookframe/ui/menu/MenuButtonPrimary.tscn",
       "res://rookframe/ui/menu/MenuButtonStandard.tscn",
+      "res://rookframe/ui/menu/MenuChoice.tscn",
       "res://rookframe/ui/menu/MenuSurface.tscn",
       "res://rookframe/ui/components/data/action_row.tscn"
     ],

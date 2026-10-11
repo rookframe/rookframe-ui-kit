@@ -49,15 +49,18 @@ func _apply_density() -> void:
 		return
 	for control: Control in find_children("*", "Control", true, false):
 		var usage := String(control.theme_type_variation).trim_suffix("__compact")
-		if control.has_method("set_compact"):
+		if control is OptionButton and control.has_method("set_compact"):
+			control.set_compact(compact)
+		elif control.has_method("set_compact"):
 			control.set_compact(compact)
 			# The host's Main Menu uses these regular/short button heights.
 			control.custom_minimum_size.y = 44 if compact else 64 if control.usage == &"menu.button.primary" else 60
 		elif theme.get_type_variation_base(usage + "__compact") != &"":
 			control.theme_type_variation = usage + ("__compact" if compact else "")
 		if control is OptionButton:
-			control.get_popup().theme_type_variation = &"settings_popup"
-			control.custom_minimum_size.y = _metric("control_height")
+			if not control.has_method("set_compact"):
+				control.get_popup().theme_type_variation = &"settings_popup"
+				control.custom_minimum_size.y = _metric("control_height")
 			if %Settings.is_ancestor_of(control):
 				control.custom_minimum_size.x = _metric("choice_width")
 		if control is ScrollContainer:

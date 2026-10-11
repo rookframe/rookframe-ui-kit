@@ -94,4 +94,5 @@ static func _materials() -> Dictionary:
 		bar.content_margin_top = 6.0
 		bar.content_margin_bottom = 6.0
 		values["settings.scroll." + key] = bar
+	values.merge(preload("choice_materials.gd").materials(values))
 	return values
