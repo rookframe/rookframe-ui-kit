@@ -27,6 +27,7 @@ Application screens, workflows, domain state, host orchestration, redundant
 native wrappers, and a public C# widget hierarchy remain outside this kit.
 
 See [the coverage inventory](docs/design-system-coverage.md),
+[the modular Action Panel](docs/action-panel.md),
 [the RFG-161 completion map](docs/rfg-161-coverage.md),
 [the public component reference](docs/public-components.md),
 [native recipes](docs/native-controls-and-recipes.md),

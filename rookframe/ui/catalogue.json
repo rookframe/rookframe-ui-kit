@@ -1177,6 +1177,37 @@
         "value_changed(value: String)"
       ],
       "contract": "Fixed-page native editor; value retains the complete text across pages and resizing. Place get_pager() in the owning footer."
+    },
+    {
+      "name": "ActionPanel",
+      "scene": "res://rookframe/ui/components/surfaces/action_panel/action_panel.tscn",
+      "script": "res://rookframe/ui/components/surfaces/action_panel/action_panel.gd",
+      "rootType": "VBoxContainer",
+      "properties": {
+        "compact": false,
+        "show_footer": true,
+        "show_emblem": true
+      },
+      "methods": [
+        "get_header_slot() -> VBoxContainer",
+        "get_emblem_slot() -> CenterContainer",
+        "get_sections_slot() -> VBoxContainer",
+        "get_footer_slot() -> VBoxContainer"
+      ],
+      "signals": [],
+      "contract": "docs/action-panel.md"
+    },
+    {
+      "name": "ActionSection",
+      "scene": "res://rookframe/ui/components/surfaces/action_panel/action_section.tscn",
+      "script": "res://rookframe/ui/components/surfaces/action_panel/action_leaf.gd",
+      "rootType": "PanelContainer",
+      "properties": {
+        "surface": 0
+      },
+      "methods": [],
+      "signals": [],
+      "contract": "Ordinary Container child; nine-patch leather skin, no game logic."
     }
   ],
   "semanticIcons": {

@@ -1,0 +1,13 @@
+[gd_scene format=3]
+[ext_resource type="Script" path="res://rookframe/ui/components/surfaces/action_panel/action_leaf.gd" id="script"]
+[node name="ActionSection" type="PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 0
+theme_type_variation = &"RookframeActionSection"
+script = ExtResource("script")
+[node name="Skin" type="Node2D" parent="."]
+show_behind_parent = true
+[node name="Surface" type="Panel" parent="Skin"]
+scale = Vector2(0.4,0.4)
+mouse_filter = 2

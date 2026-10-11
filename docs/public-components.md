@@ -63,6 +63,11 @@ here.
 
 ## Layout and navigation
 
+The opt-in [Action Panel](action-panel.md) supplies the approved offset leather
+leaves, four public composition slots and automatically paired connectors. Its
+ordinary Godot sections grow with authored or programmatically added Controls.
+It has no combat or targeting behavior.
+
 | Scene / root | Public properties and defaults | Signals, methods, and slots | Behavior, focus, input, and accessibility |
 | --- | --- | --- | --- |
 | `adaptive_grid.tscn` / `GridContainer` | `minimum_columns = 1`; `maximum_columns = 4`; `minimum_column_width = 220.0` | `column_count_changed(column_count)` | Direct child Controls are equal-priority cells. Reflow uses measured width without recreating children, so source-order reading and focus order remain stable. Children own their accessible names and input. |
