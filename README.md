@@ -91,14 +91,20 @@ Open this repository as a Godot 4.7 project or run it with the pinned toolchain:
 /Applications/Godot_mono.app/Contents/MacOS/Godot --path .
 ```
 
-The project opens `examples/catalogue/visual_catalogue.tscn`. Menu samples retain native Normal, Hovered, Pressed, Disabled and Focused
-states inside a padded surface. Settings choices open themed popups.
+The project opens `examples/catalogue/visual_catalogue.tscn`. The Menu showcase
+stacks Structure-framed sections: Surfaces, then Buttons, with future component
+families appended below. Primary, secondary and destructive buttons retain native Normal,
+Hovered, Pressed, Hovered + pressed, Disabled and Focused states. Focused previews
+are captured in turn so all appearances remain visible without competing for
+keyboard focus. Their columns
+stack on narrow screens. `examples/catalogue/showcase_section.tscn` supplies the
+shared section frame and content inset. Settings choices open themed popups.
 Samples do not change application settings.
 
 Use `rookframe/ui/menu/cyberpunk/CyberpunkTheme.tres` or
 `rookframe/ui/menu/MenuTheme.tres` (Fantasy) as a scene or project Theme. Instance
-`MenuButtonPrimary.tscn`, `MenuButtonStandard.tscn`, `MenuChoice.tscn`, and
-`MenuSurface.tscn` from that directory. `MenuChoice` is a native OptionButton
+`MenuButtonPrimary.tscn`, `MenuButtonStandard.tscn`, `MenuButtonDestructive.tscn`,
+`MenuChoice.tscn`, and `MenuSurface.tscn` from that directory. `MenuChoice` is a native OptionButton
 recipe: Fantasy uses a restrained walnut frame with an inset tray; Cyberpunk
 retains its virtual blue surfaces and cyan signals. It binds its popup Theme,
 places the selected checkmark at the trailing edge, and keeps long menus within
@@ -109,6 +115,28 @@ the popup follows the same density. Theme or density changes dismiss an open
 tray before refreshing its materials. Give the control an `accessibility_name`
 that describes the setting. Its own minimum height is 64/48 px in Fantasy and
 52/48 px in Cyberpunk; containers choose the width.
+
+Menu buttons own their themed minimum height: primary 64/44 px, Fantasy standard
+50/34 px, and Cyberpunk standard 60/44 px (regular/compact). Fantasy's standard
+face is slightly slimmer than the primary's narrow central body; 6 px is depth.
+Let Containers size the buttons instead of imposing the old 60/44 px standard
+height. To align secondary menu actions inside the primary's carved ends, place
+their VBoxContainer inside a MarginContainer with `theme_type_variation =
+&"menu_buttons"` (Usage `menu.buttons`), or `&"menu_buttons__compact"`. Keep the
+primary outside this wrapper. Fantasy reserves 34/22 px on each side; Cyberpunk
+reserves none. These are menu layout margins, so standalone standard buttons do
+not acquire any external inset.
+
+For destructive actions, use `MenuButtonDestructive.tscn` (Usage
+`components.button.destructive`, native variation `components_button_destructive`). It shares
+the secondary button’s height, padding and native input behavior. Fantasy uses
+oxblood-stained walnut, worn steel and pale lettering; Cyberpunk uses a
+red alloy switch. Both provide a distinct focus outline and disabled ink.
+Call `set_compact(true)` for compact density and use the native `pressed` signal.
+The host owns the operation and confirmation behavior. In a confirmation, pair
+it with a standard Cancel button, focus Cancel on opening, and name the action
+explicitly (for example, “Leave World”). The catalogue includes this pairing;
+its buttons only report sample activation.
 
 Native Settings controls use the `settings_*` Theme variations;
 for a bare OptionButton, set its popup variation to `settings_popup` (or

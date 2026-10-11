@@ -17,14 +17,19 @@ func check(condition: bool, message: String) -> void:
 func settle() -> void:
 	for frame in range(4):
 		await process_frame
+	# Focused previews render sequentially because native focus is Window-wide.
+	var screen := root.get_node_or_null("VisualCatalogue")
+	var deadline := Time.get_ticks_msec() + 3000
+	while screen != null and (screen._capturing_focus or screen._focus_preview_pending) and Time.get_ticks_msec() < deadline:
+		await process_frame
 
 
 func verify() -> void:
 	var screen := Catalogue.instantiate()
 	root.add_child(screen)
 	await settle()
-	var primary: Button = screen.get_node("%Menu").get_node("Buttons/Surface/States/Normal/Viewport/Button")
-	var surface: Panel = screen.get_node("%Menu").get_node("Surfaces/Record")
+	var primary: Button = screen.get_node("%PrimaryStates").get_node("Normal/Viewport/Layout/Buttons/Button")
+	var surface: Panel = screen.get_node("%SurfaceSamples").get_node("Record")
 	var choice: OptionButton = screen.get_node("%Settings").get_node("Language/Choice")
 	# Round-trip on the same instances catches stale texture/override state.
 	for theme_index in [0, 1, 0]:
@@ -39,9 +44,19 @@ func verify() -> void:
 			check(primary.get_node("Surface").visible == (theme_index == 1), "Theme retained the other button material")
 			check(primary.get_node("Surface").texture == screen.theme.get_icon("cap", variant), "Button did not inherit theme artwork")
 			check(primary.get_theme_font("font") == screen.theme.get_font("font", variant), "Button font does not match the theme")
+			var destructive: Button = screen.get_node("%ConfirmationActions/LeaveWorld")
+			var secondary: Button = screen.get_node("%ConfirmationActions/Cancel")
+			var destructive_variant := &"components_button_destructive__compact" if compact else &"components_button_destructive"
+			check(destructive.theme_type_variation == destructive_variant, "Destructive usage lost its density")
+			check(destructive.size.y == secondary.size.y, "Destructive and cancel buttons must have equal heights")
+			check(destructive.get_theme_color("font_color") != secondary.get_theme_color("font_color"), "Destructive ink lost its semantic treatment")
+			check(destructive.get_node("Surface").visible == (theme_index == 1), "Destructive button retained the other theme's material")
+			check(destructive.get_node("Surface").texture == screen.theme.get_icon("cap", destructive_variant), "Destructive texture did not refresh")
+			if theme_index == 1:
+				check(destructive.get_node("Surface").texture != secondary.get_node("Surface").texture, "Destructive button lost its oxblood material")
 			check(surface.get_node("Grain").texture == screen.theme.get_icon("grain", &"menu_world_record"), "Surface did not refresh its theme")
 			check(choice.get_popup().theme_type_variation == (&"settings_popup__compact" if compact else &"settings_popup"), "Popup lost its theme or density")
-			for usage in [&"menu_button_primary", &"menu_button_standard", &"settings_choice", &"settings_action_primary", &"settings_action_secondary", &"settings_back", &"settings_navigation"]:
+			for usage in [&"menu_button_primary", &"menu_button_standard", &"components_button_destructive", &"settings_choice", &"settings_action_primary", &"settings_action_secondary", &"settings_back", &"settings_navigation"]:
 				for state in [&"normal", &"hover", &"pressed", &"hover_pressed", &"disabled", &"focus"]:
 					check(screen.theme.has_stylebox(state, usage), "Missing %s/%s" % [usage, state])
 		for page in range(screen.get_node("%Pages").get_child_count()):
@@ -70,10 +85,17 @@ func verify() -> void:
 	await settle()
 	check(screen.get_node("%Feedback").text == "Normal pressed.", "Native keyboard activation failed")
 	primary.release_focus()
+	await _check_destructive_input(screen)
 	for width in [800, 1440]:
 		screen.size = Vector2(width, 900)
 		await settle()
-		check(screen.get_node("%Menu").vertical == (width < 1000), "Catalogue did not reflow")
+		check(screen.get_node("%Menu").vertical, "Showcase sections must remain a vertical stack")
+		check(screen.get_node("%SurfaceSamples").vertical == (width < 1000), "Surface samples did not reflow")
+		check(screen.get_node("%ButtonKinds").vertical == (width < 1000), "Button samples did not reflow")
+		check(screen.get_node("%DestructiveExamples").vertical == (width < 1000), "Destructive samples did not reflow")
+		var actions: Control = screen.get_node("%ConfirmationActions")
+		for action: Control in actions.get_children():
+			check(actions.get_global_rect().encloses(action.get_global_rect()), "Confirmation action overflowed its container")
 		check(screen.get_node("%Header").get_global_rect().end.x <= screen.get_global_rect().end.x, "Catalogue choices overflow the viewport")
 		_check_button_states(screen)
 	var capture_dir := ""
@@ -98,19 +120,60 @@ func verify() -> void:
 
 
 func _check_button_states(screen: Control) -> void:
-	var states := screen.get_node("%Menu").get_node("Buttons/Surface/States")
-	for sample in states.get_children():
-		var button: Button = sample.get_node("Viewport/Button")
-		check(button.text == sample.name, "Button label does not describe its state")
+	var samples := screen.get_node("%PrimaryStates").get_children() + screen.get_node("%SecondaryStates").get_children() + screen.get_node("%DestructiveStates").get_children()
+	for sample in samples:
+		var button: Button = sample.get_node("Viewport/Layout/Buttons/Button")
+		check(button.text == ("Hovered + pressed" if sample.name == &"HoverPressed" else str(sample.name)), "Button label does not describe its state")
 		var expected: int = {
 			"Normal": BaseButton.DRAW_NORMAL, "Hovered": BaseButton.DRAW_HOVER,
 			"Pressed": BaseButton.DRAW_PRESSED, "Disabled": BaseButton.DRAW_DISABLED,
+			"HoverPressed": BaseButton.DRAW_HOVER_PRESSED,
 			"Focused": BaseButton.DRAW_NORMAL,
 		}[str(sample.name)]
 		check(button.get_draw_mode() == expected, "Wrong native draw state: " + str(sample.name))
-		check(button.has_focus() == (sample.name == &"Focused"), "Wrong native focus state: " + str(sample.name))
+		if sample.name == &"Focused":
+			check(sample.focus_preview_ready, "Native focus preview was not captured")
+		else:
+			check(not button.has_focus(), "Unexpected native focus: " + str(sample.name))
 		# The fully extended ornament and drop shadow must fit inside the preview.
 		var travel := button.get_theme_constant("ornament_travel")
-		var rect := button.get_rect()
+		var rect := button.get_global_rect()
 		check(rect.position.x >= travel + 8 and sample.size.x - rect.end.x >= travel + 8, "Ornament can overflow the surface")
 		check(rect.position.y >= 12 and sample.size.y - rect.end.y >= button.get_theme_constant("shadow_drop") + 4, "Depth can overflow the surface")
+
+
+func _check_destructive_input(screen: Control) -> void:
+	var cancel: Button = screen.get_node("%ConfirmationActions/Cancel")
+	var destructive: Button = screen.get_node("%ConfirmationActions/LeaveWorld")
+	var activations := [0]
+	destructive.pressed.connect(func() -> void: activations[0] += 1)
+	cancel.grab_focus()
+	var tab := InputEventKey.new()
+	tab.keycode = KEY_TAB
+	tab.pressed = true
+	root.push_input(tab)
+	await settle()
+	check(destructive.has_focus(), "Tab did not move from Cancel to the destructive action")
+	for pressed in [true, false]:
+		var key := InputEventKey.new()
+		key.keycode = KEY_ENTER
+		key.pressed = pressed
+		root.push_input(key)
+	await settle()
+	check(activations[0] == 1, "Destructive action did not emit one native keyboard activation")
+	destructive.disabled = true
+	await settle()
+	for pressed in [true, false]:
+		var key := InputEventKey.new()
+		key.keycode = KEY_ENTER
+		key.pressed = pressed
+		root.push_input(key)
+		var click := InputEventMouseButton.new()
+		click.button_index = MOUSE_BUTTON_LEFT
+		click.position = destructive.get_global_rect().get_center()
+		click.pressed = pressed
+		root.push_input(click)
+	await settle()
+	check(activations[0] == 1, "Disabled destructive action accepted input")
+	destructive.disabled = false
+	destructive.release_focus()

@@ -6,6 +6,14 @@ const State = preload("../menu_state.gd")
 
 const DEFAULTS = {"font": "type.ui", "font_size": "default.font_size"}
 const ELEMENTS = {
+	"menu.buttons": {
+		"base_type": &"MarginContainer",
+		"constants/margin_left": "alloy.buttons.inset",
+		"constants/margin_right": "alloy.buttons.inset",
+		"constants/margin_top": "alloy.buttons.inset",
+		"constants/margin_bottom": "alloy.buttons.inset",
+	},
+	"menu.buttons@compact": {"base_type": &"menu.buttons"},
 	"menu.heading": {
 		"base_type": &"Label",
 		"fonts/font": "type.display.medium",
@@ -141,6 +149,11 @@ const BUTTON_COMMON = {
 const BUTTON_MATERIALS = {
     Usage.PRIMARY: {"ornament_rest": "signal.primary.ornament_rest"},
     Usage.STANDARD: {"ornament_rest": "signal.standard.ornament_rest"},
+    Usage.DESTRUCTIVE: {
+        "ornament_rest": "signal.standard.ornament_rest",
+        "ornament_width": "signal.destructive.ornament_width",
+        "ornament_travel": "signal.destructive.ornament_travel",
+    },
 }
 const BUTTON_DENSITY = {
     State.REGULAR: {
@@ -155,9 +168,21 @@ const BUTTON_DENSITY = {
     },
 }
 const BUTTON_FOCUS = {
-    "focus": "signal.adornment.focus",
-    "label": "button.standard.font_focus_color",
-    "icon": "button.standard.icon_focus_color",
+    Usage.PRIMARY: {
+        "focus": "signal.adornment.focus",
+        "label": "button.primary.font_focus_color",
+        "icon": "button.primary.font_focus_color",
+    },
+    Usage.STANDARD: {
+        "focus": "signal.adornment.focus",
+        "label": "button.standard.font_focus_color",
+        "icon": "button.standard.icon_focus_color",
+    },
+    Usage.DESTRUCTIVE: {
+        "focus": "warning.focus",
+        "label": "button.destructive.font_focus_color",
+        "icon": "button.destructive.font_focus_color",
+    },
 }
 const BUTTON_STATES = {
     Usage.STANDARD: {
@@ -212,6 +237,32 @@ const BUTTON_STATES = {
             "icon": "button.primary.font_disabled_color",
         },
     },
+    Usage.DESTRUCTIVE: {
+        State.RESTING: {
+            "surface": "warning.resting.surface",
+            "border": "warning.resting.border",
+            "label": "button.destructive.font_color",
+            "icon": "button.destructive.font_color",
+        },
+        State.HOVERED: {
+            "surface": "warning.hovered.surface",
+            "border": "warning.hovered.border",
+            "label": "button.destructive.font_hover_color",
+            "icon": "button.destructive.font_hover_color",
+        },
+        State.PRESSED: {
+            "surface": "warning.pressed.surface",
+            "border": "warning.pressed.border",
+            "label": "button.destructive.font_pressed_color",
+            "icon": "button.destructive.font_pressed_color",
+        },
+        State.DISABLED: {
+            "surface": "warning.disabled.surface",
+            "border": "warning.disabled.border",
+            "label": "button.destructive.font_disabled_color",
+            "icon": "button.destructive.font_disabled_color",
+        },
+    },
 }
 const BUTTON_PADDING = {
     State.REGULAR: {
@@ -227,6 +278,11 @@ const BUTTON_PADDING = {
         State.DISABLED: "control.disabled.padding.compact",
     },
 }
+const BUTTON_HEIGHT = {
+    Usage.PRIMARY: {State.REGULAR: "button.primary.height", State.COMPACT: "button.primary.height.compact"},
+    Usage.STANDARD: {State.REGULAR: "button.standard.height", State.COMPACT: "button.standard.height.compact"},
+    Usage.DESTRUCTIVE: {State.REGULAR: "button.standard.height", State.COMPACT: "button.standard.height.compact"},
+}
 
 static func button(usage: StringName, state: Dictionary) -> Dictionary:
     assert(usage in BUTTON_STATES, "Unknown menu button usage")
@@ -236,10 +292,11 @@ static func button(usage: StringName, state: Dictionary) -> Dictionary:
     references.merge(BUTTON_MATERIALS[usage], true)
     references.merge(BUTTON_STATES[usage][condition], true)
     references["padding"] = BUTTON_PADDING[state.density][condition]
+    references["minimum_height"] = BUTTON_HEIGHT[usage][state.density]
     if state.focus == State.FOCUSED:
-        references["focus"] = BUTTON_FOCUS.focus
+        references["focus"] = BUTTON_FOCUS[usage].focus
         # Match native Button: focus ink applies at rest; hover/press keep their ink.
         if state.availability == State.ENABLED and state.interaction == State.RESTING:
-            references["label"] = BUTTON_FOCUS.label if usage == Usage.STANDARD else "button.primary.font_focus_color"
-            references["icon"] = BUTTON_FOCUS.icon if usage == Usage.STANDARD else "button.primary.font_focus_color"
+            references["label"] = BUTTON_FOCUS[usage].label
+            references["icon"] = BUTTON_FOCUS[usage].icon
     return references

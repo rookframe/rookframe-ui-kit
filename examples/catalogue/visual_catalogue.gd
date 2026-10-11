@@ -5,6 +5,8 @@ const THEMES: Array[Theme] = [
 	preload("res://rookframe/ui/menu/MenuTheme.tres"),
 ]
 var compact := false
+var _focus_preview_pending := false
+var _capturing_focus := false
 
 
 func _ready() -> void:
@@ -17,6 +19,8 @@ func _ready() -> void:
 	%PageChoice.accessibility_name = "Component page"
 	%Editor.feedback.connect(func(message: String) -> void: %Feedback.text = message)
 	resized.connect(_fit_catalogue)
+	for states in [%PrimaryStates, %SecondaryStates, %DestructiveStates]:
+		states.get_node("Focused").focus_preview_requested.connect(_queue_focus_previews)
 	for button: Button in find_children("*", "Button", true, false):
 		if %Editor.is_ancestor_of(button):
 			continue
@@ -56,9 +60,6 @@ func _apply_density() -> void:
 			control.set_compact(compact)
 		elif control.has_method("set_compact"):
 			control.set_compact(compact)
-			# The host's Main Menu uses these regular/short button heights.
-			if control.get_script() == preload("res://rookframe/ui/menu/menu_button.gd"):
-				control.custom_minimum_size.y = 44 if compact else 64 if control.usage == &"menu.button.primary" else 60
 		elif theme.get_type_variation_base(usage + "__compact") != &"":
 			control.theme_type_variation = usage + ("__compact" if compact else "")
 		if control is OptionButton:
@@ -76,7 +77,7 @@ func _apply_density() -> void:
 	for cell: Control in %Typography.get_node("Icons").get_children():
 		# Fantasy deliberately has no menu-action pictograms.
 		cell.visible = theme.has_icon("image", cell.get_node("Image").theme_type_variation)
-	for sample in %Menu.get_node("Buttons/Surface/States").get_children():
+	for sample in %PrimaryStates.get_children() + %SecondaryStates.get_children() + %DestructiveStates.get_children():
 		sample.configure(theme, compact)
 	%Editor.configure(theme, compact)
 	# Match the host's existing action-row styling after its native ready hook.
@@ -93,10 +94,34 @@ func _metric(name: String) -> int:
 	return get_theme_constant(name + ("_short" if compact else ""), &"settings_layout")
 
 
+func _queue_focus_previews() -> void:
+	if _focus_preview_pending:
+		return
+	_focus_preview_pending = true
+	if not _capturing_focus:
+		_capture_focus_previews.call_deferred()
+
+
+func _capture_focus_previews() -> void:
+	_capturing_focus = true
+	var previous_focus := get_viewport().gui_get_focus_owner()
+	while _focus_preview_pending:
+		_focus_preview_pending = false
+		for states in [%PrimaryStates, %SecondaryStates, %DestructiveStates]:
+			if %Menu.is_visible_in_tree():
+				await states.get_node("Focused").capture_focus()
+	if is_instance_valid(previous_focus) and previous_focus.is_visible_in_tree():
+		previous_focus.grab_focus()
+	_capturing_focus = false
+
+
 func _fit_catalogue() -> void:
 	var narrow := size.x < 1000
 	%Header.vertical = narrow
-	%Menu.vertical = narrow
+	%SurfaceSamples.vertical = narrow
+	%ButtonKinds.vertical = narrow
+	%DestructiveExamples.vertical = narrow
+	%ConfirmationActions.vertical = narrow
 	%Settings.get_node("Language").vertical = narrow
 	%Settings.get_node("Quality").vertical = narrow
 	%Typography.get_node("Columns").vertical = narrow

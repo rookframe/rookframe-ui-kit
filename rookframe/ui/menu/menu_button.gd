@@ -37,6 +37,7 @@ func _notification(what: int) -> void:
 func _refresh_materials() -> void:
 	_configuring = true
 	_refresh_pending = false
+	custom_minimum_size.y = get_theme_constant("minimum_height")
 	if _motion:
 		_motion.kill()
 	if _ornament_motion:

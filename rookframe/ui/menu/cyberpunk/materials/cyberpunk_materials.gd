@@ -68,11 +68,24 @@ static var VALUES: Dictionary = {
 	"signal.inlay.cut_edge": Color(0.000000, 0.000000, 0.000000, 0.000000),
 	"signal.primary.ornament_rest": 35,
 	"signal.standard.ornament_rest": 0,
+	"signal.destructive.ornament_width": 0,
+	"signal.destructive.ornament_travel": 0,
+	"warning.focus": preload("destructive_focus.tres"),
+	"button.destructive.font_color": Color("ffc7c0"),
+	"button.destructive.font_hover_color": Color("ffe7e2"),
+	"button.destructive.font_pressed_color": Color("ffd5ca"),
+	"button.destructive.font_focus_color": Color("ffe7e2"),
+	"button.destructive.font_disabled_color": Color("977f84"),
 	"signal.inlay.outline_size": 0,
 	"signal.inlay.shadow_offset_x": 0,
 	"signal.inlay.shadow_offset_y": 0,
 	"signal.inlay.shadow_outline_size": 0,
 	"button.standard.outline_size": 0,
+	"button.primary.height": 64,
+	"button.primary.height.compact": 44,
+	"button.standard.height": 60,
+	"button.standard.height.compact": 44,
+	"alloy.buttons.inset": 0,
 	"button.standard.font_size": 21,
 	"button.compact.font_size": 18,
 	"button.standard.h_separation": 14,
@@ -130,5 +143,19 @@ static func value(token: String) -> Variant:
 	return VALUES[token]
 
 static func _static_init() -> void:
+	# Retain the alloy switch's geometry and travel with a distinct warning palette.
+	var warning_colors := {
+		"resting": [Color("401e29"), Color("c86a6b")],
+		"hovered": [Color("592936"), Color("ffaaa0")],
+		"pressed": [Color("311820"), Color("e58b81")],
+		"disabled": [Color("282329"), Color("66515c")],
+	}
+	for state in warning_colors:
+		var surface: Dictionary = VALUES["alloy." + state + ".surface"].duplicate()
+		var border: Dictionary = VALUES["alloy." + state + ".border"].duplicate()
+		surface.bg_color = warning_colors[state][0]
+		border.border_color = warning_colors[state][1]
+		VALUES["warning." + state + ".surface"] = surface
+		VALUES["warning." + state + ".border"] = border
 	VALUES.merge(preload("settings_materials.gd").VALUES)
 	VALUES.merge(preload("editor_materials.gd").materials(VALUES))

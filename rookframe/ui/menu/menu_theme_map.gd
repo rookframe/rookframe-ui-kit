@@ -6,6 +6,18 @@ const State = preload("menu_state.gd")
 
 const DEFAULTS = {"font": "type.ui", "font_size": "default.font_size"}
 const ELEMENTS = {
+	"menu.buttons": {
+		"base_type": &"MarginContainer",
+		"constants/margin_left": "wood.buttons.inset",
+		"constants/margin_right": "wood.buttons.inset",
+		"constants/margin_top": "wood.buttons.vertical_inset",
+		"constants/margin_bottom": "wood.buttons.vertical_inset",
+	},
+	"menu.buttons@compact": {
+		"base_type": &"menu.buttons",
+		"constants/margin_left": "wood.buttons.inset.compact",
+		"constants/margin_right": "wood.buttons.inset.compact",
+	},
 	"menu.heading": {
 		"base_type": &"Label",
 		"fonts/font": "type.display.medium",
@@ -145,6 +157,17 @@ const BUTTON_MATERIALS = {
         "ornament_width": "wood.plain.ornament_width",
         "ornament_travel": "wood.plain.ornament_travel",
     },
+    Usage.DESTRUCTIVE: {
+        "ornament_rest": "brass.standard.ornament_rest",
+        "cap": "wood.destructive.cap",
+        "cap_tint": "wood.destructive.cap_tint",
+        "rest_tint": "wood.destructive.rest_tint",
+        "edge_tint": "wood.destructive.edge_tint",
+        "patch_side": "wood.plain.patch_side",
+        "patch_rail": "wood.plain.patch_rail",
+        "ornament_width": "wood.plain.ornament_width",
+        "ornament_travel": "wood.plain.ornament_travel",
+    },
 }
 const BUTTON_DENSITY = {
     State.REGULAR: {
@@ -155,8 +178,9 @@ const BUTTON_DENSITY = {
     },
 }
 const BUTTON_FOCUS = {
-    "focus": "brass.adornment.focus",
-    "label": "button.standard.font_focus_color",
+    Usage.PRIMARY: {"focus": "brass.adornment.focus", "label": "button.primary.font_focus_color"},
+    Usage.STANDARD: {"focus": "wood.plain.focus", "label": "button.standard.font_focus_color"},
+    Usage.DESTRUCTIVE: {"focus": "wood.destructive.focus", "label": "button.destructive.font_focus_color"},
 }
 const BUTTON_STATES = {
     Usage.STANDARD: {
@@ -179,6 +203,28 @@ const BUTTON_STATES = {
             "surface": "wood.disabled.surface",
             "border": "wood.disabled.border",
             "label": "button.standard.font_disabled_color",
+        },
+    },
+    Usage.DESTRUCTIVE: {
+        State.RESTING: {
+            "surface": "wood.resting.surface",
+            "border": "wood.resting.border",
+            "label": "button.destructive.font_color",
+        },
+        State.HOVERED: {
+            "surface": "wood.hovered.surface",
+            "border": "wood.hovered.border",
+            "label": "button.destructive.font_hover_color",
+        },
+        State.PRESSED: {
+            "surface": "wood.pressed.surface",
+            "border": "wood.pressed.border",
+            "label": "button.destructive.font_pressed_color",
+        },
+        State.DISABLED: {
+            "surface": "wood.disabled.surface",
+            "border": "wood.disabled.border",
+            "label": "button.destructive.font_disabled_color",
         },
     },
     Usage.PRIMARY: {
@@ -218,6 +264,25 @@ const BUTTON_PADDING = {
         State.DISABLED: "control.disabled.padding.compact",
     },
 }
+const STANDARD_PADDING = {
+    State.REGULAR: {
+        State.RESTING: "wood.plain.resting.padding",
+        State.HOVERED: "wood.plain.resting.padding",
+        State.PRESSED: "wood.plain.pressed.padding",
+        State.DISABLED: "wood.plain.pressed.padding",
+    },
+    State.COMPACT: {
+        State.RESTING: "wood.plain.resting.padding.compact",
+        State.HOVERED: "wood.plain.resting.padding.compact",
+        State.PRESSED: "wood.plain.pressed.padding.compact",
+        State.DISABLED: "wood.plain.pressed.padding.compact",
+    },
+}
+const BUTTON_HEIGHT = {
+    Usage.PRIMARY: {State.REGULAR: "button.primary.height", State.COMPACT: "button.primary.height.compact"},
+    Usage.STANDARD: {State.REGULAR: "button.standard.height", State.COMPACT: "button.standard.height.compact"},
+    Usage.DESTRUCTIVE: {State.REGULAR: "button.standard.height", State.COMPACT: "button.standard.height.compact"},
+}
 
 static func button(usage: StringName, state: Dictionary) -> Dictionary:
     assert(usage in BUTTON_STATES, "Unknown menu button usage")
@@ -226,10 +291,11 @@ static func button(usage: StringName, state: Dictionary) -> Dictionary:
     references.merge(BUTTON_DENSITY[state.density], true)
     references.merge(BUTTON_MATERIALS[usage], true)
     references.merge(BUTTON_STATES[usage][condition], true)
-    references["padding"] = BUTTON_PADDING[state.density][condition]
+    references["padding"] = (BUTTON_PADDING if usage == Usage.PRIMARY else STANDARD_PADDING)[state.density][condition]
+    references["minimum_height"] = BUTTON_HEIGHT[usage][state.density]
     if state.focus == State.FOCUSED:
-        references["focus"] = "wood.plain.focus" if usage == Usage.STANDARD else BUTTON_FOCUS.focus
+        references["focus"] = BUTTON_FOCUS[usage].focus
         # Match native Button: focus ink applies at rest; hover/press keep their ink.
         if state.availability == State.ENABLED and state.interaction == State.RESTING:
-            references["label"] = BUTTON_FOCUS.label
+            references["label"] = BUTTON_FOCUS[usage].label
     return references

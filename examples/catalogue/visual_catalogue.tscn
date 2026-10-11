@@ -3,11 +3,14 @@
 [ext_resource type="Script" path="res://examples/catalogue/visual_catalogue.gd" id="script"]
 [ext_resource type="Theme" path="res://rookframe/ui/menu/cyberpunk/CyberpunkTheme.tres" id="theme"]
 [ext_resource type="PackedScene" path="res://examples/catalogue/button_state.tscn" id="state"]
+[ext_resource type="PackedScene" path="res://examples/catalogue/showcase_section.tscn" id="section"]
 [ext_resource type="PackedScene" path="res://rookframe/ui/menu/MenuSurface.tscn" id="surface"]
 [ext_resource type="Script" path="res://rookframe/ui/menu/menu_illustration.gd" id="art"]
 [ext_resource type="PackedScene" path="res://rookframe/ui/components/data/action_row.tscn" id="row"]
 
 [ext_resource type="PackedScene" path="res://rookframe/ui/menu/MenuChoice.tscn" id="choice"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/menu/MenuButtonStandard.tscn" id="standard"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/menu/MenuButtonDestructive.tscn" id="destructive"]
 
 [ext_resource type="PackedScene" path="res://examples/catalogue/editor_catalogue.tscn" id="editor"]
 
@@ -147,80 +150,32 @@ layout_mode = 2
 unique_name_in_owner = true
 size_flags_horizontal = 3
 
-[node name="Menu" type="BoxContainer" parent="Frame/Shell/Stack/Scroll/Pages"]
+[node name="Menu" type="VBoxContainer" parent="Frame/Shell/Stack/Scroll/Pages"]
 layout_mode = 2
 unique_name_in_owner = true
 size_flags_horizontal = 3
 theme_override_constants/separation = 32
 
-[node name="Buttons" type="VBoxContainer" parent="Frame/Shell/Stack/Scroll/Pages/Menu"]
+[node name="Surfaces" parent="Frame/Shell/Stack/Scroll/Pages/Menu" instance=ExtResource("section")]
 layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/separation = 20
 
-[node name="Heading" type="Label" parent="Frame/Shell/Stack/Scroll/Pages/Menu/Buttons"]
+[node name="Heading" type="Label" parent="Frame/Shell/Stack/Scroll/Pages/Menu/Surfaces/Inset/Content"]
 layout_mode = 2
 theme_type_variation = &"settings_label"
-text = "Menu button states"
+text = "Surfaces"
 
-[node name="Surface" type="MarginContainer" parent="Frame/Shell/Stack/Scroll/Pages/Menu/Buttons"]
+[node name="SurfaceSamples" type="BoxContainer" parent="Frame/Shell/Stack/Scroll/Pages/Menu/Surfaces/Inset/Content"]
+unique_name_in_owner = true
 layout_mode = 2
+theme_override_constants/separation = 24
 
-[node name="Background" parent="Frame/Shell/Stack/Scroll/Pages/Menu/Buttons/Surface" instance=ExtResource("surface")]
-layout_mode = 2
-theme_type_variation = &"menu_group"
-
-[node name="States" type="VBoxContainer" parent="Frame/Shell/Stack/Scroll/Pages/Menu/Buttons/Surface"]
-layout_mode = 2
-theme_override_constants/separation = 0
-
-[node name="Normal" parent="Frame/Shell/Stack/Scroll/Pages/Menu/Buttons/Surface/States" instance=ExtResource("state")]
-layout_mode = 2
-state = 0
-primary = true
-
-[node name="Hovered" parent="Frame/Shell/Stack/Scroll/Pages/Menu/Buttons/Surface/States" instance=ExtResource("state")]
-layout_mode = 2
-state = 1
-primary = false
-
-[node name="Pressed" parent="Frame/Shell/Stack/Scroll/Pages/Menu/Buttons/Surface/States" instance=ExtResource("state")]
-layout_mode = 2
-state = 2
-primary = false
-
-[node name="Disabled" parent="Frame/Shell/Stack/Scroll/Pages/Menu/Buttons/Surface/States" instance=ExtResource("state")]
-layout_mode = 2
-state = 3
-primary = false
-
-[node name="Focused" parent="Frame/Shell/Stack/Scroll/Pages/Menu/Buttons/Surface/States" instance=ExtResource("state")]
-layout_mode = 2
-state = 4
-primary = false
-
-[node name="Hint" type="Label" parent="Frame/Shell/Stack/Scroll/Pages/Menu/Buttons"]
-layout_mode = 2
-theme_type_variation = &"settings_help"
-text = "Native states, held for comparison."
-autowrap_mode = 2
-
-[node name="Surfaces" type="VBoxContainer" parent="Frame/Shell/Stack/Scroll/Pages/Menu"]
+[node name="Structure" parent="Frame/Shell/Stack/Scroll/Pages/Menu/Surfaces/Inset/Content/SurfaceSamples" instance=ExtResource("surface")]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/separation = 16
-
-[node name="Heading" type="Label" parent="Frame/Shell/Stack/Scroll/Pages/Menu/Surfaces"]
-layout_mode = 2
-theme_type_variation = &"settings_label"
-text = "Surfaces & records"
-
-[node name="Structure" parent="Frame/Shell/Stack/Scroll/Pages/Menu/Surfaces" instance=ExtResource("surface")]
-layout_mode = 2
 custom_minimum_size = Vector2(0, 130)
 theme_type_variation = &"menu_structure"
 
-[node name="Inset" type="MarginContainer" parent="Frame/Shell/Stack/Scroll/Pages/Menu/Surfaces/Structure"]
+[node name="Inset" type="MarginContainer" parent="Frame/Shell/Stack/Scroll/Pages/Menu/Surfaces/Inset/Content/SurfaceSamples/Structure"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -233,27 +188,28 @@ theme_override_constants/margin_right = 24
 theme_override_constants/margin_top = 16
 theme_override_constants/margin_bottom = 16
 
-[node name="Copy" type="VBoxContainer" parent="Frame/Shell/Stack/Scroll/Pages/Menu/Surfaces/Structure/Inset"]
+[node name="Copy" type="VBoxContainer" parent="Frame/Shell/Stack/Scroll/Pages/Menu/Surfaces/Inset/Content/SurfaceSamples/Structure/Inset"]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="Title" type="Label" parent="Frame/Shell/Stack/Scroll/Pages/Menu/Surfaces/Structure/Inset/Copy"]
+[node name="Title" type="Label" parent="Frame/Shell/Stack/Scroll/Pages/Menu/Surfaces/Inset/Content/SurfaceSamples/Structure/Inset/Copy"]
 layout_mode = 2
 theme_type_variation = &"menu_identity_label"
 text = "Structure"
 
-[node name="Body" type="Label" parent="Frame/Shell/Stack/Scroll/Pages/Menu/Surfaces/Structure/Inset/Copy"]
+[node name="Body" type="Label" parent="Frame/Shell/Stack/Scroll/Pages/Menu/Surfaces/Inset/Content/SurfaceSamples/Structure/Inset/Copy"]
 layout_mode = 2
 theme_type_variation = &"menu_description"
 text = "Main Menu framing"
 autowrap_mode = 2
 
-[node name="Group" parent="Frame/Shell/Stack/Scroll/Pages/Menu/Surfaces" instance=ExtResource("surface")]
+[node name="Group" parent="Frame/Shell/Stack/Scroll/Pages/Menu/Surfaces/Inset/Content/SurfaceSamples" instance=ExtResource("surface")]
 layout_mode = 2
+size_flags_horizontal = 3
 custom_minimum_size = Vector2(0, 130)
 theme_type_variation = &"menu_group"
 
-[node name="Inset" type="MarginContainer" parent="Frame/Shell/Stack/Scroll/Pages/Menu/Surfaces/Group"]
+[node name="Inset" type="MarginContainer" parent="Frame/Shell/Stack/Scroll/Pages/Menu/Surfaces/Inset/Content/SurfaceSamples/Group"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -266,27 +222,28 @@ theme_override_constants/margin_right = 24
 theme_override_constants/margin_top = 16
 theme_override_constants/margin_bottom = 16
 
-[node name="Copy" type="VBoxContainer" parent="Frame/Shell/Stack/Scroll/Pages/Menu/Surfaces/Group/Inset"]
+[node name="Copy" type="VBoxContainer" parent="Frame/Shell/Stack/Scroll/Pages/Menu/Surfaces/Inset/Content/SurfaceSamples/Group/Inset"]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="Title" type="Label" parent="Frame/Shell/Stack/Scroll/Pages/Menu/Surfaces/Group/Inset/Copy"]
+[node name="Title" type="Label" parent="Frame/Shell/Stack/Scroll/Pages/Menu/Surfaces/Inset/Content/SurfaceSamples/Group/Inset/Copy"]
 layout_mode = 2
 theme_type_variation = &"menu_identity_label"
 text = "Action group"
 
-[node name="Body" type="Label" parent="Frame/Shell/Stack/Scroll/Pages/Menu/Surfaces/Group/Inset/Copy"]
+[node name="Body" type="Label" parent="Frame/Shell/Stack/Scroll/Pages/Menu/Surfaces/Inset/Content/SurfaceSamples/Group/Inset/Copy"]
 layout_mode = 2
 theme_type_variation = &"menu_description"
 text = "Shared textured surface"
 autowrap_mode = 2
 
-[node name="Record" parent="Frame/Shell/Stack/Scroll/Pages/Menu/Surfaces" instance=ExtResource("surface")]
+[node name="Record" parent="Frame/Shell/Stack/Scroll/Pages/Menu/Surfaces/Inset/Content/SurfaceSamples" instance=ExtResource("surface")]
 layout_mode = 2
+size_flags_horizontal = 3
 custom_minimum_size = Vector2(0, 130)
 theme_type_variation = &"menu_world_record"
 
-[node name="Inset" type="MarginContainer" parent="Frame/Shell/Stack/Scroll/Pages/Menu/Surfaces/Record"]
+[node name="Inset" type="MarginContainer" parent="Frame/Shell/Stack/Scroll/Pages/Menu/Surfaces/Inset/Content/SurfaceSamples/Record"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -299,25 +256,240 @@ theme_override_constants/margin_right = 24
 theme_override_constants/margin_top = 16
 theme_override_constants/margin_bottom = 16
 
-[node name="Copy" type="VBoxContainer" parent="Frame/Shell/Stack/Scroll/Pages/Menu/Surfaces/Record/Inset"]
+[node name="Copy" type="VBoxContainer" parent="Frame/Shell/Stack/Scroll/Pages/Menu/Surfaces/Inset/Content/SurfaceSamples/Record/Inset"]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="Title" type="Label" parent="Frame/Shell/Stack/Scroll/Pages/Menu/Surfaces/Record/Inset/Copy"]
+[node name="Title" type="Label" parent="Frame/Shell/Stack/Scroll/Pages/Menu/Surfaces/Inset/Content/SurfaceSamples/Record/Inset/Copy"]
 layout_mode = 2
 theme_type_variation = &"menu_world_title"
 text = "Recent World"
 
-[node name="Body" type="Label" parent="Frame/Shell/Stack/Scroll/Pages/Menu/Surfaces/Record/Inset/Copy"]
+[node name="Body" type="Label" parent="Frame/Shell/Stack/Scroll/Pages/Menu/Surfaces/Inset/Content/SurfaceSamples/Record/Inset/Copy"]
 layout_mode = 2
 theme_type_variation = &"menu_world_description"
 text = "Your next story begins in Worlds."
 autowrap_mode = 2
 
-[node name="Status" type="Label" parent="Frame/Shell/Stack/Scroll/Pages/Menu/Surfaces/Record/Inset/Copy"]
+[node name="Status" type="Label" parent="Frame/Shell/Stack/Scroll/Pages/Menu/Surfaces/Inset/Content/SurfaceSamples/Record/Inset/Copy"]
 layout_mode = 2
 theme_type_variation = &"menu_world_status__online"
 text = "ONLINE"
+
+[node name="Buttons" parent="Frame/Shell/Stack/Scroll/Pages/Menu" instance=ExtResource("section")]
+layout_mode = 2
+
+[node name="Heading" type="Label" parent="Frame/Shell/Stack/Scroll/Pages/Menu/Buttons/Inset/Content"]
+layout_mode = 2
+theme_type_variation = &"settings_label"
+text = "Buttons"
+
+[node name="Hint" type="Label" parent="Frame/Shell/Stack/Scroll/Pages/Menu/Buttons/Inset/Content"]
+layout_mode = 2
+theme_type_variation = &"settings_help"
+text = "Primary, secondary and destructive actions in every native state."
+autowrap_mode = 2
+
+[node name="ButtonKinds" type="BoxContainer" parent="Frame/Shell/Stack/Scroll/Pages/Menu/Buttons/Inset/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 32
+
+[node name="Primary" type="VBoxContainer" parent="Frame/Shell/Stack/Scroll/Pages/Menu/Buttons/Inset/Content/ButtonKinds"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+
+[node name="Heading" type="Label" parent="Frame/Shell/Stack/Scroll/Pages/Menu/Buttons/Inset/Content/ButtonKinds/Primary"]
+layout_mode = 2
+theme_type_variation = &"settings_label"
+text = "Primary"
+
+[node name="PrimaryStates" type="VBoxContainer" parent="Frame/Shell/Stack/Scroll/Pages/Menu/Buttons/Inset/Content/ButtonKinds/Primary"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Normal" parent="Frame/Shell/Stack/Scroll/Pages/Menu/Buttons/Inset/Content/ButtonKinds/Primary/PrimaryStates" instance=ExtResource("state")]
+layout_mode = 2
+state = 0
+usage = &"menu.button.primary"
+
+[node name="Hovered" parent="Frame/Shell/Stack/Scroll/Pages/Menu/Buttons/Inset/Content/ButtonKinds/Primary/PrimaryStates" instance=ExtResource("state")]
+layout_mode = 2
+state = 1
+usage = &"menu.button.primary"
+
+[node name="Pressed" parent="Frame/Shell/Stack/Scroll/Pages/Menu/Buttons/Inset/Content/ButtonKinds/Primary/PrimaryStates" instance=ExtResource("state")]
+layout_mode = 2
+state = 2
+usage = &"menu.button.primary"
+
+[node name="HoverPressed" parent="Frame/Shell/Stack/Scroll/Pages/Menu/Buttons/Inset/Content/ButtonKinds/Primary/PrimaryStates" instance=ExtResource("state")]
+layout_mode = 2
+state = 5
+usage = &"menu.button.primary"
+
+[node name="Disabled" parent="Frame/Shell/Stack/Scroll/Pages/Menu/Buttons/Inset/Content/ButtonKinds/Primary/PrimaryStates" instance=ExtResource("state")]
+layout_mode = 2
+state = 3
+usage = &"menu.button.primary"
+
+[node name="Focused" parent="Frame/Shell/Stack/Scroll/Pages/Menu/Buttons/Inset/Content/ButtonKinds/Primary/PrimaryStates" instance=ExtResource("state")]
+layout_mode = 2
+state = 4
+usage = &"menu.button.primary"
+
+[node name="Secondary" type="VBoxContainer" parent="Frame/Shell/Stack/Scroll/Pages/Menu/Buttons/Inset/Content/ButtonKinds"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+
+[node name="Heading" type="Label" parent="Frame/Shell/Stack/Scroll/Pages/Menu/Buttons/Inset/Content/ButtonKinds/Secondary"]
+layout_mode = 2
+theme_type_variation = &"settings_label"
+text = "Secondary"
+
+[node name="SecondaryStates" type="VBoxContainer" parent="Frame/Shell/Stack/Scroll/Pages/Menu/Buttons/Inset/Content/ButtonKinds/Secondary"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Normal" parent="Frame/Shell/Stack/Scroll/Pages/Menu/Buttons/Inset/Content/ButtonKinds/Secondary/SecondaryStates" instance=ExtResource("state")]
+layout_mode = 2
+state = 0
+usage = &"menu.button.standard"
+
+[node name="Hovered" parent="Frame/Shell/Stack/Scroll/Pages/Menu/Buttons/Inset/Content/ButtonKinds/Secondary/SecondaryStates" instance=ExtResource("state")]
+layout_mode = 2
+state = 1
+usage = &"menu.button.standard"
+
+[node name="Pressed" parent="Frame/Shell/Stack/Scroll/Pages/Menu/Buttons/Inset/Content/ButtonKinds/Secondary/SecondaryStates" instance=ExtResource("state")]
+layout_mode = 2
+state = 2
+usage = &"menu.button.standard"
+
+[node name="HoverPressed" parent="Frame/Shell/Stack/Scroll/Pages/Menu/Buttons/Inset/Content/ButtonKinds/Secondary/SecondaryStates" instance=ExtResource("state")]
+layout_mode = 2
+state = 5
+usage = &"menu.button.standard"
+
+[node name="Disabled" parent="Frame/Shell/Stack/Scroll/Pages/Menu/Buttons/Inset/Content/ButtonKinds/Secondary/SecondaryStates" instance=ExtResource("state")]
+layout_mode = 2
+state = 3
+usage = &"menu.button.standard"
+
+[node name="Focused" parent="Frame/Shell/Stack/Scroll/Pages/Menu/Buttons/Inset/Content/ButtonKinds/Secondary/SecondaryStates" instance=ExtResource("state")]
+layout_mode = 2
+state = 4
+usage = &"menu.button.standard"
+
+[node name="Divider" type="HSeparator" parent="Frame/Shell/Stack/Scroll/Pages/Menu/Buttons/Inset/Content"]
+layout_mode = 2
+theme_type_variation = &"menu_divider"
+
+[node name="DestructiveExamples" type="BoxContainer" parent="Frame/Shell/Stack/Scroll/Pages/Menu/Buttons/Inset/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 32
+
+[node name="Destructive" type="VBoxContainer" parent="Frame/Shell/Stack/Scroll/Pages/Menu/Buttons/Inset/Content/DestructiveExamples"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+
+[node name="Heading" type="Label" parent="Frame/Shell/Stack/Scroll/Pages/Menu/Buttons/Inset/Content/DestructiveExamples/Destructive"]
+layout_mode = 2
+theme_type_variation = &"settings_label"
+text = "Destructive"
+
+[node name="DestructiveStates" type="VBoxContainer" parent="Frame/Shell/Stack/Scroll/Pages/Menu/Buttons/Inset/Content/DestructiveExamples/Destructive"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Normal" parent="Frame/Shell/Stack/Scroll/Pages/Menu/Buttons/Inset/Content/DestructiveExamples/Destructive/DestructiveStates" instance=ExtResource("state")]
+layout_mode = 2
+state = 0
+usage = &"components.button.destructive"
+
+[node name="Hovered" parent="Frame/Shell/Stack/Scroll/Pages/Menu/Buttons/Inset/Content/DestructiveExamples/Destructive/DestructiveStates" instance=ExtResource("state")]
+layout_mode = 2
+state = 1
+usage = &"components.button.destructive"
+
+[node name="Pressed" parent="Frame/Shell/Stack/Scroll/Pages/Menu/Buttons/Inset/Content/DestructiveExamples/Destructive/DestructiveStates" instance=ExtResource("state")]
+layout_mode = 2
+state = 2
+usage = &"components.button.destructive"
+
+[node name="HoverPressed" parent="Frame/Shell/Stack/Scroll/Pages/Menu/Buttons/Inset/Content/DestructiveExamples/Destructive/DestructiveStates" instance=ExtResource("state")]
+layout_mode = 2
+state = 5
+usage = &"components.button.destructive"
+
+[node name="Disabled" parent="Frame/Shell/Stack/Scroll/Pages/Menu/Buttons/Inset/Content/DestructiveExamples/Destructive/DestructiveStates" instance=ExtResource("state")]
+layout_mode = 2
+state = 3
+usage = &"components.button.destructive"
+
+[node name="Focused" parent="Frame/Shell/Stack/Scroll/Pages/Menu/Buttons/Inset/Content/DestructiveExamples/Destructive/DestructiveStates" instance=ExtResource("state")]
+layout_mode = 2
+state = 4
+usage = &"components.button.destructive"
+
+[node name="UseCase" type="VBoxContainer" parent="Frame/Shell/Stack/Scroll/Pages/Menu/Buttons/Inset/Content/DestructiveExamples"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 24
+
+[node name="Heading" type="Label" parent="Frame/Shell/Stack/Scroll/Pages/Menu/Buttons/Inset/Content/DestructiveExamples/UseCase"]
+layout_mode = 2
+theme_type_variation = &"settings_label"
+text = "Confirmation example"
+
+[node name="Confirmation" parent="Frame/Shell/Stack/Scroll/Pages/Menu/Buttons/Inset/Content/DestructiveExamples/UseCase" instance=ExtResource("section")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Context" type="Label" parent="Frame/Shell/Stack/Scroll/Pages/Menu/Buttons/Inset/Content/DestructiveExamples/UseCase/Confirmation/Inset/Content"]
+layout_mode = 2
+theme_type_variation = &"menu_metadata"
+text = "WORLD"
+
+[node name="Title" type="Label" parent="Frame/Shell/Stack/Scroll/Pages/Menu/Buttons/Inset/Content/DestructiveExamples/UseCase/Confirmation/Inset/Content"]
+layout_mode = 2
+theme_type_variation = &"menu_identity_label"
+text = "Leave this World?"
+autowrap_mode = 2
+
+[node name="Description" type="Label" parent="Frame/Shell/Stack/Scroll/Pages/Menu/Buttons/Inset/Content/DestructiveExamples/UseCase/Confirmation/Inset/Content"]
+layout_mode = 2
+theme_type_variation = &"menu_description"
+text = "You will return to Manager."
+autowrap_mode = 2
+
+[node name="ConfirmationActions" type="BoxContainer" parent="Frame/Shell/Stack/Scroll/Pages/Menu/Buttons/Inset/Content/DestructiveExamples/UseCase/Confirmation/Inset/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Cancel" parent="Frame/Shell/Stack/Scroll/Pages/Menu/Buttons/Inset/Content/DestructiveExamples/UseCase/Confirmation/Inset/Content/ConfirmationActions" instance=ExtResource("standard")]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Cancel"
+
+[node name="LeaveWorld" parent="Frame/Shell/Stack/Scroll/Pages/Menu/Buttons/Inset/Content/DestructiveExamples/UseCase/Confirmation/Inset/Content/ConfirmationActions" instance=ExtResource("destructive")]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Leave World"
+
+[node name="Help" type="Label" parent="Frame/Shell/Stack/Scroll/Pages/Menu/Buttons/Inset/Content/DestructiveExamples/UseCase"]
+layout_mode = 2
+theme_type_variation = &"settings_help"
+text = "Use a specific action label. When opening a confirmation, focus Cancel first."
+autowrap_mode = 2
 
 [node name="Settings" type="VBoxContainer" parent="Frame/Shell/Stack/Scroll/Pages"]
 layout_mode = 2
