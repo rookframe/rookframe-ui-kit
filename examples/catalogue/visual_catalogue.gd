@@ -1,253 +1,104 @@
 extends Control
-
-const TASK_HEADER_SCENE := preload("res://rookframe/ui/components/layout/task_header.tscn")
-const ACTION_BAR_SCENE := preload("res://rookframe/ui/components/layout/action_bar.tscn")
-const SEARCH_FIELD_SCENE := preload("res://rookframe/ui/components/forms/search_field.tscn")
-const METRIC_SCENE := preload("res://rookframe/ui/components/data/metric.tscn")
+## Standalone samples of the components implemented in the host's menu/settings.
+const THEMES: Array[Theme] = [
+	preload("res://rookframe/ui/menu/cyberpunk/CyberpunkTheme.tres"),
+	preload("res://rookframe/ui/menu/MenuTheme.tres"),
+]
+var compact := false
 
 
 func _ready() -> void:
-	_select_requested_tab()
-	_populate_native_controls()
-	_populate_layout_relationships()
-	_populate_data_relationships()
-	_populate_icon_gallery()
-	_populate_managed_surface()
-	_connect_overlays()
+	%OldCatalogue.pressed.connect(_open_old_catalogue)
+	%ThemeChoice.item_selected.connect(select_theme)
+	%DensityChoice.item_selected.connect(func(index: int) -> void: set_compact(index == 1))
+	%PageChoice.item_selected.connect(select_page)
+	%ThemeChoice.accessibility_name = "Theme"
+	%DensityChoice.accessibility_name = "Density"
+	%PageChoice.accessibility_name = "Component page"
 	resized.connect(_fit_catalogue)
-	%Tabs.tab_changed.connect(func(_index: int) -> void: _fit_catalogue())
+	for button: Button in find_children("*", "Button", true, false):
+		button.pressed.connect(func() -> void:
+			%Feedback.text = "%s pressed." % (button.text if not button.text.is_empty() else "Navigation")
+		)
+	select_theme(0)
+	select_page(0)
 	_fit_catalogue()
-	_add_locale_samples()
+
+
+func select_theme(index: int) -> void:
+	theme = THEMES[index]
+	%ThemeChoice.select(index)
+	_apply_density()
+
+
+func set_compact(enabled: bool) -> void:
+	compact = enabled
+	%DensityChoice.select(1 if enabled else 0)
+	_apply_density()
+
+
+func select_page(index: int) -> void:
+	%PageChoice.select(index)
+	for page: Control in %Pages.get_children():
+		page.visible = page.get_index() == index
+	%Scroll.scroll_vertical = 0
+
+
+func _apply_density() -> void:
+	if not is_node_ready():
+		return
+	for control: Control in find_children("*", "Control", true, false):
+		var usage := String(control.theme_type_variation).trim_suffix("__compact")
+		if control.has_method("set_compact"):
+			control.set_compact(compact)
+			# The host's Main Menu uses these regular/short button heights.
+			control.custom_minimum_size.y = 44 if compact else 64 if control.usage == &"menu.button.primary" else 60
+		elif theme.get_type_variation_base(usage + "__compact") != &"":
+			control.theme_type_variation = usage + ("__compact" if compact else "")
+		if control is OptionButton:
+			control.get_popup().theme_type_variation = &"settings_popup"
+			control.custom_minimum_size.y = _metric("control_height")
+			if %Settings.is_ancestor_of(control):
+				control.custom_minimum_size.x = _metric("choice_width")
+		if control is ScrollContainer:
+			control.get_v_scroll_bar().theme_type_variation = &"settings_scrollbar"
+	for action: Button in %Settings.get_node("Actions").get_children():
+		action.custom_minimum_size = Vector2(_metric("action_width"), _metric("control_height"))
+	for cell: Control in %Typography.get_node("Icons").get_children():
+		# Fantasy deliberately has no menu-action pictograms.
+		cell.visible = theme.has_icon("image", cell.get_node("Image").theme_type_variation)
+	for sample in %Menu.get_node("Buttons/Surface/States").get_children():
+		sample.configure(theme, compact)
+	# Match the host's existing action-row styling after its native ready hook.
+	var row := %Settings.get_node("Navigation") as Button
+	row.theme_type_variation = "settings_navigation" + ("__compact" if compact else "")
+	row.custom_minimum_size.y = _metric("category_height")
+	for path in ["Content/Copy/Title", "Content/Copy/Description", "Content/Action"]:
+		var label := row.get_node(path) as Label
+		label.remove_theme_font_size_override("font_size")
+		label.theme_type_variation = ("settings_help" if path.ends_with("Description") else "settings_label") + ("__compact" if compact else "")
+
+
+func _metric(name: String) -> int:
+	return get_theme_constant(name + ("_short" if compact else ""), &"settings_layout")
 
 
 func _fit_catalogue() -> void:
-	# Reflow the catalogue itself, without scaling the controls being reviewed.
-	var compact := size.x < 1000
-	var native := %Tabs.get_node("Native/Margin/Content")
-	native.get_node("Inputs").columns = 2 if compact else 3
-	for name in ["SemanticSurfaces", "Dense"]:
-		native.get_node(name).vertical = compact
-	%Tabs.get_node("Feedback/Margin/Content/States").columns = 1 if compact else 2
-	%Tabs.get_node("Managed/Columns/Explanation").visible = not compact
-	%ManagedDemo.custom_minimum_size = Vector2(360, 0)
-	var header: Node = %ManagedDemo.call(&"get_header_slot").get_child(0)
-	header.set("eyebrow", "" if compact else "Package task")
-	header.set("subtitle", "" if compact else "The header, one scrolling task body, and footer remain one retained tree.")
-	$Canvas/Page/Stack/Header/Copy/Title.add_theme_font_size_override(&"font_size", 30 if compact else 40)
-	$Canvas/Page/Stack/Header/Copy/Subtitle.visible = size.y >= 600
-	$Canvas/Page.add_theme_constant_override(&"margin_top", 12 if compact else 24)
-	$Canvas/Page.add_theme_constant_override(&"margin_bottom", 12 if compact else 24)
-	var compact_managed: bool = compact and %Tabs.current_tab == 6
-	$Canvas/Page/Stack/Header.visible = not compact_managed
-	for edge in ["top", "bottom"]:
-		$Canvas/Page.add_theme_constant_override("margin_" + edge, 4 if compact_managed else 12 if compact else 24)
-	for edge in ["left", "right", "top", "bottom"]:
-		%Tabs.get_node("Managed").add_theme_constant_override("margin_" + edge, 0 if compact_managed else 16)
+	var narrow := size.x < 1000
+	%Header.vertical = narrow
+	%Menu.vertical = narrow
+	%Settings.get_node("Language").vertical = narrow
+	%Settings.get_node("Quality").vertical = narrow
+	%Typography.get_node("Columns").vertical = narrow
 
 
-func _add_locale_samples() -> void:
-	var content := %Tabs.get_node("Native/Margin/Content")
-	var heading := _copy("Regional serif companions")
-	heading.theme_type_variation = &"RookframeHeading"
-	content.add_child(heading)
-	for sample in [
-		["ja", "日本語 · Rookframe — 冒険の記録、骨と直感。"],
-		["ko", "한국어 · Rookframe — 모험의 기록과 세계."],
-		["zh_CN", "简体中文 · Rookframe — 世界与冒险的记录。"],
-		["zh_TW", "繁體中文 · Rookframe — 世界與冒險的記錄。"],
-	]:
-		var label := _copy(sample[1])
-		label.language = sample[0]
-		label.add_theme_font_override(&"font", load("res://rookframe/ui/theme/locales/%s_regular.tres" % sample[0]))
-		content.add_child(label)
-
-
-func _select_requested_tab() -> void:
-	for argument in OS.get_cmdline_user_args():
-		if argument.begins_with("--catalogue-tab="):
-			%Tabs.current_tab = clampi(int(argument.get_slice("=", 1)), 0, %Tabs.get_tab_count() - 1)
-
-
-func _populate_native_controls() -> void:
-	var item_list := %NativeList as ItemList
-	for item in ["Ancient gate", "Clockwork archive", "Lantern chamber", "Disabled record"]:
-		item_list.add_item(item)
-	item_list.select(1)
-	item_list.set_item_disabled(3, true)
-
-	var tree := %NativeTree as Tree
-	var root := tree.create_item()
-	tree.hide_root = true
-	var surfaces := tree.create_item(root)
-	surfaces.set_text(0, "Surfaces")
-	var docked := tree.create_item(surfaces)
-	docked.set_text(0, "Docked task")
-	var floating := tree.create_item(surfaces)
-	floating.set_text(0, "Floating task")
-	var records := tree.create_item(root)
-	records.set_text(0, "Structured records")
-	records.set_selectable(0, false)
-	docked.select(0)
-
-	var option := %NativeOption as OptionButton
-	for item in ["Default", "Compact", "Expanded"]:
-		option.add_item(item)
-	option.select(1)
-
-	var menu := (%NativeMenu as MenuButton).get_popup()
-	menu.add_icon_item(preload("res://rookframe/ui/icons/edit.svg"), "Edit", 1)
-	menu.add_icon_item(preload("res://rookframe/ui/icons/copy.svg"), "Duplicate", 2)
-	menu.add_separator()
-	menu.add_icon_item(preload("res://rookframe/ui/icons/delete.svg"), "Delete", 3)
-	menu.set_item_disabled(3, true)
-
-
-func _populate_layout_relationships() -> void:
-	var split := %ResponsiveSplit
-	_add_panel_copy(split.call(&"get_primary_slot"), "Stage", "Bounded stage context stays first in compact reading order.")
-	_add_panel_copy(split.call(&"get_secondary_slot"), "Content", "The primary task owns more width in the wide profile and the same retained controls in the compact profile.")
-
-	var section := %SectionDemo
-	section.call(&"get_action_slot").add_child(_button("Inspect", &"RookframeQuietButton"))
-	section.call(&"get_body_slot").add_child(_copy("Section bodies accept fields, rows, native containers, or Package-owned compositions without a second content inset."))
-
-	var action_bar := %ActionBarDemo
-	action_bar.call(&"get_leading_slot").add_child(_button("Cancel", &"RookframeDangerButton"))
-	action_bar.call(&"get_trailing_slot").add_child(_button("Back", &"RookframeSecondaryButton"))
-	action_bar.call(&"get_trailing_slot").add_child(_button("Continue", &"RookframePrimaryButton"))
-
-	var toolbar := %ToolbarDemo
-	var search := SEARCH_FIELD_SCENE.instantiate()
-	search.set("show_label", false)
-	search.set("placeholder", "Filter records")
-	search.custom_minimum_size.x = 360
-	search.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
-	toolbar.call(&"get_leading_slot").add_child(search)
-	var count := _copy("24 records")
-	count.custom_minimum_size.x = 100
-	count.theme_type_variation = &"RookframeStatus"
-	toolbar.call(&"get_leading_slot").add_child(count)
-	toolbar.call(&"get_trailing_slot").add_child(_button("Filters", &"RookframeSecondaryButton", preload("res://rookframe/ui/icons/filter.svg")))
-	toolbar.call(&"get_trailing_slot").add_child(_button("Add", &"RookframePrimaryButton", preload("res://rookframe/ui/icons/add.svg")))
-
-	for item in [
-		["Create", "add.svg"],
-		["Open", "folder.svg"],
-		["Duplicate", "copy.svg"],
-		["Settings", "settings.svg"],
-	]:
-		%IconActionGrid.add_child(_button(item[0], &"RookframeSecondaryButton", load("res://rookframe/ui/icons/%s" % item[1])))
-
-
-func _populate_data_relationships() -> void:
-	for definition in [
-		["Health", "18 / 24", "Wounded"],
-		["Armor", "2", "Light"],
-		["Omens", "d2", "Ready"],
-		["Load", "5 / 8", "Three free"],
-	]:
-		var metric := METRIC_SCENE.instantiate()
-		metric.set("label_text", definition[0])
-		metric.set("value_text", definition[1])
-		metric.set("detail_text", definition[2])
-		%MetricStrip.add_child(metric)
-
-
-func _populate_icon_gallery() -> void:
-	var manifest_source := FileAccess.get_file_as_string("res://rookframe/ui/icons/manifest.json")
-	var manifest: Variant = JSON.parse_string(manifest_source)
-	if not manifest is Dictionary:
-		push_error("Could not parse the semantic icon manifest.")
-		return
-	for definition: Dictionary in manifest.get("icons", []) + manifest.get("domainPictograms", []):
-		var semantic_name := str(definition.get("name", ""))
-		var accessible_label := str(definition.get("label", semantic_name))
-		var cell := PanelContainer.new()
-		cell.custom_minimum_size = Vector2(160, 96)
-		cell.theme_type_variation = &"RookframeInsetSurface"
-		cell.accessibility_name = "%s icon" % accessible_label
-		if definition.has("author"):
-			cell.tooltip_text = "%s — %s, CC BY 3.0\n%s" % [accessible_label, definition.author, definition.source]
-		var stack := VBoxContainer.new()
-		stack.alignment = BoxContainer.ALIGNMENT_CENTER
-		stack.add_theme_constant_override(&"separation", 8)
-		cell.add_child(stack)
-		var icon := TextureRect.new()
-		icon.custom_minimum_size = Vector2(32, 32)
-		icon.texture = load("res://rookframe/ui/icons/" + str(definition.get("path", semantic_name + ".svg")))
-		icon.self_modulate = RookframeUiTokens.COLOR_PICTOGRAM
-		icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-		icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-		icon.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		icon.accessibility_name = accessible_label
-		stack.add_child(icon)
-		var label := _copy(semantic_name)
-		label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		label.theme_type_variation = &"RookframeMeta"
-		stack.add_child(label)
-		%IconGallery.add_child(cell)
-
-
-func _populate_managed_surface() -> void:
-	var surface := %ManagedDemo
-	var header := TASK_HEADER_SCENE.instantiate()
-	header.set("eyebrow", "Package task")
-	header.set("title", "Review admitted records")
-	header.set("subtitle", "The header, one scrolling task body, and footer remain one retained tree.")
-	surface.call(&"get_header_slot").add_child(header)
-
-	var task := VBoxContainer.new()
-	task.add_theme_constant_override(&"separation", 12)
-	for index in range(1, 9):
-		var row := PanelContainer.new()
-		row.theme_type_variation = &"RookframeStructuredRow"
-		var label := _copy("Retained record %d - scroll position survives dock, float, minimize, and restore." % index)
-		row.add_child(label)
-		task.add_child(row)
-	surface.call(&"set_task", task)
-
-	var footer := ACTION_BAR_SCENE.instantiate()
-	footer.call(&"get_leading_slot").add_child(_button("Cancel", &"RookframeDangerButton"))
-	footer.call(&"get_trailing_slot").add_child(_button("Apply", &"RookframePrimaryButton"))
-	surface.call(&"get_footer_slot").add_child(footer)
-
-
-func _connect_overlays() -> void:
-	%OpenAccept.pressed.connect(func() -> void: %AcceptDialogDemo.call(&"open_dialog"))
-	%OpenConfirm.pressed.connect(func() -> void: %ConfirmationDialogDemo.call(&"open_dialog"))
-	%OpenFile.pressed.connect(func() -> void: %FileDialogDemo.call(&"open_picker", ProjectSettings.globalize_path("res://")))
-
-
-func _add_panel_copy(parent: Node, heading: String, body: String) -> void:
-	var panel := PanelContainer.new()
-	panel.theme_type_variation = &"RookframeInsetSurface"
-	panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	panel.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	var stack := VBoxContainer.new()
-	stack.add_theme_constant_override(&"separation", 8)
-	panel.add_child(stack)
-	var heading_label := _copy(heading)
-	heading_label.theme_type_variation = &"RookframeHeading"
-	stack.add_child(heading_label)
-	stack.add_child(_copy(body))
-	parent.add_child(panel)
-
-
-func _copy(text: String) -> Label:
-	var label := Label.new()
-	label.text = text
-	label.theme_type_variation = &"RookframeBody"
-	label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	label.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	return label
-
-
-func _button(text: String, variation: StringName, icon: Texture2D = null) -> Button:
-	var button := Button.new()
-	button.text = text
-	button.theme_type_variation = variation
-	button.custom_minimum_size.y = 44
-	button.accessibility_name = text
-	button.tooltip_text = text
-	button.icon = icon
-	return button
+func _open_old_catalogue() -> void:
+	var old := load("res://examples/catalogue/legacy_catalogue.tscn").instantiate() as Control
+	add_child(old)
+	$Frame.hide()
+	old.return_requested.connect(func() -> void:
+		old.queue_free()
+		$Frame.show()
+		%OldCatalogue.grab_focus()
+	)
+	old.get_node("%CurrentCatalogue").grab_focus()

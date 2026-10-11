@@ -1201,5 +1201,28 @@
   "silkboundTheme": {
     "path": "res://rookframe/ui/theme/silkbound_theme.tres",
     "purpose": "Silkbound task and sheet typography with complete native and shared semantic role coverage."
+  },
+  "currentDesignSystem": {
+    "themes": {
+      "cyberpunk": "res://rookframe/ui/menu/cyberpunk/CyberpunkTheme.tres",
+      "fantasy": "res://rookframe/ui/menu/MenuTheme.tres"
+    },
+    "components": [
+      "res://rookframe/ui/menu/MenuButtonPrimary.tscn",
+      "res://rookframe/ui/menu/MenuButtonStandard.tscn",
+      "res://rookframe/ui/menu/MenuSurface.tscn",
+      "res://rookframe/ui/components/data/action_row.tscn"
+    ],
+    "nativeControls": [
+      "Label",
+      "Button",
+      "OptionButton",
+      "PopupMenu",
+      "HSeparator",
+      "VScrollBar",
+      "PanelContainer",
+      "TextureRect"
+    ],
+    "catalogue": "res://examples/catalogue/visual_catalogue.tscn"
   }
 }
