@@ -6,6 +6,14 @@ const State = preload("../menu_state.gd")
 
 const DEFAULTS = {"font": "type.ui", "font_size": "default.font_size"}
 const ELEMENTS = {
+	"menu.buttons": {
+		"base_type": &"MarginContainer",
+		"constants/margin_left": "alloy.buttons.inset",
+		"constants/margin_right": "alloy.buttons.inset",
+		"constants/margin_top": "alloy.buttons.inset",
+		"constants/margin_bottom": "alloy.buttons.inset",
+	},
+	"menu.buttons@compact": {"base_type": &"menu.buttons"},
 	"menu.heading": {
 		"base_type": &"Label",
 		"fonts/font": "type.display.medium",
@@ -227,6 +235,10 @@ const BUTTON_PADDING = {
         State.DISABLED: "control.disabled.padding.compact",
     },
 }
+const BUTTON_HEIGHT = {
+    Usage.PRIMARY: {State.REGULAR: "button.primary.height", State.COMPACT: "button.primary.height.compact"},
+    Usage.STANDARD: {State.REGULAR: "button.standard.height", State.COMPACT: "button.standard.height.compact"},
+}
 
 static func button(usage: StringName, state: Dictionary) -> Dictionary:
     assert(usage in BUTTON_STATES, "Unknown menu button usage")
@@ -236,6 +248,7 @@ static func button(usage: StringName, state: Dictionary) -> Dictionary:
     references.merge(BUTTON_MATERIALS[usage], true)
     references.merge(BUTTON_STATES[usage][condition], true)
     references["padding"] = BUTTON_PADDING[state.density][condition]
+    references["minimum_height"] = BUTTON_HEIGHT[usage][state.density]
     if state.focus == State.FOCUSED:
         references["focus"] = BUTTON_FOCUS.focus
         # Match native Button: focus ink applies at rest; hover/press keep their ink.

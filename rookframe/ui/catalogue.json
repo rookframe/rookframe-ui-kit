@@ -1226,9 +1226,15 @@
       "HSeparator",
       "VScrollBar",
       "PanelContainer",
+      "MarginContainer",
       "TextureRect"
     ],
     "catalogue": "res://examples/catalogue/visual_catalogue.tscn",
+    "menuButtons": {
+      "layout": "menu.buttons (native menu_buttons) is a MarginContainer around the secondary action stack, excluding the primary. Append __compact for compact density.",
+      "inset": "Fantasy reserves 34/22 px per side for the primary's carved ends; Cyberpunk reserves no inset. Buttons have no external margins.",
+      "height": "Button recipes own themed minimum heights: primary 64/44 px, Fantasy standard 50/34 px, Cyberpunk standard 60/44 px. Containers choose widths without imposing legacy minimum heights."
+    },
     "editor": {
       "buttons": [
         "editor_button_tool",

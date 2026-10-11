@@ -91,8 +91,14 @@ Open this repository as a Godot 4.7 project or run it with the pinned toolchain:
 /Applications/Godot_mono.app/Contents/MacOS/Godot --path .
 ```
 
-The project opens `examples/catalogue/visual_catalogue.tscn`. Menu samples retain native Normal, Hovered, Pressed, Disabled and Focused
-states inside a padded surface. Settings choices open themed popups.
+The project opens `examples/catalogue/visual_catalogue.tscn`. The Menu showcase
+stacks Structure-framed sections: Surfaces, then Buttons, with future component
+families appended below. Both primary and secondary buttons retain native Normal,
+Hovered, Pressed, Hovered + pressed, Disabled and Focused states. Focused previews
+are captured in turn so both appearances remain visible without competing for
+keyboard focus. Their columns
+stack on narrow screens. `examples/catalogue/showcase_section.tscn` supplies the
+shared section frame and content inset. Settings choices open themed popups.
 Samples do not change application settings.
 
 Use `rookframe/ui/menu/cyberpunk/CyberpunkTheme.tres` or
@@ -109,6 +115,17 @@ the popup follows the same density. Theme or density changes dismiss an open
 tray before refreshing its materials. Give the control an `accessibility_name`
 that describes the setting. Its own minimum height is 64/48 px in Fantasy and
 52/48 px in Cyberpunk; containers choose the width.
+
+Menu buttons own their themed minimum height: primary 64/44 px, Fantasy standard
+50/34 px, and Cyberpunk standard 60/44 px (regular/compact). Fantasy's standard
+face is slightly slimmer than the primary's narrow central body; 6 px is depth.
+Let Containers size the buttons instead of imposing the old 60/44 px standard
+height. To align secondary menu actions inside the primary's carved ends, place
+their VBoxContainer inside a MarginContainer with `theme_type_variation =
+&"menu_buttons"` (Usage `menu.buttons`), or `&"menu_buttons__compact"`. Keep the
+primary outside this wrapper. Fantasy reserves 34/22 px on each side; Cyberpunk
+reserves none. These are menu layout margins, so standalone standard buttons do
+not acquire any external inset.
 
 Native Settings controls use the `settings_*` Theme variations;
 for a bare OptionButton, set its popup variation to `settings_popup` (or

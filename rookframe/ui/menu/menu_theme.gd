@@ -47,7 +47,7 @@ func _compile_button(usage: StringName, compact: bool, mapping: Script, material
 	var resting: Dictionary = mapping.button(usage, State.button(State.ENABLED, State.RESTING, State.UNFOCUSED, density))
 	set_font("font", variant, materials.value(resting.font))
 	set_font_size("font_size", variant, materials.value(resting.font_size))
-	for property in ["h_separation", "icon_max_width", "outline_size"]:
+	for property in ["h_separation", "icon_max_width", "outline_size", "minimum_height"]:
 		if resting.has(property):
 			set_constant(property, variant, materials.value(resting[property]))
 	for property in ["texture_visible", "hover_ms", "press_ms", "release_ms", "transition", "ease", "cap_depth", "shadow_drop", "patch_side", "patch_rail", "ornament_width", "ornament_height", "ornament_travel", "ornament_ms", "ornament_rest", "icons_visible", "groove_size", "groove_offset_x", "groove_offset_y", "groove_shadow_size"]:

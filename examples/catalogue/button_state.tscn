@@ -22,7 +22,7 @@ transparent_bg = true
 size = Vector2i(600, 100)
 handle_input_locally = true
 
-[node name="Button" parent="Viewport" instance=ExtResource("button")]
+[node name="Layout" type="MarginContainer" parent="Viewport"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -34,3 +34,11 @@ offset_bottom = -18.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("theme")
+
+[node name="Buttons" type="MarginContainer" parent="Viewport/Layout"]
+layout_mode = 2
+theme_type_variation = &"menu_buttons"
+
+[node name="Button" parent="Viewport/Layout/Buttons" instance=ExtResource("button")]
+layout_mode = 2
+size_flags_vertical = 4

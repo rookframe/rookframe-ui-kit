@@ -143,6 +143,20 @@ static var VALUES: Dictionary = {
 	"wood.plain.patch_rail": 140,
 	"wood.plain.ornament_width": 0,
 	"wood.plain.ornament_travel": 0,
+	# The primary's straight rails occupy ~334 of its 404 texture pixels:
+	# Secondary faces sit 4 px inside that body: 44 px regular / 28 px compact.
+	"button.primary.height": 64,
+	"button.primary.height.compact": 44,
+	"button.standard.height": 50,
+	"button.standard.height.compact": 34,
+	"wood.plain.resting.padding": {"content_margin_left": 36.0, "content_margin_top": 7.0, "content_margin_right": 36.0, "content_margin_bottom": 13.0},
+	"wood.plain.pressed.padding": {"content_margin_left": 36.0, "content_margin_top": 12.0, "content_margin_right": 36.0, "content_margin_bottom": 8.0},
+	"wood.plain.resting.padding.compact": {"content_margin_left": 36.0, "content_margin_top": 0.5, "content_margin_right": 36.0, "content_margin_bottom": 6.5},
+	"wood.plain.pressed.padding.compact": {"content_margin_left": 36.0, "content_margin_top": 5.5, "content_margin_right": 36.0, "content_margin_bottom": 1.5},
+	# Layout clearance for the carved ends, outside the secondary button itself.
+	"wood.buttons.inset": 34,
+	"wood.buttons.inset.compact": 22,
+	"wood.buttons.vertical_inset": 0,
 	"brass.adornment": preload("brass_leaf_finial.tres"),
 	"brass.adornment.focus": preload("brass_adornment_focus.tres"),
 	"stone.tray": preload("stone_tray.tres"),

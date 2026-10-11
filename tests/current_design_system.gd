@@ -17,14 +17,19 @@ func check(condition: bool, message: String) -> void:
 func settle() -> void:
 	for frame in range(4):
 		await process_frame
+	# Focused previews render sequentially because native focus is Window-wide.
+	var screen := root.get_node_or_null("VisualCatalogue")
+	var deadline := Time.get_ticks_msec() + 3000
+	while screen != null and (screen._capturing_focus or screen._focus_preview_pending) and Time.get_ticks_msec() < deadline:
+		await process_frame
 
 
 func verify() -> void:
 	var screen := Catalogue.instantiate()
 	root.add_child(screen)
 	await settle()
-	var primary: Button = screen.get_node("%Menu").get_node("Buttons/Surface/States/Normal/Viewport/Button")
-	var surface: Panel = screen.get_node("%Menu").get_node("Surfaces/Record")
+	var primary: Button = screen.get_node("%PrimaryStates").get_node("Normal/Viewport/Layout/Buttons/Button")
+	var surface: Panel = screen.get_node("%SurfaceSamples").get_node("Record")
 	var choice: OptionButton = screen.get_node("%Settings").get_node("Language/Choice")
 	# Round-trip on the same instances catches stale texture/override state.
 	for theme_index in [0, 1, 0]:
@@ -73,7 +78,9 @@ func verify() -> void:
 	for width in [800, 1440]:
 		screen.size = Vector2(width, 900)
 		await settle()
-		check(screen.get_node("%Menu").vertical == (width < 1000), "Catalogue did not reflow")
+		check(screen.get_node("%Menu").vertical, "Showcase sections must remain a vertical stack")
+		check(screen.get_node("%SurfaceSamples").vertical == (width < 1000), "Surface samples did not reflow")
+		check(screen.get_node("%ButtonKinds").vertical == (width < 1000), "Button samples did not reflow")
 		check(screen.get_node("%Header").get_global_rect().end.x <= screen.get_global_rect().end.x, "Catalogue choices overflow the viewport")
 		_check_button_states(screen)
 	var capture_dir := ""
@@ -98,19 +105,23 @@ func verify() -> void:
 
 
 func _check_button_states(screen: Control) -> void:
-	var states := screen.get_node("%Menu").get_node("Buttons/Surface/States")
-	for sample in states.get_children():
-		var button: Button = sample.get_node("Viewport/Button")
-		check(button.text == sample.name, "Button label does not describe its state")
+	var samples := screen.get_node("%PrimaryStates").get_children() + screen.get_node("%SecondaryStates").get_children()
+	for sample in samples:
+		var button: Button = sample.get_node("Viewport/Layout/Buttons/Button")
+		check(button.text == ("Hovered + pressed" if sample.name == &"HoverPressed" else str(sample.name)), "Button label does not describe its state")
 		var expected: int = {
 			"Normal": BaseButton.DRAW_NORMAL, "Hovered": BaseButton.DRAW_HOVER,
 			"Pressed": BaseButton.DRAW_PRESSED, "Disabled": BaseButton.DRAW_DISABLED,
+			"HoverPressed": BaseButton.DRAW_HOVER_PRESSED,
 			"Focused": BaseButton.DRAW_NORMAL,
 		}[str(sample.name)]
 		check(button.get_draw_mode() == expected, "Wrong native draw state: " + str(sample.name))
-		check(button.has_focus() == (sample.name == &"Focused"), "Wrong native focus state: " + str(sample.name))
+		if sample.name == &"Focused":
+			check(sample.focus_preview_ready, "Native focus preview was not captured")
+		else:
+			check(not button.has_focus(), "Unexpected native focus: " + str(sample.name))
 		# The fully extended ornament and drop shadow must fit inside the preview.
 		var travel := button.get_theme_constant("ornament_travel")
-		var rect := button.get_rect()
+		var rect := button.get_global_rect()
 		check(rect.position.x >= travel + 8 and sample.size.x - rect.end.x >= travel + 8, "Ornament can overflow the surface")
 		check(rect.position.y >= 12 and sample.size.y - rect.end.y >= button.get_theme_constant("shadow_drop") + 4, "Depth can overflow the surface")
