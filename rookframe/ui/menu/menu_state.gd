@@ -10,6 +10,10 @@ const FOCUSED: StringName = &"focused"
 const OUTSIDE: StringName = &"outside"
 const INSIDE: StringName = &"inside"
 # Presentation density is separate from availability, interaction and focus.
+const SELECTED: StringName = &"selected"
+const UNSELECTED: StringName = &"unselected"
+const ONLINE: StringName = &"online"
+const OFFLINE: StringName = &"offline"
 const REGULAR: StringName = &"regular"
 const COMPACT: StringName = &"compact"
 

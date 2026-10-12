@@ -510,3 +510,6 @@ parent viewport rather than forcing a 1120 × 800 window onto a phone.
 
 General record metadata is at least 18px; SearchField defaults to a 20px editor
 and ActionLink to a 20px title. Explicit consumer density overrides still apply.
+
+Fantasy and Cyberpunk native Theme resources and ordered usage projection are
+documented in [Shared World styling](world-theme-styling.md).
