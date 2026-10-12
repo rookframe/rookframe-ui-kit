@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://rookframe/ui/components/surfaces/action_panel/connectors.gd" id="straps"]
 [ext_resource type="PackedScene" path="res://rookframe/ui/components/surfaces/action_panel/action_section.tscn" id="leaf"]
 [ext_resource type="Theme" path="res://rookframe/ui/theme/action_panel_theme.tres" id="theme"]
+[ext_resource type="Script" path="res://rookframe/ui/components/surfaces/action_panel/drop_sequence.gd" id="motion"]
 [node name="ActionPanel" type="VBoxContainer"]
 layout_mode = 2
 mouse_filter = 2
@@ -10,6 +11,8 @@ size_flags_horizontal = 3
 theme = ExtResource("theme")
 script = ExtResource("script")
 theme_override_constants/separation = 0
+[node name="DropMotion" type="Node2D" parent="."]
+script = ExtResource("motion")
 [node name="Header" type="MarginContainer" parent="."]
 layout_mode = 2
 mouse_filter = 2

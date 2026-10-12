@@ -28,6 +28,17 @@ offsets and emblem footprint without rebuilding children. `show_emblem` and
 Children keep their identity, focus and input connections through layout changes.
 Callers choose compact row composition; the panel does not infer system semantics.
 
+On opening, the header appears first. Each lower leaf drops from its top bindings
+in order, then all native content develops through ink together. `animate_open`
+defaults to true; disable it for immediate presentation, or set `reduced_motion`
+to skip motion. Hiding, removing a leaf, or changing the footer during the entrance
+restores native presentation and input immediately. Controls remain in their slots;
+temporary 3D faces render only blank leather and are freed when the entrance ends.
+The leaf folds behind its upper neighbour, accelerates downward, and settles with
+a small swing. The host instances `render_warmup.tscn` during tabletop loading to
+draw the materials and ink once for Compatibility shader compilation; its viewports
+then stop. Moving faces avoid resizing unchanged textures and stop drawing at rest.
+
 The same scenes work programmatically:
 
 ```gdscript
@@ -49,6 +60,14 @@ all four states use the same source image with material tint and pressed offset.
 Systems using another die or action supply an ordinary Button and their own icon.
 `RookframeActionDivider` supplies the thin copper separator. Labels and controls
 inherit EB Garamond; the owning system supplies localization and accessible names.
+Native Buttons, CheckBoxes, LineEdits and OptionButtons inherit the panel material
+without per-control overrides. The standard `RookframePrimaryButton` and
+`RookframeSecondaryButton` variations are scoped here too, including disabled,
+hover, pressed and keyboard-focus states. Text actions use warm borders over
+visible leather; primary actions use bone ink with dark text.
+`RookframeActionTextField` and `RookframeActionSelect` remain optional aliases for
+the native field styles. The PopupMenu keeps the same palette. Authors still set
+a 44px minimum control height and connect ordinary native signals.
 
 The companion `action_panel_theme.tres`, nine-patch Resources and fixed connector
 atlas are shared assets. Authors never redraw a skin to add a field or section.

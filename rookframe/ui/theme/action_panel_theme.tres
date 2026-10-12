@@ -1,6 +1,10 @@
 [gd_resource type="Theme" format=3]
 [ext_resource type="FontVariation" path="res://rookframe/ui/theme/silkbound_regular.tres" id="font"]
 [ext_resource type="Texture2D" path="res://rookframe/ui/assets/action-panel/ai-generated-approved-roll-source.png" id="roll_source"]
+[ext_resource type="Texture2D" path="res://rookframe/ui/assets/controls/checkbox-checked.svg" id="checkbox-checked"]
+[ext_resource type="Texture2D" path="res://rookframe/ui/assets/controls/checkbox-unchecked.svg" id="checkbox-unchecked"]
+[ext_resource type="Texture2D" path="res://rookframe/ui/assets/controls/checkbox-checked-disabled.svg" id="checkbox-checked-disabled"]
+[ext_resource type="Texture2D" path="res://rookframe/ui/assets/controls/checkbox-unchecked-disabled.svg" id="checkbox-unchecked-disabled"]
 [sub_resource type="AtlasTexture" id="die"]
 atlas = ExtResource("roll_source")
 region = Rect2(1150, 408, 124, 116)
@@ -90,6 +94,143 @@ content_margin_left = 0.0
 content_margin_top = 0.0
 content_margin_right = 0.0
 content_margin_bottom = 0.0
+[sub_resource type="StyleBoxFlat" id="field"]
+bg_color = Color(0.02, 0.025, 0.023, 0.30)
+content_margin_left = 12.0
+content_margin_right = 12.0
+content_margin_top = 9.0
+content_margin_bottom = 9.0
+border_width_bottom = 1
+border_color = Color(0.737, 0.572, 0.466, 0.55)
+[sub_resource type="StyleBoxFlat" id="field_hover"]
+bg_color = Color(0.82, 0.78, 0.65, 0.08)
+content_margin_left = 12.0
+content_margin_right = 12.0
+content_margin_top = 9.0
+content_margin_bottom = 9.0
+border_width_bottom = 1
+border_color = Color(0.875, 0.729, 0.455, 0.9)
+[sub_resource type="StyleBoxFlat" id="field_pressed"]
+bg_color = Color(0.02, 0.025, 0.023, 0.55)
+content_margin_left = 12.0
+content_margin_right = 12.0
+content_margin_top = 9.0
+content_margin_bottom = 9.0
+border_width_bottom = 1
+border_color = Color(0.875, 0.729, 0.455, 1)
+[sub_resource type="StyleBoxFlat" id="field_focus"]
+bg_color = Color(0, 0, 0, 0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.9, 0.86, 0.72, 1)
+[sub_resource type="StyleBoxFlat" id="popup"]
+bg_color = Color(0.055, 0.065, 0.061, 1)
+content_margin_left = 8.0
+content_margin_right = 8.0
+content_margin_top = 8.0
+content_margin_bottom = 8.0
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.737, 0.572, 0.466, 0.75)
+[sub_resource type="StyleBoxFlat" id="action"]
+bg_color = Color(0.02, 0.025, 0.023, 0.24)
+content_margin_left = 12.0
+content_margin_top = 9.0
+content_margin_right = 12.0
+content_margin_bottom = 9.0
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.737, 0.572, 0.466, 0.72)
+[sub_resource type="StyleBoxFlat" id="action_hover"]
+bg_color = Color(0.816, 0.745, 0.557, 0.16)
+content_margin_left = 12.0
+content_margin_top = 9.0
+content_margin_right = 12.0
+content_margin_bottom = 9.0
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.875, 0.729, 0.455, 1)
+[sub_resource type="StyleBoxFlat" id="action_pressed"]
+bg_color = Color(0.01, 0.012, 0.01, 0.62)
+content_margin_left = 12.0
+content_margin_top = 10.0
+content_margin_right = 12.0
+content_margin_bottom = 8.0
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.816, 0.745, 0.557, 0.85)
+[sub_resource type="StyleBoxFlat" id="action_disabled"]
+bg_color = Color(0.02, 0.025, 0.023, 0.12)
+content_margin_left = 12.0
+content_margin_top = 9.0
+content_margin_right = 12.0
+content_margin_bottom = 9.0
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.737, 0.572, 0.466, 0.27)
+[sub_resource type="StyleBoxFlat" id="action_primary"]
+bg_color = Color(0.808, 0.800, 0.702, 0.94)
+content_margin_left = 12.0
+content_margin_top = 9.0
+content_margin_right = 12.0
+content_margin_bottom = 9.0
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.875, 0.729, 0.455, 0.95)
+[sub_resource type="StyleBoxFlat" id="action_primary_hover"]
+bg_color = Color(0.92, 0.89, 0.77, 0.96)
+content_margin_left = 12.0
+content_margin_top = 9.0
+content_margin_right = 12.0
+content_margin_bottom = 9.0
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.95, 0.85, 0.65, 1)
+[sub_resource type="StyleBoxFlat" id="action_primary_pressed"]
+bg_color = Color(0.68, 0.63, 0.49, 0.96)
+content_margin_left = 12.0
+content_margin_top = 10.0
+content_margin_right = 12.0
+content_margin_bottom = 8.0
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.816, 0.745, 0.557, 1)
+[sub_resource type="StyleBoxFlat" id="check_quiet"]
+bg_color = Color(0, 0, 0, 0)
+content_margin_left = 8.0
+content_margin_top = 9.0
+content_margin_right = 8.0
+content_margin_bottom = 9.0
+[sub_resource type="StyleBoxFlat" id="check_hover"]
+bg_color = Color(0.816, 0.745, 0.557, 0.10)
+content_margin_left = 8.0
+content_margin_top = 9.0
+content_margin_right = 8.0
+content_margin_bottom = 9.0
+[sub_resource type="StyleBoxFlat" id="check_pressed"]
+bg_color = Color(0.01, 0.012, 0.01, 0.34)
+content_margin_left = 8.0
+content_margin_top = 9.0
+content_margin_right = 8.0
+content_margin_bottom = 9.0
 [resource]
 default_font = ExtResource("font")
 default_font_size = 18
@@ -126,3 +267,125 @@ RookframeActionRoll/styles/focus = SubResource("focus")
 RookframeActionDivider/base_type = &"HSeparator"
 RookframeActionDivider/constants/separation = 1
 RookframeActionDivider/styles/separator = SubResource("line")
+
+RookframeActionTextField/base_type = &"LineEdit"
+LineEdit/colors/font_color = Color(0.906,0.906,0.867,1)
+LineEdit/colors/font_placeholder_color = Color(0.769,0.773,0.722,0.85)
+LineEdit/colors/font_hover_color = Color(0.98,0.95,0.85,1)
+LineEdit/colors/font_pressed_color = Color(0.906,0.906,0.867,1)
+LineEdit/colors/font_disabled_color = Color(0.769,0.773,0.722,0.45)
+LineEdit/colors/caret_color = Color(0.875,0.729,0.455,1)
+LineEdit/colors/selection_color = Color(0.55,0.44,0.27,0.5)
+LineEdit/styles/normal = SubResource("field")
+LineEdit/styles/hover = SubResource("field_hover")
+LineEdit/styles/pressed = SubResource("field_pressed")
+LineEdit/styles/hover_pressed = SubResource("field_pressed")
+LineEdit/styles/read_only = SubResource("field")
+LineEdit/styles/disabled = SubResource("field")
+LineEdit/styles/focus = SubResource("field_focus")
+
+RookframeActionSelect/base_type = &"OptionButton"
+OptionButton/colors/font_color = Color(0.906,0.906,0.867,1)
+OptionButton/colors/font_placeholder_color = Color(0.769,0.773,0.722,0.85)
+OptionButton/colors/font_hover_color = Color(0.98,0.95,0.85,1)
+OptionButton/colors/font_pressed_color = Color(0.906,0.906,0.867,1)
+OptionButton/colors/font_disabled_color = Color(0.769,0.773,0.722,0.45)
+OptionButton/colors/caret_color = Color(0.875,0.729,0.455,1)
+OptionButton/colors/selection_color = Color(0.55,0.44,0.27,0.5)
+OptionButton/styles/normal = SubResource("field")
+OptionButton/styles/hover = SubResource("field_hover")
+OptionButton/styles/pressed = SubResource("field_pressed")
+OptionButton/styles/hover_pressed = SubResource("field_pressed")
+OptionButton/styles/read_only = SubResource("field")
+OptionButton/styles/disabled = SubResource("field")
+OptionButton/styles/focus = SubResource("field_focus")
+OptionButton/constants/arrow_margin = 12
+OptionButton/colors/icon_normal_color = Color(0.875,0.729,0.455,1)
+PopupMenu/styles/panel = SubResource("popup")
+PopupMenu/styles/hover = SubResource("field_hover")
+PopupMenu/colors/font_color = Color(0.906,0.906,0.867,1)
+PopupMenu/colors/font_hover_color = Color(0.98,0.95,0.85,1)
+PopupMenu/constants/v_separation = 20
+
+Button/styles/normal = SubResource("action")
+Button/styles/hover = SubResource("action_hover")
+Button/styles/pressed = SubResource("action_pressed")
+Button/styles/hover_pressed = SubResource("action_pressed")
+Button/styles/disabled = SubResource("action_disabled")
+Button/styles/focus = SubResource("field_focus")
+Button/colors/font_color = Color(0.906, 0.906, 0.867, 1)
+Button/colors/icon_normal_color = Color(0.816, 0.745, 0.557, 1)
+Button/colors/font_hover_color = Color(0.98, 0.95, 0.85, 1)
+Button/colors/icon_hover_color = Color(0.816, 0.745, 0.557, 1)
+Button/colors/font_pressed_color = Color(0.906, 0.906, 0.867, 1)
+Button/colors/icon_pressed_color = Color(0.816, 0.745, 0.557, 1)
+Button/colors/font_hover_pressed_color = Color(0.906, 0.906, 0.867, 1)
+Button/colors/font_focus_color = Color(0.98, 0.95, 0.85, 1)
+Button/colors/icon_focus_color = Color(0.816, 0.745, 0.557, 1)
+Button/colors/font_disabled_color = Color(0.769, 0.773, 0.722, 0.48)
+Button/colors/icon_disabled_color = Color(0.769, 0.773, 0.722, 0.48)
+Button/font_sizes/font_size = 18
+Button/constants/h_separation = 8
+RookframeSecondaryButton/base_type = &"Button"
+RookframeSecondaryButton/styles/normal = SubResource("action")
+RookframeSecondaryButton/styles/hover = SubResource("action_hover")
+RookframeSecondaryButton/styles/pressed = SubResource("action_pressed")
+RookframeSecondaryButton/styles/hover_pressed = SubResource("action_pressed")
+RookframeSecondaryButton/styles/disabled = SubResource("action_disabled")
+RookframeSecondaryButton/styles/focus = SubResource("field_focus")
+RookframeSecondaryButton/colors/font_color = Color(0.906, 0.906, 0.867, 1)
+RookframeSecondaryButton/colors/icon_normal_color = Color(0.816, 0.745, 0.557, 1)
+RookframeSecondaryButton/colors/font_hover_color = Color(0.98, 0.95, 0.85, 1)
+RookframeSecondaryButton/colors/icon_hover_color = Color(0.816, 0.745, 0.557, 1)
+RookframeSecondaryButton/colors/font_pressed_color = Color(0.906, 0.906, 0.867, 1)
+RookframeSecondaryButton/colors/icon_pressed_color = Color(0.816, 0.745, 0.557, 1)
+RookframeSecondaryButton/colors/font_hover_pressed_color = Color(0.906, 0.906, 0.867, 1)
+RookframeSecondaryButton/colors/font_focus_color = Color(0.98, 0.95, 0.85, 1)
+RookframeSecondaryButton/colors/icon_focus_color = Color(0.816, 0.745, 0.557, 1)
+RookframeSecondaryButton/colors/font_disabled_color = Color(0.769, 0.773, 0.722, 0.48)
+RookframeSecondaryButton/colors/icon_disabled_color = Color(0.769, 0.773, 0.722, 0.48)
+RookframeSecondaryButton/font_sizes/font_size = 18
+RookframeSecondaryButton/constants/h_separation = 8
+RookframePrimaryButton/base_type = &"Button"
+RookframePrimaryButton/styles/normal = SubResource("action_primary")
+RookframePrimaryButton/styles/hover = SubResource("action_primary_hover")
+RookframePrimaryButton/styles/pressed = SubResource("action_primary_pressed")
+RookframePrimaryButton/styles/hover_pressed = SubResource("action_primary_pressed")
+RookframePrimaryButton/styles/disabled = SubResource("action_disabled")
+RookframePrimaryButton/styles/focus = SubResource("field_focus")
+RookframePrimaryButton/colors/font_color = Color(0.082, 0.090, 0.098, 1)
+RookframePrimaryButton/colors/icon_normal_color = Color(0.082, 0.090, 0.098, 1)
+RookframePrimaryButton/colors/font_hover_color = Color(0.082, 0.090, 0.098, 1)
+RookframePrimaryButton/colors/icon_hover_color = Color(0.082, 0.090, 0.098, 1)
+RookframePrimaryButton/colors/font_pressed_color = Color(0.082, 0.090, 0.098, 1)
+RookframePrimaryButton/colors/icon_pressed_color = Color(0.082, 0.090, 0.098, 1)
+RookframePrimaryButton/colors/font_hover_pressed_color = Color(0.082, 0.090, 0.098, 1)
+RookframePrimaryButton/colors/font_focus_color = Color(0.082, 0.090, 0.098, 1)
+RookframePrimaryButton/colors/icon_focus_color = Color(0.082, 0.090, 0.098, 1)
+RookframePrimaryButton/colors/font_disabled_color = Color(0.769, 0.773, 0.722, 0.48)
+RookframePrimaryButton/colors/icon_disabled_color = Color(0.769, 0.773, 0.722, 0.48)
+RookframePrimaryButton/font_sizes/font_size = 18
+RookframePrimaryButton/constants/h_separation = 8
+CheckBox/styles/normal = SubResource("check_quiet")
+CheckBox/styles/hover = SubResource("check_hover")
+CheckBox/styles/pressed = SubResource("check_pressed")
+CheckBox/styles/hover_pressed = SubResource("check_hover")
+CheckBox/styles/disabled = SubResource("check_quiet")
+CheckBox/styles/focus = SubResource("field_focus")
+CheckBox/colors/font_color = Color(0.906, 0.906, 0.867, 1)
+CheckBox/colors/font_hover_color = Color(0.98, 0.95, 0.85, 1)
+CheckBox/colors/font_pressed_color = Color(0.906, 0.906, 0.867, 1)
+CheckBox/colors/font_hover_pressed_color = Color(0.906, 0.906, 0.867, 1)
+CheckBox/colors/font_focus_color = Color(0.98, 0.95, 0.85, 1)
+CheckBox/colors/font_disabled_color = Color(0.769, 0.773, 0.722, 0.48)
+CheckBox/icons/checked = ExtResource("checkbox-checked")
+CheckBox/icons/unchecked = ExtResource("checkbox-unchecked")
+CheckBox/icons/checked_disabled = ExtResource("checkbox-checked-disabled")
+CheckBox/icons/unchecked_disabled = ExtResource("checkbox-unchecked-disabled")
+CheckBox/constants/h_separation = 12
+CheckBox/font_sizes/font_size = 18
+LineEdit/colors/font_uneditable_color = Color(0.769, 0.773, 0.722, 0.48)
+OptionButton/colors/icon_hover_color = Color(0.95, 0.85, 0.65, 1)
+OptionButton/colors/icon_pressed_color = Color(0.95, 0.85, 0.65, 1)
+OptionButton/colors/icon_focus_color = Color(0.95, 0.85, 0.65, 1)
+OptionButton/colors/icon_disabled_color = Color(0.769, 0.773, 0.722, 0.48)

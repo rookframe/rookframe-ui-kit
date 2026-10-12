@@ -2,6 +2,8 @@
 extends VBoxContainer
 ## Content-sized linked leaves. Game rules and all interactive children belong to the caller.
 ## Add ordinary Controls to the four slots, in the editor or through the getters.
+@export var animate_open := true
+@export var reduced_motion := false
 
 @export var compact := false:
 	set(value):
@@ -25,11 +27,17 @@ func get_sections_slot() -> VBoxContainer:
 func get_footer_slot() -> VBoxContainer:
 	return get_node("Footer/Leaf/FooterSlot")
 
+func linked_leaves() -> Array[Control]:
+	var leaves: Array[Control] = [get_node("Header/Leaf")]
+	for section in get_sections_slot().get_children():
+		if section is Control and section.is_visible_in_tree(): leaves.append(section)
+	if show_footer: leaves.append(get_node("Footer/Leaf"))
+	return leaves
+
 func _ready() -> void:
 	resized.connect(_refresh_decoration)
-	get_node("Header").resized.connect(_refresh_decoration)
-	get_node("Sections").resized.connect(_refresh_decoration)
-	get_node("Footer").resized.connect(_refresh_decoration)
+	for path in ["Header", "Header/Leaf", "Sections", "Footer", "Footer/Leaf"]:
+		get_node(path).item_rect_changed.connect(_refresh_decoration)
 	get_sections_slot().child_order_changed.connect(_sections_changed)
 	_refresh_layout()
 	_sections_changed()
@@ -39,8 +47,8 @@ func _sections_changed() -> void:
 		return
 	for child in get_sections_slot().get_children():
 		if child is Control:
-			if not child.resized.is_connected(_refresh_decoration):
-				child.resized.connect(_refresh_decoration)
+			if not child.item_rect_changed.is_connected(_refresh_decoration):
+				child.item_rect_changed.connect(_refresh_decoration)
 			if not child.visibility_changed.is_connected(_refresh_decoration):
 				child.visibility_changed.connect(_refresh_decoration)
 	_refresh_decoration()
