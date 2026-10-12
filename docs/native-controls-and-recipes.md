@@ -215,3 +215,10 @@ For a plain Silkbound ScrollContainer, assign an intentional native scrollbar
 thickness (the specimen uses `get_v_scroll_bar().custom_minimum_size.x = 16`).
 Its flat StyleBoxes supply colors, not a minimum width. Check overflowing content
 at phone size and verify that the thumb remains visible and draggable.
+
+## Auxiliary Chronicle surface
+
+Use `res://rookframe/ui/chronicle/ChronicleSurface.tscn` for retained event histories,
+recaps, quest journals and acquired lore under the auxiliary Fantasy/Cyberpunk
+Themes. See [the Chronicle contract](chronicle.md) for semantic scope, companion
+text styles, density, reading margins and vertical resizing.
