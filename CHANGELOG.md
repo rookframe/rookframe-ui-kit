@@ -3,8 +3,10 @@
 ## Unreleased
 
 - Add the shared Chronicle surface for retained event histories, recaps, quest
-  journals and lore: worn, fibrous parchment in Fantasy and an archive panel
+  journals and lore: a lightly worn paper scroll in Fantasy and an archive panel
   in Cyberpunk, with reading styles, compact density and catalogue guidance.
+- Preserve Fantasy Chronicle rolls and paper grain when resizing vertically:
+  repeat the reading field and edge wear with a soft join into the bottom roll.
 
 - Migrate the shared default and task Themes, tokens, forms, records, progress,
   and managed/file-picker surfaces to Silkbound Ledger using stock Godot.

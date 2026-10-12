@@ -1,0 +1,11 @@
+Generated with the built-in image_gen tool, transparent_background=true.
+Asset: rookframe/ui/menu/materials/textures/AI_generated_paper_scroll.png
+
+Use case: photorealistic-natural.
+Asset type: transparent production game UI scroll material, blank background for native text.
+Create a physically believable real paper scroll, partly unrolled to expose a broad flat reading field, photographed straight down with orthographic alignment. Landscape 3:2 composition, whole object fully visible with only a small transparent margin. Top and bottom ends of the SAME sheet gently roll back on themselves around horizontal axes. The curled ends are actual thin layered paper, naturally uneven, with readable hollow openings, subtle paper thickness, soft self-shadow and slight compression. No separate rods or ornamental pieces. Keep the rolls modest, each within the outer 10–12% of the total image height. The long central portions of each roll should remain almost straight for nine-slice scaling, while their end openings stay near the left and right corners.
+Material: warm pale ivory / oatmeal handmade writing paper, physically thin and flexible, matte, quietly fibrous. A little age and handling: slight edge abrasion, a few small nicks, gently softened corners, faint discoloration confined to edges. Most of the side edges remain straight and intact. No heavily torn deckle, shredded borders, thick leather texture, burns or dramatic stains.
+The broad inner writing field is very calm and evenly light, with faint fine paper grain only. No visible folds, strong creases, dark speckles, veins or mottled high-contrast patches beneath text. Keep this field flat.
+Lighting: soft broad light from upper left, shallow natural contact shadows underneath the paper rolls, subdued warm edge patina, believable paper volume. Restrained realism, not fantasy illustration.
+Blank paper only: no text, symbols, seals, ink, props, brass, wooden dowels, gold bars, polished cylinders or cartoon spiral adornments. Do not put a border around the reading field. The rolls must visibly connect into the continuous writing sheet.
+Genuinely transparent background outside the scroll, opaque paper inside. No table, no background, no baked checkerboard.

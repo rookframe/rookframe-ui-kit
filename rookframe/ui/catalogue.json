@@ -1345,12 +1345,12 @@
       "divider": "chronicle_divider",
       "purpose": "Retained narrative for later reading: chronological event histories, session recaps, quest journals, discovered lore and correspondence.",
       "materials": {
-        "fantasy": "Worn, unrolled parchment with torn fibrous edges, creases at the perimeter, a quiet reading field and dark ink.",
+        "fantasy": "Real paper scroll with fixed rolled ends, light edge wear, a quiet reading field and dark ink. Paper and side wear repeat vertically at their original scale, with a soft join into the bottom roll.",
         "cyberpunk": "Dark archive panel with a permanent amber binding stripe, short top tab, small index marks and light text. Amber identifies retained records independently of warning severity or unread state."
       },
       "density": "Append __compact to surface, Label and HSeparator variations.",
       "padding": {
-        "fantasy": "72 px regular / 64 px compact on all sides: 48 px worn perimeter plus 24 / 16 px reading gutter.",
+        "fantasy": "72 / 64 px horizontal and 120 / 112 px vertical padding (regular / compact): 48 px side edges and 96 px paper rolls plus a 24 / 16 px reading gutter.",
         "cyberpunk": "30 px regular / 22 px compact on all sides."
       },
       "composition": "Native PanelContainer with one Container child. Use companion text styles and wrapping. For bounded history, put a ScrollContainer inside the surface; keep actions in an adjacent toolbar.",
