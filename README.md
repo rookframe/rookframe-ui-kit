@@ -24,6 +24,11 @@ The shared [design principles](docs/design-system/principles.md) and
 The principles guide UI Kit design work. The choices remain a draft, including
 the proposed Theme Package selection capability.
 
+The Silkbound components also include the [modular Action Panel](docs/action-panel.md)
+and reusable hinged HUD leaves. Their appearance is independent of the current
+menu/settings catalogue.
+
+
 ## Exact-commit installation
 
 Commit `plug.gd` and gd-plug's runtime to the consuming Godot project, then
