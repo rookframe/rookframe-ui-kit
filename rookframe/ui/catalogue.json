@@ -1279,7 +1279,8 @@
       "res://rookframe/ui/editor/EditorToolButton.tscn",
       "res://rookframe/ui/editor/EditorActionButton.tscn",
       "res://rookframe/ui/editor/EditorToolRail.tscn",
-      "res://rookframe/ui/editor/EditorSurface.tscn"
+      "res://rookframe/ui/editor/EditorSurface.tscn",
+      "res://rookframe/ui/chronicle/ChronicleSurface.tscn"
     ],
     "nativeControls": [
       "Label",
@@ -1332,6 +1333,40 @@
       "layout": "At least 116 px regular / 88 px compact. Title and description wrap. The trailing checkmark uses the same resource and disabled tint as MenuChoice, reserving its space when unselected.",
       "materials": "Fantasy reuses the new walnut/brass button casing and inscription, with material lighting for selection and focus. Cyberpunk reuses the new alloy button faces, bevels, cut corners and cyan signals.",
       "grouping": "SwitchGroup.tscn supplies the menu_group stone/chassis tray. Add Switch cards to get_options() (Inset/Options) and share a host-owned ButtonGroup for exclusive selection. The group keeps an equal-width row while each option fits at 320 px regular / 280 px compact, otherwise stacking vertically. compact / set_compact(bool) update the group and its cards."
+    },
+    "chronicle": {
+      "scene": "res://rookframe/ui/chronicle/ChronicleSurface.tscn",
+      "surface": "chronicle_surface",
+      "labels": [
+        "chronicle_heading",
+        "chronicle_body",
+        "chronicle_meta"
+      ],
+      "divider": "chronicle_divider",
+      "purpose": "Retained narrative for later reading: chronological event histories, session recaps, quest journals, discovered lore and correspondence.",
+      "materials": {
+        "fantasy": "Real paper scroll with fixed rolled ends, light edge wear, a quiet reading field and dark ink. Paper and side wear repeat vertically at their original scale, with a soft join into the bottom roll.",
+        "cyberpunk": "Dark archive panel with a permanent amber binding stripe, short top tab, small index marks and light text. Amber identifies retained records independently of warning severity or unread state."
+      },
+      "density": "Append __compact to surface, Label and HSeparator variations.",
+      "padding": {
+        "fantasy": "72 / 64 px horizontal and 120 / 112 px vertical padding (regular / compact): 48 px side edges and 96 px paper rolls plus a 24 / 16 px reading gutter.",
+        "cyberpunk": "30 px regular / 22 px compact on all sides."
+      },
+      "composition": "Native PanelContainer with one Container child. Use companion text styles and wrapping. For bounded history, put a ScrollContainer inside the surface; keep actions in an adjacent toolbar.",
+      "behavior": "Presentation only; hosts own persistence, entries, timestamps, ordering, filtering, links and scroll position. Material does not imply interaction, severity or unread state.",
+      "excludes": [
+        "settings and tool controls",
+        "editable fields",
+        "selectable inventory cards",
+        "transient toasts and live status",
+        "debugging output",
+        "urgent alerts"
+      ],
+      "existingRoles": {
+        "menu_world_record": "Single World summary",
+        "editor_surface_log": "Compact latest-activity strip"
+      }
     }
   }
 }

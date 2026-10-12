@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="128" viewBox="0 0 256 128">
+  <!-- Fixed archive tab and index marks; only the narrow spine stretches. -->
+  <path d="M0 0H58L54 4H0Z" fill="#d6b864"/>
+  <path d="M0 14H3V114H0Z" fill="#d6b864"/>
+  <path d="M0 124H20V126H0Z" fill="#d6b864" opacity=".65"/>
+  <path d="M220 11H222V18H220ZM225 11H228V18H225ZM232 11H233V18H232ZM237 11H240V18H237Z" fill="#d6b864" opacity=".6"/>
+</svg>

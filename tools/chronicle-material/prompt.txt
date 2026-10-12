@@ -1,0 +1,20 @@
+Generated with the built-in image_gen tool, transparent_background=true.
+Asset: rookframe/ui/menu/materials/textures/AI_generated_worn_parchment.png
+
+Use case: photorealistic-natural.
+Asset type: production game UI material texture, blank parchment panel, intended for nine-slice scaling.
+Create a single tactile, gritty sheet of old handmade rag parchment laid fully flat, viewed perfectly straight down with orthographic framing. Landscape rectangle, about 2:1, occupying almost the whole canvas, with a slim transparent margin on all sides.
+The sheet is thick, fibrous and visibly handled: irregular deckled torn perimeter, tiny nicks and fraying fibers, compressed wrinkles, restrained shallow fold marks, rubbed and darkened edges, occasional small foxing flecks. Broad warm oatmeal / desaturated bone center with naturally varied pulp, richer earthy umber aging toward the perimeter. Convincing microtexture and local side lighting should make the fibers and worn thickness palpable. Soft shallow contact shadow beneath the edge only.
+Keep the middle 80% comfortably light and relatively even for dark small UI text. Wear concentrated near edges, never black or heavily stained. Low broad creases may cross the center, but nothing visually competes with text.
+No rolled ends, no scroll rods, no spiral curls, no cylindrical top/bottom bars, no ornamental frame, no brass, no gold, no bevel border, no cartoon shapes, no glossy plastic, no burned edges. No writing, no lettering, no symbols, no seals, no illustrations, no objects or desk. This is a material asset, not a UI screenshot.
+Genuinely transparent background; opaque paper, isolated complete silhouette, no checkerboard baked into image.
+
+Readability revision (built-in image_gen edit, transparent_background=true):
+Input: original generated parchment texture.
+
+Use case: precise-object-edit.
+Edit target: the attached blank parchment texture used as a native game UI surface.
+The user approves the torn, worn edges. Preserve the outer silhouette, transparent background, proportions, frayed fibers, darkened perimeter, edge nicks, edge creases and edge lighting as closely as possible. Do not redesign the perimeter.
+Change only the inner reading field: dramatically reduce grain contrast, speckles, mottling and raised wrinkles in the middle 80% of the sheet. Remove the diagonal and horizontal creases that traverse that reading field. Make this area a calm, even, warm oatmeal paper tone with only faint, fine pulp texture, suitable behind small dark text. Reduce interior noise by roughly 85%. Retain physical paper character through very subtle broad tonal variation, not visible marks.
+Blend gently from the smooth inner reading field into the existing tactile worn edges; no obvious inset rectangle, hard border, blur halo or vignette. Wear should be strongest in a narrow perimeter band, with no strong veins or fold lines reaching under the text.
+Keep the image blank. No text, symbols, ornaments, rods, curls, or added objects. Keep the original landscape 2:1 composition and genuine alpha transparency outside the complete paper silhouette.
