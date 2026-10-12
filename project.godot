@@ -10,8 +10,7 @@ config_version=5
 
 [application]
 
-config/name="Rookframe UI Kit visual catalogue"
-run/main_scene="res://examples/catalogue/visual_catalogue.tscn"
+config/name="Rookframe UI Kit component tests"
 config/features=PackedStringArray("4.7")
 
 [display]
@@ -24,7 +23,7 @@ window/stretch/mode="canvas_items"
 
 [dotnet]
 
-project/assembly_name="Rookframe UI Kit visual catalogue"
+project/assembly_name="Rookframe UI Kit component tests"
 
 [rendering]
 

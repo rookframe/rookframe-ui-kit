@@ -1292,7 +1292,7 @@
       "MarginContainer",
       "TextureRect"
     ],
-    "catalogue": "res://examples/catalogue/visual_catalogue.tscn",
+    "catalogue": "https://github.com/rookframe/rookframe-design-specimen/blob/main/examples/catalogue/visual_catalogue.tscn",
     "menuButtons": {
       "layout": "menu.buttons (native menu_buttons) is a MarginContainer around the secondary action stack, excluding the primary. Append __compact for compact density.",
       "inset": "Fantasy reserves 34/22 px per side for the primary's carved ends; Cyberpunk reserves no inset. Buttons have no external margins.",

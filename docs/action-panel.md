@@ -10,7 +10,8 @@ to the following public slots. A single `action_section.tscn` accepts an ordinar
 Container child; add as many sections as the action needs. Rows within a section
 are ordinary native Containers. Do not make a separate leaf for every fact.
 
-Open `examples/action-panel/action_panel_example.tscn` and run the current scene
+In [the native specimen](https://github.com/rookframe/rookframe-design-specimen), open
+`examples/action-panel/action_panel_example.tscn` and run the current scene
 (F6). Its first section is authored in the scene tree; **Add section** and
 **Remove section** exercise the programmatic path. Compact and footer toggles
 reuse the same content. A native ScrollContainer bounds the whole example.
@@ -85,8 +86,8 @@ The package test uses both authored Mörk Borg composition and programmatic stoc
 Controls; the UI Kit suite checks growth, hiding, compact transitions and state
 identity. Run `tests/action_panel.gd` with the repository's GdUnit runner.
 
-This is an additive, opt-in extension of Silkbound Ledger, approved in the attack
-silhouette study. Existing screen skins do not change. Asset origin and generation
+These leaves are the approved compact-surface iteration of Silkbound Ledger.
+Long reading surfaces retain their ledger composition. Asset origin and generation
 prompts are recorded in `assets/action-panel/provenance.json`; existing game-icons
 SVG shapes remain independently attributed by their owning icon registry/Package.
 
@@ -95,6 +96,9 @@ SVG shapes remain independently attributed by their owning icon registry/Package
 `components/surfaces/hinged_leaf/hinged_leaf.tscn` is the matching animated
 Control. Instance it with **Editable Children** and author ordinary Controls in
 `Surface/Viewport/Root/Ink/Content`, or add them through `get_content()`.
+Assign `action_panel_theme.tres` to `get_content().theme`: the native SubViewport
+is a separate Theme inheritance boundary. Apply locale companion fonts to
+content Controls, including Buttons, when required.
 Set the root's position and size normally. `hinge_gap` (26px) and `hinge_inset`
 (48px) place its two bindings; those remain visible when the leaf is folded.
 

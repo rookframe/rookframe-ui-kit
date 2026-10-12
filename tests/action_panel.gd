@@ -174,3 +174,18 @@ func test_replaced_choice_controls_during_ink_restore_without_stale_references()
 	motion.finish()
 	assert_object(choice.material).is_null()
 	assert_int(choice.get_mouse_filter_with_override()).is_equal(choice.mouse_filter)
+
+func test_detaching_before_deferred_entrance_does_not_access_a_tree() -> void:
+	var panel = auto_free(PANEL.instantiate())
+	add_child(panel)
+	remove_child(panel)
+	for i in range(5): await await_idle_frame()
+	assert_bool(panel.get_node("DropMotion").active).is_false()
+
+func test_detaching_hud_leaf_before_deferred_open_does_not_access_a_tree() -> void:
+	var leaf = auto_free(load("res://rookframe/ui/components/surfaces/hinged_leaf/hinged_leaf.tscn").instantiate())
+	add_child(leaf)
+	leaf.set_open(true)
+	remove_child(leaf)
+	for i in range(5): await await_idle_frame()
+	assert_bool(leaf.is_inside_tree()).is_false()

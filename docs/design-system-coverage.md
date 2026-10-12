@@ -12,12 +12,11 @@ classifies every reusable 2D visual, layout, and interaction role found in:
   `rookframe/ui/`, the shared Theme, static factories, Managed Surface state,
   Package presentation adapter, and Tabletop Workspace.
 
-Unrelated local working-tree changes in those repositories were excluded. The
-old running Rookframe/design-system material is visual authority; current Godot
-files are implementation and migration evidence, not proof of completeness.
+Unrelated local working-tree changes in those repositories were excluded. Silkbound Ledger is the current appearance authority; this inventory retains
+component ownership and support scope from the foundation work.
 
 RFG-161's delivery against this unchanged inventory is recorded separately in
-[the completion coverage map](rfg-161-coverage.md).
+[the archived completion evidence](https://linear.app/rookframe/issue/RFG-367).
 
 ## Classification
 

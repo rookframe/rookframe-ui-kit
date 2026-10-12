@@ -46,7 +46,7 @@ unclear provenance is included in the public foundation.
 
 The clean consumer example vendors gd-plug at commit
 `209276d1f00d14b49b74403d9839f29598e9a8eb` under the MIT License in
-`examples/exact-commit-consumer/addons/gd-plug/LICENSE`. gd-plug is development
+the specimen repository’s `addons/gd-plug/LICENSE`. gd-plug is development
 material outside `rookframe/ui` and is not installed with the UI Kit. The
 consumer declaration adds a local exit-status override without modifying the
 vendored gd-plug runtime.

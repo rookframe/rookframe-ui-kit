@@ -93,6 +93,7 @@ func set_open(value: bool, animated := true) -> void:
 		_begin_close()
 
 func _begin_open(generation: int) -> void:
+	if generation != _generation or not is_inside_tree(): return
 	# Let Containers settle before sizing the live viewport; no stale-frame flash.
 	await get_tree().process_frame
 	if generation != _generation or not is_inside_tree(): return

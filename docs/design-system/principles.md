@@ -1,98 +1,57 @@
-# Rookframe UI design principles
+# Silkbound Ledger implementation contract
 
-## 1. The interface MUST feel tactile.
+## Authority and theme scope
 
-Digital actions should feel like handling believable objects. Controls have
-substance: surfaces, edges, depth, and a convincing response to interaction.
-Pressing, lifting, placing, and opening should feel distinct.
+Silkbound Ledger is the canonical default, including its leather-leaf and motion
+iteration. The Main Menu always uses Silkbound Ledger through the supported
+contract. System Extensions are intended to theme the in-World shell and game
+interface; selection is a proposed SDK capability, not an implemented API.
+Fantasy/Cyberpunk resources are auxiliary shell-theme experiments. Direct Godot
+changes to the Main Menu are allowed but unsupported, with no compatibility promise.
 
-Tactility comes from appearance and behavior together. Texture alone is
-insufficient. Materials enrich the experience while text, states, and actions
-remain clear.
+## Compose the existing resources
 
-**Discarded alternative:** An abstract interface that prioritizes visual economy
-and neutrality, treating physical character and material response as optional
-decoration.
+- Choose the public component by purpose from `rookframe/ui/catalogue.json`.
+  Use native Controls/Containers for content. Public slots own layout and material;
+  callers own game rules, labels, data and actions.
+- Use linked leather leaves for compact action/HUD composition. Use ledger reading
+  surfaces for dense text; put the cloth on the owner rather than each record.
+- Keep bindings mechanically plausible and attached while a HUD leaf is folded.
+  Preserve the component's surface outline in hover, pressed and focus states.
+- Keep category names visible. Let long names and translated text wrap. Yield
+  ornament/gaps before readable content; keep touch targets at least 44 × 44.
+- Preserve keyboard focus, hover, pressed, disabled, selected and error distinctions.
+  Selected/primary surfaces use their contrasting foreground, including icons.
+- Reuse native themes and material resources for colors, fonts, edges and spacing.
+  Use EB Garamond and explicit locale companion resources; avoid eager all-locale
+  font chains. Extend shared material treatment instead of adding local skins.
 
-## 2. The shared tabletop MUST take precedence over information density.
+## Themeable recipes
 
-During play, the interface should leave room to inhabit the Scene. We accept an
-extra action to inspect equipment, open a character sheet, or reach an occasional
-tool when that keeps the tabletop central.
+Usage describes purpose, State describes interaction/availability, and Material
+holds concrete visual values. Theme mappings reference Material for each relevant
+Usage, State and property. Theme variations preserve meaning and interaction.
+The existing auxiliary recipes demonstrate this separation; they do not establish
+shell theme selection, persistence, permissions or a supported Main Menu override.
 
-Persistent panels must earn their space. Common actions remain nearby; detailed
-information and substantial tasks open deliberately. This prioritizes spatial
-presence over simultaneous access to every tool.
+## Motion
 
-**Discarded alternative:** A dashboard that keeps statistics, inventories, logs,
-and tools simultaneously visible to minimize navigation, even when they occupy
-most of the screen.
+Use `hinged_leaf/hinged_leaf.tscn` for the HUD's gather, impact and rebound;
+use `action_panel/action_panel.tscn` for ordered drops from upper bindings followed
+by content ink. Reuse these timelines, including cancellation and reduced motion.
+Changing content/layout must preserve child identity and native input connections.
+See [the slot and motion contract](../action-panel.md) before composing either.
 
-## 3. World building, running a game, and playing MUST have distinct interfaces within one design system.
+## Verification and maintenance
 
-World builders compose and revise. Game masters present situations and coordinate
-play. Players understand their situation and act through their characters. Each
-activity deserves its own tool arrangements, workflows, and information priorities.
+Run the affected component suites and inspect the native specimen at desktop
+1920 × 1080, tablet 1024 × 768 and phone landscape 844 × 390. Exercise long content,
+disabled/focus states, interruptions and reduced motion against bright/dark scenes.
+The specimen is [a separate pinned consumer](https://github.com/rookframe/rookframe-design-specimen); it must instance production
+resources. Product placement and routes remain the host's responsibility.
 
-The same person may move between these activities; their current task determines
-the interface. Shared materials, controls, states, and interaction conventions
-provide continuity without requiring identical workspaces.
-
-**Discarded alternative:** One universal workspace adapted mainly through
-permissions and hidden controls, favoring a single arrangement to learn and
-maintain over experiences tailored to each activity.
-
-## 4. Interface controls MUST use shared recipes. Themes change appearance while preserving purpose and behavior.
-
-A screen selects a complete usage recipe. Rookframe owns the control's purpose,
-composition, behavior, interaction states, focus handling, and responsive layout
-contracts.
-
-The design has three layers:
-
-| Layer | Describes | Owner |
-| --- | --- | --- |
-| **Usage** | Semantic identity: what the element is, including its purpose and emphasis, such as a primary menu button, a selectable row, or a destructive action | Rookframe |
-| **State** | Semantic condition: how interaction or its absence affects it, such as enabled, disabled, resting, hovered, pressed, focused, selected, expanded, or pending, as applicable | Rookframe |
-| **Material** | Actual design values: surface treatments, typography, colors, textures, dimensions, spacing, borders, depth, shadows, and motion values | Rookframe or a Package |
-
-**Usage and State design tokens are semantic only. Only Material contains actual
-design values.** This includes shared defaults: a usage recipe or state token
-cannot embed a color, font size, spacing value, duration, or other visual literal.
-
-**The theme maps each element property to a Material token according to its
-Usage and State: `Theme(Usage, State, Property) → Material token`.**
-The surface, label, icon, border, and other properties can each use different
-Material tokens. The theme supplies those references rather than forming a
-fourth layer or storing additional design values. Rookframe defines each
-element's usage, applicable states, and themeable properties; the theme chooses
-their visual expression while preserving their meaning and required distinctions.
-
-State dimensions can coexist. An enabled button may be resting, hovered, or
-pressed; focus can accompany each of those states. Selection, expansion, and
-pending status apply where the control supports them.
-
-For example, **Worlds**, **Installed Packages**, and **Settings** use
-`menu.button.standard`; **Open World** uses `menu.button.primary`. For an enabled,
-resting, unfocused primary button, a theme may map the surface to brass, the label
-to ivory ink, the icon to a brass highlight, and the shadow to a shallow raised
-treatment. Each is a separate property mapping. Its pressed state receives a
-depressed treatment; focus adds a visible indicator independently. Another theme
-can use blackened steel for the same usage and states.
-
-A theme Package supplies the mappings and any additional Material resources,
-and may reuse public Rookframe resources. It declares an ordinary **Godot Theme**
-resource with its visual assets. Built-in themes follow exactly the same contract.
-Usage and State definitions remain Rookframe-owned.
-
-The World selects the theme for its game interface, Builder tools, and Package
-screens. Participant accessibility preferences take precedence, and a built-in
-theme provides the fallback. The Manager retains its separate application theme.
-
-Theme selection is a **proposed capability**, requiring a selection contract and
-consistent use of shared theme properties.
-
-**Discarded alternative:** Letting each screen or Package invent its own controls
-and styling for greater local freedom, with consistency maintained through
-guidelines rather than shared recipes. Allowing themes to redefine an element's
-usage or state semantics instead of preserving the shared interaction vocabulary.
+Keep one owning contract per behavior. Repository prose supplies agent instructions,
+public interface meaning and checks. Put proposals, rationale and review captures
+in [Linear](https://linear.app/rookframe/document/silkbound-ledger-design-examples-and-distribution-d2dd1e70a906). Retain legal notices and machine-readable asset provenance with
+the shipped resources. An asset replacement keeps its stable ID and atlas/UID
+contract, updates origin/checksum, and receives native visual verification.

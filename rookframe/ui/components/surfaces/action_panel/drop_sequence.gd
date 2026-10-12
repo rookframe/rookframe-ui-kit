@@ -36,6 +36,7 @@ func open() -> void:
 	_begin.call_deferred(_generation)
 
 func _begin(generation: int) -> void:
+	if generation != _generation or not is_inside_tree() or not active: return
 	# Let native Containers finish the caller's initial content and compact layout.
 	await get_tree().process_frame
 	if generation != _generation or not is_inside_tree() or not active: return
