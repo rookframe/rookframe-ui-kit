@@ -64,4 +64,3 @@ position; the recipe supplies only presentation. Keep existing entries visible
 while a reader browses older events, and offer an explicit jump to the newest
 entry when appropriate. Search, filters and other actions belong in a separate
 toolbar. The paper is decorative; all meaningful content remains native text.
-
