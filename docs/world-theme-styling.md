@@ -2,7 +2,7 @@
 
 The public `res://rookframe/ui/menu/MenuTheme.tres` and
 `res://rookframe/ui/menu/cyberpunk/CyberpunkTheme.tres` own their complete native
-styling, including the Worlds list and hub, escape menu and tooltips. Consumers
+styling, including the Worlds list and hub and escape menu. Consumers
 assign these Theme resources directly; they do not subclass the compiler or copy
 palettes, Materials or Theme mappings into an application.
 
@@ -20,6 +20,11 @@ variations. Later usages override only authored items, including explicit zero;
 removing an item reveals its predecessor. Compact projection occurs within each
 usage, and Godot retains native local override priority. Call the projection
 again after changing usages or receiving a Theme change.
+
+`menu/menu_theme.gd` also owns `apply_world_tooltips(target, authored)`. Call it
+after composing a World Theme and again on native Theme changes. It derives
+tooltip defaults from the composed editor items, preserving any explicit
+tooltip items in the authored Theme without filling the sparse source.
 
 The ordered `components.button` and `components.button.primary` usages are
 compiled aliases of the existing standard and primary menu styles. The primary

@@ -40,10 +40,6 @@ func _init(mapping: Script = Mapping, materials: Script = Materials) -> void:
 	set_icon("arrow", &"OptionButton", get_icon("arrow", &"settings_choice"))
 	for item in ["arrow_margin", "modulate_arrow"]:
 		set_constant(item, &"OptionButton", get_constant(item, &"settings_choice"))
-	set_stylebox("panel", &"TooltipPanel", get_stylebox("panel", &"editor_surface_inset"))
-	set_font("font", &"TooltipLabel", get_font("font", &"editor_meta"))
-	set_font_size("font_size", &"TooltipLabel", get_font_size("font_size", &"editor_meta"))
-	set_color("font_color", &"TooltipLabel", get_color("font_color", &"editor_body"))
 
 static func native_type(usage: StringName) -> StringName:
 	# Godot Theme requires identifier-safe names; semantic tokens retain dots.
@@ -162,3 +158,15 @@ static func usage_variant(target: Theme, usages: Array[StringName], base_type: S
 					target.set_theme_item(data_type, item, variant, items[item])
 		parent = variant
 	return parent
+
+## Complete a composed World Theme without overriding authored tooltip items.
+## The source remains sparse so native Theme changes can refresh these defaults.
+static func apply_world_tooltips(target: Theme, authored: Theme) -> void:
+	if not authored.has_stylebox("panel", &"TooltipPanel"):
+		target.set_stylebox("panel", &"TooltipPanel", target.get_stylebox("panel", &"editor_surface_inset"))
+	if not authored.has_font("font", &"TooltipLabel"):
+		target.set_font("font", &"TooltipLabel", target.get_font("font", &"editor_meta"))
+	if not authored.has_font_size("font_size", &"TooltipLabel"):
+		target.set_font_size("font_size", &"TooltipLabel", target.get_font_size("font_size", &"editor_meta"))
+	if not authored.has_color("font_color", &"TooltipLabel"):
+		target.set_color("font_color", &"TooltipLabel", target.get_color("font_color", &"editor_body"))

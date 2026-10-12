@@ -15,7 +15,7 @@ func test_public_themes_supply_world_rows_backdrop_and_tooltips() -> void:
 		assert_int(row.get_theme_font_size("font_size")).is_equal(appearance.get_font_size("font_size", "components_selectableRow__compact"))
 		assert_bool(appearance.get_stylebox("panel", "world_escapeMenu_surface") is StyleBoxEmpty).is_true()
 		assert_float(appearance.get_color("color", "components_backdrop").a).is_greater(0.0)
-		assert_object(appearance.get_stylebox("panel", "TooltipPanel")).is_same(appearance.get_stylebox("panel", "editor_surface_inset"))
+
 	assert_that(FANTASY.get_color("color", "components_backdrop")).is_not_equal(CYBERPUNK.get_color("color", "components_backdrop"))
 
 func test_ordered_primary_keeps_sparse_overrides_and_native_local_priority() -> void:
@@ -50,3 +50,22 @@ func test_ordered_primary_keeps_sparse_overrides_and_native_local_priority() -> 
 		Compiler.apply_usages(button, usages)
 		await get_tree().process_frame
 		assert_that(button.get_theme_color("font_color")).is_equal(color)
+
+func test_world_tooltips_follow_partial_theme_changes_and_keep_explicit_overrides() -> void:
+	var authored: Theme = FANTASY.duplicate()
+	var target: Theme = FANTASY.duplicate()
+	var ink := Color(0.2, 0.8, 0.4)
+	authored.set_color("font_color", &"editor_body", ink)
+	target.merge_with(authored)
+	Compiler.apply_world_tooltips(target, authored)
+	assert_that(target.get_color("font_color", &"TooltipLabel")).is_equal(ink)
+	assert_object(target.get_stylebox("panel", &"TooltipPanel")).is_same(target.get_stylebox("panel", &"editor_surface_inset"))
+	ink = Color(0.8, 0.2, 0.6)
+	authored.set_color("font_color", &"editor_body", ink)
+	target.merge_with(authored)
+	Compiler.apply_world_tooltips(target, authored)
+	assert_that(target.get_color("font_color", &"TooltipLabel")).is_equal(ink)
+	authored.set_color("font_color", &"TooltipLabel", Color.WHITE)
+	target.merge_with(authored)
+	Compiler.apply_world_tooltips(target, authored)
+	assert_that(target.get_color("font_color", &"TooltipLabel")).is_equal(Color.WHITE)
