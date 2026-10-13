@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "assets": [
+    {
+      "id": "menu/cyberpunk/materials/AI_generated_neon-city",
+      "path": "menu/cyberpunk/materials/AI_generated_neon-city.png",
+      "origin": "ai-generated",
+      "sha256": "4ba9b7041167f3dae01c999e9ec07f5ffcbd6ffbc402af1df44f10eaa2e96aff",
+      "license": "MIT; see repository LICENSE",
+      "replacementContract": "Preserve public path/UID, dimensions and any referencing AtlasTexture regions/StyleBoxTexture margins; update origin and checksum after replacement."
+    }
+  ]
+}

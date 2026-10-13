@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "packages": {
+    "ui-kit": {"path": "ui-kit", "dependencies": []},
+    "fantasy": {"path": "themes/fantasy", "dependencies": ["ui-kit"]},
+    "cyberpunk": {"path": "themes/cyberpunk", "dependencies": ["ui-kit"]}
+  },
+  "showcase": {"path": "showcase", "dependencies": ["ui-kit", "fantasy", "cyberpunk"]},
+  "imports": {
+    "ui-kit": {"repository": "https://github.com/rookframe/rookframe-ui-kit", "commit": "1a4c4109d3f57508fc86ed712406f7d3d01d5131"},
+    "showcase": {"repository": "https://github.com/rookframe/rookframe-design-specimen", "commit": "50ff9dec06decbb37cf06d5b943d3bcb342cafe0", "previousUiKitCommit": "db82c1d1b5fe8380a350ca7773b3df52f6fd21de"}
+  }
+}

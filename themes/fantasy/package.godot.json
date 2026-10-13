@@ -1,0 +1,9 @@
+{
+  "name": "rookframe-theme-fantasy",
+  "private": true,
+  "runtime": "rookframe/ui",
+  "dependencies": {
+    "ui-kit": "workspace:*"
+  },
+  "theme": "res://rookframe/ui/menu/MenuTheme.tres"
+}

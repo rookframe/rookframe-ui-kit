@@ -1,9 +1,10 @@
 .DS_Store
 .godot/
 *.translation
-examples/exact-commit-consumer/.plugged/
-examples/exact-commit-consumer/rookframe/ui/
-
-/addons/
-/.plugged/
-/reports/
+__pycache__/
+.plugged/
+reports/
+.workspace-install.json
+/ui-kit/addons/gdUnit4/
+/showcase/rookframe/
+/showcase/examples/local-consumer/rookframe/

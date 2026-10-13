@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "assets": [
+    {
+      "id": "assets/action-panel/ai-generated-approved-roll-source",
+      "path": "assets/action-panel/ai-generated-approved-roll-source.png",
+      "origin": "ai-generated",
+      "sha256": "a3664b1060e37914e7db2b6707e8040f15d18c4240dd5d5c3d50936ffb733aa5",
+      "license": "MIT; see repository LICENSE",
+      "replacementContract": "Preserve public path/UID, dimensions and any referencing AtlasTexture regions/StyleBoxTexture margins; update origin and checksum after replacement."
+    },
+    {
+      "id": "assets/action-panel/ai-generated-leather-atlas",
+      "path": "assets/action-panel/ai-generated-leather-atlas.png",
+      "origin": "ai-generated",
+      "sha256": "f1fa6c078d126509641e79b131041eee42c3d6669dd9a946e649b8be496aa654",
+      "license": "MIT; see repository LICENSE",
+      "replacementContract": "Preserve public path/UID, dimensions and any referencing AtlasTexture regions/StyleBoxTexture margins; update origin and checksum after replacement."
+    }
+  ]
+}

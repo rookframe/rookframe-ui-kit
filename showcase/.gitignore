@@ -1,0 +1,10 @@
+.godot/
+.plugged/
+rookframe/
+addons/gdUnit4/
+reports/
+*.translation
+__pycache__/
+.workspace-install.json
+examples/local-consumer/.godot/
+examples/local-consumer/rookframe/

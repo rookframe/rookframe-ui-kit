@@ -1,7 +1,0 @@
-[gd_resource type="Theme" load_steps=2 format=3]
-
-[ext_resource type="Script" path="res://rookframe/ui/menu/menu_theme.gd" id="compiler"]
-
-; Ordinary native Theme. All runtime values are derived, never authored here.
-[resource]
-script = ExtResource("compiler")
