@@ -531,3 +531,6 @@ flag and reveal manual page turns. Configuration, resize and state restoration
 do not trigger ink. `FullscreenWizard.set_step()` reveals only when the step
 index changes; repeated updates within a step, including roll results, stay still.
 Short caption/value facts remain together when pagination measures native content.
+
+Fantasy and Cyberpunk native Theme resources and ordered usage projection are
+documented in [Shared World styling](world-theme-styling.md).

@@ -144,6 +144,22 @@
       "sha256": "97180e47cc8899fb9ba418d7884a414e5d17bcbc59f819404d1efcaa0f6902cc",
       "license": "MIT; see repository LICENSE",
       "replacementContract": "Preserve public path/UID, dimensions and any referencing AtlasTexture regions/StyleBoxTexture margins; update origin and checksum after replacement."
+    },
+    {
+      "id": "menu/materials/textures/AI_generated_worn_parchment",
+      "path": "menu/materials/textures/AI_generated_worn_parchment.png",
+      "origin": "ai-generated",
+      "sha256": "c7967ea8e6a2d44a8ea7f2cd8cb31a76309b68dad6d20050b88a08614d28a95c",
+      "license": "MIT; see repository LICENSE",
+      "replacementContract": "Preserve public path/UID, dimensions and the referencing material region, fixed rolls and repeat geometry; update origin and checksum after replacement."
+    },
+    {
+      "id": "menu/materials/textures/AI_generated_paper_scroll",
+      "path": "menu/materials/textures/AI_generated_paper_scroll.png",
+      "origin": "ai-generated",
+      "sha256": "357be24159eeecd66bc8aa1a34fc9de5486519a9842df68bc4a73ac4509ba79e",
+      "license": "MIT; see repository LICENSE",
+      "replacementContract": "Preserve public path/UID, dimensions and the referencing material region, fixed rolls and repeat geometry; update origin and checksum after replacement."
     }
   ]
 }

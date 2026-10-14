@@ -1,0 +1,25 @@
+extends RefCounted
+## Shared Material geometry for the Worlds hub and World list.
+const VALUES = {
+	"worlds.hub.surface_width": 1280,
+	"worlds.hub.surface_height": 680,
+	"worlds.inset": 64,
+	"worlds.inset_compact": 12,
+	"worlds.gap": 20,
+	"worlds.gap_compact": 10,
+	"worlds.copy_gap": 8,
+	"worlds.copy_gap_compact": 4,
+	"worlds.control_height": 60,
+	"worlds.control_height_compact": 48,
+	"worlds.row_height": 100,
+	"worlds.row_height_compact": 76,
+	"worlds.heading_size": 38,
+	"worlds.heading_size_compact": 26,
+	"worlds.label_size": 22,
+	"worlds.label_size_compact": 18,
+	"worlds.help_size": 18,
+	"worlds.help_size_compact": 16,
+	"worlds.breakpoint_compact": 600,
+	"worlds.breakpoint_narrow": 700,
+	"worlds.search_characters": 8,
+}
