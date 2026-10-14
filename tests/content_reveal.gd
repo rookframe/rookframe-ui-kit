@@ -60,12 +60,25 @@ func test_wizard_reveals_step_changes_but_not_roll_progress_updates() -> void:
 	await get_tree().process_frame
 	assert_object(wizard.get_stage_slot().material).is_null()
 
-func test_reading_leaf_preserves_tiled_material_after_resize() -> void:
+func test_reading_leaf_preserves_grain_and_independent_border_after_resize() -> void:
 	var frame: Control = auto_free(load("res://rookframe/ui/components/surfaces/ledger_frame.tscn").instantiate())
 	add_child(frame)
 	for extent in [Vector2(1920,1080), Vector2(844,390)]:
 		frame.set_sections(Rect2(12,12,extent.x-24,56), Rect2(12,80,extent.x-24,extent.y-92))
 		await get_tree().process_frame
 		var material: StyleBoxTexture = frame.get_node("Body/Skin/Surface").get_theme_stylebox("panel")
-		assert_int(material.axis_stretch_horizontal).is_equal(StyleBoxTexture.AXIS_STRETCH_MODE_TILE)
-		assert_int(material.axis_stretch_vertical).is_equal(StyleBoxTexture.AXIS_STRETCH_MODE_TILE)
+		assert_bool(material.draw_center).is_false()
+		assert_bool(frame.get_node("Body/Skin/Grain").visible).is_true()
+
+func test_dialog_open_reveals_content_and_close_cancels_it() -> void:
+	var host: Control = auto_free(Control.new())
+	add_child(host)
+	var dialog = load("res://rookframe/ui/components/overlays/dialog.tscn").instantiate()
+	host.add_child(dialog)
+	dialog.open_dialog()
+	await get_tree().process_frame
+	await get_tree().process_frame
+	var content: Control = dialog.get_node("Shell/Content")
+	assert_object(content.material).is_not_null()
+	dialog.close_dialog()
+	assert_object(content.material).is_null()

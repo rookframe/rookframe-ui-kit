@@ -8,6 +8,12 @@ theme_type_variation = &"RookframeActionSection"
 script = ExtResource("script")
 [node name="Skin" type="Node2D" parent="."]
 show_behind_parent = true
+[node name="Grain" type="TextureRect" parent="Skin"]
+visible = false
+scale = Vector2(0.4,0.4)
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 1
 [node name="Surface" type="Panel" parent="Skin"]
 scale = Vector2(0.4,0.4)
 mouse_filter = 2

@@ -193,6 +193,7 @@ func _exit_tree() -> void:
 func _sync_scrim() -> void:
 	if visible:
 		_ensure_scrim()
+		get_node(^"Frame").reveal.call_deferred(get_node(^"Shell/Content"))
 	else:
 		_remove_scrim()
 

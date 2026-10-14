@@ -162,10 +162,12 @@ func _turn(delta: int) -> void:
 func _show_page() -> void:
 	get_node(^"Results").scroll_vertical = 0
 	_page = clampi(_page, 0, maxi(0, ceili(float(_matches.size()) / _capacity) - 1))
-	for row in _rows: row.hide()
 	var first := _page * _capacity
 	var last := mini(first + _capacity, _matches.size())
-	for index in range(first, last): _rows[_matches[index]].show()
+	# Keep visible cards in the tree's input path while layout settles. Hiding
+	# and re-showing a held Button cancels its native mouse press.
+	var visible_indices := _matches.slice(first, last)
+	for index in _rows.size(): _rows[index].visible = index in visible_indices
 	get_node(^"Pager/Range").text = "%d–%d / %d" % [first + 1, last, _matches.size()]
 	get_node(^"Pager/Previous").disabled = _page == 0
 	get_node(^"Pager/Next").disabled = last == _matches.size()

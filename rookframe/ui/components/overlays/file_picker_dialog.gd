@@ -53,7 +53,10 @@ var _history: Array[String] = []
 var _history_index := -1
 
 
+var _ink := preload("res://rookframe/ui/_internal/surfaces/content_reveal.gd").new()
+
 func _ready() -> void:
+	visibility_changed.connect(_reveal_open)
 	close_requested.connect(_cancel)
 	%Cancel.pressed.connect(_cancel)
 	%Open.pressed.connect(_confirm_selection)
@@ -410,3 +413,12 @@ func _home_directory() -> String:
 		return home
 	var documents := OS.get_system_dir(OS.SYSTEM_DIR_DOCUMENTS)
 	return documents.get_base_dir() if not documents.is_empty() else ProjectSettings.globalize_path("res://")
+
+func _reveal_open() -> void:
+	if visible:
+		_ink.play.call_deferred(get_node("Shell/Content"))
+	else:
+		_ink.finish()
+
+func _exit_tree() -> void:
+	_ink.finish()
