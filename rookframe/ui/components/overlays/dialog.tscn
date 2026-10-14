@@ -3,6 +3,8 @@
 [ext_resource type="Script" path="res://rookframe/ui/components/overlays/dialog.gd" id="script"]
 [ext_resource type="Theme" path="res://rookframe/ui/theme/silkbound_theme.tres" id="theme"]
 
+[ext_resource type="PackedScene" path="res://rookframe/ui/components/surfaces/ledger_frame.tscn" id="frame"]
+
 [node name="Dialog" type="Window"]
 visible = false
 size = Vector2i(600, 240)
@@ -14,6 +16,8 @@ exclusive = true
 wrap_controls = false
 theme = ExtResource("theme")
 script = ExtResource("script")
+
+[node name="Frame" parent="." instance=ExtResource("frame")]
 
 [node name="Shell" type="PanelContainer" parent="."]
 anchors_preset = 15

@@ -1,7 +1,7 @@
 extends GdUnitTestSuite
 
 const SCENE = preload("res://rookframe/ui/components/content/silkbound_miniature_browser.tscn")
-const LIST := "Inset/Layout/Body/Columns/List"
+const LIST := "Inset/Layout/Body/Browser"
 const FOOTER := "Inset/Layout/Footer/"
 
 func test_search_and_choice_keep_the_draft_until_confirmation() -> void:
@@ -16,13 +16,13 @@ func test_search_and_choice_keep_the_draft_until_confirmation() -> void:
 	browser.cancel_requested.connect(func(): cancelled.append(true))
 	browser.configure(entries,"a")
 	await _settle()
-	var search: LineEdit = browser.get_node("Inset/Layout/Body/Search/Editor")
+	var search: LineEdit = browser.get_node("Inset/Layout/Body/Browser/Search")
 	search.text = "Other"
 	search.text_changed.emit(search.text)
 	await _settle()
 	assert_str(browser.selection().id).is_equal("a")
-	assert_bool(browser.get_node(LIST+"/Area/Rows").get_child(0).visible).is_false()
-	browser.get_node(LIST+"/Area/Rows").get_child(1).pressed.emit()
+	assert_bool(browser.get_node(LIST+"/Results/Rows").get_child(0).visible).is_false()
+	browser.get_node(LIST+"/Results/Rows").get_child(1).pressed.emit()
 	assert_array(chosen).is_empty()
 	browser.get_node(FOOTER+"Choose").pressed.emit()
 	assert_array(chosen).contains_exactly(["b"])
@@ -31,7 +31,7 @@ func test_search_and_choice_keep_the_draft_until_confirmation() -> void:
 	browser.set_state("loading")
 	assert_bool(browser.get_node(FOOTER+"Choose").disabled).is_true()
 	browser.set_state("error","Retry")
-	assert_bool(browser.get_node("Inset/Layout/Body/Retry").visible).is_true()
+	assert_bool(browser.get_node("Inset/Layout/Body/Browser/Retry").visible).is_true()
 	entries[1].available = false
 	browser.configure(entries,"b")
 	await _settle()
@@ -50,13 +50,14 @@ func test_every_miniature_is_readable_at_each_canvas_and_after_resize() -> void:
 	browser.configure(entries,"0")
 	for dimensions in [Vector2i(1920,1080),Vector2i(1024,768),Vector2i(844,390),Vector2i(1920,1080)]:
 		viewport.size = dimensions
-		browser.get_node(LIST).restore_state({"page":0})
+		browser.get_node(LIST)._page = 0
+		browser.get_node(LIST)._show_page()
 		await _settle()
 		var seen := {}
 		for page in 30:
-			var bounds: Rect2 = browser.get_node(LIST+"/Area").get_global_rect()
-			for row in browser.get_node(LIST+"/Area/Rows").get_children():
-				if bounds.encloses(row.get_global_rect()): seen[row.get_index()] = true
+			var bounds: Rect2 = browser.get_node(LIST+"/Results").get_global_rect()
+			for row in browser.get_node(LIST+"/Results/Rows").get_children():
+				if row.visible and bounds.encloses(row.get_global_rect()): seen[row.get_index()] = true
 			var next: Button = browser.get_node(LIST+"/Pager/Next")
 			if next.disabled: break
 			next.pressed.emit()

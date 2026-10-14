@@ -21,7 +21,7 @@ func test_fixed_frame_measured_choices_and_actions() -> void:
 		await get_tree().process_frame
 	assert_bool(wizard.get_global_rect() == Rect2(0, 0, 1920, 1080)).is_true()
 	assert_bool(wizard.get_context_slot().size.x == 336).is_true()
-	assert_bool(wizard.get_node(^"Layout/Footer").get_global_rect().end.y == 1042).is_true()
+	assert_bool(wizard.get_node(^"Layout/Footer").get_global_rect().end.y == 1044).is_true()
 	var seen: Array[String] = []
 	var previous := choices.get_node(^"Pager/Previous") as Button
 	while not previous.disabled:

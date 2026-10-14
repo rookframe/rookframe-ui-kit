@@ -1,5 +1,7 @@
 @tool
 extends MarginContainer
+var _ink := preload("res://rookframe/ui/_internal/surfaces/content_reveal.gd").new()
+@export var reduced_motion := false
 ## Bounded Silkbound records with a distinct optional row action.
 ## The caller owns the records and all mutations; this Control owns only paging.
 signal selected(id: String)
@@ -281,6 +283,7 @@ func _show_page() -> void:
 func _turn(step: int) -> void:
 	_page += step
 	_show_page()
+	_ink.play(get_node(^"Content/Area"), reduced_motion)
 
 func _draw() -> void:
 	if not is_node_ready():
@@ -293,3 +296,6 @@ func _draw() -> void:
 	if not pager.visible:
 		return
 	draw_line(Vector2(get_theme_constant("margin_left"), pager.position.y + get_theme_constant("margin_top")), Vector2(size.x - get_theme_constant("margin_right"), pager.position.y + get_theme_constant("margin_top")), Color("3e4346"))
+
+func _exit_tree() -> void:
+	_ink.finish()

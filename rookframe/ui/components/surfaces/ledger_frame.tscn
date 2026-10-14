@@ -1,0 +1,22 @@
+[gd_scene format=3]
+[ext_resource type="Script" path="res://rookframe/ui/components/surfaces/ledger_frame.gd" id="script"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/components/surfaces/action_panel/action_section.tscn" id="leaf"]
+[sub_resource type="StyleBoxEmpty" id="empty"]
+[node name="LedgerFrame" type="Control"]
+mouse_filter = 2
+script = ExtResource("script")
+[node name="Header" parent="." instance=ExtResource("leaf")]
+mouse_filter = 2
+theme_override_styles/panel = SubResource("empty")
+surface = 1
+[node name="Body" parent="." instance=ExtResource("leaf")]
+tiled_body = true
+mouse_filter = 2
+theme_override_styles/panel = SubResource("empty")
+[node name="Footer" parent="." instance=ExtResource("leaf")]
+mouse_filter = 2
+theme_override_styles/panel = SubResource("empty")
+surface = 2
+
+[node name="Bindings" type="Control" parent="."]
+mouse_filter = 2

@@ -409,16 +409,20 @@ TextField, TextArea and their task variants stay together on one page, including
 the field label and validation copy. Their authored minimum height must fit the
 available content viewport, like every other indivisible interactive control.
 
-`components/content/silkbound_miniature_browser.tscn` composes the approved
-Silkbound Ledger full-viewport Miniature list and adjacent preview. It supports
-`configure(entries, selected_id, labels)`, `selection()`, `focus_search()` and
-`set_state(state, message)`, with the same entry dictionaries and six signals
-as FullscreenMiniatureBrowser. The consumer supplies Miniature data, SDK previews,
-permission checks and save operations; the component handles only native search,
-selection, bounded list pages and responsive composition. The `library` label
-is the owning Actor/definition name; `none_copy`, `empty_preview` and `find`
-localize the empty choice, preview and search caption. Widths through 900px use
-the phone composition; through 1300px use tablet; larger widths use desktop.
+`components/content/silkbound_miniature_browser.tscn` composes three linked
+leather leaves: a title and close action, a searchable card grid, and selection
+with cancel/choose actions. It retains `configure(entries, selected_id, labels)`,
+`selection()`, `focus_search()` and `set_state(state, message)`, and its six
+selection/preview/retry/choose/cancel/close signals. Consumers own acquisition,
+preview rendering, permissions and saves. Search and paging preserve the draft;
+only Choose emits `choose_requested`.
+
+`MiniatureBrowser.paginated` defaults to `false`, retaining its scrolling grid.
+Set it to `true` for full-screen sheets and wizard pickers: three cards per page
+on landscape phone, eight on larger canvases. Localized `previous` and `next`
+labels supplement the existing search, status and selection labels. Native
+resize recalculates the grid; selection remains unchanged. The full-screen
+Silkbound wrapper enables this mode.
 
 ## SilkboundCollection
 
@@ -475,9 +479,8 @@ action button retains its own action-specific tooltip.
 
 ## Silkbound full-screen wizard
 
-`FullscreenWizard` follows the approved Silkbound Ledger frame: linen cover and
-context preview, one plain ink stage, copper cover rules, numbered steps and a
-fixed action row. It retains the existing signals and composition slots. The
+`FullscreenWizard` uses three linked leather leaves: header, numbered steps
+with the existing context/stage slots, and a fixed action row. It retains the existing signals and composition slots. The
 consumer supplies its content and rules. `is_compact()` identifies the landscape
 phone profile (height at most 560px or width at most 740px); `is_tablet()` identifies
 widths through 1300px outside that profile. `set_primary()` accepts an optional
@@ -490,7 +493,7 @@ compatibility. Typography, neutral states, brass icons and responsive spacing
 now use Silkbound in both modes; the flag is no longer a design-system opt-in.
 `PaginatedContent` still uses it to opt into its optional column divider.
 Silkbound task editors are 48px high for a single line and 152px for multiple
-lines (64px in the compact profile). Empty errors reserve no blank line; error
+lines; compact editors use 44px and 48px respectively. Empty errors reserve no blank line; error
 copy still participates in native minimum-size measurement and accessibility.
 
 `PaginatedContent.content_inset_left = 0` reserves an inset inside its reading
@@ -510,3 +513,21 @@ parent viewport rather than forcing a 1120 × 800 window onto a phone.
 
 General record metadata is at least 18px; SearchField defaults to a 20px editor
 and ActionLink to a 20px title. Explicit consumer density overrides still apply.
+
+## LedgerFrame and reading transitions
+
+`components/surfaces/ledger_frame.tscn` is decorative native chrome behind an
+existing layout. `set_sections(header: Rect2, body: Rect2, footer: Rect2 = Rect2())`
+uses coordinates local to the frame. Empty rectangles hide their leaf. The
+component draws paired bindings between visible leaves and passes input through;
+it does not reparent or size consumer content.
+
+`reveal(content: Control)` uses the HUD ink shader for a 400 ms transition,
+restoring materials and modulation on completion, interruption or hide. Set
+`reduced_motion = true` to reveal immediately. Existing focus and input remain
+native. `PaginatedContent`, `PaginatedChoices`, `SilkboundCollection`,
+`PaginatedTextArea` and paginated `MiniatureBrowser` expose the same reduced-motion
+flag and reveal manual page turns. Configuration, resize and state restoration
+do not trigger ink. `FullscreenWizard.set_step()` reveals only when the step
+index changes; repeated updates within a step, including roll results, stay still.
+Short caption/value facts remain together when pagination measures native content.

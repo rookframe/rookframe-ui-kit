@@ -381,12 +381,12 @@ content_margin_left = 12.0
 content_margin_top = 10.0
 content_margin_right = 12.0
 content_margin_bottom = 10.0
-bg_color = Color(0.137255, 0.156863, 0.168627, 1)
+bg_color = Color(0.031373, 0.043137, 0.039216, 0.4)
 border_width_left = 1
 border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
-border_color = Color(0.356863, 0.384314, 0.396078, 1)
+border_color = Color(0.737255, 0.572549, 0.466667, 0.38)
 
 [sub_resource type="StyleBoxFlat" id="SearchInput"]
 content_margin_left = 12.0
@@ -417,36 +417,36 @@ content_margin_left = 16.0
 content_margin_top = 10.0
 content_margin_right = 16.0
 content_margin_bottom = 10.0
-bg_color = Color(0.137255, 0.156863, 0.168627, 1)
+bg_color = Color(0.031373, 0.043137, 0.039216, 0.4)
 border_width_left = 1
 border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
-border_color = Color(0.356863, 0.384314, 0.396078, 1)
+border_color = Color(0.737255, 0.572549, 0.466667, 0.38)
 
 [sub_resource type="StyleBoxFlat" id="ButtonHover"]
 content_margin_left = 16.0
 content_margin_top = 10.0
 content_margin_right = 16.0
 content_margin_bottom = 10.0
-bg_color = Color(0.203922, 0.239216, 0.254902, 1)
+bg_color = Color(0.737255, 0.572549, 0.466667, 0.12)
 border_width_left = 1
 border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
-border_color = Color(0.356863, 0.384314, 0.396078, 1)
+border_color = Color(0.737255, 0.572549, 0.466667, 0.38)
 
 [sub_resource type="StyleBoxFlat" id="ButtonPressed"]
 content_margin_left = 16.0
 content_margin_top = 10.0
 content_margin_right = 16.0
 content_margin_bottom = 10.0
-bg_color = Color(0.203922, 0.239216, 0.254902, 1)
+bg_color = Color(0.737255, 0.572549, 0.466667, 0.12)
 border_width_left = 1
 border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
-border_color = Color(0.356863, 0.384314, 0.396078, 1)
+border_color = Color(0.737255, 0.572549, 0.466667, 0.38)
 
 [sub_resource type="StyleBoxFlat" id="ButtonFocus"]
 content_margin_left = 15.0
@@ -465,12 +465,12 @@ content_margin_left = 16.0
 content_margin_top = 10.0
 content_margin_right = 16.0
 content_margin_bottom = 10.0
-bg_color = Color(0.137255, 0.156863, 0.168627, 1)
+bg_color = Color(0.031373, 0.043137, 0.039216, 0.4)
 border_width_left = 1
 border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
-border_color = Color(0.356863, 0.384314, 0.396078, 1)
+border_color = Color(0.737255, 0.572549, 0.466667, 0.38)
 
 [sub_resource type="StyleBoxFlat" id="Quiet"]
 content_margin_left = 12.0
@@ -1011,8 +1011,8 @@ border_width_bottom = 1
 border_color = Color(0.356863, 0.384314, 0.396078, 1)
 
 [sub_resource type="StyleBoxFlat" id="silk_Button"]
-bg_color = Color(0.082353, 0.090196, 0.098039, 1)
-border_color = Color(0.560784, 0.600000, 0.615686, 1)
+bg_color = Color(0.031373, 0.043137, 0.039216, 0.4)
+border_color = Color(0.737255, 0.572549, 0.466667, 0.38)
 border_width_left = 1
 border_width_right = 1
 border_width_top = 1
@@ -1023,8 +1023,8 @@ content_margin_top = 12.0
 content_margin_bottom = 12.0
 
 [sub_resource type="StyleBoxFlat" id="silk_Hover"]
-bg_color = Color(0.203922, 0.239216, 0.254902, 1)
-border_color = Color(0.560784, 0.600000, 0.615686, 1)
+bg_color = Color(0.737255, 0.572549, 0.466667, 0.12)
+border_color = Color(0.737255, 0.572549, 0.466667, 0.38)
 border_width_left = 1
 border_width_right = 1
 border_width_top = 1
@@ -1107,8 +1107,8 @@ content_margin_top = 0.0
 content_margin_bottom = 0.0
 
 [sub_resource type="StyleBoxFlat" id="silk_Input"]
-bg_color = Color(0.137255, 0.156863, 0.168627, 1)
-border_color = Color(0.356863, 0.384314, 0.396078, 1)
+bg_color = Color(0.031373, 0.043137, 0.039216, 0.4)
+border_color = Color(0.737255, 0.572549, 0.466667, 0.38)
 border_width_left = 1
 border_width_right = 1
 border_width_top = 1
@@ -1319,7 +1319,7 @@ content_margin_bottom = 0.0
 
 [sub_resource type="StyleBoxFlat" id="silk_SilkIconFrame"]
 bg_color = Color(0, 0, 0, 0)
-border_color = Color(0.560784, 0.600000, 0.615686, 1)
+border_color = Color(0.737255,0.572549,0.466667,0.4)
 border_width_left = 1
 content_margin_left = 0.0
 border_width_right = 1
@@ -1626,8 +1626,8 @@ border_width_bottom = 1
 content_margin_bottom = 7.0
 
 [sub_resource type="StyleBoxFlat" id="silk_WizardButton"]
-bg_color = Color(0.137255, 0.156863, 0.168627, 1)
-border_color = Color(0.560784, 0.600000, 0.615686, 1)
+bg_color = Color(0.031373, 0.043137, 0.039216, 0.4)
+border_color = Color(0.737255, 0.572549, 0.466667, 0.38)
 border_width_left = 1
 content_margin_left = 16.0
 border_width_top = 1
@@ -1638,8 +1638,8 @@ border_width_bottom = 1
 content_margin_bottom = 8.0
 
 [sub_resource type="StyleBoxFlat" id="silk_WizardHover"]
-bg_color = Color(0.203922, 0.239216, 0.254902, 1)
-border_color = Color(0.560784, 0.600000, 0.615686, 1)
+bg_color = Color(0.737255, 0.572549, 0.466667, 0.12)
+border_color = Color(0.737255, 0.572549, 0.466667, 0.38)
 border_width_left = 1
 content_margin_left = 16.0
 border_width_top = 1
@@ -1686,7 +1686,7 @@ border_width_bottom = 1
 content_margin_bottom = 8.0
 
 [sub_resource type="StyleBoxFlat" id="silk_WizardChoice"]
-bg_color = Color(0, 0, 0, 0)
+bg_color = Color(0.737255, 0.572549, 0.466667, 0.025)
 border_color = Color(0.243137, 0.262745, 0.274510, 1)
 border_width_left = 0
 content_margin_left = 0.0
@@ -1698,7 +1698,7 @@ border_width_bottom = 1
 content_margin_bottom = 0.0
 
 [sub_resource type="StyleBoxFlat" id="silk_WizardChoiceHover"]
-bg_color = Color(0.203922, 0.239216, 0.254902, 1)
+bg_color = Color(0.737255, 0.572549, 0.466667, 0.07)
 border_color = Color(0.243137, 0.262745, 0.274510, 1)
 border_width_left = 0
 content_margin_left = 0.0
@@ -1710,8 +1710,8 @@ border_width_bottom = 1
 content_margin_bottom = 0.0
 
 [sub_resource type="StyleBoxFlat" id="silk_WizardSelected"]
-bg_color = Color(0.807843, 0.800000, 0.701961, 1)
-border_color = Color(0.807843, 0.800000, 0.701961, 1)
+bg_color = Color(0.737255, 0.572549, 0.466667, 0.15)
+border_color = Color(0.737255, 0.572549, 0.466667, 0.6)
 border_width_left = 0
 content_margin_left = 0.0
 border_width_top = 0
@@ -1722,8 +1722,8 @@ border_width_bottom = 1
 content_margin_bottom = 0.0
 
 [sub_resource type="StyleBoxFlat" id="silk_WizardResult"]
-bg_color = Color(0.137255, 0.156863, 0.168627, 1)
-border_color = Color(0.243137, 0.262745, 0.274510, 1)
+bg_color = Color(0.031373, 0.043137, 0.039216, 0.4)
+border_color = Color(0.737255, 0.572549, 0.466667, 0.38)
 border_width_left = 0
 content_margin_left = 16.0
 border_width_top = 0
@@ -1734,8 +1734,8 @@ border_width_bottom = 0
 content_margin_bottom = 12.0
 
 [sub_resource type="StyleBoxFlat" id="silk_WizardResultCompact"]
-bg_color = Color(0.137255, 0.156863, 0.168627, 1)
-border_color = Color(0.243137, 0.262745, 0.274510, 1)
+bg_color = Color(0.031373, 0.043137, 0.039216, 0.4)
+border_color = Color(0.737255, 0.572549, 0.466667, 0.38)
 border_width_left = 0
 content_margin_left = 10.0
 border_width_top = 0
@@ -1825,8 +1825,8 @@ content_margin_top = 17.0
 content_margin_bottom = 16.0
 
 [sub_resource type="StyleBoxFlat" id="silk_SecondaryAction"]
-bg_color = Color(0.082353, 0.090196, 0.098039, 1)
-border_color = Color(0.560784, 0.600000, 0.615686, 1)
+bg_color = Color(0.031373, 0.043137, 0.039216, 0.4)
+border_color = Color(0.737255, 0.572549, 0.466667, 0.38)
 border_width_left = 1
 border_width_right = 1
 border_width_top = 1
@@ -2902,9 +2902,9 @@ WizardSection/colors/font_color = Color(0.905882, 0.905882, 0.866667, 1)
 WizardSection/colors/icon_normal_color = Color(0.815686, 0.745098, 0.556863, 1)
 WizardSection/colors/font_hover_color = Color(0.905882, 0.905882, 0.866667, 1)
 WizardSection/colors/icon_hover_color = Color(0.815686, 0.745098, 0.556863, 1)
-WizardSection/colors/font_pressed_color = Color(0.082353, 0.090196, 0.098039, 1)
+WizardSection/colors/font_pressed_color = Color(0.905882, 0.905882, 0.866667, 1)
 WizardSection/colors/icon_pressed_color = Color(0.082353, 0.090196, 0.098039, 1)
-WizardSection/colors/font_hover_pressed_color = Color(0.082353, 0.090196, 0.098039, 1)
+WizardSection/colors/font_hover_pressed_color = Color(0.905882, 0.905882, 0.866667, 1)
 WizardSection/colors/icon_hover_pressed_color = Color(0.082353, 0.090196, 0.098039, 1)
 WizardSection/colors/font_focus_color = Color(0.905882, 0.905882, 0.866667, 1)
 WizardSection/colors/icon_focus_color = Color(0.815686, 0.745098, 0.556863, 1)

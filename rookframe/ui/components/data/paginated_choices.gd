@@ -1,5 +1,7 @@
 @tool
 extends VBoxContainer
+var _ink := preload("res://rookframe/ui/_internal/surfaces/content_reveal.gd").new()
+@export var reduced_motion := false
 ## Measured whole-row pagination with a retained selected row.
 signal selected(id: String)
 const ROW = preload("res://rookframe/ui/_internal/data/task_choice.tscn")
@@ -70,8 +72,8 @@ func _ready() -> void:
 		get_node(^"Pager/Next").accessibility_name = "Next page"
 		get_node(^"Pager/Previous").tooltip_text = "Previous page"
 		get_node(^"Pager/Next").tooltip_text = "Next page"
-	get_node(^"Pager/Previous").pressed.connect(func(): _page -= 1; _show_page())
-	get_node(^"Pager/Next").pressed.connect(func(): _page += 1; _show_page())
+	get_node(^"Pager/Previous").pressed.connect(func(): _page -= 1; _show_page(); _ink.play(get_node(^"Area"), reduced_motion))
+	get_node(^"Pager/Next").pressed.connect(func(): _page += 1; _show_page(); _ink.play(get_node(^"Area"), reduced_motion))
 	get_node(^"Pager/FooterContent").child_entered_tree.connect(func(_child: Node): _queue_fit())
 	get_node(^"Pager/FooterContent").child_exiting_tree.connect(func(_child: Node): _queue_fit())
 	resized.connect(_queue_fit)
@@ -309,18 +311,17 @@ func _fit_silkbound() -> int:
 			action.add_theme_stylebox_override(state, box)
 	for index in _rows.size():
 		var row := _rows[index]
-		var selected := str(_entries[index].id) == _selected
-		var foreground := Color("151719") if selected else Color("e7e7dd")
+		var foreground := Color("e7e7dd")
 		row.theme_type_variation = "WizardChoice"
 		row.custom_minimum_size.y = height
-		row.get_node(^"Inset/Row/Icon").self_modulate = Color("151719") if selected else Color("d0be8e")
+		row.get_node(^"Inset/Row/Icon").self_modulate = Color("d0be8e")
 		row.get_node(^"Inset/Row/Icon").custom_minimum_size = Vector2(24,24) if phone or tablet else Vector2(28,28)
 		for label in [^"Inset/Row/Copy/Title", ^"Inset/Row/Value"]:
 			row.get_node(label).add_theme_font_override("font", preload("res://rookframe/ui/theme/silkbound_medium.tres"))
 			row.get_node(label).add_theme_color_override("font_color", foreground)
 		row.get_node(^"Inset/Row/Copy/Title").add_theme_font_size_override("font_size", 19 if phone else 20 if tablet else 24)
 		row.get_node(^"Inset/Row/Copy/Subtitle").add_theme_font_size_override("font_size", 14 if phone else 15 if tablet else 18)
-		row.get_node(^"Inset/Row/Copy/Subtitle").add_theme_color_override("font_color", Color("151719") if selected else Color("aebabe"))
+		row.get_node(^"Inset/Row/Copy/Subtitle").add_theme_color_override("font_color", Color("aebabe"))
 		row.get_node(^"Inset/Row/Copy").add_theme_constant_override("separation", 2 if phone or tablet else 4)
 		row.get_node(^"Inset/Row").add_theme_constant_override("separation", 8 if phone or tablet else 12)
 		var pending := bool(_entries[index].get("pending", false))
@@ -335,3 +336,6 @@ func _fit_silkbound() -> int:
 		preload("res://rookframe/ui/theme/silkbound_line_height.gd").apply(row.get_node(^"Inset/Row/Copy/Subtitle"),1.1 if phone else 1.2)
 		preload("res://rookframe/ui/theme/silkbound_line_height.gd").apply(value,1.15)
 	return height
+
+func _exit_tree() -> void:
+	_ink.finish()

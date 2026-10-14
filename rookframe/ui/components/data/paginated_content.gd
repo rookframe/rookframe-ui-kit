@@ -1,5 +1,7 @@
 @tool
 extends Control
+var _ink := preload("res://rookframe/ui/_internal/surfaces/content_reveal.gd").new()
+@export var reduced_motion := false
 ## Pages authored native content at measured text/Control boundaries.
 ## Compose a single Container under Area; no wheel or drag scrolling is used.
 const TEXT_FIELD = preload("res://rookframe/ui/components/forms/text_field.gd")
@@ -44,6 +46,7 @@ func _enter_tree() -> void:
 		_focus_viewport.gui_focus_changed.connect(_reveal_focus)
 
 func _exit_tree() -> void:
+	_ink.finish()
 	if is_instance_valid(_focus_viewport) and _focus_viewport.gui_focus_changed.is_connected(_reveal_focus):
 		_focus_viewport.gui_focus_changed.disconnect(_reveal_focus)
 @export var always_show_pager := false:
@@ -60,8 +63,8 @@ func _ready() -> void:
 	if get_node(^"Area").get_child_count() == 0:
 		return
 	_content = get_node(^"Area").get_child(0) as Control
-	get_node(^"Pager/Previous").pressed.connect(func(): _page -= 1; _show_page())
-	get_node(^"Pager/Next").pressed.connect(func(): _page += 1; _show_page())
+	get_node(^"Pager/Previous").pressed.connect(func(): _page -= 1; _show_page(); _ink.play(get_node(^"Area"), reduced_motion))
+	get_node(^"Pager/Next").pressed.connect(func(): _page += 1; _show_page(); _ink.play(get_node(^"Area"), reduced_motion))
 	resized.connect(refresh)
 	visibility_changed.connect(_visibility_changed)
 	_content.minimum_size_changed.connect(refresh)
@@ -156,6 +159,10 @@ func _collect_spans(node: Control, spans: Array[Vector2]) -> void:
 	if not node.is_visible_in_tree():
 		return
 	var top := node.global_position.y - _content.global_position.y
+	if node is BoxContainer and node.get_child_count() == 2 and node.get_child(0) is Label and node.get_child(1) is Label and node.size.y <= minf(72, get_node(^"Area").size.y) and node.get_child(1).get_line_count() == 1:
+		# A short caption/value pair is read as one fact, including its gap.
+		spans.append(Vector2(floorf(top), ceilf(top + node.size.y)))
+		return
 	if node is TEXT_FIELD or node is TEXT_AREA:
 		# A field's label, editor and validation copy are one interaction.
 		spans.append(Vector2(floorf(top), ceilf(top + node.size.y)))

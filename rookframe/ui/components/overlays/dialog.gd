@@ -82,7 +82,21 @@ func _ready() -> void:
 	var body_slot := get_body_slot()
 	if not body_slot.child_order_changed.is_connected(_refresh_body_visibility):
 		body_slot.child_order_changed.connect(_refresh_body_visibility)
+	size_changed.connect(_fit_material)
 	_refresh()
+	_fit_material()
+
+
+func _fit_material() -> void:
+	get_node(^"Frame").set_sections(Rect2(), Rect2(Vector2.ZERO, Vector2(size)))
+	for path in [^"Shell", ^"Shell/Content/Message", ^"Shell/Content/Body", ^"Shell/Content/Footer"]:
+		var panel: PanelContainer = get_node(path)
+		var style := panel.get_theme_stylebox("panel").duplicate() as StyleBoxFlat
+		if style == null: continue
+		style.bg_color = Color.TRANSPARENT
+		style.border_color = Color("bc927747")
+		if path == ^"Shell": style.set_border_width_all(0)
+		panel.add_theme_stylebox_override("panel", style)
 
 
 func _unhandled_key_input(event: InputEvent) -> void:

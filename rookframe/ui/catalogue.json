@@ -976,7 +976,10 @@
       "scene": "res://rookframe/ui/components/content/miniature_browser.tscn",
       "script": "res://rookframe/ui/components/content/miniature_browser.gd",
       "rootType": "VBoxContainer",
-      "properties": {},
+      "properties": {
+        "paginated": "bool",
+        "reduced_motion": "bool"
+      },
       "signals": [
         "selection_changed",
         "preview_requested",
@@ -994,7 +997,9 @@
       "scene": "res://rookframe/ui/components/surfaces/fullscreen_wizard.tscn",
       "sceneUid": "uid://g2qaay7nuc7s",
       "rootType": "Control",
-      "properties": {},
+      "properties": {
+        "reduced_motion": "bool"
+      },
       "methods": [
         "configure",
         "set_step",
@@ -1020,7 +1025,8 @@
       "sceneUid": "uid://daedsgd1whpdn",
       "rootType": "VBoxContainer",
       "properties": {
-        "silkbound": "bool"
+        "silkbound": "bool",
+        "reduced_motion": "bool"
       },
       "methods": [
         "configure"
@@ -1095,7 +1101,8 @@
           "default": true
         },
         "silkbound": "bool",
-        "content_inset_left": "int"
+        "content_inset_left": "int",
+        "reduced_motion": "bool"
       },
       "methods": [
         "refresh",
@@ -1136,7 +1143,8 @@
         "columns": "int",
         "collection_layout": "int",
         "empty_text": "String",
-        "divider_top": "bool"
+        "divider_top": "bool",
+        "reduced_motion": "bool"
       },
       "methods": [
         "configure",
@@ -1168,7 +1176,8 @@
       "rootType": "Control",
       "properties": {
         "value": "",
-        "compact": false
+        "compact": false,
+        "reduced_motion": "bool"
       },
       "methods": [
         "get_pager() -> HBoxContainer"
@@ -1237,6 +1246,20 @@
       "methods": [],
       "signals": [],
       "contract": "Decorative paired riveted tabs. Set normal Control bounds between the joined edges; input passes through."
+    },
+    {
+      "name": "LedgerFrame",
+      "scene": "res://rookframe/ui/components/surfaces/ledger_frame.tscn",
+      "rootType": "Control",
+      "properties": {
+        "reduced_motion": "bool"
+      },
+      "methods": [
+        "set_sections",
+        "reveal"
+      ],
+      "signals": [],
+      "script": "res://rookframe/ui/components/surfaces/ledger_frame.gd"
     }
   ],
   "semanticIcons": {

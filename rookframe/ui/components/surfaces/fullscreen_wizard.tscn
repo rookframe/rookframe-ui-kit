@@ -19,6 +19,8 @@
 [ext_resource type="Texture2D" path="res://rookframe/ui/icons/back.svg" id="back"]
 [ext_resource type="Texture2D" path="res://rookframe/ui/icons/rotate.svg" id="restart"]
 
+[ext_resource type="PackedScene" path="res://rookframe/ui/components/surfaces/ledger_frame.tscn" id="ledger_frame"]
+
 [node name="FullscreenWizard" type="Control"]
 layout_mode = 1
 anchors_preset = 15
@@ -30,6 +32,9 @@ theme = ExtResource("theme")
 script = ExtResource("script")
 size_flags_horizontal = 3
 size_flags_vertical = 3
+
+[node name="Frame" parent="." instance=ExtResource("ledger_frame")]
+show_behind_parent = true
 
 [node name="Ledger" type="Panel" parent="."]
 z_index = -1

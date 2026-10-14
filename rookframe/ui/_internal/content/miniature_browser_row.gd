@@ -1,5 +1,6 @@
 @tool
 extends Button
+var minimum_height := 148.0
 
 func _ready() -> void:
 	get_node(^"Content").minimum_size_changed.connect(_fit)
@@ -7,7 +8,7 @@ func _ready() -> void:
 	_fit()
 
 func _fit() -> void:
-	custom_minimum_size.y = maxf(148, get_node(^"Content").get_combined_minimum_size().y + 16)
+	custom_minimum_size.y = maxf(minimum_height, get_node(^"Content").get_combined_minimum_size().y + 16)
 
 func _preview_added(_child: Node) -> void:
 	get_node(^"Content/Stage/Fallback").hide()

@@ -34,3 +34,20 @@ custom_minimum_size = Vector2(0, 44)
 layout_mode = 2
 text = "Try again"
 theme_type_variation = &"RookframeSecondaryButton"
+
+[node name="Pager" type="HBoxContainer" parent="."]
+visible = false
+layout_mode = 2
+custom_minimum_size = Vector2(0,44)
+[node name="Previous" type="Button" parent="Pager"]
+custom_minimum_size = Vector2(0,44)
+theme_type_variation = &"RookframeSecondaryButton"
+text = "Previous"
+[node name="Range" type="Label" parent="Pager"]
+size_flags_horizontal = 3
+horizontal_alignment = 1
+theme_type_variation = &"RookframeMeta"
+[node name="Next" type="Button" parent="Pager"]
+custom_minimum_size = Vector2(0,44)
+theme_type_variation = &"RookframeSecondaryButton"
+text = "Next"

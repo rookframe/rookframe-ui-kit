@@ -2,6 +2,8 @@ extends Control
 ## A fixed-page notepad composed with native TextEdit and Label shaping.
 ## The value is always the complete text. Reparent get_pager() into the footer.
 signal value_changed(value: String)
+@export var reduced_motion := false
+var _ink := preload("res://rookframe/ui/_internal/surfaces/content_reveal.gd").new()
 @export_multiline var value := "":
 	set(next):
 		value = next
@@ -107,6 +109,7 @@ func _turn(step: int) -> void:
 	_page = clampi(_page + step, 0, _pages.size() - 1)
 	_caret = -1
 	_show_page()
+	_ink.play(_editor, reduced_motion)
 
 func _show_page() -> void:
 	_setting = true
@@ -129,3 +132,6 @@ func _show_page() -> void:
 
 func _sync_pager() -> void:
 	_pager.visible = is_visible_in_tree() and _pages.size() > 1
+
+func _exit_tree() -> void:
+	_ink.finish()
