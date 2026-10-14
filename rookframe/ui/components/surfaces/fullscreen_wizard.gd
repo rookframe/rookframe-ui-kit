@@ -56,7 +56,7 @@ func set_step(index: int) -> void:
 	var changed := _index != index
 	_index = index
 	if changed and is_node_ready():
-		_reveal_stage.call_deferred()
+		reveal_stage.call_deferred()
 	for number in _steps.size():
 		var step := _steps[number]
 		step.get_node(^"Row/Name").add_theme_color_override("font_color", TEXT if number <= index else MUTED)
@@ -183,7 +183,7 @@ func _draw() -> void:
 	var start := context.global_position - global_position + Vector2(context.size.x, 4)
 	draw_line(start, start + Vector2(0, context.size.y - 8), Color("bc927747"))
 
-func _reveal_stage() -> void:
+func reveal_stage() -> void:
 	if is_inside_tree(): get_node(^"Frame").reveal(get_stage_slot())
 
 func _label_line_height(label: Control, multiplier: float) -> void:

@@ -1008,7 +1008,8 @@
         "get_context_slot",
         "get_stage_slot",
         "is_compact",
-        "is_tablet"
+        "is_tablet",
+        "reveal_stage"
       ],
       "signals": [
         "back_requested",

@@ -529,7 +529,7 @@ native. `PaginatedContent`, `PaginatedChoices`, `SilkboundCollection`,
 `PaginatedTextArea` and paginated `MiniatureBrowser` expose the same reduced-motion
 flag and reveal manual page turns. Configuration, resize and state restoration
 do not trigger ink. `FullscreenWizard.set_step()` reveals only when the step
-index changes; repeated updates within a step, including roll results, stay still.
+index changes; `reveal_stage()` reveals a consumer-owned stage tab switch. Repeated updates within a step, including roll results, stay still.
 Short caption/value facts remain together when pagination measures native content.
 
 Fantasy and Cyberpunk native Theme resources and ordered usage projection are
