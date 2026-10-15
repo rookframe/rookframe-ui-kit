@@ -144,3 +144,53 @@ func test_long_native_content_has_complete_readable_pages_and_retains_position()
 		await get_tree().process_frame
 	assert_int(pages.capture_state().page).is_equal(retained.page)
 	viewport.free()
+
+func test_step_badge_borders_survive_fractional_window_scaling(
+	_do_skip := DisplayServer.get_name() == "headless",
+	_skip_reason := "Border coverage requires the native renderer.") -> void:
+	var viewport: SubViewport = auto_free(SubViewport.new())
+	viewport.size_2d_override = Vector2i(1920, 1080)
+	viewport.size_2d_override_stretch = true
+	viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS
+	add_child(viewport)
+	var wizard := load("res://rookframe/ui/components/surfaces/fullscreen_wizard.tscn").instantiate() as Control
+	viewport.add_child(wizard)
+	wizard.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	var steps: Array[String] = ["Class", "Abilities", "Origin & Traits", "Equipment", "Identity", "Review"]
+	wizard.configure("MÖRK BORG", "Create a character", steps)
+	# Cover numbered, current and completed badges at native and fractional scales,
+	# including the minimum desktop window and the reported missing-edge scale.
+	for width in [1920, 1742, 1750, 1600, 1280]:
+		viewport.size = Vector2i(width, roundi(width * 1080.0 / 1920.0))
+		for current in [0, 4]:
+			wizard.set_step(current)
+			for frame in 6:
+				await get_tree().process_frame
+			RenderingServer.force_draw()
+			var pixels := viewport.get_texture().get_image()
+			var canvas_scale := Vector2(viewport.size) / Vector2(viewport.size_2d_override)
+			for index in steps.size():
+				var badge: Control = wizard.get_node(^"Layout/Steps/Row").get_child(index).get_node(^"Row/Marker")
+				var rect := badge.get_global_rect()
+				rect = Rect2(rect.position * canvas_scale, rect.size * canvas_scale)
+				var border: Color = badge.get_theme_stylebox("panel").border_color
+				for side in [SIDE_LEFT, SIDE_TOP, SIDE_RIGHT, SIDE_BOTTOM]:
+					assert_bool(_badge_edge_visible(pixels, rect, border, side))\
+						.override_failure_message("Step %d edge %d disappeared at width %d, current step %d" % [index + 1, side, width, current + 1]).is_true()
+	viewport.free()
+
+func _badge_edge_visible(pixels: Image, rect: Rect2, color: Color, side: int) -> bool:
+	var vertical := side == SIDE_LEFT or side == SIDE_RIGHT
+	var edge: float = (rect.position.x if side == SIDE_LEFT else rect.end.x) if vertical else (rect.position.y if side == SIDE_TOP else rect.end.y)
+	var start: float = rect.position.y if vertical else rect.position.x
+	var length: float = rect.size.y if vertical else rect.size.x
+	# Check the middle half of each edge, excluding corners and the centred glyph.
+	for along in range(ceili(start + length * 0.25), floori(start + length * 0.75)):
+		var visible_pixel := false
+		for across in range(floori(edge) - 2, ceili(edge) + 2):
+			var pixel := pixels.get_pixel(across, along) if vertical else pixels.get_pixel(along, across)
+			if absf(pixel.r - color.r) < 0.01 and absf(pixel.g - color.g) < 0.01 and absf(pixel.b - color.b) < 0.01:
+				visible_pixel = true
+		if not visible_pixel:
+			return false
+	return true
