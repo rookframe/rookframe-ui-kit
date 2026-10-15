@@ -133,6 +133,11 @@ static func apply_usages(control: Control, usages: Array[StringName], compact: b
 		control.theme_type_variation = variant
 
 static func usage_variant(target: Theme, usages: Array[StringName], base_type: StringName, compact: bool = false) -> StringName:
+	# A usage is one Theme update. Publishing each copied item separately makes
+	# every Control inheriting this Theme repeat layout and text shaping.
+	var signals_were_blocked := target.is_blocking_signals()
+	target.set_block_signals(true)
+	var changed := false
 	var parent := base_type
 	var prefix := "Usage_" + String(base_type) + ("_compact" if compact else "_regular")
 	for usage in usages:
@@ -142,6 +147,7 @@ static func usage_variant(target: Theme, usages: Array[StringName], base_type: S
 		var variant := StringName(prefix)
 		if target.get_type_variation_base(variant) != parent:
 			target.set_type_variation(variant, parent)
+			changed = true
 		var sources: Array[StringName] = [native_type(usage)]
 		if compact:
 			sources.append(button_variant(usage, true))
@@ -153,10 +159,15 @@ static func usage_variant(target: Theme, usages: Array[StringName], base_type: S
 			for item in target.get_theme_item_list(data_type, variant):
 				if not items.has(item):
 					target.clear_theme_item(data_type, item, variant)
+					changed = true
 			for item in items:
 				if not target.has_theme_item(data_type, item, variant) or target.get_theme_item(data_type, item, variant) != items[item]:
 					target.set_theme_item(data_type, item, variant, items[item])
+					changed = true
 		parent = variant
+	target.set_block_signals(signals_were_blocked)
+	if changed and not signals_were_blocked:
+		target.emit_changed()
 	return parent
 
 ## Complete a composed World Theme without overriding authored tooltip items.
