@@ -114,7 +114,7 @@ func _fit() -> void:
 	layout.offset_bottom = -outer - 8
 	get_node(^"Layout").add_theme_constant_override("separation", 10 if phone else 20)
 	get_node(^"Layout/Header").custom_minimum_size.y = 32 if phone else 56 if tablet else 64
-	get_node(^"Layout/Steps").custom_minimum_size.y = 4 if phone else 44 if tablet else 52
+	get_node(^"Layout/Steps").custom_minimum_size.y = 4 if phone else 56 if tablet else 68
 	get_node(^"Layout/Footer").custom_minimum_size.y = 52 if phone else 60 if tablet else 68
 	for path in [^"Layout/Header", ^"Layout/Steps", ^"Layout/Footer"]:
 		get_node(path).add_theme_constant_override("margin_left", 0)
@@ -122,8 +122,8 @@ func _fit() -> void:
 	get_node(^"Layout/Body").add_theme_constant_override("separation", 16 if phone else 20 if tablet else 28)
 	get_context_slot().custom_minimum_size.x = 208 if phone else 246 if tablet else 336
 	for edge in ["left", "right", "top", "bottom"]:
-		get_context_slot().add_theme_constant_override("margin_" + edge, 12 if edge == "right" else 4)
-		get_stage_slot().add_theme_constant_override("margin_" + edge, 4)
+		get_context_slot().add_theme_constant_override("margin_" + edge, 12 if edge == "right" else 8)
+		get_stage_slot().add_theme_constant_override("margin_" + edge, 8)
 	get_node(^"Layout/Header/Title").visible = not phone
 	get_node(^"Layout/Header/Title").add_theme_font_size_override("font_size", 26 if tablet else 32)
 	get_node(^"Layout/Header/Row/CurrentStep").visible = phone
@@ -140,8 +140,12 @@ func _fit() -> void:
 		get_node("Layout/Footer/Row/" + action).add_theme_font_size_override("font_size", 18 if phone or tablet else 20)
 	for step in _steps:
 		step.get_node(^"Row").visible = not phone
-		step.get_node(^"Row/Name").add_theme_font_size_override("font_size", 17 if tablet else 20)
-		step.get_node(^"Row").offset_top = 8
+		step.get_node(^"Row/Name").add_theme_font_size_override("font_size", 19 if tablet else 24)
+		step.get_node(^"Row").offset_top = 12
+		step.get_node(^"Row").offset_bottom = -12
+		step.get_node(^"Row").add_theme_constant_override("separation", 8)
+		step.get_node(^"Row/Marker").custom_minimum_size = Vector2(26,26) if tablet else Vector2(30,30)
+		step.get_node(^"Row/Marker/Number").add_theme_font_size_override("font_size", 16 if tablet else 18)
 		step.get_node(^"Row").offset_left = 10
 		step.get_node(^"Row").offset_right = -10
 		step.get_node(^"Rule").offset_top = -2
