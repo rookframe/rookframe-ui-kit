@@ -1211,6 +1211,77 @@
         "selection_changed(ids: PackedStringArray)"
       ],
       "slots": []
+    },
+    {
+      "name": "Popover",
+      "scene": "res://rookframe/ui/components/overlays/popover.tscn",
+      "sceneUid": "uid://drqlqnjpihqjd",
+      "script": "res://rookframe/ui/components/overlays/popover.gd",
+      "scriptUid": "uid://dwxtv6ieiohur",
+      "rootType": "PopupPanel",
+      "properties": {
+        "focus_fallback": null
+      },
+      "methods": [
+        "get_content_slot() -> Container",
+        "open_for(anchor: Control, initial_focus: Control = null) -> bool",
+        "close(reason: StringName = &\"host\")",
+        "is_open() -> bool"
+      ],
+      "signals": [
+        "closed(reason: StringName)"
+      ],
+      "slots": [
+        "ContentSlot"
+      ]
+    },
+    {
+      "name": "InspectCard",
+      "scene": "res://rookframe/ui/components/overlays/inspect_card.tscn",
+      "sceneUid": "uid://dyfpjqt06duxi",
+      "script": "res://rookframe/ui/components/overlays/inspect_card.gd",
+      "scriptUid": "uid://df3k0bf7yfrxp",
+      "rootType": "Control",
+      "properties": {
+        "hover_delay_ms": 500,
+        "hover_close_delay_ms": 150
+      },
+      "methods": [
+        "bind_anchor(control: Control) -> bool",
+        "get_preview_slot() -> Container",
+        "get_body_slot() -> Container",
+        "get_action_slot() -> Container",
+        "open_inspection() -> bool",
+        "close()"
+      ],
+      "signals": [],
+      "slots": [
+        "PreviewSlot",
+        "BodySlot",
+        "ActionSlot"
+      ]
+    },
+    {
+      "name": "ToastStack",
+      "scene": "res://rookframe/ui/components/feedback/toast_stack.tscn",
+      "sceneUid": "uid://c23v4qkkv6grh",
+      "script": "res://rookframe/ui/components/feedback/toast_stack.gd",
+      "scriptUid": "uid://qlcvjx4gbnyt",
+      "rootType": "VBoxContainer",
+      "properties": {
+        "timers_paused": false
+      },
+      "methods": [
+        "configure_limits(visible: int, waiting: int) -> bool",
+        "push(message: Dictionary) -> bool",
+        "update_message(id: String, changes: Dictionary) -> bool",
+        "dismiss(id: String) -> bool",
+        "clear()"
+      ],
+      "signals": [
+        "finished(id: String, reason: StringName, action_id: String)"
+      ],
+      "slots": []
     }
   ],
   "semanticIcons": {
