@@ -1,0 +1,25 @@
+extends RefCounted
+## Optional semantic mappings; concrete values stay in Materials.
+const ELEMENTS = {
+	"RookframeTitle": {"base_type": &"Label", "fonts/font": "type.ui", "font_sizes/font_size": "expansion.Title.size", "colors/font_color": "body.font_color"},
+	"RookframeSubtitle": {"base_type": &"Label", "fonts/font": "type.ui", "font_sizes/font_size": "expansion.Subtitle.size", "colors/font_color": "body.font_color"},
+	"RookframeValue": {"base_type": &"Label", "fonts/font": "type.ui", "font_sizes/font_size": "expansion.Value.size", "colors/font_color": "body.font_color"},
+	"RookframeHeading": {"base_type": &"Label", "fonts/font": "type.ui", "font_sizes/font_size": "expansion.Heading.size", "colors/font_color": "body.font_color"},
+	"RookframeIdentity": {"base_type": &"Label", "fonts/font": "type.ui", "font_sizes/font_size": "expansion.Identity.size", "colors/font_color": "body.font_color"},
+	"RookframeBody": {"base_type": &"Label", "fonts/font": "type.ui", "font_sizes/font_size": "expansion.Body.size", "colors/font_color": "body.font_color"},
+	"RookframeLabel": {"base_type": &"Label", "fonts/font": "type.ui", "font_sizes/font_size": "expansion.Label.size", "colors/font_color": "body.font_color"},
+	"RookframeMeta": {"base_type": &"Label", "fonts/font": "type.ui", "font_sizes/font_size": "expansion.Meta.size", "colors/font_color": "body.font_color"},
+	"RookframeStatus": {"base_type": &"Label", "fonts/font": "type.ui", "font_sizes/font_size": "expansion.Status.size", "colors/font_color": "body.font_color"},
+	"RookframePending": {"base_type": &"Label", "fonts/font": "type.ui", "font_sizes/font_size": "expansion.Pending.size", "colors/font_color": "body.font_color"},
+	"RookframeSuccess": {"base_type": &"Label", "fonts/font": "type.ui", "font_sizes/font_size": "expansion.Success.size", "colors/font_color": "body.font_color"},
+	"RookframeError": {"base_type": &"Label", "fonts/font": "type.ui", "font_sizes/font_size": "expansion.Error.size", "colors/font_color": "body.font_color"},
+	"RookframeBadgeText": {"base_type": &"Label", "fonts/font": "type.ui", "font_sizes/font_size": "expansion.BadgeText.size", "colors/font_color": "body.font_color"},
+	"RookframeRaisedSurface": {"base_type": &"PanelContainer", "styles/panel": "editor.surface.inset"},
+	"RookframeBadge": {"base_type": &"PanelContainer", "styles/panel": "editor.surface.inset"},
+	"RookframeInlineNoticeInfo": {"base_type": &"PanelContainer", "styles/panel": "editor.surface.inset"},
+	"RookframeInlineNoticePending": {"base_type": &"PanelContainer", "styles/panel": "editor.surface.inset"},
+	"RookframeInlineNoticeSuccess": {"base_type": &"PanelContainer", "styles/panel": "editor.surface.inset"},
+	"RookframeInlineNoticeError": {"base_type": &"PanelContainer", "styles/panel": "editor.surface.inset"},
+	"RookframeChoiceRow": {"base_type": &"editor.button.standard"},
+	"RookframePopover": {"base_type": &"PopupPanel", "styles/panel": "editor.surface.inset"},
+}

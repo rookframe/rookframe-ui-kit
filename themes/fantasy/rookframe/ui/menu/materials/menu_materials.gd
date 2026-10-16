@@ -3,6 +3,20 @@ extends RefCounted
 ## The sole authored source of concrete menu appearance values and visual assets.
 ## Each surface, border, depth, ink and padding treatment is independently addressable.
 static var VALUES: Dictionary = {
+	"expansion.Title.size": 40,
+	"expansion.Subtitle.size": 30,
+	"expansion.Value.size": 30,
+	"expansion.Heading.size": 24,
+	"expansion.Identity.size": 22,
+	"expansion.Body.size": 21,
+	"expansion.Label.size": 20,
+	"expansion.Meta.size": 18,
+	"expansion.Status.size": 18,
+	"expansion.Pending.size": 18,
+	"expansion.Success.size": 18,
+	"expansion.Error.size": 18,
+	"expansion.BadgeText.size": 18,
+
 	"wood.texture_visible": 1,
 	"wood.icons_visible": 0,
 	"type.ui.medium": preload("res://rookframe/ui/menu/materials/ui_medium.tres"),

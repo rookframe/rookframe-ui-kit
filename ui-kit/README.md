@@ -39,6 +39,7 @@ Run the standalone component check from the repository root:
 ```sh
 godot --headless --editor --path ui-kit --import --quit
 godot --headless --path ui-kit --script res://tests/unthemed_components.gd
+godot --headless --path ui-kit --script res://tests/expansion_contracts.gd
 ```
 
 For cross-package suites, install the pinned development runner:
