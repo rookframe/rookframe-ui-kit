@@ -5,7 +5,6 @@
 [node name="AdaptiveToolbar" type="BoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/separation = 12
 script = ExtResource("1_script")
 compact_width = 700.0
 
@@ -13,12 +12,9 @@ compact_width = 700.0
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/h_separation = 12
-theme_override_constants/v_separation = 8
 
 [node name="TrailingSlot" type="HBoxContainer" parent="."]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 8
 alignment = 2
-theme_override_constants/separation = 8

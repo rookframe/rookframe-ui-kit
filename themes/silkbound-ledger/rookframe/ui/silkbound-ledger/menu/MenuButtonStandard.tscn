@@ -1,0 +1,8 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://rookframe/ui/menu/MenuButtonStandard.tscn" id="base"]
+[ext_resource type="Theme" path="res://rookframe/ui/theme/silkbound_theme.tres" id="skin_theme"]
+
+[node name="MenuButtonStandard" instance=ExtResource("base")]
+modulate = Color(0.713725, 1, 0, 1)
+theme = ExtResource("skin_theme")

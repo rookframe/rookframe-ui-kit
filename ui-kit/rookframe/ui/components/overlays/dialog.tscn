@@ -1,8 +1,6 @@
 [gd_scene format=3 uid="uid://87uetn404lqb"]
 
 [ext_resource type="Script" path="res://rookframe/ui/components/overlays/dialog.gd" id="script"]
-[ext_resource type="Theme" path="res://rookframe/ui/theme/silkbound_theme.tres" id="theme"]
-
 [ext_resource type="PackedScene" path="res://rookframe/ui/components/surfaces/ledger_frame.tscn" id="frame"]
 
 [node name="Dialog" type="Window"]
@@ -14,7 +12,6 @@ borderless = true
 transient = true
 exclusive = true
 wrap_controls = false
-theme = ExtResource("theme")
 script = ExtResource("script")
 
 [node name="Frame" parent="." instance=ExtResource("frame")]
@@ -29,18 +26,12 @@ theme_type_variation = &"SilkDialogSurface"
 
 [node name="Content" type="VBoxContainer" parent="Shell"]
 layout_mode = 2
-theme_override_constants/separation = 0
 
 [node name="Header" type="MarginContainer" parent="Shell/Content"]
 layout_mode = 2
-theme_override_constants/margin_left = 24
-theme_override_constants/margin_right = 24
-theme_override_constants/margin_top = 24
-theme_override_constants/margin_bottom = 12
 
 [node name="Copy" type="VBoxContainer" parent="Shell/Content/Header"]
 layout_mode = 2
-theme_override_constants/separation = 16
 
 [node name="Eyebrow" type="Label" parent="Shell/Content/Header/Copy"]
 unique_name_in_owner = true
@@ -75,7 +66,6 @@ theme_type_variation = &"SilkDialogBody"
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_constants/separation = 12
 
 [node name="Footer" type="PanelContainer" parent="Shell/Content"]
 layout_mode = 2
@@ -83,7 +73,6 @@ theme_type_variation = &"SilkDialogFooter"
 
 [node name="Actions" type="HBoxContainer" parent="Shell/Content/Footer"]
 layout_mode = 2
-theme_override_constants/separation = 12
 alignment = 2
 
 [node name="Cancel" type="Button" parent="Shell/Content/Footer/Actions"]

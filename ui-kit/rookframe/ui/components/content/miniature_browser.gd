@@ -12,7 +12,12 @@ var _page := 0
 var _capacity := 1
 var _matches: Array[int] = []
 var _ink := preload("res://rookframe/ui/_internal/surfaces/content_reveal.gd").new()
+@export var reveal_shader: Shader:
+	set(value):
+		reveal_shader = value
+		_ink.shader = value
 const ROW = preload("res://rookframe/ui/_internal/content/miniature_browser_row.tscn")
+@export var row_scene: PackedScene = ROW
 var _entries: Array[Dictionary] = []
 var _selection := ""
 var _rows: Array[Button] = []
@@ -43,7 +48,7 @@ func configure(entries: Array[Dictionary], selected_id: String = "", labels: Dic
 		row.queue_free()
 	_rows.clear()
 	for entry in _entries:
-		var row := ROW.instantiate() as Button
+		var row := row_scene.instantiate() as Button
 		row.get_node(^"Content/Copy/Title").text = str(entry.get("title", ""))
 		row.get_node(^"Content/Copy/Package").text = str(entry.get("package", ""))
 		row.disabled = not bool(entry.get("available", true))
@@ -87,16 +92,7 @@ func _select(id: String, notify := true) -> void:
 		var chosen := str(_entries[index].id) == id
 		_rows[index].set_pressed_no_signal(chosen)
 		var row: Button = _rows[index]
-		for state in ["normal", "hover", "pressed", "hover_pressed", "disabled"]:
-			var box := StyleBoxFlat.new()
-			box.bg_color = Color("bc927726") if state in ["pressed", "hover_pressed"] else Color("080b0a66")
-			box.set_border_width_all(1)
-			box.border_color = Color("bc9277") if state in ["pressed", "hover_pressed"] else Color("bc927747")
-			row.add_theme_stylebox_override(state, box)
-		row.get_node(^"Selected").add_theme_color_override("font_color", Color("151719"))
-		var selected_box := StyleBoxFlat.new()
-		selected_box.bg_color = Color("ceccb3")
-		row.get_node(^"Selected").add_theme_stylebox_override("normal", selected_box)
+		_style_row(row)
 		_rows[index].get_node(^"Content/Copy/Title").text = str(_entries[index].title)
 		_rows[index].get_node(^"Selected").visible = chosen
 		_rows[index].accessibility_description = _text("selected", "Selected") if chosen else ""
@@ -180,3 +176,6 @@ func _text(key: String, fallback: String) -> String:
 
 func focus_search() -> void:
 	get_node(^"Search").grab_focus()
+
+func _style_row(row: Button) -> void:
+	pass

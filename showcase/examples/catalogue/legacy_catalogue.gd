@@ -2,10 +2,10 @@ extends Control
 
 signal return_requested
 
-const TASK_HEADER_SCENE := preload("res://rookframe/ui/components/layout/task_header.tscn")
-const ACTION_BAR_SCENE := preload("res://rookframe/ui/components/layout/action_bar.tscn")
-const SEARCH_FIELD_SCENE := preload("res://rookframe/ui/components/forms/search_field.tscn")
-const METRIC_SCENE := preload("res://rookframe/ui/components/data/metric.tscn")
+const TASK_HEADER_SCENE := preload("res://rookframe/ui/silkbound-ledger/components/layout/task_header.tscn")
+const ACTION_BAR_SCENE := preload("res://rookframe/ui/silkbound-ledger/components/layout/action_bar.tscn")
+const SEARCH_FIELD_SCENE := preload("res://rookframe/ui/silkbound-ledger/components/forms/search_field.tscn")
+const METRIC_SCENE := preload("res://rookframe/ui/silkbound-ledger/components/data/metric.tscn")
 
 
 func _ready() -> void:

@@ -2,7 +2,8 @@
 
 An executable reference for agents implementing Rookframe UI. It consumes the sibling UI Kit and optional theme packages and instances its production resources with synthetic data.
 Silkbound Ledger, including leather leaves and motion, is canonical. The Main
-Menu remains Silkbound. Fantasy/Cyberpunk are auxiliary shell-theme experiments;
+The showcase explicitly instances the optional Silkbound inherited scenes.
+Base UI Kit components remain unthemed. Menu remains Silkbound. Fantasy/Cyberpunk are auxiliary shell-theme experiments;
 System Extension shell selection remains proposed, not a released SDK facility.
 Direct Godot Main Menu overrides are allowed but unsupported.
 
@@ -85,3 +86,7 @@ owns shared design rules. [Linear](https://linear.app/rookframe/document/silkbou
 holds rationale, proposals and studies; [RFG-367](https://linear.app/rookframe/issue/RFG-367)
 holds the extraction archive and review evidence. Source uses MIT; installed
 third-party resources retain the installed package notices.
+
+The native boundary comparison is `examples/theme-boundary/theme_boundary.tscn`.
+`tests/theme_boundary.gd` checks native inheritance and dynamic selection at all
+three target sizes; pass `-- --capture-dir=/tmp/theme-boundary` to capture it.

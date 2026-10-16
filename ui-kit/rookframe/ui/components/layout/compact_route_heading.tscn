@@ -1,16 +1,9 @@
 [gd_scene load_steps=4 format=3 uid="uid://bc8nlg3pfa3ub"]
 
 [ext_resource type="Script" path="res://rookframe/ui/components/layout/compact_route_heading.gd" id="1_script"]
-[ext_resource type="Font" path="res://rookframe/ui/theme/silkbound_medium.tres" id="2_exo"]
-
-[sub_resource type="FontVariation" id="HeadingBold"]
-base_font = ExtResource("2_exo")
-variation_opentype = {"wght": 500.0}
-
 [node name="CompactRouteHeading" type="VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/separation = 2
 script = ExtResource("1_script")
 
 [node name="Kicker" type="Label" parent="."]
@@ -18,16 +11,12 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 18)
 layout_mode = 2
 theme_type_variation = &"RookframeLabel"
-theme_override_font_sizes/font_size = 18
 
 [node name="Title" type="Label" parent="."]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 29)
 layout_mode = 2
 theme_type_variation = &"RookframeTitle"
-theme_override_colors/font_color = Color(0.905882, 0.905882, 0.866667, 1.0)
-theme_override_fonts/font = SubResource("HeadingBold")
-theme_override_font_sizes/font_size = 29
 autowrap_mode = 2
 
 [node name="Detail" type="Label" parent="."]
@@ -35,7 +24,6 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 theme_type_variation = &"RookframeMeta"
-theme_override_font_sizes/font_size = 18
 autowrap_mode = 2
 
 [node name="Rule" type="HSeparator" parent="."]

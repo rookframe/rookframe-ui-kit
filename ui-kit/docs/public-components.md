@@ -1,5 +1,12 @@
 # Public component reference
 
+Appearance in this reference describes the optional `silkbound-ledger` package.
+Base components are unthemed and use native Godot defaults. To select the described
+skin, install that package and instance the corresponding scene beneath
+`res://rookframe/ui/silkbound-ledger/`. Base component paths/UIDs and behavior stay
+public. See [migration notes](../MIGRATING.md#explicit-silkbound-ledger-selection).
+
+
 Every scene and script in this document is public at its normal
 `res://rookframe/ui/` path. Scene paths, scene UIDs, script paths, script UIDs,
 root types, exported property names and defaults, signals, methods, slot names,
@@ -8,6 +15,16 @@ SemVer major line.
 
 The machine-readable form of this reference is
 `res://rookframe/ui/catalogue.json`.
+
+## Optional presentation inputs
+
+Components that create child scenes expose native PackedScene properties such as
+`row_scene`, `stat_scene`, `step_scene`, `visual_scene` and `tooltip_scene` where
+applicable. Defaults point to the unthemed core scene. Skin variants supply their
+corresponding inherited scene; callers keep the documented child/slot contract.
+`reveal_shader` and the action drop sequence's `ink_shader` default to null.
+Without optional shaders, presentation settles immediately without applying an
+effect. Input, data, identity, signals and reduced-motion endpoints remain native.
 
 ## Public identities
 
@@ -93,7 +110,7 @@ semantic minimum cell width. Fixed grids remain ordinary native
 | --- | --- | --- | --- |
 | `text_field.tscn` / `VBoxContainer` | `label_text = "Field label"`; `value = ""`; `placeholder = ""`; `help_text = ""`; `error_text = ""`; `editable = true` | `value_changed(value)`, `value_committed(value)`; `focus_editor()`, `set_error(message)` | Native `LineEdit` input; Return commits. The visible label becomes its accessibility name, help/error becomes the description, and error copy begins with `Error:`. `editable` retains native read-only focus and selection behavior while preventing edits. |
 | `text_area.tscn` / `VBoxContainer` | Same defaults as `TextField` | Same signals and methods | Native `TextEdit` with a 112px minimum editor height; focus exit commits. Label/help/error accessibility and native read-only behavior match `TextField`. |
-| `search_field.tscn` / `VBoxContainer` | `label_text = "Search"`; `show_label = true`; `value = ""`; `placeholder = "Search"`; `show_clear_when_empty = false`; `perimeter_minimum_height = 44.0`; `clear_minimum_size = Vector2(44, 44)`; `editor_font_size = 14` | `value_changed(value)`, `value_committed(value)`, `cleared`; `focus_editor()`, `clear()` | Icon, editor, and clear action share one visible focus perimeter. `show_clear_when_empty` retains a discoverable reset action for workflows that need it. The density exports configure the one perimeter without changing its ownership. Return commits; clear emits `cleared` and returns focus to the editor. The label remains the editor's accessibility name even when visually hidden. |
+| `search_field.tscn` / `VBoxContainer` | `label_text = "Search"`; `show_label = true`; `value = ""`; `placeholder = "Search"`; `show_clear_when_empty = false`; `perimeter_minimum_height = 44.0`; `clear_minimum_size = Vector2(44, 44)`; `editor_font_size = 0` | `value_changed(value)`, `value_committed(value)`, `cleared`; `focus_editor()`, `clear()` | Icon, editor, and clear action share one visible focus perimeter. `show_clear_when_empty` retains a discoverable reset action for workflows that need it. The density exports configure the one perimeter without changing its ownership. Return commits; clear emits `cleared` and returns focus to the editor. The label remains the editor's accessibility name even when visually hidden. |
 | `choice_row.tscn` / `Button` | `title = "Choice"`; `description = "Supporting decision copy"`; `action_label = "Select"`; `variant = DETAILED`; native `button_group = null`, `button_pressed = false`, `disabled = false` | `selection_changed(selected)` plus native `pressed` and `toggled`; `set_selected(selected)`, `is_selected()` | The complete native toggle Button is one 44px-minimum target. Title, description, and selected/not-selected state form its accessibility description. Assign a shared `ButtonGroup` for exclusive keyboard/controller selection. |
 | `package_choice.tscn` / `Button` | `package_name = "Package"`; `detail_text = ""`; `action_label = "ADD"`; native `button_pressed = false`, `disabled = false` | Native `pressed` and `toggled` | Complete multi-select Package target. The marker, Package identity, detail, and visible `ADD`/`INCLUDED` state form one accessible toggle; callers own Package selection policy and persistence. |
 | `package_choice_card.tscn` / `Button` | `package_name = "Package"`; `detail_text = ""`; `action_label = "INCLUDE"`; native `button_pressed = false`, `disabled = false` | Native `pressed` and `toggled` | Detailed multi-select Package card for wide task surfaces. It retains the same one-target selection and accessibility behavior as the compact Package choice. |
@@ -167,7 +184,7 @@ progress remains native `ProgressBar`.
 | `structured_row.tscn` / `PanelContainer` | `variant = DATA`; `title = "Row identity"`; `detail = ""`; `value_text = ""`; `status_text = ""`; `leading_image = null`; `compact_width = 620.0`; variants `DATA`, `DETAIL`, `COMPACT_DETAIL`, `STACKED_DETAIL`, `SUMMARY`, `TABLE`, `HEADER`, `SELECTION_BANNER`, `CATEGORY`, `CATALOGUE`, `PORTRAIT`, `PENDING` | `layout_profile_changed(profile)`; `get_action_slot()`; `ActionSlot` | Context-neutral read-only row family with one stable trailing lane. Compact reflow retains content and focus order. Title/status remain textual; pending state is not color-only. Use `ChoiceRow`, not this scene, when the entire row must be selectable. |
 | `key_value_row.tscn` / `PanelContainer` | `key_text = "Key"`; `value_text = ""` | No signals or methods | Compact read-only fact with a visible key, trailing value, and divider. It receives no input; key and value are combined into its accessibility name and description. |
 | `action_row.tscn` / `Button` | `title = "Action"`; `description = "Supporting action detail"`; `action_label = "â€º"`; `tone = STANDARD`; native `disabled = false`; tones `STANDARD`, `DANGER` | Native `pressed` | Complete native button target for a compact navigation or management action. Title, supporting detail, and trailing action label remain visible; the root uses a secondary or danger semantic action style. Callers own policy and persistence. |
-| `action_link.tscn` / `Button` | `title = "Action"`; `title_lane_width = 150.0`; `title_font_size = 20`; native `disabled = false` | Native `pressed` | Complete quiet navigation target with a label lane, intentional gap, continuous trailing rule, and scene-authored arrow head. The rule never touches the label and meets the arrow base; callers own policy and connect `pressed`. |
+| `action_link.tscn` / `Button` | `title = "Action"`; `title_lane_width = 150.0`; `title_font_size = 0`; native `disabled = false` | Native `pressed` | Complete quiet navigation target with a label lane, intentional gap, continuous trailing rule, and scene-authored arrow head. The rule never touches the label and meets the arrow base; callers own policy and connect `pressed`. |
 | `world_row.tscn` / `Button` | `title = "World"`; `detail_text = ""`; `selected = false`; native `disabled = false` | Native `pressed` | Selectable World record with a brass marker, textual identity/metadata, neutral selection, and brass disclosure. The full root is the only target; callers own selection and navigation policy. |
 | `world_summary_card.tscn` / `VBoxContainer` | `facts_visible = true`; `actions_visible = false`; `kicker_text = "SELECTED WORLD"`; `privacy_text = "PRIVATE"`; `package_name = "Package"`; `detail_text = ""` | Native child `OpenWorld` and `WorldDetails` Buttons when actions are visible | Retained World identity, Package, availability, optional facts, and optional actions as one scene-authored relationship. Callers supply dynamic text/data and connect action Buttons; policy, persistence, and navigation remain outside the component. |
 | `disclosure_row.tscn` / `Button` | `title = "Action"`; `description = "Supporting action detail"`; `action_label = "â€º"`; `tone = STANDARD`; native `disabled = false`; tones `STANDARD`, `DANGER` | Native `pressed` | Plain settings-list action with textual title/detail, a scene-authored disclosure, and one bottom divider. The root is the only interactive target; callers own policy and connect `pressed`. |

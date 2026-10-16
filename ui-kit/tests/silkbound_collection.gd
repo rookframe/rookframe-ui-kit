@@ -5,7 +5,7 @@ func test_bounded_records_keep_details_and_actions_independent() -> void:
 		var viewport: SubViewport = auto_free(SubViewport.new())
 		viewport.size = canvas
 		add_child(viewport)
-		var collection = load("res://rookframe/ui/components/data/silkbound_collection.tscn").instantiate()
+		var collection = load("res://rookframe/ui/silkbound-ledger/components/data/silkbound_collection.tscn").instantiate()
 		collection.theme = load("res://rookframe/ui/theme/silkbound_theme.tres")
 		collection.size = Vector2(500, 240)
 		viewport.add_child(collection)
@@ -66,7 +66,7 @@ func test_shrink_section_places_pager_after_last_row_and_pads_actions() -> void:
 	var layout := VBoxContainer.new()
 	layout.size = Vector2(600,800)
 	viewport.add_child(layout)
-	var collection = load("res://rookframe/ui/components/data/silkbound_collection.tscn").instantiate()
+	var collection = load("res://rookframe/ui/silkbound-ledger/components/data/silkbound_collection.tscn").instantiate()
 	collection.theme = load("res://rookframe/ui/theme/silkbound_theme.tres")
 	collection.size_flags_vertical = Control.SIZE_FILL
 	layout.add_child(collection)
@@ -88,7 +88,7 @@ func test_shrink_section_places_pager_after_last_row_and_pads_actions() -> void:
 	assert_float(consume.get_theme_stylebox("normal").content_margin_left).is_equal(10.0)
 
 func test_single_page_hides_controls_but_keeps_footer_actions() -> void:
-	var collection = auto_free(load("res://rookframe/ui/components/data/silkbound_collection.tscn").instantiate())
+	var collection = auto_free(load("res://rookframe/ui/silkbound-ledger/components/data/silkbound_collection.tscn").instantiate())
 	collection.theme = load("res://rookframe/ui/theme/silkbound_theme.tres")
 	collection.size = Vector2(500, 250)
 	add_child(collection)
@@ -110,7 +110,7 @@ func test_single_page_hides_controls_but_keeps_footer_actions() -> void:
 	assert_bool(collection.get_node("Content/Pager/Next").disabled).is_false()
 
 func test_hints_follow_live_records_and_do_not_replace_action_labels() -> void:
-	var collection = auto_free(load("res://rookframe/ui/components/data/silkbound_collection.tscn").instantiate())
+	var collection = auto_free(load("res://rookframe/ui/silkbound-ledger/components/data/silkbound_collection.tscn").instantiate())
 	collection.theme = load("res://rookframe/ui/theme/silkbound_theme.tres")
 	collection.size = Vector2(500, 400)
 	add_child(collection)

@@ -1,0 +1,23 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://rookframe/ui/components/data/action_link.tscn" id="base"]
+[ext_resource type="Theme" path="res://rookframe/ui/theme/silkbound_theme.tres" id="skin_theme"]
+
+[node name="ActionLink" instance=ExtResource("base")]
+title_font_size = 20
+theme = ExtResource("skin_theme")
+
+[node name="Content" parent="."]
+theme_override_constants/separation = 0
+
+[node name="Title" parent="Content"]
+theme_override_font_sizes/font_size = 18
+
+[node name="Tail" parent="Content"]
+theme_override_constants/separation = 0
+
+[node name="Rule" parent="Content/Tail"]
+color = Color(0.850980, 0.682353, 0.580392, 1.0)
+
+[node name="Head" parent="Content/Tail/ArrowHead"]
+color = Color(0.850980, 0.682353, 0.580392, 1.0)

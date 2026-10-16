@@ -2,22 +2,17 @@
 [ext_resource type="Script" path="res://rookframe/ui/components/surfaces/action_panel/action_panel.gd" id="script"]
 [ext_resource type="Script" path="res://rookframe/ui/components/surfaces/action_panel/connectors.gd" id="straps"]
 [ext_resource type="PackedScene" path="res://rookframe/ui/components/surfaces/action_panel/action_section.tscn" id="leaf"]
-[ext_resource type="Theme" path="res://rookframe/ui/theme/action_panel_theme.tres" id="theme"]
 [ext_resource type="Script" path="res://rookframe/ui/components/surfaces/action_panel/drop_sequence.gd" id="motion"]
 [node name="ActionPanel" type="VBoxContainer"]
 layout_mode = 2
 mouse_filter = 2
 size_flags_horizontal = 3
-theme = ExtResource("theme")
 script = ExtResource("script")
-theme_override_constants/separation = 0
 [node name="DropMotion" type="Node2D" parent="."]
 script = ExtResource("motion")
 [node name="Header" type="MarginContainer" parent="."]
 layout_mode = 2
 mouse_filter = 2
-theme_override_constants/margin_left = 76
-theme_override_constants/margin_right = 62
 [node name="Leaf" parent="Header" instance=ExtResource("leaf")]
 layout_mode = 2
 theme_type_variation = &"RookframeActionHeader"
@@ -27,7 +22,6 @@ layout_mode = 2
 mouse_filter = 2
 [node name="Emblem" type="Node2D" parent="Header"]
 [node name="Leaf" parent="Header/Emblem" instance=ExtResource("leaf")]
-theme = ExtResource("theme")
 theme_type_variation = &"RookframeActionEmblem"
 surface = 3
 [node name="EmblemSlot" type="CenterContainer" parent="Header/Emblem/Leaf"]
@@ -36,17 +30,12 @@ mouse_filter = 2
 [node name="Sections" type="MarginContainer" parent="."]
 layout_mode = 2
 mouse_filter = 2
-theme_override_constants/margin_left = 18
 [node name="SectionsSlot" type="VBoxContainer" parent="Sections"]
 layout_mode = 2
 mouse_filter = 2
-theme_override_constants/separation = 14
 [node name="Footer" type="MarginContainer" parent="."]
 layout_mode = 2
 mouse_filter = 2
-theme_override_constants/margin_left = 78
-theme_override_constants/margin_right = 26
-theme_override_constants/margin_top = 5
 [node name="Leaf" parent="Footer" instance=ExtResource("leaf")]
 layout_mode = 2
 theme_type_variation = &"RookframeActionFooter"

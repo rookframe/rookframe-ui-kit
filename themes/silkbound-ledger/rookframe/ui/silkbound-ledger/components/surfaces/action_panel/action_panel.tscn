@@ -1,0 +1,57 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://rookframe/ui/components/surfaces/action_panel/action_panel.tscn" id="base"]
+[ext_resource type="Theme" path="res://rookframe/ui/theme/action_panel_theme.tres" id="a38d8932fa_theme"]
+[ext_resource type="Script" path="res://rookframe/ui/silkbound-ledger/components/surfaces/action_panel/action_panel.gd" id="a38d8932fa_skin_script"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/components/surfaces/action_panel/drop_leaf.tscn" id="a38d8932fa_scene_VISUAL"]
+[ext_resource type="Shader" path="res://rookframe/ui/components/surfaces/action_panel/content_ink.gdshader" id="a38d8932fa_ink_shader"]
+[ext_resource type="Script" path="res://rookframe/ui/silkbound-ledger/components/surfaces/action_panel/action_leaf.gd" id="683113bcd7_skin_script"]
+[ext_resource type="Script" path="res://rookframe/ui/silkbound-ledger/components/surfaces/action_panel/action_leaf.gd" id="a9d1f344b4_skin_script"]
+[ext_resource type="Script" path="res://rookframe/ui/silkbound-ledger/components/surfaces/action_panel/action_leaf.gd" id="d38b383685_skin_script"]
+[ext_resource type="Script" path="res://rookframe/ui/silkbound-ledger/components/surfaces/action_panel/connectors.gd" id="a38d8932fa_skin_straps"]
+
+[node name="ActionPanel" instance=ExtResource("base")]
+theme = ExtResource("a38d8932fa_theme")
+theme_override_constants/separation = 0
+script = ExtResource("a38d8932fa_skin_script")
+
+[node name="DropMotion" parent="."]
+visual_scene = ExtResource("a38d8932fa_scene_VISUAL")
+ink_shader = ExtResource("a38d8932fa_ink_shader")
+
+[node name="Header" parent="."]
+theme_override_constants/margin_left = 76
+theme_override_constants/margin_right = 62
+
+[node name="Leaf" parent="Header"]
+script = ExtResource("683113bcd7_skin_script")
+
+[node name="Skin" parent="Header/Leaf"]
+visible = true
+
+[node name="Leaf" parent="Header/Emblem"]
+script = ExtResource("a9d1f344b4_skin_script")
+theme = ExtResource("a38d8932fa_theme")
+
+[node name="Skin" parent="Header/Emblem/Leaf"]
+visible = true
+
+[node name="Sections" parent="."]
+theme_override_constants/margin_left = 18
+
+[node name="SectionsSlot" parent="Sections"]
+theme_override_constants/separation = 14
+
+[node name="Footer" parent="."]
+theme_override_constants/margin_left = 78
+theme_override_constants/margin_right = 26
+theme_override_constants/margin_top = 5
+
+[node name="Leaf" parent="Footer"]
+script = ExtResource("d38b383685_skin_script")
+
+[node name="Skin" parent="Footer/Leaf"]
+visible = true
+
+[node name="Connectors" parent="."]
+script = ExtResource("a38d8932fa_skin_straps")

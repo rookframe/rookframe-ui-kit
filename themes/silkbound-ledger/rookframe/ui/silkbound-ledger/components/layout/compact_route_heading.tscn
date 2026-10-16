@@ -1,0 +1,25 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://rookframe/ui/components/layout/compact_route_heading.tscn" id="base"]
+[ext_resource type="Font" path="res://rookframe/ui/theme/silkbound_medium.tres" id="5df27cbbd0_2_exo"]
+
+[ext_resource type="Theme" path="res://rookframe/ui/theme/silkbound_theme.tres" id="skin_theme"]
+[sub_resource type="FontVariation" id="5df27cbbd0_HeadingBold"]
+base_font = ExtResource("5df27cbbd0_2_exo")
+variation_opentype = {"wght": 500.0}
+
+
+[node name="CompactRouteHeading" instance=ExtResource("base")]
+theme_override_constants/separation = 2
+theme = ExtResource("skin_theme")
+
+[node name="Kicker" parent="."]
+theme_override_font_sizes/font_size = 18
+
+[node name="Title" parent="."]
+theme_override_colors/font_color = Color(0.905882, 0.905882, 0.866667, 1.0)
+theme_override_fonts/font = SubResource("5df27cbbd0_HeadingBold")
+theme_override_font_sizes/font_size = 29
+
+[node name="Detail" parent="."]
+theme_override_font_sizes/font_size = 18

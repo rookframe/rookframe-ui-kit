@@ -46,7 +46,7 @@ var _value := ""
 		clear_minimum_size = value
 		_refresh()
 
-@export var editor_font_size := 20:
+@export var editor_font_size := 0:
 	set(value):
 		editor_font_size = value
 		_refresh()
@@ -132,7 +132,10 @@ func _refresh() -> void:
 			editor.text = _value
 		editor.placeholder_text = placeholder
 		editor.accessibility_name = label_text
-		editor.add_theme_font_size_override(&"font_size", editor_font_size)
+		if editor_font_size > 0:
+			editor.add_theme_font_size_override(&"font_size", editor_font_size)
+		else:
+			editor.remove_theme_font_size_override("font_size")
 	if clear_button != null:
 		clear_button.custom_minimum_size = clear_minimum_size
 		clear_button.visible = show_clear_when_empty or not _value.is_empty()

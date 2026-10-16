@@ -93,13 +93,13 @@ func _rebuild_wide(normalized_steps: PackedStringArray, normalized_current: int)
 		cell.name = "Step%d" % position
 		cell.custom_minimum_size.x = 112
 		cell.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		cell.add_theme_constant_override(&"separation", 8)
+		_style_cell(cell)
 		cell.accessibility_name = "Step %d, %s, %s" % [position, normalized_steps[index], state_name]
 		track.add_child(cell)
 
 		var rail := HBoxContainer.new()
 		rail.name = "Rail"
-		rail.add_theme_constant_override(&"separation", 6)
+		_style_rail(rail)
 		cell.add_child(rail)
 
 		var left := _connector("Connector%dLeft" % position)
@@ -118,7 +118,7 @@ func _rebuild_wide(normalized_steps: PackedStringArray, normalized_current: int)
 			var icon := TextureRect.new()
 			icon.name = "Check"
 			icon.texture = CHECK_ICON
-			icon.self_modulate = RookframeUiTokens.COLOR_CONTENT
+			icon.self_modulate = _step_icon_color()
 			icon.custom_minimum_size = Vector2(20, 20)
 			icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 			icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
@@ -131,11 +131,10 @@ func _rebuild_wide(normalized_steps: PackedStringArray, normalized_current: int)
 			number.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 			number.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 			number.theme_type_variation = &"RookframePending" if state_name == "current" else &"RookframeMeta"
-			number.add_theme_font_size_override(&"font_size", 20)
-			number.add_theme_color_override(&"font_color", RookframeUiTokens.COLOR_INK if state_name == "current" else RookframeUiTokens.COLOR_CONTENT_MUTED)
+			number.add_theme_color_override(&"font_color", _step_number_color(state_name))
 			number.mouse_filter = Control.MOUSE_FILTER_IGNORE
 			marker.add_child(number)
-			preload("res://rookframe/ui/theme/silkbound_line_height.gd").apply(number, 1.1)
+			_style_number(number)
 
 		var right := _connector("Connector%dRight" % position)
 		right.color = _connector_color(position < normalized_current)
@@ -165,8 +164,8 @@ func _connector(node_name: String) -> ColorRect:
 	return connector
 
 
-func _connector_color(complete: bool) -> Color:
-	return RookframeUiTokens.COLOR_ACCENT if complete else RookframeUiTokens.COLOR_RULE
+func _connector_color(_complete: bool) -> Color:
+	return get_theme_color("font_color", "Label")
 
 
 func _marker_variation(state_name: String) -> StringName:
@@ -218,3 +217,18 @@ func _refresh_accessibility(normalized_steps: PackedStringArray, normalized_curr
 		var state_name := "complete" if position < normalized_current else ("current" if position == normalized_current else "pending")
 		states.append("%s, %s" % [normalized_steps[index], state_name])
 	accessibility_description = "Step %d of %d. %s" % [normalized_current, normalized_steps.size(), "; ".join(states)]
+
+func _style_number(number: Label) -> void:
+	pass
+
+func _style_cell(cell: VBoxContainer) -> void:
+	pass
+
+func _style_rail(rail: HBoxContainer) -> void:
+	pass
+
+func _step_icon_color() -> Color:
+	return get_theme_color("font_color", "Label")
+
+func _step_number_color(state_name: String) -> Color:
+	return get_theme_color("font_color", _label_variation(state_name))

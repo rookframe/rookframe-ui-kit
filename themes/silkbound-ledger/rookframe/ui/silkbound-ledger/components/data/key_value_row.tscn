@@ -1,0 +1,22 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://rookframe/ui/components/data/key_value_row.tscn" id="base"]
+[ext_resource type="Theme" path="res://rookframe/ui/theme/silkbound_theme.tres" id="skin_theme"]
+[sub_resource type="StyleBoxFlat" id="ed65557267_ValueRowSurface"]
+bg_color = Color(0, 0, 0, 0)
+border_width_bottom = 1
+border_color = Color(0.243137, 0.262745, 0.274510, 1.0)
+
+
+[node name="KeyValueRow" instance=ExtResource("base")]
+theme_override_styles/panel = SubResource("ed65557267_ValueRowSurface")
+theme = ExtResource("skin_theme")
+
+[node name="Content" parent="."]
+theme_override_constants/separation = 24
+
+[node name="Key" parent="Content"]
+theme_override_font_sizes/font_size = 18
+
+[node name="Value" parent="Content"]
+theme_override_font_sizes/font_size = 18

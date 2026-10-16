@@ -1,5 +1,8 @@
 # Third-party notices
 
+Font and frame sections below describe resources now supplied by optional theme
+packages. Core installs contain the semantic icons and their licenses only.
+
 ## Tabler Icons
 
 The public semantic icon registry vendors a curated 65-icon subset of

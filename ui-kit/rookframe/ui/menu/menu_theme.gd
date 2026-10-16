@@ -5,18 +5,14 @@ extends Theme
 const Usage = preload("menu_usage.gd")
 const State = preload("menu_state.gd")
 
-func _init(mapping: Script = null, materials: Script = null) -> void:
+func _init(mapping: Script = null, materials: Script = null, extensions: Array[Script] = []) -> void:
 	if mapping == null or materials == null:
 		return
 	default_font = materials.value(mapping.DEFAULTS.font)
 	default_font_size = materials.value(mapping.DEFAULTS.font_size)
 	var elements: Dictionary = mapping.ELEMENTS.duplicate()
-	elements.merge(preload("settings_theme_map.gd").ELEMENTS)
-	elements.merge(preload("switch_theme_map.gd").ELEMENTS)
-	elements.merge(preload("../editor/editor_theme_map.gd").ELEMENTS)
-	elements.merge(preload("../chronicle/chronicle_theme_map.gd").ELEMENTS)
-	elements.merge(preload("world_list_theme_map.gd").ELEMENTS)
-	elements.merge(preload("world_toolbar_theme_map.gd").ELEMENTS)
+	for extension in extensions:
+		elements.merge(extension.ELEMENTS)
 	for usage in elements:
 		var properties: Dictionary = elements[usage]
 		var native_usage := native_type(usage)

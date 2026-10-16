@@ -3,7 +3,9 @@
   "private": true,
   "runtime": "rookframe/ui",
   "dependencies": {
-    "ui-kit": "workspace:*"
+    "ui-kit": "workspace:*",
+    "fonts": "workspace:*",
+    "shell-common": "workspace:*"
   },
   "theme": "res://rookframe/ui/menu/cyberpunk/CyberpunkTheme.tres"
 }

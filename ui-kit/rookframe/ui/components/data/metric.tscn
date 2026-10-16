@@ -11,7 +11,6 @@ script = ExtResource("1_script")
 
 [node name="Content" type="VBoxContainer" parent="."]
 layout_mode = 2
-theme_override_constants/separation = 4
 
 [node name="Label" type="Label" parent="Content"]
 unique_name_in_owner = true
@@ -35,4 +34,3 @@ autowrap_mode = 2
 [node name="ActionSlot" type="HBoxContainer" parent="Content"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_constants/separation = 8

@@ -7,7 +7,7 @@ func _run() -> void:
 	# Cross a layout frame while the native Button is held; signal-only tests
 	# cannot detect canceled mouse presses in the paginated browser.
 	root.size = Vector2i(1024, 768)
-	var browser = load("res://rookframe/ui/components/content/miniature_browser.tscn").instantiate()
+	var browser = load("res://rookframe/ui/silkbound-ledger/components/content/miniature_browser.tscn").instantiate()
 	browser.paginated = true
 	root.add_child(browser)
 	browser.size = Vector2(1000, 700)

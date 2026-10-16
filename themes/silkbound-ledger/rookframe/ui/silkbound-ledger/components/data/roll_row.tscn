@@ -1,0 +1,24 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://rookframe/ui/components/data/roll_row.tscn" id="base"]
+[ext_resource type="Theme" path="res://rookframe/ui/theme/silkbound_theme.tres" id="skin_theme"]
+
+[node name="RollRow" instance=ExtResource("base")]
+theme_override_constants/h_separation = 16
+theme_override_constants/v_separation = 8
+theme = ExtResource("skin_theme")
+
+[node name="State" parent="."]
+theme_override_constants/separation = 4
+
+[node name="Icon" parent="State"]
+self_modulate = Color(0.815686, 0.745098, 0.556863, 1)
+
+[node name="Die" parent="."]
+self_modulate = Color(0.815686, 0.745098, 0.556863, 1)
+
+[node name="Identity" parent="."]
+theme_override_constants/separation = 2
+
+[node name="ActionSlot" parent="."]
+theme_override_constants/separation = 8

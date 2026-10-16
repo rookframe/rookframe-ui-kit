@@ -5,12 +5,12 @@ func test_fixed_frame_measured_choices_and_actions() -> void:
 	viewport.size = Vector2i(1920, 1080)
 	viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS
 	add_child(viewport)
-	var wizard := load("res://rookframe/ui/components/surfaces/fullscreen_wizard.tscn").instantiate() as Control
+	var wizard := load("res://rookframe/ui/silkbound-ledger/components/surfaces/fullscreen_wizard.tscn").instantiate() as Control
 	viewport.add_child(wizard)
 	wizard.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	var steps: Array[String] = ["Class", "Abilities", "Origin & Traits", "Equipment", "Identity", "Review"]
 	wizard.configure("MÖRK BORG", "Create a character", steps)
-	var choices := load("res://rookframe/ui/components/data/paginated_choices.tscn").instantiate() as Control
+	var choices := load("res://rookframe/ui/silkbound-ledger/components/data/paginated_choices.tscn").instantiate() as Control
 	wizard.get_stage_slot().add_child(choices)
 	var entries: Array[Dictionary] = []
 	for index in 15:
@@ -59,14 +59,14 @@ func test_fixed_frame_measured_choices_and_actions() -> void:
 			if argument.begins_with("--capture="):
 				viewport.get_texture().get_image().save_png(argument.trim_prefix("--capture=").get_basename() + "-disabled.png")
 	for scene in ["task_text_field", "task_text_area"]:
-		var field := load("res://rookframe/ui/components/forms/" + scene + ".tscn").instantiate() as Control
+		var field := load("res://rookframe/ui/silkbound-ledger/components/forms/" + scene + ".tscn").instantiate() as Control
 		wizard.get_stage_slot().add_child(field)
 		await get_tree().process_frame
 		await get_tree().process_frame
 		assert_bool(field.get_node(^"Help").get_global_rect().end.y <= field.get_node(^"Editor").global_position.y).is_true()
 		assert_bool(field.get_node(^"Editor").custom_minimum_size.y == (48 if scene == "task_text_field" else 152)).is_true()
 		field.free()
-	var summary := load("res://rookframe/ui/components/data/summary_block.tscn").instantiate() as Control
+	var summary := load("res://rookframe/ui/silkbound-ledger/components/data/summary_block.tscn").instantiate() as Control
 	wizard.get_stage_slot().add_child(summary)
 	var pairs: Array[Dictionary] = [{"label": "Name", "value": "Retained identity"}]
 	summary.configure("Character", null, pairs)
@@ -90,7 +90,7 @@ func test_long_native_content_has_complete_readable_pages_and_retains_position()
 	var viewport: SubViewport = auto_free(SubViewport.new())
 	viewport.size = Vector2i(1024, 768)
 	add_child(viewport)
-	var pages = load("res://rookframe/ui/components/data/paginated_content.tscn").instantiate()
+	var pages = load("res://rookframe/ui/silkbound-ledger/components/data/paginated_content.tscn").instantiate()
 	pages.size = Vector2(640, 380)
 	var columns := HBoxContainer.new()
 	columns.add_theme_constant_override("separation", 20)
@@ -99,7 +99,7 @@ func test_long_native_content_has_complete_readable_pages_and_retains_position()
 		var column := VBoxContainer.new()
 		column.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		columns.add_child(column)
-		var summary = load("res://rookframe/ui/components/data/summary_block.tscn").instantiate()
+		var summary = load("res://rookframe/ui/silkbound-ledger/components/data/summary_block.tscn").instantiate()
 		column.add_child(summary)
 	viewport.add_child(pages)
 	var pairs: Array[Dictionary] = [{"label": "Origin", "value": "A long origin that wraps onto several lines in a narrow column."}, {"label": "Carried", "value": "Rope, lantern, oil, rations and a portable laboratory. ".repeat(12)}]
@@ -153,7 +153,7 @@ func test_step_badge_borders_survive_fractional_window_scaling(
 	viewport.size_2d_override_stretch = true
 	viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS
 	add_child(viewport)
-	var wizard := load("res://rookframe/ui/components/surfaces/fullscreen_wizard.tscn").instantiate() as Control
+	var wizard := load("res://rookframe/ui/silkbound-ledger/components/surfaces/fullscreen_wizard.tscn").instantiate() as Control
 	viewport.add_child(wizard)
 	wizard.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	var steps: Array[String] = ["Class", "Abilities", "Origin & Traits", "Equipment", "Identity", "Review"]

@@ -1,41 +1,17 @@
-# Public runtime subtree
+# Unthemed public runtime
 
-This directory is installed verbatim at `res://rookframe/ui/` and is the public
-support boundary of the Rookframe UI Kit.
+This subtree installs at `res://rookframe/ui/`. Components retain their public
+paths and UIDs, slots, input and behavior. They assign no Theme, custom fonts,
+colors or material resources. Native Godot Theme inheritance supplies appearance.
+Semantic variation names are hooks for a consumer Theme, not default styling.
 
-- `theme/rookframe_theme.tres` is the shared native Godot Theme.
-- `tokens.gd` exposes semantic values required by reusable kit relationships.
-- `components/` contains the editor-authored public scenes for relationships
-  Godot does not supply as one native Control.
-- `catalogue.json` is the machine-readable index of the public component and
-  Theme contract.
-- `assets/fonts/` contains the licensed UI and display fonts.
-- `assets/frames/` contains Rookframe-owned nine-slice surface, action, and
-  focus frames.
-- `icons/` contains the semantic icon registry and one SVG per semantic role.
-- `_internal/` is the only unsupported subtree.
+`components/` contains compositions Godot does not supply as one native Control;
+`menu/`, `editor/` and `chronicle/` provide theme-aware interaction recipes.
+`icons/` supplies semantic icons and their licenses. `_internal/` is unsupported.
+`catalogue.json` indexes the core API and identifies optional theme contracts.
 
-Everything else in this directory is public even if its documentation is
-accidentally incomplete. Public paths, Godot resource UIDs, Theme variation
-names, and documented meanings are stable within a SemVer major line.
-
-Examples and repository development material intentionally live outside this
-subtree and are not copied by the documented gd-plug declaration.
-
-Repository documentation is intentionally outside the installed runtime
-include. Read the candidate's
-[public component API](https://github.com/rookframe/rookframe-ui-kit/blob/next/ui-kit/docs/public-components.md),
-[native recipes](https://github.com/rookframe/rookframe-ui-kit/blob/next/ui-kit/docs/native-controls-and-recipes.md),
-[accessibility and input contract](https://github.com/rookframe/rookframe-ui-kit/blob/next/ui-kit/docs/accessibility-and-input.md),
-[semantic icon identities](https://github.com/rookframe/rookframe-ui-kit/blob/next/ui-kit/docs/semantic-icons.md),
-and [compatibility model](https://github.com/rookframe/rookframe-ui-kit/blob/next/ui-kit/docs/compatibility.md).
-
-### Silkbound Ledger
-
-`theme/silkbound_theme.tres` is the approved task theme for migrated surfaces.
-Use `silkbound_regular.tres`, `silkbound_medium.tres`, `silkbound_semibold.tres`
-and `silkbound_italic.tres` for ordinary FontVariation roles. `SilkIcon` and
-`SilkPrimaryIcon` are native Button variations for named 44px actions; supply
-an icon, tooltip and accessibility name. Material assets and their source are
-in `assets/silkbound-ledger/README.md`. This release supplies the shared theme;
-individual application and Package scenes select it as they migrate.
+Install `--theme silkbound-ledger` and explicitly instance scenes under
+`res://rookframe/ui/silkbound-ledger/` to opt into Silkbound Ledger. These inherit
+the corresponding core scenes. Theme resources, tokens and material assets are
+owned by that package and keep their existing installed paths/UIDs. Merely
+installing it never styles the core components.

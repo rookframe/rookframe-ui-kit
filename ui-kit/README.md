@@ -1,9 +1,8 @@
 # Rookframe UI Kit
 
-Production Godot resources for **Silkbound Ledger**, Rookframe's canonical default
-design. Leather leaves, bindings and ink/physical motion are its current iteration.
-The Main Menu remains Silkbound Ledger. Fantasy and Cyberpunk are auxiliary
-shell-theme experiments; System Extension shell theme selection remains proposed.
+Unthemed Godot controls, composition and behavior. A core-only install uses
+Godot defaults and includes no custom fonts, material assets or Theme resources.
+Silkbound Ledger is an optional sibling package in `../themes/silkbound-ledger`.
 
 ## Agent entry points
 
@@ -24,7 +23,9 @@ Check out the required monorepo commit and run the installer from its root:
 python3 tools/workspace.py install --destination /path/to/godot-project
 ```
 
-Install optional materials with `--theme fantasy` or `--theme cyberpunk`.
+Install optional appearance with `--theme silkbound-ledger`, `--theme fantasy`
+or `--theme cyberpunk`. Silkbound component variants are native inherited scenes
+under `res://rookframe/ui/silkbound-ledger/`; base scene paths stay unthemed.
 Public Godot paths remain `res://rookframe/ui/`; the installer includes runtime
 resources and legal notices, excluding tests and examples.
 
@@ -42,18 +43,21 @@ From `ui-kit/`, install the development-only runner:
 godot --headless -s plug.gd install
 ```
 
-Import with `godot --headless --editor --path . --import --quit`, then run the applicable
-suite, for example:
+Run the standalone core-only regression without optional packages:
 
 ```sh
-godot --headless --path . --script res://addons/gdUnit4/bin/GdUnitCmdTool.gd --ignoreHeadlessMode -a res://tests/action_panel.gd -c -rd reports/action-panel
+godot --headless --editor --path ui-kit --import --quit
+godot --headless --path ui-kit --script res://tests/unthemed_components.gd
 ```
 
-Require a fresh nonempty report with no failed, skipped or flaky cases. Use the
-sibling showcase for rendered inspection. Host placement, domain behavior and
-networking are tested in the host, not simulated in the UI Kit.
+From the repository root, `python3 tools/check_components.py` creates a temporary
+consumer with Silkbound installed, copies the component suites and the installed
+GdUnit runner, imports it, and runs the suites. It never installs theme resources
+into the owning core package. Use `--headless` for non-rendering checks; the motion
+and pointer suites need the native display. Reports are written to the supplied
+`--reports` directory. Require no failed, skipped or flaky cases.
 
 Rookframe-owned source/assets use [MIT](LICENSE); third-party resources retain
-[their notices](THIRD_PARTY_NOTICES.md). `rookframe/ui/assets/generated-assets.json`
+[their notices](THIRD_PARTY_NOTICES.md). The optional Silkbound package’s `rookframe/ui/assets/generated-assets.json`
 tracks generated production art by stable replacement ID, path and checksum.
 Design discussion, proposals and review evidence live in [Linear](https://linear.app/rookframe/document/silkbound-ledger-design-examples-and-distribution-d2dd1e70a906).

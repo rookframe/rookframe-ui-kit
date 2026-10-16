@@ -1,0 +1,22 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://rookframe/ui/components/data/action_row.tscn" id="base"]
+[ext_resource type="Theme" path="res://rookframe/ui/theme/silkbound_theme.tres" id="skin_theme"]
+
+[node name="ActionRow" instance=ExtResource("base")]
+theme = ExtResource("skin_theme")
+
+[node name="Content" parent="."]
+theme_override_constants/separation = 12
+
+[node name="Copy" parent="Content"]
+theme_override_constants/separation = 2
+
+[node name="Title" parent="Content/Copy"]
+theme_override_font_sizes/font_size = 18
+
+[node name="Description" parent="Content/Copy"]
+theme_override_font_sizes/font_size = 18
+
+[node name="Action" parent="Content"]
+theme_override_font_sizes/font_size = 22

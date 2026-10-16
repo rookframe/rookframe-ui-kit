@@ -59,8 +59,9 @@ func pose(progress: float) -> void:
 	hinge.rotation_degrees.x = angle
 	$Clip/Image.self_modulate.a = 1.0
 	var exposure := (1.0 - smoothstep(65.0, 90.0, angle)) * (1.0 - smoothstep(0.82, 1.0, progress))
-	$Clip/Shadow.visible = exposure > 0.001
+	$Clip/Shadow.visible = $Clip/Shadow.material != null and exposure > 0.001
 	motion.render_target_update_mode = SubViewport.UPDATE_ONCE if progress == 0.0 else SubViewport.UPDATE_ALWAYS if progress < 1.0 else SubViewport.UPDATE_DISABLED
+	if $Clip/Shadow.material == null: return
 	# Same projected-corner shadow as the HUD; never a stationary rectangle.
 	var corners := [Vector2.ZERO, Vector2(leaf_size.x, 0), leaf_size, Vector2(0, leaf_size.y)]
 	for i in range(4):

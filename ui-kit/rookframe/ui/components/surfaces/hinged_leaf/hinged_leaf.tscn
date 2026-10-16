@@ -1,31 +1,6 @@
 [gd_scene format=3]
 
 [ext_resource type="Script" path="res://rookframe/ui/components/surfaces/hinged_leaf/hinged_leaf.gd" id="script"]
-[ext_resource type="Shader" path="res://rookframe/ui/components/surfaces/hinged_leaf/ink.gdshader" id="ink"]
-[ext_resource type="Shader" path="res://rookframe/ui/components/surfaces/hinged_leaf/shadow.gdshader" id="shadow"]
-[ext_resource type="Shader" path="res://rookframe/ui/components/surfaces/hinged_leaf/binding.gdshader" id="binding"]
-[ext_resource type="StyleBox" path="res://rookframe/ui/assets/action-panel/body.tres" id="skin"]
-[ext_resource type="Texture2D" path="res://rookframe/ui/assets/action-panel/ai-generated-leather-atlas.png" id="atlas"]
-[ext_resource type="Theme" path="res://rookframe/ui/theme/silkbound_theme.tres" id="theme"]
-
-[sub_resource type="ShaderMaterial" id="ink_material"]
-resource_local_to_scene = true
-shader = ExtResource("ink")
-[sub_resource type="ShaderMaterial" id="shadow_material"]
-resource_local_to_scene = true
-shader = ExtResource("shadow")
-[sub_resource type="ShaderMaterial" id="binding_left"]
-resource_local_to_scene = true
-shader = ExtResource("binding")
-[sub_resource type="ShaderMaterial" id="binding_right"]
-resource_local_to_scene = true
-shader = ExtResource("binding")
-[sub_resource type="AtlasTexture" id="binding_texture"]
-atlas = ExtResource("atlas")
-region = Rect2(1245, 429, 117, 139)
-[sub_resource type="StandardMaterial3D" id="edge"]
-shading_mode = 0
-albedo_color = Color(0.447, 0.329, 0.227, 1)
 [sub_resource type="BoxMesh" id="slab"]
 resource_local_to_scene = true
 size = Vector3(545, 216, 1.8)
@@ -44,12 +19,10 @@ offset_right = 548.0
 offset_bottom = 220.0
 mouse_filter = 2
 focus_mode = 0
-theme = ExtResource("theme")
 script = ExtResource("script")
 
 [node name="Shadow" type="ColorRect" parent="."]
 visible = false
-material = SubResource("shadow_material")
 mouse_filter = 2
 
 [node name="Surface" type="SubViewportContainer" parent="."]
@@ -75,10 +48,8 @@ anchor_right = 2.5
 anchor_bottom = 2.5
 scale = Vector2(0.4, 0.4)
 mouse_filter = 2
-theme_override_styles/panel = ExtResource("skin")
 
 [node name="Ink" type="CanvasGroup" parent="Surface/Viewport/Root"]
-material = SubResource("ink_material")
 
 [node name="Content" type="Control" parent="Surface/Viewport/Root/Ink"]
 offset_right = 548.0
@@ -101,7 +72,6 @@ far = 3000.0
 [node name="Leather" type="Node3D" parent="Motion/Hinge"]
 [node name="Thickness" type="MeshInstance3D" parent="Motion/Hinge/Leather"]
 mesh = SubResource("slab")
-material_override = SubResource("edge")
 [node name="Face" type="MeshInstance3D" parent="Motion/Hinge/Leather"]
 position = Vector3(0, 136, 1)
 mesh = SubResource("quad")
@@ -116,12 +86,8 @@ expand_mode = 1
 [node name="Bindings" type="Control" parent="."]
 mouse_filter = 2
 [node name="Left" type="TextureRect" parent="Bindings"]
-material = SubResource("binding_left")
 mouse_filter = 2
-texture = SubResource("binding_texture")
 expand_mode = 1
 [node name="Right" type="TextureRect" parent="Bindings"]
-material = SubResource("binding_right")
 mouse_filter = 2
-texture = SubResource("binding_texture")
 expand_mode = 1

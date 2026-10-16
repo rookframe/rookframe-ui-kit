@@ -18,7 +18,6 @@ const MINIMUM_DIALOG_HEIGHT := 0
 const COMPACT_VIEWPORT_WIDTH := 700.0
 const COMPACT_VIEWPORT_HEIGHT := 550.0
 const COMPACT_BODY_TOP_INSET := 12
-const SCRIM_COLOR := Color(0, 0, 0, 0.667)
 
 var _fit_pending := false
 var _scrim: ColorRect
@@ -89,14 +88,7 @@ func _ready() -> void:
 
 func _fit_material() -> void:
 	get_node(^"Frame").set_sections(Rect2(), Rect2(Vector2.ZERO, Vector2(size)))
-	for path in [^"Shell", ^"Shell/Content/Message", ^"Shell/Content/Body", ^"Shell/Content/Footer"]:
-		var panel: PanelContainer = get_node(path)
-		var style := panel.get_theme_stylebox("panel").duplicate() as StyleBoxFlat
-		if style == null: continue
-		style.bg_color = Color.TRANSPARENT
-		style.border_color = Color("bc927747")
-		if path == ^"Shell": style.set_border_width_all(0)
-		panel.add_theme_stylebox_override("panel", style)
+	_style_panels()
 
 
 func _unhandled_key_input(event: InputEvent) -> void:
@@ -207,7 +199,7 @@ func _ensure_scrim() -> void:
 	var dialog_index := get_index()
 	_scrim = ColorRect.new()
 	_scrim.name = "DialogScrim"
-	_scrim.color = SCRIM_COLOR
+	_scrim.color = _scrim_color()
 	_scrim.mouse_filter = Control.MOUSE_FILTER_STOP
 	_scrim.focus_mode = Control.FOCUS_NONE
 	_scrim.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
@@ -250,43 +242,12 @@ func _host_viewport_size() -> Vector2:
 func _configure_compact_layout() -> bool:
 	var compact := _is_compact_viewport()
 	min_size = Vector2i(0 if compact else 600, MINIMUM_DIALOG_HEIGHT)
-	var header := get_node_or_null(^"Shell/Content/Header") as MarginContainer
-	if header != null:
-		for side in [&"margin_left", &"margin_right", &"margin_top"]:
-			header.add_theme_constant_override(side, 16 if compact else 24)
-	for node_name in ["Message", "Body", "Footer"]:
-		var panel := get_node("Shell/Content/" + node_name) as PanelContainer
-		var style := panel.get_theme_stylebox("panel").duplicate() as StyleBox
-		style.content_margin_left = 16.0 if compact else 24.0
-		style.content_margin_right = 16.0 if compact else 24.0
-		if node_name == "Message":
-			style.content_margin_bottom = 32.0 if compact else 40.0
-		elif node_name == "Body":
-			style.content_margin_bottom = 16.0 if compact else 24.0
-		else:
-			style.content_margin_top = 13.0 if compact else 17.0
-			style.content_margin_bottom = 12.0 if compact else 16.0
-		panel.add_theme_stylebox_override("panel", style)
+	_style_compact_layout(compact)
 	return compact
 
 
 func _draw_confirmation_underline() -> void:
-	var button := get_node(^"Shell/Content/Footer/Actions/Confirm") as Button
-	if tone != Tone.DANGER or button.disabled:
-		return
-	if button.get_draw_mode() not in [BaseButton.DRAW_HOVER, BaseButton.DRAW_PRESSED, BaseButton.DRAW_HOVER_PRESSED]:
-		return
-	# Native Button retains input and focus; its draw signal adds the specimen's
-	# text underline for the destructive hover/pressed state.
-	var font := button.get_theme_font("font")
-	var font_size := button.get_theme_font_size("font_size")
-	var width := font.get_string_size(button.tr(button.text), HORIZONTAL_ALIGNMENT_LEFT, -1, font_size).x
-	var left := floorf((button.size.x - width) * 0.5)
-	var baseline := floorf((button.size.y - font.get_height(font_size)) * 0.5) + font.get_ascent(font_size)
-	var y := baseline + 3.0
-	button.draw_line(Vector2(left, y), Vector2(left + width, y),
-		button.get_theme_color("font_hover_color"), maxf(1.0, font.get_underline_thickness(font_size)))
-
+	pass
 
 func _refresh() -> void:
 	if not is_inside_tree():
@@ -323,3 +284,12 @@ func _refresh() -> void:
 	title = heading
 	accessibility_name = heading
 	accessibility_description = description
+
+func _style_panels() -> void:
+	pass
+
+func _scrim_color() -> Color:
+	return Color.TRANSPARENT
+
+func _style_compact_layout(compact: bool) -> void:
+	pass

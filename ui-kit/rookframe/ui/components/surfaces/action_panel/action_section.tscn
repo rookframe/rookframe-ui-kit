@@ -8,6 +8,7 @@ theme_type_variation = &"RookframeActionSection"
 script = ExtResource("script")
 [node name="Skin" type="Node2D" parent="."]
 show_behind_parent = true
+visible = false
 [node name="Grain" type="TextureRect" parent="Skin"]
 visible = false
 scale = Vector2(0.4,0.4)

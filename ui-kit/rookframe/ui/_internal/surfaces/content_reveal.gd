@@ -1,6 +1,6 @@
 extends RefCounted
 ## Shared, interruptible ink on native content. Layout, focus and input stay native.
-const INK = preload("res://rookframe/ui/components/surfaces/action_panel/content_ink.gdshader")
+var shader: Shader
 const SECONDS := 0.4
 const OWNER := &"_rookframe_content_reveal"
 var _tween: Tween
@@ -10,11 +10,11 @@ var _material: ShaderMaterial
 
 func play(content: Control, reduced_motion: bool = false) -> void:
 	finish()
-	if reduced_motion or Engine.is_editor_hint() or not content.is_visible_in_tree():
+	if shader == null or reduced_motion or Engine.is_editor_hint() or not content.is_visible_in_tree():
 		return
 	_root = content
 	_material = ShaderMaterial.new()
-	_material.shader = INK
+	_material.shader = shader
 	_collect(content)
 	_root.tree_exiting.connect(finish, CONNECT_ONE_SHOT)
 	_root.visibility_changed.connect(_visibility_changed)

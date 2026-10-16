@@ -1,0 +1,59 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://rookframe/ui/components/overlays/dialog.tscn" id="base"]
+[ext_resource type="Theme" path="res://rookframe/ui/theme/silkbound_theme.tres" id="4f3045e12b_theme"]
+
+[ext_resource type="Script" path="res://rookframe/ui/silkbound-ledger/components/overlays/dialog.gd" id="4f3045e12b_skin_script"]
+[ext_resource type="Script" path="res://rookframe/ui/silkbound-ledger/components/surfaces/ledger_frame.gd" id="8be90b1a1c_skin_script"]
+[ext_resource type="Shader" path="res://rookframe/ui/components/surfaces/action_panel/content_ink.gdshader" id="8be90b1a1c_reveal_shader"]
+[ext_resource type="Script" path="res://rookframe/ui/silkbound-ledger/components/surfaces/action_panel/action_leaf.gd" id="87b6a5e0a5_skin_script"]
+[ext_resource type="Script" path="res://rookframe/ui/silkbound-ledger/components/surfaces/action_panel/action_leaf.gd" id="3916124514_skin_script"]
+[ext_resource type="Script" path="res://rookframe/ui/silkbound-ledger/components/surfaces/action_panel/action_leaf.gd" id="e6649cf926_skin_script"]
+[sub_resource type="StyleBoxEmpty" id="8be90b1a1c_empty"]
+
+[node name="Dialog" instance=ExtResource("base")]
+theme = ExtResource("4f3045e12b_theme")
+script = ExtResource("4f3045e12b_skin_script")
+
+[node name="Frame" parent="."]
+script = ExtResource("8be90b1a1c_skin_script")
+reveal_shader = ExtResource("8be90b1a1c_reveal_shader")
+
+[node name="Header" parent="Frame"]
+script = ExtResource("87b6a5e0a5_skin_script")
+theme_override_styles/panel = SubResource("8be90b1a1c_empty")
+
+[node name="Skin" parent="Frame/Header"]
+visible = true
+
+[node name="Body" parent="Frame"]
+script = ExtResource("3916124514_skin_script")
+theme_override_styles/panel = SubResource("8be90b1a1c_empty")
+
+[node name="Skin" parent="Frame/Body"]
+visible = true
+
+[node name="Footer" parent="Frame"]
+script = ExtResource("e6649cf926_skin_script")
+theme_override_styles/panel = SubResource("8be90b1a1c_empty")
+
+[node name="Skin" parent="Frame/Footer"]
+visible = true
+
+[node name="Content" parent="Shell"]
+theme_override_constants/separation = 0
+
+[node name="Header" parent="Shell/Content"]
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_bottom = 12
+
+[node name="Copy" parent="Shell/Content/Header"]
+theme_override_constants/separation = 16
+
+[node name="BodySlot" parent="Shell/Content/Body"]
+theme_override_constants/separation = 12
+
+[node name="Actions" parent="Shell/Content/Footer"]
+theme_override_constants/separation = 12

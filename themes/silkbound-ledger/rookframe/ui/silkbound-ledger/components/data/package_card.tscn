@@ -1,0 +1,43 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://rookframe/ui/components/data/package_card.tscn" id="base"]
+[ext_resource type="Theme" path="res://rookframe/ui/theme/silkbound_theme.tres" id="skin_theme"]
+[sub_resource type="StyleBoxFlat" id="b86dea9c8f_PackageCardSurface"]
+bg_color = Color(0.203922, 0.239216, 0.254902, 1)
+border_width_left = 3
+border_width_top = 0
+border_width_right = 0
+border_width_bottom = 0
+border_color = Color(0.807843, 0.800000, 0.701961, 1.0)
+
+
+[node name="PackageCard" instance=ExtResource("base")]
+theme_override_styles/panel = SubResource("b86dea9c8f_PackageCardSurface")
+theme = ExtResource("skin_theme")
+
+[node name="Margin" parent="."]
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 18
+theme_override_constants/margin_bottom = 16
+
+[node name="Content" parent="Margin"]
+theme_override_constants/separation = 14
+
+[node name="Marker" parent="Margin/Content"]
+theme_override_colors/font_color = Color(0.815686, 0.745098, 0.556863, 1)
+theme_override_font_sizes/font_size = 20
+
+[node name="Copy" parent="Margin/Content"]
+theme_override_constants/separation = 3
+
+[node name="Name" parent="Margin/Content/Copy"]
+theme_override_colors/font_color = Color(0.905882, 0.905882, 0.866667, 1.0)
+theme_override_font_sizes/font_size = 18
+
+[node name="Detail" parent="Margin/Content/Copy"]
+theme_override_font_sizes/font_size = 18
+
+[node name="State" parent="Margin/Content"]
+theme_override_colors/font_color = Color(0.905882, 0.905882, 0.866667, 1.0)
+theme_override_font_sizes/font_size = 18

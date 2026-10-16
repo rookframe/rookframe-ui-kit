@@ -1,0 +1,18 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://rookframe/ui/components/content/miniature_browser.tscn" id="base"]
+[ext_resource type="Script" path="res://rookframe/ui/silkbound-ledger/components/content/miniature_browser.gd" id="eb3aa45d0d_skin_1"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/_internal/content/miniature_browser_row.tscn" id="eb3aa45d0d_scene_ROW"]
+[ext_resource type="Shader" path="res://rookframe/ui/components/surfaces/action_panel/content_ink.gdshader" id="eb3aa45d0d_reveal_shader"]
+[ext_resource type="Theme" path="res://rookframe/ui/theme/silkbound_theme.tres" id="skin_theme"]
+
+[node name="MiniatureBrowser" instance=ExtResource("base")]
+theme_override_constants/separation = 8
+script = ExtResource("eb3aa45d0d_skin_1")
+row_scene = ExtResource("eb3aa45d0d_scene_ROW")
+reveal_shader = ExtResource("eb3aa45d0d_reveal_shader")
+theme = ExtResource("skin_theme")
+
+[node name="Rows" parent="Results"]
+theme_override_constants/h_separation = 12
+theme_override_constants/v_separation = 12

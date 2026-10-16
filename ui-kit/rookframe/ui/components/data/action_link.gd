@@ -14,9 +14,9 @@ extends Button
 		title_lane_width = maxf(value, 0.0)
 		_refresh()
 
-@export_range(8, 72, 1) var title_font_size := 20:
+@export_range(0, 72, 1) var title_font_size := 0:
 	set(value):
-		title_font_size = clampi(value, 8, 72)
+		title_font_size = clampi(value, 0, 72)
 		_refresh()
 
 
@@ -31,6 +31,9 @@ func _refresh() -> void:
 	if title_label != null:
 		title_label.text = title
 		title_label.custom_minimum_size.x = title_lane_width
-		title_label.add_theme_font_size_override(&"font_size", title_font_size)
+		if title_font_size > 0:
+			title_label.add_theme_font_size_override(&"font_size", title_font_size)
+		else:
+			title_label.remove_theme_font_size_override("font_size")
 	accessibility_name = title
 	accessibility_description = "Navigation action"

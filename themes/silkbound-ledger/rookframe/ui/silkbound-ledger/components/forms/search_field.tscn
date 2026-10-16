@@ -1,0 +1,26 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://rookframe/ui/components/forms/search_field.tscn" id="base"]
+[ext_resource type="Theme" path="res://rookframe/ui/theme/silkbound_theme.tres" id="skin_theme"]
+[sub_resource type="StyleBoxEmpty" id="4f77a28d1f_StyleBoxEmpty_search"]
+
+
+[node name="SearchField" instance=ExtResource("base")]
+theme_override_constants/separation = 4
+editor_font_size = 20
+theme = ExtResource("skin_theme")
+
+[node name="Row" parent="Perimeter"]
+theme_override_constants/separation = 8
+
+[node name="Icon" parent="Perimeter/Row"]
+self_modulate = Color(0.815686, 0.745098, 0.556863, 1)
+modulate = Color(0.682353, 0.729412, 0.745098, 1.0)
+
+[node name="Editor" parent="Perimeter/Row"]
+theme_override_styles/normal = SubResource("4f77a28d1f_StyleBoxEmpty_search")
+theme_override_styles/focus = SubResource("4f77a28d1f_StyleBoxEmpty_search")
+theme_override_styles/read_only = SubResource("4f77a28d1f_StyleBoxEmpty_search")
+
+[node name="Clear" parent="Perimeter/Row"]
+theme_override_styles/focus = SubResource("4f77a28d1f_StyleBoxEmpty_search")

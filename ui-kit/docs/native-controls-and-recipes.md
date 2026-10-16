@@ -1,5 +1,12 @@
 # Native Controls and composition recipes
 
+Appearance in this reference describes the optional `silkbound-ledger` package.
+Base components are unthemed and use native Godot defaults. To select the described
+skin, install that package and instance the corresponding scene beneath
+`res://rookframe/ui/silkbound-ledger/`. Base component paths/UIDs and behavior stay
+public. See [migration notes](../MIGRATING.md#explicit-silkbound-ledger-selection).
+
+
 The UI Kit is native-first: Godot owns control behavior and Rookframe supplies
 Theme coverage, semantic variation names, and recipes. Do not put a
 pass-through scene or script around an adequate built-in node.

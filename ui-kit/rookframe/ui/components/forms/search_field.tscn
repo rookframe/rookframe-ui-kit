@@ -4,12 +4,9 @@
 [ext_resource type="Texture2D" path="res://rookframe/ui/icons/search.svg" id="2_search"]
 [ext_resource type="Texture2D" path="res://rookframe/ui/icons/clear.svg" id="3_clear"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_search"]
-
 [node name="SearchField" type="VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/separation = 4
 script = ExtResource("1_script")
 
 [node name="Label" type="Label" parent="."]
@@ -26,14 +23,11 @@ theme_type_variation = &"RookframeSearchField"
 
 [node name="Row" type="HBoxContainer" parent="Perimeter"]
 layout_mode = 2
-theme_override_constants/separation = 8
 
 [node name="Icon" type="TextureRect" parent="Perimeter/Row"]
-self_modulate = Color(0.815686, 0.745098, 0.556863, 1)
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 texture = ExtResource("2_search")
-modulate = Color(0.682353, 0.729412, 0.745098, 1.0)
 expand_mode = 1
 stretch_mode = 5
 mouse_filter = 2
@@ -42,9 +36,6 @@ mouse_filter = 2
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_styles/normal = SubResource("StyleBoxEmpty_search")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_search")
-theme_override_styles/read_only = SubResource("StyleBoxEmpty_search")
 placeholder_text = "Search"
 
 [node name="Clear" type="Button" parent="Perimeter/Row"]
@@ -52,7 +43,6 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(44, 44)
 layout_mode = 2
 theme_type_variation = &"RookframeQuietButton"
-theme_override_styles/focus = SubResource("StyleBoxEmpty_search")
 icon = ExtResource("3_clear")
 flat = true
 tooltip_text = "Clear search"

@@ -1,0 +1,18 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://rookframe/ui/components/data/paginated_content.tscn" id="base"]
+[ext_resource type="Theme" path="res://rookframe/ui/theme/fullscreen_task_theme.tres" id="3aa1a1407e_theme"]
+[ext_resource type="Script" path="res://rookframe/ui/silkbound-ledger/components/data/paginated_content.gd" id="3aa1a1407e_skin_script"]
+[ext_resource type="Shader" path="res://rookframe/ui/components/surfaces/action_panel/content_ink.gdshader" id="3aa1a1407e_reveal_shader"]
+
+[node name="PaginatedContent" instance=ExtResource("base")]
+theme = ExtResource("3aa1a1407e_theme")
+script = ExtResource("3aa1a1407e_skin_script")
+reveal_shader = ExtResource("3aa1a1407e_reveal_shader")
+
+[node name="Pager" parent="."]
+theme_override_constants/separation = 8
+
+[node name="Range" parent="Pager"]
+theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(0.682353, 0.729412, 0.745098, 1)

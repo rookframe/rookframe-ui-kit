@@ -1,0 +1,22 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://rookframe/ui/_internal/content/miniature_browser_row.tscn" id="base"]
+[ext_resource type="Theme" path="res://rookframe/ui/theme/silkbound_theme.tres" id="skin_theme"]
+
+[node name="MiniatureChoice" instance=ExtResource("base")]
+theme = ExtResource("skin_theme")
+
+[node name="Content" parent="."]
+theme_override_constants/separation = 8
+
+[node name="Fallback" parent="Content/Stage"]
+theme_override_font_sizes/font_size = 18
+
+[node name="Copy" parent="Content"]
+theme_override_constants/separation = 2
+
+[node name="Title" parent="Content/Copy"]
+theme_override_font_sizes/font_size = 18
+
+[node name="Package" parent="Content/Copy"]
+theme_override_font_sizes/font_size = 18

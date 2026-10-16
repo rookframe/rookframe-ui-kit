@@ -1,15 +1,17 @@
 # Rookframe UI workspace
 
-The `next` branch brings the production UI Kit, native showcase and optional
-Fantasy/Cyberpunk themes into one repository. This migration establishes the
-package boundaries for the UI rework; existing component visuals are retained.
+The UI Kit supplies unthemed Godot components. Silkbound Ledger, Fantasy and
+Cyberpunk are optional appearance packages. The showcase explicitly selects
+Silkbound Ledger for its canonical examples.
 
 | Package | Contents |
 | --- | --- |
-| [ui-kit](ui-kit/README.md) | Shared controls, theme compiler, Silkbound default, component tests and contracts |
-| [showcase](showcase/README.md) | Native examples, catalogue and integration checks from the design specimen |
-| [themes/fantasy](themes/fantasy/README.md) | Fantasy theme mapping, materials and artwork |
-| [themes/cyberpunk](themes/cyberpunk/README.md) | Cyberpunk theme mapping, materials, artwork and Exo 2 font |
+| [ui-kit](ui-kit/README.md) | Unthemed controls, composition, theme compiler and component contracts |
+| [showcase](showcase/README.md) | Native examples and integration checks |
+| [themes/silkbound-ledger](themes/silkbound-ledger/README.md) | Silkbound materials, fonts, inherited scenes and presentation scripts |
+| [themes/fantasy](themes/fantasy/README.md) | Fantasy mappings, materials and artwork |
+| [themes/cyberpunk](themes/cyberpunk/README.md) | Cyberpunk mappings, materials and artwork |
+| `themes/fonts`, `themes/shell-common` | Shared optional font payload and auxiliary theme recipes |
 
 ## Run the showcase
 
@@ -34,11 +36,15 @@ Check out the required monorepo revision, then run:
 
 ```sh
 python3 tools/workspace.py install --destination /path/to/godot-project
-# Optional themes; either can be installed independently:
+# Optional themes; each can be installed independently:
+python3 tools/workspace.py install --destination /path/to/godot-project --theme silkbound-ledger
 python3 tools/workspace.py install --destination /path/to/godot-project --theme fantasy --theme cyberpunk
 ```
 
-The installer copies runtime resources and legal notices only. Installed paths
+The installer copies runtime resources and legal notices only. Base components stay unthemed even when a theme is installed. For Silkbound,
+instance the corresponding scene under `res://rookframe/ui/silkbound-ledger/`
+(for example `silkbound-ledger/components/forms/text_field.tscn`). Native Theme
+resources and licensed assets retain their previous installed paths. Installed paths
 remain `res://rookframe/ui/`; source folders are package boundaries, not new
 Godot resource prefixes. Existing UIDs and asset licenses are retained.
 See [migration notes](ui-kit/MIGRATING.md) for the changed source layout.

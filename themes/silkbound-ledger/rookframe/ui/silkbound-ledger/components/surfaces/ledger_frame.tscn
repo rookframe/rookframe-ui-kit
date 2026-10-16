@@ -1,0 +1,36 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://rookframe/ui/components/surfaces/ledger_frame.tscn" id="base"]
+[ext_resource type="Script" path="res://rookframe/ui/silkbound-ledger/components/surfaces/ledger_frame.gd" id="58886b686d_skin_script"]
+[ext_resource type="Shader" path="res://rookframe/ui/components/surfaces/action_panel/content_ink.gdshader" id="58886b686d_reveal_shader"]
+[ext_resource type="Script" path="res://rookframe/ui/silkbound-ledger/components/surfaces/action_panel/action_leaf.gd" id="b09d7c346b_skin_script"]
+[ext_resource type="Script" path="res://rookframe/ui/silkbound-ledger/components/surfaces/action_panel/action_leaf.gd" id="639f8e3df0_skin_script"]
+[ext_resource type="Script" path="res://rookframe/ui/silkbound-ledger/components/surfaces/action_panel/action_leaf.gd" id="3f51b2dac8_skin_script"]
+[ext_resource type="Theme" path="res://rookframe/ui/theme/silkbound_theme.tres" id="skin_theme"]
+[sub_resource type="StyleBoxEmpty" id="58886b686d_empty"]
+
+[node name="LedgerFrame" instance=ExtResource("base")]
+script = ExtResource("58886b686d_skin_script")
+reveal_shader = ExtResource("58886b686d_reveal_shader")
+theme = ExtResource("skin_theme")
+
+[node name="Header" parent="."]
+script = ExtResource("b09d7c346b_skin_script")
+theme_override_styles/panel = SubResource("58886b686d_empty")
+
+[node name="Skin" parent="Header"]
+visible = true
+
+[node name="Body" parent="."]
+script = ExtResource("639f8e3df0_skin_script")
+theme_override_styles/panel = SubResource("58886b686d_empty")
+
+[node name="Skin" parent="Body"]
+visible = true
+
+[node name="Footer" parent="."]
+script = ExtResource("3f51b2dac8_skin_script")
+theme_override_styles/panel = SubResource("58886b686d_empty")
+
+[node name="Skin" parent="Footer"]
+visible = true

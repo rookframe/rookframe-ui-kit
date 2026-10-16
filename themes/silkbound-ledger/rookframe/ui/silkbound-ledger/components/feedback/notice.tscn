@@ -1,0 +1,23 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://rookframe/ui/components/feedback/notice.tscn" id="base"]
+[ext_resource type="Theme" path="res://rookframe/ui/theme/silkbound_theme.tres" id="263625f306_theme"]
+
+[ext_resource type="Script" path="res://rookframe/ui/silkbound-ledger/components/feedback/notice.gd" id="263625f306_skin_1_script"]
+
+[node name="Notice" instance=ExtResource("base")]
+theme = ExtResource("263625f306_theme")
+script = ExtResource("263625f306_skin_1_script")
+
+[node name="Content" parent="."]
+theme_override_constants/separation = 12
+
+[node name="Icon" parent="Content"]
+self_modulate = Color(0.815686, 0.745098, 0.556863, 1)
+
+[node name="Copy" parent="Content"]
+theme_override_constants/separation = 8
+
+[node name="ActionSlot" parent="Content/Copy"]
+theme_override_constants/h_separation = 12
+theme_override_constants/v_separation = 12

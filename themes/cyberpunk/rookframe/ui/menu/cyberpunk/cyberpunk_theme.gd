@@ -5,4 +5,4 @@ const CyberpunkMapping = preload("cyberpunk_theme_map.gd")
 const CyberpunkMaterials = preload("materials/cyberpunk_materials.gd")
 
 func _init() -> void:
-	super(CyberpunkMapping, CyberpunkMaterials)
+	super(CyberpunkMapping, CyberpunkMaterials, preload("res://rookframe/ui/menu/shell_theme_maps.gd").MAPS)

@@ -3,8 +3,11 @@ extends Control
 ## Linked reading leaves behind an existing native layout; no content reparenting.
 @export var reduced_motion := false
 const REVEAL = preload("res://rookframe/ui/_internal/surfaces/content_reveal.gd")
-const STRAP = preload("res://rookframe/ui/assets/action-panel/connector.tres")
 var _ink := REVEAL.new()
+@export var reveal_shader: Shader:
+	set(value):
+		reveal_shader = value
+		_ink.shader = value
 var _sections: Array[Rect2] = []
 
 func _ready() -> void:
@@ -23,15 +26,7 @@ func reveal(content: Control) -> void:
 	_ink.play(content, reduced_motion)
 
 func _draw_bindings() -> void:
-	var previous := Rect2()
-	for rect in _sections:
-		if not rect.has_area():
-			continue
-		if previous.has_area():
-			var top := previous.end.y - 6
-			for x in [maxf(previous.position.x, rect.position.x) + 26, minf(previous.end.x, rect.end.x) - 48]:
-				get_node("Bindings").draw_texture_rect(STRAP, Rect2(x, top, 16, maxf(16, rect.position.y - top + 6)), false)
-		previous = rect
+	pass
 
 func _exit_tree() -> void:
 	_ink.finish()
