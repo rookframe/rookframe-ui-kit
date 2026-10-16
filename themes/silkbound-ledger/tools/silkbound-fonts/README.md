@@ -32,7 +32,7 @@ node themes/silkbound-ledger/tools/silkbound-fonts/export.cjs /tmp/silkbound-fon
 python3 tools/workspace.py install --destination /tmp/silkbound-font-check --theme silkbound-ledger
 cp ui-kit/project.godot /tmp/silkbound-font-check/project.godot
 cp -R themes/silkbound-ledger/tools /tmp/silkbound-font-check/tools
-/path/to/Godot --headless --path /tmp/silkbound-font-check --script res://tools/silkbound-fonts/assemble.gd -- /tmp/silkbound-fonts "$PWD/themes/fonts/rookframe/ui/assets/fonts/eb-garamond/prerendered"
+/path/to/Godot --headless --path /tmp/silkbound-font-check --script res://tools/silkbound-fonts/assemble.gd -- /tmp/silkbound-fonts "$PWD/shared/fonts/rookframe/ui/assets/fonts/eb-garamond/prerendered"
 ```
 
 Use a fresh temporary directory. The temporary fonts address individual glyphs

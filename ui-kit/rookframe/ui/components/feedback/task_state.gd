@@ -12,10 +12,10 @@ enum State {
 
 const STATE_NAMES := ["Loading", "Empty", "Success", "Error"]
 const PANEL_VARIATIONS := [
-	&"RookframeNoticePending",
-	&"RookframeNoticeInfo",
-	&"RookframeNoticeSuccess",
-	&"RookframeNoticeError",
+	&"RookframeInlineNoticePending",
+	&"RookframeInlineNoticeInfo",
+	&"RookframeInlineNoticeSuccess",
+	&"RookframeInlineNoticeError",
 ]
 const TEXT_VARIATIONS := [
 	&"RookframePending",

@@ -7,7 +7,7 @@ custom_minimum_size = Vector2(0, 220)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_type_variation = &"RookframeNoticeInfo"
+theme_type_variation = &"RookframeInlineNoticeInfo"
 script = ExtResource("1_script")
 
 [node name="Content" type="VBoxContainer" parent="."]

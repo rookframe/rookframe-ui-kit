@@ -1,7 +1,6 @@
 @tool
 extends "res://rookframe/ui/components/forms/text_field.gd"
 ## Phone density for the existing task field relationship.
-@export var silkbound := false
 @export var compact := false:
 	set(next):
 		compact = next

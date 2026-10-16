@@ -11,7 +11,6 @@ var _ink := preload("res://rookframe/ui/_internal/surfaces/content_reveal.gd").n
 const TEXT_FIELD = preload("res://rookframe/ui/components/forms/text_field.gd")
 const TEXT_AREA = preload("res://rookframe/ui/components/forms/text_area.gd")
 
-@export var silkbound := false
 @export var content_inset_left := 0
 
 var _page := 0

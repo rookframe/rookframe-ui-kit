@@ -1,6 +1,6 @@
 extends GdUnitTestSuite
 
-const SCENE = preload("res://rookframe/ui/silkbound-ledger/components/content/silkbound_miniature_browser.tscn")
+const SCENE = preload("res://rookframe/ui/silkbound-ledger/components/content/miniature_picker.tscn")
 const LIST := "Inset/Layout/Body/Browser"
 const FOOTER := "Inset/Layout/Footer/"
 

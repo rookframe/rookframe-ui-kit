@@ -11,7 +11,10 @@ Silkbound Ledger for its canonical examples.
 | [themes/silkbound-ledger](themes/silkbound-ledger/README.md) | Silkbound materials, fonts, inherited scenes and presentation scripts |
 | [themes/fantasy](themes/fantasy/README.md) | Fantasy mappings, materials and artwork |
 | [themes/cyberpunk](themes/cyberpunk/README.md) | Cyberpunk mappings, materials and artwork |
-| `themes/fonts`, `themes/shell-common` | Shared optional font payload and auxiliary theme recipes |
+| `shared/fonts`, `shared/shell-common` | Shared optional font payload and auxiliary theme recipes |
+
+`themes/` contains one theme package per folder. Shared optional dependencies
+live in `shared/`; core resources and contracts contain no concrete theme references.
 
 ## Run the showcase
 
@@ -47,7 +50,7 @@ instance the corresponding scene under `res://rookframe/ui/silkbound-ledger/`
 resources and licensed assets retain their previous installed paths. Installed paths
 remain `res://rookframe/ui/`; source folders are package boundaries, not new
 Godot resource prefixes. Existing UIDs and asset licenses are retained.
-See [migration notes](ui-kit/MIGRATING.md) for the changed source layout.
+See [v2 migration steps](docs/migration-to-v2.md) for the breaking path and property changes.
 
 ## Checks
 

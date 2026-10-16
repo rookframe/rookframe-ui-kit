@@ -1,8 +1,8 @@
 [gd_scene format=3]
 
-[ext_resource type="PackedScene" path="res://rookframe/ui/components/content/silkbound_miniature_browser.tscn" id="base"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/components/content/miniature_picker.tscn" id="base"]
 [ext_resource type="Theme" path="res://rookframe/ui/theme/silkbound_theme.tres" id="92f8c6a4e3_theme"]
-[ext_resource type="Script" path="res://rookframe/ui/silkbound-ledger/components/content/silkbound_miniature_browser.gd" id="92f8c6a4e3_skin_script"]
+[ext_resource type="Script" path="res://rookframe/ui/silkbound-ledger/components/content/miniature_picker.gd" id="92f8c6a4e3_skin_script"]
 [ext_resource type="Script" path="res://rookframe/ui/silkbound-ledger/components/surfaces/ledger_frame.gd" id="8be90b1a1c_skin_script"]
 [ext_resource type="Shader" path="res://rookframe/ui/components/surfaces/action_panel/content_ink.gdshader" id="8be90b1a1c_reveal_shader"]
 [ext_resource type="Script" path="res://rookframe/ui/silkbound-ledger/components/surfaces/action_panel/action_leaf.gd" id="87b6a5e0a5_skin_script"]
@@ -13,7 +13,7 @@
 [ext_resource type="Shader" path="res://rookframe/ui/components/surfaces/action_panel/content_ink.gdshader" id="d7ed8abbb3_reveal_shader"]
 [sub_resource type="StyleBoxEmpty" id="8be90b1a1c_empty"]
 
-[node name="SilkboundMiniatureBrowser" instance=ExtResource("base")]
+[node name="MiniaturePicker" instance=ExtResource("base")]
 theme = ExtResource("92f8c6a4e3_theme")
 script = ExtResource("92f8c6a4e3_skin_script")
 

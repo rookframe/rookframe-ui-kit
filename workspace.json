@@ -22,7 +22,7 @@
       ]
     },
     "fonts": {
-      "path": "themes/fonts",
+      "path": "shared/fonts",
       "dependencies": []
     },
     "silkbound-ledger": {
@@ -33,7 +33,7 @@
       ]
     },
     "shell-common": {
-      "path": "themes/shell-common",
+      "path": "shared/shell-common",
       "dependencies": [
         "ui-kit"
       ]

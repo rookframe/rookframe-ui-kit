@@ -60,7 +60,7 @@ func _on_dismiss_pressed() -> void:
 func _refresh() -> void:
 	if not is_inside_tree():
 		return
-	theme_type_variation = &"SilkNotice"
+	theme_type_variation = &"RookframeInlineNotice"
 	var icon := get_node_or_null(^"Content/Icon") as TextureRect
 	var state_label := get_node_or_null(^"Content/Copy/State") as Label
 	var title_label := get_node_or_null(^"Content/Copy/Title") as Label

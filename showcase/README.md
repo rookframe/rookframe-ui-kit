@@ -69,11 +69,13 @@ godot --headless --editor --path showcase --import --quit
 godot --headless --path showcase --script res://addons/gdUnit4/bin/GdUnitCmdTool.gd --ignoreHeadlessMode -a res://tests/world_theme.gd -c -rd reports/world-theme
 ```
 
-The copied runner is ignored development tooling. Run the full kit component
-suite with a graphical renderer to include fractional-scale wizard badge checks:
+The copied runner is development tooling. Theme component integration suites live
+in `tests/theme_components`; core-only checks remain in `ui-kit/tests`.
+From the workspace root, run the theme suites in a disposable consumer with a
+graphical renderer to include fractional-scale wizard badge checks:
 
 ```sh
-godot --path ui-kit --script res://addons/gdUnit4/bin/GdUnitCmdTool.gd -a res://tests -c -rd reports/components
+python3 tools/check_components.py
 ```
 
 Run `python3 ../tools/workspace.py prepare` after changing a local package.

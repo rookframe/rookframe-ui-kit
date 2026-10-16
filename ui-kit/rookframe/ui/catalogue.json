@@ -916,7 +916,6 @@
       "sceneUid": "uid://daedsgd1whpdn",
       "rootType": "VBoxContainer",
       "properties": {
-        "silkbound": "bool",
         "reduced_motion": "bool"
       },
       "methods": [
@@ -933,9 +932,7 @@
       "scene": "res://rookframe/ui/components/data/summary_block.tscn",
       "sceneUid": "uid://cxu3q4m6ldbha",
       "rootType": "VBoxContainer",
-      "properties": {
-        "silkbound": "bool"
-      },
+      "properties": {},
       "methods": [
         "configure",
         "set_stats"
@@ -949,9 +946,7 @@
       "scene": "res://rookframe/ui/components/forms/task_text_field.tscn",
       "sceneUid": "uid://c0of87liqui3k",
       "rootType": "VBoxContainer",
-      "properties": {
-        "silkbound": "bool"
-      },
+      "properties": {},
       "methods": [
         "focus_editor",
         "set_error"
@@ -968,9 +963,7 @@
       "scene": "res://rookframe/ui/components/forms/task_text_area.tscn",
       "sceneUid": "uid://cammbybvgdssm",
       "rootType": "VBoxContainer",
-      "properties": {
-        "silkbound": "bool"
-      },
+      "properties": {},
       "methods": [
         "focus_editor",
         "set_error"
@@ -991,7 +984,6 @@
           "type": "bool",
           "default": true
         },
-        "silkbound": "bool",
         "content_inset_left": "int",
         "reduced_motion": "bool"
       },
@@ -1005,8 +997,8 @@
       "scriptUid": "uid://cu4kmucnvjxu1"
     },
     {
-      "name": "SilkboundMiniatureBrowser",
-      "scene": "res://rookframe/ui/components/content/silkbound_miniature_browser.tscn",
+      "name": "MiniaturePicker",
+      "scene": "res://rookframe/ui/components/content/miniature_picker.tscn",
       "rootType": "Control",
       "properties": {},
       "methods": [
@@ -1023,12 +1015,12 @@
         "preview_requested",
         "retry_requested"
       ],
-      "script": "res://rookframe/ui/components/content/silkbound_miniature_browser.gd",
+      "script": "res://rookframe/ui/components/content/miniature_picker.gd",
       "scriptUid": "uid://csbj2ehev7qc7"
     },
     {
-      "name": "SilkboundCollection",
-      "scene": "res://rookframe/ui/components/data/silkbound_collection.tscn",
+      "name": "Collection",
+      "scene": "res://rookframe/ui/components/data/collection.tscn",
       "rootType": "MarginContainer",
       "properties": {
         "columns": "int",
@@ -1048,12 +1040,12 @@
         "selected",
         "action_requested"
       ],
-      "script": "res://rookframe/ui/components/data/silkbound_collection.gd",
+      "script": "res://rookframe/ui/components/data/collection.gd",
       "scriptUid": "uid://bhswcvuj0kpbd"
     },
     {
-      "name": "SilkboundTooltip",
-      "scene": "res://rookframe/ui/components/feedback/silkbound_tooltip.tscn",
+      "name": "RecordTooltip",
+      "scene": "res://rookframe/ui/components/feedback/record_tooltip.tscn",
       "rootType": "VBoxContainer",
       "properties": {},
       "methods": [],
@@ -1197,9 +1189,9 @@
     "catalogue": "https://github.com/rookframe/rookframe-design-specimen/blob/main/examples/catalogue/visual_catalogue.tscn",
     "menuButtons": {
       "layout": "menu.buttons (native menu_buttons) is a MarginContainer around the secondary action stack, excluding the primary. Append __compact for compact density.",
-      "inset": "Fantasy reserves 34/22 px per side for the primary's carved ends; Cyberpunk reserves no inset. Buttons have no external margins.",
-      "destructive": "components.button.destructive (native components_button_destructive) shares secondary dimensions and native Button behavior. Fantasy uses oxblood wood and worn steel; Cyberpunk uses red alloy. Host owns confirmation and effects; focus Cancel first when opening a confirmation.",
-      "height": "Button recipes own themed minimum heights: primary 64/44 px, Fantasy standard 50/34 px, Cyberpunk standard 60/44 px. Containers choose widths without imposing legacy minimum heights."
+      "inset": "The consumer Theme supplies content insets. Buttons have no external margins.",
+      "destructive": "components.button.destructive shares secondary dimensions and native Button behavior. The host owns confirmation and effects.",
+      "height": "Button recipes use native Theme minimum heights. Containers choose widths."
     },
     "editor": {
       "buttons": [
@@ -1214,7 +1206,6 @@
         "editor_surface_log"
       ],
       "density": "Append __compact to native variations; button recipes expose compact and set_compact(bool).",
-      "materials": "Fantasy reserves ornate brass for primary actions; tools, secondary actions and dropdowns use recessed walnut in a slim beveled brass casing with gently rounded corners. Surfaces use textured stone and walnut. Cyberpunk uses alloy/emissive switches and virtual chassis.",
       "behavior": "Native Button signals, toggle_mode, ButtonGroup, shortcuts, tooltips and focus. Surface children use ordinary Containers; EditorToolRail exposes Tools, a BoxContainer."
     },
     "switch": {
@@ -1232,7 +1223,6 @@
       },
       "behavior": "Native toggle Button, button_pressed, toggled(bool), pressed, disabled, shortcut and keyboard focus. Share a host-owned ButtonGroup for exclusive selection. Theme and density changes preserve selection.",
       "layout": "At least 116 px regular / 88 px compact. Title and description wrap. The trailing checkmark uses the same resource and disabled tint as MenuChoice, reserving its space when unselected.",
-      "materials": "Fantasy reuses the new walnut/brass button casing and inscription, with material lighting for selection and focus. Cyberpunk reuses the new alloy button faces, bevels, cut corners and cyan signals.",
       "grouping": "SwitchGroup.tscn supplies the menu_group stone/chassis tray. Add Switch cards to get_options() (Inset/Options) and share a host-owned ButtonGroup for exclusive selection. The group keeps an equal-width row while each option fits at 320 px regular / 280 px compact, otherwise stacking vertically. compact / set_compact(bool) update the group and its cards."
     },
     "chronicle": {
@@ -1245,15 +1235,8 @@
       ],
       "divider": "chronicle_divider",
       "purpose": "Retained narrative for later reading: chronological event histories, session recaps, quest journals, discovered lore and correspondence.",
-      "materials": {
-        "fantasy": "Real paper scroll with fixed rolled ends, light edge wear, a quiet reading field and dark ink. Paper and side wear repeat vertically at their original scale, with a soft join into the bottom roll.",
-        "cyberpunk": "Dark archive panel with a permanent amber binding stripe, short top tab, small index marks and light text. Amber identifies retained records independently of warning severity or unread state."
-      },
       "density": "Append __compact to surface, Label and HSeparator variations.",
-      "padding": {
-        "fantasy": "72 / 64 px horizontal and 120 / 112 px vertical padding (regular / compact): 48 px side edges and 96 px paper rolls plus a 24 / 16 px reading gutter.",
-        "cyberpunk": "30 px regular / 22 px compact on all sides."
-      },
+      "padding": "Native Theme content margins determine reading padding.",
       "composition": "Native PanelContainer with one Container child. Use companion text styles and wrapping. For bounded history, put a ScrollContainer inside the surface; keep actions in an adjacent toolbar.",
       "behavior": "Presentation only; hosts own persistence, entries, timestamps, ordering, filtering, links and scroll position. Material does not imply interaction, severity or unread state.",
       "excludes": [
@@ -1268,18 +1251,6 @@
         "menu_world_record": "Single World summary",
         "editor_surface_log": "Compact latest-activity strip"
       }
-    },
-    "optionalThemePackages": [
-      "silkbound-ledger",
-      "fantasy",
-      "cyberpunk"
-    ]
-  },
-  "optionalThemes": {
-    "silkbound-ledger": {
-      "catalogue": "res://rookframe/ui/silkbound-ledger/catalogue.json",
-      "scenePrefix": "res://rookframe/ui/silkbound-ledger/",
-      "installedByDefault": false
     }
   },
   "appearance": "Native Godot defaults; no Theme or local skin assigned."

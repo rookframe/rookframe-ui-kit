@@ -1,5 +1,5 @@
 @tool
-extends "res://rookframe/ui/components/content/silkbound_miniature_browser.gd"
+extends "res://rookframe/ui/components/content/miniature_picker.gd"
 
 func _arrange() -> void:
 	if not is_node_ready(): return

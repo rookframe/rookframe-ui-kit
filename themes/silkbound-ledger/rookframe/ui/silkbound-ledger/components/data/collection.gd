@@ -1,5 +1,5 @@
 @tool
-extends "res://rookframe/ui/components/data/silkbound_collection.gd"
+extends "res://rookframe/ui/components/data/collection.gd"
 
 func _draw() -> void:
 	if not is_node_ready():

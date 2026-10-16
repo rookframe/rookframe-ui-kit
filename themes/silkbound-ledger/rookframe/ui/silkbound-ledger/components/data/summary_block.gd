@@ -1,7 +1,7 @@
 @tool
 extends "res://rookframe/ui/components/data/summary_block.gd"
 
-func _fit_silkbound() -> void:
+func _fit_presentation() -> void:
 	var phone := get_viewport_rect().size.y <= 560 or get_viewport_rect().size.x <= 740
 	var tablet := get_viewport_rect().size.x <= 1300 and not phone
 	get_node(^"Rule").color = Color("3e4346")
