@@ -31,6 +31,11 @@ const ICONS := [
 ]
 const SPINNER_SPEED := TAU * 0.8
 
+@export var reduced_motion := false:
+	set(value):
+		reduced_motion = value
+		_refresh()
+
 @export var state := State.EMPTY:
 	set(value):
 		state = clampi(value, State.LOADING, State.ERROR)
@@ -75,7 +80,7 @@ func _refresh() -> void:
 		icon.texture = ICONS[state]
 		icon.self_modulate = get_theme_color(&"font_color", TEXT_VARIATIONS[state]) if state in [State.SUCCESS, State.ERROR] else _state_icon_color()
 		icon.accessibility_name = "%s state" % STATE_NAMES[state]
-		if state != State.LOADING:
+		if state != State.LOADING or reduced_motion:
 			icon.rotation = 0.0
 	if state_label != null:
 		state_label.text = STATE_NAMES[state]
@@ -85,7 +90,7 @@ func _refresh() -> void:
 	if description_label != null:
 		description_label.text = description
 		description_label.visible = not description.is_empty()
-	set_process(state == State.LOADING)
+	set_process(state == State.LOADING and not reduced_motion)
 	accessibility_name = "%s: %s" % [STATE_NAMES[state], title]
 	accessibility_description = description
 

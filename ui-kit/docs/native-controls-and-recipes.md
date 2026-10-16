@@ -216,3 +216,84 @@ Use `res://rookframe/ui/chronicle/ChronicleSurface.tscn` for retained event hist
 recaps, quest journals and acquired lore under a consumer
 Theme. See [the Chronicle contract](chronicle.md) for semantic scope, companion
 text styles, density, reading margins and vertical resizing.
+
+## Expansion recipes (RF-UI-EXPANSION-01)
+
+The synthetic Settings and character examples are in
+`showcase/examples/ui-expansion/native_recipes.gd`. They use native controls and
+production components. The containing screen supplies one bounded scroll owner.
+The host owns every value, action and translated string.
+
+| Requirement | Capability | Composition | Observable result |
+| --- | --- | --- | --- |
+| NAT-01 | Select; Native Select | Use OptionButton. Keep native IDs and disabled items. Document native search settings. | Selection uses IDs. Disabled items cannot activate. Empty lists have no invalid selected index. |
+| NAT-02 | Radio Group | Use ButtonGroup and CheckBox or ChoiceRow. | Required mode keeps one selected item. Optional mode permits none. The recipe states its initial selection. |
+| NAT-03 | Checkbox | Use native CheckBox for one boolean. | Pointer, keyboard, and controller each change the value once. Mixed state is absent. |
+| NAT-04 | Switch | Use CheckButton for an immediate boolean setting. | The host receives one change. Existing selectable Switch cards keep their separate contract. |
+| NAT-05 | Toggle | Use Button.toggle_mode. | Pressed state remains distinct from focus and disabled state. |
+| NAT-06 | Toggle Group | Use ButtonGroup for exclusive choice. Use independent toggles for multiple choice. | Group rules remain true after disabled-state and external-value changes. |
+| NAT-07 | Button Group | Use ActionBar and native containers. | Actions keep independent behavior and source order during compact layout. |
+| NAT-08 | Context Menu | Use PopupMenu. Provide pointer and explicit controller/touch activation. | Open at the source. Focus the first enabled item. Return focus after dismissal. |
+| NAT-09 | Dropdown Menu | Use MenuButton and PopupMenu. | Activation requests an action. It does not silently set a field value. |
+| NAT-10 | Dialog | Extend the existing Dialog only where a required test fails. | Body content fits the bounded area. One scrim blocks background input. Existing initial focus remains unchanged. |
+| NAT-11 | Alert Dialog | Use the existing Dialog confirmation recipe. | Only Confirm emits confirmation. Cancel and window-close use the cancellation path. |
+| NAT-12 | Tooltip | Use the native tooltip lifecycle and consumer-supplied tooltip content. | Tooltip content has no interactive action. Essential information remains available through activation. |
+| NAT-13 | Accordion | Use FoldableContainer and FoldableGroup. | Single-open and multiple-open recipes work. The recipe states whether all sections can close. |
+| NAT-14 | Collapsible | Use one FoldableContainer without a group. | Closed content receives no focus. Content state survives close and open. |
+| NAT-15 | Tabs | Use TabContainer or TabBar with retained panels. | Disabled tabs cannot activate. Panel state survives tab changes. Hidden panels receive no focus. |
+| NAT-16 | Input | Keep TextField, SearchField, and native LineEdit. | Keep selection, clipboard, undo, IME, and read-only behavior. Return commits as documented. |
+| NAT-17 | Textarea | Keep TextArea and native TextEdit. | Keep wrapping, scrolling, selection, caret, and IME. Focus exit commits as documented. |
+| NAT-18 | Table | Use Tree columns or existing StructuredRow TABLE/HEADER recipes. | Headers match cells. Numeric values align. Long content remains available at constrained width. |
+| NAT-19 | Alert | Use Notice. | Title, description, tone, dismissal, and action slots keep their documented behavior. |
+| NAT-20 | Empty | Use TaskState.EMPTY. | Empty data and zero filter results have different explanations. A supplied recovery action remains reachable. |
+| NAT-21 | Progress | Use ProgressBar or TextureProgressBar. | Current value and limit have readable labels. Task progress and health/mana examples work. |
+| NAT-22 | Spinner | Use the existing TaskState.LOADING foundation. | Loading has a text description. Reduced motion keeps a static indicator. Focus stays unchanged. |
+| NAT-23 | Slider | Use HSlider or VSlider for one value. | Minima, maxima, steps, units, disabled state, and controller adjustment work. |
+| NAT-24 | Numeric Input | Use SpinBox inside Field or Input Group. | Typed values follow native bounds and step rules. The recipe states when the value commits. |
+| NAT-25 | Scroll Area | Use ScrollContainer and native scrollbars. | Wheel, touch, scrollbar drag, and focus-follow behavior work. Nested scroll owners are absent. |
+| NAT-26 | Aspect Ratio | Use AspectRatioContainer and TextureRect. | Fit and crop examples keep the selected ratio during resize. |
+| NAT-27 | Card | Use Section or existing surfaces. | Header, body, and actions remain readable. A display card has no implied activation. |
+| NAT-28 | Item | Use StructuredRow, ChoiceRow, or ActionRow by purpose. | Display, selection, and activation remain separate documented behaviors. |
+| NAT-29 | Badge | Use the existing Badge. | Text communicates status without color. Long labels do not cover adjacent actions. |
+| NAT-30 | Avatar | Use TextureRect and a fallback recipe. | A missing image shows host-supplied initials or a generic icon. The identity has an accessible name. |
+| NAT-31 | Button | Use native Button and current theme variations. | Text and icon actions work with each input mode. Disabled actions emit no activation. |
+| NAT-32 | Label | Use native Label and Field relationships. | Each input has an unambiguous name. Display labels do not add focus targets. |
+| NAT-33 | Separator | Use HSeparator and VSeparator. | The separator follows the active theme. It adds no focus target. |
+| NAT-34 | Typography | Use the requirements in Section 06. | The typography specimen passes the required sizes, languages, and text scales. |
+| NAT-35 | Direction | Use native text and layout direction. | RTL layout, mixed-direction values, and focus navigation pass the required examples. |
+
+Native OptionButton uses `get_item_id(index)` in its selected-index callback.
+Enable `get_popup().allow_search` for native incremental search. Clear an empty
+list with `clear()`; never select index zero in an empty list.
+
+Required radio groups initially select the first enabled option. Optional groups
+set `ButtonGroup.allow_unpress = true` and initially select none. The host keeps
+a required selection eligible when it changes availability. Independent toggle
+buttons permit multiple selections; a shared ButtonGroup makes them exclusive.
+
+Context menus expose the same source action through pointer, keyboard, controller
+and touch. Dropdown menu activation requests an action rather than changing a
+field value. The native popup captures dismissal and restores source focus.
+
+FoldableGroup provides single-open accordion behavior; independent
+FoldableContainers permit several open sections. Both recipes allow all sections
+to close and retain child controls. TabContainer retains every panel.
+
+SpinBox commits typed content on native Return or focus exit; arrows change its
+value immediately. Hosts use `value_changed` for immediate settings. Read-only
+LineEdit and TextEdit retain native selection and copy.
+
+Tree supplies one bounded table scroll owner. Numeric columns align right; full
+long values remain in accessible text and tooltips. Sorting, column filters,
+column visibility and editing are outside this read-only recipe.
+
+Avatar initials are supplied by the host. When no image or initials are available,
+use the semantic `person.svg` icon and a host-supplied accessible identity.
+Progress examples require finite values and a finite maximum above the minimum;
+clamp only the displayed value. Use a labelled TaskState.LOADING for unknown totals.
+TaskState's additive `reduced_motion = false` property stops its spinner when true
+and keeps the same labelled loading state and focus.
+
+Typography uses the owning theme's semantic roles and regional companions. Core
+contains no fonts. Set native `layout_direction` for RTL, preserve source order,
+and use LTR `text_direction` on mixed paths, IDs and numeric values.
