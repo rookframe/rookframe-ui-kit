@@ -1,9 +1,5 @@
 [gd_scene format=3]
 [ext_resource type="Script" path="res://rookframe/ui/components/surfaces/action_panel/drop_leaf.gd" id="script"]
-[ext_resource type="Shader" path="res://rookframe/ui/components/surfaces/hinged_leaf/shadow.gdshader" id="shadow"]
-[sub_resource type="ShaderMaterial" id="shadow_material"]
-resource_local_to_scene = true
-shader = ExtResource("shadow")
 [sub_resource type="QuadMesh" id="quad"]
 resource_local_to_scene = true
 [sub_resource type="BoxMesh" id="edge_mesh"]
@@ -14,9 +10,6 @@ transparency = 1
 shading_mode = 0
 cull_mode = 2
 texture_filter = 1
-[sub_resource type="StandardMaterial3D" id="edge"]
-shading_mode = 0
-albedo_color = Color(0.34, 0.24, 0.16, 1)
 [node name="DropLeaf" type="Control"]
 mouse_filter = 2
 script = ExtResource("script")
@@ -41,7 +34,6 @@ far = 3000.0
 [node name="Hinge" type="Node3D" parent="Motion"]
 [node name="Edge" type="MeshInstance3D" parent="Motion/Hinge"]
 mesh = SubResource("edge_mesh")
-material_override = SubResource("edge")
 [node name="Face" type="MeshInstance3D" parent="Motion/Hinge"]
 position = Vector3(0, 0, 1)
 mesh = SubResource("quad")
@@ -50,7 +42,6 @@ material_override = SubResource("face")
 clip_contents = true
 mouse_filter = 2
 [node name="Shadow" type="ColorRect" parent="Clip"]
-material = SubResource("shadow_material")
 mouse_filter = 2
 [node name="Image" type="TextureRect" parent="Clip"]
 mouse_filter = 2

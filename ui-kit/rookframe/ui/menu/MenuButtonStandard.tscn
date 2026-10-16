@@ -3,7 +3,6 @@
 [ext_resource type="Script" path="res://rookframe/ui/menu/menu_button.gd" id="recipe"]
 
 [node name="MenuButtonStandard" type="Button"]
-modulate = Color(0.713725, 1, 0, 1)
 focus_mode = 2
 mouse_default_cursor_shape = 2
 script = ExtResource("recipe")

@@ -1,5 +1,12 @@
 # Shared Fantasy and Cyberpunk styling
 
+Appearance in this reference describes the optional `silkbound-ledger` package.
+Base components are unthemed and use native Godot defaults. To select the described
+skin, install that package and instance the corresponding scene beneath
+`res://rookframe/ui/silkbound-ledger/`. Base component paths/UIDs and behavior stay
+public. See [migration notes](../MIGRATING.md#explicit-silkbound-ledger-selection).
+
+
 The optional `themes/fantasy` and `themes/cyberpunk` packages supply the public
 `res://rookframe/ui/menu/MenuTheme.tres` and
 `res://rookframe/ui/menu/cyberpunk/CyberpunkTheme.tres` own their complete native

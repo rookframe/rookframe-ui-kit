@@ -1,116 +1,6 @@
 {
   "schemaVersion": 1,
   "supportBoundary": "Every normal path under res://rookframe/ui is public; only _internal is unsupported.",
-  "theme": {
-    "path": "res://rookframe/ui/theme/rookframe_theme.tres",
-    "uid": "uid://s4dv3jijmvy1",
-    "variations": {
-      "surfaces": [
-        "RookframeCanvas",
-        "RookframePackageInk",
-        "RookframePackageFrame",
-        "RookframeSurface",
-        "RookframeRaisedSurface",
-        "RookframeRaisedFrame",
-        "RookframeActiveSurface",
-        "RookframeInsetFrame",
-        "RookframeTaskFrame",
-        "RookframeGoldFrame",
-        "RookframeGoldBadge",
-        "RookframeShellRail",
-        "RookframeManagedChrome",
-        "RookframeManagedChromeCompact",
-        "RookframeSubtleFrame",
-        "RookframeInsetSurface",
-        "RookframeSection",
-        "RookframeManagedSurface",
-        "RookframeNotice",
-        "RookframeNoticeInfo",
-        "RookframeNoticePending",
-        "RookframeNoticeSuccess",
-        "RookframeNoticeError",
-        "RookframeBadge",
-        "RookframeSearchField",
-        "RookframeSearchFieldFocus",
-        "RookframeStructuredRow",
-        "RookframeStructuredRowSelected",
-        "RookframeStepPending",
-        "RookframeStepCurrent",
-        "RookframeStepComplete",
-        "RookframeDialogSurface"
-      ],
-      "text": [
-        "RookframeTitle",
-        "RookframeSubtitle",
-        "RookframeHeading",
-        "RookframeLabel",
-        "RookframeValue",
-        "RookframeBody",
-        "RookframeMeta",
-        "RookframeStatus",
-        "RookframePending",
-        "RookframeSuccess",
-        "RookframeError",
-        "RookframeIdentity",
-        "RookframeBadgeText"
-      ],
-      "inputs": [
-        "RookframeSearchInput"
-      ],
-      "actions": [
-        "RookframePrimaryButton",
-        "RookframeGoldButton",
-        "RookframeShellControl",
-        "RookframeManagedControl",
-        "RookframeManagedAffirm",
-        "RookframeManagedCommit",
-        "RookframeManagedSelected",
-        "RookframeSecondaryButton",
-        "RookframeQuietButton",
-        "RookframeDangerButton",
-        "RookframeDangerOutline",
-        "RookframeTabButton",
-        "RookframeChoiceRow",
-        "RookframeCircularAction",
-        "RookframeCompactAction",
-        "RookframeCompactActionTouch"
-      ]
-    },
-    "nativeTypes": [
-      "Button",
-      "CheckBox",
-      "CheckButton",
-      "LineEdit",
-      "TextEdit",
-      "SpinBox",
-      "HSlider",
-      "VSlider",
-      "MenuButton",
-      "OptionButton",
-      "PopupMenu",
-      "PopupPanel",
-      "ProgressBar",
-      "TabBar",
-      "TabContainer",
-      "ItemList",
-      "Tree",
-      "Window",
-      "AcceptDialog",
-      "ConfirmationDialog",
-      "FileDialog",
-      "Panel",
-      "PanelContainer",
-      "HSeparator",
-      "VSeparator",
-      "HScrollBar",
-      "VScrollBar",
-      "HBoxContainer",
-      "VBoxContainer",
-      "HFlowContainer",
-      "VFlowContainer",
-      "GridContainer"
-    ]
-  },
   "components": [
     {
       "name": "AdaptiveGrid",
@@ -338,7 +228,7 @@
           44.0,
           44.0
         ],
-        "editor_font_size": 14
+        "editor_font_size": 0
       },
       "signals": [
         "value_changed(value: String)",
@@ -755,7 +645,7 @@
       "properties": {
         "title": "Action",
         "description": "Supporting action detail",
-        "action_label": "â€º",
+        "action_label": "\u00e2\u20ac\u00ba",
         "tone": "STANDARD",
         "disabled": false
       },
@@ -778,7 +668,7 @@
       "properties": {
         "title": "Action",
         "title_lane_width": 150.0,
-        "title_font_size": 15,
+        "title_font_size": 0,
         "disabled": false
       },
       "signals": [
@@ -839,7 +729,7 @@
       "properties": {
         "title": "Action",
         "description": "Supporting action detail",
-        "action_label": "â€º",
+        "action_label": "\u00e2\u20ac\u00ba",
         "tone": "STANDARD",
         "disabled": false
       },
@@ -1277,15 +1167,6 @@
     "redundant native wrappers",
     "public C# widget hierarchy"
   ],
-  "taskTheme": {
-    "path": "res://rookframe/ui/theme/fullscreen_task_theme.tres",
-    "uid": "uid://cyf74fj0m2vqa",
-    "purpose": "Silkbound Ledger density profile for fixed full-screen tasks; the legacy path remains supported."
-  },
-  "silkboundTheme": {
-    "path": "res://rookframe/ui/theme/silkbound_theme.tres",
-    "purpose": "Silkbound task and sheet typography with complete native and shared semantic role coverage."
-  },
   "currentDesignSystem": {
     "components": [
       "res://rookframe/ui/menu/MenuButtonPrimary.tscn",
@@ -1389,8 +1270,17 @@
       }
     },
     "optionalThemePackages": [
+      "silkbound-ledger",
       "fantasy",
       "cyberpunk"
     ]
-  }
+  },
+  "optionalThemes": {
+    "silkbound-ledger": {
+      "catalogue": "res://rookframe/ui/silkbound-ledger/catalogue.json",
+      "scenePrefix": "res://rookframe/ui/silkbound-ledger/",
+      "installedByDefault": false
+    }
+  },
+  "appearance": "Native Godot defaults; no Theme or local skin assigned."
 }

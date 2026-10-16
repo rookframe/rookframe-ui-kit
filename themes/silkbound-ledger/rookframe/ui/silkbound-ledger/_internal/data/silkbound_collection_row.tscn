@@ -1,0 +1,45 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://rookframe/ui/_internal/data/silkbound_collection_row.tscn" id="base"]
+[ext_resource type="StyleBox" path="res://rookframe/ui/theme/silkbound_plain.tres" id="86d5468720_row"]
+[ext_resource type="StyleBox" path="res://rookframe/ui/theme/silkbound_row_hover.tres" id="86d5468720_hover"]
+[ext_resource type="FontVariation" path="res://rookframe/ui/theme/silkbound_medium.tres" id="86d5468720_medium"]
+[ext_resource type="Script" path="res://rookframe/ui/silkbound-ledger/_internal/data/silkbound_collection_row.gd" id="86d5468720_skin_script"]
+[ext_resource type="Theme" path="res://rookframe/ui/theme/silkbound_theme.tres" id="skin_theme"]
+
+[node name="CollectionRow" instance=ExtResource("base")]
+theme_override_constants/separation = 12
+script = ExtResource("86d5468720_skin_script")
+theme = ExtResource("skin_theme")
+
+[node name="Details" parent="."]
+theme_override_styles/normal = ExtResource("86d5468720_row")
+theme_override_styles/hover = ExtResource("86d5468720_hover")
+theme_override_styles/pressed = ExtResource("86d5468720_hover")
+
+[node name="Row" parent="Details/Inset"]
+theme_override_constants/separation = 14
+
+[node name="Icon" parent="Details/Inset/Row"]
+self_modulate = Color(0.815686, 0.745098, 0.556863, 1)
+
+[node name="Copy" parent="Details/Inset/Row"]
+theme_override_constants/separation = 4
+
+[node name="Title" parent="Details/Inset/Row/Copy"]
+theme_override_fonts/font = ExtResource("86d5468720_medium")
+theme_override_font_sizes/font_size = 24
+
+[node name="Subtitle" parent="Details/Inset/Row/Copy"]
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(0.682353, 0.729412, 0.745098, 1)
+
+[node name="Value" parent="Details/Inset/Row"]
+theme_override_fonts/font = ExtResource("86d5468720_medium")
+theme_override_font_sizes/font_size = 25
+
+[node name="Action" parent="."]
+theme_override_constants/icon_max_width = 28
+
+[node name="Arrow" parent="Details/Inset/Row"]
+theme_override_font_sizes/font_size = 18

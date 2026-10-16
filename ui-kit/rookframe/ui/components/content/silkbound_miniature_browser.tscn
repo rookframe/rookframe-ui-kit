@@ -1,6 +1,5 @@
 [gd_scene format=3]
 [ext_resource type="Script" path="res://rookframe/ui/components/content/silkbound_miniature_browser.gd" id="script"]
-[ext_resource type="Theme" path="res://rookframe/ui/theme/silkbound_theme.tres" id="theme"]
 [ext_resource type="PackedScene" path="res://rookframe/ui/components/surfaces/ledger_frame.tscn" id="frame"]
 [ext_resource type="PackedScene" path="res://rookframe/ui/components/content/miniature_browser.tscn" id="browser"]
 [ext_resource type="Texture2D" path="res://rookframe/ui/icons/close.svg" id="close"]
@@ -10,7 +9,6 @@ texture_filter = 2
 layout_mode = 1
 anchor_right = 1.0
 anchor_bottom = 1.0
-theme = ExtResource("theme")
 script = ExtResource("script")
 [node name="Frame" parent="." instance=ExtResource("frame")]
 [node name="Inset" type="MarginContainer" parent="."]
@@ -21,7 +19,6 @@ anchor_bottom = 1.0
 layout_mode = 2
 [node name="Header" type="MarginContainer" parent="Inset/Layout"]
 layout_mode = 2
-theme_override_constants/margin_right = 16
 [node name="Row" type="HBoxContainer" parent="Inset/Layout/Header"]
 layout_mode = 2
 [node name="Copy" type="VBoxContainer" parent="Inset/Layout/Header/Row"]
@@ -40,7 +37,6 @@ icon_alignment = 1
 icon = ExtResource("close")
 [node name="Body" type="VBoxContainer" parent="Inset/Layout"]
 size_flags_vertical = 3
-theme_override_constants/separation = 4
 [node name="Note" type="Label" parent="Inset/Layout/Body"]
 visible = false
 autowrap_mode = 3
@@ -49,7 +45,6 @@ theme_type_variation = &"RookframeMeta"
 layout_mode = 2
 paginated = true
 [node name="Footer" type="HBoxContainer" parent="Inset/Layout"]
-theme_override_constants/separation = 16
 [node name="Cancel" type="Button" parent="Inset/Layout/Footer"]
 custom_minimum_size = Vector2(0,44)
 size_flags_vertical = 4
@@ -64,9 +59,6 @@ size_flags_vertical = 4
 theme_type_variation = &"RookframePrimaryButton"
 text = "Choose"
 icon = ExtResource("check")
-theme_override_colors/icon_normal_color = Color(0.082353,0.090196,0.098039,1)
-theme_override_colors/icon_hover_color = Color(0.082353,0.090196,0.098039,1)
-theme_override_colors/icon_pressed_color = Color(0.082353,0.090196,0.098039,1)
 [node name="Gutter" type="Control" parent="Inset/Layout/Footer"]
 custom_minimum_size = Vector2(16,0)
 mouse_filter = 2

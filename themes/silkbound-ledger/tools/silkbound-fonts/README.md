@@ -27,9 +27,12 @@ Godot **4.7.2**. The renderer/platform matters because the source authority was
 reviewed there. Provide Playwright on `NODE_PATH`. From this repository:
 
 ```sh
-python3 tools/silkbound-fonts/prepare.py /tmp/silkbound-fonts
-node tools/silkbound-fonts/export.cjs /tmp/silkbound-fonts /path/to/chromium
-/path/to/Godot --headless --path . --script tools/silkbound-fonts/assemble.gd -- /tmp/silkbound-fonts "$PWD/rookframe/ui/assets/fonts/eb-garamond/prerendered"
+python3 themes/silkbound-ledger/tools/silkbound-fonts/prepare.py /tmp/silkbound-fonts
+node themes/silkbound-ledger/tools/silkbound-fonts/export.cjs /tmp/silkbound-fonts /path/to/chromium
+python3 tools/workspace.py install --destination /tmp/silkbound-font-check --theme silkbound-ledger
+cp ui-kit/project.godot /tmp/silkbound-font-check/project.godot
+cp -R themes/silkbound-ledger/tools /tmp/silkbound-font-check/tools
+/path/to/Godot --headless --path /tmp/silkbound-font-check --script res://tools/silkbound-fonts/assemble.gd -- /tmp/silkbound-fonts "$PWD/themes/fonts/rookframe/ui/assets/fonts/eb-garamond/prerendered"
 ```
 
 Use a fresh temporary directory. The temporary fonts address individual glyphs
@@ -37,7 +40,8 @@ through private-use code points and omit shaping only for atlas export. They
 are **not** distributed. The shipped resources embed the original TTF bytes;
 the OFL license and source provenance beside those originals apply.
 
-After generation, run `Godot --headless --path . --script tools/silkbound-fonts/verify.gd`
+After generation, reinstall the theme into the temporary consumer, import it,
+and run `Godot --headless --path /tmp/silkbound-font-check --script res://tools/silkbound-fonts/verify.gd`
 to reload the saved resources in a fresh Godot process. Verify
 the original font bytes, unchanged text measurements, accented Latin/Russian,
 ligatures, a character and size outside the cache, and unchanged existing atlas

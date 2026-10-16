@@ -1,28 +1,9 @@
 [gd_scene format=3]
 
-[ext_resource type="Theme" path="res://rookframe/ui/theme/silkbound_theme.tres" id="theme"]
-[ext_resource type="FontVariation" path="res://rookframe/ui/theme/silkbound_medium.tres" id="display"]
 [ext_resource type="Texture2D" path="res://rookframe/ui/icons/check.svg" id="dice"]
 
 
 
-
-[sub_resource type="StyleBoxFlat" id="Frame"]
-bg_color = Color(0, 0, 0, 0)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(1, 1, 1, 1)
-content_margin_left = 0.0
-content_margin_right = 0.0
-content_margin_top = 0.0
-content_margin_bottom = 0.0
-
-corner_radius_top_left = 0
-corner_radius_top_right = 0
-corner_radius_bottom_left = 0
-corner_radius_bottom_right = 0
 
 [node name="WizardStep" type="Control"]
 layout_mode = 2
@@ -35,7 +16,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 5
 offset_top = 8.0
 offset_bottom = -6.0
 mouse_filter = 2
@@ -47,15 +27,12 @@ custom_minimum_size = Vector2(24, 24)
 size_flags_vertical = 4
 size_flags_horizontal = 4
 mouse_filter = 2
-theme_override_styles/panel = SubResource("Frame")
 
 [node name="Number" type="Label" parent="Row/Marker"]
 layout_mode = 2
 text = "1"
 horizontal_alignment = 1
 vertical_alignment = 1
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 14
 
 [node name="Done" type="TextureRect" parent="Row/Marker"]
 custom_minimum_size = Vector2(17,17)
@@ -73,9 +50,6 @@ layout_mode = 2
 text = "Step"
 horizontal_alignment = 0
 size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 18
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("display")
 vertical_alignment = 1
 
 [node name="Rule" type="ColorRect" parent="."]
@@ -84,7 +58,6 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = -3.0
-color = Color(0.850980, 0.682353, 0.580392, 1.0)
 mouse_filter = 2
 
 [node name="Connector" type="ColorRect" parent="."]
@@ -96,4 +69,3 @@ offset_top = 23.0
 offset_right = -18.0
 offset_bottom = 24.0
 mouse_filter = 2
-color = Color(0.807843, 0.800000, 0.701961, 1)

@@ -1,13 +1,11 @@
 [gd_scene format=3]
 
-[ext_resource type="Theme" path="res://rookframe/ui/theme/fullscreen_task_theme.tres" id="theme"]
 [ext_resource type="Script" path="res://rookframe/ui/components/data/paginated_content.gd" id="script"]
 
 [node name="PaginatedContent" type="Control"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme = ExtResource("theme")
 script = ExtResource("script")
 
 [node name="Area" type="Control" parent="."]
@@ -22,7 +20,6 @@ anchor_top = 1.0
 anchor_bottom = 1.0
 offset_top = -53.0
 custom_minimum_size = Vector2(0, 53)
-theme_override_constants/separation = 8
 
 [node name="Previous" type="Button" parent="Pager"]
 layout_mode = 2
@@ -34,8 +31,6 @@ size_flags_vertical = 8
 [node name="Range" type="Label" parent="Pager"]
 layout_mode = 2
 text = ""
-theme_override_font_sizes/font_size = 12
-theme_override_colors/font_color = Color(0.682353, 0.729412, 0.745098, 1)
 size_flags_horizontal = 3
 horizontal_alignment = 1
 

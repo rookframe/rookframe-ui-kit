@@ -1,0 +1,32 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://rookframe/ui/components/surfaces/action_panel/render_warmup.tscn" id="base"]
+[ext_resource type="Shader" path="res://rookframe/ui/components/surfaces/action_panel/content_ink.gdshader" id="4654ecfae4_ink"]
+[ext_resource type="Theme" path="res://rookframe/ui/theme/action_panel_theme.tres" id="4654ecfae4_theme"]
+[ext_resource type="StyleBox" path="res://rookframe/ui/assets/action-panel/body.tres" id="4654ecfae4_warmup"]
+[ext_resource type="Shader" path="res://rookframe/ui/components/surfaces/hinged_leaf/shadow.gdshader" id="a73cd6867f_shadow"]
+[sub_resource type="ShaderMaterial" id="4654ecfae4_material"]
+shader = ExtResource("4654ecfae4_ink")
+shader_parameter/progress = 0.65
+[sub_resource type="ShaderMaterial" id="a73cd6867f_shadow_material"]
+resource_local_to_scene = true
+shader = ExtResource("a73cd6867f_shadow")
+[sub_resource type="StandardMaterial3D" id="a73cd6867f_edge"]
+shading_mode = 0
+albedo_color = Color(0.34, 0.24, 0.16, 1)
+
+[node name="ActionPanelWarmup" instance=ExtResource("base")]
+surface = ExtResource("4654ecfae4_warmup")
+
+[node name="Edge" parent="Leaf/Motion/Hinge"]
+material_override = SubResource("a73cd6867f_edge")
+
+[node name="Shadow" parent="Leaf/Clip"]
+material = SubResource("a73cd6867f_shadow_material")
+
+[node name="Text" parent="."]
+material = SubResource("4654ecfae4_material")
+theme = ExtResource("4654ecfae4_theme")
+
+[node name="Icon" parent="."]
+material = SubResource("4654ecfae4_material")

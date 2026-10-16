@@ -1,0 +1,14 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://rookframe/ui/components/layout/responsive_split.tscn" id="base"]
+[ext_resource type="Theme" path="res://rookframe/ui/theme/silkbound_theme.tres" id="skin_theme"]
+
+[node name="ResponsiveSplit" instance=ExtResource("base")]
+theme_override_constants/separation = 24
+theme = ExtResource("skin_theme")
+
+[node name="PrimarySlot" parent="."]
+theme_override_constants/separation = 16
+
+[node name="SecondarySlot" parent="."]
+theme_override_constants/separation = 16

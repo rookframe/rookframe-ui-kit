@@ -1,0 +1,10 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://rookframe/ui/components/forms/task_text_area.tscn" id="base"]
+[ext_resource type="Script" path="res://rookframe/ui/silkbound-ledger/components/forms/task_text_area.gd" id="b27ef23620_skin_1_script"]
+[ext_resource type="Theme" path="res://rookframe/ui/theme/silkbound_theme.tres" id="skin_theme"]
+
+[node name="TextArea" instance=ExtResource("base")]
+theme_override_constants/separation = 8
+script = ExtResource("b27ef23620_skin_1_script")
+theme = ExtResource("skin_theme")

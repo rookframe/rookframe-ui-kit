@@ -12,7 +12,7 @@ from workspace import ROOT, install, sources, verify
 
 class PackageTests(unittest.TestCase):
     def test_independent_resource_closures(self):
-        for packages in [['ui-kit'], ['fantasy'], ['cyberpunk'], ['fantasy', 'cyberpunk']]:
+        for packages in [['ui-kit'], ['silkbound-ledger'], ['fantasy'], ['cyberpunk'], ['fantasy', 'cyberpunk'], ['silkbound-ledger', 'fantasy', 'cyberpunk']]:
             with self.subTest(packages=packages):
                 files = sources(packages)
                 for relative, path in files.items():
@@ -31,6 +31,43 @@ class PackageTests(unittest.TestCase):
         self.assertNotIn('rookframe/ui/menu/MenuTheme.tres', core)
         self.assertFalse(any('/cyberpunk/' in p for p in core))
         self.assertFalse(any('/materials/textures/' in p for p in core))
+
+    def test_core_has_no_baked_appearance(self):
+        core = sources(['ui-kit'])
+        self.assertFalse(any('/assets/' in p or '/theme/' in p for p in core))
+        self.assertFalse(any(p.endswith(('.ttf', '.otf', '.gdshader', '.tres')) for p in core))
+        for relative, path in core.items():
+            if path.suffix == '.tscn':
+                text = path.read_text()
+                self.assertNotRegex(text, r'(?m)^(theme|theme_override_\w+/\w+|modulate|self_modulate|color|material) = ')
+                self.assertNotIn('type="Theme"', text)
+            if path.suffix == '.gd':
+                self.assertNotRegex(path.read_text(), r'Color\("', relative)
+
+    def test_installing_themes_never_replaces_core_resources(self):
+        core = sources(['ui-kit'])
+        for theme in ['silkbound-ledger', 'fantasy', 'cyberpunk']:
+            combined = sources([theme])
+            for relative, source in core.items():
+                self.assertEqual(combined[relative], source)
+        silk = sources(['silkbound-ledger'])
+        self.assertIn('rookframe/ui/theme/silkbound_theme.tres', silk)
+        for relative, source in silk.items():
+            if '/silkbound-ledger/' in relative and relative.endswith('.tscn'):
+                base = relative.replace('/silkbound-ledger/', '/')
+                self.assertIn(base, core)
+                self.assertIn(f'path="res://{base}" id="base"', source.read_text())
+
+    def test_uninstalling_silkbound_removes_appearance_and_fonts(self):
+        with tempfile.TemporaryDirectory() as folder:
+            dest = Path(folder)
+            install(dest, ['silkbound-ledger'])
+            verify(dest, ['silkbound-ledger'])
+            install(dest, ['ui-kit'])
+            verify(dest, ['ui-kit'])
+            self.assertFalse((dest / 'rookframe/ui/theme/silkbound_theme.tres').exists())
+            self.assertFalse(any((dest / 'rookframe/ui').rglob('*.ttf')))
+            self.assertFalse(any((dest / 'rookframe/ui/silkbound-ledger').rglob('*.tscn')))
 
     def test_install_switches_theme_and_detects_stale_files(self):
         with tempfile.TemporaryDirectory() as folder:

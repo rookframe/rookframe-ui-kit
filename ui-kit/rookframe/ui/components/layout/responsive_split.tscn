@@ -6,7 +6,6 @@
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_constants/separation = 24
 script = ExtResource("1_script")
 
 [node name="PrimarySlot" type="VBoxContainer" parent="."]
@@ -15,7 +14,6 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.4
-theme_override_constants/separation = 16
 
 [node name="SecondarySlot" type="VBoxContainer" parent="."]
 unique_name_in_owner = true
@@ -23,4 +21,3 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.6
-theme_override_constants/separation = 16

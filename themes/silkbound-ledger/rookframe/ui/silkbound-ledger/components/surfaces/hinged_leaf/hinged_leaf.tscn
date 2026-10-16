@@ -1,0 +1,52 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://rookframe/ui/components/surfaces/hinged_leaf/hinged_leaf.tscn" id="base"]
+[ext_resource type="Shader" path="res://rookframe/ui/components/surfaces/hinged_leaf/ink.gdshader" id="3fb558668a_ink"]
+[ext_resource type="Shader" path="res://rookframe/ui/components/surfaces/hinged_leaf/shadow.gdshader" id="3fb558668a_shadow"]
+[ext_resource type="Shader" path="res://rookframe/ui/components/surfaces/hinged_leaf/binding.gdshader" id="3fb558668a_binding"]
+[ext_resource type="StyleBox" path="res://rookframe/ui/assets/action-panel/body.tres" id="3fb558668a_skin"]
+[ext_resource type="Texture2D" path="res://rookframe/ui/assets/action-panel/ai-generated-leather-atlas.png" id="3fb558668a_atlas"]
+[ext_resource type="Theme" path="res://rookframe/ui/theme/silkbound_theme.tres" id="3fb558668a_theme"]
+
+[ext_resource type="Script" path="res://rookframe/ui/silkbound-ledger/components/surfaces/hinged_leaf/hinged_leaf.gd" id="3fb558668a_skin_script"]
+[sub_resource type="ShaderMaterial" id="3fb558668a_ink_material"]
+resource_local_to_scene = true
+shader = ExtResource("3fb558668a_ink")
+[sub_resource type="ShaderMaterial" id="3fb558668a_shadow_material"]
+resource_local_to_scene = true
+shader = ExtResource("3fb558668a_shadow")
+[sub_resource type="ShaderMaterial" id="3fb558668a_binding_left"]
+resource_local_to_scene = true
+shader = ExtResource("3fb558668a_binding")
+[sub_resource type="ShaderMaterial" id="3fb558668a_binding_right"]
+resource_local_to_scene = true
+shader = ExtResource("3fb558668a_binding")
+[sub_resource type="AtlasTexture" id="3fb558668a_binding_texture"]
+atlas = ExtResource("3fb558668a_atlas")
+region = Rect2(1245, 429, 117, 139)
+[sub_resource type="StandardMaterial3D" id="3fb558668a_edge"]
+shading_mode = 0
+albedo_color = Color(0.447, 0.329, 0.227, 1)
+[node name="HingedLeaf" instance=ExtResource("base")]
+theme = ExtResource("3fb558668a_theme")
+script = ExtResource("3fb558668a_skin_script")
+
+[node name="Shadow" parent="."]
+material = SubResource("3fb558668a_shadow_material")
+
+[node name="Skin" parent="Surface/Viewport/Root"]
+theme_override_styles/panel = ExtResource("3fb558668a_skin")
+
+[node name="Ink" parent="Surface/Viewport/Root"]
+material = SubResource("3fb558668a_ink_material")
+
+[node name="Thickness" parent="Motion/Hinge/Leather"]
+material_override = SubResource("3fb558668a_edge")
+
+[node name="Left" parent="Bindings"]
+material = SubResource("3fb558668a_binding_left")
+texture = SubResource("3fb558668a_binding_texture")
+
+[node name="Right" parent="Bindings"]
+material = SubResource("3fb558668a_binding_right")
+texture = SubResource("3fb558668a_binding_texture")

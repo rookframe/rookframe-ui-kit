@@ -1,4 +1,5 @@
 extends GdUnitTestSuite
+const INK = preload("res://rookframe/ui/components/surfaces/action_panel/content_ink.gdshader")
 const REVEAL = preload("res://rookframe/ui/_internal/surfaces/content_reveal.gd")
 
 func test_reveal_restores_material_focus_and_modulation_after_interruption() -> void:
@@ -9,7 +10,9 @@ func test_reveal_restores_material_focus_and_modulation_after_interruption() -> 
 	add_child(content)
 	button.grab_focus()
 	var first = REVEAL.new()
+	first.shader = INK
 	var second = REVEAL.new()
+	second.shader = INK
 	var original := button.self_modulate
 	first.play(content)
 	assert_object(button.material).is_not_null()
@@ -35,6 +38,7 @@ func test_reveal_uses_four_hundred_milliseconds_and_preserves_existing_shader() 
 	content.self_modulate = Color(1,1,1,0.6)
 	add_child(content)
 	var reveal = REVEAL.new()
+	reveal.shader = INK
 	reveal.play(content)
 	await get_tree().create_timer(0.2).timeout
 	assert_float(content.self_modulate.a).is_less(0.6)
@@ -44,7 +48,7 @@ func test_reveal_uses_four_hundred_milliseconds_and_preserves_existing_shader() 
 	assert_bool(content.material == custom).is_true()
 
 func test_wizard_reveals_step_changes_but_not_roll_progress_updates() -> void:
-	var wizard: Control = auto_free(load("res://rookframe/ui/components/surfaces/fullscreen_wizard.tscn").instantiate())
+	var wizard: Control = auto_free(load("res://rookframe/ui/silkbound-ledger/components/surfaces/fullscreen_wizard.tscn").instantiate())
 	wizard.set_anchors_and_offsets_preset(Control.PRESET_TOP_LEFT)
 	add_child(wizard)
 	wizard.size = Vector2(1024,768)
@@ -61,7 +65,7 @@ func test_wizard_reveals_step_changes_but_not_roll_progress_updates() -> void:
 	assert_object(wizard.get_stage_slot().material).is_null()
 
 func test_reading_leaf_preserves_grain_and_independent_border_after_resize() -> void:
-	var frame: Control = auto_free(load("res://rookframe/ui/components/surfaces/ledger_frame.tscn").instantiate())
+	var frame: Control = auto_free(load("res://rookframe/ui/silkbound-ledger/components/surfaces/ledger_frame.tscn").instantiate())
 	add_child(frame)
 	for extent in [Vector2(1920,1080), Vector2(844,390)]:
 		frame.set_sections(Rect2(12,12,extent.x-24,56), Rect2(12,80,extent.x-24,extent.y-92))
@@ -73,7 +77,7 @@ func test_reading_leaf_preserves_grain_and_independent_border_after_resize() -> 
 func test_dialog_open_reveals_content_and_close_cancels_it() -> void:
 	var host: Control = auto_free(Control.new())
 	add_child(host)
-	var dialog = load("res://rookframe/ui/components/overlays/dialog.tscn").instantiate()
+	var dialog = load("res://rookframe/ui/silkbound-ledger/components/overlays/dialog.tscn").instantiate()
 	host.add_child(dialog)
 	dialog.open_dialog()
 	await get_tree().process_frame

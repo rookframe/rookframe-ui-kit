@@ -1,0 +1,5 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://rookframe/ui/menu/MenuButtonDestructive.tscn" id="base"]
+[node name="MenuButtonDestructive" instance=ExtResource("base")]
+modulate = Color(0.713725, 1, 0, 1)

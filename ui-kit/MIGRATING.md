@@ -1,5 +1,28 @@
 # Migration notes
 
+## Explicit Silkbound Ledger selection
+
+The core now installs without any Theme, font, material or local skin. Add
+`--theme silkbound-ledger` to installation and change styled component scene
+references from `res://rookframe/ui/components/...` to
+`res://rookframe/ui/silkbound-ledger/components/...`. Base paths and UIDs keep their
+behavior and composition; they now inherit native Godot defaults. Merely installing
+the theme does not apply it. Existing Theme/material/font paths and UIDs are
+provided by the optional package, not the core.
+
+Silkbound variants use native scene/script inheritance and inject themed dynamic
+row scenes through exported PackedScene properties. Ink/reveal shaders are optional
+inputs with null defaults; core-only components settle without those effects. Ordinary consumer Controls
+can inherit the optional native Theme directly. `ActionLink.title_font_size` and
+`SearchField.editor_font_size` now default to zero (inherit); positive values still
+provide an explicit caller override. Silkbound variants retain their prior sizes.
+
+The optional `fonts` dependency avoids coupling Fantasy/Cyberpunk to Silkbound.
+Their shared mappings/geometry live in `shell-common`; the core compiler accepts
+an optional array of additional mapping scripts instead of preloading them.
+
+Component suites run in an isolated prepared consumer; see `ui-kit/README.md`.
+
 ## `next` monorepo layout
 
 Source previously at `rookframe/ui/` now lives under `ui-kit/rookframe/ui/`.
@@ -16,7 +39,7 @@ of the former external Git pin; run `prepare` after editing them.
 
 The shared `menu/menu_theme.gd` compiler no longer selects Fantasy implicitly:
 pass mapping/material scripts to its constructor, or load the optional
-`menu/MenuTheme.tres` entry point. Cyberpunk depends only on UI Kit.
+`menu/MenuTheme.tres` entry point. Cyberpunk installs its shared optional font and shell-recipe dependencies.
 Theme integration suites moved from `ui-kit/tests` to `showcase/tests`.
 
 There is no stable release to migrate from yet.
@@ -47,7 +70,7 @@ declaration; do not vendor an old UI Kit into the artifact.
 See [the complete compatibility model](docs/compatibility.md) for the protected
 public contract and the direct-Godot consequences.
 
-## Silkbound Ledger foundation
+## Earlier Silkbound Ledger foundation (superseded by explicit selection)
 
 All three existing Theme paths now supply Silkbound. No path, UID, scene root,
 signal, slot, domain operation or placement state has been removed. Historical

@@ -5,4 +5,4 @@ const Mapping = preload("menu_theme_map.gd")
 const Materials = preload("materials/menu_materials.gd")
 
 func _init() -> void:
-	super(Mapping, Materials)
+	super(Mapping, Materials, preload("res://rookframe/ui/menu/shell_theme_maps.gd").MAPS)

@@ -1,12 +1,17 @@
 @tool
 extends MarginContainer
 var _ink := preload("res://rookframe/ui/_internal/surfaces/content_reveal.gd").new()
+@export var reveal_shader: Shader:
+	set(value):
+		reveal_shader = value
+		_ink.shader = value
 @export var reduced_motion := false
 ## Bounded Silkbound records with a distinct optional row action.
 ## The caller owns the records and all mutations; this Control owns only paging.
 signal selected(id: String)
 signal action_requested(id: String)
 const ROW = preload("res://rookframe/ui/_internal/data/silkbound_collection_row.tscn")
+@export var row_scene: PackedScene = ROW
 @export var empty_text := "No entries in this group."
 @export var framed_collection := true
 @export var divider_top := false
@@ -19,14 +24,7 @@ var _page := 0
 var _pending := true
 var _settle := 0
 var _restore_focus: Control
-const MEDIUM = preload("res://rookframe/ui/theme/silkbound_medium.tres")
-const REGULAR = preload("res://rookframe/ui/theme/silkbound_regular.tres")
-var _title_font: FontVariation
-var _subtitle_font: FontVariation
-
 func _ready() -> void:
-	_title_font = MEDIUM.duplicate()
-	_subtitle_font = REGULAR.duplicate()
 	get_node(^"Content/Pager/Previous").pressed.connect(_turn.bind(-1))
 	get_node(^"Content/Pager/Next").pressed.connect(_turn.bind(1))
 	resized.connect(_queue_fit)
@@ -78,7 +76,7 @@ func configure(entries: Array[Dictionary], _selected_id: String, caption: String
 			row.queue_free()
 		_rows.clear()
 		for entry in _entries:
-			var row := ROW.instantiate() as Control
+			var row := row_scene.instantiate() as Control
 			row.get_node(^"Details").pressed.connect(_select.bind(str(entry.id)))
 			row.get_node(^"Action").pressed.connect(_act.bind(str(entry.id)))
 			get_node(^"Content/Area/Rows").add_child(row)
@@ -135,35 +133,16 @@ func _process(_delta: float) -> void:
 
 func _fit() -> void:
 	var phone := get_viewport_rect().size.x <= 900
-	var inset := 0 if phone else 4 if get_viewport_rect().size.x <= 1300 else 10
-	add_theme_constant_override("margin_left", inset)
-	add_theme_constant_override("margin_right", inset)
-	add_theme_constant_override("margin_top", 11 if divider_top and not phone else 0)
 	var tablet := get_viewport_rect().size.x <= 1300 and not phone
 	var grid := get_node(^"Content/Area/Rows") as GridContainer
 	grid.columns = 1 if phone else columns
-	grid.add_theme_constant_override("v_separation", 4 if phone or tablet else 6)
-	grid.add_theme_constant_override("h_separation", 12 if tablet else 24)
-	grid.offset_top = 4 if phone else 6 if tablet else 12
+	_style_grid(grid, phone, tablet)
 	get_node(^"Content/Caption").visible = not phone
 	get_node(^"Content/Caption").custom_minimum_size.y = 44 if tablet else 50
-	get_node(^"Content/Caption/Title").add_theme_font_size_override("font_size", 20 if tablet else 25)
-	get_node(^"Content/Caption/Count").add_theme_font_size_override("font_size", 17 if tablet else 20)
 	get_node(^"Content/Pager/Range").visible = not phone
-	for path in [^"Content/Pager/Previous", ^"Content/Pager/Next"]:
-		get_node(path).add_theme_stylebox_override("normal", preload("res://rookframe/ui/theme/silkbound_plain.tres"))
-		get_node(path).add_theme_stylebox_override("disabled", preload("res://rookframe/ui/theme/silkbound_plain.tres"))
 	get_node(^"Content/Pager/FooterContent").visible = get_node(^"Content/Pager/FooterContent").get_child_count() > 0
 	get_node(^"Content/Pager/Indicator/PhoneCount").visible = phone
-	for path in [^"Content/Pager/Range", ^"Content/Pager/Indicator/Page"]:
-		get_node(path).add_theme_font_size_override("font_size", 14 if tablet else 15 if phone else 18)
-	get_node(^"Content/Pager/Indicator/PhoneCount").add_theme_font_size_override("font_size", 12)
-	for path in [^"Content/Pager/Previous", ^"Content/Pager/Next"]:
-		get_node(path).add_theme_font_size_override("font_size", 28)
-	_title_font.spacing_top = -1 if phone or tablet else -2
-	_title_font.spacing_bottom = -1 if phone or tablet else -2
-	_subtitle_font.spacing_top = -1
-	_subtitle_font.spacing_bottom = 0 if phone or tablet else -1
+	_style_collection(phone, tablet)
 	var heights: Array[float] = []
 	var width: float = (get_node(^"Content").size.x - (grid.columns - 1) * grid.get_theme_constant("h_separation")) / grid.columns
 	for index in _rows.size():
@@ -172,17 +151,9 @@ func _fit() -> void:
 		var inventory := entry.has("action") or collection_layout == 2
 		var action := row.get_node(^"Action") as Button
 		action.custom_minimum_size = Vector2(44 if action.icon != null else 78 if phone or tablet else 86, 44)
-		action.add_theme_font_size_override("font_size", 17 if phone or tablet else 19)
+		_style_action_type(action, phone, tablet)
 		action.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
-		for state in ["normal", "hover", "pressed", "hover_pressed", "disabled"]:
-			var frame := action.get_theme_stylebox(state).duplicate() as StyleBoxFlat
-			frame.content_margin_left = 8 if action.icon != null else 10
-			frame.content_margin_right = frame.content_margin_left
-			frame.content_margin_top = 8 if action.icon != null else 6
-			frame.content_margin_bottom = frame.content_margin_top
-			frame.bg_color = Color("ceccb3") if action.button_pressed else Color("343d41") if state in ["hover", "pressed", "hover_pressed"] else Color("23282b")
-			frame.border_color = Color("ceccb3") if action.button_pressed else Color("5b6265")
-			action.add_theme_stylebox_override(state, frame)
+		_style_action(action)
 		var button := row.get_node(^"Details") as Button
 		var title := row.get_node(^"Details/Inset/Row/Copy/Title") as Label
 		var subtitle := row.get_node(^"Details/Inset/Row/Copy/Subtitle") as Label
@@ -194,22 +165,15 @@ func _fit() -> void:
 		value.visible = not value.text.is_empty()
 		row.get_node(^"Details/Inset/Row/Arrow").visible = phone and not inventory
 		var row_inset := row.get_node(^"Details/Inset") as MarginContainer
-		var title_size := 19 if phone else (20 if inventory else 19) if tablet else 23 if inventory else 24
-		var subtitle_size := (15 if inventory else 14) if phone else (16 if inventory else 14) if tablet else 17 if inventory else 18
-		title.add_theme_font_override("font", _title_font)
-		subtitle.add_theme_font_override("font", _subtitle_font)
-		title.add_theme_font_size_override("font_size", title_size)
-		subtitle.add_theme_font_size_override("font_size", subtitle_size)
-		value.add_theme_font_size_override("font_size", 13 if phone and entry.get("phone_value_meta", false) else 20 if phone else 19 if tablet else 25)
+		_style_record(title, subtitle, value, phone, tablet, inventory, entry)
+		var title_size := title.get_theme_font_size("font_size")
+		var subtitle_size := subtitle.get_theme_font_size("font_size")
 		icon.custom_minimum_size = Vector2.ONE * (24 if phone or tablet else 30 if inventory else 34)
-		var gap := 8 if phone or tablet else 12 if inventory else 18
-		row.get_node(^"Details/Inset/Row").add_theme_constant_override("separation", gap)
-		var px := 4 if phone else 2 if tablet else 6 if inventory else 8
-		var py := 4 if phone else 6 if tablet else 10
-		var text_gap := 3 if phone or tablet else 4
-		row.get_node(^"Details/Inset/Row/Copy").add_theme_constant_override("separation", text_gap)
-		for edge in ["left", "right", "top", "bottom"]:
-			row_inset.add_theme_constant_override("margin_" + edge, px if edge in ["left", "right"] else py)
+		_style_record_spacing(row, row_inset, phone, tablet, inventory)
+		var gap: int = row.get_node(^"Details/Inset/Row").get_theme_constant("separation")
+		var px := row_inset.get_theme_constant("margin_left")
+		var py := row_inset.get_theme_constant("margin_top")
+		var text_gap: int = row.get_node(^"Details/Inset/Row/Copy").get_theme_constant("separation")
 		var copy_width := width - 2 * px - icon.custom_minimum_size.x - gap - (16 if phone and not inventory else 0)
 		if value.visible:
 			copy_width -= value.get_minimum_size().x + gap
@@ -286,16 +250,25 @@ func _turn(step: int) -> void:
 	_ink.play(get_node(^"Content/Area"), reduced_motion)
 
 func _draw() -> void:
-	if not is_node_ready():
-		return
-	if divider_top and get_node(^"Content/Caption").visible:
-		draw_line(Vector2.ZERO, Vector2(size.x, 0), Color("3e4346"))
-	if get_node(^"Content/Caption").visible:
-		draw_line(Vector2(0, get_node(^"Content/Caption").size.y + get_theme_constant("margin_top")), Vector2(size.x, get_node(^"Content/Caption").size.y + get_theme_constant("margin_top")), Color("5b6265"))
-	var pager := get_node(^"Content/Pager") as Control
-	if not pager.visible:
-		return
-	draw_line(Vector2(get_theme_constant("margin_left"), pager.position.y + get_theme_constant("margin_top")), Vector2(size.x - get_theme_constant("margin_right"), pager.position.y + get_theme_constant("margin_top")), Color("3e4346"))
+	pass
 
 func _exit_tree() -> void:
 	_ink.finish()
+
+func _style_action(action: Button) -> void:
+	pass
+
+func _style_collection(phone: bool, tablet: bool) -> void:
+	pass
+
+func _style_record(title: Label, subtitle: Label, value: Label, phone: bool, tablet: bool, inventory: bool, entry: Dictionary) -> void:
+	pass
+
+func _style_action_type(action: Button, phone: bool, tablet: bool) -> void:
+	pass
+
+func _style_grid(grid: GridContainer, phone: bool, tablet: bool) -> void:
+	pass
+
+func _style_record_spacing(row: Control, row_inset: MarginContainer, phone: bool, tablet: bool, inventory: bool) -> void:
+	pass

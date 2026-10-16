@@ -1,7 +1,8 @@
 extends Node2D
 ## An entrance only: native slots, layout, input and control identity stay intact.
 const VISUAL = preload("res://rookframe/ui/components/surfaces/action_panel/drop_leaf.tscn")
-const INK = preload("res://rookframe/ui/components/surfaces/action_panel/content_ink.gdshader")
+@export var visual_scene: PackedScene = VISUAL
+@export var ink_shader: Shader
 const LEAF = preload("res://rookframe/ui/components/surfaces/action_panel/action_leaf.gd")
 const HEADER_SECONDS := 0.02
 const DROP_SECONDS := 0.46
@@ -20,14 +21,14 @@ var _original_modulate := Color.WHITE
 @onready var panel: VBoxContainer = get_parent()
 
 func _ready() -> void:
-	_ink.shader = INK
+	_ink.shader = ink_shader
 	panel.visibility_changed.connect(_visibility_changed)
 	if panel.animate_open and not Engine.is_editor_hint():
 		open()
 
 func open() -> void:
 	finish()
-	if panel.reduced_motion or not panel.is_visible_in_tree(): return
+	if ink_shader == null or panel.reduced_motion or not panel.is_visible_in_tree(): return
 	active = true
 	elapsed = 0.0
 	_original_modulate = panel.modulate
@@ -46,7 +47,7 @@ func _begin(generation: int) -> void:
 		leaf.mouse_behavior_recursive = Control.MOUSE_BEHAVIOR_DISABLED
 		leaf.focus_behavior_recursive = Control.FOCUS_BEHAVIOR_DISABLED
 		if leaf != _leaves[0]:
-			var visual = VISUAL.instantiate()
+			var visual = visual_scene.instantiate()
 			add_child(visual)
 			_visuals.append(visual)
 			var skin: CanvasItem = leaf.get_node_or_null("Skin")
@@ -90,7 +91,7 @@ func _pose(seconds: float) -> void:
 		var visual = _visuals[i]
 		var progress := clampf((seconds - HEADER_SECONDS - i * DROP_SECONDS) / DROP_SECONDS, 0, 1)
 		var rect := Rect2(leaf.global_position - panel.global_position, leaf.size)
-		visual.configure(rect, LEAF.STYLES[leaf.surface] if leaf is LEAF else LEAF.STYLES[0])
+		visual.configure(rect, leaf.get_surface_style() if leaf is LEAF else leaf.get_theme_stylebox("panel"))
 		visual.pose(progress)
 		visual.visible = progress > 0.0 and progress < 1.0
 		var skin := leaf.get_node_or_null("Skin")

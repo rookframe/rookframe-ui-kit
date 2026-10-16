@@ -1,0 +1,31 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://rookframe/ui/components/forms/paginated_text_area.tscn" id="base"]
+[ext_resource type="Script" path="res://rookframe/ui/silkbound-ledger/components/forms/paginated_text_area.gd" id="03d63614c4_skin_script"]
+[ext_resource type="Shader" path="res://rookframe/ui/components/surfaces/action_panel/content_ink.gdshader" id="03d63614c4_reveal_shader"]
+[ext_resource type="Theme" path="res://rookframe/ui/theme/silkbound_theme.tres" id="skin_theme"]
+[sub_resource type="StyleBoxFlat" id="03d63614c4_input"]
+bg_color = Color(0.137255, 0.156863, 0.168627, 1.0)
+border_color = Color(0.244353, 0.262784, 0.272745, 1)
+border_width_left = 1
+border_width_right = 1
+border_width_top = 1
+border_width_bottom = 1
+content_margin_left = 14.0
+content_margin_right = 14.0
+content_margin_top = 12.0
+content_margin_bottom = 12.0
+
+[node name="PaginatedTextArea" instance=ExtResource("base")]
+script = ExtResource("03d63614c4_skin_script")
+reveal_shader = ExtResource("03d63614c4_reveal_shader")
+theme = ExtResource("skin_theme")
+
+[node name="Editor" parent="."]
+theme_override_styles/normal = SubResource("03d63614c4_input")
+
+[node name="Pager" parent="."]
+theme_override_constants/separation = 8
+
+[node name="Range" parent="Pager"]
+theme_override_font_sizes/font_size = 14

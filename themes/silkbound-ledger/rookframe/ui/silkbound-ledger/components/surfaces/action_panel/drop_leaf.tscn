@@ -1,0 +1,20 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://rookframe/ui/components/surfaces/action_panel/drop_leaf.tscn" id="base"]
+[ext_resource type="Shader" path="res://rookframe/ui/components/surfaces/hinged_leaf/shadow.gdshader" id="743ed9b2cc_shadow"]
+[ext_resource type="Theme" path="res://rookframe/ui/theme/action_panel_theme.tres" id="skin_theme"]
+[sub_resource type="ShaderMaterial" id="743ed9b2cc_shadow_material"]
+resource_local_to_scene = true
+shader = ExtResource("743ed9b2cc_shadow")
+[sub_resource type="StandardMaterial3D" id="743ed9b2cc_edge"]
+shading_mode = 0
+albedo_color = Color(0.34, 0.24, 0.16, 1)
+
+[node name="DropLeaf" instance=ExtResource("base")]
+theme = ExtResource("skin_theme")
+
+[node name="Edge" parent="Motion/Hinge"]
+material_override = SubResource("743ed9b2cc_edge")
+
+[node name="Shadow" parent="Clip"]
+material = SubResource("743ed9b2cc_shadow_material")

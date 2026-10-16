@@ -1,0 +1,46 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://rookframe/ui/components/surfaces/managed_surface.tscn" id="base"]
+[ext_resource type="Texture2D" path="res://rookframe/ui/assets/silkbound-ledger/linen.png" id="b391a69655_linen"]
+
+
+[ext_resource type="StyleBox" path="res://rookframe/ui/theme/silkbound_plain.tres" id="b391a69655_plain"]
+[ext_resource type="StyleBox" path="res://rookframe/ui/theme/silkbound_row.tres" id="b391a69655_rule"]
+
+[ext_resource type="Theme" path="res://rookframe/ui/theme/silkbound_theme.tres" id="skin_theme"]
+[node name="ManagedSurface" instance=ExtResource("base")]
+theme = ExtResource("skin_theme")
+
+[node name="Linen" parent="."]
+texture = ExtResource("b391a69655_linen")
+
+[node name="Sections" parent="."]
+theme_override_constants/separation = 0
+
+[node name="Chrome" parent="Sections"]
+theme_override_styles/panel = ExtResource("b391a69655_rule")
+
+[node name="Row" parent="Sections/Chrome"]
+theme_override_constants/separation = 8
+
+[node name="Header" parent="Sections"]
+theme_override_styles/panel = ExtResource("b391a69655_rule")
+
+[node name="HeaderSlot" parent="Sections/Header"]
+theme_override_constants/separation = 8
+
+[node name="BodyRegion" parent="Sections"]
+theme_override_styles/panel = ExtResource("b391a69655_plain")
+
+[node name="BodyPadding" parent="Sections/BodyRegion"]
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="TaskSlot" parent="Sections/BodyRegion/BodyPadding/Body"]
+theme_override_constants/separation = 12
+
+[node name="Footer" parent="Sections"]
+theme_override_styles/panel = ExtResource("b391a69655_rule")
+
+[node name="FooterSlot" parent="Sections/Footer"]
+theme_override_constants/separation = 8

@@ -91,7 +91,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("command", choices=["prepare", "verify", "install"])
     parser.add_argument("--destination", type=Path)
-    parser.add_argument("--theme", action="append", choices=["fantasy", "cyberpunk"], default=[])
+    parser.add_argument("--theme", action="append", choices=["silkbound-ledger", "fantasy", "cyberpunk"], default=[])
     args = parser.parse_args()
     if args.command == "install":
         if args.destination is None:

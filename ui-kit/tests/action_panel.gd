@@ -1,6 +1,6 @@
 extends GdUnitTestSuite
-const PANEL = preload("res://rookframe/ui/components/surfaces/action_panel/action_panel.tscn")
-const SECTION = preload("res://rookframe/ui/components/surfaces/action_panel/action_section.tscn")
+const PANEL = preload("res://rookframe/ui/silkbound-ledger/components/surfaces/action_panel/action_panel.tscn")
+const SECTION = preload("res://rookframe/ui/silkbound-ledger/components/surfaces/action_panel/action_section.tscn")
 
 func test_native_slots_grow_and_shrink_without_recreating_content() -> void:
 	var panel = auto_free(PANEL.instantiate())
@@ -183,7 +183,7 @@ func test_detaching_before_deferred_entrance_does_not_access_a_tree() -> void:
 	assert_bool(panel.get_node("DropMotion").active).is_false()
 
 func test_detaching_hud_leaf_before_deferred_open_does_not_access_a_tree() -> void:
-	var leaf = auto_free(load("res://rookframe/ui/components/surfaces/hinged_leaf/hinged_leaf.tscn").instantiate())
+	var leaf = auto_free(load("res://rookframe/ui/silkbound-ledger/components/surfaces/hinged_leaf/hinged_leaf.tscn").instantiate())
 	add_child(leaf)
 	leaf.set_open(true)
 	remove_child(leaf)

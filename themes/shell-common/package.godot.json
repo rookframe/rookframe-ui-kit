@@ -1,0 +1,8 @@
+{
+  "name": "rookframe-theme-shell-common",
+  "private": true,
+  "runtime": "rookframe/ui",
+  "dependencies": {
+    "ui-kit": "workspace:*"
+  }
+}

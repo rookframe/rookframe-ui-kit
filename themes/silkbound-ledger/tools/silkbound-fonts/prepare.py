@@ -13,7 +13,7 @@ from fontTools.ttLib import TTFont
 from fontTools.ttLib.tables._c_m_a_p import CmapSubtable
 
 TOOLS = Path(__file__).resolve().parent
-SOURCE = TOOLS.parents[1] / "rookframe/ui/assets/fonts/eb-garamond"
+SOURCE = TOOLS.parents[2] / "fonts/rookframe/ui/assets/fonts/eb-garamond"
 # The migrated English/Russian UI plus accented names and common symbols.
 # Other characters and sizes continue through the original dynamic font.
 # Keep the eager atlas to common UI Latin/accents, Russian and punctuation.

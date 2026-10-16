@@ -1,21 +1,26 @@
-# Silkbound Ledger implementation contract
+# UI Kit composition and optional appearance contract
 
 ## Authority and theme scope
 
-Silkbound Ledger is the canonical default, including its leather-leaf and motion
-iteration. The Main Menu always uses Silkbound Ledger through the supported
-contract. System Extensions are intended to theme the in-World shell and game
-interface; selection is a proposed SDK capability, not an implemented API.
-Fantasy/Cyberpunk resources are optional packages under `themes/` in the workspace,
-kept outside the core UI Kit. They remain auxiliary shell-theme experiments. Direct Godot
-changes to the Main Menu are allowed but unsupported, with no compatibility promise.
+The shared UI Kit is unthemed. Core scenes at `res://rookframe/ui/components/`
+retain native Godot controls, composition, input and semantic variation names,
+but assign no Theme, palette, custom font, material or scene-local skin.
+They inherit the consumer's Theme or Godot's defaults. Installing a theme does
+not change the base scenes or select it globally.
+
+Silkbound Ledger is an explicit optional package at `themes/silkbound-ledger/`.
+Its native inherited scenes live at `res://rookframe/ui/silkbound-ledger/` and
+own leather leaves, typography, decoration and presentation hooks. The showcase
+opts into those scenes. The Main Menu's product choice remains Silkbound Ledger;
+hosts must now select it explicitly. Fantasy/Cyberpunk remain auxiliary shell
+experiments with shared optional mappings in `themes/shell-common/`.
 
 ## Compose the existing resources
 
 - Choose the public component by purpose from `rookframe/ui/catalogue.json`.
   Use native Controls/Containers for content. Public slots own layout and material;
   callers own game rules, labels, data and actions.
-- Use linked leather leaves for compact action/HUD composition. Use ledger reading
+- With Silkbound Ledger selected, use linked leather leaves for compact action/HUD composition. Use ledger reading
   surfaces for dense text; put the cloth on the owner rather than each record.
 - Keep bindings mechanically plausible and attached while a HUD leaf is folded.
   Preserve the component's surface outline in hover, pressed and focus states.
@@ -24,7 +29,7 @@ changes to the Main Menu are allowed but unsupported, with no compatibility prom
 - Preserve keyboard focus, hover, pressed, disabled, selected and error distinctions.
   Selected/primary surfaces use their contrasting foreground, including icons.
 - Reuse native themes and material resources for colors, fonts, edges and spacing.
-  Use EB Garamond and explicit locale companion resources; avoid eager all-locale
+  In Silkbound Ledger, use EB Garamond and explicit locale companion resources; avoid eager all-locale
   font chains. Extend shared material treatment instead of adding local skins.
 
 ## Themeable recipes

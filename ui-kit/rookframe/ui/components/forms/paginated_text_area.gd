@@ -4,6 +4,10 @@ extends Control
 signal value_changed(value: String)
 @export var reduced_motion := false
 var _ink := preload("res://rookframe/ui/_internal/surfaces/content_reveal.gd").new()
+@export var reveal_shader: Shader:
+	set(value):
+		reveal_shader = value
+		_ink.shader = value
 @export_multiline var value := "":
 	set(next):
 		value = next
@@ -55,10 +59,9 @@ func _changed() -> void:
 	value_changed.emit(value)
 
 func _reflow() -> void:
-	var font_size := 16 if compact else 20
-	var line_spacing := 6 if compact else 10
-	_editor.add_theme_font_size_override("font_size", font_size)
-	_editor.add_theme_constant_override("line_spacing", line_spacing)
+	_style_editor()
+	var font_size := _editor.get_theme_font_size("font_size")
+	var line_spacing := _editor.get_theme_constant("line_spacing")
 	_measure.add_theme_font_override("font", _editor.get_theme_font("font"))
 	_measure.add_theme_font_size_override("font_size", font_size)
 	_measure.add_theme_constant_override("line_spacing", line_spacing)
@@ -135,3 +138,6 @@ func _sync_pager() -> void:
 
 func _exit_tree() -> void:
 	_ink.finish()
+
+func _style_editor() -> void:
+	pass

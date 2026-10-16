@@ -11,4 +11,7 @@ func _refresh() -> void:
 	super._refresh()
 	if not is_inside_tree():
 		return
-	preload("res://rookframe/ui/_internal/forms/silkbound_task_field.gd").apply(self, compact, true)
+	_style_field()
+
+func _style_field() -> void:
+	get_node(^"Editor").custom_minimum_size.y = 112 if get_node(^"Editor") is TextEdit else 44

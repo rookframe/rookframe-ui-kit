@@ -76,7 +76,7 @@ func set_open(value: bool, animated := true) -> void:
 	animating = false
 	if not is_node_ready():
 		return
-	if not animated or reduced_motion or not is_visible_in_tree():
+	if not animated or reduced_motion or _ink == null or not is_visible_in_tree():
 		if value: _pose(1.0)
 		else: _folded()
 		if value: _focus_content.call_deferred()
@@ -137,7 +137,7 @@ func _pose(value: float) -> void:
 		_render.render_target_update_mode = SubViewport.UPDATE_DISABLED
 		_source.render_target_update_mode = SubViewport.UPDATE_ALWAYS
 		_surface.self_modulate.a = 1.0
-		_ink.set_shader_parameter("progress", 1.0)
+		_set_ink_progress(1.0)
 		_surface_pose(0.0, 0.0)
 		_shadow.hide()
 		return
@@ -146,7 +146,7 @@ func _pose(value: float) -> void:
 	_render.render_target_update_mode = SubViewport.UPDATE_ALWAYS
 	_source.render_target_update_mode = SubViewport.UPDATE_ALWAYS
 	var seconds := value * CHOREOGRAPHY_SECONDS
-	_ink.set_shader_parameter("progress", clampf((seconds - 0.40) / 0.22, 0.0, 1.0))
+	_set_ink_progress(clampf((seconds - 0.40) / 0.22, 0.0, 1.0))
 	if seconds < 0.07:
 		var t := seconds / 0.07
 		_surface_pose(lerpf(CLOSED_ANGLE, -190.0, t), 0.0, Vector2.ONE, 0.0, sin(t * PI) * 1.3)
@@ -188,11 +188,12 @@ func _surface_pose(angle: float, depth: float, compression := Vector2.ONE, dip :
 		var height := maxf(12.0, base.y - top.y)
 		binding.size = Vector2(34, height)
 		binding.position = Vector2(base.x - 17, top.y)
-		binding.material.set_shader_parameter("strip_height", height)
-		binding.material.set_shader_parameter("top_offset", top.x - base.x)
-		binding.self_modulate = Color.WHITE.lerp(Color(0.80, 0.83, 0.84), 1.0 - extension)
+		if binding.material != null: binding.material.set_shader_parameter("strip_height", height)
+		if binding.material != null: binding.material.set_shader_parameter("top_offset", top.x - base.x)
+		binding.self_modulate = _binding_tint(extension)
 	var loft := clampf(depth / 142.0, 0.0, 1.0)
 	var exposure := smoothstep(-105.0, -60.0, angle)
+	if _shadow.material == null: return
 	_shadow.visible = exposure > 0.001
 	_shadow.modulate.a = 1.0
 	var corners := [Vector3(-size.x / 2, hinge_gap + size.y, 1), Vector3(size.x / 2, hinge_gap + size.y, 1), Vector3(size.x / 2, hinge_gap, 1), Vector3(-size.x / 2, hinge_gap, 1)]
@@ -215,7 +216,7 @@ func _begin_close() -> void:
 	var from_depth := _depth
 	var from_scale := Vector2(_body.scale.x, _body.scale.y)
 	_motion = create_tween()
-	_motion.tween_method(func(value: float): _ink.set_shader_parameter("progress", value), float(_ink.get_shader_parameter("progress")), 0.0, 0.06)
+	_motion.tween_method(func(value: float): _set_ink_progress(value), float(_ink.get_shader_parameter("progress")), 0.0, 0.06)
 	_motion.tween_callback(func():
 		_surface.self_modulate.a = 0.0
 		_image.show()
@@ -234,7 +235,7 @@ func _folded() -> void:
 	_image.hide()
 	_render.render_target_update_mode = SubViewport.UPDATE_DISABLED
 	_source.render_target_update_mode = SubViewport.UPDATE_DISABLED
-	_ink.set_shader_parameter("progress", 0.0)
+	_set_ink_progress(0.0)
 	_surface_pose(CLOSED_ANGLE, 0.0)
 	_shadow.hide()
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -247,3 +248,9 @@ func _exit_tree() -> void:
 	_generation += 1
 	if _motion != null and _motion.is_valid(): _motion.kill()
 	if not is_zero_approx(_jolt): reaction_changed.emit(0.0)
+
+func _binding_tint(_extension: float) -> Color:
+	return Color.WHITE
+
+func _set_ink_progress(progress: float) -> void:
+	if _ink != null: _ink.set_shader_parameter("progress", progress)

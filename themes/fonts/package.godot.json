@@ -1,0 +1,6 @@
+{
+  "name": "rookframe-theme-fonts",
+  "private": true,
+  "runtime": "rookframe/ui",
+  "dependencies": {}
+}

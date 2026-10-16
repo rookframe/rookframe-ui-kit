@@ -1,6 +1,10 @@
 @tool
 extends Control
 var _ink := preload("res://rookframe/ui/_internal/surfaces/content_reveal.gd").new()
+@export var reveal_shader: Shader:
+	set(value):
+		reveal_shader = value
+		_ink.shader = value
 @export var reduced_motion := false
 ## Pages authored native content at measured text/Control boundaries.
 ## Compose a single Container under Area; no wheel or drag scrolling is used.
@@ -93,21 +97,7 @@ func _fit() -> void:
 	_pager.alignment = BoxContainer.ALIGNMENT_CENTER if always_show_pager else BoxContainer.ALIGNMENT_BEGIN
 	_range.size_flags_horizontal = 0 if always_show_pager else Control.SIZE_EXPAND_FILL
 	_range.custom_minimum_size.x = 54 if always_show_pager else 0
-	_range.add_theme_font_size_override("font_size", 15 if get_viewport_rect().size.y <= 560 else 18)
-	if silkbound:
-		_range.add_theme_color_override("font_color", Color("aebabe"))
-		for button in [_previous, _next]:
-			button.theme_type_variation = "WizardButton"
-			button.text = ""
-			button.icon_alignment = HORIZONTAL_ALIGNMENT_CENTER
-			button.icon = preload("res://rookframe/ui/icons/chevron-left.svg") if button == _previous else preload("res://rookframe/ui/icons/chevron-right.svg")
-			button.accessibility_name = "Previous page" if button == _previous else "Next page"
-			button.tooltip_text = button.accessibility_name
-			for state in ["normal", "hover", "pressed", "disabled"]:
-				var frame := button.get_theme_stylebox(state).duplicate() as StyleBoxFlat
-				frame.content_margin_left = 0
-				frame.content_margin_right = 0
-				button.add_theme_stylebox_override(state, frame)
+	_style_pager()
 	var overflow := enabled and _content.get_combined_minimum_size().y > height + 1
 	_pager.visible = overflow or always_show_pager
 	if overflow and not _external_pager:
@@ -212,5 +202,7 @@ func _visibility_changed() -> void:
 	refresh()
 
 func _draw() -> void:
-	if silkbound and content_inset_left > 0:
-		draw_line(Vector2.ZERO,Vector2(0,size.y),Color("3e4346"))
+	pass
+
+func _style_pager() -> void:
+	pass

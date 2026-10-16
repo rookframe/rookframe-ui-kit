@@ -1,6 +1,5 @@
 [gd_scene load_steps=5 format=3 uid="uid://dyrvqc2ip2we6"]
 
-[ext_resource type="Theme" path="res://rookframe/ui/theme/rookframe_theme.tres" id="1_theme"]
 [ext_resource type="Texture2D" path="res://rookframe/ui/icons/check.svg" id="2_check"]
 [ext_resource type="PackedScene" uid="uid://jhuolgtvtefyi" path="res://rookframe/ui/components/forms/search_field.tscn" id="3_search"]
 [ext_resource type="Script" path="res://consumer.gd" id="4_consumer"]
@@ -12,7 +11,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_theme")
 script = ExtResource("4_consumer")
 
 [node name="Canvas" type="PanelContainer" parent="."]

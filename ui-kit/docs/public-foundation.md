@@ -1,5 +1,12 @@
 # Public foundation reference
 
+Appearance in this reference describes the optional `silkbound-ledger` package.
+Base components are unthemed and use native Godot defaults. To select the described
+skin, install that package and instance the corresponding scene beneath
+`res://rookframe/ui/silkbound-ledger/`. Base component paths/UIDs and behavior stay
+public. See [migration notes](../MIGRATING.md#explicit-silkbound-ledger-selection).
+
+
 The filesystem is authoritative: normal resources under
 `res://rookframe/ui/` are public; only `_internal/` is unsupported.
 

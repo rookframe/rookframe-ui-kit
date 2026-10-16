@@ -1,0 +1,12 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://rookframe/ui/components/surfaces/action_panel/action_section.tscn" id="base"]
+[ext_resource type="Script" path="res://rookframe/ui/silkbound-ledger/components/surfaces/action_panel/action_leaf.gd" id="0289f71b97_skin_script"]
+[ext_resource type="Theme" path="res://rookframe/ui/theme/action_panel_theme.tres" id="skin_theme"]
+
+[node name="ActionSection" instance=ExtResource("base")]
+script = ExtResource("0289f71b97_skin_script")
+theme = ExtResource("skin_theme")
+
+[node name="Skin" parent="."]
+visible = true

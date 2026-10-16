@@ -1,0 +1,97 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://rookframe/ui/components/overlays/file_picker_dialog.tscn" id="base"]
+[ext_resource type="Theme" path="res://rookframe/ui/theme/rookframe_theme.tres" id="29c7a950bf_10_theme"]
+
+[ext_resource type="Texture2D" path="res://rookframe/ui/assets/silkbound-ledger/linen.png" id="29c7a950bf_linen"]
+
+[ext_resource type="StyleBox" path="res://rookframe/ui/theme/silkbound_plain.tres" id="29c7a950bf_plain"]
+
+[ext_resource type="Script" path="res://rookframe/ui/silkbound-ledger/components/overlays/file_picker_dialog.gd" id="29c7a950bf_skin_1_script"]
+[ext_resource type="Shader" path="res://rookframe/ui/components/surfaces/action_panel/content_ink.gdshader" id="29c7a950bf_reveal_shader"]
+[sub_resource type="StyleBoxEmpty" id="061ed57ca4_StyleBoxEmpty_search"]
+
+
+[node name="FilePickerDialog" instance=ExtResource("base")]
+theme = ExtResource("29c7a950bf_10_theme")
+script = ExtResource("29c7a950bf_skin_1_script")
+reveal_shader = ExtResource("29c7a950bf_reveal_shader")
+
+[node name="Background" parent="."]
+color = Color(0.137255, 0.156863, 0.168627, 1.0)
+
+[node name="Linen" parent="Shell"]
+texture = ExtResource("29c7a950bf_linen")
+
+[node name="Content" parent="Shell"]
+theme_override_constants/separation = 16
+
+[node name="Header" parent="Shell/Content"]
+theme_override_constants/separation = 16
+
+[node name="Accent" parent="Shell/Content/Header"]
+color = Color(0.243137, 0.262745, 0.274510, 1)
+
+[node name="Icon" parent="Shell/Content/Header/Mark"]
+self_modulate = Color(0.815686, 0.745098, 0.556863, 1)
+
+[node name="Copy" parent="Shell/Content/Header"]
+theme_override_constants/separation = 4
+
+[node name="Navigation" parent="Shell/Content"]
+theme_override_constants/separation = 8
+
+[node name="Path" parent="Shell/Content/Navigation"]
+theme_override_styles/panel = ExtResource("29c7a950bf_plain")
+
+[node name="Breadcrumbs" parent="Shell/Content/Navigation/Path/BreadcrumbScroll"]
+theme_override_constants/separation = 4
+
+[node name="Search" parent="Shell/Content/Navigation"]
+theme_override_constants/separation = 4
+editor_font_size = 20
+
+[node name="Row" parent="Shell/Content/Navigation/Search/Perimeter"]
+theme_override_constants/separation = 8
+
+[node name="Icon" parent="Shell/Content/Navigation/Search/Perimeter/Row"]
+self_modulate = Color(0.815686, 0.745098, 0.556863, 1)
+modulate = Color(0.682353, 0.729412, 0.745098, 1.0)
+
+[node name="Editor" parent="Shell/Content/Navigation/Search/Perimeter/Row"]
+theme_override_styles/normal = SubResource("061ed57ca4_StyleBoxEmpty_search")
+theme_override_styles/focus = SubResource("061ed57ca4_StyleBoxEmpty_search")
+theme_override_styles/read_only = SubResource("061ed57ca4_StyleBoxEmpty_search")
+
+[node name="Clear" parent="Shell/Content/Navigation/Search/Perimeter/Row"]
+theme_override_styles/focus = SubResource("061ed57ca4_StyleBoxEmpty_search")
+
+[node name="Browser" parent="Shell/Content"]
+theme_override_constants/separation = 12
+
+[node name="Stack" parent="Shell/Content/Browser/PlacesPanel"]
+theme_override_constants/separation = 8
+
+[node name="Stack" parent="Shell/Content/Browser/FilesPanel"]
+theme_override_constants/separation = 8
+
+[node name="Stack" parent="Shell/Content/Browser/Preview"]
+theme_override_constants/separation = 12
+
+[node name="PreviewDetail" parent="Shell/Content/Browser/Preview/Stack"]
+theme_override_font_sizes/font_size = 18
+
+[node name="Selection" parent="Shell/Content"]
+theme_override_constants/separation = 12
+
+[node name="File" parent="Shell/Content/Selection"]
+theme_override_constants/separation = 4
+
+[node name="Filter" parent="Shell/Content/Selection"]
+theme_override_constants/separation = 4
+
+[node name="Actions" parent="Shell/Content"]
+theme_override_constants/separation = 12
+
+[node name="HintIcon" parent="Shell/Content/Actions"]
+modulate = Color(0.682353, 0.729412, 0.745098, 1.0)

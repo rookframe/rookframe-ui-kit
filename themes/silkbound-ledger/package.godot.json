@@ -1,0 +1,9 @@
+{
+  "name": "rookframe-theme-silkbound-ledger",
+  "private": true,
+  "runtime": "rookframe/ui",
+  "dependencies": {
+    "ui-kit": "workspace:*",
+    "fonts": "workspace:*"
+  }
+}

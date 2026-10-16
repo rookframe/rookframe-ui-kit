@@ -14,9 +14,6 @@ enum Tone {
 }
 
 const TONE_NAMES := ["Info", "Pending", "Success", "Error"]
-const TONE_COLORS := [
-	Color("d0be8e"), Color("d0be8e"), Color("a9c4b6"), Color("ff817a"),
-]
 const ICONS := [
 	preload("res://rookframe/ui/icons/info.svg"),
 	preload("res://rookframe/ui/icons/spinner.svg"),
@@ -71,11 +68,11 @@ func _refresh() -> void:
 	var dismiss_button := get_node_or_null(^"Content/Dismiss") as Button
 	if icon != null:
 		icon.texture = ICONS[tone]
-		icon.self_modulate = TONE_COLORS[tone]
+		icon.self_modulate = _tone_color()
 		icon.accessibility_name = "%s status" % TONE_NAMES[tone]
 	if state_label != null:
 		state_label.text = TONE_NAMES[tone]
-		state_label.add_theme_color_override("font_color", TONE_COLORS[tone])
+		state_label.add_theme_color_override("font_color", _tone_color())
 	if title_label != null:
 		title_label.text = title
 	if description_label != null:
@@ -85,3 +82,6 @@ func _refresh() -> void:
 		dismiss_button.visible = dismissible
 	accessibility_name = "%s: %s" % [TONE_NAMES[tone], title]
 	accessibility_description = description
+
+func _tone_color() -> Color:
+	return get_theme_color("font_color", "Label")

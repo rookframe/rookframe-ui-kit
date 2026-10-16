@@ -1,7 +1,7 @@
 extends GdUnitTestSuite
 
 func test_editing_and_resizing_preserve_every_character(width: int, height: int, _test_parameters := [[606,581],[606,369],[740,180]]) -> void:
-	var note = auto_free(load("res://rookframe/ui/components/forms/paginated_text_area.tscn").instantiate())
+	var note = auto_free(load("res://rookframe/ui/silkbound-ledger/components/forms/paginated_text_area.tscn").instantiate())
 	note.theme = load("res://rookframe/ui/theme/silkbound_theme.tres")
 	add_child(note)
 	note.size = Vector2(width, height)

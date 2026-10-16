@@ -1,0 +1,134 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://rookframe/ui/components/data/world_summary_card.tscn" id="base"]
+[ext_resource type="Font" path="res://rookframe/ui/theme/silkbound_medium.tres" id="a85d28bb95_3_exo"]
+
+[ext_resource type="Theme" path="res://rookframe/ui/theme/silkbound_theme.tres" id="skin_theme"]
+[sub_resource type="FontVariation" id="a85d28bb95_SummaryBold"]
+base_font = ExtResource("a85d28bb95_3_exo")
+variation_opentype = {"wght": 500.0}
+
+[sub_resource type="StyleBoxFlat" id="a85d28bb95_SummarySurface"]
+content_margin_left = 17.0
+content_margin_top = 17.0
+content_margin_right = 17.0
+content_margin_bottom = 17.0
+bg_color = Color(0.082353, 0.090196, 0.098039, 0.97)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.356863, 0.384314, 0.396078, 1.0)
+
+[sub_resource type="StyleBoxFlat" id="a85d28bb95_AvailabilitySurface"]
+content_margin_left = 14.0
+content_margin_right = 14.0
+bg_color = Color(0.082353, 0.090196, 0.098039, 0.74)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.356863, 0.384314, 0.396078, 1.0)
+
+[sub_resource type="StyleBoxFlat" id="88daded1d0_ValueRowSurface"]
+bg_color = Color(0, 0, 0, 0)
+border_width_bottom = 1
+border_color = Color(0.243137, 0.262745, 0.274510, 1.0)
+
+[sub_resource type="StyleBoxFlat" id="f3edc92df1_ValueRowSurface"]
+bg_color = Color(0, 0, 0, 0)
+border_width_bottom = 1
+border_color = Color(0.243137, 0.262745, 0.274510, 1.0)
+
+
+[node name="WorldSummaryCard" instance=ExtResource("base")]
+theme_override_constants/separation = 0
+theme = ExtResource("skin_theme")
+
+[node name="TopAccent" parent="."]
+color = Color(0.905882, 0.905882, 0.866667, 1.0)
+
+[node name="Margin" parent="."]
+theme_override_styles/panel = SubResource("a85d28bb95_SummarySurface")
+
+[node name="Content" parent="Margin"]
+theme_override_constants/separation = 0
+
+[node name="Text" parent="Margin/Content/Kicker"]
+theme_override_font_sizes/font_size = 18
+
+[node name="Privacy" parent="Margin/Content/Kicker"]
+theme_override_font_sizes/font_size = 18
+
+[node name="WorldName" parent="Margin/Content"]
+theme_override_colors/font_color = Color(0.905882, 0.905882, 0.866667, 1.0)
+theme_override_fonts/font = SubResource("a85d28bb95_SummaryBold")
+theme_override_font_sizes/font_size = 24
+
+[node name="WorldMeta" parent="Margin/Content"]
+theme_override_colors/font_color = Color(0.905882, 0.905882, 0.866667, 1.0)
+theme_override_font_sizes/font_size = 18
+
+[node name="Package" parent="Margin/Content"]
+theme_override_constants/separation = 12
+
+[node name="Marker" parent="Margin/Content/Package"]
+theme_override_colors/font_color = Color(0.905882, 0.905882, 0.866667, 1.0)
+theme_override_font_sizes/font_size = 18
+
+[node name="Copy" parent="Margin/Content/Package"]
+theme_override_constants/separation = 1
+
+[node name="Name" parent="Margin/Content/Package/Copy"]
+theme_override_colors/font_color = Color(0.905882, 0.905882, 0.866667, 1.0)
+theme_override_fonts/font = SubResource("a85d28bb95_SummaryBold")
+theme_override_font_sizes/font_size = 18
+
+[node name="Detail" parent="Margin/Content/Package/Copy"]
+theme_override_font_sizes/font_size = 18
+
+[node name="Availability" parent="Margin/Content"]
+theme_override_styles/panel = SubResource("a85d28bb95_AvailabilitySurface")
+
+[node name="Status" parent="Margin/Content/Availability"]
+theme_override_fonts/font = SubResource("a85d28bb95_SummaryBold")
+theme_override_font_sizes/font_size = 18
+
+[node name="Facts" parent="Margin/Content"]
+theme_override_constants/separation = 0
+
+[node name="Rows" parent="Margin/Content/Facts"]
+theme_override_constants/separation = 0
+
+[node name="Created" parent="Margin/Content/Facts/Rows"]
+theme_override_styles/panel = SubResource("88daded1d0_ValueRowSurface")
+
+[node name="Content" parent="Margin/Content/Facts/Rows/Created"]
+theme_override_constants/separation = 24
+
+[node name="Key" parent="Margin/Content/Facts/Rows/Created/Content"]
+theme_override_font_sizes/font_size = 18
+
+[node name="Value" parent="Margin/Content/Facts/Rows/Created/Content"]
+theme_override_font_sizes/font_size = 18
+
+[node name="Address" parent="Margin/Content/Facts/Rows"]
+theme_override_styles/panel = SubResource("f3edc92df1_ValueRowSurface")
+
+[node name="Content" parent="Margin/Content/Facts/Rows/Address"]
+theme_override_constants/separation = 24
+
+[node name="Key" parent="Margin/Content/Facts/Rows/Address/Content"]
+theme_override_font_sizes/font_size = 18
+
+[node name="Value" parent="Margin/Content/Facts/Rows/Address/Content"]
+theme_override_font_sizes/font_size = 18
+
+[node name="Actions" parent="Margin/Content"]
+theme_override_constants/separation = 8
+
+[node name="OpenWorld" parent="Margin/Content/Actions"]
+theme_override_font_sizes/font_size = 18
+
+[node name="WorldDetails" parent="Margin/Content/Actions"]
+theme_override_font_sizes/font_size = 18

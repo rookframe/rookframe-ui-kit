@@ -54,6 +54,10 @@ var _history_index := -1
 
 
 var _ink := preload("res://rookframe/ui/_internal/surfaces/content_reveal.gd").new()
+@export var reveal_shader: Shader:
+	set(value):
+		reveal_shader = value
+		_ink.shader = value
 
 func _ready() -> void:
 	visibility_changed.connect(_reveal_open)
@@ -111,7 +115,7 @@ func _fit_layout() -> void:
 	$Shell/Content/Actions/Hint.visible = not compact
 	$Shell/Content/Actions/HintIcon.visible = not compact
 	$Shell/Content/Actions/Space.visible = compact
-	$Shell/Content.add_theme_constant_override(&"separation", 8 if compact else 16)
+	_style_spacing(compact)
 	%Search.custom_minimum_size.x = 220 if compact else 300
 
 
@@ -422,3 +426,6 @@ func _reveal_open() -> void:
 
 func _exit_tree() -> void:
 	_ink.finish()
+
+func _style_spacing(compact: bool) -> void:
+	pass

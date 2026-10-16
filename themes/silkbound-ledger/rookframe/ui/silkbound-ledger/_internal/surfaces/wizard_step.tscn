@@ -1,0 +1,46 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://rookframe/ui/_internal/surfaces/wizard_step.tscn" id="base"]
+[ext_resource type="FontVariation" path="res://rookframe/ui/theme/silkbound_medium.tres" id="7d1199d2f6_display"]
+[ext_resource type="Theme" path="res://rookframe/ui/theme/silkbound_theme.tres" id="skin_theme"]
+[sub_resource type="StyleBoxFlat" id="7d1199d2f6_Frame"]
+bg_color = Color(0, 0, 0, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+content_margin_left = 0.0
+content_margin_right = 0.0
+content_margin_top = 0.0
+content_margin_bottom = 0.0
+
+corner_radius_top_left = 0
+corner_radius_top_right = 0
+corner_radius_bottom_left = 0
+corner_radius_bottom_right = 0
+
+
+[node name="WizardStep" instance=ExtResource("base")]
+theme = ExtResource("skin_theme")
+
+[node name="Row" parent="."]
+theme_override_constants/separation = 5
+
+[node name="Marker" parent="Row"]
+theme_override_styles/panel = SubResource("7d1199d2f6_Frame")
+
+[node name="Number" parent="Row/Marker"]
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 14
+
+[node name="Name" parent="Row"]
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("7d1199d2f6_display")
+
+[node name="Rule" parent="."]
+color = Color(0.850980, 0.682353, 0.580392, 1.0)
+
+[node name="Connector" parent="."]
+color = Color(0.807843, 0.800000, 0.701961, 1)

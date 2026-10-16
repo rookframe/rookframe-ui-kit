@@ -58,12 +58,7 @@ func _refresh_layout() -> void:
 		return
 	var header: MarginContainer = get_node("Header")
 	header.custom_minimum_size.y = (44 if compact else 56) if show_emblem else 0
-	header.add_theme_constant_override("margin_left", (48 if compact else 76) if show_emblem else 18)
-	header.add_theme_constant_override("margin_right", 20 if compact else 62)
-	get_node("Sections").add_theme_constant_override("margin_left", 8 if compact else 18)
-	get_node("Footer").add_theme_constant_override("margin_left", 28 if compact else 78)
-	get_node("Footer").add_theme_constant_override("margin_right", 8 if compact else 26)
-	get_node("Footer").add_theme_constant_override("margin_top", 4 if compact else 5)
+	_style_layout(header)
 	get_node("Footer").visible = show_footer
 	get_node("Header/Emblem").visible = show_emblem
 	_refresh_decoration()
@@ -75,3 +70,6 @@ func _refresh_decoration() -> void:
 	emblem.size = Vector2(52, 44) if compact else Vector2(82, 56)
 	emblem.position = Vector2(0, maxf(0, (get_node("Header").size.y - emblem.size.y) * .5))
 	get_node("Connectors").queue_redraw()
+
+func _style_layout(header: MarginContainer) -> void:
+	pass

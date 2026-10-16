@@ -1,0 +1,22 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://rookframe/ui/components/layout/section.tscn" id="base"]
+[ext_resource type="Theme" path="res://rookframe/ui/theme/silkbound_theme.tres" id="skin_theme"]
+
+[node name="Section" instance=ExtResource("base")]
+theme = ExtResource("skin_theme")
+
+[node name="Content" parent="."]
+theme_override_constants/separation = 16
+
+[node name="Header" parent="Content"]
+theme_override_constants/separation = 16
+
+[node name="Copy" parent="Content/Header"]
+theme_override_constants/separation = 4
+
+[node name="ActionSlot" parent="Content/Header"]
+theme_override_constants/separation = 8
+
+[node name="BodySlot" parent="Content"]
+theme_override_constants/separation = 12

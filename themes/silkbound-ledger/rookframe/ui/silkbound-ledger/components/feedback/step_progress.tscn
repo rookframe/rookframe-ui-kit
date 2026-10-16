@@ -1,0 +1,28 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://rookframe/ui/components/feedback/step_progress.tscn" id="base"]
+[ext_resource type="Script" path="res://rookframe/ui/silkbound-ledger/components/feedback/step_progress.gd" id="09afed3d73_skin_1_script"]
+[ext_resource type="Theme" path="res://rookframe/ui/theme/silkbound_theme.tres" id="skin_theme"]
+
+[node name="StepProgress" instance=ExtResource("base")]
+theme_override_constants/separation = 12
+script = ExtResource("09afed3d73_skin_1_script")
+theme = ExtResource("skin_theme")
+
+[node name="Wide" parent="."]
+theme_override_constants/separation = 12
+
+[node name="Context" parent="Wide"]
+theme_override_constants/separation = 16
+
+[node name="Track" parent="Wide"]
+theme_override_constants/separation = 0
+
+[node name="Content" parent="Compact"]
+theme_override_constants/separation = 12
+
+[node name="Row" parent="Compact/Content"]
+theme_override_constants/separation = 12
+
+[node name="Copy" parent="Compact/Content/Row"]
+theme_override_constants/separation = 2

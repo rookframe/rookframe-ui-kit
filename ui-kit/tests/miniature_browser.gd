@@ -4,7 +4,7 @@ func _initialize() -> void:
 	call_deferred("_check")
 
 func _check() -> void:
-	var browser = load("res://rookframe/ui/components/content/miniature_browser.tscn").instantiate()
+	var browser = load("res://rookframe/ui/silkbound-ledger/components/content/miniature_browser.tscn").instantiate()
 	root.add_child(browser)
 	browser.size = Vector2(303, 160)
 	var previews: Array[Control] = []
