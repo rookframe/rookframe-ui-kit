@@ -102,6 +102,7 @@ three optional themes, eight languages, 1.0/1.5 text scale, long text and motion
 
 ```sh
 godot --path showcase --script res://tests/ui_expansion.gd -- --capture-dir=/tmp/rookframe-ui-expansion/captures
+godot --path showcase --script res://tests/ui_expansion_recipes.gd
 ```
 
 The automated matrix captures appearance; inspect the captures before claiming

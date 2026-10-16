@@ -16,6 +16,11 @@ var collections: Array = []
 var toasts: Array = []
 var inspections: Array = []
 var contexts: Array = []
+var selection_popovers: Array = []
+var retrievals: Array[Dictionary] = []
+var busy_states: Array = []
+var collection_menus: Array[MenuButton] = []
+var asset_previews: Array = []
 var entries: Array[Dictionary] = []
 var _language_labels: Array[Label] = []
 var _serial := 0
@@ -39,13 +44,17 @@ func _ready() -> void:
 		var page := _page(title)
 		_forms(page)
 		_inspection(page)
+		var recipes = preload("native_recipes.gd").new()
+		recipes.include_settings = title == "Settings"
+		recipes.include_details = title == "Details"
+		page.add_child(recipes)
 	for i in 36: entries.append({"id": "record-%d" % i, "title": "Inventory item %d" % (i + 1), "subtitle": "A retained record", "phone_subtitle": "", "value": str(i + 1), "action": "Use item", "action_text": "Use"})
 	for title in ["Inventory", "Assets"]:
 		var page := _page(title)
 		_collection(page, title)
 		var actions := HBoxContainer.new()
 		page.add_child(actions)
-		_transfer(actions)
+		_transfer(actions, title == "Assets")
 		_inspection(actions)
 	var feedback := _page("Feedback")
 	for title in ["Item updates", "Task updates"]:
@@ -94,10 +103,10 @@ func _button(copy: String) -> Button:
 	return button
 
 func _forms(page: Container) -> void:
-	for kind in ["number", "copy"]:
+	for kind in ["number", "copy", "search"]:
 		var field = load(UI + "components/forms/field.tscn").instantiate()
 		page.add_child(field)
-		field.label_text = "Capacity" if kind == "number" else "Read-only item ID"
+		field.label_text = {"number": "Capacity", "copy": "Read-only item ID", "search": "Search items"}[kind]
 		field.help_text = "The host validates this value."
 		var group = load(UI + "components/forms/input_group.tscn").instantiate()
 		field.get_input_slot().add_child(group)
@@ -108,13 +117,28 @@ func _forms(page: Container) -> void:
 			var unit := _label("kg")
 			unit.autowrap_mode = TextServer.AUTOWRAP_OFF
 			group.get_trailing_slot().add_child(unit)
-		else:
+		elif kind == "copy":
 			editor = LineEdit.new()
 			editor.text = "item-42"
 			editor.editable = false
 			var copy := _button("Copy")
 			copy.pressed.connect(func(): DisplayServer.clipboard_set(editor.text))
 			group.get_trailing_slot().add_child(copy)
+		else:
+			editor = LineEdit.new()
+			editor.text = "Retained query"
+			var glyph := TextureRect.new()
+			glyph.texture = load(UI + "icons/search.svg")
+			glyph.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+			glyph.custom_minimum_size = Vector2(24, 24)
+			glyph.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+			glyph.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+			group.get_leading_slot().add_child(glyph)
+			var clear := _button("Clear search")
+			clear.pressed.connect(func():
+				editor.text = ""
+				editor.grab_focus())
+			group.get_trailing_slot().add_child(clear)
 		editor.custom_minimum_size.y = 44
 		editor.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		group.get_input_slot().add_child(editor)
@@ -124,6 +148,34 @@ func _forms(page: Container) -> void:
 	search.label_text = "Search items"
 	search.value = "Retained query"
 	page.add_child(search)
+	for kind in ["Quality", "Volume", "Storage"]:
+		var field = load(UI + "components/forms/field.tscn").instantiate()
+		field.label_text = kind
+		page.add_child(field)
+		var target: Control
+		if kind == "Quality":
+			target = OptionButton.new()
+			target.add_item("Balanced", 10)
+			target.add_item("Detailed", 20)
+		elif kind == "Volume":
+			target = HSlider.new()
+			target.max_value = 100
+			target.step = 5
+		else:
+			target = HBoxContainer.new()
+			var group := ButtonGroup.new()
+			for copy in ["Local", "Shared"]:
+				var choice := CheckBox.new()
+				choice.text = copy
+				choice.accessibility_name = copy
+				choice.custom_minimum_size = Vector2(44, 44)
+				choice.button_group = group
+				choice.button_pressed = copy == "Local"
+				target.add_child(choice)
+		target.custom_minimum_size.y = 44
+		field.get_input_slot().add_child(target)
+		field.set_target(target)
+		fields.append(field)
 	var error := _button("Toggle error")
 	error.pressed.connect(func():
 		for field in fields: field.set_error("Value is unavailable" if field.error_text.is_empty() else ""))
@@ -161,11 +213,16 @@ func _collection(page: Container, title: String) -> void:
 	var collection = load(UI + "components/data/collection.tscn").instantiate()
 	collection.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	page.add_child(collection)
-	collection.configure(entries, "", title, str(entries.size()))
+	var records: Array[Dictionary] = entries.duplicate(true)
+	if title == "Assets":
+		for record in records:
+			record.title = record.title.replace("Inventory item", "Asset")
+			record.icon = load(UI + "icons/sigil.svg")
+	collection.configure(records, "", title, str(records.size()))
 	collections.append(collection)
 	search.text_changed.connect(func(query: String):
 		var ids := PackedStringArray()
-		for entry in entries:
+		for entry in records:
 			if query.is_empty() or entry.title.to_lower().contains(query.to_lower()): ids.append(entry.id)
 		collection.set_visible_ids(ids))
 	collection.get_footer_slot().add_child(_button("Host action"))
@@ -175,23 +232,85 @@ func _collection(page: Container, title: String) -> void:
 	status.hide()
 	page.add_child(status)
 	search.text_changed.connect(func(query: String):
-		var matches := entries.any(func(entry: Dictionary): return query.is_empty() or entry.title.to_lower().contains(query.to_lower()))
+		var matches := records.any(func(entry: Dictionary): return query.is_empty() or entry.title.to_lower().contains(query.to_lower()))
+		status.state = 1
+		status.title = "No matching items"
 		status.visible = not matches
 		collection.visible = matches)
-	var fail := _button("Show retrieval error")
-	toolbar.add_child(fail)
-	fail.pressed.connect(func():
-		status.state = 3
-		status.title = "Could not load items"
-		collection.hide()
-		status.show())
+	var menu := MenuButton.new()
+	menu.text = "Actions"
+	menu.accessibility_name = title + " actions"
+	menu.focus_mode = Control.FOCUS_ALL
+	menu.custom_minimum_size = Vector2(44, 44)
+	toolbar.add_child(menu)
+	collection_menus.append(menu)
+	var popup := menu.get_popup()
+	popup.add_item("Select items", 10)
+	popup.add_item("Show retrieval error", 20)
+	popup.add_item("Load latest results", 30)
+	if title == "Assets": popup.add_item("Preview image", 40)
+	var picker_popover = load(UI + "components/overlays/popover.tscn").instantiate()
+	page.add_child(picker_popover)
+	selection_popovers.append(picker_popover)
+	var picker = load(UI + "components/forms/multi_select_picker.tscn").instantiate()
+	picker_popover.get_content_slot().add_child(picker)
+	picker.set_items(records)
+	pickers.append(picker)
+	var preview = load(UI + "components/overlays/popover.tscn").instantiate()
+	page.add_child(preview)
+	asset_previews.append(preview)
+	for stretch in [TextureRect.STRETCH_KEEP_ASPECT_CENTERED, TextureRect.STRETCH_KEEP_ASPECT_COVERED]:
+		var ratio := AspectRatioContainer.new()
+		ratio.ratio = 16.0 / 9.0
+		ratio.custom_minimum_size = Vector2(240, 135)
+		preview.get_content_slot().add_child(ratio)
+		var image := TextureRect.new()
+		image.texture = load(UI + "icons/sigil.svg")
+		image.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		image.stretch_mode = stretch
+		image.accessibility_name = "Asset preview: fit" if stretch == TextureRect.STRETCH_KEEP_ASPECT_CENTERED else "Asset preview: crop"
+		ratio.add_child(image)
+	var retrieval := {"generation": 0, "accepted": 0, "ignored": 0}
+	retrievals.append(retrieval)
+	popup.id_pressed.connect(func(id: int):
+		if id == 10: picker_popover.open_for(menu)
+		elif id == 20:
+			status.state = 3
+			status.title = "Could not load items"
+			collection.hide()
+			status.show()
+		elif id == 30: simulate_retrieval(retrievals.find(retrieval))
+		elif id == 40: preview.open_for(menu)
+	)
+	retrieval["apply"] = func(generation: int):
+		collection.configure(records, "", title, "Result %d" % generation)
+		status.hide()
+		collection.show()
 	var retry := _button("Retry")
 	status.get_action_slot().add_child(retry)
 	retry.pressed.connect(func():
 		status.hide()
 		collection.show())
 
-func _transfer(page: Container) -> void:
+func simulate_retrieval(index: int) -> void:
+	# The first response arrives last. Only the current generation is accepted.
+	var state := retrievals[index]
+	state.generation += 1
+	_deliver_response(index, state.generation, 3)
+	state.generation += 1
+	_deliver_response(index, state.generation, 1)
+
+func _deliver_response(index: int, generation: int, frames: int) -> void:
+	for i in frames: await get_tree().process_frame
+	if not is_inside_tree(): return
+	var state := retrievals[index]
+	if generation != state.generation:
+		state.ignored += 1
+		return
+	state.accepted = generation
+	state.apply.call(generation)
+
+func _transfer(page: Container, delayed := false) -> void:
 	var region := HBoxContainer.new()
 	region.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	page.add_child(region)
@@ -214,15 +333,27 @@ func _transfer(page: Container) -> void:
 	region.add_child(target)
 	context.placement_validator = func(_source: String, _target: String, payload: Dictionary): return {"allowed": payload.get("amount", 0) == 1, "reason": "Only one item fits"}
 	context.transfer_requested.connect(func(id: int, _source: String, _target: String, _payload: Dictionary):
-		# Synthetic synchronous host acceptance; data movement belongs here.
+		if delayed: await get_tree().create_timer(0.25).timeout
+		if not is_instance_valid(context) or not is_instance_valid(target): return
+		# Synthetic host acceptance; domain movement belongs here.
 		target.text = "Equipped item-42"
 		context.resolve_transfer(id, true))
 
 func _feedback(page: Container, title: String) -> void:
 	page.add_child(_label(title, "RookframeHeading"))
+	var busy = load(UI + "components/feedback/task_state.tscn").instantiate()
+	busy.state = 0
+	busy.title = "Saving task progress"
+	busy.description = "Synthetic host work; actions below remain available."
+	page.add_child(busy)
+	busy_states.append(busy)
 	var stack = load(UI + "components/feedback/toast_stack.tscn").instantiate()
 	page.add_child(stack)
 	toasts.append(stack)
+	var result := _label("No host action requested")
+	page.add_child(result)
+	stack.finished.connect(func(_id: String, reason: StringName, action: String):
+		if reason == &"action": result.text = "Host action: " + action)
 	var push := _button("Push message")
 	page.add_child(push)
 	push.pressed.connect(func():
@@ -277,3 +408,4 @@ func apply_presentation() -> void:
 		inspect.get_preview_slot().get_child(0).text = copy
 		inspect.get_body_slot().get_child(0).text = copy
 	for collection in collections: collection.reduced_motion = reduced_motion
+	for busy in busy_states: busy.reduced_motion = reduced_motion
