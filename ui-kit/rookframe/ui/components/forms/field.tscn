@@ -1,0 +1,31 @@
+[gd_scene load_steps=2 format=3 uid="uid://dal8rg0ntcpnw"]
+
+[ext_resource type="Script" path="res://rookframe/ui/components/forms/field.gd" id="1"]
+
+[node name="Field" type="VBoxContainer"]
+script = ExtResource("1")
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"RookframeLabel"
+autowrap_mode = 2
+
+[node name="InputSlot" type="VBoxContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Help" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"RookframeMeta"
+autowrap_mode = 2
+
+[node name="Error" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"RookframeError"
+autowrap_mode = 2
+

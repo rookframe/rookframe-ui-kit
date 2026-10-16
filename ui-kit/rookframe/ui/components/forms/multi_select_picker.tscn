@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=3 uid="uid://oxjbxtifnqxj"]
+
+[ext_resource type="Script" path="res://rookframe/ui/components/forms/multi_select_picker.gd" id="1"]
+
+[node name="MultiSelectPicker" type="VBoxContainer"]
+script = ExtResource("1")
+size_flags_horizontal = 3
+
+[node name="Empty" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+autowrap_mode = 2
+
+[node name="Rows" type="VBoxContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Summary" type="VBoxContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Clear" type="Button" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(44, 44)
+text = "Clear selection"
+
