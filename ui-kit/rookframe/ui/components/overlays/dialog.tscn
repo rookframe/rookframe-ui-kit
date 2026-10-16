@@ -22,7 +22,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_type_variation = &"SilkDialogSurface"
+theme_type_variation = &"RookframeModalSurface"
 
 [node name="Content" type="VBoxContainer" parent="Shell"]
 layout_mode = 2
@@ -36,31 +36,31 @@ layout_mode = 2
 [node name="Eyebrow" type="Label" parent="Shell/Content/Header/Copy"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_type_variation = &"SilkNoticeState"
+theme_type_variation = &"RookframeInlineNoticeState"
 text = "Rookframe"
 
 [node name="Title" type="Label" parent="Shell/Content/Header/Copy"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_type_variation = &"SilkDialogTitle"
+theme_type_variation = &"RookframeDialogTitle"
 text = "Dialog title"
 autowrap_mode = 3
 
 [node name="Message" type="PanelContainer" parent="Shell/Content"]
 layout_mode = 2
-theme_type_variation = &"SilkDialogMessage"
+theme_type_variation = &"RookframeDialogMessage"
 
 [node name="Description" type="Label" parent="Shell/Content/Message"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_type_variation = &"SilkDialogCopy"
+theme_type_variation = &"RookframeDialogCopy"
 text = "Explain the decision and its consequence."
 autowrap_mode = 3
 
 [node name="Body" type="PanelContainer" parent="Shell/Content"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_type_variation = &"SilkDialogBody"
+theme_type_variation = &"RookframeDialogBody"
 
 [node name="BodySlot" type="VBoxContainer" parent="Shell/Content/Body"]
 unique_name_in_owner = true
@@ -69,7 +69,7 @@ size_flags_vertical = 3
 
 [node name="Footer" type="PanelContainer" parent="Shell/Content"]
 layout_mode = 2
-theme_type_variation = &"SilkDialogFooter"
+theme_type_variation = &"RookframeDialogFooter"
 
 [node name="Actions" type="HBoxContainer" parent="Shell/Content/Footer"]
 layout_mode = 2

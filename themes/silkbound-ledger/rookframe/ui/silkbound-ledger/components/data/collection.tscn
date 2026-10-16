@@ -1,13 +1,13 @@
 [gd_scene format=3]
 
-[ext_resource type="PackedScene" path="res://rookframe/ui/components/data/silkbound_collection.tscn" id="base"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/components/data/collection.tscn" id="base"]
 [ext_resource type="FontVariation" path="res://rookframe/ui/theme/silkbound_medium.tres" id="6b18850439_medium"]
-[ext_resource type="Script" path="res://rookframe/ui/silkbound-ledger/components/data/silkbound_collection.gd" id="6b18850439_skin_script"]
-[ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/_internal/data/silkbound_collection_row.tscn" id="6b18850439_scene_ROW"]
+[ext_resource type="Script" path="res://rookframe/ui/silkbound-ledger/components/data/collection.gd" id="6b18850439_skin_script"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/_internal/data/collection_row.tscn" id="6b18850439_scene_ROW"]
 [ext_resource type="Shader" path="res://rookframe/ui/components/surfaces/action_panel/content_ink.gdshader" id="6b18850439_reveal_shader"]
 [ext_resource type="Theme" path="res://rookframe/ui/theme/silkbound_theme.tres" id="skin_theme"]
 
-[node name="SilkboundCollection" instance=ExtResource("base")]
+[node name="Collection" instance=ExtResource("base")]
 theme_override_constants/separation = 0
 script = ExtResource("6b18850439_skin_script")
 row_scene = ExtResource("6b18850439_scene_ROW")

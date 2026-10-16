@@ -1,7 +1,6 @@
 @tool
 extends VBoxContainer
 ## Authored review block with data-driven label/value rows and optional copy.
-@export var silkbound := false
 const ROW = preload("res://rookframe/ui/_internal/data/summary_pair.tscn")
 @export var row_scene: PackedScene = ROW
 const STAT = preload("res://rookframe/ui/_internal/data/summary_stat.tscn")
@@ -43,8 +42,8 @@ func configure(title: String, icon: Texture2D, pairs: Array[Dictionary], copy: S
 	_fit()
 
 func _fit() -> void:
-	_fit_silkbound()
+	_fit_presentation()
 
 
-func _fit_silkbound() -> void:
+func _fit_presentation() -> void:
 	pass

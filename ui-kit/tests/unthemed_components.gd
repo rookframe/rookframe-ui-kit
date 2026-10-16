@@ -32,7 +32,7 @@ func _collect(directory: String, paths: Array[String]) -> void:
 	for file in DirAccess.get_files_at(directory):
 		if file.ends_with(".tscn"): paths.append(directory.path_join(file))
 	for child in DirAccess.get_directories_at(directory):
-		if child != "silkbound-ledger": _collect(directory.path_join(child), paths)
+		_collect(directory.path_join(child), paths)
 
 func _inspect(node: Node, source: String) -> void:
 	if node is Control or node is Window:

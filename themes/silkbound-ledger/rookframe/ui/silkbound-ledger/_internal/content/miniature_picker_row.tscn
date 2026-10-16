@@ -1,6 +1,6 @@
 [gd_scene format=3]
 
-[ext_resource type="PackedScene" path="res://rookframe/ui/_internal/content/silkbound_miniature_row.tscn" id="base"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/_internal/content/miniature_picker_row.tscn" id="base"]
 [ext_resource type="Theme" path="res://rookframe/ui/theme/silkbound_theme.tres" id="skin_theme"]
 [sub_resource type="StyleBoxFlat" id="34c42b1303_normal"]
 bg_color = Color(0,0,0,0)

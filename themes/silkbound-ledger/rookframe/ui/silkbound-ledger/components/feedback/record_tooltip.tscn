@@ -1,11 +1,11 @@
 [gd_scene format=3]
 
-[ext_resource type="PackedScene" path="res://rookframe/ui/components/feedback/silkbound_tooltip.tscn" id="base"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/components/feedback/record_tooltip.tscn" id="base"]
 [ext_resource type="FontVariation" path="res://rookframe/ui/theme/silkbound_medium.tres" id="d09180428d_medium"]
 [ext_resource type="FontVariation" path="res://rookframe/ui/theme/silkbound_regular.tres" id="d09180428d_regular"]
 [ext_resource type="Theme" path="res://rookframe/ui/theme/silkbound_theme.tres" id="skin_theme"]
 
-[node name="SilkboundTooltip" instance=ExtResource("base")]
+[node name="RecordTooltip" instance=ExtResource("base")]
 theme_override_constants/separation = 8
 theme = ExtResource("skin_theme")
 

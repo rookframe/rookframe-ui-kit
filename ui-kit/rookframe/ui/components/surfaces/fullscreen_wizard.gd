@@ -1,6 +1,6 @@
 @tool
 extends Control
-## Silkbound full-screen task frame. Consumers own the draft and task content.
+## Full-screen task frame. Consumers own the draft and task content.
 signal back_requested
 signal restart_requested
 signal primary_requested

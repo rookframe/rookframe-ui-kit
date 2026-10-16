@@ -1,10 +1,7 @@
 # Native Controls and composition recipes
 
-Appearance in this reference describes the optional `silkbound-ledger` package.
-Base components are unthemed and use native Godot defaults. To select the described
-skin, install that package and instance the corresponding scene beneath
-`res://rookframe/ui/silkbound-ledger/`. Base component paths/UIDs and behavior stay
-public. See [migration notes](../MIGRATING.md#explicit-silkbound-ledger-selection).
+Core components inherit the consumer Theme or native Godot defaults.
+Appearance belongs to the consumer or an optional theme package.
 
 
 The UI Kit is native-first: Godot owns control behavior and Rookframe supplies
@@ -111,11 +108,9 @@ are required.
 
 ## Auxiliary shell-theme Switch
 
-Instance `res://rookframe/ui/menu/Switch.tscn` under either auxiliary Theme. The shared
+Instance `res://rookframe/ui/menu/Switch.tscn` under a consumer Theme. The shared
 Usage token is `components.switch`, mapped to native `components_switch` and
-`components_switch__compact` variations. Fantasy uses its buttons' textured
-walnut and beveled brass casing, with material lighting for selection and focus.
-Cyberpunk uses their alloy faces, cut corners, depth and cyan selection edges.
+`components_switch__compact` variations. The consumer Theme supplies appearance.
 
 Set `title` and optional `description` for the card's copy; leave native
 `Button.text` and `icon` empty. Selected cards show the same checkmark resource
@@ -136,8 +131,7 @@ assign the same host-owned `ButtonGroup` to those cards for exclusive selection.
 Set one card's initial `button_pressed = true`. Independent groups use separate
 ButtonGroups; standalone cards can toggle independently.
 
-SwitchGroup supplies the existing `menu_group` material: stone tray in Fantasy,
-chassis tray in Cyberpunk. It supports any number of options. Cards share a row
+SwitchGroup uses the `menu_group` variation from the consumer Theme. It supports any number of options. Cards share a row
 using a preferred card width of 320 px regular / 280 px compact; when the row
 would not fit, the whole group stacks vertically. The threshold also accounts for padding, gaps and
 larger native card minimums. Adding, removing or hiding options recomputes the
@@ -156,13 +150,7 @@ states. Run its integration check in the sibling showcase with:
 
 ## Auxiliary shell-theme editor controls
 
-These auxiliary editor recipes exercise Fantasy and Cyberpunk theme mappings.
-Fantasy reserves carved brass fittings for primary actions. Tools, secondary
-actions, and dropdowns use recessed walnut with a slim, beveled brass casing and
-gently rounded corners, alongside
-textured stone rails/panels and walnut inset/log surfaces.
-Cyberpunk uses the menu's alloy switches, emissive actions, and virtual
-chassis materials. Silkbound Ledger remains canonical; these examples do not change the Main Menu.
+These editor recipes use semantic mappings from the consumer Theme.
 
 | Scene under `res://rookframe/ui/editor/` | Use |
 | --- | --- |
@@ -199,15 +187,14 @@ tool/layer/placement example. Run its input, layout and material checks with:
 
 ## Auxiliary shell-theme choices and native Settings controls
 
-Instance `res://rookframe/ui/menu/MenuChoice.tscn` with the Fantasy or Cyberpunk
+Instance `res://rookframe/ui/menu/MenuChoice.tscn` with a consumer
 Theme. This native OptionButton binds its popup Theme, puts the selected check
 at the trailing edge, and bounds long menus to the available space above or
 below the field. Item IDs, metadata, tooltips, incremental search, keyboard
 navigation and selection signals remain native. Set `compact` or call
 `set_compact(true)`; the popup follows the density. Theme/density changes dismiss
 an open popup before refreshing. Give the field an `accessibility_name`.
-Minimum heights are 64/48 px in Fantasy and 52/48 px in Cyberpunk; containers
-choose the width.
+The consumer Theme supplies minimum heights; containers choose the width.
 
 For a bare OptionButton, set `get_popup().theme_type_variation` to
 `settings_popup` or `settings_popup__compact`. Set a ScrollContainer's vertical
@@ -218,7 +205,7 @@ selectable popup items and popup scrollbars; disabled items/separators keep the
 arrow cursor. Verify with `tests/menu_choice.gd` in the showcase and
 `tests/current_design_system.gd` in the sibling showcase.
 
-For a plain Silkbound ScrollContainer, assign an intentional native scrollbar
+For a native ScrollContainer, assign an intentional native scrollbar
 thickness (the specimen uses `get_v_scroll_bar().custom_minimum_size.x = 16`).
 Its flat StyleBoxes supply colors, not a minimum width. Check overflowing content
 at phone size and verify that the thumb remains visible and draggable.
@@ -226,6 +213,6 @@ at phone size and verify that the thumb remains visible and draggable.
 ## Auxiliary Chronicle surface
 
 Use `res://rookframe/ui/chronicle/ChronicleSurface.tscn` for retained event histories,
-recaps, quest journals and acquired lore under the auxiliary Fantasy/Cyberpunk
-Themes. See [the Chronicle contract](chronicle.md) for semantic scope, companion
+recaps, quest journals and acquired lore under a consumer
+Theme. See [the Chronicle contract](chronicle.md) for semantic scope, companion
 text styles, density, reading margins and vertical resizing.

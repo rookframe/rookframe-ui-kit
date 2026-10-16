@@ -1,6 +1,6 @@
 [gd_scene format=3]
-[ext_resource type="Script" path="res://rookframe/ui/_internal/data/silkbound_collection_row.gd" id="script"]
-[ext_resource type="Script" path="res://rookframe/ui/_internal/data/silkbound_hint_button.gd" id="hint"]
+[ext_resource type="Script" path="res://rookframe/ui/_internal/data/collection_row.gd" id="script"]
+[ext_resource type="Script" path="res://rookframe/ui/_internal/data/hint_button.gd" id="hint"]
 [node name="CollectionRow" type="HBoxContainer"]
 script = ExtResource("script")
 size_flags_horizontal = 3
@@ -38,7 +38,7 @@ mouse_filter = 2
 visible = false
 custom_minimum_size = Vector2(44, 44)
 size_flags_vertical = 4
-theme_type_variation = &"SilkIcon"
+theme_type_variation = &"RookframeIcon"
 expand_icon = true
 
 [node name="Arrow" type="Label" parent="Details/Inset/Row"]

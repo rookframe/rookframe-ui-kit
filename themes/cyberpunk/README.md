@@ -1,8 +1,8 @@
 # Cyberpunk theme
 
-Optional native Godot theme package. Depends only on the sibling UI Kit.
-The kit supplies controls, semantic mappings, geometry and the Theme compiler;
-this package owns its material values, artwork and theme-specific mapping.
+Optional native Godot theme package. The sibling UI Kit supplies controls and
+the Theme compiler. `shared/fonts` and `shared/shell-common` supply optional fonts,
+semantic mappings and geometry. This package owns materials, artwork and its mapping.
 
 Install from the monorepo root:
 
@@ -14,4 +14,6 @@ Assign `res://rookframe/ui/menu/cyberpunk/CyberpunkTheme.tres` to the owning Con
 Runtime paths and existing UIDs are preserved; resources are merged into the
 consumer's `rookframe/ui/`. Review this package through `../../showcase`.
 See the [recipe contract](../../ui-kit/docs/native-controls-and-recipes.md).
+Shared appearance rules live in [shell styling](../../shared/shell-common/docs/styling.md)
+and [Chronicle styling](../../shared/shell-common/docs/chronicle.md).
 Source and generated art use [MIT](LICENSE); shipped fonts retain their licenses.

@@ -6,11 +6,11 @@ var _ink := preload("res://rookframe/ui/_internal/surfaces/content_reveal.gd").n
 		reveal_shader = value
 		_ink.shader = value
 @export var reduced_motion := false
-## Bounded Silkbound records with a distinct optional row action.
+## Bounded records with a distinct optional row action.
 ## The caller owns the records and all mutations; this Control owns only paging.
 signal selected(id: String)
 signal action_requested(id: String)
-const ROW = preload("res://rookframe/ui/_internal/data/silkbound_collection_row.tscn")
+const ROW = preload("res://rookframe/ui/_internal/data/collection_row.tscn")
 @export var row_scene: PackedScene = ROW
 @export var empty_text := "No entries in this group."
 @export var framed_collection := true
@@ -105,7 +105,7 @@ func configure(entries: Array[Dictionary], _selected_id: String, caption: String
 		action.toggle_mode = entry.has("action_pressed")
 		action.set_pressed_no_signal(bool(entry.get("action_pressed", false)))
 		action.accessibility_name = action.tooltip_text
-		action.theme_type_variation = &"SilkPrimaryIcon" if entry.get("action_pressed", false) else &"SilkIcon"
+		action.theme_type_variation = &"RookframePrimaryIcon" if entry.get("action_pressed", false) else &"RookframeIcon"
 	get_node(^"Content/Caption/Title").text = caption
 	get_node(^"Content/Caption/Count").text = count
 	get_node(^"Content/Area/Empty").text = empty_text

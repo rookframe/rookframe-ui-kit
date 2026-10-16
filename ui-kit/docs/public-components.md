@@ -1,10 +1,7 @@
 # Public component reference
 
-Appearance in this reference describes the optional `silkbound-ledger` package.
-Base components are unthemed and use native Godot defaults. To select the described
-skin, install that package and instance the corresponding scene beneath
-`res://rookframe/ui/silkbound-ledger/`. Base component paths/UIDs and behavior stay
-public. See [migration notes](../MIGRATING.md#explicit-silkbound-ledger-selection).
+Core components inherit the consumer Theme or native Godot defaults.
+Appearance belongs to the consumer or an optional theme package.
 
 
 Every scene and script in this document is public at its normal
@@ -80,8 +77,7 @@ here.
 
 ## Layout and navigation
 
-The opt-in [Action Panel](action-panel.md) supplies the approved offset leather
-leaves, four public composition slots and automatically paired connectors. Its
+The opt-in [Action Panel](action-panel.md) supplies four composable regions, four public composition slots and automatically paired connectors. Its
 ordinary Godot sections grow with authored or programmatically added Controls.
 It has no combat or targeting behavior.
 
@@ -132,7 +128,7 @@ and loads the selected file; cancel does nothing, and failures use
 
 | Scene / root | Public properties and defaults | Signals, methods, and slots | Behavior, focus, input, and accessibility |
 | --- | --- | --- | --- |
-| `dialog.tscn` / `Window` | `tone = INFORMATION`; `eyebrow = "Rookframe"`; `heading = "Dialog title"`; `description = "Explain the decision and its consequence."`; `confirm_label = "Continue"`; `cancel_label = "Cancel"`; `show_cancel = true`; `confirm_enabled = true` | `confirmed`, `cancelled`; `get_body_slot()`, `open_dialog()`, `close_dialog()`; `BodySlot` | Opens as a native modal Window with one blocking scrim without pre-focusing either action. Tab enters the native control order when the user requests keyboard navigation. At 700px or narrower, or 550px or shorter, it becomes an embedded bottom sheet, retaining the same source-order controls. `ui_cancel`, the cancel action, and `close_requested` emit `cancelled`; an enabled Confirm emits `confirmed`. Silkbound Ledger uses a heading, optional eyebrow, unboxed message, ledger bands, and a trailing footer with Cancel before the confirmation. Destructive confirmation has explicit text and danger styling. |
+| `dialog.tscn` / `Window` | `tone = INFORMATION`; `eyebrow = "Rookframe"`; `heading = "Dialog title"`; `description = "Explain the decision and its consequence."`; `confirm_label = "Continue"`; `cancel_label = "Cancel"`; `show_cancel = true`; `confirm_enabled = true` | `confirmed`, `cancelled`; `get_body_slot()`, `open_dialog()`, `close_dialog()`; `BodySlot` | Opens as a native modal Window with one blocking scrim without pre-focusing either action. Tab enters the native control order when the user requests keyboard navigation. At 700px or narrower, or 550px or shorter, it becomes an embedded bottom sheet, retaining the same source-order controls. `ui_cancel`, the cancel action, and `close_requested` emit `cancelled`; an enabled Confirm emits `confirmed`. Destructive confirmation has explicit text and danger styling. |
 | `file_picker_dialog.tscn` / `Window` | `heading = "Open a file"`; `description = "Choose a file from your project or computer."`; `initial_directory = "res://"`; `allowed_extensions = []`; `confirm_label = "Open"`; `show_hidden = false` | `file_selected(path)`, `cancelled`, `directory_changed(path)`; `open_picker(directory = "")`, `current_directory()`, `selected_path()` | Initial focus enters Search. Native focusable places, breadcrumbs, file rows, and actions support keyboard/controller navigation; activation opens folders or selects files, `ui_accept` confirms a selection, and `ui_cancel` cancels. Selected name/path and filter summary stay visible and accessible outside hover tooltips. |
 
 `Dialog` is a native modal `Window` with a blocking host scrim, a heading,
@@ -256,10 +252,10 @@ trees.
 
 ## Miniature browser
 
-Use `res://rookframe/ui/components/content/silkbound_miniature_browser.tscn` for
+Use `res://rookframe/ui/components/content/miniature_picker.tscn` for
 full-screen Miniature choice, including creation and sheet Appearance. Its
 list, search, preview and SDK-owned draft confirmation replace the former
-full-screen grid browser. See the Silkbound Miniature browser contract below.
+full-screen grid browser. See the MiniaturePicker contract below.
 
 `res://rookframe/ui/components/content/miniature_browser.tscn` combines search,
 a responsive scrolling grid of native choice cards. Every available card has its
@@ -426,8 +422,7 @@ TextField, TextArea and their task variants stay together on one page, including
 the field label and validation copy. Their authored minimum height must fit the
 available content viewport, like every other indivisible interactive control.
 
-`components/content/silkbound_miniature_browser.tscn` composes three linked
-leather leaves: a title and close action, a searchable card grid, and selection
+`components/content/miniature_picker.tscn` composes three regions: a title and close action, a searchable card grid, and selection
 with cancel/choose actions. It retains `configure(entries, selected_id, labels)`,
 `selection()`, `focus_search()` and `set_state(state, message)`, and its six
 selection/preview/retry/choose/cancel/close signals. Consumers own acquisition,
@@ -439,12 +434,12 @@ Set it to `true` for full-screen sheets and wizard pickers: three cards per page
 on landscape phone, eight on larger canvases. Localized `previous` and `next`
 labels supplement the existing search, status and selection labels. Native
 resize recalculates the grid; selection remains unchanged. The full-screen
-Silkbound wrapper enables this mode.
+MiniaturePicker wrapper enables this mode.
 
-## SilkboundCollection
+## Collection
 
-`res://rookframe/ui/components/data/silkbound_collection.tscn` is a bounded,
-whole-row collection for the Silkbound sheet. It uses one column on phone and
+`res://rookframe/ui/components/data/collection.tscn` is a bounded,
+whole-row collection for bounded content. It uses one column on phone and
 one or two authored columns on larger canvases. `collection_layout` selects
 ordinary, wide, or inventory row metrics; `divider_top` adds a secondary section
 divider. The owning surface supplies its Theme.
@@ -464,39 +459,39 @@ keeps complete rows within the available area; long text wraps using native
 font metrics. Keyboard focus, hover, pressed and disabled states remain
 separate. Consumers must use these public methods rather than internal paths.
 
-`components/forms/paginated_text_area.tscn` is the Silkbound fixed-page notepad.
+`components/forms/paginated_text_area.tscn` is a fixed-page notepad.
 Set `value` to the complete text and consume `value_changed(value)` to retain the
 complete draft; `compact` applies landscape phone typography. Native Label shaping
 measures pages and native TextEdit handles input. Edits, page turns and resize
 retain all text and the editing caret. Reparent the `get_pager()` HBoxContainer
 into an authored fixed footer. The pager appears only when the text needs more than one page.
 
-SilkboundCollection follows native vertical size flags: `SIZE_EXPAND_FILL` fills
+Collection follows native vertical size flags: `SIZE_EXPAND_FILL` fills
 its bounded page allocation; `SIZE_FILL` requests the natural height of its
 records and keeps the pager directly below them. Use shrink sizing for short
 secondary sections, and expanded sizing for collections requiring bounded paging.
 
-Silkbound collection and notepad pagers are hidden when all content fits on one
+Collection and notepad pagers are hidden when all content fits on one
 page, including empty collections. A collection footer slot remains available
 for caller-owned actions even when its page controls are hidden.
 
-## Silkbound hover hints
+## Record hover hints
 
-`components/feedback/silkbound_tooltip.tscn` is authored content for Godot's
+`components/feedback/record_tooltip.tscn` is authored content for Godot's
 `Control._make_custom_tooltip`: a title, wrapping summary and inspection
 prompt. Set its `Title` and `Summary` Labels before returning the instance. Godot
-owns delay, positioning, dismissal and lifetime; the Silkbound Theme supplies the
+owns delay, positioning, dismissal and lifetime; the consumer Theme supplies the
 TooltipPanel frame and padding. Keep all information reachable by activation.
 
-SilkboundCollection entries accept optional `hint` and `hint_title` strings. The
+Collection entries accept optional `hint` and `hint_title` strings. The
 details button shows these with the shared composition and exposes the summary
 as its accessibility description. An empty hint produces no tooltip. The separate
 action button retains its own action-specific tooltip.
 
 
-## Silkbound full-screen wizard
+## Full-screen wizard
 
-`FullscreenWizard` uses three linked leather leaves: header, numbered steps
+`FullscreenWizard` uses three regions: header, numbered steps
 with the existing context/stage slots, and a fixed action row. It retains the existing signals and composition slots. The
 consumer supplies its content and rules. `is_compact()` identifies the landscape
 phone profile (height at most 560px or width at most 740px); `is_tablet()` identifies
@@ -504,23 +499,9 @@ widths through 1300px outside that profile. `set_primary()` accepts an optional
 native icon alongside the action text inside the button. Icon-only navigation
 buttons center their glyph; the footer has no redundant retention hint.
 
-`PaginatedChoices`, `PaginatedContent`, `SummaryBlock`, `TaskTextField` and
-`TaskTextArea` retain their serialized `silkbound = false` property for source
-compatibility. Typography, neutral states, brass icons and responsive spacing
-now use Silkbound in both modes; the flag is no longer a design-system opt-in.
-`PaginatedContent` still uses it to opt into its optional column divider.
-Silkbound task editors are 48px high for a single line and 152px for multiple
-lines; compact editors use 44px and 48px respectively. Empty errors reserve no blank line; error
-copy still participates in native minimum-size measurement and accessibility.
-
 `PaginatedContent.content_inset_left = 0` reserves an inset inside its reading
-area. In Silkbound mode, a nonzero inset also draws the internal column divider.
-Pagination measures the remaining content width and keeps whole native controls
-and text lines visible. It does not add another panel fill.
-
-`theme/silkbound_line_height.gd` provides `apply(control, multiplier)` for
-specimen line boxes using stock `FontVariation` top/bottom spacing. It preserves
-the resolved font and size and gives each Control its own font variation.
+area. Pagination measures the remaining content width and keeps whole native
+controls and text lines visible. Appearance is supplied by the consumer.
 
 The file picker preserves its Window/signals and places/preview desktop layout.
 Below 1000px width or 600px height, an ordinary OptionButton exposes the same
@@ -542,12 +523,12 @@ it does not reparent or size consumer content.
 `reveal(content: Control)` uses the HUD ink shader for a 400 ms transition,
 restoring materials and modulation on completion, interruption or hide. Set
 `reduced_motion = true` to reveal immediately. Existing focus and input remain
-native. `PaginatedContent`, `PaginatedChoices`, `SilkboundCollection`,
+native. `PaginatedContent`, `PaginatedChoices`, `Collection`,
 `PaginatedTextArea` and paginated `MiniatureBrowser` expose the same reduced-motion
 flag and reveal manual page turns. Configuration, resize and state restoration
 do not trigger ink. `FullscreenWizard.set_step()` reveals only when the step
 index changes; `reveal_stage()` reveals a consumer-owned stage tab switch. Repeated updates within a step, including roll results, stay still.
 Short caption/value facts remain together when pagination measures native content.
 
-Fantasy and Cyberpunk native Theme resources and ordered usage projection are
-documented in [Shared World styling](world-theme-styling.md).
+Ordered native Theme usage projection is documented in
+[World styling](world-theme-styling.md).

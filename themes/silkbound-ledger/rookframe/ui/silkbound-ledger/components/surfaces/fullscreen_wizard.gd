@@ -58,7 +58,7 @@ func _fit() -> void:
 func _fit_primary() -> void:
 	for name in ["Back", "Primary", "Close", "Restart"]:
 		var action := get_node(("Layout/Header/Row/" if name == "Close" else "Layout/Footer/Row/") + name) as Button
-		if name in ["Back", "Close"]: action.theme_type_variation = "SilkIcon"
+		if name in ["Back", "Close"]: action.theme_type_variation = "RookframeIcon"
 		action.custom_minimum_size = Vector2(44 if name in ["Back", "Close"] else 0, 44)
 		action.add_theme_constant_override("icon_max_width", 22)
 		for state in ["normal", "hover", "pressed", "disabled"]:

@@ -7,10 +7,26 @@ import tempfile
 import unittest
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'tools'))
-from workspace import ROOT, install, sources, verify
+from workspace import CONFIG, ROOT, install, sources, verify
 
 
 class PackageTests(unittest.TestCase):
+    def test_themes_contains_only_theme_projects(self):
+        self.assertEqual(
+            {path.name for path in (ROOT / 'themes').iterdir()},
+            {'silkbound-ledger', 'fantasy', 'cyberpunk'},
+        )
+        for name in ('fonts', 'shell-common'):
+            self.assertEqual(CONFIG['packages'][name]['path'], f'shared/{name}')
+
+    def test_core_source_has_no_concrete_theme_references(self):
+        ignored = {'.godot', '.plugged', 'addons', 'reports', '__pycache__'}
+        for path in (ROOT / 'ui-kit').rglob('*'):
+            if not path.is_file() or ignored.intersection(path.relative_to(ROOT / 'ui-kit').parts):
+                continue
+            self.assertNotRegex(path.as_posix().lower(), r'silk|fantasy|cyberpunk')
+            self.assertNotRegex(path.read_bytes().lower(), rb'silk|fantasy|cyberpunk', str(path))
+
     def test_independent_resource_closures(self):
         for packages in [['ui-kit'], ['silkbound-ledger'], ['fantasy'], ['cyberpunk'], ['fantasy', 'cyberpunk'], ['silkbound-ledger', 'fantasy', 'cyberpunk']]:
             with self.subTest(packages=packages):

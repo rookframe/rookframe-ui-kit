@@ -1,7 +1,12 @@
 @tool
 extends "res://rookframe/ui/components/data/paginated_choices.gd"
 
-func _fit_silkbound() -> int:
+@export var spaced_range := false
+
+func _range_format() -> String:
+	return "%d–%d\u2002of\u2002%d" if spaced_range else super._range_format()
+
+func _fit_presentation() -> int:
 	var phone := get_viewport_rect().size.y <= 560 or get_viewport_rect().size.x <= 740
 	var tablet := get_viewport_rect().size.x <= 1300 and not phone
 	theme = preload("res://rookframe/ui/theme/silkbound_theme.tres")
@@ -137,7 +142,7 @@ func _arrange_rows() -> Vector3:
 		var measured := value.get_theme_font("font").get_string_size(value.text, HORIZONTAL_ALIGNMENT_LEFT, -1, value.get_theme_font_size("font_size")).x
 		value.custom_minimum_size.x = minf(ceilf(measured), (size.x - inset * 2) / columns * 0.3) if framed_collection else minf(ceilf(measured), size.x * 0.3) if tablet else 14 if columns > 1 else 0
 
-	height = _fit_silkbound()
+	height = _fit_presentation()
 	return Vector3(height, inset, vertical_inset)
 
 func _style_entry(row: Control, entry: Dictionary, selected_id: String) -> void:

@@ -12,7 +12,7 @@ from workspace import ROOT, install
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--headless', action='store_true')
-    parser.add_argument('--reports', type=Path, default=ROOT / 'ui-kit/reports/components')
+    parser.add_argument('--reports', type=Path, default=ROOT / 'showcase/reports/theme-components')
     args = parser.parse_args()
     runner = ROOT / 'ui-kit/addons/gdUnit4'
     if not runner.is_dir():
@@ -21,7 +21,7 @@ def main():
         project = Path(folder)
         install(project, ['ui-kit', 'silkbound-ledger'])
         shutil.copy2(ROOT / 'ui-kit/project.godot', project / 'project.godot')
-        shutil.copytree(ROOT / 'ui-kit/tests', project / 'tests')
+        shutil.copytree(ROOT / 'showcase/tests/theme_components', project / 'tests')
         shutil.copytree(runner, project / 'addons/gdUnit4')
         subprocess.run(['godot', '--headless', '--editor', '--path', folder,
                         '--log-file', str(project / 'import.log'), '--import', '--quit'], check=True)

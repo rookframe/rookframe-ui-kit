@@ -10,7 +10,6 @@ var _ink := preload("res://rookframe/ui/_internal/surfaces/content_reveal.gd").n
 signal selected(id: String)
 const ROW = preload("res://rookframe/ui/_internal/data/task_choice.tscn")
 @export var row_scene: PackedScene = ROW
-@export var silkbound := false
 var _entries: Array[Dictionary] = []
 var _rows: Array[Button] = []
 var _selected := ""
@@ -204,15 +203,15 @@ func _show_page() -> void:
 	get_node(^"Pager/Previous").disabled = _page == 0
 	get_node(^"Pager/Next").disabled = _page == pages - 1
 	get_node(^"Pager/Indicator/Page").text = "%d / %d" % [_page + 1, pages]
-	var range_format := "%d–%d\u2002of\u2002%d" if silkbound else "%d–%d of %d"
+	var range_format := _range_format()
 	var range_text := range_format % [_pages[_page].x + 1, _pages[_page].y, _rows.size()] if not _rows.is_empty() else "0 entries"
 	get_node(^"Pager/Range").text = range_text
 	if framed_collection and get_viewport_rect().size.y <= 560:
 		get_node(^"Pager/Indicator/PhoneCount").text = range_text
 
 
-func _fit_silkbound() -> int:
-	return 44
+func _range_format() -> String:
+	return "%d–%d of %d"
 
 func _exit_tree() -> void:
 	_ink.finish()

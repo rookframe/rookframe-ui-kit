@@ -23,5 +23,8 @@ installed paths. Shared licensed fonts come from the optional `fonts` package.
 The previous green MenuButtonStandard smoke tint is preserved only in this
 package's explicit variant. Fantasy/Cyberpunk remain independent installations.
 
-Run `python3 tools/workspace.py prepare` after edits. Component checks stay in
-`ui-kit/tests`; native review and integration checks stay in `showcase`.
+Run `python3 tools/workspace.py prepare` after edits. Core component checks stay
+in `ui-kit/tests`; themed component integration suites live in
+`showcase/tests/theme_components`. Run them with `python3 tools/check_components.py`.
+See [appearance resources](docs/foundation.md), [action panel appearance](docs/action-panel.md)
+and the [v2 migration steps](../../docs/migration-to-v2.md).

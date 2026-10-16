@@ -1,6 +1,6 @@
 [gd_scene format=3]
-[ext_resource type="Script" path="res://rookframe/ui/components/data/silkbound_collection.gd" id="script"]
-[node name="SilkboundCollection" type="MarginContainer"]
+[ext_resource type="Script" path="res://rookframe/ui/components/data/collection.gd" id="script"]
+[node name="Collection" type="MarginContainer"]
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("script")

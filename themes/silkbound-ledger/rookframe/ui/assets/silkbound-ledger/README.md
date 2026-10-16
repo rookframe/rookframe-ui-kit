@@ -7,7 +7,7 @@ It is decoration: use TextureRect with mouse_filter Ignore, 28 × 100 desktop,
 20 × 68 tablet, and omit on phone. Apply linen once to the owning surface.
 
 `theme/silkbound_theme.tres` supplies native task variations and 44px icon actions
-(`SilkIcon`, `SilkPrimaryIcon`). The font resources retain the full licensed EB Garamond faces and native
+(`RookframeIcon`, `RookframePrimaryIcon`). The font resources retain the full licensed EB Garamond faces and native
 shaping, with prerendered glyph caches for the approved appearance. They support
 the Creature sheet's English and Russian. See `tools/silkbound-fonts/README.md`
 for source, regeneration and fallback verification.

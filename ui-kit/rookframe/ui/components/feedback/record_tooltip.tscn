@@ -1,5 +1,5 @@
 [gd_scene format=3]
-[node name="SilkboundTooltip" type="VBoxContainer"]
+[node name="RecordTooltip" type="VBoxContainer"]
 custom_minimum_size = Vector2(280, 0)
 offset_right = 280.0
 mouse_filter = 2

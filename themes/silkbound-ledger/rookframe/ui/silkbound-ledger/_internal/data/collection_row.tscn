@@ -1,10 +1,10 @@
 [gd_scene format=3]
 
-[ext_resource type="PackedScene" path="res://rookframe/ui/_internal/data/silkbound_collection_row.tscn" id="base"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/_internal/data/collection_row.tscn" id="base"]
 [ext_resource type="StyleBox" path="res://rookframe/ui/theme/silkbound_plain.tres" id="86d5468720_row"]
 [ext_resource type="StyleBox" path="res://rookframe/ui/theme/silkbound_row_hover.tres" id="86d5468720_hover"]
 [ext_resource type="FontVariation" path="res://rookframe/ui/theme/silkbound_medium.tres" id="86d5468720_medium"]
-[ext_resource type="Script" path="res://rookframe/ui/silkbound-ledger/_internal/data/silkbound_collection_row.gd" id="86d5468720_skin_script"]
+[ext_resource type="Script" path="res://rookframe/ui/silkbound-ledger/_internal/data/collection_row.gd" id="86d5468720_skin_script"]
 [ext_resource type="Theme" path="res://rookframe/ui/theme/silkbound_theme.tres" id="skin_theme"]
 
 [node name="CollectionRow" instance=ExtResource("base")]

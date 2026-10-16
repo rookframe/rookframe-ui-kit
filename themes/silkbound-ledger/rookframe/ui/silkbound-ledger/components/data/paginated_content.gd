@@ -1,9 +1,11 @@
 @tool
 extends "res://rookframe/ui/components/data/paginated_content.gd"
 
+@export var decorated_pager := false
+
 func _style_pager() -> void:
 	_range.add_theme_font_size_override("font_size", 15 if get_viewport_rect().size.y <= 560 else 18)
-	if silkbound:
+	if decorated_pager:
 		_range.add_theme_color_override("font_color", Color("aebabe"))
 		for button in [_previous, _next]:
 			button.theme_type_variation = "WizardButton"
@@ -20,5 +22,5 @@ func _style_pager() -> void:
 
 
 func _draw() -> void:
-	if silkbound and content_inset_left > 0:
+	if decorated_pager and content_inset_left > 0:
 		draw_line(Vector2.ZERO,Vector2(0,size.y),Color("3e4346"))
