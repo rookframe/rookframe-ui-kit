@@ -568,3 +568,12 @@ for properties, failure results, focus and retained-slot ownership.
 `components/feedback/toast_stack.tscn` (uid://c23v4qkkv6grh) has root `VBoxContainer` and script
 `components/feedback/toast_stack.gd` (uid://qlcvjx4gbnyt). See [the interaction contract](interaction-components.md)
 for properties, failure results, focus and retained-slot ownership.
+
+### DragSlot
+
+`components/data/drag_slot.tscn` (uid://cog0mcu7npi2r) has root `Button` and script
+`components/data/drag_slot.gd` (uid://bpd5p56xkf2bc). See [the interaction contract](interaction-components.md)
+for properties, failure results, focus and retained-slot ownership.
+
+`components/data/transfer_context.gd` (uid://bd4lhsxhvd6w4) is the public Node class
+`RookframeTransferContext`. It has no scene. See the [interaction contract](interaction-components.md).

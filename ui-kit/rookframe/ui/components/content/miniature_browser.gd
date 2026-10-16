@@ -1,5 +1,8 @@
 @tool
 extends VBoxContainer
+const Records = preload("res://rookframe/ui/_internal/interaction/records.gd")
+const Focus = preload("res://rookframe/ui/_internal/interaction/focus.gd")
+@export var focus_fallback: Control
 ## Data-driven Miniature selection. The caller owns content, localization,
 ## preview rendering and persistence. Entries: id, title, package, available.
 signal selection_changed(entry: Dictionary)
@@ -25,6 +28,7 @@ var _labels: Dictionary = {}
 var _state := "ready"
 
 func _ready() -> void:
+	theme_changed.connect(_queue_arrange)
 	get_node(^"Search").text_changed.connect(_filter)
 	get_node(^"Retry").pressed.connect(func(): retry_requested.emit())
 	get_node(^"Results").resized.connect(_arrange)
@@ -34,41 +38,45 @@ func _ready() -> void:
 
 ## Supply localized copy; no locale is selected globally by this component.
 func configure(entries: Array[Dictionary], selected_id: String = "", labels: Dictionary = {}) -> void:
+	if not Records.valid(entries): return
+	var focused := get_viewport().gui_get_focus_owner()
+	var former := Records.focused_index(_rows, focused)
+	var retained := Records.reconcile(entries, _entries, _rows, get_node(^"Results/Rows"), _create_row)
+	_rows.assign(retained)
 	_entries = entries.duplicate(true)
-	_page = 0
 	_selection = selected_id
-	_labels = labels
+	_labels = labels.duplicate(true)
 	get_node(^"Search").placeholder_text = _text("search", "Search Miniatures")
 	get_node(^"Search").accessibility_name = _text("search", "Search Miniatures")
 	get_node(^"Retry").text = _text("retry", "Try again")
 	get_node(^"Pager/Previous").text = _text("previous", "Previous")
 	get_node(^"Pager/Next").text = _text("next", "Next")
-	for row in _rows:
-		row.get_parent().remove_child(row)
-		row.queue_free()
-	_rows.clear()
-	for entry in _entries:
-		var row := row_scene.instantiate() as Button
+	for index in _entries.size():
+		var entry := _entries[index]
+		var row := _rows[index]
 		row.get_node(^"Content/Copy/Title").text = str(entry.get("title", ""))
 		row.get_node(^"Content/Copy/Package").text = str(entry.get("package", ""))
 		row.disabled = not bool(entry.get("available", true))
+		row.focus_mode = Control.FOCUS_NONE if row.disabled else Control.FOCUS_ALL
 		row.get_node(^"Content/Copy/Package").visible = not str(entry.get("package", "")).is_empty()
-		row.accessibility_name = str(entry.get("title", ""))
-		if not str(entry.get("package", "")).is_empty():
-			row.accessibility_name += " · " + str(entry.package)
-		if row.disabled:
-			row.get_node(^"Content/Stage/Fallback").text = _text("unavailable", "Unavailable")
-		else:
-			row.get_node(^"Content/Stage/Fallback").text = _text("preview_unavailable", "Preview unavailable")
-		row.pressed.connect(_select.bind(str(entry.id)))
-		get_node(^"Results/Rows").add_child(row)
-		row.get_node(^"Content/Copy").minimum_size_changed.connect(_queue_arrange)
-		_rows.append(row)
-		if not row.disabled:
-			preview_requested.emit(entry.duplicate(true), row.get_node(^"Content/Stage/Preview"))
-	set_state("ready")
+		row.accessibility_name = str(entry.get("title", "")) + (" · " + str(entry.package) if not str(entry.get("package", "")).is_empty() else "")
+		row.get_node(^"Content/Stage/Fallback").text = _text("unavailable", "Unavailable") if row.disabled else _text("preview_unavailable", "Preview unavailable")
+		if not row.disabled: preview_requested.emit(entry.duplicate(true), row.get_node(^"Content/Stage/Preview"))
+	_state = "ready"
+	get_node(^"Search").editable = true
+	get_node(^"Results").visible = not _entries.is_empty()
+	get_node(^"Retry").visible = false
 	_select(_selection, false)
-	_arrange()
+	_filter(get_node(^"Search").text, false)
+	if former >= 0:
+		if is_instance_valid(focused) and _rows.has(focused): focus_entry(_entries[_rows.find(focused)].id)
+		else: Focus.restore(_rows, former, focus_fallback)
+
+func _create_row(id: String) -> Control:
+	var row := row_scene.instantiate() as Button
+	row.pressed.connect(_select.bind(id))
+	row.get_node(^"Content/Copy").minimum_size_changed.connect(_queue_arrange)
+	return row
 
 func selection() -> Dictionary:
 	for entry in _entries:
@@ -100,9 +108,9 @@ func _select(id: String, notify := true) -> void:
 	if notify:
 		selection_changed.emit(entry)
 
-func _filter(query: String) -> void:
+func _filter(query: String, reset_page := true) -> void:
 	_matches.clear()
-	_page = 0
+	if reset_page: _page = 0
 	var count := 0
 	for index in range(_rows.size()):
 		var entry := _entries[index]
@@ -132,7 +140,7 @@ func _arrange() -> void:
 	get_node(^"Pager").visible = paginated and _state == "ready" and not _matches.is_empty()
 	var width: float = results.size.x - (0 if paginated else results.get_v_scroll_bar().get_combined_minimum_size().x)
 	var columns := clampi(int((width + 12) / 148), 1, 4)
-	if paginated: columns = 3 if get_viewport_rect().size.y <= 560 else 4
+	if paginated: columns = clampi(int((width + 12) / 148), 1, 4)
 	get_node(^"Results/Rows").columns = columns
 	var caption_height := 44.0
 	for row in _rows:
@@ -140,14 +148,17 @@ func _arrange() -> void:
 	var preview_height := clampf(minf((width - (columns - 1) * 12) / columns - 16,
 		results.size.y - caption_height - 24), 96, 220)
 	if paginated:
-		var rows := 1 if get_viewport_rect().size.y <= 560 else 2
+		var rows := maxi(1, floori((results.size.y + 12) / (caption_height + 24 + 48 + 12)))
 		_capacity = columns * rows
 		preview_height = maxf(24, floorf((results.size.y - (rows - 1) * 12) / rows) - caption_height - 24)
 	for row in _rows:
 		row.minimum_height = 0 if paginated else 148
 		row.custom_minimum_size.y = preview_height + caption_height + 24 if paginated else 148
 		row.get_node(^"Content/Stage").custom_minimum_size.y = preview_height
-	if paginated: _show_page()
+	if paginated:
+		var focused := _rows.find(get_viewport().gui_get_focus_owner())
+		if focused in _matches: _page = _matches.find(focused) / _capacity
+		_show_page()
 
 func _turn(delta: int) -> void:
 	_page += delta
@@ -164,7 +175,7 @@ func _show_page() -> void:
 	# and re-showing a held Button cancels its native mouse press.
 	var visible_indices := _matches.slice(first, last)
 	for index in _rows.size(): _rows[index].visible = index in visible_indices
-	get_node(^"Pager/Range").text = "%d–%d / %d" % [first + 1, last, _matches.size()]
+	get_node(^"Pager/Range").text = "%d–%d / %d" % [first + 1, last, _matches.size()] if not _matches.is_empty() else tr("0 entries")
 	get_node(^"Pager/Previous").disabled = _page == 0
 	get_node(^"Pager/Next").disabled = last == _matches.size()
 
@@ -179,3 +190,22 @@ func focus_search() -> void:
 
 func _style_row(row: Button) -> void:
 	pass
+
+func focus_entry(id: String) -> bool:
+	if not is_visible_in_tree(): return false
+	for index in _entries.size():
+		if _entries[index].id == id and index in _matches and not _rows[index].disabled:
+			if paginated:
+				_page = _matches.find(index) / _capacity
+				_show_page()
+			return Focus.give(_rows[index])
+	return false
+
+func capture_state() -> Dictionary:
+	return {"page": _page, "query": get_node(^"Search").text}
+
+func restore_state(state: Dictionary) -> void:
+	get_node(^"Search").text = str(state.get("query", ""))
+	_filter(get_node(^"Search").text)
+	_page = maxi(0, int(state.get("page", 0)))
+	_arrange()

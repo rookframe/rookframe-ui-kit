@@ -1,5 +1,13 @@
 @tool
 extends MarginContainer
+const Records = preload("res://rookframe/ui/_internal/interaction/records.gd")
+const Focus = preload("res://rookframe/ui/_internal/interaction/focus.gd")
+@export var focus_fallback: Control
+var _view_entries: Array[Dictionary] = []
+var _view_rows: Array = []
+var _visible_ids: Variant = null
+var _focus_position := -1
+
 var _ink := preload("res://rookframe/ui/_internal/surfaces/content_reveal.gd").new()
 @export var reveal_shader: Shader:
 	set(value):
@@ -28,6 +36,7 @@ func _ready() -> void:
 	get_node(^"Content/Pager/Previous").pressed.connect(_turn.bind(-1))
 	get_node(^"Content/Pager/Next").pressed.connect(_turn.bind(1))
 	resized.connect(_queue_fit)
+	theme_changed.connect(_queue_fit)
 	get_node(^"Content/Area").resized.connect(_queue_fit)
 	visibility_changed.connect(_queue_fit)
 	get_node(^"Content/Pager/FooterContent").child_entered_tree.connect(_footer_changed)
@@ -49,38 +58,26 @@ func restore_state(state: Dictionary) -> void:
 func focus_entry(id: String) -> bool:
 	if not is_visible_in_tree():
 		return false
-	for index in _entries.size():
-		if str(_entries[index].id) == id:
+	for index in _view_entries.size():
+		if str(_view_entries[index].id) == id:
 			for page in _pages.size():
 				if index >= _pages[page].x and index < _pages[page].y:
 					_page = page
 			_show_page()
-			_rows[index].get_node(^"Details").grab_focus()
+			_view_rows[index].get_node(^"Details").grab_focus()
 			return true
 	return false
 
 func configure(entries: Array[Dictionary], _selected_id: String, caption: String = "", count: String = "") -> void:
+	if not Records.valid(entries): return
 	var focused := get_viewport().gui_get_focus_owner()
-	if focused != null and is_ancestor_of(focused):
-		_restore_focus = focused
-	var same := entries.size() == _entries.size()
-	if same:
-		for index in entries.size():
-			if str(entries[index].id) != str(_entries[index].id):
-				same = false
-				break
+	_focus_position = Records.focused_index(_view_rows, focused)
+	if _focus_position >= 0: _restore_focus = focused
+	var retained := Records.reconcile(entries, _entries, _rows, get_node(^"Content/Area/Rows"), _create_row)
+	_rows.assign(retained)
 	_entries = entries.duplicate(true)
-	if not same:
-		for row in _rows:
-			row.get_parent().remove_child(row)
-			row.queue_free()
-		_rows.clear()
-		for entry in _entries:
-			var row := row_scene.instantiate() as Control
-			row.get_node(^"Details").pressed.connect(_select.bind(str(entry.id)))
-			row.get_node(^"Action").pressed.connect(_act.bind(str(entry.id)))
-			get_node(^"Content/Area/Rows").add_child(row)
-			_rows.append(row)
+	_update_view()
+
 	for index in _rows.size():
 		var entry := _entries[index]
 		var row := _rows[index]
@@ -112,6 +109,12 @@ func configure(entries: Array[Dictionary], _selected_id: String, caption: String
 	get_node(^"Content/Area/Empty").visible = entries.is_empty()
 	_queue_fit()
 
+func _create_row(id: String) -> Control:
+	var row := row_scene.instantiate() as Control
+	row.get_node(^"Details").pressed.connect(_select.bind(id))
+	row.get_node(^"Action").pressed.connect(_act.bind(id))
+	return row
+
 func _select(id: String) -> void:
 	selected.emit(id)
 
@@ -132,8 +135,8 @@ func _process(_delta: float) -> void:
 	_fit()
 
 func _fit() -> void:
-	var phone := get_viewport_rect().size.x <= 900
-	var tablet := get_viewport_rect().size.x <= 1300 and not phone
+	var phone := size.x <= 900
+	var tablet := size.x <= 1300 and not phone
 	var grid := get_node(^"Content/Area/Rows") as GridContainer
 	grid.columns = 1 if phone else columns
 	_style_grid(grid, phone, tablet)
@@ -145,12 +148,12 @@ func _fit() -> void:
 	_style_collection(phone, tablet)
 	var heights: Array[float] = []
 	var width: float = (get_node(^"Content").size.x - (grid.columns - 1) * grid.get_theme_constant("h_separation")) / grid.columns
-	for index in _rows.size():
-		var row := _rows[index]
-		var entry := _entries[index]
+	for index in _view_rows.size():
+		var row: Control = _view_rows[index]
+		var entry := _view_entries[index]
 		var inventory := entry.has("action") or collection_layout == 2
 		var action := row.get_node(^"Action") as Button
-		action.custom_minimum_size = Vector2(44 if action.icon != null else 78 if phone or tablet else 86, 44)
+		action.custom_minimum_size = Vector2(44 if action.icon != null else 86, 44)
 		_style_action_type(action, phone, tablet)
 		action.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
 		_style_action(action)
@@ -204,10 +207,11 @@ func _fit() -> void:
 	_paginate(heights, available, grid)
 	if _pages.size() > 1 and not footer:
 		_paginate(heights, available - pager_height, grid)
+	var focused_index := Records.focused_index(_view_rows, _restore_focus if is_instance_valid(_restore_focus) else get_viewport().gui_get_focus_owner())
+	if focused_index >= 0: _page = Records.page_for(focused_index, _pages)
+	elif _focus_position >= 0 and not _view_rows.is_empty(): _page = Records.page_for(mini(_focus_position, _view_rows.size() - 1), _pages)
 	_show_page()
-	if is_instance_valid(_restore_focus) and _restore_focus.is_visible_in_tree():
-		_restore_focus.grab_focus()
-	_restore_focus = null
+	_restore_record_focus()
 	queue_redraw()
 
 func _paginate(heights: Array[float], available: float, grid: GridContainer) -> void:
@@ -232,15 +236,17 @@ func _show_page() -> void:
 	get_node(^"Content/Pager").visible = multiple or footer
 	for path in [^"Content/Pager/Previous", ^"Content/Pager/Next", ^"Content/Pager/Indicator"]:
 		get_node(path).visible = multiple
-	get_node(^"Content/Pager/Range").visible = multiple and get_viewport_rect().size.x > 900
+	get_node(^"Content/Pager/Range").visible = multiple and size.x > 900
 	_page = clampi(_page, 0, _pages.size() - 1)
 	var bounds := _pages[_page]
-	for index in _rows.size():
-		_rows[index].visible = index >= bounds.x and index < bounds.y
+	for row in _rows:
+		if row not in _view_rows: row.hide()
+	for index in _view_rows.size():
+		_view_rows[index].visible = index >= bounds.x and index < bounds.y
 	get_node(^"Content/Pager/Previous").disabled = _page == 0
 	get_node(^"Content/Pager/Next").disabled = _page == _pages.size() - 1
 	get_node(^"Content/Pager/Indicator/Page").text = "%d / %d" % [_page + 1, _pages.size()]
-	var caption := "%d–%d of %d" % [bounds.x + 1, bounds.y, _rows.size()] if not _rows.is_empty() else "0 entries"
+	var caption := "%d–%d of %d" % [bounds.x + 1, bounds.y, _view_rows.size()] if not _view_rows.is_empty() else tr("0 entries")
 	get_node(^"Content/Pager/Range").text = caption
 	get_node(^"Content/Pager/Indicator/PhoneCount").text = caption
 
@@ -272,3 +278,44 @@ func _style_grid(grid: GridContainer, phone: bool, tablet: bool) -> void:
 
 func _style_record_spacing(row: Control, row_inset: MarginContainer, phone: bool, tablet: bool, inventory: bool) -> void:
 	pass
+
+## Filter the view without replacing authoritative records or domain selection.
+func set_visible_ids(ids: PackedStringArray) -> bool:
+	var known: Dictionary = {}
+	for entry in _entries: known[entry.id] = true
+	var seen: Dictionary = {}
+	for id in ids:
+		if seen.has(id) or not known.has(id): return false
+		seen[id] = true
+	_remember_view_focus()
+	_visible_ids = seen
+	_update_view()
+	_queue_fit()
+	return true
+
+func reset_filter() -> void:
+	_remember_view_focus()
+	_visible_ids = null
+	_update_view()
+	_queue_fit()
+
+func _update_view() -> void:
+	_view_entries.clear()
+	_view_rows.clear()
+	for index in _entries.size():
+		if _visible_ids == null or _visible_ids.has(_entries[index].id):
+			_view_entries.append(_entries[index])
+			_view_rows.append(_rows[index])
+
+func _restore_record_focus() -> void:
+	if is_instance_valid(_restore_focus) and Focus.eligible(_restore_focus):
+		Focus.give(_restore_focus)
+	elif _focus_position >= 0:
+		Focus.restore(_view_rows, _focus_position, focus_fallback)
+	_restore_focus = null
+	_focus_position = -1
+
+func _remember_view_focus() -> void:
+	var focused := get_viewport().gui_get_focus_owner()
+	_focus_position = Records.focused_index(_view_rows, focused)
+	_restore_focus = focused if _focus_position >= 0 else null
