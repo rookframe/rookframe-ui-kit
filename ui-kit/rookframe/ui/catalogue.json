@@ -444,7 +444,8 @@
       "properties": {
         "state": "EMPTY",
         "title": "Nothing here yet",
-        "description": ""
+        "description": "",
+        "reduced_motion": false
       },
       "methods": [
         "get_action_slot() -> Container"
