@@ -5,7 +5,7 @@ const Demo = preload("res://examples/components/pages/data_feedback/demo.gd")
 static func build(page) -> void:
 	var section = page.section("Read-only records", "The table owns its bounded scrolling. Select a row to read its complete name below.")
 	var status = page.note(section, "Select a record.")
-	var table := Tree.new()
+	var table := preload("res://rookframe/ui/components/data/table.tscn").instantiate() as Tree
 	table.columns = 3
 	table.hide_root = true
 	table.column_titles_visible = true

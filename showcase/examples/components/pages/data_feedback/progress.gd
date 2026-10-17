@@ -5,7 +5,7 @@ const Demo = preload("res://examples/components/pages/data_feedback/demo.gd")
 static func build(page) -> void:
 	var section = page.section("Task completion")
 	var status = page.note(section, "Preparing assets: 4 / 10")
-	var bar := ProgressBar.new()
+	var bar := preload("res://rookframe/ui/components/feedback/progress.tscn").instantiate() as ProgressBar
 	bar.max_value = 10
 	bar.value = 4
 	bar.custom_minimum_size.y = 28
@@ -24,7 +24,7 @@ static func build(page) -> void:
 	for data in [["Health", 75, 100], ["Mana", 20, 50], ["Stamina", 0, 60]]:
 		var copy := "%s: %d / %d" % data
 		page.note(resources, copy)
-		var meter := ProgressBar.new()
+		var meter := preload("res://rookframe/ui/components/feedback/progress.tscn").instantiate() as ProgressBar
 		meter.max_value = data[2]
 		meter.value = data[1]
 		meter.custom_minimum_size.y = 28

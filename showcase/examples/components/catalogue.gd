@@ -39,6 +39,12 @@ var _navigation_open := false
 var _dark := false
 
 func _ready() -> void:
+	var window := get_window()
+	var display_scale := maxf(1.0, DisplayServer.screen_get_scale(window.current_screen))
+	# Keep the authored window size in logical units on high-DPI displays.
+	window.size = Vector2i(Vector2(window.size) * display_scale / window.content_scale_factor)
+	window.content_scale_factor = display_scale
+	window.move_to_center()
 	entries = Registry.entries()
 	theme = Chrome.create()
 	var background := PanelContainer.new()
@@ -319,7 +325,8 @@ func _unhandled_key_input(event: InputEvent) -> void:
 func _open_laboratory() -> void:
 	var window := Window.new()
 	window.title = "Silkbound Ledger · Motion laboratory"
-	window.size = Vector2i(1200, 850)
+	window.content_scale_factor = get_window().content_scale_factor
+	window.size = Vector2i(Vector2(1200, 850) * window.content_scale_factor)
 	window.close_requested.connect(window.queue_free)
 	add_child(window)
 	window.add_child(load("res://examples/laboratory/laboratory.tscn").instantiate())

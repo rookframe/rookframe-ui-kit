@@ -4,13 +4,79 @@ Core components inherit the consumer Theme or native Godot defaults.
 Appearance belongs to the consumer or an optional theme package.
 
 
-The UI Kit is native-first: Godot owns control behavior and Rookframe supplies
-Theme coverage, semantic variation names, and recipes. Do not put a
-pass-through scene or script around an adequate built-in node.
+All Rookframe UI must be usable through the UI Kit's public resources under
+`res://rookframe/ui/`, including standard controls and composition recipes.
+Use UI Kit proxies for standard Godot elements wherever possible. A proxy
+keeps the native node or resource and its properties, methods, signals, input,
+focus, accessibility and layout behavior. Add custom behavior only for a
+composition that Godot does not already provide; reuse existing kit components
+for those compositions. Consumers address the public kit resource rather than
+recreating the component in host code. Native nodes remain appropriate inside
+kit implementations and for caller-owned content and layout in public slots.
+
+The catalogue records each public scene, script or resource path. Proxy scenes
+and resources are unthemed; appearance belongs to the consumer or an optional
+theme package. Adding a proxy does not select or implement a theme override.
+
+## Public native proxies
+
+Paths below are relative to `res://rookframe/ui/components/`. Instance `.tscn`
+resources with `PackedScene.instantiate()`. Their roots keep the listed native
+class API. Load `.tres` groups once per owning scene, or call `duplicate()` for
+independent runtime groups; assign the shared instance to participating native
+controls. Group resources are local to each instantiated scene.
+
+| Component | Public resource | Native root or resource | Usage |
+| --- | --- | --- | --- |
+| Button | `actions/button.tscn` | `Button` | Native properties, methods, signals, input and focus behavior remain unchanged. |
+| Toggle | `actions/toggle.tscn` | `Button` | Native properties, methods, signals, input and focus behavior remain unchanged. |
+| ButtonGroup | `actions/button_group.tscn` | `HFlowContainer` | Native properties, methods, signals, input and focus behavior remain unchanged. |
+| ToggleGroup | `actions/toggle_group.tres` | `ButtonGroup` | Assign one instance to exclusive Toggle buttons. Duplicate per independent group; omit the group for independent toggles. |
+| Select | `forms/select.tscn` | `OptionButton` | Native properties, methods, signals, input and focus behavior remain unchanged. |
+| RadioGroup | `forms/radio_group.tres` | `ButtonGroup` | Assign one instance to Checkbox buttons and set the initial selection. Duplicate per independent group. Native allow_unpress enables an optional choice. |
+| Checkbox | `forms/checkbox.tscn` | `CheckBox` | Native properties, methods, signals, input and focus behavior remain unchanged. |
+| NativeSwitch | `forms/switch.tscn` | `CheckButton` | Native properties, methods, signals, input and focus behavior remain unchanged. |
+| Input | `forms/input.tscn` | `LineEdit` | Native properties, methods, signals, input and focus behavior remain unchanged. |
+| NativeTextarea | `forms/textarea.tscn` | `TextEdit` | Native properties, methods, signals, input and focus behavior remain unchanged. |
+| Slider | `forms/slider.tscn` | `HSlider` | Native properties, methods, signals, input and focus behavior remain unchanged. |
+| VerticalSlider | `forms/vertical_slider.tscn` | `VSlider` | Native properties, methods, signals, input and focus behavior remain unchanged. |
+| NumericInput | `forms/numeric_input.tscn` | `SpinBox` | Native properties, methods, signals, input and focus behavior remain unchanged. |
+| Tabs | `navigation/tabs.tscn` | `TabContainer` | Native properties, methods, signals, input and focus behavior remain unchanged. |
+| ScrollArea | `layout/scroll_area.tscn` | `ScrollContainer` | Native properties, methods, signals, input and focus behavior remain unchanged. |
+| AspectRatio | `layout/aspect_ratio.tscn` | `AspectRatioContainer` | Native properties, methods, signals, input and focus behavior remain unchanged. |
+| Separator | `layout/separator.tscn` | `HSeparator` | Native properties, methods, signals, input and focus behavior remain unchanged. |
+| VerticalSeparator | `layout/vertical_separator.tscn` | `VSeparator` | Native properties, methods, signals, input and focus behavior remain unchanged. |
+| Direction | `layout/direction.tscn` | `VBoxContainer` | Set native layout_direction on this content container; use text_direction on mixed-direction child values. |
+| Accordion | `surfaces/accordion.tres` | `FoldableGroup` | Assign one instance to Collapsible scenes for single-open sections. Duplicate per independent accordion; omit the group for multiple-open sections. |
+| Collapsible | `surfaces/collapsible.tscn` | `FoldableContainer` | Native properties, methods, signals, input and focus behavior remain unchanged. |
+| Card | `surfaces/card.tscn` | `PanelContainer` | Inherits Section: title, description, get_body_slot() and get_action_slot(). No implicit activation. |
+| Label | `data/label.tscn` | `Label` | Native properties, methods, signals, input and focus behavior remain unchanged. |
+| Typography | `data/typography.tscn` | `Label` | Native Label with the RookframeBody semantic role. Set theme_type_variation for other roles; fonts and appearance belong to the consumer. |
+| Table | `data/table.tscn` | `Tree` | Native properties, methods, signals, input and focus behavior remain unchanged. |
+| Item | `data/item.tscn` | `PanelContainer` | Display item inherits StructuredRow. Use ChoiceRow for selection and ActionRow for activation. |
+| Avatar | `data/avatar.tscn` | `PanelContainer` | Set texture, initials and fallback_texture. Displays the supplied image, then initials, then fallback art. The host supplies the accessible identity. |
+| Progress | `feedback/progress.tscn` | `ProgressBar` | Native properties, methods, signals, input and focus behavior remain unchanged. |
+| Spinner | `feedback/spinner.tscn` | `PanelContainer` | Inherits TaskState in LOADING state, including title, description, state and reduced_motion. No separate animation implementation. |
+| Tooltip | `feedback/tooltip.tscn` | `Label` | Set text and return this Label from the source Control._make_custom_tooltip(). Godot owns the tooltip popup, timing, placement and dismissal. |
+| ContextMenu | `overlays/context_menu.tscn` | `PopupMenu` | Native properties, methods, signals, input and focus behavior remain unchanged. |
+| DropdownMenu | `overlays/dropdown_menu.tscn` | `MenuButton` | Native properties, methods, signals, input and focus behavior remain unchanged. |
+| AlertDialog | `overlays/alert_dialog.tscn` | `Window` | Inherits Dialog in CONFIRMATION tone, including confirmed/cancelled signals, open_dialog() and get_body_slot(). |
+
+The Slider and Separator pages list both orientations. Accordion combines
+`surfaces/accordion.tres` with `surfaces/collapsible.tscn`. Radio Group combines
+`forms/radio_group.tres` with `forms/checkbox.tscn`; Toggle Group combines
+`actions/toggle_group.tres` with `actions/toggle.tscn`. Hosts still own required
+initial selections, content, labels and actions. Card, Item, Spinner and Alert
+Dialog inherit their existing core compositions without duplicating behavior.
+
+For a tooltip, return an instance of `feedback/tooltip.tscn` with its `text`
+set from the source control's `_make_custom_tooltip(for_text)` override. Godot
+provides the native tooltip popup and lifecycle. The Tooltip showcase page
+contains this small host-side factory.
 
 ## Inputs and choices
 
-- Use `LineEdit` and `TextEdit` directly when a visible label/help/error
+- Use the `LineEdit` and `TextEdit` proxies when a visible label/help/error
   relationship is not needed. Minimum target height is 44px; multiline entry
   starts at 112px.
 - Use `SpinBox` for numeric entry and `HSlider`/`VSlider` for bounded ranges.
@@ -45,7 +111,7 @@ pass-through scene or script around an adequate built-in node.
 
 ## Windows, dialogs, popups, and menus
 
-- Use `Window` directly for a normal native or embedded window. Rookframe Theme
+- Use native `Window` behavior for a normal native or embedded window. Rookframe Theme
   styles embedded borders and the title. Connect `close_requested`; Godot does
   not automatically close a Window.
 - Use the public `Dialog` for Rookframe acknowledgement and confirmed decisions.
@@ -220,8 +286,9 @@ text styles, density, reading margins and vertical resizing.
 ## Expansion recipes (RF-UI-EXPANSION-01)
 
 The synthetic Settings and character examples are in
-`showcase/examples/ui-expansion/native_recipes.gd`. They use native controls and
-production components. The containing screen supplies one bounded scroll owner.
+`showcase/examples/ui-expansion/native_recipes.gd`. Dedicated component pages
+under `showcase/examples/components/pages/` consume the public proxies below.
+The containing screen supplies one bounded scroll owner.
 The host owns every value, action and translated string.
 
 | Requirement | Capability | Composition | Observable result |

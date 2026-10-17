@@ -4,7 +4,7 @@ const Demo = preload("res://examples/components/pages/data_feedback/demo.gd")
 
 static func build(page) -> void:
 	var display = page.section("Display item", "A read-only record with an explicit action.")
-	var record = page.scene(Demo.path("data/structured_row"), display, {"title": "Moonstone compass", "detail": "Explorer equipment", "value_text": "1 kg"})
+	var record = page.scene("res://rookframe/ui/components/data/item.tscn", display, {"title": "Moonstone compass", "detail": "Explorer equipment", "value_text": "1 kg"})
 	var status = page.note(display, "No action requested.")
 	page.button(record.get_action_slot(), "Inspect compass", func(): status.text = "Compass inspection requested.")
 	var selection = page.section("Selectable item", "The entire choice row is one native toggle target.")

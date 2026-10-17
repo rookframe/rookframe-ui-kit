@@ -13,20 +13,9 @@ static func _avatar(page, parent: Node, identity: String, initials: String, use_
 	var row := HBoxContainer.new()
 	row.add_theme_constant_override("separation", 16)
 	parent.add_child(row)
-	var frame := PanelContainer.new()
-	frame.custom_minimum_size = Vector2(64, 64)
-	frame.accessibility_name = identity
-	row.add_child(frame)
-	if use_icon:
-		var art := TextureRect.new()
-		art.texture = load("res://rookframe/ui/icons/person.svg")
-		art.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-		art.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-		art.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		frame.add_child(art)
-	else:
-		var copy = page.label(initials)
-		copy.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		copy.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-		frame.add_child(copy)
+	page.scene("res://rookframe/ui/components/data/avatar.tscn", row, {
+		"accessibility_name": identity,
+		"initials": initials,
+		"texture": load("res://rookframe/ui/icons/person.svg") if use_icon else null
+	})
 	page.note(row, identity)

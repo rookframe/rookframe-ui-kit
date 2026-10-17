@@ -1,0 +1,4 @@
+[gd_scene format=3 uid="uid://d1ffeqgu0rgna"]
+
+[node name="Progress" type="ProgressBar"]
+custom_minimum_size = Vector2(0, 28)

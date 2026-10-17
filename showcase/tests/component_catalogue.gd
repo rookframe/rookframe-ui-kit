@@ -27,6 +27,9 @@ func _run() -> void:
 	check(not catalogue.entries.is_empty(), "The component catalogue must have entries")
 	check(catalogue.current_id.is_empty(), "Launch opens the grouped overview")
 	check(not catalogue.show_page("missing-component"), "Unknown component IDs must not replace the current view")
+	await capture("launch")
+	# The layout matrix uses exact native pixels, independent of desktop DPI.
+	root.content_scale_factor = 1.0
 	for canvas in [Vector2i(1920, 1080), Vector2i(1024, 768), Vector2i(844, 390)]:
 		root.size = canvas
 		catalogue.show_page("")

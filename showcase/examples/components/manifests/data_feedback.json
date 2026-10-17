@@ -193,6 +193,7 @@
     "category": "Feedback & overlays",
     "script": "res://examples/components/pages/data_feedback/alert_dialog.gd",
     "covers": [
+      "res://rookframe/ui/components/overlays/alert_dialog.tscn",
       "Alert Dialog"
     ],
     "keywords": [
@@ -274,6 +275,7 @@
     "category": "Feedback & overlays",
     "script": "res://examples/components/pages/data_feedback/tooltip.gd",
     "covers": [
+      "res://rookframe/ui/components/feedback/tooltip.tscn",
       "Tooltip"
     ],
     "keywords": [
@@ -287,6 +289,7 @@
     "category": "Feedback & overlays",
     "script": "res://examples/components/pages/data_feedback/context_menu.gd",
     "covers": [
+      "res://rookframe/ui/components/overlays/context_menu.tscn",
       "Context Menu"
     ],
     "keywords": [
@@ -300,6 +303,7 @@
     "category": "Feedback & overlays",
     "script": "res://examples/components/pages/data_feedback/dropdown_menu.gd",
     "covers": [
+      "res://rookframe/ui/components/overlays/dropdown_menu.tscn",
       "Dropdown Menu"
     ],
     "keywords": [
@@ -420,6 +424,7 @@
     "category": "Data display",
     "script": "res://examples/components/pages/data_feedback/table.gd",
     "covers": [
+      "res://rookframe/ui/components/data/table.tscn",
       "Table"
     ],
     "keywords": [
@@ -433,6 +438,7 @@
     "category": "Feedback & overlays",
     "script": "res://examples/components/pages/data_feedback/progress.gd",
     "covers": [
+      "res://rookframe/ui/components/feedback/progress.tscn",
       "Progress"
     ],
     "keywords": [
@@ -446,6 +452,7 @@
     "category": "Feedback & overlays",
     "script": "res://examples/components/pages/data_feedback/spinner.gd",
     "covers": [
+      "res://rookframe/ui/components/feedback/spinner.tscn",
       "Spinner"
     ],
     "keywords": [
@@ -459,6 +466,7 @@
     "category": "Data display",
     "script": "res://examples/components/pages/data_feedback/item.gd",
     "covers": [
+      "res://rookframe/ui/components/data/item.tscn",
       "Item"
     ],
     "keywords": [
@@ -472,6 +480,7 @@
     "category": "Data display",
     "script": "res://examples/components/pages/data_feedback/avatar.gd",
     "covers": [
+      "res://rookframe/ui/components/data/avatar.tscn",
       "Avatar"
     ],
     "keywords": [

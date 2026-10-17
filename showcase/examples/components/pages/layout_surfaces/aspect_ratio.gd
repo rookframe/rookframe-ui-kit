@@ -6,7 +6,7 @@ static func build(page) -> void:
 	for cropped in [false, true]:
 		var body = page.section("Square crop" if cropped else "Widescreen fit", "Resize the gallery: the media remains inside its selected ratio.")
 		var bounds := Demo.region(body, 220)
-		var ratio := AspectRatioContainer.new()
+		var ratio := preload("res://rookframe/ui/components/layout/aspect_ratio.tscn").instantiate() as AspectRatioContainer
 		ratio.ratio = 1.0 if cropped else 16.0 / 9.0
 		ratio.stretch_mode = AspectRatioContainer.STRETCH_FIT
 		bounds.add_child(ratio)

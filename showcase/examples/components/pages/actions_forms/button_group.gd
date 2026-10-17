@@ -9,7 +9,7 @@ static func build(page) -> void:
 	page.button(trailing, "Save draft", func(): status.text = "Draft saved locally.")
 	page.button(trailing, "Continue", func(): status.text = "Continue requested.")
 	var other = page.section("Wrapping command group", "Related commands remain separate actions. They wrap together at constrained widths.")
-	var commands = page.flow(other)
+	var commands = page.scene("res://rookframe/ui/components/actions/button_group.tscn", other)
 	var result = page.note(other, "Choose an editing command.")
 	for title in ["Duplicate", "Archive", "Restore"]:
 		page.button(commands, title, func(): result.text = title + " requested.")

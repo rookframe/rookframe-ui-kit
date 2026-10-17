@@ -406,6 +406,7 @@
     "description": "Native selection by stable ID, with disabled items, empty lists and incremental search.",
     "script": "res://examples/components/pages/actions_forms/select.gd",
     "covers": [
+      "res://rookframe/ui/components/forms/select.tscn",
       "Select",
       "Native Select"
     ],
@@ -423,6 +424,7 @@
     "description": "Required and optional exclusive choices using native ButtonGroup rules.",
     "script": "res://examples/components/pages/actions_forms/radio_group.gd",
     "covers": [
+      "res://rookframe/ui/components/forms/radio_group.tres",
       "Radio Group"
     ],
     "keywords": [
@@ -439,6 +441,7 @@
     "description": "One independent boolean with native checked, unchecked and disabled states.",
     "script": "res://examples/components/pages/actions_forms/checkbox.gd",
     "covers": [
+      "res://rookframe/ui/components/forms/checkbox.tscn",
       "Checkbox"
     ],
     "keywords": [
@@ -455,6 +458,7 @@
     "description": "Immediate boolean settings using native CheckButton.",
     "script": "res://examples/components/pages/actions_forms/native_switch.gd",
     "covers": [
+      "res://rookframe/ui/components/forms/switch.tscn",
       "Switch"
     ],
     "keywords": [
@@ -471,6 +475,7 @@
     "description": "A native pressed button for a persistent on/off mode.",
     "script": "res://examples/components/pages/actions_forms/toggle.gd",
     "covers": [
+      "res://rookframe/ui/components/actions/toggle.tscn",
       "Toggle"
     ],
     "keywords": [
@@ -487,6 +492,7 @@
     "description": "Exclusive modes and independent options composed from native toggles.",
     "script": "res://examples/components/pages/actions_forms/toggle_group.gd",
     "covers": [
+      "res://rookframe/ui/components/actions/toggle_group.tres",
       "Toggle Group"
     ],
     "keywords": [
@@ -503,6 +509,7 @@
     "description": "Independent commands in responsive source-order action lanes.",
     "script": "res://examples/components/pages/actions_forms/button_group.gd",
     "covers": [
+      "res://rookframe/ui/components/actions/button_group.tscn",
       "Button Group"
     ],
     "keywords": [
@@ -519,6 +526,7 @@
     "description": "Native single-line text entry with submit, selection, undo and read-only behavior.",
     "script": "res://examples/components/pages/actions_forms/input.gd",
     "covers": [
+      "res://rookframe/ui/components/forms/input.tscn",
       "Input"
     ],
     "keywords": [
@@ -535,6 +543,7 @@
     "description": "Native multiline entry with wrapping, selection, undo and read-only viewing.",
     "script": "res://examples/components/pages/actions_forms/native_textarea.gd",
     "covers": [
+      "res://rookframe/ui/components/forms/textarea.tscn",
       "Textarea"
     ],
     "keywords": [
@@ -551,7 +560,9 @@
     "description": "Bounded continuous and stepped values with readable units and locked states.",
     "script": "res://examples/components/pages/actions_forms/slider.gd",
     "covers": [
-      "Slider"
+      "res://rookframe/ui/components/forms/slider.tscn",
+      "Slider",
+      "res://rookframe/ui/components/forms/vertical_slider.tscn"
     ],
     "keywords": [
       "range",
@@ -567,6 +578,7 @@
     "description": "Native SpinBox values with bounds, steps, units and commit behavior.",
     "script": "res://examples/components/pages/actions_forms/numeric_input.gd",
     "covers": [
+      "res://rookframe/ui/components/forms/numeric_input.tscn",
       "Numeric Input"
     ],
     "keywords": [
@@ -583,6 +595,7 @@
     "description": "Native text and icon commands with explicit names, focus and availability.",
     "script": "res://examples/components/pages/actions_forms/button.gd",
     "covers": [
+      "res://rookframe/ui/components/actions/button.tscn",
       "Button"
     ],
     "keywords": [

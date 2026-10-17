@@ -9,6 +9,7 @@ static func create(dark: bool = false) -> Theme:
 	var line := Color("38383c") if dark else Color("dedee2")
 	var hover := Color("2d2d31") if dark else Color("efeff1")
 	result.set_color("font_color", "Label", ink)
+	result.set_color("default_color", "RichTextLabel", ink)
 	result.set_color("font_color", "Button", ink)
 	result.set_color("font_hover_color", "Button", ink)
 	result.set_color("font_pressed_color", "Button", ink)

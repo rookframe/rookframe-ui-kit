@@ -8,6 +8,22 @@ var preview_theme: Theme = preload("res://rookframe/ui/theme/rookframe_theme.tre
 var section_titles: Array[String] = []
 var section_blocks: Array[Control] = []
 
+func _ready() -> void:
+	var paths := PackedStringArray()
+	for resource in entry.get("covers", []):
+		if resource.begins_with("res://"):
+			paths.append(resource)
+	var reference := RichTextLabel.new()
+	reference.name = "UsageReference"
+	reference.fit_content = true
+	reference.scroll_active = false
+	reference.selection_enabled = true
+	reference.focus_mode = Control.FOCUS_ALL
+	reference.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	reference.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	reference.text = "Resource path:\n" + "\n".join(paths)
+	add_child(reference)
+
 func section(title: String, description: String = "") -> VBoxContainer:
 	var block := VBoxContainer.new()
 	block.add_theme_constant_override("separation", 12)
@@ -31,7 +47,7 @@ func section(title: String, description: String = "") -> VBoxContainer:
 	return body
 
 func label(copy: String) -> Label:
-	var result := Label.new()
+	var result: Label = preload("res://rookframe/ui/components/data/label.tscn").instantiate()
 	result.text = copy
 	result.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	result.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -43,7 +59,7 @@ func note(parent: Node, copy: String) -> Label:
 	return result
 
 func button(parent: Node, copy: String, action: Callable = Callable()) -> Button:
-	var result := Button.new()
+	var result: Button = preload("res://rookframe/ui/components/actions/button.tscn").instantiate()
 	result.text = copy
 	result.custom_minimum_size = Vector2(44, 44)
 	result.accessibility_name = copy

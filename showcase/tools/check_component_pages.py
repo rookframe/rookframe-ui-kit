@@ -28,8 +28,12 @@ def main():
         path = SHOWCASE / entry["script"].removeprefix("res://")
         assert path.is_file(), f"Missing page: {path}"
         assert "static func build(page" in path.read_text(), f"Missing builder: {path}"
+        resources = [p for p in entry["covers"] if p.startswith("res://rookframe/ui/")]
+        assert resources, f"No public UI Kit resource for {entry['id']}"
+        for resource in resources:
+            assert (SHOWCASE / resource.removeprefix("res://")).is_file(), resource
         covered.update(entry["covers"])
-    expected = {c.get("scene", c.get("script")) for c in catalogue["components"]}
+    expected = {c.get("scene", c.get("script", c.get("resource"))) for c in catalogue["components"]}
     expected.update(c["script"] for c in catalogue.get("behaviorResources", []))
     expected.update(catalogue["currentDesignSystem"]["components"])
     expected.update(c["name"] for c in catalogue["expansionCapabilities"])

@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://cnp8bfel1ex7d"]
+
+[node name="ContextMenu" type="PopupMenu"]
+visible = false
+allow_search = true

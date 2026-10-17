@@ -6,7 +6,7 @@ static func build(page) -> void:
 	for follow in [true, false]:
 		var body = page.section("Keyboard focus follows" if follow else "Read-only history", "This bounded example owns its body scroll. Horizontal scrolling is disabled.")
 		var bounds := Demo.region(body, 240)
-		var scroll := ScrollContainer.new()
+		var scroll := preload("res://rookframe/ui/components/layout/scroll_area.tscn").instantiate() as ScrollContainer
 		scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 		scroll.follow_focus = follow
 		bounds.add_child(scroll)

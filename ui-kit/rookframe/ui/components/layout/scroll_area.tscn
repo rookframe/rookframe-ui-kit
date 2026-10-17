@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://cdm381hwjmiqt"]
+
+[node name="ScrollArea" type="ScrollContainer"]
+horizontal_scroll_mode = 0
+follow_focus = true

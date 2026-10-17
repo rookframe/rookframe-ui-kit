@@ -646,7 +646,7 @@
       "properties": {
         "title": "Action",
         "description": "Supporting action detail",
-        "action_label": "\u00e2\u20ac\u00ba",
+        "action_label": "â€º",
         "tone": "STANDARD",
         "disabled": false
       },
@@ -730,7 +730,7 @@
       "properties": {
         "title": "Action",
         "description": "Supporting action detail",
-        "action_label": "\u00e2\u20ac\u00ba",
+        "action_label": "â€º",
         "tone": "STANDARD",
         "disabled": false
       },
@@ -1305,6 +1305,283 @@
       "slots": [
         "ContentSlot"
       ]
+    },
+    {
+      "name": "Button",
+      "scene": "res://rookframe/ui/components/actions/button.tscn",
+      "sceneUid": "uid://nsflvqoc35wn",
+      "rootType": "Button",
+      "contract": "Native properties, methods, signals, input and focus behavior remain unchanged.",
+      "nativeProxy": true
+    },
+    {
+      "name": "Toggle",
+      "scene": "res://rookframe/ui/components/actions/toggle.tscn",
+      "sceneUid": "uid://cwpab8mecms23",
+      "rootType": "Button",
+      "contract": "Native properties, methods, signals, input and focus behavior remain unchanged.",
+      "inherits": "res://rookframe/ui/components/actions/button.tscn",
+      "nativeProxy": true
+    },
+    {
+      "name": "ButtonGroup",
+      "scene": "res://rookframe/ui/components/actions/button_group.tscn",
+      "sceneUid": "uid://b4aur0867u0tt",
+      "rootType": "HFlowContainer",
+      "contract": "Native properties, methods, signals, input and focus behavior remain unchanged.",
+      "nativeProxy": true
+    },
+    {
+      "name": "ToggleGroup",
+      "resource": "res://rookframe/ui/components/actions/toggle_group.tres",
+      "resourceUid": "uid://c8tvkeg114t6r",
+      "rootType": "ButtonGroup",
+      "contract": "Assign one instance to exclusive Toggle buttons. Duplicate per independent group; omit the group for independent toggles.",
+      "nativeProxy": true
+    },
+    {
+      "name": "Select",
+      "scene": "res://rookframe/ui/components/forms/select.tscn",
+      "sceneUid": "uid://b5elwurhf51gu",
+      "rootType": "OptionButton",
+      "contract": "Native properties, methods, signals, input and focus behavior remain unchanged.",
+      "nativeProxy": true
+    },
+    {
+      "name": "RadioGroup",
+      "resource": "res://rookframe/ui/components/forms/radio_group.tres",
+      "resourceUid": "uid://gcr81jnjqjml",
+      "rootType": "ButtonGroup",
+      "contract": "Assign one instance to Checkbox buttons and set the initial selection. Duplicate per independent group. Native allow_unpress enables an optional choice.",
+      "nativeProxy": true
+    },
+    {
+      "name": "Checkbox",
+      "scene": "res://rookframe/ui/components/forms/checkbox.tscn",
+      "sceneUid": "uid://ckbo42fhr6k0s",
+      "rootType": "CheckBox",
+      "contract": "Native properties, methods, signals, input and focus behavior remain unchanged.",
+      "nativeProxy": true
+    },
+    {
+      "name": "NativeSwitch",
+      "scene": "res://rookframe/ui/components/forms/switch.tscn",
+      "sceneUid": "uid://domf1cvhsmy7x",
+      "rootType": "CheckButton",
+      "contract": "Native properties, methods, signals, input and focus behavior remain unchanged.",
+      "nativeProxy": true
+    },
+    {
+      "name": "Input",
+      "scene": "res://rookframe/ui/components/forms/input.tscn",
+      "sceneUid": "uid://d0fwqhwatcy1e",
+      "rootType": "LineEdit",
+      "contract": "Native properties, methods, signals, input and focus behavior remain unchanged.",
+      "nativeProxy": true
+    },
+    {
+      "name": "NativeTextarea",
+      "scene": "res://rookframe/ui/components/forms/textarea.tscn",
+      "sceneUid": "uid://375xeqywavgp",
+      "rootType": "TextEdit",
+      "contract": "Native properties, methods, signals, input and focus behavior remain unchanged.",
+      "nativeProxy": true
+    },
+    {
+      "name": "Slider",
+      "scene": "res://rookframe/ui/components/forms/slider.tscn",
+      "sceneUid": "uid://dg6u25avvig3f",
+      "rootType": "HSlider",
+      "contract": "Native properties, methods, signals, input and focus behavior remain unchanged.",
+      "nativeProxy": true
+    },
+    {
+      "name": "VerticalSlider",
+      "scene": "res://rookframe/ui/components/forms/vertical_slider.tscn",
+      "sceneUid": "uid://cjeplibpvyep2",
+      "rootType": "VSlider",
+      "contract": "Native properties, methods, signals, input and focus behavior remain unchanged.",
+      "nativeProxy": true
+    },
+    {
+      "name": "NumericInput",
+      "scene": "res://rookframe/ui/components/forms/numeric_input.tscn",
+      "sceneUid": "uid://3i6i3ixsentq",
+      "rootType": "SpinBox",
+      "contract": "Native properties, methods, signals, input and focus behavior remain unchanged.",
+      "nativeProxy": true
+    },
+    {
+      "name": "Tabs",
+      "scene": "res://rookframe/ui/components/navigation/tabs.tscn",
+      "sceneUid": "uid://dosdhal0wmtc1",
+      "rootType": "TabContainer",
+      "contract": "Native properties, methods, signals, input and focus behavior remain unchanged.",
+      "nativeProxy": true
+    },
+    {
+      "name": "ScrollArea",
+      "scene": "res://rookframe/ui/components/layout/scroll_area.tscn",
+      "sceneUid": "uid://cdm381hwjmiqt",
+      "rootType": "ScrollContainer",
+      "contract": "Native properties, methods, signals, input and focus behavior remain unchanged.",
+      "nativeProxy": true
+    },
+    {
+      "name": "AspectRatio",
+      "scene": "res://rookframe/ui/components/layout/aspect_ratio.tscn",
+      "sceneUid": "uid://dfceram75fsan",
+      "rootType": "AspectRatioContainer",
+      "contract": "Native properties, methods, signals, input and focus behavior remain unchanged.",
+      "nativeProxy": true
+    },
+    {
+      "name": "Separator",
+      "scene": "res://rookframe/ui/components/layout/separator.tscn",
+      "sceneUid": "uid://cqxyphpy8pc2e",
+      "rootType": "HSeparator",
+      "contract": "Native properties, methods, signals, input and focus behavior remain unchanged.",
+      "nativeProxy": true
+    },
+    {
+      "name": "VerticalSeparator",
+      "scene": "res://rookframe/ui/components/layout/vertical_separator.tscn",
+      "sceneUid": "uid://cikx40hubfq2u",
+      "rootType": "VSeparator",
+      "contract": "Native properties, methods, signals, input and focus behavior remain unchanged.",
+      "nativeProxy": true
+    },
+    {
+      "name": "Direction",
+      "scene": "res://rookframe/ui/components/layout/direction.tscn",
+      "sceneUid": "uid://b2hl4xpxx1x0b",
+      "rootType": "VBoxContainer",
+      "contract": "Set native layout_direction on this content container; use text_direction on mixed-direction child values.",
+      "nativeProxy": true
+    },
+    {
+      "name": "Accordion",
+      "resource": "res://rookframe/ui/components/surfaces/accordion.tres",
+      "resourceUid": "uid://dxc7tk2n0vpov",
+      "rootType": "FoldableGroup",
+      "contract": "Assign one instance to Collapsible scenes for single-open sections. Duplicate per independent accordion; omit the group for multiple-open sections.",
+      "nativeProxy": true
+    },
+    {
+      "name": "Collapsible",
+      "scene": "res://rookframe/ui/components/surfaces/collapsible.tscn",
+      "sceneUid": "uid://tibursphmfnq",
+      "rootType": "FoldableContainer",
+      "contract": "Native properties, methods, signals, input and focus behavior remain unchanged.",
+      "nativeProxy": true
+    },
+    {
+      "name": "Card",
+      "scene": "res://rookframe/ui/components/surfaces/card.tscn",
+      "sceneUid": "uid://bebdwngv12nli",
+      "rootType": "PanelContainer",
+      "contract": "Inherits Section: title, description, get_body_slot() and get_action_slot(). No implicit activation.",
+      "inherits": "res://rookframe/ui/components/layout/section.tscn",
+      "nativeProxy": true
+    },
+    {
+      "name": "Label",
+      "scene": "res://rookframe/ui/components/data/label.tscn",
+      "sceneUid": "uid://bj3pq6q6rqtwc",
+      "rootType": "Label",
+      "contract": "Native properties, methods, signals, input and focus behavior remain unchanged.",
+      "nativeProxy": true
+    },
+    {
+      "name": "Typography",
+      "scene": "res://rookframe/ui/components/data/typography.tscn",
+      "sceneUid": "uid://6qfw2fvnalwu",
+      "rootType": "Label",
+      "contract": "Native Label with the RookframeBody semantic role. Set theme_type_variation for other roles; fonts and appearance belong to the consumer.",
+      "inherits": "res://rookframe/ui/components/data/label.tscn",
+      "nativeProxy": true
+    },
+    {
+      "name": "Table",
+      "scene": "res://rookframe/ui/components/data/table.tscn",
+      "sceneUid": "uid://dpsvm67ykpvd8",
+      "rootType": "Tree",
+      "contract": "Native properties, methods, signals, input and focus behavior remain unchanged.",
+      "nativeProxy": true
+    },
+    {
+      "name": "Item",
+      "scene": "res://rookframe/ui/components/data/item.tscn",
+      "sceneUid": "uid://yxpfremkhaet",
+      "rootType": "PanelContainer",
+      "contract": "Display item inherits StructuredRow. Use ChoiceRow for selection and ActionRow for activation.",
+      "inherits": "res://rookframe/ui/components/data/structured_row.tscn",
+      "nativeProxy": true
+    },
+    {
+      "name": "Avatar",
+      "scene": "res://rookframe/ui/components/data/avatar.tscn",
+      "sceneUid": "uid://dljmiq1r21kjk",
+      "rootType": "PanelContainer",
+      "contract": "Set texture, initials and fallback_texture. Displays the supplied image, then initials, then fallback art. The host supplies the accessible identity.",
+      "nativeProxy": true,
+      "script": "res://rookframe/ui/components/data/avatar.gd",
+      "scriptUid": "uid://f7rrmcrg126t",
+      "properties": {
+        "texture": null,
+        "initials": "",
+        "fallback_texture": "res://rookframe/ui/icons/person.svg"
+      }
+    },
+    {
+      "name": "Progress",
+      "scene": "res://rookframe/ui/components/feedback/progress.tscn",
+      "sceneUid": "uid://d1ffeqgu0rgna",
+      "rootType": "ProgressBar",
+      "contract": "Native properties, methods, signals, input and focus behavior remain unchanged.",
+      "nativeProxy": true
+    },
+    {
+      "name": "Spinner",
+      "scene": "res://rookframe/ui/components/feedback/spinner.tscn",
+      "sceneUid": "uid://cfbaj5635ocq",
+      "rootType": "PanelContainer",
+      "contract": "Inherits TaskState in LOADING state, including title, description, state and reduced_motion. No separate animation implementation.",
+      "inherits": "res://rookframe/ui/components/feedback/task_state.tscn",
+      "nativeProxy": true
+    },
+    {
+      "name": "Tooltip",
+      "scene": "res://rookframe/ui/components/feedback/tooltip.tscn",
+      "sceneUid": "uid://ldl5c3tx0das",
+      "rootType": "Label",
+      "contract": "Set text and return this Label from the source Control._make_custom_tooltip(). Godot owns the tooltip popup, timing, placement and dismissal.",
+      "nativeProxy": true
+    },
+    {
+      "name": "ContextMenu",
+      "scene": "res://rookframe/ui/components/overlays/context_menu.tscn",
+      "sceneUid": "uid://cnp8bfel1ex7d",
+      "rootType": "PopupMenu",
+      "contract": "Native properties, methods, signals, input and focus behavior remain unchanged.",
+      "nativeProxy": true
+    },
+    {
+      "name": "DropdownMenu",
+      "scene": "res://rookframe/ui/components/overlays/dropdown_menu.tscn",
+      "sceneUid": "uid://43bd0eupbcom",
+      "rootType": "MenuButton",
+      "contract": "Native properties, methods, signals, input and focus behavior remain unchanged.",
+      "nativeProxy": true
+    },
+    {
+      "name": "AlertDialog",
+      "scene": "res://rookframe/ui/components/overlays/alert_dialog.tscn",
+      "sceneUid": "uid://bd3q0jknt4crj",
+      "rootType": "Window",
+      "contract": "Inherits Dialog in CONFIRMATION tone, including confirmed/cancelled signals, open_dialog() and get_body_slot().",
+      "inherits": "res://rookframe/ui/components/overlays/dialog.tscn",
+      "nativeProxy": true
     }
   ],
   "semanticIcons": {
@@ -1440,7 +1717,7 @@
       "name": "Select",
       "decision": "Included",
       "requirement": "NAT-01",
-      "implementation": "docs/native-controls-and-recipes.md#expansion-recipes-rf-ui-expansion-01",
+      "implementation": "res://rookframe/ui/components/forms/select.tscn",
       "documentation": "docs/native-controls-and-recipes.md",
       "example": "showcase/examples/ui-expansion/specimen.tscn"
     },
@@ -1449,7 +1726,7 @@
       "name": "Native Select",
       "decision": "Existing coverage",
       "requirement": "NAT-01",
-      "implementation": "docs/native-controls-and-recipes.md#expansion-recipes-rf-ui-expansion-01",
+      "implementation": "res://rookframe/ui/components/forms/select.tscn",
       "documentation": "docs/native-controls-and-recipes.md",
       "example": "showcase/examples/ui-expansion/specimen.tscn"
     },
@@ -1458,7 +1735,7 @@
       "name": "Radio Group",
       "decision": "Included",
       "requirement": "NAT-02",
-      "implementation": "docs/native-controls-and-recipes.md#expansion-recipes-rf-ui-expansion-01",
+      "implementation": "res://rookframe/ui/components/forms/radio_group.tres",
       "documentation": "docs/native-controls-and-recipes.md",
       "example": "showcase/examples/ui-expansion/specimen.tscn"
     },
@@ -1467,7 +1744,7 @@
       "name": "Checkbox",
       "decision": "Included",
       "requirement": "NAT-03",
-      "implementation": "docs/native-controls-and-recipes.md#expansion-recipes-rf-ui-expansion-01",
+      "implementation": "res://rookframe/ui/components/forms/checkbox.tscn",
       "documentation": "docs/native-controls-and-recipes.md",
       "example": "showcase/examples/ui-expansion/specimen.tscn"
     },
@@ -1476,7 +1753,7 @@
       "name": "Switch",
       "decision": "Included",
       "requirement": "NAT-04",
-      "implementation": "docs/native-controls-and-recipes.md#expansion-recipes-rf-ui-expansion-01",
+      "implementation": "res://rookframe/ui/components/forms/switch.tscn",
       "documentation": "docs/native-controls-and-recipes.md",
       "example": "showcase/examples/ui-expansion/specimen.tscn"
     },
@@ -1485,7 +1762,7 @@
       "name": "Toggle",
       "decision": "Included",
       "requirement": "NAT-05",
-      "implementation": "docs/native-controls-and-recipes.md#expansion-recipes-rf-ui-expansion-01",
+      "implementation": "res://rookframe/ui/components/actions/toggle.tscn",
       "documentation": "docs/native-controls-and-recipes.md",
       "example": "showcase/examples/ui-expansion/specimen.tscn"
     },
@@ -1494,7 +1771,7 @@
       "name": "Toggle Group",
       "decision": "Included",
       "requirement": "NAT-06",
-      "implementation": "docs/native-controls-and-recipes.md#expansion-recipes-rf-ui-expansion-01",
+      "implementation": "res://rookframe/ui/components/actions/toggle_group.tres",
       "documentation": "docs/native-controls-and-recipes.md",
       "example": "showcase/examples/ui-expansion/specimen.tscn"
     },
@@ -1503,7 +1780,7 @@
       "name": "Button Group",
       "decision": "Existing coverage",
       "requirement": "NAT-07",
-      "implementation": "docs/native-controls-and-recipes.md#expansion-recipes-rf-ui-expansion-01",
+      "implementation": "res://rookframe/ui/components/actions/button_group.tscn",
       "documentation": "docs/native-controls-and-recipes.md",
       "example": "showcase/examples/ui-expansion/specimen.tscn"
     },
@@ -1512,7 +1789,7 @@
       "name": "Context Menu",
       "decision": "Included",
       "requirement": "NAT-08",
-      "implementation": "docs/native-controls-and-recipes.md#expansion-recipes-rf-ui-expansion-01",
+      "implementation": "res://rookframe/ui/components/overlays/context_menu.tscn",
       "documentation": "docs/native-controls-and-recipes.md",
       "example": "showcase/examples/ui-expansion/specimen.tscn"
     },
@@ -1521,7 +1798,7 @@
       "name": "Dropdown Menu",
       "decision": "Included",
       "requirement": "NAT-09",
-      "implementation": "docs/native-controls-and-recipes.md#expansion-recipes-rf-ui-expansion-01",
+      "implementation": "res://rookframe/ui/components/overlays/dropdown_menu.tscn",
       "documentation": "docs/native-controls-and-recipes.md",
       "example": "showcase/examples/ui-expansion/specimen.tscn"
     },
@@ -1539,7 +1816,7 @@
       "name": "Alert Dialog",
       "decision": "Included",
       "requirement": "NAT-11",
-      "implementation": "docs/native-controls-and-recipes.md#expansion-recipes-rf-ui-expansion-01",
+      "implementation": "res://rookframe/ui/components/overlays/alert_dialog.tscn",
       "documentation": "docs/native-controls-and-recipes.md",
       "example": "showcase/examples/ui-expansion/specimen.tscn"
     },
@@ -1557,7 +1834,7 @@
       "name": "Tooltip",
       "decision": "Included",
       "requirement": "NAT-12",
-      "implementation": "docs/native-controls-and-recipes.md#expansion-recipes-rf-ui-expansion-01",
+      "implementation": "res://rookframe/ui/components/feedback/tooltip.tscn",
       "documentation": "docs/native-controls-and-recipes.md",
       "example": "showcase/examples/ui-expansion/specimen.tscn"
     },
@@ -1584,7 +1861,7 @@
       "name": "Accordion",
       "decision": "Included",
       "requirement": "NAT-13",
-      "implementation": "docs/native-controls-and-recipes.md#expansion-recipes-rf-ui-expansion-01",
+      "implementation": "res://rookframe/ui/components/surfaces/accordion.tres",
       "documentation": "docs/native-controls-and-recipes.md",
       "example": "showcase/examples/ui-expansion/specimen.tscn"
     },
@@ -1593,7 +1870,7 @@
       "name": "Collapsible",
       "decision": "Included",
       "requirement": "NAT-14",
-      "implementation": "docs/native-controls-and-recipes.md#expansion-recipes-rf-ui-expansion-01",
+      "implementation": "res://rookframe/ui/components/surfaces/collapsible.tscn",
       "documentation": "docs/native-controls-and-recipes.md",
       "example": "showcase/examples/ui-expansion/specimen.tscn"
     },
@@ -1602,7 +1879,7 @@
       "name": "Tabs",
       "decision": "Included",
       "requirement": "NAT-15",
-      "implementation": "docs/native-controls-and-recipes.md#expansion-recipes-rf-ui-expansion-01",
+      "implementation": "res://rookframe/ui/components/navigation/tabs.tscn",
       "documentation": "docs/native-controls-and-recipes.md",
       "example": "showcase/examples/ui-expansion/specimen.tscn"
     },
@@ -1629,7 +1906,7 @@
       "name": "Input",
       "decision": "Included",
       "requirement": "NAT-16",
-      "implementation": "docs/native-controls-and-recipes.md#expansion-recipes-rf-ui-expansion-01",
+      "implementation": "res://rookframe/ui/components/forms/input.tscn",
       "documentation": "docs/native-controls-and-recipes.md",
       "example": "showcase/examples/ui-expansion/specimen.tscn"
     },
@@ -1638,7 +1915,7 @@
       "name": "Textarea",
       "decision": "Included",
       "requirement": "NAT-17",
-      "implementation": "docs/native-controls-and-recipes.md#expansion-recipes-rf-ui-expansion-01",
+      "implementation": "res://rookframe/ui/components/forms/textarea.tscn",
       "documentation": "docs/native-controls-and-recipes.md",
       "example": "showcase/examples/ui-expansion/specimen.tscn"
     },
@@ -1674,7 +1951,7 @@
       "name": "Table",
       "decision": "Included",
       "requirement": "NAT-18",
-      "implementation": "docs/native-controls-and-recipes.md#expansion-recipes-rf-ui-expansion-01",
+      "implementation": "res://rookframe/ui/components/data/table.tscn",
       "documentation": "docs/native-controls-and-recipes.md",
       "example": "showcase/examples/ui-expansion/specimen.tscn"
     },
@@ -1701,7 +1978,7 @@
       "name": "Progress",
       "decision": "Included",
       "requirement": "NAT-21",
-      "implementation": "docs/native-controls-and-recipes.md#expansion-recipes-rf-ui-expansion-01",
+      "implementation": "res://rookframe/ui/components/feedback/progress.tscn",
       "documentation": "docs/native-controls-and-recipes.md",
       "example": "showcase/examples/ui-expansion/specimen.tscn"
     },
@@ -1710,7 +1987,7 @@
       "name": "Spinner",
       "decision": "Included",
       "requirement": "NAT-22",
-      "implementation": "docs/native-controls-and-recipes.md#expansion-recipes-rf-ui-expansion-01",
+      "implementation": "res://rookframe/ui/components/feedback/spinner.tscn",
       "documentation": "docs/native-controls-and-recipes.md",
       "example": "showcase/examples/ui-expansion/specimen.tscn"
     },
@@ -1719,7 +1996,7 @@
       "name": "Slider",
       "decision": "Included",
       "requirement": "NAT-23",
-      "implementation": "docs/native-controls-and-recipes.md#expansion-recipes-rf-ui-expansion-01",
+      "implementation": "res://rookframe/ui/components/forms/slider.tscn",
       "documentation": "docs/native-controls-and-recipes.md",
       "example": "showcase/examples/ui-expansion/specimen.tscn"
     },
@@ -1728,7 +2005,7 @@
       "name": "Numeric Input",
       "decision": "Included",
       "requirement": "NAT-24",
-      "implementation": "docs/native-controls-and-recipes.md#expansion-recipes-rf-ui-expansion-01",
+      "implementation": "res://rookframe/ui/components/forms/numeric_input.tscn",
       "documentation": "docs/native-controls-and-recipes.md",
       "example": "showcase/examples/ui-expansion/specimen.tscn"
     },
@@ -1737,7 +2014,7 @@
       "name": "Scroll Area",
       "decision": "Included",
       "requirement": "NAT-25",
-      "implementation": "docs/native-controls-and-recipes.md#expansion-recipes-rf-ui-expansion-01",
+      "implementation": "res://rookframe/ui/components/layout/scroll_area.tscn",
       "documentation": "docs/native-controls-and-recipes.md",
       "example": "showcase/examples/ui-expansion/specimen.tscn"
     },
@@ -1746,7 +2023,7 @@
       "name": "Aspect Ratio",
       "decision": "Included",
       "requirement": "NAT-26",
-      "implementation": "docs/native-controls-and-recipes.md#expansion-recipes-rf-ui-expansion-01",
+      "implementation": "res://rookframe/ui/components/layout/aspect_ratio.tscn",
       "documentation": "docs/native-controls-and-recipes.md",
       "example": "showcase/examples/ui-expansion/specimen.tscn"
     },
@@ -1755,7 +2032,7 @@
       "name": "Card",
       "decision": "Existing coverage",
       "requirement": "NAT-27",
-      "implementation": "docs/native-controls-and-recipes.md#expansion-recipes-rf-ui-expansion-01",
+      "implementation": "res://rookframe/ui/components/surfaces/card.tscn",
       "documentation": "docs/native-controls-and-recipes.md",
       "example": "showcase/examples/ui-expansion/specimen.tscn"
     },
@@ -1764,7 +2041,7 @@
       "name": "Item",
       "decision": "Existing coverage",
       "requirement": "NAT-28",
-      "implementation": "docs/native-controls-and-recipes.md#expansion-recipes-rf-ui-expansion-01",
+      "implementation": "res://rookframe/ui/components/data/item.tscn",
       "documentation": "docs/native-controls-and-recipes.md",
       "example": "showcase/examples/ui-expansion/specimen.tscn"
     },
@@ -1782,7 +2059,7 @@
       "name": "Avatar",
       "decision": "Included",
       "requirement": "NAT-30",
-      "implementation": "docs/native-controls-and-recipes.md#expansion-recipes-rf-ui-expansion-01",
+      "implementation": "res://rookframe/ui/components/data/avatar.tscn",
       "documentation": "docs/native-controls-and-recipes.md",
       "example": "showcase/examples/ui-expansion/specimen.tscn"
     },
@@ -1791,7 +2068,7 @@
       "name": "Button",
       "decision": "Included",
       "requirement": "NAT-31",
-      "implementation": "docs/native-controls-and-recipes.md#expansion-recipes-rf-ui-expansion-01",
+      "implementation": "res://rookframe/ui/components/actions/button.tscn",
       "documentation": "docs/native-controls-and-recipes.md",
       "example": "showcase/examples/ui-expansion/specimen.tscn"
     },
@@ -1800,7 +2077,7 @@
       "name": "Label",
       "decision": "Existing coverage",
       "requirement": "NAT-32",
-      "implementation": "docs/native-controls-and-recipes.md#expansion-recipes-rf-ui-expansion-01",
+      "implementation": "res://rookframe/ui/components/data/label.tscn",
       "documentation": "docs/native-controls-and-recipes.md",
       "example": "showcase/examples/ui-expansion/specimen.tscn"
     },
@@ -1809,7 +2086,7 @@
       "name": "Separator",
       "decision": "Included",
       "requirement": "NAT-33",
-      "implementation": "docs/native-controls-and-recipes.md#expansion-recipes-rf-ui-expansion-01",
+      "implementation": "res://rookframe/ui/components/layout/separator.tscn",
       "documentation": "docs/native-controls-and-recipes.md",
       "example": "showcase/examples/ui-expansion/specimen.tscn"
     },
@@ -1818,7 +2095,7 @@
       "name": "Typography",
       "decision": "Included",
       "requirement": "NAT-34",
-      "implementation": "docs/native-controls-and-recipes.md#expansion-recipes-rf-ui-expansion-01",
+      "implementation": "res://rookframe/ui/components/data/typography.tscn",
       "documentation": "docs/native-controls-and-recipes.md",
       "example": "showcase/examples/ui-expansion/specimen.tscn"
     },
@@ -1827,7 +2104,7 @@
       "name": "Direction",
       "decision": "Included",
       "requirement": "NAT-35",
-      "implementation": "docs/native-controls-and-recipes.md#expansion-recipes-rf-ui-expansion-01",
+      "implementation": "res://rookframe/ui/components/layout/direction.tscn",
       "documentation": "docs/native-controls-and-recipes.md",
       "example": "showcase/examples/ui-expansion/specimen.tscn"
     }

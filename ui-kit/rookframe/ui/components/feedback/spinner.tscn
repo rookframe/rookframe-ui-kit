@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cfbaj5635ocq"]
+
+[ext_resource type="PackedScene" path="res://rookframe/ui/components/feedback/task_state.tscn" id="base"]
+
+[node name="Spinner" instance=ExtResource("base")]
+state = 0
+title = "Loading"

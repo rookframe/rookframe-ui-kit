@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cwpab8mecms23"]
+
+[ext_resource type="PackedScene" path="res://rookframe/ui/components/actions/button.tscn" id="base"]
+
+[node name="Toggle" instance=ExtResource("base")]
+toggle_mode = true
