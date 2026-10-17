@@ -72,11 +72,15 @@ func _ready() -> void:
 	layout.add_child(top)
 	_menu = _button(top, "Components", _toggle_navigation)
 	var brand := _label("ROOKFRAME", 20)
+	brand.autowrap_mode = TextServer.AUTOWRAP_OFF
 	brand.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	brand.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	top.add_child(brand)
 	var appearance := HBoxContainer.new()
+	appearance.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	top.add_child(appearance)
 	var theme_label := _label("Theme")
+	theme_label.autowrap_mode = TextServer.AUTOWRAP_OFF
 	theme_label.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	appearance.add_child(theme_label)
 	theme_selector = preload("res://rookframe/ui/components/forms/select.tscn").instantiate()
