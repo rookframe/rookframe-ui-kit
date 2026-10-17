@@ -33,6 +33,11 @@ stale copies and checks generated-art provenance. No network or external UI Kit
 pin is used. `workspace.json` records package dependencies and import revisions;
 the monorepo revision now identifies kit, themes and showcase together.
 
+The native showcase opens a component catalogue with grouped navigation, search,
+and a dedicated view for each component's variants and states. The Motion lab
+action opens the retained Silkbound composition laboratory. To open one component
+directly, append `-- --component=field` to the Godot launch command.
+
 ## Install in a consumer
 
 Check out the required monorepo revision, then run:

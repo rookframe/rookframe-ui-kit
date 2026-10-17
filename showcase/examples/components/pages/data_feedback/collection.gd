@@ -1,0 +1,25 @@
+extends RefCounted
+
+const Demo = preload("res://examples/components/pages/data_feedback/demo.gd")
+
+static func build(page) -> void:
+	var section = page.section("Inventory collection", "Inspect a record or use its separate Equip action. Filtering retains the authoritative records.")
+	var actions = page.flow(section)
+	var status = page.note(section, "Select an item to inspect it.")
+	var host = Demo.bounded(section, 360)
+	var collection = page.scene(Demo.path("data/collection"), host, {"reduced_motion": page.reduced_motion, "collection_layout": 2})
+	Demo.fill(collection)
+	collection.configure(Demo.records(14, true), "item-0", "Expedition inventory", "14 items")
+	collection.selected.connect(func(id: String): status.text = "Inspecting " + id)
+	collection.action_requested.connect(func(id: String): status.text = "Equip requested: " + id)
+	page.button(actions, "Show three items", func(): collection.set_visible_ids(PackedStringArray(["item-0", "item-2", "item-5"])))
+	page.button(actions, "Show all", func(): collection.reset_filter())
+	page.button(actions, "Focus last item", func(): collection.focus_entry("item-13"))
+	page.button(collection.get_footer_slot(), "Review", func(): status.text = "Inventory review requested.")
+	var empty = page.section("No matching records")
+	var empty_host = Demo.bounded(empty, 190)
+	var filtered = page.scene(Demo.path("data/collection"), empty_host, {"empty_text": "No items match this filter."})
+	Demo.fill(filtered)
+	filtered.configure(Demo.records(4), "", "Filtered inventory", "0 matches")
+	filtered.set_visible_ids(PackedStringArray())
+	page.button(filtered.get_footer_slot(), "Clear filter", func(): filtered.reset_filter())

@@ -1,0 +1,481 @@
+[
+  {
+    "id": "metric",
+    "title": "Metric",
+    "description": "A named value with supporting detail and an optional action.",
+    "category": "Data display",
+    "script": "res://examples/components/pages/data_feedback/metric.gd",
+    "covers": [
+      "res://rookframe/ui/components/data/metric.tscn"
+    ],
+    "keywords": [
+      "stat",
+      "value"
+    ]
+  },
+  {
+    "id": "metric_strip",
+    "title": "Metric Strip",
+    "description": "Equal-priority facts that reflow with the available width.",
+    "category": "Data display",
+    "script": "res://examples/components/pages/data_feedback/metric_strip.gd",
+    "covers": [
+      "res://rookframe/ui/components/data/metric_strip.tscn"
+    ],
+    "keywords": [
+      "stats",
+      "facts"
+    ]
+  },
+  {
+    "id": "badge",
+    "title": "Badge",
+    "description": "Readable status and classification labels, with optional icons.",
+    "category": "Data display",
+    "script": "res://examples/components/pages/data_feedback/badge.gd",
+    "covers": [
+      "res://rookframe/ui/components/data/badge.tscn",
+      "Badge"
+    ],
+    "keywords": [
+      "badge"
+    ]
+  },
+  {
+    "id": "roll_row",
+    "title": "Roll Row",
+    "description": "A roll sequence with explicit complete, current, pending, and locked states.",
+    "category": "Data display",
+    "script": "res://examples/components/pages/data_feedback/roll_row.gd",
+    "covers": [
+      "res://rookframe/ui/components/data/roll_row.tscn"
+    ],
+    "keywords": []
+  },
+  {
+    "id": "structured_row",
+    "title": "Structured Row",
+    "description": "Read-only records with a stable lane for explicit actions.",
+    "category": "Data display",
+    "script": "res://examples/components/pages/data_feedback/structured_row.gd",
+    "covers": [
+      "res://rookframe/ui/components/data/structured_row.tscn"
+    ],
+    "keywords": []
+  },
+  {
+    "id": "key_value_row",
+    "title": "Key Value Row",
+    "description": "A compact, read-only pair of a visible key and value.",
+    "category": "Data display",
+    "script": "res://examples/components/pages/data_feedback/key_value_row.gd",
+    "covers": [
+      "res://rookframe/ui/components/data/key_value_row.tscn"
+    ],
+    "keywords": []
+  },
+  {
+    "id": "world_row",
+    "title": "World Row",
+    "description": "Selectable world records with retained identity and metadata.",
+    "category": "Data display",
+    "script": "res://examples/components/pages/data_feedback/world_row.gd",
+    "covers": [
+      "res://rookframe/ui/components/data/world_row.tscn"
+    ],
+    "keywords": []
+  },
+  {
+    "id": "world_summary_card",
+    "title": "World Summary Card",
+    "description": "A retained world summary with optional facts and actions.",
+    "category": "Data display",
+    "script": "res://examples/components/pages/data_feedback/world_summary_card.gd",
+    "covers": [
+      "res://rookframe/ui/components/data/world_summary_card.tscn"
+    ],
+    "keywords": []
+  },
+  {
+    "id": "package_row",
+    "title": "Package Row",
+    "description": "Read-only package identity with available, selected, and required states.",
+    "category": "Data display",
+    "script": "res://examples/components/pages/data_feedback/package_row.gd",
+    "covers": [
+      "res://rookframe/ui/components/data/package_row.tscn"
+    ],
+    "keywords": []
+  },
+  {
+    "id": "package_card",
+    "title": "Package Card",
+    "description": "Read-only package identity with available, selected, and required states.",
+    "category": "Data display",
+    "script": "res://examples/components/pages/data_feedback/package_card.gd",
+    "covers": [
+      "res://rookframe/ui/components/data/package_card.tscn"
+    ],
+    "keywords": []
+  },
+  {
+    "id": "summary_block",
+    "title": "Summary Block",
+    "description": "A heading, optional stat strip, facts, and supporting copy.",
+    "category": "Data display",
+    "script": "res://examples/components/pages/data_feedback/summary_block.gd",
+    "covers": [
+      "res://rookframe/ui/components/data/summary_block.tscn"
+    ],
+    "keywords": []
+  },
+  {
+    "id": "notice",
+    "title": "Notice",
+    "description": "In-task alerts with explicit tone, optional dismissal, and recovery actions.",
+    "category": "Feedback & overlays",
+    "script": "res://examples/components/pages/data_feedback/notice.gd",
+    "covers": [
+      "res://rookframe/ui/components/feedback/notice.tscn",
+      "Alert"
+    ],
+    "keywords": [
+      "alert",
+      "notification"
+    ]
+  },
+  {
+    "id": "task_state",
+    "title": "Task State",
+    "description": "Whole-body loading, empty, success, and error states with recovery actions.",
+    "category": "Feedback & overlays",
+    "script": "res://examples/components/pages/data_feedback/task_state.gd",
+    "covers": [
+      "res://rookframe/ui/components/feedback/task_state.tscn",
+      "Empty"
+    ],
+    "keywords": [
+      "empty",
+      "loading",
+      "success",
+      "error"
+    ]
+  },
+  {
+    "id": "step_progress",
+    "title": "Step Progress",
+    "description": "A read-only workflow rail that becomes a compact current-step summary.",
+    "category": "Feedback & overlays",
+    "script": "res://examples/components/pages/data_feedback/step_progress.gd",
+    "covers": [
+      "res://rookframe/ui/components/feedback/step_progress.tscn"
+    ],
+    "keywords": []
+  },
+  {
+    "id": "dialog",
+    "title": "Dialog",
+    "description": "Acknowledgements and decisions with a bounded body and explicit footer actions.",
+    "category": "Feedback & overlays",
+    "script": "res://examples/components/pages/data_feedback/dialog.gd",
+    "covers": [
+      "res://rookframe/ui/components/overlays/dialog.tscn",
+      "Dialog"
+    ],
+    "keywords": [
+      "dialog"
+    ]
+  },
+  {
+    "id": "alert_dialog",
+    "title": "Alert Dialog",
+    "description": "A consequential confirmation with separate confirm and cancellation paths.",
+    "category": "Feedback & overlays",
+    "script": "res://examples/components/pages/data_feedback/alert_dialog.gd",
+    "covers": [
+      "Alert Dialog"
+    ],
+    "keywords": [
+      "alert dialog"
+    ]
+  },
+  {
+    "id": "file_picker_dialog",
+    "title": "File Picker Dialog",
+    "description": "Browse, filter, and confirm a file using the public native picker.",
+    "category": "Feedback & overlays",
+    "script": "res://examples/components/pages/data_feedback/file_picker_dialog.gd",
+    "covers": [
+      "res://rookframe/ui/components/overlays/file_picker_dialog.tscn"
+    ],
+    "keywords": []
+  },
+  {
+    "id": "popover",
+    "title": "Popover",
+    "description": "Anchored, retained content with native focus and dismissal.",
+    "category": "Feedback & overlays",
+    "script": "res://examples/components/pages/data_feedback/popover.gd",
+    "covers": [
+      "res://rookframe/ui/components/overlays/popover.tscn",
+      "Popover"
+    ],
+    "keywords": [
+      "popover"
+    ]
+  },
+  {
+    "id": "inspect_card",
+    "title": "Inspect Card",
+    "description": "A read-only hover preview and explicit inspection for every input mode.",
+    "category": "Feedback & overlays",
+    "script": "res://examples/components/pages/data_feedback/inspect_card.gd",
+    "covers": [
+      "res://rookframe/ui/components/overlays/inspect_card.tscn",
+      "Hover Card"
+    ],
+    "keywords": [
+      "hover card"
+    ]
+  },
+  {
+    "id": "toast_stack",
+    "title": "Toast Stack",
+    "description": "Queued transient messages with explicit actions and dismissal.",
+    "category": "Feedback & overlays",
+    "script": "res://examples/components/pages/data_feedback/toast_stack.gd",
+    "covers": [
+      "res://rookframe/ui/components/feedback/toast_stack.tscn",
+      "Toast"
+    ],
+    "keywords": [
+      "toast"
+    ]
+  },
+  {
+    "id": "record_tooltip",
+    "title": "Record Tooltip",
+    "description": "Authored title and summary content for the native tooltip lifecycle.",
+    "category": "Feedback & overlays",
+    "script": "res://examples/components/pages/data_feedback/record_tooltip.gd",
+    "covers": [
+      "res://rookframe/ui/components/feedback/record_tooltip.tscn"
+    ],
+    "keywords": [
+      "hover",
+      "hint",
+      "record"
+    ]
+  },
+  {
+    "id": "tooltip",
+    "title": "Tooltip",
+    "description": "Native hints with equivalent essential information available on activation.",
+    "category": "Feedback & overlays",
+    "script": "res://examples/components/pages/data_feedback/tooltip.gd",
+    "covers": [
+      "Tooltip"
+    ],
+    "keywords": [
+      "tooltip"
+    ]
+  },
+  {
+    "id": "context_menu",
+    "title": "Context Menu",
+    "description": "Actions at a source record, reachable with pointer or explicit activation.",
+    "category": "Feedback & overlays",
+    "script": "res://examples/components/pages/data_feedback/context_menu.gd",
+    "covers": [
+      "Context Menu"
+    ],
+    "keywords": [
+      "context menu"
+    ]
+  },
+  {
+    "id": "dropdown_menu",
+    "title": "Dropdown Menu",
+    "description": "A native action menu with separators and unavailable commands.",
+    "category": "Feedback & overlays",
+    "script": "res://examples/components/pages/data_feedback/dropdown_menu.gd",
+    "covers": [
+      "Dropdown Menu"
+    ],
+    "keywords": [
+      "dropdown menu"
+    ]
+  },
+  {
+    "id": "collection",
+    "title": "Collection",
+    "description": "Bounded records with filtering, detail activation, and a separate row action.",
+    "category": "Data display",
+    "script": "res://examples/components/pages/data_feedback/collection.gd",
+    "covers": [
+      "res://rookframe/ui/components/data/collection.tscn",
+      "Collection browser"
+    ],
+    "keywords": [
+      "collection browser"
+    ]
+  },
+  {
+    "id": "paginated_choices",
+    "title": "Paginated Choices",
+    "description": "Whole-row selection with page controls that preserve record identity.",
+    "category": "Navigation",
+    "script": "res://examples/components/pages/data_feedback/paginated_choices.gd",
+    "covers": [
+      "res://rookframe/ui/components/data/paginated_choices.tscn",
+      "Pagination"
+    ],
+    "keywords": [
+      "pagination"
+    ]
+  },
+  {
+    "id": "paginated_content",
+    "title": "Paginated Content",
+    "description": "Native text and controls divided into complete reading pages.",
+    "category": "Data display",
+    "script": "res://examples/components/pages/data_feedback/paginated_content.gd",
+    "covers": [
+      "res://rookframe/ui/components/data/paginated_content.tscn"
+    ],
+    "keywords": [
+      "reading",
+      "pages"
+    ]
+  },
+  {
+    "id": "miniature_browser",
+    "title": "Miniature Browser",
+    "description": "Searchable miniature records with preview, selection, and loading states.",
+    "category": "Data display",
+    "script": "res://examples/components/pages/data_feedback/miniature_browser.gd",
+    "covers": [
+      "res://rookframe/ui/components/content/miniature_browser.tscn"
+    ],
+    "keywords": [
+      "assets",
+      "search",
+      "preview"
+    ]
+  },
+  {
+    "id": "miniature_picker",
+    "title": "Miniature Picker",
+    "description": "A complete choice workflow with retained draft selection and explicit confirmation.",
+    "category": "Data display",
+    "script": "res://examples/components/pages/data_feedback/miniature_picker.gd",
+    "covers": [
+      "res://rookframe/ui/components/content/miniature_picker.tscn"
+    ],
+    "keywords": [
+      "assets",
+      "selection",
+      "preview"
+    ]
+  },
+  {
+    "id": "drag_slot",
+    "title": "Drag Slot",
+    "description": "Pointer drag and explicit pick-up/place share the same transfer validation.",
+    "category": "Data display",
+    "script": "res://examples/components/pages/data_feedback/drag_slot.gd",
+    "covers": [
+      "res://rookframe/ui/components/data/drag_slot.tscn",
+      "Drag-and-drop slot"
+    ],
+    "keywords": [
+      "drag-and-drop slot",
+      "drag and drop",
+      "inventory",
+      "pick up"
+    ]
+  },
+  {
+    "id": "transfer_context",
+    "title": "Transfer Context",
+    "description": "Host-controlled carrying, pending, accepted, and rejected transfer states.",
+    "category": "Data display",
+    "script": "res://examples/components/pages/data_feedback/transfer_context.gd",
+    "covers": [
+      "res://rookframe/ui/components/data/transfer_context.gd",
+      "RookframeTransferContext"
+    ],
+    "keywords": [
+      "rookframetransfercontext",
+      "drag and drop",
+      "pick up",
+      "pending",
+      "placement"
+    ]
+  },
+  {
+    "id": "table",
+    "title": "Table",
+    "description": "A bounded native table with aligned numeric columns and complete record text.",
+    "category": "Data display",
+    "script": "res://examples/components/pages/data_feedback/table.gd",
+    "covers": [
+      "Table"
+    ],
+    "keywords": [
+      "table"
+    ]
+  },
+  {
+    "id": "progress",
+    "title": "Progress",
+    "description": "Finite progress with readable values, limits, and units.",
+    "category": "Feedback & overlays",
+    "script": "res://examples/components/pages/data_feedback/progress.gd",
+    "covers": [
+      "Progress"
+    ],
+    "keywords": [
+      "progress"
+    ]
+  },
+  {
+    "id": "spinner",
+    "title": "Spinner",
+    "description": "Labelled indeterminate loading with a static reduced-motion presentation.",
+    "category": "Feedback & overlays",
+    "script": "res://examples/components/pages/data_feedback/spinner.gd",
+    "covers": [
+      "Spinner"
+    ],
+    "keywords": [
+      "spinner"
+    ]
+  },
+  {
+    "id": "item",
+    "title": "Item",
+    "description": "Display, selection, and activation recipes with distinct interaction semantics.",
+    "category": "Data display",
+    "script": "res://examples/components/pages/data_feedback/item.gd",
+    "covers": [
+      "Item"
+    ],
+    "keywords": [
+      "item"
+    ]
+  },
+  {
+    "id": "avatar",
+    "title": "Avatar",
+    "description": "Bounded identity art with explicit initials and generic fallback states.",
+    "category": "Data display",
+    "script": "res://examples/components/pages/data_feedback/avatar.gd",
+    "covers": [
+      "Avatar"
+    ],
+    "keywords": [
+      "avatar"
+    ]
+  }
+]
