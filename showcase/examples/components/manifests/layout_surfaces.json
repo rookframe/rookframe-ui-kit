@@ -1,0 +1,438 @@
+[
+  {
+    "id": "adaptive_grid",
+    "title": "Adaptive Grid",
+    "category": "Layout",
+    "description": "Equal-priority cells reflow while preserving their controls.",
+    "script": "res://examples/components/pages/layout_surfaces/adaptive_grid.gd",
+    "covers": [
+      "res://rookframe/ui/components/layout/adaptive_grid.tscn"
+    ],
+    "keywords": [
+      "grid",
+      "responsive",
+      "columns"
+    ]
+  },
+  {
+    "id": "responsive_split",
+    "title": "Responsive Split",
+    "category": "Layout",
+    "description": "One retained two-region layout for stage/content and task/detail.",
+    "script": "res://examples/components/pages/layout_surfaces/responsive_split.gd",
+    "covers": [
+      "res://rookframe/ui/components/layout/responsive_split.tscn"
+    ],
+    "keywords": [
+      "split",
+      "responsive",
+      "stage"
+    ]
+  },
+  {
+    "id": "task_header",
+    "title": "Task Header",
+    "category": "Layout",
+    "description": "A task identity with optional actions, progress and retained tabs.",
+    "script": "res://examples/components/pages/layout_surfaces/task_header.gd",
+    "covers": [
+      "res://rookframe/ui/components/layout/task_header.tscn"
+    ],
+    "keywords": [
+      "heading",
+      "task",
+      "progress"
+    ]
+  },
+  {
+    "id": "compact_route_heading",
+    "title": "Compact Route Heading",
+    "category": "Navigation",
+    "description": "Compact route identity, supporting detail and a divider.",
+    "script": "res://examples/components/pages/layout_surfaces/compact_route_heading.gd",
+    "covers": [
+      "res://rookframe/ui/components/layout/compact_route_heading.tscn"
+    ],
+    "keywords": [
+      "route",
+      "heading",
+      "breadcrumb"
+    ]
+  },
+  {
+    "id": "section",
+    "title": "Section",
+    "category": "Surfaces",
+    "description": "Framed content with a stable heading and trailing action slot.",
+    "script": "res://examples/components/pages/layout_surfaces/section.gd",
+    "covers": [
+      "res://rookframe/ui/components/layout/section.tscn"
+    ],
+    "keywords": [
+      "card",
+      "frame",
+      "content"
+    ]
+  },
+  {
+    "id": "action_bar",
+    "title": "Action Bar",
+    "category": "Layout",
+    "description": "Leading and trailing action lanes retain order when stacked.",
+    "script": "res://examples/components/pages/layout_surfaces/action_bar.gd",
+    "covers": [
+      "res://rookframe/ui/components/layout/action_bar.tscn"
+    ],
+    "keywords": [
+      "actions",
+      "footer",
+      "responsive"
+    ]
+  },
+  {
+    "id": "adaptive_toolbar",
+    "title": "Adaptive Toolbar",
+    "category": "Layout",
+    "description": "Search and count stay paired with filtering and action controls.",
+    "script": "res://examples/components/pages/layout_surfaces/adaptive_toolbar.gd",
+    "covers": [
+      "res://rookframe/ui/components/layout/adaptive_toolbar.tscn"
+    ],
+    "keywords": [
+      "toolbar",
+      "search",
+      "filter"
+    ]
+  },
+  {
+    "id": "accordion",
+    "title": "Accordion",
+    "category": "Surfaces",
+    "description": "Native disclosures with single-open and multiple-open policies.",
+    "script": "res://examples/components/pages/layout_surfaces/accordion.gd",
+    "covers": [
+      "Accordion"
+    ],
+    "keywords": [
+      "fold",
+      "disclosure",
+      "single open"
+    ]
+  },
+  {
+    "id": "collapsible",
+    "title": "Collapsible",
+    "category": "Surfaces",
+    "description": "An independent native disclosure that retains its content state.",
+    "script": "res://examples/components/pages/layout_surfaces/collapsible.gd",
+    "covers": [
+      "Collapsible"
+    ],
+    "keywords": [
+      "fold",
+      "disclosure",
+      "retained"
+    ]
+  },
+  {
+    "id": "tabs",
+    "title": "Tabs",
+    "category": "Navigation",
+    "description": "Retained native panels with disabled and alternate tab placement.",
+    "script": "res://examples/components/pages/layout_surfaces/tabs.gd",
+    "covers": [
+      "Tabs"
+    ],
+    "keywords": [
+      "tab",
+      "retained",
+      "disabled"
+    ]
+  },
+  {
+    "id": "scroll_area",
+    "title": "Scroll Area",
+    "category": "Layout",
+    "description": "Bounded native reading areas with focus-follow and scrollbars.",
+    "script": "res://examples/components/pages/layout_surfaces/scroll_area.gd",
+    "covers": [
+      "Scroll Area"
+    ],
+    "keywords": [
+      "scroll",
+      "reading",
+      "focus"
+    ]
+  },
+  {
+    "id": "aspect_ratio",
+    "title": "Aspect Ratio",
+    "category": "Layout",
+    "description": "Native ratio containers keep media proportions during resize.",
+    "script": "res://examples/components/pages/layout_surfaces/aspect_ratio.gd",
+    "covers": [
+      "Aspect Ratio"
+    ],
+    "keywords": [
+      "image",
+      "media",
+      "ratio"
+    ]
+  },
+  {
+    "id": "card",
+    "title": "Card",
+    "category": "Surfaces",
+    "description": "Display cards compose the public Section with content and actions.",
+    "script": "res://examples/components/pages/layout_surfaces/card.gd",
+    "covers": [
+      "Card"
+    ],
+    "keywords": [
+      "panel",
+      "content",
+      "header"
+    ]
+  },
+  {
+    "id": "separator",
+    "title": "Separator",
+    "category": "Layout",
+    "description": "Native rules separate related content without adding focus targets.",
+    "script": "res://examples/components/pages/layout_surfaces/separator.gd",
+    "covers": [
+      "Separator"
+    ],
+    "keywords": [
+      "rule",
+      "divider"
+    ]
+  },
+  {
+    "id": "typography",
+    "title": "Typography",
+    "category": "Data display",
+    "description": "Semantic text roles, wrapping and multilingual reading samples.",
+    "script": "res://examples/components/pages/layout_surfaces/typography.gd",
+    "covers": [
+      "Typography"
+    ],
+    "keywords": [
+      "text",
+      "font",
+      "reading",
+      "locale"
+    ]
+  },
+  {
+    "id": "label",
+    "title": "Label",
+    "category": "Data display",
+    "description": "Visible text and unambiguous names for native inputs.",
+    "script": "res://examples/components/pages/layout_surfaces/label.gd",
+    "covers": [
+      "Label"
+    ],
+    "keywords": [
+      "text",
+      "accessible name",
+      "field"
+    ]
+  },
+  {
+    "id": "direction",
+    "title": "Direction",
+    "category": "Layout",
+    "description": "Native LTR and RTL layout with mixed-direction identifiers.",
+    "script": "res://examples/components/pages/layout_surfaces/direction.gd",
+    "covers": [
+      "Direction"
+    ],
+    "keywords": [
+      "rtl",
+      "locale",
+      "language"
+    ]
+  },
+  {
+    "id": "action_panel",
+    "title": "Action Panel",
+    "category": "Surfaces",
+    "description": "Linked header, emblem, sections and footer with retained native content.",
+    "script": "res://examples/components/pages/layout_surfaces/action_panel.gd",
+    "covers": [
+      "res://rookframe/ui/components/surfaces/action_panel/action_panel.tscn"
+    ],
+    "keywords": [
+      "leaf",
+      "slots",
+      "silkbound"
+    ]
+  },
+  {
+    "id": "action_section",
+    "title": "Action Section",
+    "category": "Surfaces",
+    "description": "A content-sized action leaf with native controls and optional materials.",
+    "script": "res://examples/components/pages/layout_surfaces/action_section.gd",
+    "covers": [
+      "res://rookframe/ui/components/surfaces/action_panel/action_section.tscn"
+    ],
+    "keywords": [
+      "leaf",
+      "skin",
+      "header",
+      "footer"
+    ]
+  },
+  {
+    "id": "hinged_leaf",
+    "title": "Hinged Leaf",
+    "category": "Surfaces",
+    "description": "Folding content preserves its controls through interrupted transitions.",
+    "script": "res://examples/components/pages/layout_surfaces/hinged_leaf.gd",
+    "covers": [
+      "res://rookframe/ui/components/surfaces/hinged_leaf/hinged_leaf.tscn"
+    ],
+    "keywords": [
+      "motion",
+      "fold",
+      "reduced motion"
+    ]
+  },
+  {
+    "id": "binding_pair",
+    "title": "Binding Pair",
+    "category": "Surfaces",
+    "description": "Decorative paired tabs connect consumer-owned surfaces and pass input through.",
+    "script": "res://examples/components/pages/layout_surfaces/binding_pair.gd",
+    "covers": [
+      "res://rookframe/ui/components/surfaces/hinged_leaf/binding_pair.tscn"
+    ],
+    "keywords": [
+      "connector",
+      "decoration",
+      "silkbound"
+    ]
+  },
+  {
+    "id": "ledger_frame",
+    "title": "Ledger Frame",
+    "category": "Surfaces",
+    "description": "Decorative leaves sit behind an existing layout without owning its content.",
+    "script": "res://examples/components/pages/layout_surfaces/ledger_frame.gd",
+    "covers": [
+      "res://rookframe/ui/components/surfaces/ledger_frame.tscn"
+    ],
+    "keywords": [
+      "reading",
+      "frame",
+      "motion"
+    ]
+  },
+  {
+    "id": "fullscreen_wizard",
+    "title": "Fullscreen Wizard",
+    "category": "Surfaces",
+    "description": "A bounded preview of fixed task chrome with host-owned progression.",
+    "script": "res://examples/components/pages/layout_surfaces/fullscreen_wizard.gd",
+    "covers": [
+      "res://rookframe/ui/components/surfaces/fullscreen_wizard.tscn"
+    ],
+    "keywords": [
+      "wizard",
+      "steps",
+      "task"
+    ]
+  },
+  {
+    "id": "managed_surface",
+    "title": "Managed Surface",
+    "category": "Surfaces",
+    "description": "Retained task content with dock/float, minimize and restore lifecycle.",
+    "script": "res://examples/components/pages/layout_surfaces/managed_surface.gd",
+    "covers": [
+      "res://rookframe/ui/components/surfaces/managed_surface.tscn"
+    ],
+    "keywords": [
+      "dock",
+      "float",
+      "lifecycle"
+    ]
+  },
+  {
+    "id": "managed_surface_state",
+    "title": "Managed Surface State",
+    "category": "Surfaces",
+    "description": "Observable resource state for retained surface lifecycle and persistence.",
+    "script": "res://examples/components/pages/layout_surfaces/managed_surface_state.gd",
+    "covers": [
+      "res://rookframe/ui/components/surfaces/managed_surface_state.gd"
+    ],
+    "keywords": [
+      "resource",
+      "snapshot",
+      "state"
+    ]
+  },
+  {
+    "id": "menu_surface",
+    "title": "Menu Surface",
+    "category": "Surfaces",
+    "description": "An optional material backdrop for consumer-owned menu content.",
+    "script": "res://examples/components/pages/layout_surfaces/menu_surface.gd",
+    "covers": [
+      "res://rookframe/ui/menu/MenuSurface.tscn"
+    ],
+    "keywords": [
+      "menu",
+      "backdrop",
+      "material"
+    ]
+  },
+  {
+    "id": "editor_tool_rail",
+    "title": "Editor Tool Rail",
+    "category": "Navigation",
+    "description": "Framed native tool groups in vertical and horizontal arrangements.",
+    "script": "res://examples/components/pages/layout_surfaces/editor_tool_rail.gd",
+    "covers": [
+      "res://rookframe/ui/editor/EditorToolRail.tscn"
+    ],
+    "keywords": [
+      "tools",
+      "rail",
+      "editor"
+    ]
+  },
+  {
+    "id": "editor_surface",
+    "title": "Editor Surface",
+    "category": "Surfaces",
+    "description": "Native editor panels and insets with consumer-authored content.",
+    "script": "res://examples/components/pages/layout_surfaces/editor_surface.gd",
+    "covers": [
+      "res://rookframe/ui/editor/EditorSurface.tscn"
+    ],
+    "keywords": [
+      "editor",
+      "panel",
+      "inset"
+    ]
+  },
+  {
+    "id": "chronicle_surface",
+    "title": "Chronicle Surface",
+    "category": "Surfaces",
+    "description": "Retained narrative with semantic reading roles and density variants.",
+    "script": "res://examples/components/pages/layout_surfaces/chronicle_surface.gd",
+    "covers": [
+      "res://rookframe/ui/chronicle/ChronicleSurface.tscn"
+    ],
+    "keywords": [
+      "history",
+      "journal",
+      "narrative"
+    ]
+  }
+]
