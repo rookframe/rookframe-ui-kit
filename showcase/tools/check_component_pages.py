@@ -31,7 +31,7 @@ def main():
         resources = [p for p in entry["covers"] if p.startswith("res://rookframe/ui/")]
         assert resources, f"No public UI Kit resource for {entry['id']}"
         for resource in resources:
-            assert (SHOWCASE / resource.removeprefix("res://")).is_file(), resource
+            assert (ROOT / "ui-kit" / resource.removeprefix("res://")).is_file(), f"Non-core component: {resource}"
         covered.update(entry["covers"])
     expected = {c.get("scene", c.get("script", c.get("resource"))) for c in catalogue["components"]}
     expected.update(c["script"] for c in catalogue.get("behaviorResources", []))
@@ -40,6 +40,18 @@ def main():
     missing = expected - covered
     assert not missing, "Unrepresented public components/capabilities:\n" + "\n".join(sorted(missing))
     assert {entry["category"] for entry in entries} == CATEGORIES
+    # Keep the library runnable with only the core package installed.
+    for source in (SHOWCASE / "examples/components").rglob("*"):
+        if source.suffix not in {".gd", ".tscn", ".json"}:
+            continue
+        text = source.read_text()
+        assert not re.search(r"fantasy|cyberpunk|silkbound", text, re.IGNORECASE), source
+        for ref in re.findall(r'"(res://[^"\n]+)"', text):
+            relative = ref.removeprefix("res://")
+            if ref.startswith("res://rookframe/"):
+                assert (ROOT / "ui-kit" / relative).exists(), f"Non-core dependency: {source} -> {ref}"
+            else:
+                assert ref.startswith("res://examples/components/"), f"External specimen dependency: {source} -> {ref}"
     print(f"COMPONENT_PAGES: {len(entries)} dedicated views cover {len(expected)} public resources/capabilities")
 
 

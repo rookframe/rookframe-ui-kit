@@ -6,7 +6,7 @@ static func build(page) -> void:
 	var body = page.section("Interactive task", "Move through the steps to compare pending, current and completed progress states. Restart retains this one frame.")
 	var bounds := Demo.region(body, 440)
 	bounds.clip_contents = true
-	var wizard = Demo.skin(page, "components/surfaces/fullscreen_wizard.tscn", bounds, {"reduced_motion": page.reduced_motion})
+	var wizard = Demo.component(page, "components/surfaces/fullscreen_wizard.tscn", bounds, {"reduced_motion": page.reduced_motion})
 	wizard.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	var steps: Array[String] = ["Identity", "Details", "Review"]
 	wizard.configure("ROOKFRAME", "Prepare a character", steps, {"subtitle": "Local example", "close": "Close preview", "restart": "Restart"})
@@ -43,7 +43,7 @@ static func build(page) -> void:
 	var unavailable = page.section("Waiting for required input", "The primary action stays unavailable until the consumer enables it.")
 	var waiting_bounds := Demo.region(unavailable, 330)
 	waiting_bounds.clip_contents = true
-	var waiting = Demo.skin(page, "components/surfaces/fullscreen_wizard.tscn", waiting_bounds, {"reduced_motion": true})
+	var waiting = Demo.component(page, "components/surfaces/fullscreen_wizard.tscn", waiting_bounds, {"reduced_motion": true})
 	waiting.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	waiting.configure("ROOKFRAME", "Prepare a character", steps, {"subtitle": "Required input"})
 	page.note(Demo.stack(waiting.get_context_slot()), "Identity")

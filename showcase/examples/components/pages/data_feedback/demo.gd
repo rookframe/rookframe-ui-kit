@@ -1,11 +1,9 @@
 extends RefCounted
 ## Shared synthetic records and bounded example hosts; no component behavior.
 const CORE := "res://rookframe/ui/components/"
-const SKIN := "res://rookframe/ui/silkbound-ledger/components/"
 
 static func path(relative: String) -> String:
-	var themed := SKIN + relative + ".tscn"
-	return themed if ResourceLoader.exists(themed) else CORE + relative + ".tscn"
+	return CORE + relative + ".tscn"
 
 static func bounded(parent: Node, height: float = 340.0) -> Control:
 	var host := Control.new()

@@ -64,7 +64,6 @@ func _ready() -> void:
 	var brand := _label("ROOKFRAME", 20)
 	brand.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	top.add_child(brand)
-	_button(top, "Motion lab", _open_laboratory)
 	var motion := CheckButton.new()
 	motion.text = "Reduced motion"
 	motion.custom_minimum_size.y = 44
@@ -321,16 +320,6 @@ func _unhandled_key_input(event: InputEvent) -> void:
 			_responsive()
 			_menu.grab_focus()
 			get_viewport().set_input_as_handled()
-
-func _open_laboratory() -> void:
-	var window := Window.new()
-	window.title = "Silkbound Ledger · Motion laboratory"
-	window.content_scale_factor = get_window().content_scale_factor
-	window.size = Vector2i(Vector2(1200, 850) * window.content_scale_factor)
-	window.close_requested.connect(window.queue_free)
-	add_child(window)
-	window.add_child(load("res://examples/laboratory/laboratory.tscn").instantiate())
-	window.show()
 
 func _clear(parent: Node) -> void:
 	for child in parent.get_children():

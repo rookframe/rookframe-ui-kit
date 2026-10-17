@@ -4,7 +4,6 @@ const Demo = preload("res://examples/components/pages/actions_forms/support.gd")
 
 static func build(page) -> void:
 	var main = page.section("Choose a region", "Type while the popup is open to use native incremental search.")
-	Demo.shell_materials(page, main)
 	var choice = Demo.shell_scene(page, "res://rookframe/ui/menu/MenuChoice.tscn", main, {"accessibility_name": "Campaign region"})
 	choice.add_item("Northern frontier", 101)
 	choice.add_item("Silver harbour", 205)

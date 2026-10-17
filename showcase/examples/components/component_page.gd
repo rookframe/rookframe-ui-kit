@@ -4,7 +4,8 @@ extends VBoxContainer
 var entry: Dictionary = {}
 var examples: Array[VBoxContainer] = []
 var reduced_motion := false
-var preview_theme: Theme = preload("res://rookframe/ui/theme/rookframe_theme.tres")
+# Use the complete native Theme so catalogue chrome cannot style specimens.
+var preview_theme: Theme = ThemeDB.get_default_theme()
 var section_titles: Array[String] = []
 var section_blocks: Array[Control] = []
 
@@ -77,6 +78,9 @@ func flow(parent: Node) -> HFlowContainer:
 
 func scene(path: String, parent: Node, properties: Dictionary = {}) -> Node:
 	var result: Node = load(path).instantiate()
+	# Page-owned overlays sit outside the native-themed example bodies.
+	if parent == self and (result is Control or result is Window):
+		result.theme = preview_theme
 	for key in properties:
 		result.set(key, properties[key])
 	parent.add_child(result)

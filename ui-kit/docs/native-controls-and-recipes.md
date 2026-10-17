@@ -177,6 +177,10 @@ are required.
 Instance `res://rookframe/ui/menu/Switch.tscn` under a consumer Theme. The shared
 Usage token is `components.switch`, mapped to native `components_switch` and
 `components_switch__compact` variations. The consumer Theme supplies appearance.
+Without those mappings, the card uses native Button text colors, font and
+content margins, container spacing and the CheckBox checkmark. Disabled and
+selected states retain their native colors. Menu buttons, menu choices, editor
+buttons and Switch cards retain a minimum 44px target without theme sizing.
 
 Set `title` and optional `description` for the card's copy; leave native
 `Button.text` and `icon` empty. Selected cards show the same checkmark resource
@@ -261,6 +265,8 @@ navigation and selection signals remain native. Set `compact` or call
 `set_compact(true)`; the popup follows the density. Theme/density changes dismiss
 an open popup before refreshing. Give the field an `accessibility_name`.
 The consumer Theme supplies minimum heights; containers choose the width.
+Without a custom selection marker, the popup keeps Godot's native checks and
+scrollbars.
 
 For a bare OptionButton, set `get_popup().theme_type_variation` to
 `settings_popup` or `settings_popup__compact`. Set a ScrollContainer's vertical

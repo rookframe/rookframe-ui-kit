@@ -6,7 +6,7 @@ class RecordButton extends Button:
 	var record_title := ""
 	var summary := ""
 	func _make_custom_tooltip(_text: String) -> Object:
-		var tooltip = load("res://rookframe/ui/silkbound-ledger/components/feedback/record_tooltip.tscn").instantiate()
+		var tooltip = load("res://rookframe/ui/components/feedback/record_tooltip.tscn").instantiate()
 		tooltip.get_node("Title").text = record_title
 		tooltip.get_node("Summary").text = summary
 		return tooltip

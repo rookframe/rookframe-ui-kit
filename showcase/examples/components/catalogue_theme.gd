@@ -28,7 +28,10 @@ static func create(dark: bool = false) -> Theme:
 	result.set_type_variation("ShowcaseBackground", "PanelContainer")
 	result.set_stylebox("panel", "ShowcaseBackground", box(paper, Color.TRANSPARENT, 0))
 	result.set_type_variation("ShowcaseExample", "PanelContainer")
-	result.set_stylebox("panel", "ShowcaseExample", box(Color("15191a"), line, 24))
+	var preview := ThemeDB.get_default_theme().get_stylebox("panel", "PanelContainer").duplicate()
+	for side in [SIDE_LEFT, SIDE_TOP, SIDE_RIGHT, SIDE_BOTTOM]:
+		preview.set_content_margin(side, 24)
+	result.set_stylebox("panel", "ShowcaseExample", preview)
 	result.set_color("font_color", "LineEdit", ink)
 	result.set_color("font_placeholder_color", "LineEdit", Color("85858c"))
 	result.set_stylebox("normal", "LineEdit", box(paper, line, 12))

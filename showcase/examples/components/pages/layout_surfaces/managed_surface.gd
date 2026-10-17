@@ -6,7 +6,7 @@ static func build(page) -> void:
 	var body = page.section("Docked and floating state", "The example records placement requests. A host decides where to present the retained surface.")
 	var state = load("res://rookframe/ui/components/surfaces/managed_surface_state.gd").new()
 	var bounds := Demo.region(body, 340)
-	var surface = Demo.skin(page, "components/surfaces/managed_surface.tscn", bounds, {"state": state, "surface_title": "Session notes", "custom_minimum_size": Vector2(0, 0)})
+	var surface = Demo.component(page, "components/surfaces/managed_surface.tscn", bounds, {"state": state, "surface_title": "Session notes", "custom_minimum_size": Vector2(0, 0)})
 	surface.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	page.note(surface.get_header_slot(), "Draft · retained between lifecycle changes")
 	var task := VBoxContainer.new()
@@ -24,7 +24,7 @@ static func build(page) -> void:
 	var full_state = load("res://rookframe/ui/components/surfaces/managed_surface_state.gd").new()
 	full_state.placement = 2
 	var full_bounds := Demo.region(full, 180)
-	var fixed = Demo.skin(page, "components/surfaces/managed_surface.tscn", full_bounds, {"state": full_state, "custom_minimum_size": Vector2(0, 0)})
+	var fixed = Demo.component(page, "components/surfaces/managed_surface.tscn", full_bounds, {"state": full_state, "custom_minimum_size": Vector2(0, 0)})
 	fixed.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	var full_task := VBoxContainer.new()
 	page.note(full_task, "A task owns its complete viewport composition.")

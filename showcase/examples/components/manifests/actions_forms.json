@@ -212,7 +212,7 @@
     "id": "menu_button_primary",
     "title": "Menu Button \u00b7 Primary",
     "category": "Actions",
-    "description": "A native menu action with semantic hierarchy, density and availability. Auxiliary shell recipe with Fantasy and Cyberpunk appearances.",
+    "description": "A native menu action with semantic hierarchy, density and availability.",
     "script": "res://examples/components/pages/actions_forms/menu_button_primary.gd",
     "covers": [
       "res://rookframe/ui/menu/MenuButtonPrimary.tscn"
@@ -228,7 +228,7 @@
     "id": "menu_button_standard",
     "title": "Menu Button \u00b7 Standard",
     "category": "Actions",
-    "description": "A native menu action with semantic hierarchy, density and availability. Auxiliary shell recipe with Fantasy and Cyberpunk appearances.",
+    "description": "A native menu action with semantic hierarchy, density and availability.",
     "script": "res://examples/components/pages/actions_forms/menu_button_standard.gd",
     "covers": [
       "res://rookframe/ui/menu/MenuButtonStandard.tscn"
@@ -244,7 +244,7 @@
     "id": "menu_button_destructive",
     "title": "Menu Button \u00b7 Destructive",
     "category": "Actions",
-    "description": "A native menu action with semantic hierarchy, density and availability. Auxiliary shell recipe with Fantasy and Cyberpunk appearances.",
+    "description": "A native menu action with semantic hierarchy, density and availability.",
     "script": "res://examples/components/pages/actions_forms/menu_button_destructive.gd",
     "covers": [
       "res://rookframe/ui/menu/MenuButtonDestructive.tscn"
@@ -260,7 +260,7 @@
     "id": "menu_choice",
     "title": "Menu Choice",
     "category": "Forms & selection",
-    "description": "A themed native selection popup with density, disabled items and stable IDs. Auxiliary shell recipe with Fantasy and Cyberpunk appearances.",
+    "description": "A native selection popup with density, disabled items and stable IDs.",
     "script": "res://examples/components/pages/actions_forms/menu_choice.gd",
     "covers": [
       "res://rookframe/ui/menu/MenuChoice.tscn"
@@ -276,7 +276,7 @@
     "id": "card_switch",
     "title": "Switch Card",
     "category": "Forms & selection",
-    "description": "Selectable cards with independent toggle state and compact density. Auxiliary shell recipe with Fantasy and Cyberpunk appearances.",
+    "description": "Selectable cards with independent toggle state and compact density.",
     "script": "res://examples/components/pages/actions_forms/card_switch.gd",
     "covers": [
       "res://rookframe/ui/menu/Switch.tscn"
@@ -292,7 +292,7 @@
     "id": "switch_group",
     "title": "Switch Group",
     "category": "Forms & selection",
-    "description": "Responsive card trays with explicit exclusive or independent selection. Auxiliary shell recipe with Fantasy and Cyberpunk appearances.",
+    "description": "Responsive card trays with explicit exclusive or independent selection.",
     "script": "res://examples/components/pages/actions_forms/switch_group.gd",
     "covers": [
       "res://rookframe/ui/menu/SwitchGroup.tscn"
@@ -308,7 +308,7 @@
     "id": "editor_tool_button",
     "title": "Editor Tool Button",
     "category": "Actions",
-    "description": "Square icon tools with exclusive selection, accessible names and density. Auxiliary shell recipe with Fantasy and Cyberpunk appearances.",
+    "description": "Square icon tools with exclusive selection, accessible names and density.",
     "script": "res://examples/components/pages/actions_forms/editor_tool_button.gd",
     "covers": [
       "res://rookframe/ui/editor/EditorToolButton.tscn"
@@ -324,7 +324,7 @@
     "id": "editor_action_button",
     "title": "Editor Action Button",
     "category": "Actions",
-    "description": "Labelled editor actions with primary, standard and unavailable states. Auxiliary shell recipe with Fantasy and Cyberpunk appearances.",
+    "description": "Labelled editor actions with primary, standard and unavailable states.",
     "script": "res://examples/components/pages/actions_forms/editor_action_button.gd",
     "covers": [
       "res://rookframe/ui/editor/EditorActionButton.tscn"
