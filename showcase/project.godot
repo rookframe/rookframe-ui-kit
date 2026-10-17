@@ -2,7 +2,7 @@ config_version=5
 
 [application]
 config/name="Silkbound Ledger · Rookframe design specimen"
-run/main_scene="res://examples/laboratory/laboratory.tscn"
+run/main_scene="res://examples/components/catalogue.tscn"
 config/features=PackedStringArray("4.7")
 
 [display]

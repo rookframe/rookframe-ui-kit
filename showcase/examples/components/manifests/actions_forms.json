@@ -1,0 +1,595 @@
+[
+  {
+    "id": "text_field",
+    "title": "Text Field",
+    "category": "Forms & selection",
+    "description": "Labelled text entry with help, validation, focus and read-only states.",
+    "script": "res://examples/components/pages/actions_forms/text_field.gd",
+    "covers": [
+      "res://rookframe/ui/components/forms/text_field.tscn"
+    ],
+    "keywords": [
+      "text",
+      "input",
+      "validation",
+      "read-only"
+    ]
+  },
+  {
+    "id": "text_area",
+    "title": "Text Area \u00b7 Field",
+    "category": "Forms & selection",
+    "description": "Labelled text entry with help, validation, focus and read-only states.",
+    "script": "res://examples/components/pages/actions_forms/text_area.gd",
+    "covers": [
+      "res://rookframe/ui/components/forms/text_area.tscn"
+    ],
+    "keywords": [
+      "text",
+      "input",
+      "validation",
+      "read-only"
+    ]
+  },
+  {
+    "id": "task_text_field",
+    "title": "Task Text Field",
+    "category": "Forms & selection",
+    "description": "Labelled text entry with help, validation, focus and read-only states.",
+    "script": "res://examples/components/pages/actions_forms/task_text_field.gd",
+    "covers": [
+      "res://rookframe/ui/components/forms/task_text_field.tscn"
+    ],
+    "keywords": [
+      "text",
+      "input",
+      "validation",
+      "read-only"
+    ]
+  },
+  {
+    "id": "task_text_area",
+    "title": "Task Text Area",
+    "category": "Forms & selection",
+    "description": "Labelled text entry with help, validation, focus and read-only states.",
+    "script": "res://examples/components/pages/actions_forms/task_text_area.gd",
+    "covers": [
+      "res://rookframe/ui/components/forms/task_text_area.tscn"
+    ],
+    "keywords": [
+      "text",
+      "input",
+      "validation",
+      "read-only"
+    ]
+  },
+  {
+    "id": "search_field",
+    "title": "Search Field",
+    "category": "Forms & selection",
+    "description": "Search with a shared focus perimeter and discoverable clearing.",
+    "script": "res://examples/components/pages/actions_forms/search_field.gd",
+    "covers": [
+      "res://rookframe/ui/components/forms/search_field.tscn"
+    ],
+    "keywords": [
+      "search",
+      "filter",
+      "clear",
+      "focus"
+    ]
+  },
+  {
+    "id": "choice_row",
+    "title": "Choice Row",
+    "category": "Forms & selection",
+    "description": "Detailed and compact selection rows with exclusive and unavailable choices.",
+    "script": "res://examples/components/pages/actions_forms/choice_row.gd",
+    "covers": [
+      "res://rookframe/ui/components/forms/choice_row.tscn"
+    ],
+    "keywords": [
+      "selection",
+      "radio",
+      "compact",
+      "disabled"
+    ]
+  },
+  {
+    "id": "package_choice",
+    "title": "Package Choice",
+    "category": "Forms & selection",
+    "description": "Available, included and locked package choices with independent selection.",
+    "script": "res://examples/components/pages/actions_forms/package_choice.gd",
+    "covers": [
+      "res://rookframe/ui/components/forms/package_choice.tscn"
+    ],
+    "keywords": [
+      "package",
+      "selected",
+      "disabled"
+    ]
+  },
+  {
+    "id": "package_choice_card",
+    "title": "Package Choice Card",
+    "category": "Forms & selection",
+    "description": "Available, included and locked package choices with independent selection.",
+    "script": "res://examples/components/pages/actions_forms/package_choice_card.gd",
+    "covers": [
+      "res://rookframe/ui/components/forms/package_choice_card.tscn"
+    ],
+    "keywords": [
+      "package",
+      "selected",
+      "disabled"
+    ]
+  },
+  {
+    "id": "image_field",
+    "title": "Image Field",
+    "category": "Forms & selection",
+    "description": "Replaceable image previews with empty, populated, error and disabled states.",
+    "script": "res://examples/components/pages/actions_forms/image_field.gd",
+    "covers": [
+      "res://rookframe/ui/components/forms/image_field.tscn"
+    ],
+    "keywords": [
+      "image",
+      "preview",
+      "error",
+      "disabled"
+    ]
+  },
+  {
+    "id": "paginated_text_area",
+    "title": "Paginated Text Area",
+    "category": "Forms & selection",
+    "description": "A bounded notepad that retains its complete draft across page turns.",
+    "script": "res://examples/components/pages/actions_forms/paginated_text_area.gd",
+    "covers": [
+      "res://rookframe/ui/components/forms/paginated_text_area.tscn"
+    ],
+    "keywords": [
+      "pagination",
+      "journal",
+      "editor",
+      "compact"
+    ]
+  },
+  {
+    "id": "field",
+    "title": "Field",
+    "category": "Forms & selection",
+    "description": "Retained labels, help and validation for native inputs and choice groups.",
+    "script": "res://examples/components/pages/actions_forms/field.gd",
+    "covers": [
+      "res://rookframe/ui/components/forms/field.tscn",
+      "Field"
+    ],
+    "keywords": [
+      "label",
+      "help",
+      "validation",
+      "accessibility"
+    ]
+  },
+  {
+    "id": "input_group",
+    "title": "Input Group",
+    "category": "Forms & selection",
+    "description": "One native input with leading context and independently available trailing actions.",
+    "script": "res://examples/components/pages/actions_forms/input_group.gd",
+    "covers": [
+      "res://rookframe/ui/components/forms/input_group.tscn",
+      "Input Group"
+    ],
+    "keywords": [
+      "units",
+      "copy",
+      "search",
+      "read-only"
+    ]
+  },
+  {
+    "id": "multi_select_picker",
+    "title": "Multi-select Picker",
+    "category": "Forms & selection",
+    "description": "Independent records, retained locked selections and removable summaries.",
+    "script": "res://examples/components/pages/actions_forms/multi_select_picker.gd",
+    "covers": [
+      "res://rookframe/ui/components/forms/multi_select_picker.tscn",
+      "Multi-select picker"
+    ],
+    "keywords": [
+      "multi-select",
+      "selection",
+      "empty",
+      "disabled"
+    ]
+  },
+  {
+    "id": "menu_button_primary",
+    "title": "Menu Button \u00b7 Primary",
+    "category": "Actions",
+    "description": "A native menu action with semantic hierarchy, density and availability. Auxiliary shell recipe with Fantasy and Cyberpunk appearances.",
+    "script": "res://examples/components/pages/actions_forms/menu_button_primary.gd",
+    "covers": [
+      "res://rookframe/ui/menu/MenuButtonPrimary.tscn"
+    ],
+    "keywords": [
+      "button",
+      "menu",
+      "compact",
+      "disabled"
+    ]
+  },
+  {
+    "id": "menu_button_standard",
+    "title": "Menu Button \u00b7 Standard",
+    "category": "Actions",
+    "description": "A native menu action with semantic hierarchy, density and availability. Auxiliary shell recipe with Fantasy and Cyberpunk appearances.",
+    "script": "res://examples/components/pages/actions_forms/menu_button_standard.gd",
+    "covers": [
+      "res://rookframe/ui/menu/MenuButtonStandard.tscn"
+    ],
+    "keywords": [
+      "button",
+      "menu",
+      "compact",
+      "disabled"
+    ]
+  },
+  {
+    "id": "menu_button_destructive",
+    "title": "Menu Button \u00b7 Destructive",
+    "category": "Actions",
+    "description": "A native menu action with semantic hierarchy, density and availability. Auxiliary shell recipe with Fantasy and Cyberpunk appearances.",
+    "script": "res://examples/components/pages/actions_forms/menu_button_destructive.gd",
+    "covers": [
+      "res://rookframe/ui/menu/MenuButtonDestructive.tscn"
+    ],
+    "keywords": [
+      "button",
+      "menu",
+      "compact",
+      "disabled"
+    ]
+  },
+  {
+    "id": "menu_choice",
+    "title": "Menu Choice",
+    "category": "Forms & selection",
+    "description": "A themed native selection popup with density, disabled items and stable IDs. Auxiliary shell recipe with Fantasy and Cyberpunk appearances.",
+    "script": "res://examples/components/pages/actions_forms/menu_choice.gd",
+    "covers": [
+      "res://rookframe/ui/menu/MenuChoice.tscn"
+    ],
+    "keywords": [
+      "select",
+      "popup",
+      "density",
+      "disabled"
+    ]
+  },
+  {
+    "id": "card_switch",
+    "title": "Switch Card",
+    "category": "Forms & selection",
+    "description": "Selectable cards with independent toggle state and compact density. Auxiliary shell recipe with Fantasy and Cyberpunk appearances.",
+    "script": "res://examples/components/pages/actions_forms/card_switch.gd",
+    "covers": [
+      "res://rookframe/ui/menu/Switch.tscn"
+    ],
+    "keywords": [
+      "card",
+      "toggle",
+      "selected",
+      "disabled"
+    ]
+  },
+  {
+    "id": "switch_group",
+    "title": "Switch Group",
+    "category": "Forms & selection",
+    "description": "Responsive card trays with explicit exclusive or independent selection. Auxiliary shell recipe with Fantasy and Cyberpunk appearances.",
+    "script": "res://examples/components/pages/actions_forms/switch_group.gd",
+    "covers": [
+      "res://rookframe/ui/menu/SwitchGroup.tscn"
+    ],
+    "keywords": [
+      "card",
+      "group",
+      "radio",
+      "responsive"
+    ]
+  },
+  {
+    "id": "editor_tool_button",
+    "title": "Editor Tool Button",
+    "category": "Actions",
+    "description": "Square icon tools with exclusive selection, accessible names and density. Auxiliary shell recipe with Fantasy and Cyberpunk appearances.",
+    "script": "res://examples/components/pages/actions_forms/editor_tool_button.gd",
+    "covers": [
+      "res://rookframe/ui/editor/EditorToolButton.tscn"
+    ],
+    "keywords": [
+      "editor",
+      "icon",
+      "tool",
+      "selected"
+    ]
+  },
+  {
+    "id": "editor_action_button",
+    "title": "Editor Action Button",
+    "category": "Actions",
+    "description": "Labelled editor actions with primary, standard and unavailable states. Auxiliary shell recipe with Fantasy and Cyberpunk appearances.",
+    "script": "res://examples/components/pages/actions_forms/editor_action_button.gd",
+    "covers": [
+      "res://rookframe/ui/editor/EditorActionButton.tscn"
+    ],
+    "keywords": [
+      "editor",
+      "action",
+      "primary",
+      "compact"
+    ]
+  },
+  {
+    "id": "action_row",
+    "title": "Action Row",
+    "category": "Actions",
+    "description": "One complete action target with supporting detail and explicit availability.",
+    "script": "res://examples/components/pages/actions_forms/action_row.gd",
+    "covers": [
+      "res://rookframe/ui/components/data/action_row.tscn"
+    ],
+    "keywords": [
+      "action",
+      "navigation",
+      "danger",
+      "disabled"
+    ]
+  },
+  {
+    "id": "disclosure_row",
+    "title": "Disclosure Row",
+    "category": "Actions",
+    "description": "One complete action target with supporting detail and explicit availability.",
+    "script": "res://examples/components/pages/actions_forms/disclosure_row.gd",
+    "covers": [
+      "res://rookframe/ui/components/data/disclosure_row.tscn"
+    ],
+    "keywords": [
+      "action",
+      "navigation",
+      "danger",
+      "disabled"
+    ]
+  },
+  {
+    "id": "action_link",
+    "title": "Action Link",
+    "category": "Actions",
+    "description": "Quiet navigation actions with a readable label and continuous trailing rule.",
+    "script": "res://examples/components/pages/actions_forms/action_link.gd",
+    "covers": [
+      "res://rookframe/ui/components/data/action_link.tscn"
+    ],
+    "keywords": [
+      "link",
+      "navigation",
+      "disabled"
+    ]
+  },
+  {
+    "id": "icon_action_grid",
+    "title": "Icon Action Grid",
+    "category": "Actions",
+    "description": "Adaptive action cells that retain their native targets while columns change.",
+    "script": "res://examples/components/pages/actions_forms/icon_action_grid.gd",
+    "covers": [
+      "res://rookframe/ui/components/data/icon_action_grid.tscn"
+    ],
+    "keywords": [
+      "grid",
+      "icon",
+      "actions",
+      "responsive"
+    ]
+  },
+  {
+    "id": "select",
+    "title": "Select",
+    "category": "Forms & selection",
+    "description": "Native selection by stable ID, with disabled items, empty lists and incremental search.",
+    "script": "res://examples/components/pages/actions_forms/select.gd",
+    "covers": [
+      "Select",
+      "Native Select"
+    ],
+    "keywords": [
+      "option",
+      "select",
+      "disabled",
+      "empty"
+    ]
+  },
+  {
+    "id": "radio_group",
+    "title": "Radio Group",
+    "category": "Forms & selection",
+    "description": "Required and optional exclusive choices using native ButtonGroup rules.",
+    "script": "res://examples/components/pages/actions_forms/radio_group.gd",
+    "covers": [
+      "Radio Group"
+    ],
+    "keywords": [
+      "radio",
+      "exclusive",
+      "optional",
+      "selection"
+    ]
+  },
+  {
+    "id": "checkbox",
+    "title": "Checkbox",
+    "category": "Forms & selection",
+    "description": "One independent boolean with native checked, unchecked and disabled states.",
+    "script": "res://examples/components/pages/actions_forms/checkbox.gd",
+    "covers": [
+      "Checkbox"
+    ],
+    "keywords": [
+      "boolean",
+      "checked",
+      "unchecked",
+      "disabled"
+    ]
+  },
+  {
+    "id": "native_switch",
+    "title": "Switch",
+    "category": "Forms & selection",
+    "description": "Immediate boolean settings using native CheckButton.",
+    "script": "res://examples/components/pages/actions_forms/native_switch.gd",
+    "covers": [
+      "Switch"
+    ],
+    "keywords": [
+      "boolean",
+      "setting",
+      "on",
+      "off"
+    ]
+  },
+  {
+    "id": "toggle",
+    "title": "Toggle",
+    "category": "Actions",
+    "description": "A native pressed button for a persistent on/off mode.",
+    "script": "res://examples/components/pages/actions_forms/toggle.gd",
+    "covers": [
+      "Toggle"
+    ],
+    "keywords": [
+      "toggle",
+      "pressed",
+      "selected",
+      "disabled"
+    ]
+  },
+  {
+    "id": "toggle_group",
+    "title": "Toggle Group",
+    "category": "Actions",
+    "description": "Exclusive modes and independent options composed from native toggles.",
+    "script": "res://examples/components/pages/actions_forms/toggle_group.gd",
+    "covers": [
+      "Toggle Group"
+    ],
+    "keywords": [
+      "group",
+      "toggle",
+      "exclusive",
+      "multiple"
+    ]
+  },
+  {
+    "id": "button_group",
+    "title": "Button Group",
+    "category": "Actions",
+    "description": "Independent commands in responsive source-order action lanes.",
+    "script": "res://examples/components/pages/actions_forms/button_group.gd",
+    "covers": [
+      "Button Group"
+    ],
+    "keywords": [
+      "commands",
+      "actions",
+      "responsive",
+      "source order"
+    ]
+  },
+  {
+    "id": "input",
+    "title": "Input",
+    "category": "Forms & selection",
+    "description": "Native single-line text entry with submit, selection, undo and read-only behavior.",
+    "script": "res://examples/components/pages/actions_forms/input.gd",
+    "covers": [
+      "Input"
+    ],
+    "keywords": [
+      "text",
+      "line edit",
+      "secret",
+      "read-only"
+    ]
+  },
+  {
+    "id": "native_textarea",
+    "title": "Textarea \u00b7 Native",
+    "category": "Forms & selection",
+    "description": "Native multiline entry with wrapping, selection, undo and read-only viewing.",
+    "script": "res://examples/components/pages/actions_forms/native_textarea.gd",
+    "covers": [
+      "Textarea"
+    ],
+    "keywords": [
+      "multiline",
+      "editor",
+      "wrap",
+      "read-only"
+    ]
+  },
+  {
+    "id": "slider",
+    "title": "Slider",
+    "category": "Forms & selection",
+    "description": "Bounded continuous and stepped values with readable units and locked states.",
+    "script": "res://examples/components/pages/actions_forms/slider.gd",
+    "covers": [
+      "Slider"
+    ],
+    "keywords": [
+      "range",
+      "volume",
+      "step",
+      "disabled"
+    ]
+  },
+  {
+    "id": "numeric_input",
+    "title": "Numeric Input",
+    "category": "Forms & selection",
+    "description": "Native SpinBox values with bounds, steps, units and commit behavior.",
+    "script": "res://examples/components/pages/actions_forms/numeric_input.gd",
+    "covers": [
+      "Numeric Input"
+    ],
+    "keywords": [
+      "spinbox",
+      "number",
+      "step",
+      "bounds"
+    ]
+  },
+  {
+    "id": "button",
+    "title": "Button",
+    "category": "Actions",
+    "description": "Native text and icon commands with explicit names, focus and availability.",
+    "script": "res://examples/components/pages/actions_forms/button.gd",
+    "covers": [
+      "Button"
+    ],
+    "keywords": [
+      "native",
+      "icon",
+      "command",
+      "disabled"
+    ]
+  }
+]
