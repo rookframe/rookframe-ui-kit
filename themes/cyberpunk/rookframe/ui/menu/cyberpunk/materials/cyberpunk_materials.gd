@@ -2,6 +2,20 @@
 extends RefCounted
 ## Neon Circuit Material: every concrete appearance value lives here or in its native resources.
 static var VALUES: Dictionary = {
+	"expansion.Title.size": 40,
+	"expansion.Subtitle.size": 30,
+	"expansion.Value.size": 30,
+	"expansion.Heading.size": 24,
+	"expansion.Identity.size": 22,
+	"expansion.Body.size": 21,
+	"expansion.Label.size": 20,
+	"expansion.Meta.size": 18,
+	"expansion.Status.size": 18,
+	"expansion.Pending.size": 18,
+	"expansion.Success.size": 18,
+	"expansion.Error.size": 18,
+	"expansion.BadgeText.size": 18,
+
 	"type.ui": preload("ui.tres"),
 	"type.ui.medium": preload("ui.tres"),
 	"type.display.medium": preload("display.tres"),

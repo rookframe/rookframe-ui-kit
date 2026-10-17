@@ -1424,5 +1424,412 @@
       "rootType": "Node",
       "contract": "docs/interaction-components.md"
     }
+  ],
+  "expansionCapabilities": [
+    {
+      "interviewNumber": 2,
+      "name": "Multi-select picker",
+      "decision": "Included",
+      "requirement": "MUL",
+      "implementation": "res://rookframe/ui/components/forms/multi_select_picker.tscn",
+      "documentation": "docs/interaction-components.md",
+      "example": "showcase/examples/ui-expansion/specimen.tscn"
+    },
+    {
+      "interviewNumber": 4,
+      "name": "Select",
+      "decision": "Included",
+      "requirement": "NAT-01",
+      "implementation": "docs/native-controls-and-recipes.md#expansion-recipes-rf-ui-expansion-01",
+      "documentation": "docs/native-controls-and-recipes.md",
+      "example": "showcase/examples/ui-expansion/specimen.tscn"
+    },
+    {
+      "interviewNumber": 5,
+      "name": "Native Select",
+      "decision": "Existing coverage",
+      "requirement": "NAT-01",
+      "implementation": "docs/native-controls-and-recipes.md#expansion-recipes-rf-ui-expansion-01",
+      "documentation": "docs/native-controls-and-recipes.md",
+      "example": "showcase/examples/ui-expansion/specimen.tscn"
+    },
+    {
+      "interviewNumber": 6,
+      "name": "Radio Group",
+      "decision": "Included",
+      "requirement": "NAT-02",
+      "implementation": "docs/native-controls-and-recipes.md#expansion-recipes-rf-ui-expansion-01",
+      "documentation": "docs/native-controls-and-recipes.md",
+      "example": "showcase/examples/ui-expansion/specimen.tscn"
+    },
+    {
+      "interviewNumber": 7,
+      "name": "Checkbox",
+      "decision": "Included",
+      "requirement": "NAT-03",
+      "implementation": "docs/native-controls-and-recipes.md#expansion-recipes-rf-ui-expansion-01",
+      "documentation": "docs/native-controls-and-recipes.md",
+      "example": "showcase/examples/ui-expansion/specimen.tscn"
+    },
+    {
+      "interviewNumber": 8,
+      "name": "Switch",
+      "decision": "Included",
+      "requirement": "NAT-04",
+      "implementation": "docs/native-controls-and-recipes.md#expansion-recipes-rf-ui-expansion-01",
+      "documentation": "docs/native-controls-and-recipes.md",
+      "example": "showcase/examples/ui-expansion/specimen.tscn"
+    },
+    {
+      "interviewNumber": 9,
+      "name": "Toggle",
+      "decision": "Included",
+      "requirement": "NAT-05",
+      "implementation": "docs/native-controls-and-recipes.md#expansion-recipes-rf-ui-expansion-01",
+      "documentation": "docs/native-controls-and-recipes.md",
+      "example": "showcase/examples/ui-expansion/specimen.tscn"
+    },
+    {
+      "interviewNumber": 10,
+      "name": "Toggle Group",
+      "decision": "Included",
+      "requirement": "NAT-06",
+      "implementation": "docs/native-controls-and-recipes.md#expansion-recipes-rf-ui-expansion-01",
+      "documentation": "docs/native-controls-and-recipes.md",
+      "example": "showcase/examples/ui-expansion/specimen.tscn"
+    },
+    {
+      "interviewNumber": 11,
+      "name": "Button Group",
+      "decision": "Existing coverage",
+      "requirement": "NAT-07",
+      "implementation": "docs/native-controls-and-recipes.md#expansion-recipes-rf-ui-expansion-01",
+      "documentation": "docs/native-controls-and-recipes.md",
+      "example": "showcase/examples/ui-expansion/specimen.tscn"
+    },
+    {
+      "interviewNumber": 13,
+      "name": "Context Menu",
+      "decision": "Included",
+      "requirement": "NAT-08",
+      "implementation": "docs/native-controls-and-recipes.md#expansion-recipes-rf-ui-expansion-01",
+      "documentation": "docs/native-controls-and-recipes.md",
+      "example": "showcase/examples/ui-expansion/specimen.tscn"
+    },
+    {
+      "interviewNumber": 14,
+      "name": "Dropdown Menu",
+      "decision": "Included",
+      "requirement": "NAT-09",
+      "implementation": "docs/native-controls-and-recipes.md#expansion-recipes-rf-ui-expansion-01",
+      "documentation": "docs/native-controls-and-recipes.md",
+      "example": "showcase/examples/ui-expansion/specimen.tscn"
+    },
+    {
+      "interviewNumber": 15,
+      "name": "Dialog",
+      "decision": "Included",
+      "requirement": "NAT-10",
+      "implementation": "docs/native-controls-and-recipes.md#expansion-recipes-rf-ui-expansion-01",
+      "documentation": "docs/native-controls-and-recipes.md",
+      "example": "showcase/examples/ui-expansion/specimen.tscn"
+    },
+    {
+      "interviewNumber": 16,
+      "name": "Alert Dialog",
+      "decision": "Included",
+      "requirement": "NAT-11",
+      "implementation": "docs/native-controls-and-recipes.md#expansion-recipes-rf-ui-expansion-01",
+      "documentation": "docs/native-controls-and-recipes.md",
+      "example": "showcase/examples/ui-expansion/specimen.tscn"
+    },
+    {
+      "interviewNumber": 17,
+      "name": "Popover",
+      "decision": "Included",
+      "requirement": "POP",
+      "implementation": "res://rookframe/ui/components/overlays/popover.tscn",
+      "documentation": "docs/interaction-components.md",
+      "example": "showcase/examples/ui-expansion/specimen.tscn"
+    },
+    {
+      "interviewNumber": 18,
+      "name": "Tooltip",
+      "decision": "Included",
+      "requirement": "NAT-12",
+      "implementation": "docs/native-controls-and-recipes.md#expansion-recipes-rf-ui-expansion-01",
+      "documentation": "docs/native-controls-and-recipes.md",
+      "example": "showcase/examples/ui-expansion/specimen.tscn"
+    },
+    {
+      "interviewNumber": 19,
+      "name": "Hover Card",
+      "decision": "Included",
+      "requirement": "INS",
+      "implementation": "res://rookframe/ui/components/overlays/inspect_card.tscn",
+      "documentation": "docs/interaction-components.md",
+      "example": "showcase/examples/ui-expansion/specimen.tscn"
+    },
+    {
+      "interviewNumber": 22,
+      "name": "Toast",
+      "decision": "Included",
+      "requirement": "TST",
+      "implementation": "res://rookframe/ui/components/feedback/toast_stack.tscn",
+      "documentation": "docs/interaction-components.md",
+      "example": "showcase/examples/ui-expansion/specimen.tscn"
+    },
+    {
+      "interviewNumber": 23,
+      "name": "Accordion",
+      "decision": "Included",
+      "requirement": "NAT-13",
+      "implementation": "docs/native-controls-and-recipes.md#expansion-recipes-rf-ui-expansion-01",
+      "documentation": "docs/native-controls-and-recipes.md",
+      "example": "showcase/examples/ui-expansion/specimen.tscn"
+    },
+    {
+      "interviewNumber": 24,
+      "name": "Collapsible",
+      "decision": "Included",
+      "requirement": "NAT-14",
+      "implementation": "docs/native-controls-and-recipes.md#expansion-recipes-rf-ui-expansion-01",
+      "documentation": "docs/native-controls-and-recipes.md",
+      "example": "showcase/examples/ui-expansion/specimen.tscn"
+    },
+    {
+      "interviewNumber": 25,
+      "name": "Tabs",
+      "decision": "Included",
+      "requirement": "NAT-15",
+      "implementation": "docs/native-controls-and-recipes.md#expansion-recipes-rf-ui-expansion-01",
+      "documentation": "docs/native-controls-and-recipes.md",
+      "example": "showcase/examples/ui-expansion/specimen.tscn"
+    },
+    {
+      "interviewNumber": 26,
+      "name": "Field",
+      "decision": "Included",
+      "requirement": "FLD",
+      "implementation": "res://rookframe/ui/components/forms/field.tscn",
+      "documentation": "docs/interaction-components.md",
+      "example": "showcase/examples/ui-expansion/specimen.tscn"
+    },
+    {
+      "interviewNumber": 27,
+      "name": "Input Group",
+      "decision": "Included",
+      "requirement": "IGR",
+      "implementation": "res://rookframe/ui/components/forms/input_group.tscn",
+      "documentation": "docs/interaction-components.md",
+      "example": "showcase/examples/ui-expansion/specimen.tscn"
+    },
+    {
+      "interviewNumber": 28,
+      "name": "Input",
+      "decision": "Included",
+      "requirement": "NAT-16",
+      "implementation": "docs/native-controls-and-recipes.md#expansion-recipes-rf-ui-expansion-01",
+      "documentation": "docs/native-controls-and-recipes.md",
+      "example": "showcase/examples/ui-expansion/specimen.tscn"
+    },
+    {
+      "interviewNumber": 29,
+      "name": "Textarea",
+      "decision": "Included",
+      "requirement": "NAT-17",
+      "implementation": "docs/native-controls-and-recipes.md#expansion-recipes-rf-ui-expansion-01",
+      "documentation": "docs/native-controls-and-recipes.md",
+      "example": "showcase/examples/ui-expansion/specimen.tscn"
+    },
+    {
+      "interviewNumber": 32,
+      "name": "Drag-and-drop slot",
+      "decision": "Included",
+      "requirement": "DRG",
+      "implementation": "res://rookframe/ui/components/data/drag_slot.tscn",
+      "documentation": "docs/interaction-components.md",
+      "example": "showcase/examples/ui-expansion/specimen.tscn"
+    },
+    {
+      "interviewNumber": 34,
+      "name": "Collection browser",
+      "decision": "Included",
+      "requirement": "COL",
+      "implementation": "res://rookframe/ui/components/data/collection.tscn",
+      "documentation": "docs/interaction-components.md",
+      "example": "showcase/examples/ui-expansion/specimen.tscn"
+    },
+    {
+      "interviewNumber": 35,
+      "name": "Pagination",
+      "decision": "Included",
+      "requirement": "PAG",
+      "implementation": "res://rookframe/ui/components/data/paginated_choices.tscn",
+      "documentation": "docs/interaction-components.md",
+      "example": "showcase/examples/ui-expansion/specimen.tscn"
+    },
+    {
+      "interviewNumber": 36,
+      "name": "Table",
+      "decision": "Included",
+      "requirement": "NAT-18",
+      "implementation": "docs/native-controls-and-recipes.md#expansion-recipes-rf-ui-expansion-01",
+      "documentation": "docs/native-controls-and-recipes.md",
+      "example": "showcase/examples/ui-expansion/specimen.tscn"
+    },
+    {
+      "interviewNumber": 38,
+      "name": "Alert",
+      "decision": "Included",
+      "requirement": "NAT-19",
+      "implementation": "docs/native-controls-and-recipes.md#expansion-recipes-rf-ui-expansion-01",
+      "documentation": "docs/native-controls-and-recipes.md",
+      "example": "showcase/examples/ui-expansion/specimen.tscn"
+    },
+    {
+      "interviewNumber": 39,
+      "name": "Empty",
+      "decision": "Included",
+      "requirement": "NAT-20",
+      "implementation": "docs/native-controls-and-recipes.md#expansion-recipes-rf-ui-expansion-01",
+      "documentation": "docs/native-controls-and-recipes.md",
+      "example": "showcase/examples/ui-expansion/specimen.tscn"
+    },
+    {
+      "interviewNumber": 40,
+      "name": "Progress",
+      "decision": "Included",
+      "requirement": "NAT-21",
+      "implementation": "docs/native-controls-and-recipes.md#expansion-recipes-rf-ui-expansion-01",
+      "documentation": "docs/native-controls-and-recipes.md",
+      "example": "showcase/examples/ui-expansion/specimen.tscn"
+    },
+    {
+      "interviewNumber": 41,
+      "name": "Spinner",
+      "decision": "Included",
+      "requirement": "NAT-22",
+      "implementation": "docs/native-controls-and-recipes.md#expansion-recipes-rf-ui-expansion-01",
+      "documentation": "docs/native-controls-and-recipes.md",
+      "example": "showcase/examples/ui-expansion/specimen.tscn"
+    },
+    {
+      "interviewNumber": 44,
+      "name": "Slider",
+      "decision": "Included",
+      "requirement": "NAT-23",
+      "implementation": "docs/native-controls-and-recipes.md#expansion-recipes-rf-ui-expansion-01",
+      "documentation": "docs/native-controls-and-recipes.md",
+      "example": "showcase/examples/ui-expansion/specimen.tscn"
+    },
+    {
+      "interviewNumber": 45,
+      "name": "Numeric Input",
+      "decision": "Included",
+      "requirement": "NAT-24",
+      "implementation": "docs/native-controls-and-recipes.md#expansion-recipes-rf-ui-expansion-01",
+      "documentation": "docs/native-controls-and-recipes.md",
+      "example": "showcase/examples/ui-expansion/specimen.tscn"
+    },
+    {
+      "interviewNumber": 46,
+      "name": "Scroll Area",
+      "decision": "Included",
+      "requirement": "NAT-25",
+      "implementation": "docs/native-controls-and-recipes.md#expansion-recipes-rf-ui-expansion-01",
+      "documentation": "docs/native-controls-and-recipes.md",
+      "example": "showcase/examples/ui-expansion/specimen.tscn"
+    },
+    {
+      "interviewNumber": 48,
+      "name": "Aspect Ratio",
+      "decision": "Included",
+      "requirement": "NAT-26",
+      "implementation": "docs/native-controls-and-recipes.md#expansion-recipes-rf-ui-expansion-01",
+      "documentation": "docs/native-controls-and-recipes.md",
+      "example": "showcase/examples/ui-expansion/specimen.tscn"
+    },
+    {
+      "interviewNumber": 49,
+      "name": "Card",
+      "decision": "Existing coverage",
+      "requirement": "NAT-27",
+      "implementation": "docs/native-controls-and-recipes.md#expansion-recipes-rf-ui-expansion-01",
+      "documentation": "docs/native-controls-and-recipes.md",
+      "example": "showcase/examples/ui-expansion/specimen.tscn"
+    },
+    {
+      "interviewNumber": 50,
+      "name": "Item",
+      "decision": "Existing coverage",
+      "requirement": "NAT-28",
+      "implementation": "docs/native-controls-and-recipes.md#expansion-recipes-rf-ui-expansion-01",
+      "documentation": "docs/native-controls-and-recipes.md",
+      "example": "showcase/examples/ui-expansion/specimen.tscn"
+    },
+    {
+      "interviewNumber": 51,
+      "name": "Badge",
+      "decision": "Included",
+      "requirement": "NAT-29",
+      "implementation": "docs/native-controls-and-recipes.md#expansion-recipes-rf-ui-expansion-01",
+      "documentation": "docs/native-controls-and-recipes.md",
+      "example": "showcase/examples/ui-expansion/specimen.tscn"
+    },
+    {
+      "interviewNumber": 52,
+      "name": "Avatar",
+      "decision": "Included",
+      "requirement": "NAT-30",
+      "implementation": "docs/native-controls-and-recipes.md#expansion-recipes-rf-ui-expansion-01",
+      "documentation": "docs/native-controls-and-recipes.md",
+      "example": "showcase/examples/ui-expansion/specimen.tscn"
+    },
+    {
+      "interviewNumber": 53,
+      "name": "Button",
+      "decision": "Included",
+      "requirement": "NAT-31",
+      "implementation": "docs/native-controls-and-recipes.md#expansion-recipes-rf-ui-expansion-01",
+      "documentation": "docs/native-controls-and-recipes.md",
+      "example": "showcase/examples/ui-expansion/specimen.tscn"
+    },
+    {
+      "interviewNumber": 55,
+      "name": "Label",
+      "decision": "Existing coverage",
+      "requirement": "NAT-32",
+      "implementation": "docs/native-controls-and-recipes.md#expansion-recipes-rf-ui-expansion-01",
+      "documentation": "docs/native-controls-and-recipes.md",
+      "example": "showcase/examples/ui-expansion/specimen.tscn"
+    },
+    {
+      "interviewNumber": 56,
+      "name": "Separator",
+      "decision": "Included",
+      "requirement": "NAT-33",
+      "implementation": "docs/native-controls-and-recipes.md#expansion-recipes-rf-ui-expansion-01",
+      "documentation": "docs/native-controls-and-recipes.md",
+      "example": "showcase/examples/ui-expansion/specimen.tscn"
+    },
+    {
+      "interviewNumber": 57,
+      "name": "Typography",
+      "decision": "Included",
+      "requirement": "NAT-34",
+      "implementation": "docs/native-controls-and-recipes.md#expansion-recipes-rf-ui-expansion-01",
+      "documentation": "docs/native-controls-and-recipes.md",
+      "example": "showcase/examples/ui-expansion/specimen.tscn"
+    },
+    {
+      "interviewNumber": 58,
+      "name": "Direction",
+      "decision": "Included",
+      "requirement": "NAT-35",
+      "implementation": "docs/native-controls-and-recipes.md#expansion-recipes-rf-ui-expansion-01",
+      "documentation": "docs/native-controls-and-recipes.md",
+      "example": "showcase/examples/ui-expansion/specimen.tscn"
+    }
   ]
 }

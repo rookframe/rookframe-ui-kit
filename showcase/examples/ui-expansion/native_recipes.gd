@@ -4,10 +4,12 @@ extends VBoxContainer
 const UI := "res://rookframe/ui/"
 var controls: Dictionary = {}
 var actions: Array[String] = []
+var include_settings := true
+var include_details := true
 
 func _ready() -> void:
-	_settings()
-	_details()
+	if include_settings: _settings()
+	if include_details: _details()
 
 func _label(copy: String, role := &"RookframeBody") -> Label:
 	var label := Label.new()

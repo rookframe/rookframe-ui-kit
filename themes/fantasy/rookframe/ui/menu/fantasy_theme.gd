@@ -5,4 +5,6 @@ const Mapping = preload("menu_theme_map.gd")
 const Materials = preload("materials/menu_materials.gd")
 
 func _init() -> void:
-	super(Mapping, Materials, preload("res://rookframe/ui/menu/shell_theme_maps.gd").MAPS)
+	var extensions: Array[Script] = preload("res://rookframe/ui/menu/shell_theme_maps.gd").MAPS.duplicate()
+	extensions.append(preload("expansion_theme_map.gd"))
+	super(Mapping, Materials, extensions)

@@ -5,4 +5,6 @@ const CyberpunkMapping = preload("cyberpunk_theme_map.gd")
 const CyberpunkMaterials = preload("materials/cyberpunk_materials.gd")
 
 func _init() -> void:
-	super(CyberpunkMapping, CyberpunkMaterials, preload("res://rookframe/ui/menu/shell_theme_maps.gd").MAPS)
+	var extensions: Array[Script] = preload("res://rookframe/ui/menu/shell_theme_maps.gd").MAPS.duplicate()
+	extensions.append(preload("expansion_theme_map.gd"))
+	super(CyberpunkMapping, CyberpunkMaterials, extensions)

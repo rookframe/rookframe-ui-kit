@@ -92,3 +92,23 @@ third-party resources retain the installed package notices.
 The native boundary comparison is `examples/theme-boundary/theme_boundary.tscn`.
 `tests/theme_boundary.gd` checks native inheritance and dynamic selection at all
 three target sizes; pass `-- --capture-dir=/tmp/theme-boundary` to capture it.
+
+## UI expansion specimens
+
+Run `godot --path showcase res://examples/ui-expansion/specimen.tscn` from the
+workspace root. The retained tabs cover native recipes, Settings, Details,
+Inventory, Assets, Feedback and language specimens. The toolbar changes the
+three optional themes, eight languages, 1.0/1.5 text scale, long text and motion.
+
+```sh
+godot --path showcase --script res://tests/ui_expansion.gd -- --capture-dir=/tmp/rookframe-ui-expansion/captures
+godot --path showcase --script res://tests/ui_expansion_recipes.gd
+```
+
+The automated matrix captures appearance; inspect the captures before claiming
+visual acceptance. Real IME, screen-reader announcements, touch hardware and
+controller hardware still require their native platform input routes. The
+standalone core contract runner is documented in the UI Kit README.
+Arabic and Hebrew specimen fonts are test assets under `examples/ui-expansion/fonts`;
+their OFL licenses, source URLs and SHA-256 checksums travel with them. The
+existing explicit Silkbound CJK companions supply Japanese, Chinese and Korean.
