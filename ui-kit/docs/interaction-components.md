@@ -129,3 +129,163 @@ Keep input arrays unchanged.
 An empty item list shows an empty state and no active Clear action.
 Unknown optional record fields do not affect selection behavior.
 
+
+## Popover, Inspect Card and Toast Stack
+
+
+**10.1 Popover interface**
+
+Godot supplies popup capture through its native Window and Popup facilities.
+Use the [Window reference](https://docs.godotengine.org/en/stable/classes/class_window.html) for engine-specific flags and coordinate rules.
+
+| Member | Type or signature | Result |
+| --- | --- | --- |
+| `get_content_slot()` | → Container | Retained content |
+| `open_for(anchor, initial_focus = null)` | Control, Control or null → bool | true when the popup opens |
+| `close(reason = "host")` | StringName → void | Closes an open popup |
+| `is_open()` | → bool | Current open state |
+| `closed(reason)` | Signal with StringName | One close event per open operation |
+
+Valid close reasons are `host`, `cancel`, `outside`, `anchor_lost`, and `owner_hidden`.
+Use `replace` when an open popup changes to another anchor.
+A repeated close call has no effect.
+
+- **POP-01.** Reject a missing or invisible anchor.
+- **POP-02.** Reject an explicit focus target outside the popup.
+- **POP-03.** Reject an explicit focus target that cannot receive focus.
+- **POP-04.** Position the popup below the anchor when sufficient space exists.
+- **POP-05.** Use the space above when the popup cannot fit below.
+- **POP-06.** Otherwise, use the side with more vertical space.
+- **POP-07.** Keep the complete popup inside the owner's usable bounds.
+- **POP-08.** Use an 8 px gap from the anchor.
+- **POP-09.** Use an 8 px margin from usable bounds.
+- **POP-10.** Put oversized content inside one scroll owner.
+- **POP-11.** Recalculate placement after anchor movement or owner resize.
+- **POP-12.** Close the popup when the anchor disappears.
+- **POP-13.** Close the popup when its owner becomes hidden.
+- **POP-14.** Use native popup capture and outside-dismissal behavior.
+- **POP-15.** Keep the Dialog scrim out of this recipe.
+- **POP-16.** Consume the dismissal input.
+- **POP-17.** Return focus to the anchor when it remains eligible.
+- **POP-18.** Otherwise, use the shared focus fallback.
+- **POP-19.** Keep content nodes during close and reopen.
+
+If initial_focus is absent, use the first eligible control in content order.
+If no eligible control exists, keep cancellation available through the popup.
+Use the correct native coordinate system for embedded and separate windows.
+Keep host content available through the public slot only.
+
+Use theme constants for the gap and bounds margin.
+The values above are their defaults.
+
+**10.2 Inspect Card interface**
+
+| Member | Type or signature | Default or result |
+| --- | --- | --- |
+| `bind_anchor(control)` | Control → bool | true for a valid anchor |
+| `get_preview_slot()` | → Container | Read-only hover content |
+| `get_body_slot()` | → Container | Explicit inspection content |
+| `get_action_slot()` | → Container | Host-supplied actions |
+| `open_inspection()` | → bool | true when explicit inspection opens |
+| `close()` | → void | Closes preview or explicit inspection |
+| `hover_delay_ms` | int | 500 |
+| `hover_close_delay_ms` | int | 150 |
+
+The host supplies preview content and full inspection content.
+These are separate presentations.
+They are not alternate responsive copies of one editable tree.
+
+- **INS-01.** Open the preview after the hover delay.
+- **INS-02.** Keep preview content read-only.
+- **INS-03.** Keep the preview outside focus navigation.
+- **INS-04.** Keep the preview from capturing keyboard or controller input.
+- **INS-05.** Close the preview after the pointer leaves the anchor.
+- **INS-06.** Cancel a pending preview when the anchor disappears.
+- **INS-07.** Use Popover for explicit inspection.
+- **INS-08.** Close the preview before explicit inspection opens.
+- **INS-09.** Expose all essential preview information through explicit inspection.
+- **INS-10.** Expose actions only in explicit inspection.
+- **INS-11.** Keep explicit inspection open until its normal dismissal condition.
+- **INS-12.** Prevent hover from reopening a manually closed card until pointer re-entry.
+- **INS-13.** Keep item rules and action execution in the host.
+- **INS-14.** Keep comparison, pinning, and inspection history outside this release.
+
+Supply a visible Inspect action in the touch example.
+Use native activation for the keyboard/controller example.
+No dynamic action prompt is required.
+
+**11. Toast stack**
+
+**11.1 Interface**
+
+| Member | Type or signature | Default or result |
+| --- | --- | --- |
+| `configure_limits(visible, waiting)` | int, int → bool | Defaults: 3 visible; 20 waiting |
+| `push(message)` | Dictionary → bool | true when accepted |
+| `update_message(id, changes)` | String, Dictionary → bool | true after a valid update |
+| `dismiss(id)` | String → bool | true when an accepted message is removed |
+| `clear()` | → void | Removes all messages |
+| `finished(id, reason, action_id)` | Signal with String, StringName, String | One terminal event per accepted message |
+| `timers_paused` | bool | false |
+
+| Message key | Type | Default |
+| --- | --- | --- |
+| `id` | String | Required, nonempty, unique |
+| `title` | String | Required, nonempty |
+| `description` | String | Empty |
+| `tone` | StringName | `info` |
+| `duration_ms` | int | 5000 without an action; 0 with an action |
+| `action_id` | String | Empty |
+| `action_label` | String | Empty |
+| `action_disabled` | bool | false |
+| `dismissible` | bool | true |
+
+Valid tones are `info`, `success`, and `error`.
+A duration of zero means no timed dismissal.
+A positive duration starts when the message becomes visible.
+Negative durations are invalid.
+Supply both action_id and action_label, or neither.
+
+Valid terminal reasons are `timeout`, `action`, `user`, `host`, and `clear`.
+Use an empty action_id except for the action reason.
+
+- **TST-01.** Display accepted messages in arrival order.
+- **TST-02.** Promote waiting messages in the same order.
+- **TST-03.** Reject a duplicate ID.
+- **TST-04.** Reject a new message when both capacities are full.
+- **TST-05.** Keep accepted messages unchanged after overflow rejection.
+- **TST-06.** Reject a visible limit below one.
+- **TST-07.** Reject a waiting limit below zero.
+- **TST-08.** Reject limits below the current message counts.
+- **TST-09.** Keep a message's queue position during update_message.
+- **TST-10.** Keep its elapsed visible time during update_message.
+- **TST-11.** Keep message IDs immutable during updates.
+- **TST-12.** Pause dismissal while the pointer is over the message.
+- **TST-13.** Pause dismissal while focus is inside the message.
+- **TST-14.** Pause dismissal while the stack is hidden.
+- **TST-15.** Pause dismissal while the application lacks focus.
+- **TST-16.** Pause dismissal while timers_paused is true.
+- **TST-17.** Keep timer duration independent of game time scale.
+- **TST-18.** Obey the host's pause policy for the owning UI branch.
+- **TST-19.** Keep focus unchanged when a message appears.
+- **TST-20.** Give visible messages a polite native announcement where supported.
+- **TST-21.** Announce a message only when it becomes visible.
+- **TST-22.** Remove the message before emitting its terminal event.
+- **TST-23.** When a message ends normally, emit one terminal event.
+- **TST-24.** Cancel timers when the stack exits the scene tree.
+
+The host owns stack placement.
+Use Notice for message content where its contract fits.
+Use persistent Notice or Dialog for recovery that cannot expire safely.
+
+An action emits finished with reason action.
+The host performs the action.
+Disabled actions cannot finish the message through activation.
+A removed stack emits no delayed terminal events.
+
+
+Popover also accepts `focus_fallback: Control = null`. Its native Theme constants
+`RookframePopover/anchor_gap` and `bounds_margin` default to 8. Preview slots are
+read-only; focus and mouse behavior are disabled recursively. Toast Stack uses the
+monotonic real-time clock and inherits its UI branch pause policy. Native polite
+live regions depend on the platform accessibility backend.

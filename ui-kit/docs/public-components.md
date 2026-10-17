@@ -550,3 +550,21 @@ for properties, failure results, focus and retained-slot ownership.
 `components/forms/multi_select_picker.tscn` (uid://oxjbxtifnqxj) has root `VBoxContainer` and script
 `components/forms/multi_select_picker.gd` (uid://ckwuvwkjmdbv5). See [the interaction contract](interaction-components.md)
 for properties, failure results, focus and retained-slot ownership.
+
+### Popover
+
+`components/overlays/popover.tscn` (uid://drqlqnjpihqjd) has root `PopupPanel` and script
+`components/overlays/popover.gd` (uid://dwxtv6ieiohur). See [the interaction contract](interaction-components.md)
+for properties, failure results, focus and retained-slot ownership.
+
+### InspectCard
+
+`components/overlays/inspect_card.tscn` (uid://dyfpjqt06duxi) has root `Control` and script
+`components/overlays/inspect_card.gd` (uid://df3k0bf7yfrxp). See [the interaction contract](interaction-components.md)
+for properties, failure results, focus and retained-slot ownership.
+
+### ToastStack
+
+`components/feedback/toast_stack.tscn` (uid://c23v4qkkv6grh) has root `VBoxContainer` and script
+`components/feedback/toast_stack.gd` (uid://qlcvjx4gbnyt). See [the interaction contract](interaction-components.md)
+for properties, failure results, focus and retained-slot ownership.

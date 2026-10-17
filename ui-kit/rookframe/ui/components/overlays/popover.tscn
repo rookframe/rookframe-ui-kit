@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://drqlqnjpihqjd"]
+
+[ext_resource type="Script" path="res://rookframe/ui/components/overlays/popover.gd" id="1"]
+
+[node name="Popover" type="PopupPanel"]
+script = ExtResource("1")
+visible = false
+theme_type_variation = &"RookframePopover"
+
+[node name="Scroll" type="ScrollContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+horizontal_scroll_mode = 1
+vertical_scroll_mode = 1
+follow_focus = true
+
+[node name="ContentSlot" type="VBoxContainer" parent="Scroll"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+

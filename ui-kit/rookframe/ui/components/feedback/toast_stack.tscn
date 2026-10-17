@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://c23v4qkkv6grh"]
+
+[ext_resource type="Script" path="res://rookframe/ui/components/feedback/toast_stack.gd" id="1"]
+
+[node name="ToastStack" type="VBoxContainer"]
+script = ExtResource("1")
+size_flags_horizontal = 3
+
