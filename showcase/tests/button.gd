@@ -30,13 +30,7 @@ func _run() -> void:
 			push_error("Unknown preview theme: %s. Choose native, ledger, fantasy or cyberpunk." % preview)
 			quit(2)
 			return
-		var skin: Theme = ThemeDB.get_default_theme() if preview == "native" else load(THEMES[preview])
-		# Set the page's presentation input before its builder creates examples
-		# and overlays. Navigation keeps the selected appearance in this launcher.
-		catalogue._page_host.child_entered_tree.connect(func(page: Node):
-			if page.get_script() == catalogue.Page:
-				page.preview_theme = skin
-		)
+		catalogue.select_theme("silkbound-ledger" if preview == "ledger" else preview)
 		catalogue.show_page("button")
 		await settle()
 		if not capture_dir.is_empty(): await capture("preview-" + preview)
@@ -48,7 +42,7 @@ func _run() -> void:
 	check(actions.size() == 34, "One production Button supplies the complete variant matrix")
 	for theme_name in THEMES:
 		var skin: Theme = ThemeDB.get_default_theme() if theme_name == "native" else load(THEMES[theme_name])
-		for example in page.examples: example.theme = skin
+		catalogue.select_theme("silkbound-ledger" if theme_name == "ledger" else theme_name)
 		for canvas in [Vector2i(1920, 1080), Vector2i(1024, 768), Vector2i(844, 390)]:
 			root.size = canvas
 			await settle()
