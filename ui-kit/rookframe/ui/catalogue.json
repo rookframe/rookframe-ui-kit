@@ -1144,6 +1144,73 @@
       ],
       "signals": [],
       "script": "res://rookframe/ui/components/surfaces/ledger_frame.gd"
+    },
+    {
+      "name": "Field",
+      "scene": "res://rookframe/ui/components/forms/field.tscn",
+      "sceneUid": "uid://dal8rg0ntcpnw",
+      "script": "res://rookframe/ui/components/forms/field.gd",
+      "scriptUid": "uid://bxpp2oliyajl7",
+      "rootType": "VBoxContainer",
+      "properties": {
+        "label_text": "",
+        "help_text": "",
+        "error_text": "",
+        "label_visible": true
+      },
+      "methods": [
+        "get_input_slot() -> Container",
+        "set_target(control: Control) -> bool",
+        "set_error(message: String)",
+        "focus_input() -> bool"
+      ],
+      "signals": [],
+      "slots": [
+        "InputSlot"
+      ]
+    },
+    {
+      "name": "InputGroup",
+      "scene": "res://rookframe/ui/components/forms/input_group.tscn",
+      "sceneUid": "uid://dk7rcpwx23ly5",
+      "script": "res://rookframe/ui/components/forms/input_group.gd",
+      "scriptUid": "uid://dsqthbx6u0kqx",
+      "rootType": "HBoxContainer",
+      "properties": {},
+      "methods": [
+        "get_leading_slot() -> Container",
+        "get_input_slot() -> Container",
+        "get_trailing_slot() -> Container"
+      ],
+      "signals": [],
+      "slots": [
+        "LeadingSlot",
+        "InputSlot",
+        "TrailingSlot"
+      ]
+    },
+    {
+      "name": "MultiSelectPicker",
+      "scene": "res://rookframe/ui/components/forms/multi_select_picker.tscn",
+      "sceneUid": "uid://oxjbxtifnqxj",
+      "script": "res://rookframe/ui/components/forms/multi_select_picker.gd",
+      "scriptUid": "uid://ckwuvwkjmdbv5",
+      "rootType": "VBoxContainer",
+      "properties": {
+        "show_summary": true,
+        "show_clear": true,
+        "disabled": false,
+        "focus_fallback": null
+      },
+      "methods": [
+        "set_items(items: Array[Dictionary]) -> bool",
+        "set_selected_ids(ids: PackedStringArray) -> bool",
+        "get_selected_ids() -> PackedStringArray"
+      ],
+      "signals": [
+        "selection_changed(ids: PackedStringArray)"
+      ],
+      "slots": []
     }
   ],
   "semanticIcons": {

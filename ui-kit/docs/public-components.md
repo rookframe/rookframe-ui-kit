@@ -532,3 +532,21 @@ Short caption/value facts remain together when pagination measures native conten
 
 Ordered native Theme usage projection is documented in
 [World styling](world-theme-styling.md).
+
+### Field
+
+`components/forms/field.tscn` (uid://dal8rg0ntcpnw) has root `VBoxContainer` and script
+`components/forms/field.gd` (uid://bxpp2oliyajl7). See [the interaction contract](interaction-components.md)
+for properties, failure results, focus and retained-slot ownership.
+
+### InputGroup
+
+`components/forms/input_group.tscn` (uid://dk7rcpwx23ly5) has root `HBoxContainer` and script
+`components/forms/input_group.gd` (uid://dsqthbx6u0kqx). See [the interaction contract](interaction-components.md)
+for properties, failure results, focus and retained-slot ownership.
+
+### MultiSelectPicker
+
+`components/forms/multi_select_picker.tscn` (uid://oxjbxtifnqxj) has root `VBoxContainer` and script
+`components/forms/multi_select_picker.gd` (uid://ckwuvwkjmdbv5). See [the interaction contract](interaction-components.md)
+for properties, failure results, focus and retained-slot ownership.
