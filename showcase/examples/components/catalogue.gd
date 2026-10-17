@@ -187,6 +187,8 @@ func filter_navigation(query: String) -> void:
 	_empty.visible = count == 0
 
 func show_page(id: String) -> bool:
+	if id in Registry.BUTTON_ALIASES:
+		id = "button"
 	var entry: Dictionary = {}
 	for item in entries:
 		if item.id == id:

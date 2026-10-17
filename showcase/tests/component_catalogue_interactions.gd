@@ -75,16 +75,18 @@ func _run() -> void:
 	check(fixed.reduced_motion, "Global reduced motion preserves the static comparison")
 	catalogue.set_reduced_motion(false)
 
-	for id in ["card_switch", "menu_button_destructive"]:
+	for alias in catalogue.Registry.BUTTON_ALIASES:
+		check(catalogue.show_page(alias) and catalogue.current_id == "button", "Legacy route opens shared Button: " + alias)
+
+	for id in ["card_switch", "button"]:
 		catalogue.show_page(id)
 		await settle()
-		var path := "res://rookframe/ui/menu/Switch.tscn" if id == "card_switch" else "res://rookframe/ui/menu/MenuButtonDestructive.tscn"
-		var control: Button = resource_node(path)
+		var control: Button = resource_node("res://rookframe/ui/menu/Switch.tscn") if id == "card_switch" else button("Delete draft")
 		await activate(control)
 		if id == "card_switch":
 			check(control.button_pressed, "The core card toggles with native styling")
 		else:
-			check(catalogue.current_page.find_children("*", "Label", true, false).any(func(node): return node.text.begins_with("Confirmation requested for:")), "The core destructive action requests confirmation")
+			check(catalogue.current_page.find_children("*", "Label", true, false).any(func(node): return node.text.begins_with("Confirmation requested:")), "The core destructive action requests confirmation")
 		var native_theme := ThemeDB.get_default_theme()
 		catalogue.theme = catalogue.Chrome.create(true)
 		await settle()

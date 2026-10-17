@@ -389,3 +389,25 @@ OptionButton/colors/icon_hover_color = Color(0.95, 0.85, 0.65, 1)
 OptionButton/colors/icon_pressed_color = Color(0.95, 0.85, 0.65, 1)
 OptionButton/colors/icon_focus_color = Color(0.95, 0.85, 0.65, 1)
 OptionButton/colors/icon_disabled_color = Color(0.769, 0.773, 0.722, 0.48)
+
+; Shared Button semantic variations. Native inheritance owns all draw states.
+components_button/base_type = &"RookframeSecondaryButton"
+components_button/constants/minimum_height = 52
+components_button__compact/base_type = &"components_button"
+components_button__compact/constants/minimum_height = 44
+components_button/colors/icon_normal_color = Color(0.906, 0.906, 0.867, 1)
+components_button/colors/icon_hover_color = Color(0.98, 0.95, 0.85, 1)
+components_button/colors/icon_pressed_color = Color(0.906, 0.906, 0.867, 1)
+components_button/colors/icon_hover_pressed_color = Color(0.906, 0.906, 0.867, 1)
+components_button/colors/icon_focus_color = Color(0.98, 0.95, 0.85, 1)
+components_button/colors/icon_disabled_color = Color(0.769, 0.773, 0.722, 0.48)
+components_button_primary/base_type = &"RookframePrimaryButton"
+components_button_primary/constants/minimum_height = 52
+components_button_primary__compact/base_type = &"components_button_primary"
+components_button_primary__compact/constants/minimum_height = 44
+components_button_primary/colors/icon_normal_color = Color(0.082, 0.090, 0.098, 1)
+components_button_primary/colors/icon_hover_color = Color(0.082, 0.090, 0.098, 1)
+components_button_primary/colors/icon_pressed_color = Color(0.082, 0.090, 0.098, 1)
+components_button_primary/colors/icon_hover_pressed_color = Color(0.082, 0.090, 0.098, 1)
+components_button_primary/colors/icon_focus_color = Color(0.082, 0.090, 0.098, 1)
+components_button_primary/colors/icon_disabled_color = Color(0.769, 0.773, 0.722, 0.48)

@@ -41,6 +41,7 @@ godot --headless --editor --path ui-kit --import --quit
 godot --headless --path ui-kit --script res://tests/unthemed_components.gd
 godot --headless --path ui-kit --script res://tests/native_recipe_defaults.gd
 godot --headless --path ui-kit --script res://tests/native_proxies.gd
+godot --headless --path ui-kit --script res://tests/button.gd
 godot --headless --path ui-kit --script res://tests/expansion_contracts.gd
 ```
 

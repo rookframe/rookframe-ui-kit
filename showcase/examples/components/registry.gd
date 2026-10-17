@@ -2,6 +2,7 @@ extends RefCounted
 ## Showcase navigation metadata. The installed catalogue remains the public API.
 const CATEGORIES := ["Actions", "Forms & selection", "Navigation", "Layout", "Surfaces", "Data display", "Feedback & overlays"]
 const MANIFESTS := ["layout_surfaces", "actions_forms", "data_feedback"]
+const BUTTON_ALIASES := ["menu_button_primary", "menu_button_standard", "menu_button_destructive", "editor_tool_button", "editor_action_button"]
 
 static func entries() -> Array[Dictionary]:
 	var result: Array[Dictionary] = []
