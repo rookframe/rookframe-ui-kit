@@ -8,7 +8,7 @@ static func build(page) -> void:
 		var source = page.button(section, "Journal actions" if not unavailable else "Locked journal actions")
 		var status = page.note(section, "No action requested.")
 		var menu := preload("res://rookframe/ui/components/overlays/context_menu.tscn").instantiate() as PopupMenu
-		menu.theme = page.preview_theme
+		page.bind_preview_theme(menu)
 		menu.add_item("Inspect", 10)
 		menu.add_item("Duplicate", 20)
 		menu.add_separator()

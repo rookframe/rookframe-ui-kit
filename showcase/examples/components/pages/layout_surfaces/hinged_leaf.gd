@@ -11,7 +11,7 @@ static func build(page) -> void:
 		leaf.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 		leaf.offset_bottom = -32
 		var inset := Demo.inset(leaf.get_content(), 24)
-		inset.theme = page.preview_theme
+		page.bind_preview_theme(inset)
 		inset.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 		var content := Demo.stack(inset)
 		page.note(content, "Expedition notes")

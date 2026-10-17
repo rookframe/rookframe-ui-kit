@@ -1,9 +1,10 @@
 # Rookframe native component catalogue
 
 An executable reference for agents implementing Rookframe UI. The component
-library instances core UI Kit resources with synthetic data and stock Godot
-styling. Its preview Theme is Godot's default, including page-owned popups and
-windows. Optional presentation shaders and decoration are absent. All public
+library instances core UI Kit resources with synthetic data. The toolbar's
+Theme selector offers Godot default, Silkbound Ledger, Fantasy and Cyberpunk
+from the workspace's `themes/` packages, using their canonical native Theme
+resources. Godot default is selected on launch. All public
 component routes remain available. Menu/editor button routes redirect to the
 shared Button page, which covers primary, secondary and destructive variants,
 normal/compact sizes and text/icon content.
@@ -34,8 +35,9 @@ Search by component, group, or purpose. Ctrl/Cmd+K focuses search; Enter opens
 the first match. Previous/Next follow group order. At narrow widths, Components
 opens the navigation; Escape returns to the current view. Desktop views include
 section links. Reduced motion updates the active examples without rebuilding
-their state. Light/dark changes only the catalogue chrome; component previews
-retain stock Godot styling.
+their state. Theme changes update the existing examples, page-owned popups and
+windows, and hinged-leaf content without rebuilding their state. The selection
+continues across page navigation. Light/dark changes only the catalogue chrome.
 
 Open a dedicated view directly with `godot --path . -- --component=field`.
 Route IDs and page ownership are listed in `examples/components/manifests/`.

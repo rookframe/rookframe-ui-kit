@@ -3,6 +3,12 @@ extends Control
 const Registry = preload("registry.gd")
 const Page = preload("component_page.gd")
 const Chrome = preload("catalogue_theme.gd")
+const PREVIEW_THEMES := {
+	"native": null,
+	"silkbound-ledger": preload("res://rookframe/ui/themes/silkbound-ledger/theme.tres"),
+	"fantasy": preload("res://rookframe/ui/themes/fantasy/theme.tres"),
+	"cyberpunk": preload("res://rookframe/ui/themes/cyberpunk/theme.tres"),
+}
 const GROUP_COPY := {
 	"Actions": "Trigger an action or choose a tool.",
 	"Forms & selection": "Enter, validate, and select values.",
@@ -16,6 +22,8 @@ var entries: Array[Dictionary] = []
 var current_id := ""
 var current_page: VBoxContainer
 var reduced_motion := false
+var selected_theme := "native"
+var theme_selector: OptionButton
 var search: LineEdit
 var content_scroll: ScrollContainer
 var sidebar: VBoxContainer
@@ -58,12 +66,32 @@ func _ready() -> void:
 	var layout := VBoxContainer.new()
 	layout.add_theme_constant_override("separation", 12)
 	padding.add_child(layout)
-	var top := HBoxContainer.new()
+	var top := HFlowContainer.new()
+	top.add_theme_constant_override("h_separation", 12)
+	top.add_theme_constant_override("v_separation", 8)
 	layout.add_child(top)
 	_menu = _button(top, "Components", _toggle_navigation)
 	var brand := _label("ROOKFRAME", 20)
+	brand.autowrap_mode = TextServer.AUTOWRAP_OFF
 	brand.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	brand.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	top.add_child(brand)
+	var appearance := HBoxContainer.new()
+	appearance.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	top.add_child(appearance)
+	var theme_label := _label("Theme")
+	theme_label.autowrap_mode = TextServer.AUTOWRAP_OFF
+	theme_label.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	appearance.add_child(theme_label)
+	theme_selector = preload("res://rookframe/ui/components/forms/select.tscn").instantiate()
+	theme_selector.accessibility_name = "Preview theme"
+	theme_selector.tooltip_text = "Appearance of component examples"
+	for id in PREVIEW_THEMES:
+		theme_selector.add_item("Godot default" if id == "native" else id.replace("-", " ").capitalize())
+		theme_selector.set_item_metadata(theme_selector.item_count - 1, id)
+	theme_selector.item_selected.connect(func(index: int) -> void:
+		select_theme(theme_selector.get_item_metadata(index)))
+	appearance.add_child(theme_selector)
 	var motion := CheckButton.new()
 	motion.text = "Reduced motion"
 	motion.custom_minimum_size.y = 44
@@ -216,6 +244,7 @@ func show_page(id: String) -> bool:
 		current_page = Page.new()
 		current_page.entry = entry
 		current_page.reduced_motion = reduced_motion
+		current_page.preview_theme = _preview_theme()
 		current_page.add_theme_constant_override("separation", 28)
 		_page_host.add_child(current_page)
 		var implementation = load(entry.script)
@@ -296,6 +325,18 @@ func _adjacent(direction: int) -> void:
 	var index := clampi(_index() + direction, 0, entries.size() - 1)
 	if not entries.is_empty():
 		show_page(entries[index].id)
+
+func select_theme(id: String) -> bool:
+	if not PREVIEW_THEMES.has(id):
+		return false
+	selected_theme = id
+	theme_selector.select(PREVIEW_THEMES.keys().find(id))
+	if is_instance_valid(current_page):
+		current_page.preview_theme = _preview_theme()
+	return true
+
+func _preview_theme() -> Theme:
+	return ThemeDB.get_default_theme() if selected_theme == "native" else PREVIEW_THEMES[selected_theme]
 
 func set_reduced_motion(value: bool) -> void:
 	reduced_motion = value
