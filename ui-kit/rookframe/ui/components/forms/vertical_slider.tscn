@@ -1,0 +1,4 @@
+[gd_scene format=3 uid="uid://cjeplibpvyep2"]
+
+[node name="VerticalSlider" type="VSlider"]
+custom_minimum_size = Vector2(44, 44)

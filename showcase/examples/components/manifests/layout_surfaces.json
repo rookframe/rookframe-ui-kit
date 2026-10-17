@@ -111,7 +111,9 @@
     "description": "Native disclosures with single-open and multiple-open policies.",
     "script": "res://examples/components/pages/layout_surfaces/accordion.gd",
     "covers": [
-      "Accordion"
+      "res://rookframe/ui/components/surfaces/accordion.tres",
+      "Accordion",
+      "res://rookframe/ui/components/surfaces/collapsible.tscn"
     ],
     "keywords": [
       "fold",
@@ -126,6 +128,7 @@
     "description": "An independent native disclosure that retains its content state.",
     "script": "res://examples/components/pages/layout_surfaces/collapsible.gd",
     "covers": [
+      "res://rookframe/ui/components/surfaces/collapsible.tscn",
       "Collapsible"
     ],
     "keywords": [
@@ -141,6 +144,7 @@
     "description": "Retained native panels with disabled and alternate tab placement.",
     "script": "res://examples/components/pages/layout_surfaces/tabs.gd",
     "covers": [
+      "res://rookframe/ui/components/navigation/tabs.tscn",
       "Tabs"
     ],
     "keywords": [
@@ -156,6 +160,7 @@
     "description": "Bounded native reading areas with focus-follow and scrollbars.",
     "script": "res://examples/components/pages/layout_surfaces/scroll_area.gd",
     "covers": [
+      "res://rookframe/ui/components/layout/scroll_area.tscn",
       "Scroll Area"
     ],
     "keywords": [
@@ -171,6 +176,7 @@
     "description": "Native ratio containers keep media proportions during resize.",
     "script": "res://examples/components/pages/layout_surfaces/aspect_ratio.gd",
     "covers": [
+      "res://rookframe/ui/components/layout/aspect_ratio.tscn",
       "Aspect Ratio"
     ],
     "keywords": [
@@ -186,6 +192,7 @@
     "description": "Display cards compose the public Section with content and actions.",
     "script": "res://examples/components/pages/layout_surfaces/card.gd",
     "covers": [
+      "res://rookframe/ui/components/surfaces/card.tscn",
       "Card"
     ],
     "keywords": [
@@ -201,7 +208,9 @@
     "description": "Native rules separate related content without adding focus targets.",
     "script": "res://examples/components/pages/layout_surfaces/separator.gd",
     "covers": [
-      "Separator"
+      "res://rookframe/ui/components/layout/separator.tscn",
+      "Separator",
+      "res://rookframe/ui/components/layout/vertical_separator.tscn"
     ],
     "keywords": [
       "rule",
@@ -215,6 +224,7 @@
     "description": "Semantic text roles, wrapping and multilingual reading samples.",
     "script": "res://examples/components/pages/layout_surfaces/typography.gd",
     "covers": [
+      "res://rookframe/ui/components/data/typography.tscn",
       "Typography"
     ],
     "keywords": [
@@ -231,6 +241,7 @@
     "description": "Visible text and unambiguous names for native inputs.",
     "script": "res://examples/components/pages/layout_surfaces/label.gd",
     "covers": [
+      "res://rookframe/ui/components/data/label.tscn",
       "Label"
     ],
     "keywords": [
@@ -246,6 +257,7 @@
     "description": "Native LTR and RTL layout with mixed-direction identifiers.",
     "script": "res://examples/components/pages/layout_surfaces/direction.gd",
     "covers": [
+      "res://rookframe/ui/components/layout/direction.tscn",
       "Direction"
     ],
     "keywords": [

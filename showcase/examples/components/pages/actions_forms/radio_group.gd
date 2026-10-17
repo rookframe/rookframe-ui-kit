@@ -4,7 +4,7 @@ const Demo = preload("res://examples/components/pages/actions_forms/support.gd")
 
 static func build(page) -> void:
 	var required = page.section("Required choice", "The first enabled option starts selected. Exactly one choice remains active.")
-	var group := ButtonGroup.new()
+	var group := preload("res://rookframe/ui/components/forms/radio_group.tres").duplicate() as ButtonGroup
 	var status = page.note(required, "Difficulty: Standard")
 	for title in ["Standard", "Challenging", "Unavailable"]:
 		var radio := Demo.checkbox(required, title, title == "Standard")
@@ -14,7 +14,7 @@ static func build(page) -> void:
 			if enabled: status.text = "Difficulty: " + title
 		)
 	var optional = page.section("Optional choice", "No option starts selected. Activate the current choice again to clear it.")
-	var optional_group := ButtonGroup.new()
+	var optional_group := preload("res://rookframe/ui/components/forms/radio_group.tres").duplicate() as ButtonGroup
 	optional_group.allow_unpress = true
 	var result = page.note(optional, "No preference.")
 	for title in ["Morning", "Evening"]:

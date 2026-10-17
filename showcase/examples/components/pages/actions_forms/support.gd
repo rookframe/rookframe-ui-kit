@@ -2,7 +2,7 @@ extends RefCounted
 ## Shared specimen wiring; each page supplies its own examples and public resource.
 
 static func checkbox(parent: Node, title: String, selected: bool = false) -> CheckBox:
-	var control := CheckBox.new()
+	var control := preload("res://rookframe/ui/components/forms/checkbox.tscn").instantiate() as CheckBox
 	control.text = title
 	control.button_pressed = selected
 	control.custom_minimum_size.y = 44
@@ -10,7 +10,7 @@ static func checkbox(parent: Node, title: String, selected: bool = false) -> Che
 	return control
 
 static func line(parent: Node, title: String, value: String = "") -> LineEdit:
-	var control := LineEdit.new()
+	var control := preload("res://rookframe/ui/components/forms/input.tscn").instantiate() as LineEdit
 	control.accessibility_name = title
 	control.text = value
 	control.custom_minimum_size.y = 44
@@ -19,7 +19,7 @@ static func line(parent: Node, title: String, value: String = "") -> LineEdit:
 	return control
 
 static func text(parent: Node, title: String, value: String = "") -> TextEdit:
-	var control := TextEdit.new()
+	var control := preload("res://rookframe/ui/components/forms/textarea.tscn").instantiate() as TextEdit
 	control.accessibility_name = title
 	control.text = value
 	control.wrap_mode = TextEdit.LINE_WRAPPING_BOUNDARY

@@ -5,7 +5,7 @@ const Demo = preload("res://examples/components/pages/actions_forms/support.gd")
 static func build(page) -> void:
 	var main = page.section("Bounded quantity", "Arrows update immediately. Typed values commit on Enter or focus exit.")
 	var field = page.scene("res://rookframe/ui/components/forms/field.tscn", main, {"label_text": "Party size", "help_text": "Choose between one and eight travellers."})
-	var spin := SpinBox.new()
+	var spin := preload("res://rookframe/ui/components/forms/numeric_input.tscn").instantiate() as SpinBox
 	spin.min_value = 1
 	spin.max_value = 8
 	spin.step = 1
@@ -17,7 +17,7 @@ static func build(page) -> void:
 	spin.value_changed.connect(func(value: float): status.text = "Travellers: %d" % value)
 	var other = page.section("Decimal units and read-only", "The native bounds and quarter-unit step apply to typed and arrow input.")
 	var units = page.scene("res://rookframe/ui/components/forms/input_group.tscn", other)
-	var distance := SpinBox.new()
+	var distance := preload("res://rookframe/ui/components/forms/numeric_input.tscn").instantiate() as SpinBox
 	distance.min_value = 0
 	distance.max_value = 10
 	distance.step = 0.25

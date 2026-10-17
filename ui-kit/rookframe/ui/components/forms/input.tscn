@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://d0fwqhwatcy1e"]
+
+[node name="Input" type="LineEdit"]
+custom_minimum_size = Vector2(44, 44)
+size_flags_horizontal = 3

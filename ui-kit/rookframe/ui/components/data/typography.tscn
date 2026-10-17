@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://6qfw2fvnalwu"]
+
+[ext_resource type="PackedScene" path="res://rookframe/ui/components/data/label.tscn" id="base"]
+
+[node name="Typography" instance=ExtResource("base")]
+theme_type_variation = &"RookframeBody"

@@ -5,7 +5,9 @@ const Demo = preload("res://examples/components/pages/layout_surfaces/demo.gd")
 static func build(page) -> void:
 	for rtl in [false, true]:
 		var body = page.section("Right to left" if rtl else "Left to right", "The layout changes direction while IDs and paths retain left-to-right text order.")
-		var content := Demo.stack(body)
+		var content = page.scene("res://rookframe/ui/components/layout/direction.tscn", body)
+		content.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		content.add_theme_constant_override("separation", 12)
 		content.layout_direction = Control.LAYOUT_DIRECTION_RTL if rtl else Control.LAYOUT_DIRECTION_LTR
 		page.note(content, "رحلة إلى الشمال" if rtl else "Journey to the north")
 		var input := Demo.editor(content, "worlds/north/scene-012", "Scene identifier")

@@ -4,7 +4,7 @@ Core components inherit the consumer Theme or native Godot defaults.
 Appearance belongs to the consumer or an optional theme package.
 
 
-Every scene and script in this document is public at its normal
+Every scene, script and resource in this document is public at its normal
 `res://rookframe/ui/` path. Scene paths, scene UIDs, script paths, script UIDs,
 root types, exported property names and defaults, signals, methods, slot names,
 state names, and documented behavior are compatibility contracts within a
@@ -12,6 +12,11 @@ SemVer major line.
 
 The machine-readable form of this reference is
 `res://rookframe/ui/catalogue.json`.
+
+[Native proxies](native-controls-and-recipes.md#public-native-proxies) expose
+standard controls and recipes through the same public resource boundary. A
+catalogue component has a `scene`, `script` or `resource` entry; `.tscn` entries
+instantiate native nodes, while `.tres` entries load native grouping resources.
 
 ## Optional presentation inputs
 

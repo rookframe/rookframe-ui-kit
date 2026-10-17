@@ -1,0 +1,4 @@
+[gd_scene format=3 uid="uid://ckbo42fhr6k0s"]
+
+[node name="Checkbox" type="CheckBox"]
+custom_minimum_size = Vector2(44, 44)

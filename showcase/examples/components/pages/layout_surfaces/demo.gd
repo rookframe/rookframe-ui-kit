@@ -13,7 +13,7 @@ static func stack(parent: Node) -> VBoxContainer:
 	return content
 
 static func editor(parent: Node, copy: String, accessible_name: String) -> LineEdit:
-	var input := LineEdit.new()
+	var input := preload("res://rookframe/ui/components/forms/input.tscn").instantiate() as LineEdit
 	input.text = copy
 	input.accessibility_name = accessible_name
 	input.custom_minimum_size.y = 44

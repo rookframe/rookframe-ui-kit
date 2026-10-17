@@ -4,7 +4,7 @@ const Demo = preload("res://examples/components/pages/actions_forms/support.gd")
 
 static func build(page) -> void:
 	var main = page.section("Volume", "Adjust with pointer, keyboard arrows or controller. Values range from 0 to 100 percent.")
-	var slider := HSlider.new()
+	var slider := preload("res://rookframe/ui/components/forms/slider.tscn").instantiate() as HSlider
 	slider.min_value = 0
 	slider.max_value = 100
 	slider.step = 1
@@ -17,7 +17,7 @@ static func build(page) -> void:
 	var disable := Demo.checkbox(page.flow(main), "Lock volume")
 	disable.toggled.connect(func(enabled: bool): slider.editable = not enabled)
 	var stepped = page.section("Stepped distance", "A five-kilometre step makes the allowed increments visible.")
-	var distance := HSlider.new()
+	var distance := preload("res://rookframe/ui/components/forms/slider.tscn").instantiate() as HSlider
 	distance.min_value = 5
 	distance.max_value = 50
 	distance.step = 5

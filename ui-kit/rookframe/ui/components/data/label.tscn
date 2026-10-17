@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://bj3pq6q6rqtwc"]
+
+[node name="Label" type="Label"]
+size_flags_horizontal = 3
+autowrap_mode = 3

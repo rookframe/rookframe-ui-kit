@@ -15,7 +15,10 @@ Shared optional dependencies belong outside the directory of theme projects.
 ## Compose the existing resources
 
 - Choose the public component by purpose from `rookframe/ui/catalogue.json`.
-  Use native Controls/Containers for content. Public slots own layout;
+  All Rookframe UI is available through the kit, including proxies for standard
+  Godot controls and recipes. Use those public resources and preserve native
+  behavior as specified by [the proxy contract](../native-controls-and-recipes.md).
+  Native Controls/Containers may compose caller-owned content. Public slots own layout;
   callers own game rules, labels, data and actions.
 - Keep category names visible. Let long names and translated text wrap. Yield
   ornament/gaps before readable content; keep touch targets at least 44 × 44.

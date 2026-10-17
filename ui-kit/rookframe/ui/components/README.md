@@ -1,12 +1,14 @@
 # Public components
 
-These editor-authored scenes implement only reusable relationships that Godot
-does not provide as one built-in Control. Use native Controls directly for
-ordinary inputs, choices, tabs, lists, trees, menus, dialogs, windows, progress,
-images, and fixed layouts.
+These public resources are the entry points for Rookframe UI, including thin
+proxies for standard Godot controls and resources. Proxies keep native behavior;
+composed components add relationships that Godot does not provide as one node.
+See [the proxy paths and usage contract](../../../docs/native-controls-and-recipes.md#public-native-proxies).
 
 - `layout/` contains adaptive grids and splits, task hierarchy, compact route
   headings, sections, action groups, and toolbars.
+- `actions/` contains native buttons, toggles, action containers and toggle groups;
+  `navigation/` contains retained native tabs.
 - `forms/` contains labelled field relationships, one-perimeter search,
   complete generic and compact/detailed Package choice targets, and neutral
   media replacement.

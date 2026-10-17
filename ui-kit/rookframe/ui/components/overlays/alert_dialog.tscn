@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bd3q0jknt4crj"]
+
+[ext_resource type="PackedScene" path="res://rookframe/ui/components/overlays/dialog.tscn" id="base"]
+
+[node name="AlertDialog" instance=ExtResource("base")]
+tone = 1
