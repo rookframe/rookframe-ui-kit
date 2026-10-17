@@ -1,0 +1,33 @@
+extends RefCounted
+
+const Demo = preload("res://examples/components/pages/layout_surfaces/demo.gd")
+
+static func build(page) -> void:
+	var body = page.section("Docked and floating state", "The example records placement requests. A host decides where to present the retained surface.")
+	var state = load("res://rookframe/ui/components/surfaces/managed_surface_state.gd").new()
+	var bounds := Demo.region(body, 340)
+	var surface = Demo.skin(page, "components/surfaces/managed_surface.tscn", bounds, {"state": state, "surface_title": "Session notes", "custom_minimum_size": Vector2(0, 0)})
+	surface.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	page.note(surface.get_header_slot(), "Draft · retained between lifecycle changes")
+	var task := VBoxContainer.new()
+	Demo.editor(task, "The observatory", "Retained session title")
+	page.note(task, "Edit the title, minimize or close, then reopen. Your draft remains.")
+	surface.set_task(task)
+	page.note(surface.get_footer_slot(), "Local example")
+	var status = page.note(body, "Docked · open")
+	surface.lifecycle_changed.connect(func(snapshot): status.text = "%s · %s" % [str(snapshot.placement).capitalize(), "closed" if snapshot.closed else "minimized" if snapshot.minimized else "open"])
+	var controls = page.flow(body)
+	page.button(controls, "Minimize", func(): surface.minimize_surface())
+	page.button(controls, "Restore", func(): surface.restore_surface())
+	page.button(controls, "Reopen", func(): surface.open_surface())
+	var full = page.section("Full-viewport placement", "This fixed task presentation has no dock/float or minimize controls.")
+	var full_state = load("res://rookframe/ui/components/surfaces/managed_surface_state.gd").new()
+	full_state.placement = 2
+	var full_bounds := Demo.region(full, 180)
+	var fixed = Demo.skin(page, "components/surfaces/managed_surface.tscn", full_bounds, {"state": full_state, "custom_minimum_size": Vector2(0, 0)})
+	fixed.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	var full_task := VBoxContainer.new()
+	page.note(full_task, "A task owns its complete viewport composition.")
+	page.button(full_task, "Close task", func(): fixed.close_surface())
+	fixed.set_task(full_task)
+	page.button(full, "Reopen task", func(): fixed.open_surface())
