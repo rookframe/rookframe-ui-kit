@@ -23,7 +23,7 @@ func set_compact(enabled: bool) -> void:
 func _refresh() -> void:
 	_refresh_pending = false
 	theme_type_variation = usage.replace(".", "_") + ("__compact" if compact else "")
-	var height := get_theme_constant("minimum_height")
+	var height := maxi(44, get_theme_constant("minimum_height"))
 	custom_minimum_size.y = height
 	if usage == "editor.button.tool":
 		custom_minimum_size.x = height

@@ -78,15 +78,20 @@ func _run() -> void:
 	for id in ["card_switch", "menu_button_destructive"]:
 		catalogue.show_page(id)
 		await settle()
-		var choice: OptionButton = catalogue.current_page.find_children("*", "OptionButton", true, false).filter(func(node): return node.accessibility_name == "Auxiliary shell appearance")[0]
-		var controls: Array = catalogue.current_page.find_children("*", "Control", true, false).filter(func(node): return node.has_meta("showcase_shell_recipe"))
-		var retained: Control = controls[0]
-		choice.select(1)
-		choice.item_selected.emit(1)
+		var path := "res://rookframe/ui/menu/Switch.tscn" if id == "card_switch" else "res://rookframe/ui/menu/MenuButtonDestructive.tscn"
+		var control: Button = resource_node(path)
+		await activate(control)
+		if id == "card_switch":
+			check(control.button_pressed, "The core card toggles with native styling")
+		else:
+			check(catalogue.current_page.find_children("*", "Label", true, false).any(func(node): return node.text.begins_with("Confirmation requested for:")), "The core destructive action requests confirmation")
+		var native_theme := ThemeDB.get_default_theme()
+		catalogue.theme = catalogue.Chrome.create(true)
 		await settle()
-		check(is_instance_valid(retained), "Changing appearance retains the specimen controls")
-		check(retained.theme.resource_path.ends_with("CyberpunkTheme.tres"), "Appearance selector applies the Cyberpunk production theme")
-		await capture(id + "-cyberpunk")
+		check(control.get_theme_color("font_color", "Button") == native_theme.get_color("font_color", "Button"), "Catalogue chrome does not change native specimen colors")
+		check(control.get_theme_font("font", "Button") == native_theme.get_font("font", "Button"), "Specimens retain the stock Godot font")
+		await capture(id + "-native")
+	catalogue.theme = catalogue.Chrome.create()
 
 	root.size = Vector2i(844, 390)
 	await settle()

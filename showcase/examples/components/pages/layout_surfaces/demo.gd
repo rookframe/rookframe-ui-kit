@@ -1,9 +1,9 @@
 extends RefCounted
 ## Small composition helpers shared by these showcase pages.
-const SKIN := "res://rookframe/ui/silkbound-ledger/"
+const CORE := "res://rookframe/ui/"
 
-static func skin(page, path: String, parent: Node, properties: Dictionary = {}) -> Node:
-	return page.scene(SKIN + path, parent, properties)
+static func component(page, path: String, parent: Node, properties: Dictionary = {}) -> Node:
+	return page.scene(CORE + path, parent, properties)
 
 static func stack(parent: Node) -> VBoxContainer:
 	var content := VBoxContainer.new()
@@ -36,11 +36,6 @@ static func inset(parent: Node, amount: int = 16) -> MarginContainer:
 	return result
 
 static func panel(page, parent: Node, title: String, copy: String) -> Node:
-	var frame = skin(page, "components/layout/section.tscn", parent, {"title": title})
+	var frame = component(page, "components/layout/section.tscn", parent, {"title": title})
 	page.note(frame.get_body_slot(), copy)
 	return frame
-
-static func auxiliary(page, path: String, parent: Node, appearance: String, properties: Dictionary = {}) -> Node:
-	var configured := properties.duplicate()
-	configured.theme = load("res://rookframe/ui/menu/MenuTheme.tres" if appearance == "Fantasy" else "res://rookframe/ui/menu/cyberpunk/CyberpunkTheme.tres")
-	return page.scene("res://rookframe/ui/" + path, parent, configured)

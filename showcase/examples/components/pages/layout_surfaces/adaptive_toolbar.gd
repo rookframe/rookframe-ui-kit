@@ -5,7 +5,7 @@ const Demo = preload("res://examples/components/pages/layout_surfaces/demo.gd")
 static func build(page) -> void:
 	for compact in [false, true]:
 		var body = page.section("Compact toolbar" if compact else "Search and actions", "The same leading and trailing lanes adapt to the measured width.")
-		var toolbar = Demo.skin(page, "components/layout/adaptive_toolbar.tscn", body, {"compact_width": 10000.0 if compact else 700.0})
+		var toolbar = Demo.component(page, "components/layout/adaptive_toolbar.tscn", body, {"compact_width": 10000.0 if compact else 700.0})
 		var search = Demo.editor(toolbar.get_leading_slot(), "", "Filter maps")
 		search.placeholder_text = "Filter maps"
 		var count = page.note(body, "3 maps available")

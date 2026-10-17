@@ -4,9 +4,9 @@ const Demo = preload("res://examples/components/pages/layout_surfaces/demo.gd")
 
 static func build(page) -> void:
 	var minimal = page.section("Title and supporting copy")
-	Demo.skin(page, "components/layout/task_header.tscn", minimal, {"eyebrow": "WORLD", "title": "The northern reaches", "subtitle": "A quiet place to plan the next expedition."})
+	Demo.component(page, "components/layout/task_header.tscn", minimal, {"eyebrow": "WORLD", "title": "The northern reaches", "subtitle": "A quiet place to plan the next expedition."})
 	var complete = page.section("Actions, progress and tabs", "The task owns values and navigation; the header owns their hierarchy.")
-	var header = Demo.skin(page, "components/layout/task_header.tscn", complete, {"eyebrow": "EXPEDITION", "title": "Prepare the next journey", "subtitle": "Long task names and supporting descriptions wrap within the available space.", "use_large_title": true})
+	var header = Demo.component(page, "components/layout/task_header.tscn", complete, {"eyebrow": "EXPEDITION", "title": "Prepare the next journey", "subtitle": "Long task names and supporting descriptions wrap within the available space.", "use_large_title": true})
 	var status = page.note(complete, "Draft saved locally in this example.")
 	page.button(header.get_actions_slot(), "Save draft", func(): status.text = "Draft saved.")
 	var progress := ProgressBar.new()

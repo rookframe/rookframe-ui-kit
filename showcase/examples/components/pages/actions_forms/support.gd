@@ -51,28 +51,10 @@ static func input_examples(page, path: String, multiline: bool, task: bool) -> v
 		compact.toggled.connect(func(enabled: bool): field.compact = enabled; locked.compact = enabled)
 
 static func shell_scene(page, path: String, parent: Node, properties: Dictionary = {}) -> Node:
-	var configured := properties.duplicate()
-	configured["theme"] = preload("res://rookframe/ui/menu/MenuTheme.tres")
-	var control = page.scene(path, parent, configured)
-	control.set_meta("showcase_shell_recipe", true)
-	return control
-
-static func shell_materials(page, parent: Node) -> void:
-	var choices := OptionButton.new()
-	choices.accessibility_name = "Auxiliary shell appearance"
-	choices.custom_minimum_size.y = 44
-	choices.add_item("Fantasy appearance")
-	choices.add_item("Cyberpunk appearance")
-	parent.add_child(choices)
-	choices.item_selected.connect(func(index: int):
-		var material: Theme = load("res://rookframe/ui/menu/MenuTheme.tres" if index == 0 else "res://rookframe/ui/menu/cyberpunk/CyberpunkTheme.tres")
-		for control in page.find_children("*", "Control", true, false):
-			if control.has_meta("showcase_shell_recipe"): control.theme = material
-	)
+	return page.scene(path, parent, properties)
 
 static func menu_button_examples(page, path: String, title: String, dangerous: bool = false) -> void:
-	var main = page.section("Activation", "An auxiliary shell recipe. Compare Fantasy and Cyberpunk appearance, then try pointer activation, Tab focus and Enter or Space.")
-	shell_materials(page, main)
+	var main = page.section("Activation", "Try pointer activation, Tab focus and Enter or Space.")
 	var status = page.note(main, "No action requested.")
 	var control = shell_scene(page, path, main, {"text": title})
 	control.pressed.connect(func(): status.text = "Confirmation requested for: " + title if dangerous else "Requested: " + title)

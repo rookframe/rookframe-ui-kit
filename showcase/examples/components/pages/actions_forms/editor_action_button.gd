@@ -4,7 +4,6 @@ const Demo = preload("res://examples/components/pages/actions_forms/support.gd")
 
 static func build(page) -> void:
 	var main = page.section("Primary and standard", "Related commands keep independent behavior and native source order.")
-	Demo.shell_materials(page, main)
 	var actions = page.flow(main)
 	var status = page.note(main, "No editor action requested.")
 	var save = Demo.shell_scene(page, "res://rookframe/ui/editor/EditorActionButton.tscn", actions, {"text": "Save scene", "icon": load("res://rookframe/ui/icons/check.svg")})
