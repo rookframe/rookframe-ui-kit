@@ -7,5 +7,5 @@
     "fonts": "workspace:*",
     "shell-common": "workspace:*"
   },
-  "theme": "res://rookframe/ui/menu/MenuTheme.tres"
+  "theme": "res://rookframe/ui/themes/fantasy/theme.tres"
 }

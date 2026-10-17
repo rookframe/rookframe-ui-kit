@@ -1,7 +1,12 @@
 [gd_scene format=3]
 
+
+[ext_resource type="Script" path="res://rookframe/ui/_internal/presentation/bind_hboxcontainer.gd" id="presentation_script"]
+
 [node name="SummaryStat" type="HBoxContainer"]
+script = ExtResource("presentation_script")
 layout_mode = 2
+
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 2

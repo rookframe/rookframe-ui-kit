@@ -30,3 +30,7 @@ func _refresh() -> void:
 		value.visible = not value_text.is_empty()
 	accessibility_name = key_text
 	accessibility_description = value_text
+
+
+func _enter_tree() -> void:
+	preload("res://rookframe/ui/_internal/presentation/binding.gd").attach(self)

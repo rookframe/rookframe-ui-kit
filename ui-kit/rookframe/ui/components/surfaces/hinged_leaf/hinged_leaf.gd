@@ -1,4 +1,5 @@
 extends Control
+const Appearance = preload("res://rookframe/ui/_internal/presentation/appearance.gd")
 ## A leather leaf with persistent bindings and ordinary, live Godot Controls.
 ## Author children in Surface/Viewport/Root/Ink/Content, or use get_content().
 ## Position and size this Control normally; the hinge folds toward its lower edge.
@@ -20,6 +21,7 @@ var _generation := 0
 var _progress := 0.0
 var _depth := 0.0
 var _jolt := 0.0
+var _content_theme: Theme
 @onready var _surface: SubViewportContainer = $Surface
 @onready var _source: SubViewport = $Surface/Viewport
 @onready var _root: Control = $Surface/Viewport/Root
@@ -36,6 +38,7 @@ func get_content() -> Control:
 	return $Surface/Viewport/Root/Ink/Content
 
 func _ready() -> void:
+	_inherit_content_theme()
 	$Motion/Hinge/Leather/Face.material_override.albedo_texture = _source.get_texture()
 	_image.texture = _render.get_texture()
 	resized.connect(_layout)
@@ -250,7 +253,31 @@ func _exit_tree() -> void:
 	if not is_zero_approx(_jolt): reaction_changed.emit(0.0)
 
 func _binding_tint(_extension: float) -> Color:
+	if Appearance.has_hook(self, &"_binding_tint"):
+		return Appearance.invoke(self, &"_binding_tint", [_extension])
 	return Color.WHITE
 
 func _set_ink_progress(progress: float) -> void:
 	if _ink != null: _ink.set_shader_parameter("progress", progress)
+
+
+func _enter_tree() -> void:
+	preload("res://rookframe/ui/_internal/presentation/binding.gd").attach(self)
+
+func _presentation_will_change() -> void:
+	_generation += 1
+	if _motion != null and _motion.is_valid():
+		_motion.kill()
+	animating = false
+
+func _presentation_changed() -> void:
+	_ink = $Surface/Viewport/Root/Ink.material
+	_inherit_content_theme()
+	if is_open: _pose(1.0)
+	else: _folded()
+
+func _inherit_content_theme() -> void:
+	var content := get_content()
+	if content.theme == null or content.theme == _content_theme:
+		_content_theme = Appearance.owning_theme(self)
+		content.theme = _content_theme

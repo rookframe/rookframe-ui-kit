@@ -1,6 +1,6 @@
 extends Control
 ## F6 this scene: the first section is authored; additional sections use the public slots.
-const SECTION = preload("res://rookframe/ui/silkbound-ledger/components/surfaces/action_panel/action_section.tscn")
+const SECTION = preload("res://rookframe/ui/components/surfaces/action_panel/action_section.tscn")
 const LINE_HEIGHT = preload("res://rookframe/ui/theme/silkbound_line_height.gd")
 @onready var panel = %Panel
 

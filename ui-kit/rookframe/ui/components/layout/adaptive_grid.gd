@@ -42,3 +42,7 @@ func _update_columns() -> void:
 		return
 	columns = next_columns
 	column_count_changed.emit(columns)
+
+
+func _enter_tree() -> void:
+	preload("res://rookframe/ui/_internal/presentation/binding.gd").attach(self)

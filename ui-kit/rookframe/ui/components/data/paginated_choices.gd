@@ -1,5 +1,6 @@
 @tool
 extends VBoxContainer
+const Appearance = preload("res://rookframe/ui/_internal/presentation/appearance.gd")
 const Records = preload("res://rookframe/ui/_internal/interaction/records.gd")
 const Focus = preload("res://rookframe/ui/_internal/interaction/focus.gd")
 @export var focus_fallback: Control
@@ -7,10 +8,12 @@ var _view_entries: Array[Dictionary] = []
 var _view_rows: Array = []
 var _visible_ids: Variant = null
 var _focus_position := -1
+@export var spaced_range := false
 
 var _ink := preload("res://rookframe/ui/_internal/surfaces/content_reveal.gd").new()
 @export var reveal_shader: Shader:
 	set(value):
+		_ink.finish()
 		reveal_shader = value
 		_ink.shader = value
 @export var reduced_motion := false
@@ -69,6 +72,7 @@ func focus_entry(id: String) -> bool:
 	return false
 
 func _enter_tree() -> void:
+	preload("res://rookframe/ui/_internal/presentation/binding.gd").attach(self)
 	_queue_fit()
 
 func _ready() -> void:
@@ -204,6 +208,9 @@ func _page_for_entry(index: int) -> int:
 	return 0
 
 func _draw() -> void:
+	if Appearance.has_hook(self, &"_draw"):
+		Appearance.invoke(self, &"_draw", [])
+		return
 	pass
 
 func _show_page() -> void:
@@ -224,12 +231,16 @@ func _show_page() -> void:
 
 
 func _range_format() -> String:
+	if Appearance.has_hook(self, &"_range_format"):
+		return Appearance.invoke(self, &"_range_format", [])
 	return "%d–%d of %d"
 
 func _exit_tree() -> void:
 	_ink.finish()
 
 func _arrange_rows() -> Vector3:
+	if Appearance.has_hook(self, &"_arrange_rows"):
+		return Appearance.invoke(self, &"_arrange_rows", [])
 	var grid := get_node(^"Area/Rows") as GridContainer
 	grid.columns = columns
 	get_node(^"Pager/FooterContent").visible = get_node(^"Pager/FooterContent").get_child_count() > 0
@@ -238,6 +249,9 @@ func _arrange_rows() -> Vector3:
 	return Vector3(44, 0, 0)
 
 func _style_entry(row: Control, entry: Dictionary, selected_id: String) -> void:
+	if Appearance.has_hook(self, &"_style_entry"):
+		Appearance.invoke(self, &"_style_entry", [row, entry, selected_id])
+		return
 	pass
 
 ## Filter the view without replacing authoritative records or domain selection.

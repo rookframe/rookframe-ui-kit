@@ -1,8 +1,13 @@
 [gd_scene format=3]
 
+
+[ext_resource type="Script" path="res://rookframe/ui/_internal/presentation/bind_vboxcontainer.gd" id="presentation_script"]
+
 [node name="SummaryPair" type="VBoxContainer"]
+script = ExtResource("presentation_script")
 layout_mode = 2
 size_flags_horizontal = 3
+
 
 [node name="Inset" type="MarginContainer" parent="."]
 layout_mode = 2

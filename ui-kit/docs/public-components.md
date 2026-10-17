@@ -22,8 +22,10 @@ instantiate native nodes, while `.tres` entries load native grouping resources.
 
 Components that create child scenes expose native PackedScene properties such as
 `row_scene`, `stat_scene`, `step_scene`, `visual_scene` and `tooltip_scene` where
-applicable. Defaults point to the unthemed core scene. Skin variants supply their
-corresponding inherited scene; callers keep the documented child/slot contract.
+applicable. Defaults point to the unthemed core scene. The selected canonical Theme supplies optional appearance to these same core
+scenes; callers keep the documented child/slot contract. Explicit caller-provided
+PackedScenes remain supported. Theme-specific inherited scenes are compatibility
+entry points, not required for activation.
 `reveal_shader` and the action drop sequence's `ink_shader` default to null.
 Without optional shaders, presentation settles immediately without applying an
 effect. Input, data, identity, signals and reduced-motion endpoints remain native.

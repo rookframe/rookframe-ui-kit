@@ -39,3 +39,7 @@ func _refresh() -> void:
 	if detail != null:
 		detail.text = detail_text
 		detail.visible = not detail_text.is_empty()
+
+
+func _enter_tree() -> void:
+	preload("res://rookframe/ui/_internal/presentation/binding.gd").attach(self)

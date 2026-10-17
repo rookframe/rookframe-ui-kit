@@ -1,5 +1,6 @@
 @tool
 extends PanelContainer
+const Appearance = preload("res://rookframe/ui/_internal/presentation/appearance.gd")
 
 ## Compact in-place status with semantic tone, wrapping copy, optional actions,
 ## and optional dismissal.
@@ -84,4 +85,13 @@ func _refresh() -> void:
 	accessibility_description = description
 
 func _tone_color() -> Color:
+	if Appearance.has_hook(self, &"_tone_color"):
+		return Appearance.invoke(self, &"_tone_color", [])
 	return get_theme_color("font_color", "Label")
+
+
+func _enter_tree() -> void:
+	preload("res://rookframe/ui/_internal/presentation/binding.gd").attach(self)
+
+func _presentation_changed() -> void:
+	_refresh()

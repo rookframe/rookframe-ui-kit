@@ -5,5 +5,6 @@
   "dependencies": {
     "ui-kit": "workspace:*",
     "fonts": "workspace:*"
-  }
+  },
+  "theme": "res://rookframe/ui/themes/silkbound-ledger/theme.tres"
 }

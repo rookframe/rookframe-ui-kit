@@ -1,5 +1,5 @@
 extends Control
-## Native comparison of the public unthemed scenes and explicit optional skins.
+## Identical public component scenes with native defaults or a selected Theme.
 func _ready() -> void:
 	var scroll := ScrollContainer.new()
 	add_child(scroll)
@@ -10,11 +10,13 @@ func _ready() -> void:
 	for themed in [false, true]:
 		var column := VBoxContainer.new()
 		column.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		if themed:
+			column.theme = preload("res://rookframe/ui/themes/silkbound-ledger/theme.tres")
 		columns.add_child(column)
 		var heading := Label.new()
 		heading.text = "Silkbound Ledger" if themed else "Native defaults"
 		column.add_child(heading)
-		var prefix := "res://rookframe/ui/" + ("silkbound-ledger/" if themed else "")
+		var prefix := "res://rookframe/ui/"
 		var field = load(prefix + "components/forms/text_field.tscn").instantiate()
 		field.label_text = "Character name"
 		field.value = "The archivist"

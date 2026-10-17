@@ -1,8 +1,10 @@
 @tool
 extends Control
+const Appearance = preload("res://rookframe/ui/_internal/presentation/appearance.gd")
 var _ink := preload("res://rookframe/ui/_internal/surfaces/content_reveal.gd").new()
 @export var reveal_shader: Shader:
 	set(value):
+		_ink.finish()
 		reveal_shader = value
 		_ink.shader = value
 @export var reduced_motion := false
@@ -10,6 +12,7 @@ var _ink := preload("res://rookframe/ui/_internal/surfaces/content_reveal.gd").n
 ## Compose a single Container under Area; no wheel or drag scrolling is used.
 const TEXT_FIELD = preload("res://rookframe/ui/components/forms/text_field.gd")
 const TEXT_AREA = preload("res://rookframe/ui/components/forms/text_area.gd")
+@export var decorated_pager := false
 
 @export var content_inset_left := 0
 
@@ -44,6 +47,7 @@ func get_pager() -> HBoxContainer:
 	return _pager
 
 func _enter_tree() -> void:
+	preload("res://rookframe/ui/_internal/presentation/binding.gd").attach(self)
 	_focus_viewport = get_viewport()
 	if not _focus_viewport.gui_focus_changed.is_connected(_reveal_focus):
 		_focus_viewport.gui_focus_changed.connect(_reveal_focus)
@@ -201,7 +205,13 @@ func _visibility_changed() -> void:
 	refresh()
 
 func _draw() -> void:
+	if Appearance.has_hook(self, &"_draw"):
+		Appearance.invoke(self, &"_draw", [])
+		return
 	pass
 
 func _style_pager() -> void:
+	if Appearance.has_hook(self, &"_style_pager"):
+		Appearance.invoke(self, &"_style_pager", [])
+		return
 	pass

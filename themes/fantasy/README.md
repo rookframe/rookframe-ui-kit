@@ -10,7 +10,12 @@ Install from the monorepo root:
 python3 tools/workspace.py install --destination /path/to/godot-project --theme fantasy
 ```
 
-Assign `res://rookframe/ui/menu/MenuTheme.tres` to the owning Control.
+Assign `res://rookframe/ui/themes/fantasy/theme.tres` to the owning Control
+in code or the Inspector. Use the same `res://rookframe/ui/components/...` scenes
+as every other theme. The shared native Theme entry wraps this package's existing
+mapping compiler. Installation does not activate it; hosts own selection and
+persistence. `res://rookframe/ui/menu/MenuTheme.tres` remains a compatibility resource.
+See [the common activation contract](../../ui-kit/docs/world-theme-styling.md).
 Runtime paths and existing UIDs are preserved; resources are merged into the
 consumer's `rookframe/ui/`. Review this package through `../../showcase`.
 See the [recipe contract](../../ui-kit/docs/native-controls-and-recipes.md).

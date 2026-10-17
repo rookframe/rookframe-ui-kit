@@ -135,3 +135,7 @@ func _popup_visibility_changed() -> void:
 		get_popup().max_size = Vector2i.ZERO
 		if is_visible_in_tree() and not disabled:
 			grab_focus()
+
+
+func _enter_tree() -> void:
+	preload("res://rookframe/ui/_internal/presentation/binding.gd").attach(self)

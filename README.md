@@ -16,6 +16,17 @@ resources with stock Godot styling; separate examples exercise optional themes.
 `themes/` contains one theme package per folder. Shared optional dependencies
 live in `shared/`; core resources and contracts contain no concrete theme references.
 
+Activate any installed appearance with the same native Godot assignment:
+
+```gdscript
+ui_root.theme = load("res://rookframe/ui/themes/silkbound-ledger/theme.tres")
+```
+
+Replace `silkbound-ledger` with `fantasy` or `cyberpunk`. Keep using the shared
+`res://rookframe/ui/components/...` scenes, including rich material/motion
+components. Installation does not activate a theme. See the
+[activation contract](ui-kit/docs/world-theme-styling.md).
+
 ## Run the showcase
 
 Use Godot 4.7 and Python 3.9+ from the repository root:
@@ -48,10 +59,10 @@ python3 tools/workspace.py install --destination /path/to/godot-project --theme 
 python3 tools/workspace.py install --destination /path/to/godot-project --theme fantasy --theme cyberpunk
 ```
 
-The installer copies runtime resources and legal notices only. Base components stay unthemed even when a theme is installed. For Silkbound,
-instance the corresponding scene under `res://rookframe/ui/silkbound-ledger/`
-(for example `silkbound-ledger/components/forms/text_field.tscn`). Native Theme
-resources and licensed assets retain their previous installed paths. Installed paths
+The installer copies runtime resources and legal notices only. Components use
+native defaults until the host assigns an installed canonical Theme. Keep using
+the core scenes for every appearance. Existing inherited scene paths, native Theme
+resources and licensed assets remain compatibility entry points. Installed paths
 remain `res://rookframe/ui/`; source folders are package boundaries, not new
 Godot resource prefixes. Existing UIDs and asset licenses are retained.
 See [v2 migration steps](docs/migration-to-v2.md) for the breaking path and property changes.

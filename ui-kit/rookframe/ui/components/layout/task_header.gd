@@ -56,3 +56,7 @@ func _refresh() -> void:
 	if subtitle_label != null:
 		subtitle_label.text = subtitle
 		subtitle_label.visible = not subtitle.is_empty()
+
+
+func _enter_tree() -> void:
+	preload("res://rookframe/ui/_internal/presentation/binding.gd").attach(self)

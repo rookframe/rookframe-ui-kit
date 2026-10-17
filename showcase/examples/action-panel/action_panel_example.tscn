@@ -1,8 +1,8 @@
 [gd_scene format=3]
 [ext_resource type="Script" path="res://examples/action-panel/action_panel_example.gd" id="example"]
-[ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/components/surfaces/action_panel/action_panel.tscn" id="panel"]
-[ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/components/surfaces/action_panel/action_section.tscn" id="section"]
-[ext_resource type="Theme" path="res://rookframe/ui/theme/silkbound_theme.tres" id="theme"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/components/surfaces/action_panel/action_panel.tscn" id="panel"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/components/surfaces/action_panel/action_section.tscn" id="section"]
+[ext_resource type="Theme" path="res://rookframe/ui/themes/silkbound-ledger/theme.tres" id="theme"]
 [ext_resource type="Texture2D" path="res://rookframe/ui/icons/dice.svg" id="icon"]
 
 [node name="ActionPanelExample" type="Control"]

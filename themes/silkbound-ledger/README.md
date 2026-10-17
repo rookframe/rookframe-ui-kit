@@ -6,17 +6,18 @@ Optional appearance for the unthemed Rookframe UI Kit. Install from the reposito
 python3 tools/workspace.py install --destination /path/to/project --theme silkbound-ledger
 ```
 
-Instance `res://rookframe/ui/silkbound-ledger/components/...` instead of the
-corresponding `res://rookframe/ui/components/...` scene. These are native Godot
-inherited scenes: the core owns node composition, slots, signals, focus, data and
-input; this package owns Theme assignments, scene overrides and presentation
-subclasses. Exported `row_scene`, `step_scene` and similar PackedScene properties
-select themed runtime-created children without adding core dependencies.
+Assign `res://rookframe/ui/themes/silkbound-ledger/theme.tres` to the owning
+Control, in code or the Inspector. Instance the ordinary
+`res://rookframe/ui/components/...` scenes. The Theme supplies native styling,
+leather surfaces, bindings, shaders and responsive presentation through the shared
+component hooks. Runtime-created children inherit the selection too.
 
-For native Controls, assign `res://rookframe/ui/theme/silkbound_theme.tres` or
-`action_panel_theme.tres` to the owning Control. A Theme alone supplies native
-styles; use the inherited component scene for decoration and responsive skin
-hooks. Installation never changes or globally themes the base scenes.
+The package retains its existing native Themes, inherited scene paths and script
+UIDs for compatibility. Inherited scenes also author the static appearance
+properties used by the canonical resource; presentation strategies hold the
+existing visual methods. Core behavior and live content are never replaced.
+Installation does not activate a Theme. Hosts own selection and persistence.
+See [the common activation contract](../../ui-kit/docs/world-theme-styling.md).
 
 Material resources, fonts, tokens, licenses and existing UIDs retain their
 installed paths. Shared licensed fonts come from the optional `fonts` package.

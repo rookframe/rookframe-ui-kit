@@ -62,3 +62,7 @@ func _refresh() -> void:
 		facts.visible = facts_visible
 	if actions != null:
 		actions.visible = actions_visible
+
+
+func _enter_tree() -> void:
+	preload("res://rookframe/ui/_internal/presentation/binding.gd").attach(self)

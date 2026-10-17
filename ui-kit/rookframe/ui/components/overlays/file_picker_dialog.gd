@@ -1,5 +1,6 @@
 @tool
 extends Window
+const Appearance = preload("res://rookframe/ui/_internal/presentation/appearance.gd")
 
 ## Rookframe file selection with native Godot focus, keyboard, and filesystem APIs.
 ##
@@ -56,6 +57,7 @@ var _history_index := -1
 var _ink := preload("res://rookframe/ui/_internal/surfaces/content_reveal.gd").new()
 @export var reveal_shader: Shader:
 	set(value):
+		_ink.finish()
 		reveal_shader = value
 		_ink.shader = value
 
@@ -428,4 +430,11 @@ func _exit_tree() -> void:
 	_ink.finish()
 
 func _style_spacing(compact: bool) -> void:
+	if Appearance.has_hook(self, &"_style_spacing"):
+		Appearance.invoke(self, &"_style_spacing", [compact])
+		return
 	pass
+
+
+func _enter_tree() -> void:
+	preload("res://rookframe/ui/_internal/presentation/binding.gd").attach(self)

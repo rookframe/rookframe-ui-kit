@@ -33,3 +33,7 @@ func _notification(what: int) -> void:
 	if what == NOTIFICATION_THEME_CHANGED and is_node_ready() and not _refresh_pending:
 		_refresh_pending = true
 		_refresh.call_deferred()
+
+
+func _enter_tree() -> void:
+	preload("res://rookframe/ui/_internal/presentation/binding.gd").attach(self)

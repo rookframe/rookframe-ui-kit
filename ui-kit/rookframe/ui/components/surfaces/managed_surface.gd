@@ -258,3 +258,7 @@ func _refresh() -> void:
 		scroll.scroll_vertical = roundi(state.scroll_offset)
 	accessibility_name = surface_title
 	accessibility_description = "Full-viewport task" if full_viewport else "Managed surface with one scrolling task body"
+
+
+func _enter_tree() -> void:
+	preload("res://rookframe/ui/_internal/presentation/binding.gd").attach(self)

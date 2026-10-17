@@ -53,3 +53,7 @@ func _refresh() -> void:
 	accessibility_name = title
 	accessibility_description = description
 
+
+
+func _enter_tree() -> void:
+	preload("res://rookframe/ui/_internal/presentation/binding.gd").attach(self)

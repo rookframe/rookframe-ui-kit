@@ -29,3 +29,7 @@ func _refresh() -> void:
 	if label != null:
 		label.text = label_text
 	accessibility_name = label_text
+
+
+func _enter_tree() -> void:
+	preload("res://rookframe/ui/_internal/presentation/binding.gd").attach(self)

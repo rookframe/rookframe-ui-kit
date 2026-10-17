@@ -1,9 +1,7 @@
 @tool
 extends "res://rookframe/ui/components/feedback/notice.gd"
-
-const TONE_COLORS := [
-	Color("d0be8e"), Color("d0be8e"), Color("a9c4b6"), Color("ff817a"),
-]
+const PresentationStyle = preload("res://rookframe/ui/themes/silkbound-ledger/presentation/notice.gd")
+var _skin = PresentationStyle.new()
 
 func _tone_color() -> Color:
-	return TONE_COLORS[tone]
+	return _skin._tone_color(self)

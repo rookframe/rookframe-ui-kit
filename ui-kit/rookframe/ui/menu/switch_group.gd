@@ -60,3 +60,7 @@ func _fit() -> void:
 	var row_width := count * width + maxi(0, count - 1) * options.get_theme_constant("separation")
 	# Stack at equality too: a native row can temporarily hold its parent's minimum.
 	options.vertical = count > 1 and available <= row_width
+
+
+func _enter_tree() -> void:
+	preload("res://rookframe/ui/_internal/presentation/binding.gd").attach(self)

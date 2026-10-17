@@ -1,5 +1,6 @@
 @tool
 extends MarginContainer
+const Appearance = preload("res://rookframe/ui/_internal/presentation/appearance.gd")
 const Records = preload("res://rookframe/ui/_internal/interaction/records.gd")
 const Focus = preload("res://rookframe/ui/_internal/interaction/focus.gd")
 @export var focus_fallback: Control
@@ -11,6 +12,7 @@ var _focus_position := -1
 var _ink := preload("res://rookframe/ui/_internal/surfaces/content_reveal.gd").new()
 @export var reveal_shader: Shader:
 	set(value):
+		_ink.finish()
 		reveal_shader = value
 		_ink.shader = value
 @export var reduced_motion := false
@@ -256,27 +258,48 @@ func _turn(step: int) -> void:
 	_ink.play(get_node(^"Content/Area"), reduced_motion)
 
 func _draw() -> void:
+	if Appearance.has_hook(self, &"_draw"):
+		Appearance.invoke(self, &"_draw", [])
+		return
 	pass
 
 func _exit_tree() -> void:
 	_ink.finish()
 
 func _style_action(action: Button) -> void:
+	if Appearance.has_hook(self, &"_style_action"):
+		Appearance.invoke(self, &"_style_action", [action])
+		return
 	pass
 
 func _style_collection(phone: bool, tablet: bool) -> void:
+	if Appearance.has_hook(self, &"_style_collection"):
+		Appearance.invoke(self, &"_style_collection", [phone, tablet])
+		return
 	pass
 
 func _style_record(title: Label, subtitle: Label, value: Label, phone: bool, tablet: bool, inventory: bool, entry: Dictionary) -> void:
+	if Appearance.has_hook(self, &"_style_record"):
+		Appearance.invoke(self, &"_style_record", [title, subtitle, value, phone, tablet, inventory, entry])
+		return
 	pass
 
 func _style_action_type(action: Button, phone: bool, tablet: bool) -> void:
+	if Appearance.has_hook(self, &"_style_action_type"):
+		Appearance.invoke(self, &"_style_action_type", [action, phone, tablet])
+		return
 	pass
 
 func _style_grid(grid: GridContainer, phone: bool, tablet: bool) -> void:
+	if Appearance.has_hook(self, &"_style_grid"):
+		Appearance.invoke(self, &"_style_grid", [grid, phone, tablet])
+		return
 	pass
 
 func _style_record_spacing(row: Control, row_inset: MarginContainer, phone: bool, tablet: bool, inventory: bool) -> void:
+	if Appearance.has_hook(self, &"_style_record_spacing"):
+		Appearance.invoke(self, &"_style_record_spacing", [row, row_inset, phone, tablet, inventory])
+		return
 	pass
 
 ## Filter the view without replacing authoritative records or domain selection.
@@ -319,3 +342,7 @@ func _remember_view_focus() -> void:
 	var focused := get_viewport().gui_get_focus_owner()
 	_focus_position = Records.focused_index(_view_rows, focused)
 	_restore_focus = focused if _focus_position >= 0 else null
+
+
+func _enter_tree() -> void:
+	preload("res://rookframe/ui/_internal/presentation/binding.gd").attach(self)

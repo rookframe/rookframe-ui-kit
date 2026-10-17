@@ -42,3 +42,7 @@ func _refresh() -> void:
 		detail.visible = not detail_text.is_empty()
 	accessibility_name = "%s: %s" % [label_text, value_text]
 	accessibility_description = detail_text
+
+
+func _enter_tree() -> void:
+	preload("res://rookframe/ui/_internal/presentation/binding.gd").attach(self)

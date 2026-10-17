@@ -59,14 +59,14 @@ func verify() -> void:
 	root.add_child(lab)
 	await settle()
 	check(lab.sample.recipe == 0, "Default must open Silkbound action leaves")
-	check(lab.sample.surface.scene_file_path == "res://rookframe/ui/silkbound-ledger/components/surfaces/action_panel/action_panel.tscn", "Default must instance production Action Panel")
+	check(lab.sample.surface.scene_file_path == "res://rookframe/ui/components/surfaces/action_panel/action_panel.tscn", "Default must instance production Action Panel")
 	if DisplayServer.get_name() != "headless":
 		await create_timer(1.6).timeout
 		await capture("launcher")
 	lab.options.recipe = 1
 	lab.refresh()
 	await settle()
-	check(lab.sample.hinged.scene_file_path == "res://rookframe/ui/silkbound-ledger/components/surfaces/hinged_leaf/hinged_leaf.tscn", "HUD must instance production hinged leaf")
+	check(lab.sample.hinged.scene_file_path == "res://rookframe/ui/components/surfaces/hinged_leaf/hinged_leaf.tscn", "HUD must instance production hinged leaf")
 	var pause: CheckButton
 	var replay: Button
 	for button in lab.find_children("*", "Button", true, false):

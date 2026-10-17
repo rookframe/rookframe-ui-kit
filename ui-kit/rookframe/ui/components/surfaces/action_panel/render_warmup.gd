@@ -4,6 +4,9 @@ extends SubViewport
 var completed := false
 @export var surface: StyleBox
 
+func _enter_tree() -> void:
+	preload("res://rookframe/ui/_internal/presentation/binding.gd").attach(self)
+
 func _ready() -> void:
 	if surface == null:
 		completed = true

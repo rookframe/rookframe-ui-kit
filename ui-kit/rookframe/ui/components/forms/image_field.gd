@@ -81,3 +81,7 @@ func _refresh() -> void:
 	if error != null:
 		error.text = "Error: %s" % error_text
 		error.visible = not error_text.is_empty()
+
+
+func _enter_tree() -> void:
+	preload("res://rookframe/ui/_internal/presentation/binding.gd").attach(self)

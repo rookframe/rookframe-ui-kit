@@ -1,5 +1,6 @@
 @tool
 extends VBoxContainer
+const Appearance = preload("res://rookframe/ui/_internal/presentation/appearance.gd")
 ## Content-sized linked leaves. Game rules and all interactive children belong to the caller.
 ## Add ordinary Controls to the four slots, in the editor or through the getters.
 @export var animate_open := true
@@ -72,4 +73,17 @@ func _refresh_decoration() -> void:
 	get_node("Connectors").queue_redraw()
 
 func _style_layout(header: MarginContainer) -> void:
+	if Appearance.has_hook(self, &"_style_layout"):
+		Appearance.invoke(self, &"_style_layout", [header])
+		return
 	pass
+
+
+func _enter_tree() -> void:
+	preload("res://rookframe/ui/_internal/presentation/binding.gd").attach(self)
+
+func _presentation_will_change() -> void:
+	get_node("DropMotion").finish()
+
+func _presentation_changed() -> void:
+	_refresh_layout()

@@ -1,5 +1,7 @@
+@tool
 extends "res://rookframe/ui/components/forms/paginated_text_area.gd"
+const PresentationStyle = preload("res://rookframe/ui/themes/silkbound-ledger/presentation/paginated_text_area.gd")
+var _skin = PresentationStyle.new()
 
 func _style_editor() -> void:
-	_editor.add_theme_font_size_override("font_size", 16 if compact else 20)
-	_editor.add_theme_constant_override("line_spacing", 6 if compact else 10)
+	_skin._style_editor(self)

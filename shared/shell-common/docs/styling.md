@@ -1,11 +1,13 @@
 # Shared Fantasy and Cyberpunk styling
 
-The optional `themes/fantasy` and `themes/cyberpunk` packages supply the public
-`res://rookframe/ui/menu/MenuTheme.tres` and
-`res://rookframe/ui/menu/cyberpunk/CyberpunkTheme.tres` own their complete native
-styling, including the Worlds list and hub and escape menu. Consumers
-assign these Theme resources directly; they do not subclass the compiler or copy
-palettes, Materials or Theme mappings into an application.
+The optional `themes/fantasy` and `themes/cyberpunk` packages expose
+`res://rookframe/ui/themes/fantasy/theme.tres` and
+`res://rookframe/ui/themes/cyberpunk/theme.tres`. Assign either resource to the
+owning Control's native `theme` property, in code or the Inspector. They supply
+the complete native styling, including the Worlds list, hub and escape menu.
+Consumers use shared component scenes. Installation is separate from activation;
+hosts own selection and persistence. The former `menu/MenuTheme.tres` and
+`menu/cyberpunk/CyberpunkTheme.tres` paths remain compatibility resources.
 
 `menu/world_list_theme_map.gd` and `menu/world_toolbar_theme_map.gd` map semantic
 usages to Materials. Each theme's `materials/world_list_materials.gd` supplies its

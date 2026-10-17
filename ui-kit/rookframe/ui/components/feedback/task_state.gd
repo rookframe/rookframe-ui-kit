@@ -1,5 +1,6 @@
 @tool
 extends PanelContainer
+const Appearance = preload("res://rookframe/ui/_internal/presentation/appearance.gd")
 
 ## Whole-task loading, empty, recovery, success, or terminal state region.
 
@@ -95,4 +96,13 @@ func _refresh() -> void:
 	accessibility_description = description
 
 func _state_icon_color() -> Color:
+	if Appearance.has_hook(self, &"_state_icon_color"):
+		return Appearance.invoke(self, &"_state_icon_color", [])
 	return get_theme_color("font_color", "Label")
+
+
+func _enter_tree() -> void:
+	preload("res://rookframe/ui/_internal/presentation/binding.gd").attach(self)
+
+func _presentation_changed() -> void:
+	_refresh()

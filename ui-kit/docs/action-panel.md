@@ -3,7 +3,8 @@
 `res://rookframe/ui/components/surfaces/action_panel/action_panel.tscn` composes
 four regions with ordinary Godot Controls. The caller owns content, signals and
 system rules. The core owns layout, child identity and presentation sequencing.
-The consumer supplies materials, decoration and optional shaders.
+The selected canonical Theme supplies materials, decoration and optional shaders
+through the shared presentation hooks. Use this same scene for every theme.
 
 Instance the scene with Editable Children or use the public getters:
 
@@ -37,8 +38,8 @@ panel.show_footer = false
 
 `components/surfaces/hinged_leaf/hinged_leaf.tscn` contains folding content.
 Author Controls in `Surface/Viewport/Root/Ink/Content` or use `get_content()`.
-Its SubViewport is a separate Theme inheritance boundary; assign the consumer
-Theme to the content when needed.
+The component propagates the selected Theme across its internal SubViewport
+boundary, including to caller-owned content.
 
 `set_open(open, animate = true)` changes the open state. Read `is_open` and
 `animating`, and connect `settled(open)` or `reaction_changed(offset)`.

@@ -2,12 +2,13 @@
 
 Appearance in this reference describes the optional `silkbound-ledger` package.
 Base components are unthemed and use native Godot defaults. To select the described
-skin, install that package and instance the corresponding scene beneath
-`res://rookframe/ui/silkbound-ledger/`. Base component paths/UIDs and behavior stay
+skin, install that package and assign
+`res://rookframe/ui/themes/silkbound-ledger/theme.tres` to the owning Control.
+Use the ordinary `res://rookframe/ui/components/` scenes. Base component paths/UIDs and behavior stay
 public. See [migration notes](../../../docs/migration-to-v2.md).
 
 
-`res://rookframe/ui/silkbound-ledger/components/surfaces/action_panel/action_panel.tscn` composes
+`res://rookframe/ui/components/surfaces/action_panel/action_panel.tscn` composes
 the approved offset leather leaves. It owns appearance, content sizing and paired
 connectors. The caller owns its ordinary Godot Controls, signals and system rules.
 It contains no targeting, dice, difficulty, permission or combat logic.
@@ -50,9 +51,9 @@ then stop. Moving faces avoid resizing unchanged textures and stop drawing at re
 The same scenes work programmatically:
 
 ```gdscript
-var panel = preload("res://rookframe/ui/silkbound-ledger/components/surfaces/action_panel/action_panel.tscn").instantiate()
+var panel = preload("res://rookframe/ui/components/surfaces/action_panel/action_panel.tscn").instantiate()
 add_child(panel)
-var section = preload("res://rookframe/ui/silkbound-ledger/components/surfaces/action_panel/action_section.tscn").instantiate()
+var section = preload("res://rookframe/ui/components/surfaces/action_panel/action_section.tscn").instantiate()
 var rows := VBoxContainer.new()
 section.add_child(rows)
 panel.get_sections_slot().add_child(section)

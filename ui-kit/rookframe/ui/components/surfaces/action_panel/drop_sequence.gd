@@ -28,6 +28,7 @@ func _ready() -> void:
 
 func open() -> void:
 	finish()
+	_ink.shader = ink_shader
 	if ink_shader == null or panel.reduced_motion or not panel.is_visible_in_tree(): return
 	active = true
 	elapsed = 0.0

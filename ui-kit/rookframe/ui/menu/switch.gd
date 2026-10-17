@@ -100,3 +100,7 @@ func _update_state() -> void:
 		var label := _label(role)
 		if label.get_theme_color("font_color") != color:
 			label.add_theme_color_override("font_color", color)
+
+
+func _enter_tree() -> void:
+	preload("res://rookframe/ui/_internal/presentation/binding.gd").attach(self)

@@ -71,3 +71,7 @@ func pose(progress: float) -> void:
 
 func project(point: Vector2) -> Vector2:
 	return camera.unproject_position(hinge.to_global(Vector3(point.x - leaf_size.x / 2.0, -point.y, 1))) * 0.5 - MARGIN
+
+
+func _enter_tree() -> void:
+	preload("res://rookframe/ui/_internal/presentation/binding.gd").attach(self)
