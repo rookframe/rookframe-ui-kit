@@ -1,5 +1,6 @@
 @tool
 extends Control
+const Appearance = preload("res://rookframe/ui/_internal/presentation/appearance.gd")
 ## Full-screen task frame. Consumers own the draft and task content.
 signal back_requested
 signal restart_requested
@@ -91,6 +92,9 @@ func is_tablet() -> bool:
 	return size.x <= 1300 and not is_compact()
 
 func _fit() -> void:
+	if Appearance.has_hook(self, &"_fit"):
+		Appearance.invoke(self, &"_fit", [])
+		return
 	if not is_node_ready(): return
 	get_node(^"Ledger").hide()
 	get_node(^"StageSurface").hide()
@@ -99,6 +103,9 @@ func _fit() -> void:
 	_fit_surfaces.call_deferred()
 
 func _fit_primary() -> void:
+	if Appearance.has_hook(self, &"_fit_primary"):
+		Appearance.invoke(self, &"_fit_primary", [])
+		return
 	pass
 
 func _fit_surfaces() -> void:
@@ -115,17 +122,33 @@ func _fit_surfaces() -> void:
 	queue_redraw()
 
 func _draw() -> void:
+	if Appearance.has_hook(self, &"_draw"):
+		Appearance.invoke(self, &"_draw", [])
+		return
 	pass
 
 func reveal_stage() -> void:
 	if is_inside_tree(): get_node(^"Frame").reveal(get_stage_slot())
 
 func _label_line_height(label: Control, multiplier: float) -> void:
+	if Appearance.has_hook(self, &"_label_line_height"):
+		Appearance.invoke(self, &"_label_line_height", [label, multiplier])
+		return
 	pass
 
 
 func _style_step(step: Control, number: int, index: int) -> void:
+	if Appearance.has_hook(self, &"_style_step"):
+		Appearance.invoke(self, &"_style_step", [step, number, index])
+		return
 	pass
 
 func _style_primary_state(button: Button) -> void:
+	if Appearance.has_hook(self, &"_style_primary_state"):
+		Appearance.invoke(self, &"_style_primary_state", [button])
+		return
 	pass
+
+
+func _enter_tree() -> void:
+	preload("res://rookframe/ui/_internal/presentation/binding.gd").attach(self)

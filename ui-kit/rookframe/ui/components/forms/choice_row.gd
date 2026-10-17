@@ -68,3 +68,7 @@ func _refresh() -> void:
 		state_label.theme_type_variation = &"RookframeSuccess" if button_pressed else &"RookframeStatus"
 	accessibility_name = title
 	accessibility_description = ("Selected. " if button_pressed else "Not selected. ") + description
+
+
+func _enter_tree() -> void:
+	preload("res://rookframe/ui/_internal/presentation/binding.gd").attach(self)

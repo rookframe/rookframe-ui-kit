@@ -1,8 +1,13 @@
 [gd_scene format=3]
+
+[ext_resource type="Script" path="res://rookframe/ui/_internal/presentation/bind_vboxcontainer.gd" id="presentation_script"]
+
 [node name="RecordTooltip" type="VBoxContainer"]
+script = ExtResource("presentation_script")
 custom_minimum_size = Vector2(280, 0)
 offset_right = 280.0
 mouse_filter = 2
+
 [node name="Title" type="Label" parent="."]
 max_lines_visible = 2
 text_overrun_behavior = 3

@@ -1,5 +1,6 @@
 @tool
 extends Window
+const Appearance = preload("res://rookframe/ui/_internal/presentation/appearance.gd")
 
 ## Designed modal composition with native Window focus, modality, and input.
 
@@ -247,6 +248,9 @@ func _configure_compact_layout() -> bool:
 
 
 func _draw_confirmation_underline() -> void:
+	if Appearance.has_hook(self, &"_draw_confirmation_underline"):
+		Appearance.invoke(self, &"_draw_confirmation_underline", [])
+		return
 	pass
 
 func _refresh() -> void:
@@ -286,10 +290,22 @@ func _refresh() -> void:
 	accessibility_description = description
 
 func _style_panels() -> void:
+	if Appearance.has_hook(self, &"_style_panels"):
+		Appearance.invoke(self, &"_style_panels", [])
+		return
 	pass
 
 func _scrim_color() -> Color:
+	if Appearance.has_hook(self, &"_scrim_color"):
+		return Appearance.invoke(self, &"_scrim_color", [])
 	return Color.TRANSPARENT
 
 func _style_compact_layout(compact: bool) -> void:
+	if Appearance.has_hook(self, &"_style_compact_layout"):
+		Appearance.invoke(self, &"_style_compact_layout", [compact])
+		return
 	pass
+
+
+func _enter_tree() -> void:
+	preload("res://rookframe/ui/_internal/presentation/binding.gd").attach(self)

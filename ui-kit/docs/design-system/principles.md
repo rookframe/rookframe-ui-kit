@@ -8,7 +8,13 @@ but assign no Theme, palette, custom font, material or scene-local skin.
 They inherit the consumer's Theme or Godot's defaults. Installing a theme does
 not change the base scenes or select it globally.
 
-Concrete theme resources, presentation subclasses and documentation belong to
+Every optional package exposes `res://rookframe/ui/themes/<theme-name>/theme.tres`,
+a native Theme that supplies both Theme items and optional presentation resources.
+Consumers select it on the owning Control and always use the core component scenes.
+The shared presentation hooks apply existing appearance without replacing behavior,
+content, signals, focus or motion contracts.
+
+Concrete theme resources, presentation strategies and documentation belong to
 their owning packages outside the core. Hosts select appearance explicitly.
 Shared optional dependencies belong outside the directory of theme projects.
 

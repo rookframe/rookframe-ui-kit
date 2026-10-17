@@ -1,8 +1,13 @@
 [gd_scene format=3]
+
+[ext_resource type="Script" path="res://rookframe/ui/_internal/presentation/bind_button.gd" id="presentation_script"]
+
 [node name="MiniatureRow" type="Button"]
+script = ExtResource("presentation_script")
 custom_minimum_size = Vector2(0,64)
 size_flags_horizontal = 3
 toggle_mode = true
+
 
 [node name="Inset" type="MarginContainer" parent="."]
 layout_mode = 1

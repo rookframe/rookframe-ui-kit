@@ -77,6 +77,17 @@ class PackageTests(unittest.TestCase):
                 self.assertIn(base, core)
                 self.assertIn(f'path="res://{base}" id="base"', source.read_text())
 
+    def test_every_theme_has_one_canonical_native_entry(self):
+        for name in ('fantasy', 'cyberpunk', 'silkbound-ledger'):
+            with self.subTest(theme=name):
+                package = ROOT / 'themes' / name
+                manifest = json.loads((package / 'package.godot.json').read_text())
+                path = f'rookframe/ui/themes/{name}/theme.tres'
+                self.assertEqual(manifest['theme'], 'res://' + path)
+                entry = sources([name])[path].read_text()
+                self.assertIn('type="Theme"', entry)
+                self.assertIn('res://rookframe/ui/themes/component_theme.gd', entry)
+
     def test_uninstalling_silkbound_removes_appearance_and_fonts(self):
         with tempfile.TemporaryDirectory() as folder:
             dest = Path(folder)

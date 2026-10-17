@@ -1,0 +1,201 @@
+[gd_resource type="Theme" format=3]
+
+[ext_resource type="Script" path="res://rookframe/ui/themes/component_theme.gd" id="script"]
+[ext_resource type="Theme" path="res://rookframe/ui/theme/silkbound_theme.tres" id="native"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/_internal/content/miniature_browser_row.tscn" id="scene_0"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/_internal/content/miniature_picker_row.tscn" id="scene_1"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/_internal/data/collection_row.tscn" id="scene_2"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/_internal/data/summary_pair.tscn" id="scene_3"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/_internal/data/summary_stat.tscn" id="scene_4"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/_internal/data/task_choice.tscn" id="scene_5"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/_internal/surfaces/wizard_step.tscn" id="scene_6"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/chronicle/ChronicleSurface.tscn" id="scene_7"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/components/content/miniature_browser.tscn" id="scene_8"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/components/content/miniature_picker.tscn" id="scene_9"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/components/data/action_link.tscn" id="scene_10"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/components/data/action_row.tscn" id="scene_11"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/components/data/badge.tscn" id="scene_12"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/components/data/collection.tscn" id="scene_13"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/components/data/disclosure_row.tscn" id="scene_14"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/components/data/icon_action_grid.tscn" id="scene_15"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/components/data/key_value_row.tscn" id="scene_16"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/components/data/metric.tscn" id="scene_17"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/components/data/metric_strip.tscn" id="scene_18"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/components/data/package_card.tscn" id="scene_19"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/components/data/package_row.tscn" id="scene_20"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/components/data/paginated_choices.tscn" id="scene_21"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/components/data/paginated_content.tscn" id="scene_22"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/components/data/roll_row.tscn" id="scene_23"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/components/data/structured_row.tscn" id="scene_24"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/components/data/summary_block.tscn" id="scene_25"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/components/data/world_row.tscn" id="scene_26"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/components/data/world_summary_card.tscn" id="scene_27"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/components/feedback/notice.tscn" id="scene_28"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/components/feedback/record_tooltip.tscn" id="scene_29"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/components/feedback/step_progress.tscn" id="scene_30"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/components/feedback/task_state.tscn" id="scene_31"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/components/forms/choice_row.tscn" id="scene_32"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/components/forms/image_field.tscn" id="scene_33"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/components/forms/package_choice.tscn" id="scene_34"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/components/forms/package_choice_card.tscn" id="scene_35"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/components/forms/paginated_text_area.tscn" id="scene_36"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/components/forms/search_field.tscn" id="scene_37"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/components/forms/task_text_area.tscn" id="scene_38"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/components/forms/task_text_field.tscn" id="scene_39"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/components/forms/text_area.tscn" id="scene_40"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/components/forms/text_field.tscn" id="scene_41"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/components/layout/action_bar.tscn" id="scene_42"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/components/layout/adaptive_grid.tscn" id="scene_43"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/components/layout/adaptive_toolbar.tscn" id="scene_44"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/components/layout/compact_route_heading.tscn" id="scene_45"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/components/layout/responsive_split.tscn" id="scene_46"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/components/layout/section.tscn" id="scene_47"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/components/layout/task_header.tscn" id="scene_48"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/components/overlays/dialog.tscn" id="scene_49"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/components/overlays/file_picker_dialog.tscn" id="scene_50"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/components/surfaces/action_panel/action_panel.tscn" id="scene_51"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/components/surfaces/action_panel/action_section.tscn" id="scene_52"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/components/surfaces/action_panel/drop_leaf.tscn" id="scene_53"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/components/surfaces/action_panel/render_warmup.tscn" id="scene_54"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/components/surfaces/fullscreen_wizard.tscn" id="scene_55"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/components/surfaces/hinged_leaf/binding_pair.tscn" id="scene_56"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/components/surfaces/hinged_leaf/hinged_leaf.tscn" id="scene_57"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/components/surfaces/ledger_frame.tscn" id="scene_58"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/components/surfaces/managed_surface.tscn" id="scene_59"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/editor/EditorActionButton.tscn" id="scene_60"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/editor/EditorSurface.tscn" id="scene_61"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/editor/EditorToolButton.tscn" id="scene_62"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/editor/EditorToolRail.tscn" id="scene_63"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/menu/MenuButtonDestructive.tscn" id="scene_64"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/menu/MenuButtonPrimary.tscn" id="scene_65"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/menu/MenuButtonStandard.tscn" id="scene_66"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/menu/MenuChoice.tscn" id="scene_67"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/menu/MenuSurface.tscn" id="scene_68"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/menu/Switch.tscn" id="scene_69"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/menu/SwitchGroup.tscn" id="scene_70"]
+[ext_resource type="Script" path="res://rookframe/ui/themes/silkbound-ledger/presentation/collection_row.gd" id="hook_0"]
+[ext_resource type="Script" path="res://rookframe/ui/themes/silkbound-ledger/presentation/miniature_browser.gd" id="hook_1"]
+[ext_resource type="Script" path="res://rookframe/ui/themes/silkbound-ledger/presentation/miniature_picker.gd" id="hook_2"]
+[ext_resource type="Script" path="res://rookframe/ui/themes/silkbound-ledger/presentation/collection.gd" id="hook_3"]
+[ext_resource type="Script" path="res://rookframe/ui/themes/silkbound-ledger/presentation/paginated_choices.gd" id="hook_4"]
+[ext_resource type="Script" path="res://rookframe/ui/themes/silkbound-ledger/presentation/paginated_content.gd" id="hook_5"]
+[ext_resource type="Script" path="res://rookframe/ui/themes/silkbound-ledger/presentation/summary_block.gd" id="hook_6"]
+[ext_resource type="Script" path="res://rookframe/ui/themes/silkbound-ledger/presentation/notice.gd" id="hook_7"]
+[ext_resource type="Script" path="res://rookframe/ui/themes/silkbound-ledger/presentation/step_progress.gd" id="hook_8"]
+[ext_resource type="Script" path="res://rookframe/ui/themes/silkbound-ledger/presentation/task_state.gd" id="hook_9"]
+[ext_resource type="Script" path="res://rookframe/ui/themes/silkbound-ledger/presentation/paginated_text_area.gd" id="hook_10"]
+[ext_resource type="Script" path="res://rookframe/ui/themes/silkbound-ledger/presentation/task_text_area.gd" id="hook_11"]
+[ext_resource type="Script" path="res://rookframe/ui/themes/silkbound-ledger/presentation/task_text_field.gd" id="hook_12"]
+[ext_resource type="Script" path="res://rookframe/ui/themes/silkbound-ledger/presentation/dialog.gd" id="hook_13"]
+[ext_resource type="Script" path="res://rookframe/ui/themes/silkbound-ledger/presentation/file_picker_dialog.gd" id="hook_14"]
+[ext_resource type="Script" path="res://rookframe/ui/themes/silkbound-ledger/presentation/action_leaf.gd" id="hook_15"]
+[ext_resource type="Script" path="res://rookframe/ui/themes/silkbound-ledger/presentation/action_panel.gd" id="hook_16"]
+[ext_resource type="Script" path="res://rookframe/ui/themes/silkbound-ledger/presentation/connectors.gd" id="hook_17"]
+[ext_resource type="Script" path="res://rookframe/ui/themes/silkbound-ledger/presentation/fullscreen_wizard.gd" id="hook_18"]
+[ext_resource type="Script" path="res://rookframe/ui/themes/silkbound-ledger/presentation/binding_pair.gd" id="hook_19"]
+[ext_resource type="Script" path="res://rookframe/ui/themes/silkbound-ledger/presentation/hinged_leaf.gd" id="hook_20"]
+[ext_resource type="Script" path="res://rookframe/ui/themes/silkbound-ledger/presentation/ledger_frame.gd" id="hook_21"]
+
+[ext_resource type="Theme" path="res://rookframe/ui/theme/action_panel_theme.tres" id="action_profile"]
+
+[resource]
+script = ExtResource("script")
+native_theme = ExtResource("native")
+supplemental_themes = Array[Theme]([ExtResource("action_profile")])
+presentations = Dictionary[String, PackedScene]({
+"res://rookframe/ui/_internal/content/miniature_browser_row.tscn": ExtResource("scene_0"),
+"res://rookframe/ui/_internal/content/miniature_picker_row.tscn": ExtResource("scene_1"),
+"res://rookframe/ui/_internal/data/collection_row.tscn": ExtResource("scene_2"),
+"res://rookframe/ui/_internal/data/summary_pair.tscn": ExtResource("scene_3"),
+"res://rookframe/ui/_internal/data/summary_stat.tscn": ExtResource("scene_4"),
+"res://rookframe/ui/_internal/data/task_choice.tscn": ExtResource("scene_5"),
+"res://rookframe/ui/_internal/surfaces/wizard_step.tscn": ExtResource("scene_6"),
+"res://rookframe/ui/chronicle/ChronicleSurface.tscn": ExtResource("scene_7"),
+"res://rookframe/ui/components/content/miniature_browser.tscn": ExtResource("scene_8"),
+"res://rookframe/ui/components/content/miniature_picker.tscn": ExtResource("scene_9"),
+"res://rookframe/ui/components/data/action_link.tscn": ExtResource("scene_10"),
+"res://rookframe/ui/components/data/action_row.tscn": ExtResource("scene_11"),
+"res://rookframe/ui/components/data/badge.tscn": ExtResource("scene_12"),
+"res://rookframe/ui/components/data/collection.tscn": ExtResource("scene_13"),
+"res://rookframe/ui/components/data/disclosure_row.tscn": ExtResource("scene_14"),
+"res://rookframe/ui/components/data/icon_action_grid.tscn": ExtResource("scene_15"),
+"res://rookframe/ui/components/data/key_value_row.tscn": ExtResource("scene_16"),
+"res://rookframe/ui/components/data/metric.tscn": ExtResource("scene_17"),
+"res://rookframe/ui/components/data/metric_strip.tscn": ExtResource("scene_18"),
+"res://rookframe/ui/components/data/package_card.tscn": ExtResource("scene_19"),
+"res://rookframe/ui/components/data/package_row.tscn": ExtResource("scene_20"),
+"res://rookframe/ui/components/data/paginated_choices.tscn": ExtResource("scene_21"),
+"res://rookframe/ui/components/data/paginated_content.tscn": ExtResource("scene_22"),
+"res://rookframe/ui/components/data/roll_row.tscn": ExtResource("scene_23"),
+"res://rookframe/ui/components/data/structured_row.tscn": ExtResource("scene_24"),
+"res://rookframe/ui/components/data/summary_block.tscn": ExtResource("scene_25"),
+"res://rookframe/ui/components/data/world_row.tscn": ExtResource("scene_26"),
+"res://rookframe/ui/components/data/world_summary_card.tscn": ExtResource("scene_27"),
+"res://rookframe/ui/components/feedback/notice.tscn": ExtResource("scene_28"),
+"res://rookframe/ui/components/feedback/record_tooltip.tscn": ExtResource("scene_29"),
+"res://rookframe/ui/components/feedback/step_progress.tscn": ExtResource("scene_30"),
+"res://rookframe/ui/components/feedback/task_state.tscn": ExtResource("scene_31"),
+"res://rookframe/ui/components/forms/choice_row.tscn": ExtResource("scene_32"),
+"res://rookframe/ui/components/forms/image_field.tscn": ExtResource("scene_33"),
+"res://rookframe/ui/components/forms/package_choice.tscn": ExtResource("scene_34"),
+"res://rookframe/ui/components/forms/package_choice_card.tscn": ExtResource("scene_35"),
+"res://rookframe/ui/components/forms/paginated_text_area.tscn": ExtResource("scene_36"),
+"res://rookframe/ui/components/forms/search_field.tscn": ExtResource("scene_37"),
+"res://rookframe/ui/components/forms/task_text_area.tscn": ExtResource("scene_38"),
+"res://rookframe/ui/components/forms/task_text_field.tscn": ExtResource("scene_39"),
+"res://rookframe/ui/components/forms/text_area.tscn": ExtResource("scene_40"),
+"res://rookframe/ui/components/forms/text_field.tscn": ExtResource("scene_41"),
+"res://rookframe/ui/components/layout/action_bar.tscn": ExtResource("scene_42"),
+"res://rookframe/ui/components/layout/adaptive_grid.tscn": ExtResource("scene_43"),
+"res://rookframe/ui/components/layout/adaptive_toolbar.tscn": ExtResource("scene_44"),
+"res://rookframe/ui/components/layout/compact_route_heading.tscn": ExtResource("scene_45"),
+"res://rookframe/ui/components/layout/responsive_split.tscn": ExtResource("scene_46"),
+"res://rookframe/ui/components/layout/section.tscn": ExtResource("scene_47"),
+"res://rookframe/ui/components/layout/task_header.tscn": ExtResource("scene_48"),
+"res://rookframe/ui/components/overlays/dialog.tscn": ExtResource("scene_49"),
+"res://rookframe/ui/components/overlays/file_picker_dialog.tscn": ExtResource("scene_50"),
+"res://rookframe/ui/components/surfaces/action_panel/action_panel.tscn": ExtResource("scene_51"),
+"res://rookframe/ui/components/surfaces/action_panel/action_section.tscn": ExtResource("scene_52"),
+"res://rookframe/ui/components/surfaces/action_panel/drop_leaf.tscn": ExtResource("scene_53"),
+"res://rookframe/ui/components/surfaces/action_panel/render_warmup.tscn": ExtResource("scene_54"),
+"res://rookframe/ui/components/surfaces/fullscreen_wizard.tscn": ExtResource("scene_55"),
+"res://rookframe/ui/components/surfaces/hinged_leaf/binding_pair.tscn": ExtResource("scene_56"),
+"res://rookframe/ui/components/surfaces/hinged_leaf/hinged_leaf.tscn": ExtResource("scene_57"),
+"res://rookframe/ui/components/surfaces/ledger_frame.tscn": ExtResource("scene_58"),
+"res://rookframe/ui/components/surfaces/managed_surface.tscn": ExtResource("scene_59"),
+"res://rookframe/ui/editor/EditorActionButton.tscn": ExtResource("scene_60"),
+"res://rookframe/ui/editor/EditorSurface.tscn": ExtResource("scene_61"),
+"res://rookframe/ui/editor/EditorToolButton.tscn": ExtResource("scene_62"),
+"res://rookframe/ui/editor/EditorToolRail.tscn": ExtResource("scene_63"),
+"res://rookframe/ui/menu/MenuButtonDestructive.tscn": ExtResource("scene_64"),
+"res://rookframe/ui/menu/MenuButtonPrimary.tscn": ExtResource("scene_65"),
+"res://rookframe/ui/menu/MenuButtonStandard.tscn": ExtResource("scene_66"),
+"res://rookframe/ui/menu/MenuChoice.tscn": ExtResource("scene_67"),
+"res://rookframe/ui/menu/MenuSurface.tscn": ExtResource("scene_68"),
+"res://rookframe/ui/menu/Switch.tscn": ExtResource("scene_69"),
+"res://rookframe/ui/menu/SwitchGroup.tscn": ExtResource("scene_70")
+})
+presentation_hooks = Dictionary[String, Script]({
+"res://rookframe/ui/_internal/data/collection_row.gd": ExtResource("hook_0"),
+"res://rookframe/ui/components/content/miniature_browser.gd": ExtResource("hook_1"),
+"res://rookframe/ui/components/content/miniature_picker.gd": ExtResource("hook_2"),
+"res://rookframe/ui/components/data/collection.gd": ExtResource("hook_3"),
+"res://rookframe/ui/components/data/paginated_choices.gd": ExtResource("hook_4"),
+"res://rookframe/ui/components/data/paginated_content.gd": ExtResource("hook_5"),
+"res://rookframe/ui/components/data/summary_block.gd": ExtResource("hook_6"),
+"res://rookframe/ui/components/feedback/notice.gd": ExtResource("hook_7"),
+"res://rookframe/ui/components/feedback/step_progress.gd": ExtResource("hook_8"),
+"res://rookframe/ui/components/feedback/task_state.gd": ExtResource("hook_9"),
+"res://rookframe/ui/components/forms/paginated_text_area.gd": ExtResource("hook_10"),
+"res://rookframe/ui/components/forms/task_text_area.gd": ExtResource("hook_11"),
+"res://rookframe/ui/components/forms/task_text_field.gd": ExtResource("hook_12"),
+"res://rookframe/ui/components/overlays/dialog.gd": ExtResource("hook_13"),
+"res://rookframe/ui/components/overlays/file_picker_dialog.gd": ExtResource("hook_14"),
+"res://rookframe/ui/components/surfaces/action_panel/action_leaf.gd": ExtResource("hook_15"),
+"res://rookframe/ui/components/surfaces/action_panel/action_panel.gd": ExtResource("hook_16"),
+"res://rookframe/ui/components/surfaces/action_panel/connectors.gd": ExtResource("hook_17"),
+"res://rookframe/ui/components/surfaces/fullscreen_wizard.gd": ExtResource("hook_18"),
+"res://rookframe/ui/components/surfaces/hinged_leaf/binding_pair.gd": ExtResource("hook_19"),
+"res://rookframe/ui/components/surfaces/hinged_leaf/hinged_leaf.gd": ExtResource("hook_20"),
+"res://rookframe/ui/components/surfaces/ledger_frame.gd": ExtResource("hook_21")
+})

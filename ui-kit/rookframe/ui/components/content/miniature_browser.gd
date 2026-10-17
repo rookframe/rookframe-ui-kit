@@ -1,5 +1,6 @@
 @tool
 extends VBoxContainer
+const Appearance = preload("res://rookframe/ui/_internal/presentation/appearance.gd")
 const Records = preload("res://rookframe/ui/_internal/interaction/records.gd")
 const Focus = preload("res://rookframe/ui/_internal/interaction/focus.gd")
 @export var focus_fallback: Control
@@ -17,6 +18,7 @@ var _matches: Array[int] = []
 var _ink := preload("res://rookframe/ui/_internal/surfaces/content_reveal.gd").new()
 @export var reveal_shader: Shader:
 	set(value):
+		_ink.finish()
 		reveal_shader = value
 		_ink.shader = value
 const ROW = preload("res://rookframe/ui/_internal/content/miniature_browser_row.tscn")
@@ -189,6 +191,9 @@ func focus_search() -> void:
 	get_node(^"Search").grab_focus()
 
 func _style_row(row: Button) -> void:
+	if Appearance.has_hook(self, &"_style_row"):
+		Appearance.invoke(self, &"_style_row", [row])
+		return
 	pass
 
 func focus_entry(id: String) -> bool:
@@ -209,3 +214,7 @@ func restore_state(state: Dictionary) -> void:
 	_filter(get_node(^"Search").text)
 	_page = maxi(0, int(state.get("page", 0)))
 	_arrange()
+
+
+func _enter_tree() -> void:
+	preload("res://rookframe/ui/_internal/presentation/binding.gd").attach(self)

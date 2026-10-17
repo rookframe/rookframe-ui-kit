@@ -12,3 +12,7 @@ func _fit() -> void:
 
 func _preview_added(_child: Node) -> void:
 	get_node(^"Content/Stage/Fallback").hide()
+
+
+func _enter_tree() -> void:
+	preload("res://rookframe/ui/_internal/presentation/binding.gd").attach(self)

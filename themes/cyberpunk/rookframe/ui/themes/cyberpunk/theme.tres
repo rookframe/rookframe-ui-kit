@@ -1,0 +1,8 @@
+[gd_resource type="Theme" format=3]
+
+[ext_resource type="Script" path="res://rookframe/ui/themes/component_theme.gd" id="script"]
+[ext_resource type="Theme" path="res://rookframe/ui/menu/cyberpunk/CyberpunkTheme.tres" id="native"]
+
+[resource]
+script = ExtResource("script")
+native_theme = ExtResource("native")

@@ -19,7 +19,11 @@ func _run() -> void:
 		var base := columns.get_child(0)
 		var skin := columns.get_child(1)
 		if base.get_child(1).theme != null: failures.append("Base field assigns a theme")
-		if skin.get_child(1).theme == null: failures.append("Skin did not opt into a theme")
+		if skin.theme != load("res://rookframe/ui/themes/silkbound-ledger/theme.tres"):
+			failures.append("Skin did not select the canonical Theme")
+		for index in range(1, base.get_child_count()):
+			if base.get_child(index).scene_file_path != skin.get_child(index).scene_file_path:
+				failures.append("Appearance must use the same component scenes")
 		if base.get_child(4)._rows.size() != 8: failures.append("Base choice data was lost")
 		if base.get_child(4)._rows[1].button_pressed != true: failures.append("Base choice selection was lost")
 		# Host fonts must reach nested public slots even with Silkbound installed.

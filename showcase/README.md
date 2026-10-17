@@ -8,7 +8,9 @@ component routes remain available. Menu/editor button routes redirect to the
 shared Button page, which covers primary, secondary and destructive variants,
 normal/compact sizes and text/icon content.
 
-Separate examples consume optional theme packages. Their appearance does not
+Separate examples consume optional theme packages through
+`res://rookframe/ui/themes/<theme-name>/theme.tres` on their owning Control.
+They instance the same public core scenes, including leather/motion presentation. Their appearance does not
 change the component library. System Extension shell selection remains proposed,
 not a released SDK facility; direct Godot Main Menu overrides are unsupported.
 
@@ -75,7 +77,7 @@ consumers of theme mappings, not the Rookframe Main Menu.
 | Authored header/section; programmatic growing sections | `examples/action-panel/action_panel_example.tscn` and `.gd` | `components/surfaces/action_panel/action_panel.tscn` |
 | Action/explanation composition | `examples/laboratory/sample.gd` | Action Panel public slots; native Controls |
 | Hinged category leaf | `examples/laboratory/sample.gd` | `components/surfaces/hinged_leaf/hinged_leaf.tscn` |
-| Read-only ledger composition | `examples/laboratory/sample.gd` | `theme/silkbound_theme.tres`; native Containers/Labels |
+| Read-only ledger composition | `examples/laboratory/sample.gd` | `themes/silkbound-ledger/theme.tres`; native Containers/Labels |
 | Control states and locale fonts | `examples/catalogue/legacy_catalogue.tscn` | Silkbound public scenes and Theme |
 | Auxiliary material variations | `examples/catalogue/visual_catalogue.tscn` | Fantasy/Cyberpunk recipe resources |
 
@@ -94,6 +96,8 @@ godot --headless --path . --script res://tests/component_catalogue_interactions.
 godot --path . --script res://tests/button.gd -- --capture-dir=/absolute/temp/path
 godot --path . --script res://tests/component_catalogue.gd -- --capture-dir=/absolute/temp/path
 godot --path . --script res://tests/specimen.gd -- --capture-dir=/absolute/temp/path
+godot --headless --path . --script res://tests/theme_activation.gd
+godot --headless --path . --script res://tests/theme_state.gd
 godot --headless --path . --script res://tests/current_design_system.gd
 godot --headless --path . --script res://tests/editor_components.gd
 godot --headless --path . --script res://tests/switch.gd

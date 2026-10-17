@@ -1,8 +1,13 @@
 [gd_scene format=3]
 
+
+[ext_resource type="Script" path="res://rookframe/ui/_internal/presentation/bind_panelcontainer.gd" id="presentation_script"]
+
 [node name="EditorToolRail" type="PanelContainer"]
+script = ExtResource("presentation_script")
 theme_type_variation = &"editor_surface_rail"
 mouse_filter = 0
+
 
 [node name="Tools" type="BoxContainer" parent="."]
 layout_mode = 2

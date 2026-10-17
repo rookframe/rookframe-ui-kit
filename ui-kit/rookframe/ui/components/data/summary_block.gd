@@ -1,5 +1,6 @@
 @tool
 extends VBoxContainer
+const Appearance = preload("res://rookframe/ui/_internal/presentation/appearance.gd")
 ## Authored review block with data-driven label/value rows and optional copy.
 const ROW = preload("res://rookframe/ui/_internal/data/summary_pair.tscn")
 @export var row_scene: PackedScene = ROW
@@ -46,4 +47,14 @@ func _fit() -> void:
 
 
 func _fit_presentation() -> void:
+	if Appearance.has_hook(self, &"_fit_presentation"):
+		Appearance.invoke(self, &"_fit_presentation", [])
+		return
 	pass
+
+
+func _enter_tree() -> void:
+	preload("res://rookframe/ui/_internal/presentation/binding.gd").attach(self)
+
+func _presentation_changed() -> void:
+	_fit()

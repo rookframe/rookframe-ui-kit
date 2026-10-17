@@ -1,5 +1,6 @@
 @tool
 extends VBoxContainer
+const Appearance = preload("res://rookframe/ui/_internal/presentation/appearance.gd")
 
 ## Responsive two-to-eight-step wizard progress. Wide layouts render a
 ## connected step rail; compact layouts keep the current step and completion.
@@ -165,6 +166,8 @@ func _connector(node_name: String) -> ColorRect:
 
 
 func _connector_color(_complete: bool) -> Color:
+	if Appearance.has_hook(self, &"_connector_color"):
+		return Appearance.invoke(self, &"_connector_color", [_complete])
 	return get_theme_color("font_color", "Label")
 
 
@@ -219,16 +222,33 @@ func _refresh_accessibility(normalized_steps: PackedStringArray, normalized_curr
 	accessibility_description = "Step %d of %d. %s" % [normalized_current, normalized_steps.size(), "; ".join(states)]
 
 func _style_number(number: Label) -> void:
+	if Appearance.has_hook(self, &"_style_number"):
+		Appearance.invoke(self, &"_style_number", [number])
+		return
 	pass
 
 func _style_cell(cell: VBoxContainer) -> void:
+	if Appearance.has_hook(self, &"_style_cell"):
+		Appearance.invoke(self, &"_style_cell", [cell])
+		return
 	pass
 
 func _style_rail(rail: HBoxContainer) -> void:
+	if Appearance.has_hook(self, &"_style_rail"):
+		Appearance.invoke(self, &"_style_rail", [rail])
+		return
 	pass
 
 func _step_icon_color() -> Color:
+	if Appearance.has_hook(self, &"_step_icon_color"):
+		return Appearance.invoke(self, &"_step_icon_color", [])
 	return get_theme_color("font_color", "Label")
 
 func _step_number_color(state_name: String) -> Color:
+	if Appearance.has_hook(self, &"_step_number_color"):
+		return Appearance.invoke(self, &"_step_number_color", [state_name])
 	return get_theme_color("font_color", _label_variation(state_name))
+
+
+func _enter_tree() -> void:
+	preload("res://rookframe/ui/_internal/presentation/binding.gd").attach(self)

@@ -54,3 +54,7 @@ func _refresh() -> void:
 		state_label.theme_type_variation = &"RookframeStatus" if selected else &"RookframeMeta"
 	accessibility_name = package_name
 	accessibility_description = detail_text
+
+
+func _enter_tree() -> void:
+	preload("res://rookframe/ui/_internal/presentation/binding.gd").attach(self)

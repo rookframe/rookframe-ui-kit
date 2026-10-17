@@ -3,9 +3,9 @@ extends SceneTree
 const Catalogue = preload("res://examples/components/catalogue.tscn")
 const THEMES := {
 	"native": "",
-	"ledger": "res://rookframe/ui/theme/silkbound_theme.tres",
-	"fantasy": "res://rookframe/ui/menu/MenuTheme.tres",
-	"cyberpunk": "res://rookframe/ui/menu/cyberpunk/CyberpunkTheme.tres",
+	"ledger": "res://rookframe/ui/themes/silkbound-ledger/theme.tres",
+	"fantasy": "res://rookframe/ui/themes/fantasy/theme.tres",
+	"cyberpunk": "res://rookframe/ui/themes/cyberpunk/theme.tres",
 }
 var failures: Array[String] = []
 var capture_dir := ""

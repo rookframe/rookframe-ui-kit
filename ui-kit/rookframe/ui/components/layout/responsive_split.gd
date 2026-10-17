@@ -59,3 +59,7 @@ func _apply_profile() -> void:
 		return
 	_profile = next_profile
 	layout_profile_changed.emit(_profile)
+
+
+func _enter_tree() -> void:
+	preload("res://rookframe/ui/_internal/presentation/binding.gd").attach(self)

@@ -24,3 +24,7 @@ func apply_inset(control: Control, inset: float) -> void:
 	control.offset_top = inset
 	control.offset_right = -inset
 	control.offset_bottom = -inset
+
+
+func _enter_tree() -> void:
+	preload("res://rookframe/ui/_internal/presentation/binding.gd").attach(self)

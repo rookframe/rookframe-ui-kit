@@ -2,8 +2,9 @@
 
 Appearance in this reference describes the optional `silkbound-ledger` package.
 Base components are unthemed and use native Godot defaults. To select the described
-skin, install that package and instance the corresponding scene beneath
-`res://rookframe/ui/silkbound-ledger/`. Base component paths/UIDs and behavior stay
+skin, install that package and assign
+`res://rookframe/ui/themes/silkbound-ledger/theme.tres` to the owning Control.
+Use the ordinary `res://rookframe/ui/components/` scenes. Base component paths/UIDs and behavior stay
 public. See [migration notes](../../../docs/migration-to-v2.md).
 
 

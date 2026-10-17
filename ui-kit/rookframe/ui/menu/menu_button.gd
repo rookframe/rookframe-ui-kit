@@ -50,6 +50,14 @@ func _refresh_materials() -> void:
 	for slot in SLOTS.values():
 		_targets[slot] = get_theme_stylebox(slot).duplicate()
 	_mode = get_draw_mode()
+	# Native Themes may supply texture/empty styles; only flat faces interpolate.
+	if not _targets[SLOTS[_mode]] is StyleBoxFlat:
+		_face = null
+		for layer in [$Shadow, $Depth, $Surface, $OrnamentLeft, $OrnamentRight, $Engraving]:
+			layer.hide()
+		_configuring = false
+		return
+	$Engraving.show()
 	_face = _targets[SLOTS[_mode]].duplicate()
 	var textured := get_theme_constant("texture_visible") != 0
 	_face.draw_center = not textured
@@ -154,3 +162,7 @@ func _set_face_property(value: Variant, property: String) -> void:
 func _set_ornament_reveal(value: float) -> void:
 	_ornament_reveal = value
 	_layout_art()
+
+
+func _enter_tree() -> void:
+	preload("res://rookframe/ui/_internal/presentation/binding.gd").attach(self)

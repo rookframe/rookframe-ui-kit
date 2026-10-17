@@ -142,3 +142,7 @@ func _refresh() -> void:
 		clear_button.accessibility_name = "Clear %s" % label_text.to_lower()
 		clear_button.tooltip_text = clear_button.accessibility_name
 	_refresh_focus()
+
+
+func _enter_tree() -> void:
+	preload("res://rookframe/ui/_internal/presentation/binding.gd").attach(self)

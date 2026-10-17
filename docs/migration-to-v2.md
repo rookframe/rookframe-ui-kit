@@ -11,9 +11,10 @@ This change removes the old component paths and properties. There are no compati
 
    If you need a theme, add `--theme silkbound-ledger`, `--theme fantasy`, or `--theme cyberpunk`.
    The core components use Godot defaults.
-   To use styled components, select the inherited scenes from the theme package.
-   For Silkbound Ledger, use the prefix `res://rookframe/ui/silkbound-ledger/components/`.
-   For native Controls, assign the required Theme resource to the parent Control.
+   Keep using `res://rookframe/ui/components/` for every theme. Assign
+   `res://rookframe/ui/themes/<theme-name>/theme.tres` to the parent Control.
+   This activates both native styles and richer component presentation. Existing
+   theme-specific scene and Theme paths remain compatibility entry points.
 
 2. Replace the component paths in scenes and scripts with the paths in this table.
 

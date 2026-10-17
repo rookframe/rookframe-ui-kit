@@ -1,21 +1,22 @@
 @tool
 extends "res://rookframe/ui/components/feedback/step_progress.gd"
+const PresentationStyle = preload("res://rookframe/ui/themes/silkbound-ledger/presentation/step_progress.gd")
+var _skin = PresentationStyle.new()
 
 func _style_number(number: Label) -> void:
-	number.add_theme_font_size_override("font_size", 20)
-	preload("res://rookframe/ui/theme/silkbound_line_height.gd").apply(number, 1.1)
+	_skin._style_number(self, number)
 
 func _style_cell(cell: VBoxContainer) -> void:
-	cell.add_theme_constant_override(&"separation", 8)
+	_skin._style_cell(self, cell)
 
 func _style_rail(rail: HBoxContainer) -> void:
-	rail.add_theme_constant_override(&"separation", 6)
+	_skin._style_rail(self, rail)
 
 func _step_icon_color() -> Color:
-	return Color("e7e7dd")
+	return _skin._step_icon_color(self)
 
 func _step_number_color(state_name: String) -> Color:
-	return Color("151719") if state_name == "current" else Color("aebabe")
+	return _skin._step_number_color(self, state_name)
 
 func _connector_color(complete: bool) -> Color:
-	return Color("ceccb3") if complete else Color("3e4346")
+	return _skin._connector_color(self, complete)

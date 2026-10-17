@@ -1,10 +1,10 @@
 extends Control
 ## Composition-only samples. All material and motion comes from the installed kit.
-const PANEL = preload("res://rookframe/ui/silkbound-ledger/components/surfaces/action_panel/action_panel.tscn")
-const SECTION = preload("res://rookframe/ui/silkbound-ledger/components/surfaces/action_panel/action_section.tscn")
-const HINGED = preload("res://rookframe/ui/silkbound-ledger/components/surfaces/hinged_leaf/hinged_leaf.tscn")
-const PANEL_THEME = preload("res://rookframe/ui/theme/action_panel_theme.tres")
-const LEDGER_THEME = preload("res://rookframe/ui/theme/silkbound_theme.tres")
+const PANEL = preload("res://rookframe/ui/components/surfaces/action_panel/action_panel.tscn")
+const SECTION = preload("res://rookframe/ui/components/surfaces/action_panel/action_section.tscn")
+const HINGED = preload("res://rookframe/ui/components/surfaces/hinged_leaf/hinged_leaf.tscn")
+const PANEL_THEME = preload("res://rookframe/ui/themes/silkbound-ledger/theme.tres")
+const LEDGER_THEME = preload("res://rookframe/ui/themes/silkbound-ledger/theme.tres")
 const LINE_HEIGHT = preload("res://rookframe/ui/theme/silkbound_line_height.gd")
 const TITLES = {"en": "Shortsword", "ru": "Короткий меч", "ja": "ショートソード"}
 const CATEGORIES = {"en": ["Abilities", "Attacks", "Powers", "Items", "Features", "Companions", "Recovery"], "ru": ["Характеристики", "Атаки", "Силы", "Предметы", "Особенности", "Спутники", "Отдых"], "ja": ["能力", "攻撃", "魔法", "道具", "特徴", "仲間", "回復"]}
@@ -122,7 +122,6 @@ func _make_hud() -> void:
 	hinged.custom_minimum_size = Vector2(0, 158)
 	surface.add_child(hinged)
 	# A SubViewport is its own Theme inheritance boundary.
-	hinged.get_content().theme = PANEL_THEME
 	var margin := MarginContainer.new()
 	hinged.get_content().add_child(margin)
 	margin.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)

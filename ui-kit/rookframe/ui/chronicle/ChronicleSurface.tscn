@@ -1,5 +1,9 @@
 [gd_scene format=3]
 
+
+[ext_resource type="Script" path="res://rookframe/ui/_internal/presentation/bind_panelcontainer.gd" id="presentation_script"]
+
 [node name="ChronicleSurface" type="PanelContainer"]
+script = ExtResource("presentation_script")
 theme_type_variation = &"chronicle_surface"
 mouse_filter = 0

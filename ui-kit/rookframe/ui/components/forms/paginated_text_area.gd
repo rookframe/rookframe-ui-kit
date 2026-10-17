@@ -1,4 +1,5 @@
 extends Control
+const Appearance = preload("res://rookframe/ui/_internal/presentation/appearance.gd")
 ## A fixed-page notepad composed with native TextEdit and Label shaping.
 ## The value is always the complete text. Reparent get_pager() into the footer.
 signal value_changed(value: String)
@@ -6,6 +7,7 @@ signal value_changed(value: String)
 var _ink := preload("res://rookframe/ui/_internal/surfaces/content_reveal.gd").new()
 @export var reveal_shader: Shader:
 	set(value):
+		_ink.finish()
 		reveal_shader = value
 		_ink.shader = value
 @export_multiline var value := "":
@@ -140,4 +142,11 @@ func _exit_tree() -> void:
 	_ink.finish()
 
 func _style_editor() -> void:
+	if Appearance.has_hook(self, &"_style_editor"):
+		Appearance.invoke(self, &"_style_editor", [])
+		return
 	pass
+
+
+func _enter_tree() -> void:
+	preload("res://rookframe/ui/_internal/presentation/binding.gd").attach(self)

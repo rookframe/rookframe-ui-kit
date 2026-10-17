@@ -1,5 +1,7 @@
 @tool
 extends "res://rookframe/ui/components/forms/task_text_field.gd"
+const PresentationStyle = preload("res://rookframe/ui/themes/silkbound-ledger/presentation/task_text_field.gd")
+var _skin = PresentationStyle.new()
 
 func _style_field() -> void:
-	preload("res://rookframe/ui/_internal/forms/silkbound_task_field.gd").apply(self, compact, false)
+	_skin._style_field(self)

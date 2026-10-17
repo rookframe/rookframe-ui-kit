@@ -1,5 +1,6 @@
 @tool
 extends Control
+const Appearance = preload("res://rookframe/ui/_internal/presentation/appearance.gd")
 ## Full-screen miniature choice; callers own acquisition, previews and saves.
 signal selection_changed(entry: Dictionary)
 signal preview_requested(entry: Dictionary, target: Control)
@@ -59,6 +60,9 @@ func _selected(entry: Dictionary) -> void:
 	selection_changed.emit(entry)
 
 func _arrange() -> void:
+	if Appearance.has_hook(self, &"_arrange"):
+		Appearance.invoke(self, &"_arrange", [])
+		return
 	if is_node_ready(): _fit_frame.call_deferred()
 
 func _fit_frame() -> void:
@@ -71,3 +75,7 @@ func _fit_frame() -> void:
 
 func _text(key: String, fallback: String) -> String:
 	return str(_labels.get(key, fallback))
+
+
+func _enter_tree() -> void:
+	preload("res://rookframe/ui/_internal/presentation/binding.gd").attach(self)

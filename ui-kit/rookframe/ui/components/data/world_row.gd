@@ -41,3 +41,7 @@ func _refresh() -> void:
 		detail_label.text = detail_text
 	accessibility_name = title
 	accessibility_description = ("Selected. " if selected else "Not selected. ") + detail_text
+
+
+func _enter_tree() -> void:
+	preload("res://rookframe/ui/_internal/presentation/binding.gd").attach(self)

@@ -37,3 +37,7 @@ func _refresh() -> void:
 			title_label.remove_theme_font_size_override("font_size")
 	accessibility_name = title
 	accessibility_description = "Navigation action"
+
+
+func _enter_tree() -> void:
+	preload("res://rookframe/ui/_internal/presentation/binding.gd").attach(self)
