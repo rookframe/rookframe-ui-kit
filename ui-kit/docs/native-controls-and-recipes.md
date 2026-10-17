@@ -91,6 +91,9 @@ icon-with-text and icon-only content in both sizes. Native `icon_alignment`, `ex
 `shortcut`, `toggle_mode`, `button_group`, `pressed` and `toggled` remain usable.
 Changing variant, size or inherited Theme retains the same control and selection.
 Destructive actions do not implement confirmation or effects; the host owns them.
+`reduced_motion = false` allows optional theme motion; setting it to `true`
+settles that presentation immediately. Theme changes cancel the old presentation
+and restore its overrides without changing native content or interaction.
 
 The semantic Theme types are `components_button`, `components_button_primary`
 and `components_button_destructive`, with `__compact` for compact size. The
