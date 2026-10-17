@@ -4,7 +4,9 @@ An executable reference for agents implementing Rookframe UI. The component
 library instances core UI Kit resources with synthetic data and stock Godot
 styling. Its preview Theme is Godot's default, including page-owned popups and
 windows. Optional presentation shaders and decoration are absent. All public
-component routes remain available, including the native menu/editor recipes.
+component routes remain available. Menu/editor button routes redirect to the
+shared Button page, which covers primary, secondary and destructive variants,
+normal/compact sizes and text/icon content.
 
 Separate examples consume optional theme packages. Their appearance does not
 change the component library. System Extension shell selection remains proposed,
@@ -39,6 +41,19 @@ Every manifest entry points to its own script under `examples/components/pages/`
 `component_page.gd` supplies shared example framing. When adding a component,
 add a dedicated page with meaningful variants/states and declare the covered
 public resource or native capability in its manifest.
+
+To inspect Button with an optional theme, run this launcher from the workspace
+root. It opens Button and keeps the selected theme when navigating other pages:
+
+```sh
+python3 tools/workspace.py prepare
+godot --path showcase --script res://tests/button.gd -- --preview=ledger
+```
+
+Choose `ledger`, `fantasy`, `cyberpunk` or `native`. The ordinary catalogue launch
+continues to use stock Godot appearance. Omit `--preview` and pass
+`--capture-dir=/absolute/temp/path` to run the automatic theme/size matrix,
+save screenshots and exit.
 
 Open the separate motion laboratory with
 `godot --path . res://examples/laboratory/laboratory.tscn`.
@@ -76,6 +91,7 @@ host integration suites. This project executes no game rules or network actions.
 python3 tools/check_component_pages.py
 godot --headless --path . --script res://tests/component_catalogue.gd
 godot --headless --path . --script res://tests/component_catalogue_interactions.gd
+godot --path . --script res://tests/button.gd -- --capture-dir=/absolute/temp/path
 godot --path . --script res://tests/component_catalogue.gd -- --capture-dir=/absolute/temp/path
 godot --path . --script res://tests/specimen.gd -- --capture-dir=/absolute/temp/path
 godot --headless --path . --script res://tests/current_design_system.gd

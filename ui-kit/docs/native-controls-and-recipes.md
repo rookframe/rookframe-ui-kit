@@ -28,7 +28,7 @@ controls. Group resources are local to each instantiated scene.
 
 | Component | Public resource | Native root or resource | Usage |
 | --- | --- | --- | --- |
-| Button | `actions/button.tscn` | `Button` | Native properties, methods, signals, input and focus behavior remain unchanged. |
+| Button | `actions/button.tscn` | `Button` | `variant = SECONDARY` (`SECONDARY`, `PRIMARY`, `DESTRUCTIVE`), `compact = false`; native text, icon, input, signals and toggle behavior. |
 | Toggle | `actions/toggle.tscn` | `Button` | Native properties, methods, signals, input and focus behavior remain unchanged. |
 | ButtonGroup | `actions/button_group.tscn` | `HFlowContainer` | Native properties, methods, signals, input and focus behavior remain unchanged. |
 | ToggleGroup | `actions/toggle_group.tres` | `ButtonGroup` | Assign one instance to exclusive Toggle buttons. Duplicate per independent group; omit the group for independent toggles. |
@@ -73,6 +73,36 @@ For a tooltip, return an instance of `feedback/tooltip.tscn` with its `text`
 set from the source control's `_make_custom_tooltip(for_text)` override. Godot
 provides the native tooltip popup and lifecycle. The Tooltip showcase page
 contains this small host-side factory.
+
+## Button
+
+Use `components/actions/button.tscn` for menu actions, editor commands and icon
+tools. `variant` selects `SECONDARY` (standard), `PRIMARY` or `DESTRUCTIVE`;
+`compact` / `set_compact(bool)` selects normal or compact size. Normal targets
+start at 52 × 52px and compact targets at 44 × 44px. Native text/icon sizing,
+larger caller minima and the Theme's `minimum_height` can grow these targets.
+Containers own placement and final width.
+
+Use native `text` for a label and `icon` for an optional image. For icon-only
+actions, leave `text` empty, set `icon`, and supply `accessibility_name` and
+`tooltip_text`. Icons center automatically while the label is empty; restoring
+the label restores its previous icon alignment. All three variants support text,
+icon-with-text and icon-only content in both sizes. Native `icon_alignment`, `expand_icon`, `disabled`,
+`shortcut`, `toggle_mode`, `button_group`, `pressed` and `toggled` remain usable.
+Changing variant, size or inherited Theme retains the same control and selection.
+Destructive actions do not implement confirmation or effects; the host owns them.
+
+The semantic Theme types are `components_button`, `components_button_primary`
+and `components_button_destructive`, with `__compact` for compact size. The
+component owns `theme_type_variation`; consumers style these types in a native
+Theme. Without mappings, all variants inherit native Godot Button appearance.
+No palette, font or Theme is installed by the component.
+
+The scene UID remains `uid://nsflvqoc35wn`. Its public behavior script is
+`components/actions/button.gd` (`uid://dthc7uwdw3f2`). The inherited Toggle scene
+also supports these properties. Existing `menu/MenuButton*.tscn` and
+`editor/Editor*Button.tscn` paths remain compatibility recipes for prior
+consumers and optional presentation packages; new compositions use Button.
 
 ## Inputs and choices
 
@@ -218,9 +248,10 @@ states. Run its integration check in the sibling showcase with:
 # Omit --headless and append -- --capture-dir=/tmp/switch to render both themes.
 ```
 
-## Auxiliary shell-theme editor controls
+## Compatibility shell-theme editor controls
 
-These editor recipes use semantic mappings from the consumer Theme.
+These existing editor recipes retain semantic mappings from the consumer Theme.
+Use the shared [Button](#button) for new labelled commands and icon tools.
 
 | Scene under `res://rookframe/ui/editor/` | Use |
 | --- | --- |

@@ -1311,8 +1311,22 @@
       "scene": "res://rookframe/ui/components/actions/button.tscn",
       "sceneUid": "uid://nsflvqoc35wn",
       "rootType": "Button",
-      "contract": "Native properties, methods, signals, input and focus behavior remain unchanged.",
-      "nativeProxy": true
+      "contract": "Native Button input, signals, text, icon and toggle behavior. Normal/compact minimum targets are 52/44px; the consumer Theme supplies semantic appearance. Empty text with an icon creates an icon-only action; provide an accessibility_name and tooltip_text.",
+      "nativeProxy": true,
+      "script": "res://rookframe/ui/components/actions/button.gd",
+      "properties": {
+        "variant": "SECONDARY",
+        "compact": false
+      },
+      "variants": [
+        "SECONDARY",
+        "PRIMARY",
+        "DESTRUCTIVE"
+      ],
+      "methods": [
+        "set_compact(bool)"
+      ],
+      "scriptUid": "uid://dthc7uwdw3f2"
     },
     {
       "name": "Toggle",
@@ -1600,16 +1614,12 @@
   ],
   "currentDesignSystem": {
     "components": [
-      "res://rookframe/ui/menu/MenuButtonPrimary.tscn",
-      "res://rookframe/ui/menu/MenuButtonStandard.tscn",
-      "res://rookframe/ui/menu/MenuButtonDestructive.tscn",
+      "res://rookframe/ui/components/actions/button.tscn",
       "res://rookframe/ui/menu/MenuChoice.tscn",
       "res://rookframe/ui/menu/Switch.tscn",
       "res://rookframe/ui/menu/SwitchGroup.tscn",
       "res://rookframe/ui/menu/MenuSurface.tscn",
       "res://rookframe/ui/components/data/action_row.tscn",
-      "res://rookframe/ui/editor/EditorToolButton.tscn",
-      "res://rookframe/ui/editor/EditorActionButton.tscn",
       "res://rookframe/ui/editor/EditorToolRail.tscn",
       "res://rookframe/ui/editor/EditorSurface.tscn",
       "res://rookframe/ui/chronicle/ChronicleSurface.tscn"
@@ -1690,7 +1700,14 @@
         "menu_world_record": "Single World summary",
         "editor_surface_log": "Compact latest-activity strip"
       }
-    }
+    },
+    "compatibilityScenes": [
+      "res://rookframe/ui/menu/MenuButtonPrimary.tscn",
+      "res://rookframe/ui/menu/MenuButtonStandard.tscn",
+      "res://rookframe/ui/menu/MenuButtonDestructive.tscn",
+      "res://rookframe/ui/editor/EditorToolButton.tscn",
+      "res://rookframe/ui/editor/EditorActionButton.tscn"
+    ]
   },
   "appearance": "Native Godot defaults; no Theme or local skin assigned.",
   "behaviorResources": [

@@ -52,18 +52,3 @@ static func input_examples(page, path: String, multiline: bool, task: bool) -> v
 
 static func shell_scene(page, path: String, parent: Node, properties: Dictionary = {}) -> Node:
 	return page.scene(path, parent, properties)
-
-static func menu_button_examples(page, path: String, title: String, dangerous: bool = false) -> void:
-	var main = page.section("Activation", "Try pointer activation, Tab focus and Enter or Space.")
-	var status = page.note(main, "No action requested.")
-	var control = shell_scene(page, path, main, {"text": title})
-	control.pressed.connect(func(): status.text = "Confirmation requested for: " + title if dangerous else "Requested: " + title)
-	var settings = page.flow(main)
-	page.button(settings, "Focus action", control.grab_focus)
-	var disabled := checkbox(settings, "Disable action")
-	disabled.toggled.connect(func(enabled: bool): control.disabled = enabled)
-	var compact := checkbox(settings, "Compact density")
-	compact.toggled.connect(control.set_compact)
-	var other = page.section("Disabled state", "Unavailable actions keep a readable label and do not activate.")
-	shell_scene(page, path, other, {"text": "Unavailable action", "disabled": true})
-	page.note(other, "Try the enabled example above to compare hover, focus and pressed feedback.")

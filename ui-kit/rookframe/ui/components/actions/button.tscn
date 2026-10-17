@@ -1,4 +1,8 @@
-[gd_scene format=3 uid="uid://nsflvqoc35wn"]
+[gd_scene load_steps=2 format=3 uid="uid://nsflvqoc35wn"]
+
+[ext_resource type="Script" path="res://rookframe/ui/components/actions/button.gd" id="button"]
 
 [node name="Button" type="Button"]
 custom_minimum_size = Vector2(44, 44)
+theme_type_variation = &"components_button"
+script = ExtResource("button")
