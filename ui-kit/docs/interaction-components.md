@@ -285,7 +285,223 @@ A removed stack emits no delayed terminal events.
 
 
 Popover also accepts `focus_fallback: Control = null`. Its native Theme constants
-`RookframePopover/anchor_gap` and `bounds_margin` default to 8. Preview slots are
+`RookframePopover/anchor_gap` and `bounds_margin` default to 8.
+`minimum_width` defaults to 320, clamped to the available owner bounds. Preview slots are
 read-only; focus and mouse behavior are disabled recursively. Toast Stack uses the
 monotonic real-time clock and inherits its UI branch pause policy. Native polite
 live regions depend on the platform accessibility backend.
+
+## Collections and transfer
+
+
+Use Collection, PaginatedChoices, and MiniatureBrowser as the implementation starting points.
+Use their existing public paths and methods.
+Keep collection behavior independent of host data retrieval.
+
+**12.1 Existing interfaces**
+
+| Interface | Required treatment |
+| --- | --- |
+| `configure(entries, selected_id, caption, count)` | Keep the existing signature and each component's selection meaning |
+| `selected(id)` | Keep the existing user-activation meaning |
+| `action_requested(id)` | Keep host action execution separate |
+| `capture_state()` | Keep existing serialized keys compatible |
+| `restore_state(state)` | Restore view state without changing host selection or domain data |
+| `focus_entry(id)` | Reveal the correct page and focus a valid record |
+| `get_footer_slot()` | Keep caller-owned content and existing visibility rules |
+
+Collection uses selected to request details.
+Its row action requests a separate host action.
+Do not replace this behavior with automatic item transfer.
+
+**12.2 Record updates**
+
+- **COL-01.** Match retained rows by stable ID.
+- **COL-02.** Keep the row instance when its record changes position.
+- **COL-03.** Update changed record fields in the retained row.
+- **COL-04.** Free only removed rows.
+- **COL-05.** Keep focus on a retained eligible row.
+- **COL-06.** Use the shared fallback when the focused row disappears.
+- **COL-07.** Keep user selection when a filter temporarily hides its record.
+- **COL-08.** Remove selection only when the record leaves the authoritative set.
+- **COL-09.** Keep the authoritative set separate from filtered results.
+- **COL-10.** Keep text queries in the host or the screen recipe.
+- **COL-11.** Keep remote requests outside collection components.
+- **COL-12.** Use TaskState for loading, empty, and error content.
+- **COL-13.** Keep fake status rows out of the record set.
+- **COL-14.** Prevent stale request results from replacing newer data in the host example.
+
+An existing void method keeps its return type.
+For invalid records, leave state unchanged and report a developer error.
+New methods that reject input use the documented failure result.
+
+**12.3 Page rules**
+
+- **PAG-01.** Keep internal page indexes zero-based.
+- **PAG-02.** Display page numbers from one when pages exist.
+- **PAG-03.** Disable Previous at the first page.
+- **PAG-04.** Disable Next at the last page.
+- **PAG-05.** Keep pages inside the current valid range after data removal.
+- **PAG-06.** Keep full rows inside each measured page.
+- **PAG-07.** Keep the focused row visible after layout changes.
+- **PAG-08.** Otherwise, retain the current page when it remains valid.
+- **PAG-09.** Keep page changes separate from record activation.
+- **PAG-10.** Keep accessible names on page actions.
+- **PAG-11.** Keep the current range available without hover.
+- **PAG-12.** Keep page restoration silent with respect to user activation.
+
+For new empty summaries, display the translated equivalent of “0 entries.”
+Keep existing footer visibility contracts.
+PaginatedChoices and Collection have different documented footer rules.
+Do not replace those rules with one unconditional hide rule.
+
+**12.4 Required collection examples**
+
+| Example | Required content |
+| --- | --- |
+| Inventory | Stable IDs, item details, a row action, filtering, pagination, and transfer targets |
+| Asset browser | Stable IDs, image previews, filtering, empty/error states, and pagination |
+| Basic table | Text, numeric columns, long names, and bounded scrolling |
+
+Use the same shared behavior in both collection examples.
+Keep example game rules local to the showcase.
+Use 1,000 records for the bounded dataset test.
+This is a test size, not a new runtime rejection limit.
+Virtualization and advanced Data Table behavior remain outside this release.
+
+
+**13. Drag-and-drop Slot and Transfer Context**
+
+Use native pointer drag/drop for the pointer route.
+Use native focus and activation for the keyboard/controller route.
+Use the same validation and transfer request for both routes.
+Native activation starts pick-up when a source has no active transfer.
+Native activation requests placement when a transfer is active.
+Touch uses explicit pick-up and place actions.
+
+**13.1 Drag Slot interface**
+
+| Member | Type | Default |
+| --- | --- | --- |
+| `slot_id` | String | Empty; required before use |
+| `context` | RookframeTransferContext or null | null |
+| `can_source` | bool | true |
+| `can_target` | bool | true |
+| `payload` | Dictionary | Empty |
+| `disabled` | Native Button property | false |
+| `get_content_slot()` | → Container | Retained host content |
+
+Keep toggle_mode false.
+A source slot can contain an item.
+An empty target slot can accept a transfer.
+The host supplies the payload and visible item data.
+
+Use unique slot IDs inside one context.
+A slot registers with its context when it enters the tree.
+A slot removes its registration when it exits the tree.
+A duplicate slot ID leaves the later slot unavailable.
+Report duplicate IDs as developer errors.
+
+**13.2 Transfer Context interface**
+
+Use the public class name `RookframeTransferContext`.
+Create one context for each independent host transfer region.
+Place it under that region's Control.
+Use the nearest Control ancestor as the region.
+Keep registered slots in that region and the same Viewport.
+Keep the context outside an autoload.
+
+| Member | Type or signature | Default or result |
+| --- | --- | --- |
+| `placement_validator` | Callable | Empty; placements are unavailable |
+| `begin_transfer(source_id)` | String → bool | true when carrying starts |
+| `evaluate_target(target_id)` | String → Dictionary | `allowed: bool` and `reason: String` |
+| `request_placement(target_id)` | String → int | Positive request ID, or zero on rejection |
+| `resolve_transfer(request_id, accepted, error_text = "")` | int, bool, String → bool | false for an unknown or completed request |
+| `cancel_transfer(reason = "cancel")` | StringName → bool | true only when carrying ends |
+| `get_state()` | → StringName | `idle`, `carrying`, or `pending` |
+| `state_changed(state)` | Signal with StringName | One state transition |
+| `transfer_requested(request_id, source_id, target_id, payload)` | Signal with int, String, String, Dictionary | One validated placement request |
+
+The validator accepts source_id, target_id, and a payload copy.
+It returns a Dictionary with allowed and reason.
+The allowed value is a bool.
+The reason value is visible host-supplied text.
+Require a reason for an unavailable target.
+The validator performs no domain or scene mutation.
+An invalid validator result makes the target unavailable.
+Report invalid validator results as developer errors.
+Use a translated unavailable message when no valid reason exists.
+
+Allow null, bool, int, finite float, String, Array, and Dictionary values in a transfer payload.
+Require String keys in nested dictionaries.
+Reject Node, Resource, Callable, and cyclic payload references.
+This restriction makes the request data independent of control lifetime.
+
+**13.3 Transfer states**
+
+| Current state | Event | Next state | Required result |
+| --- | --- | --- | --- |
+| idle | Valid source activation or pointer drag | carrying | Copy the payload. Display the transfer preview. |
+| idle | Invalid source | idle | Return false. Keep data unchanged. |
+| carrying | Eligible target focus or pointer movement | carrying | Display current eligibility and reason. |
+| carrying | Invalid controller placement | carrying | Show the reason. Emit no request. |
+| carrying | Invalid pointer release | idle | Cancel the drag. Emit no request. |
+| carrying | Valid placement | pending | Assign a new request ID. Emit one transfer request. |
+| carrying | Cancel, source removal, source hiding, or context hiding | idle | Remove the preview. Keep host data unchanged. |
+| pending | Duplicate activation | pending | Emit no additional request. |
+| pending | Cancel input | pending | Consume the input. Keep the request pending. |
+| pending | Host accepts the matching request | idle | Remove pending feedback. Use updated host data. |
+| pending | Host rejects; source remains valid | carrying | Show the error. Permit another target. |
+| pending | Host rejects; source is absent or unavailable | idle | End the operation. Use focus fallback. |
+| Any state | Context destruction | Ended | Remove UI resources. Emit no delayed request. |
+
+Request IDs are unique within one context lifetime.
+The host retains the context identity with each request.
+
+A pending request has already crossed into the host.
+UI cancellation cannot revoke that request.
+The host decides whether an operation can finish after its UI disappears.
+
+**13.4 Transfer rules**
+
+- **DRG-01.** Permit one active transfer per context.
+- **DRG-02.** Reject a new transfer while another transfer is active.
+- **DRG-03.** Require a visible, enabled source with can_source true.
+- **DRG-04.** Require a visible, enabled target with can_target true.
+- **DRG-05.** Reject placement on the source slot.
+- **DRG-06.** Run the validator again immediately before the request.
+- **DRG-07.** Set pending state before emitting transfer_requested.
+- **DRG-08.** Increase the positive request ID by one for each new request.
+- **DRG-09.** Ignore a result for an old request ID.
+- **DRG-10.** Keep the copied payload unchanged during the operation.
+- **DRG-11.** Give the host a separate payload copy.
+- **DRG-12.** Keep all item movement and inventory changes in the host.
+- **DRG-13.** Remove the preview after cancellation.
+- **DRG-14.** Suppress source activation after a pointer drag.
+- **DRG-15.** Keep the native drop result separate from host acceptance.
+- **DRG-16.** Keep pending feedback visible until the matching result.
+- **DRG-17.** Give invalid targets text or an icon in addition to color.
+- **DRG-18.** Restore focus to the target after acceptance when possible.
+- **DRG-19.** Restore focus to the source after cancellation when possible.
+- **DRG-20.** Otherwise, use the shared focus fallback.
+
+The host validates the latest domain state before it commits a transfer.
+The host applies an accepted transfer once.
+The test host demonstrates immediate and delayed results.
+A real network protocol is outside this UI component.
+
+
+Collection and PaginatedChoices add `set_visible_ids(ids: PackedStringArray) -> bool`
+and `reset_filter() -> void`. Unknown or duplicate IDs reject the whole filter.
+`configure` always receives authoritative records; view filtering never replaces
+those records. Both expose `focus_fallback: Control = null`.
+MiniatureBrowser adds `focus_entry(id) -> bool`, `capture_state() -> Dictionary`,
+and `restore_state(state) -> void`; state holds page and query, never selection.
+
+TransferContext also accepts `focus_fallback: Control = null`. DragSlot's identity
+and context are configured before tree entry and remain fixed while registered.
+Changing either in-tree reports a developer error and retains the prior value.
+Allowed cancellation reasons: cancel, host, source_lost, context_hidden, invalid_drop.
+Invalid reasons return false. The context uses native `_unhandled_input`; hosts
+handle gameplay after the owning UI region's unhandled cancellation route.

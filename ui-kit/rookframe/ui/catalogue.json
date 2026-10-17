@@ -1282,6 +1282,29 @@
         "finished(id: String, reason: StringName, action_id: String)"
       ],
       "slots": []
+    },
+    {
+      "name": "DragSlot",
+      "scene": "res://rookframe/ui/components/data/drag_slot.tscn",
+      "sceneUid": "uid://cog0mcu7npi2r",
+      "script": "res://rookframe/ui/components/data/drag_slot.gd",
+      "scriptUid": "uid://bpd5p56xkf2bc",
+      "rootType": "Button",
+      "properties": {
+        "slot_id": "",
+        "context": null,
+        "can_source": true,
+        "can_target": true,
+        "payload": {},
+        "disabled": false
+      },
+      "methods": [
+        "get_content_slot() -> Container"
+      ],
+      "signals": [],
+      "slots": [
+        "ContentSlot"
+      ]
     }
   ],
   "semanticIcons": {
@@ -1392,5 +1415,14 @@
       }
     }
   },
-  "appearance": "Native Godot defaults; no Theme or local skin assigned."
+  "appearance": "Native Godot defaults; no Theme or local skin assigned.",
+  "behaviorResources": [
+    {
+      "name": "RookframeTransferContext",
+      "script": "res://rookframe/ui/components/data/transfer_context.gd",
+      "scriptUid": "uid://bd4lhsxhvd6w4",
+      "rootType": "Node",
+      "contract": "docs/interaction-components.md"
+    }
+  ]
 }
