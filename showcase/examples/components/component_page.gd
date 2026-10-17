@@ -8,6 +8,25 @@ var preview_theme: Theme = preload("res://rookframe/ui/theme/rookframe_theme.tre
 var section_titles: Array[String] = []
 var section_blocks: Array[Control] = []
 
+func _ready() -> void:
+	var paths := PackedStringArray()
+	for resource in entry.get("covers", []):
+		if resource.begins_with("res://"):
+			paths.append(resource)
+	var reference := RichTextLabel.new()
+	reference.name = "UsageReference"
+	reference.fit_content = true
+	reference.scroll_active = false
+	reference.selection_enabled = true
+	reference.focus_mode = Control.FOCUS_ALL
+	reference.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	reference.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	if paths.is_empty():
+		reference.text = "Native Godot recipe — no Rookframe resource required.\nExample source: " + entry.script
+	else:
+		reference.text = "Resource path:\n" + "\n".join(paths)
+	add_child(reference)
+
 func section(title: String, description: String = "") -> VBoxContainer:
 	var block := VBoxContainer.new()
 	block.add_theme_constant_override("separation", 12)
