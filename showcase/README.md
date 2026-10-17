@@ -1,9 +1,10 @@
-# Silkbound Ledger native specimen
+# Rookframe native component catalogue
 
 An executable reference for agents implementing Rookframe UI. It consumes the sibling UI Kit and optional theme packages and instances its production resources with synthetic data.
-Silkbound Ledger, including leather leaves and motion, is canonical. The Main
+Silkbound Ledger, including leather leaves and motion, is canonical.
 The showcase explicitly instances the optional Silkbound inherited scenes.
-Base UI Kit components remain unthemed. Menu remains Silkbound. Fantasy/Cyberpunk are auxiliary shell-theme experiments;
+Base UI Kit components remain unthemed. The Main Menu remains Silkbound.
+Fantasy/Cyberpunk are auxiliary shell-theme experiments;
 System Extension shell selection remains proposed, not a released SDK facility.
 Direct Godot Main Menu overrides are allowed but unsupported.
 
@@ -17,13 +18,33 @@ godot --headless --editor --path . --import --quit
 godot --path .
 ```
 
-The laboratory opens Silkbound action leaves. Choose a recipe, long content,
+The project opens `examples/components/catalogue.tscn`: a native Godot catalogue
+with one view per component or native composition recipe. Navigation groups
+components by purpose: Actions, Forms & selection, Navigation, Layout, Surfaces,
+Data display, and Feedback & overlays. Each view offers separate state and variant
+examples using production resources, plus local synthetic interaction feedback.
+
+Search by component, group, or purpose. Ctrl/Cmd+K focuses search; Enter opens
+the first match. Previous/Next follow group order. At narrow widths, Components
+opens the navigation; Escape returns to the current view. Desktop views include
+section links. Reduced motion updates the active examples without rebuilding
+their state. Light/dark changes the catalogue chrome; specimen appearance remains
+the selected production resources.
+
+Open a dedicated view directly with `godot --path . -- --component=field`.
+Route IDs and page ownership are listed in `examples/components/manifests/`.
+Every manifest entry points to its own script under `examples/components/pages/`;
+`component_page.gd` supplies shared example framing. When adding a component,
+add a dedicated page with meaningful variants/states and declare the covered
+public resource or native capability in its manifest.
+
+**Motion lab** opens the retained Silkbound action-leaf laboratory. Choose a recipe, long content,
 English/Russian/Japanese, bright/dark backdrop, extra rows and reduced motion.
 Replay, pause or slow the native motion. Open a native-size preview for desktop
 1920 × 1080, tablet 1024 × 768 or phone landscape 844 × 390; the preview's client
 area is the selected canvas and contains no laboratory toolbar.
 
-**Controls** opens the Silkbound state catalogue. **Shell experiments** opens
+Inside the laboratory, **Controls** opens the original Silkbound state catalogue. **Shell experiments** opens
 Fantasy/Cyberpunk controls, settings and editor examples. These are reference
 consumers of theme mappings, not the Rookframe Main Menu.
 
@@ -31,6 +52,7 @@ consumers of theme mappings, not the Rookframe Main Menu.
 
 | Example | Source | Production resource |
 | --- | --- | --- |
+| Grouped component views and interactive states | `examples/components/catalogue.tscn` and `pages/` | Public component scenes and documented native recipes |
 | Authored header/section; programmatic growing sections | `examples/action-panel/action_panel_example.tscn` and `.gd` | `components/surfaces/action_panel/action_panel.tscn` |
 | Action/explanation composition | `examples/laboratory/sample.gd` | Action Panel public slots; native Controls |
 | Hinged category leaf | `examples/laboratory/sample.gd` | `components/surfaces/hinged_leaf/hinged_leaf.tscn` |
@@ -47,14 +69,21 @@ host integration suites. This project executes no game rules or network actions.
 ## Verify changes
 
 ```sh
+python3 tools/check_component_pages.py
+godot --headless --path . --script res://tests/component_catalogue.gd
+godot --headless --path . --script res://tests/component_catalogue_interactions.gd
+godot --path . --script res://tests/component_catalogue.gd -- --capture-dir=/absolute/temp/path
 godot --path . --script res://tests/specimen.gd -- --capture-dir=/absolute/temp/path
 godot --headless --path . --script res://tests/current_design_system.gd
 godot --headless --path . --script res://tests/editor_components.gd
 godot --headless --path . --script res://tests/switch.gd
 ```
 
-The first check exercises the laboratory and all native-size content cases; omit
-capture-dir for checks only. Catalogue checks travel with the catalogue; reusable
+The component checks verify registry coverage, dedicated views, navigation,
+search, reduced motion, and layout at all three native sizes. Captures include
+the first and final examples on every page. The specimen check exercises the
+laboratory and its native-size content cases; omit capture-dir for checks only.
+Catalogue checks travel with the catalogue; reusable
 component unit tests remain in the UI Kit. Review captured images as well as exit
 status. Root/toolbars are author tools, not a new product screen authority.
 
