@@ -1,0 +1,67 @@
+extends VBoxContainer
+## Shared specimen framing; component behavior stays in the production resources.
+
+var entry: Dictionary = {}
+var examples: Array[VBoxContainer] = []
+var reduced_motion := false
+var preview_theme: Theme = preload("res://rookframe/ui/theme/rookframe_theme.tres")
+var section_titles: Array[String] = []
+var section_blocks: Array[Control] = []
+
+func section(title: String, description: String = "") -> VBoxContainer:
+	var block := VBoxContainer.new()
+	block.add_theme_constant_override("separation", 12)
+	add_child(block)
+	section_titles.append(title)
+	section_blocks.append(block)
+	var heading := label(title)
+	heading.add_theme_font_size_override("font_size", 22)
+	block.add_child(heading)
+	if not description.is_empty():
+		block.add_child(label(description))
+	var frame := PanelContainer.new()
+	frame.theme_type_variation = &"ShowcaseExample"
+	block.add_child(frame)
+	var body := VBoxContainer.new()
+	body.add_theme_constant_override("separation", 14)
+	body.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	frame.add_child(body)
+	body.theme = preview_theme
+	examples.append(body)
+	return body
+
+func label(copy: String) -> Label:
+	var result := Label.new()
+	result.text = copy
+	result.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	result.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	return result
+
+func note(parent: Node, copy: String) -> Label:
+	var result := label(copy)
+	parent.add_child(result)
+	return result
+
+func button(parent: Node, copy: String, action: Callable = Callable()) -> Button:
+	var result := Button.new()
+	result.text = copy
+	result.custom_minimum_size = Vector2(44, 44)
+	result.accessibility_name = copy
+	parent.add_child(result)
+	if action.is_valid():
+		result.pressed.connect(action)
+	return result
+
+func flow(parent: Node) -> HFlowContainer:
+	var result := HFlowContainer.new()
+	result.add_theme_constant_override("h_separation", 8)
+	result.add_theme_constant_override("v_separation", 8)
+	parent.add_child(result)
+	return result
+
+func scene(path: String, parent: Node, properties: Dictionary = {}) -> Node:
+	var result: Node = load(path).instantiate()
+	for key in properties:
+		result.set(key, properties[key])
+	parent.add_child(result)
+	return result
