@@ -62,7 +62,7 @@ func note(parent: Node, copy: String) -> Label:
 func button(parent: Node, copy: String, action: Callable = Callable()) -> Button:
 	var result: Button = preload("res://rookframe/ui/components/actions/button.tscn").instantiate()
 	result.text = copy
-	result.custom_minimum_size = Vector2(44, 44)
+	result.compact = true
 	result.accessibility_name = copy
 	parent.add_child(result)
 	if action.is_valid():

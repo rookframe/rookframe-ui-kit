@@ -209,54 +209,6 @@
     ]
   },
   {
-    "id": "menu_button_primary",
-    "title": "Menu Button \u00b7 Primary",
-    "category": "Actions",
-    "description": "A native menu action with semantic hierarchy, density and availability.",
-    "script": "res://examples/components/pages/actions_forms/menu_button_primary.gd",
-    "covers": [
-      "res://rookframe/ui/menu/MenuButtonPrimary.tscn"
-    ],
-    "keywords": [
-      "button",
-      "menu",
-      "compact",
-      "disabled"
-    ]
-  },
-  {
-    "id": "menu_button_standard",
-    "title": "Menu Button \u00b7 Standard",
-    "category": "Actions",
-    "description": "A native menu action with semantic hierarchy, density and availability.",
-    "script": "res://examples/components/pages/actions_forms/menu_button_standard.gd",
-    "covers": [
-      "res://rookframe/ui/menu/MenuButtonStandard.tscn"
-    ],
-    "keywords": [
-      "button",
-      "menu",
-      "compact",
-      "disabled"
-    ]
-  },
-  {
-    "id": "menu_button_destructive",
-    "title": "Menu Button \u00b7 Destructive",
-    "category": "Actions",
-    "description": "A native menu action with semantic hierarchy, density and availability.",
-    "script": "res://examples/components/pages/actions_forms/menu_button_destructive.gd",
-    "covers": [
-      "res://rookframe/ui/menu/MenuButtonDestructive.tscn"
-    ],
-    "keywords": [
-      "button",
-      "menu",
-      "compact",
-      "disabled"
-    ]
-  },
-  {
     "id": "menu_choice",
     "title": "Menu Choice",
     "category": "Forms & selection",
@@ -302,38 +254,6 @@
       "group",
       "radio",
       "responsive"
-    ]
-  },
-  {
-    "id": "editor_tool_button",
-    "title": "Editor Tool Button",
-    "category": "Actions",
-    "description": "Square icon tools with exclusive selection, accessible names and density.",
-    "script": "res://examples/components/pages/actions_forms/editor_tool_button.gd",
-    "covers": [
-      "res://rookframe/ui/editor/EditorToolButton.tscn"
-    ],
-    "keywords": [
-      "editor",
-      "icon",
-      "tool",
-      "selected"
-    ]
-  },
-  {
-    "id": "editor_action_button",
-    "title": "Editor Action Button",
-    "category": "Actions",
-    "description": "Labelled editor actions with primary, standard and unavailable states.",
-    "script": "res://examples/components/pages/actions_forms/editor_action_button.gd",
-    "covers": [
-      "res://rookframe/ui/editor/EditorActionButton.tscn"
-    ],
-    "keywords": [
-      "editor",
-      "action",
-      "primary",
-      "compact"
     ]
   },
   {
@@ -592,16 +512,22 @@
     "id": "button",
     "title": "Button",
     "category": "Actions",
-    "description": "Native text and icon commands with explicit names, focus and availability.",
+    "description": "Primary, secondary and destructive actions in normal and compact sizes, with text or icons.",
     "script": "res://examples/components/pages/actions_forms/button.gd",
     "covers": [
       "res://rookframe/ui/components/actions/button.tscn",
       "Button"
     ],
     "keywords": [
-      "native",
+      "primary",
+      "secondary",
+      "standard",
+      "destructive",
+      "compact",
       "icon",
-      "command",
+      "menu",
+      "editor",
+      "tool",
       "disabled"
     ]
   }

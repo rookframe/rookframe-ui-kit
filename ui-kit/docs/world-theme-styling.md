@@ -17,7 +17,14 @@ Call it after composition and after native Theme changes.
 
 `components.button` and `components.button.primary` are compiled aliases for
 standard and primary menu styles. The primary alias contains only differences,
-so broad button overrides remain effective. Recipes expose one `usage` property.
+so broad button overrides remain effective. `components.button.destructive`
+supplies the destructive role. The shared `components/actions/button.tscn`
+selects the corresponding native `components_button`,
+`components_button_primary` or `components_button_destructive` type through
+`variant`, and appends `__compact` through `compact`. Theme mappings must define
+compact inheritance as well as normal inheritance. The same types style native
+text, icon-with-text and icon-only content. Compatibility menu/editor recipes
+retain their existing `usage` property.
 
 Hosts own routes, labels, World state and responsive composition. Concrete
 geometry, materials and mapping sets belong to optional packages.
