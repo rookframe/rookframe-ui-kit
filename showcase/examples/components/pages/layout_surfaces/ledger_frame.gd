@@ -4,9 +4,9 @@ const Demo = preload("res://examples/components/pages/layout_surfaces/demo.gd")
 
 static func build(page) -> void:
 	for footer in [true, false]:
-		var body = page.section("Header, body and footer" if footer else "Header and body", "Reveal the retained content. Reduced motion settles immediately.")
+		var body = page.section("Header, body and footer" if footer else "Header and body", "Core frames have no decoration or reveal shader. Content remains visible and reveal settles immediately.")
 		var bounds := Demo.region(body, 320 if footer else 250)
-		var frame = Demo.skin(page, "components/surfaces/ledger_frame.tscn", bounds, {"reduced_motion": page.reduced_motion})
+		var frame = Demo.component(page, "components/surfaces/ledger_frame.tscn", bounds, {"reduced_motion": page.reduced_motion})
 		frame.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 		var content := Control.new()
 		bounds.add_child(content)

@@ -1,12 +1,14 @@
 # Rookframe native component catalogue
 
-An executable reference for agents implementing Rookframe UI. It consumes the sibling UI Kit and optional theme packages and instances its production resources with synthetic data.
-Silkbound Ledger, including leather leaves and motion, is canonical.
-The showcase explicitly instances the optional Silkbound inherited scenes.
-Base UI Kit components remain unthemed. The Main Menu remains Silkbound.
-Fantasy/Cyberpunk are auxiliary shell-theme experiments;
-System Extension shell selection remains proposed, not a released SDK facility.
-Direct Godot Main Menu overrides are allowed but unsupported.
+An executable reference for agents implementing Rookframe UI. The component
+library instances core UI Kit resources with synthetic data and stock Godot
+styling. Its preview Theme is Godot's default, including page-owned popups and
+windows. Optional presentation shaders and decoration are absent. All public
+component routes remain available, including the native menu/editor recipes.
+
+Separate examples consume optional theme packages. Their appearance does not
+change the component library. System Extension shell selection remains proposed,
+not a released SDK facility; direct Godot Main Menu overrides are unsupported.
 
 ## Run and inspect
 
@@ -28,8 +30,8 @@ Search by component, group, or purpose. Ctrl/Cmd+K focuses search; Enter opens
 the first match. Previous/Next follow group order. At narrow widths, Components
 opens the navigation; Escape returns to the current view. Desktop views include
 section links. Reduced motion updates the active examples without rebuilding
-their state. Light/dark changes the catalogue chrome; specimen appearance remains
-the selected production resources.
+their state. Light/dark changes only the catalogue chrome; component previews
+retain stock Godot styling.
 
 Open a dedicated view directly with `godot --path . -- --component=field`.
 Route IDs and page ownership are listed in `examples/components/manifests/`.
@@ -38,7 +40,9 @@ Every manifest entry points to its own script under `examples/components/pages/`
 add a dedicated page with meaningful variants/states and declare the covered
 public resource or native capability in its manifest.
 
-**Motion lab** opens the retained Silkbound action-leaf laboratory. Choose a recipe, long content,
+Open the separate motion laboratory with
+`godot --path . res://examples/laboratory/laboratory.tscn`.
+It retains the Silkbound action-leaf examples. Choose a recipe, long content,
 English/Russian/Japanese, bright/dark backdrop, extra rows and reduced motion.
 Replay, pause or slow the native motion. Open a native-size preview for desktop
 1920 × 1080, tablet 1024 × 768 or phone landscape 844 × 390; the preview's client

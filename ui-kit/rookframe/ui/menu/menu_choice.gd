@@ -65,6 +65,11 @@ func _refresh_theme() -> void:
 	# A local Theme holds instance-bound textures, never modifying the shared Theme.
 	menu.theme = null
 	menu.theme_type_variation = &"settings_popup__compact" if compact else &"settings_popup"
+	custom_minimum_size.y = maxi(44, get_theme_constant("minimum_height"))
+	# Keep native popup checks and scrollbars when no optional marker is supplied.
+	if not has_theme_icon("selection_mark"):
+		_configuring = false
+		return
 	var local_theme := Theme.new()
 	var check := TrailingCheck.new()
 	check.popup = weakref(menu)
@@ -86,7 +91,6 @@ func _refresh_theme() -> void:
 	for slot in ["increment", "decrement", "increment_highlight", "decrement_highlight", "increment_pressed", "decrement_pressed"]:
 		local_theme.set_icon(slot, &"VScrollBar", get_theme_icon("empty_mark"))
 	menu.theme = local_theme
-	custom_minimum_size.y = get_theme_constant("minimum_height")
 	_configuring = false
 
 

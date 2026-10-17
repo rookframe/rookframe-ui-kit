@@ -7,11 +7,11 @@ static func build(page) -> void:
 		var body = page.section("Reduced motion" if immediate else "Open, close and interrupt", "Toggle again during movement to replace the active transition. The content stays retained.")
 		var controls = page.flow(body)
 		var bounds := Demo.region(body, 230)
-		var leaf = Demo.skin(page, "components/surfaces/hinged_leaf/hinged_leaf.tscn", bounds, {"reduced_motion": immediate or page.reduced_motion})
+		var leaf = Demo.component(page, "components/surfaces/hinged_leaf/hinged_leaf.tscn", bounds, {"reduced_motion": immediate or page.reduced_motion})
 		leaf.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 		leaf.offset_bottom = -32
 		var inset := Demo.inset(leaf.get_content(), 24)
-		inset.theme = load("res://rookframe/ui/theme/silkbound_theme.tres")
+		inset.theme = page.preview_theme
 		inset.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 		var content := Demo.stack(inset)
 		page.note(content, "Expedition notes")

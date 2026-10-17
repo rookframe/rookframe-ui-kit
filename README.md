@@ -1,8 +1,8 @@
 # Rookframe UI workspace
 
 The UI Kit supplies unthemed Godot components. Silkbound Ledger, Fantasy and
-Cyberpunk are optional appearance packages. The showcase explicitly selects
-Silkbound Ledger for its canonical examples.
+Cyberpunk are optional appearance packages. The component library uses core
+resources with stock Godot styling; separate examples exercise optional themes.
 
 | Package | Contents |
 | --- | --- |
@@ -34,8 +34,7 @@ pin is used. `workspace.json` records package dependencies and import revisions;
 the monorepo revision now identifies kit, themes and showcase together.
 
 The native showcase opens a component catalogue with grouped navigation, search,
-and a dedicated view for each component's variants and states. The Motion lab
-action opens the retained Silkbound composition laboratory. To open one component
+and a dedicated view for each component's variants and states. To open one component
 directly, append `-- --component=field` to the Godot launch command.
 
 ## Install in a consumer

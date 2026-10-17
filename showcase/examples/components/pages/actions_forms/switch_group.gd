@@ -4,7 +4,6 @@ const Demo = preload("res://examples/components/pages/actions_forms/support.gd")
 
 static func build(page) -> void:
 	var main = page.section("Choose one mode", "Cards share the available width and stack together on narrow views.")
-	Demo.shell_materials(page, main)
 	var tray = Demo.shell_scene(page, "res://rookframe/ui/menu/SwitchGroup.tscn", main)
 	var group := ButtonGroup.new()
 	var status = page.note(main, "Selected: Guided")

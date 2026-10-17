@@ -4,7 +4,6 @@ const Demo = preload("res://examples/components/pages/actions_forms/support.gd")
 
 static func build(page) -> void:
 	var main = page.section("Choose an editor tool", "Icon tools use explicit accessible names. Focus and selection remain distinct.")
-	Demo.shell_materials(page, main)
 	var group := ButtonGroup.new()
 	var tools = page.flow(main)
 	var status = page.note(main, "Active tool: Select")

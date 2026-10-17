@@ -51,8 +51,11 @@ class PackageTests(unittest.TestCase):
     def test_core_has_no_baked_appearance(self):
         core = sources(['ui-kit'])
         self.assertFalse(any('/assets/' in p or '/theme/' in p for p in core))
-        self.assertFalse(any(p.endswith(('.ttf', '.otf', '.gdshader', '.tres')) for p in core))
+        self.assertFalse(any(p.endswith(('.ttf', '.otf', '.gdshader')) for p in core))
         for relative, path in core.items():
+            if path.suffix == '.tres':
+                # Native grouping resources carry behavior, not appearance.
+                self.assertRegex(path.read_text(), r'^\[gd_resource type="(?:ButtonGroup|FoldableGroup)"', relative)
             if path.suffix == '.tscn':
                 text = path.read_text()
                 self.assertNotRegex(text, r'(?m)^(theme|theme_override_\w+/\w+|modulate|self_modulate|color|material) = ')
