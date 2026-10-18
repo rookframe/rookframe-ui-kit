@@ -1,9 +1,0 @@
-[gd_scene load_steps=2 format=3]
-
-[ext_resource type="Script" path="res://rookframe/ui/menu/menu_choice.gd" id="recipe"]
-
-[node name="MenuChoice" type="OptionButton"]
-custom_minimum_size = Vector2(0, 64)
-mouse_default_cursor_shape = 2
-theme_type_variation = &"settings_choice"
-script = ExtResource("recipe")

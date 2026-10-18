@@ -1,6 +1,6 @@
 extends SceneTree
 ## Native input integration plus reproducible graphical evidence for both themes.
-const Choice = preload("res://rookframe/ui/menu/MenuChoice.tscn")
+const Choice = preload("res://rookframe/ui/components/forms/select.tscn")
 const THEMES = [preload("res://rookframe/ui/menu/MenuTheme.tres"), preload("res://rookframe/ui/menu/cyberpunk/CyberpunkTheme.tres")]
 var failures: Array[String] = []
 var capture_dir := ""
@@ -67,7 +67,7 @@ func verify() -> void:
 	backdrop.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	screen.add_child(backdrop)
 	backdrop.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	var choice := Choice.instantiate() as OptionButton
+	var choice := _variant_scene() as OptionButton
 	screen.add_child(choice)
 	choice.accessibility_name = "Language"
 	choice.item_selected.connect(func(index: int) -> void: selection_events.append(index))
@@ -216,3 +216,9 @@ func verify() -> void:
 	await settle()
 	print("MENU_CHOICE ", "PASS" if failures.is_empty() else failures)
 	quit(0 if failures.is_empty() else 1)
+
+
+func _variant_scene() -> Control:
+	var control = Choice.instantiate()
+	control.variant = 1
+	return control

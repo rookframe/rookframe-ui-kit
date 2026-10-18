@@ -38,7 +38,7 @@ polish.
   returns focus to the editor. `show_clear_when_empty` keeps that reset action
   discoverable when the route requires it; `clear_minimum_size` preserves its
   target size.
-- A complete Choice Row is one target. Supporting description and selected/not
+- A complete Choice is one target. Supporting description and selected/not
   selected state are included in its accessibility description.
 
 ## Status communication

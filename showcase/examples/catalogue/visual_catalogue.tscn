@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" path="res://rookframe/ui/menu/MenuSurface.tscn" id="surface"]
 [ext_resource type="Script" path="res://rookframe/ui/menu/menu_illustration.gd" id="art"]
 
-[ext_resource type="PackedScene" path="res://rookframe/ui/menu/MenuChoice.tscn" id="choice"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/components/forms/select.tscn" id="choice"]
 [ext_resource type="PackedScene" path="res://rookframe/ui/menu/MenuButtonStandard.tscn" id="standard"]
 [ext_resource type="PackedScene" path="res://rookframe/ui/menu/MenuButtonDestructive.tscn" id="destructive"]
 
@@ -87,6 +87,7 @@ theme_override_constants/h_separation = 12
 theme_override_constants/v_separation = 8
 
 [node name="ThemeChoice" parent="Frame/Shell/Stack/Header/Selectors/Choices" instance=ExtResource("choice")]
+variant = 1
 layout_mode = 2
 theme_type_variation = &"settings_choice"
 item_count = 2
@@ -99,6 +100,7 @@ popup/item_1/text = "Fantasy"
 popup/item_1/id = 1
 
 [node name="DensityChoice" parent="Frame/Shell/Stack/Header/Selectors/Choices" instance=ExtResource("choice")]
+variant = 1
 layout_mode = 2
 theme_type_variation = &"settings_choice"
 item_count = 2
@@ -111,6 +113,7 @@ popup/item_1/text = "Compact"
 popup/item_1/id = 1
 
 [node name="PageChoice" parent="Frame/Shell/Stack/Header/Selectors/Choices" instance=ExtResource("choice")]
+variant = 1
 layout_mode = 2
 theme_type_variation = &"settings_choice"
 item_count = 4
@@ -535,6 +538,7 @@ text = "Open the tray. Arrow keys navigate; Enter selects; Escape dismisses."
 autowrap_mode = 2
 
 [node name="Choice" parent="Frame/Shell/Stack/Scroll/Pages/Settings/Language" instance=ExtResource("choice")]
+variant = 1
 layout_mode = 2
 theme_type_variation = &"settings_choice"
 item_count = 4
@@ -570,6 +574,7 @@ text = "A disabled selection"
 autowrap_mode = 2
 
 [node name="Choice" parent="Frame/Shell/Stack/Scroll/Pages/Settings/Quality" instance=ExtResource("choice")]
+variant = 1
 layout_mode = 2
 theme_type_variation = &"settings_choice"
 item_count = 1

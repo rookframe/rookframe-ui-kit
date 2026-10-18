@@ -78,12 +78,12 @@ func _run() -> void:
 	for alias in catalogue.Registry.BUTTON_ALIASES:
 		check(catalogue.show_page(alias) and catalogue.current_id == "button", "Legacy route opens shared Button: " + alias)
 
-	for id in ["card_switch", "button"]:
+	for id in ["choice", "button"]:
 		catalogue.show_page(id)
 		await settle()
-		var control: Button = resource_node("res://rookframe/ui/menu/Switch.tscn") if id == "card_switch" else button("Delete draft")
+		var control: Button = resource_node("res://rookframe/ui/components/forms/choice.tscn") if id == "choice" else button("Delete draft")
 		await activate(control)
-		if id == "card_switch":
+		if id == "choice":
 			check(control.button_pressed, "The core card toggles with native styling")
 		else:
 			check(catalogue.current_page.find_children("*", "Label", true, false).any(func(node): return node.text.begins_with("Confirmation requested:")), "The core destructive action requests confirmation")

@@ -80,48 +80,18 @@
     ]
   },
   {
-    "id": "choice_row",
-    "title": "Choice Row",
+    "id": "choice",
+    "title": "Choice",
     "category": "Forms & selection",
-    "description": "Detailed and compact selection rows with exclusive and unavailable choices.",
-    "script": "res://examples/components/pages/actions_forms/choice_row.gd",
+    "description": "Rows, cards, markers and list values with native independent or exclusive selection.",
+    "script": "res://examples/components/pages/actions_forms/choice.gd",
     "covers": [
-      "res://rookframe/ui/components/forms/choice_row.tscn"
+      "res://rookframe/ui/components/forms/choice.tscn"
     ],
     "keywords": [
       "selection",
       "radio",
       "compact",
-      "disabled"
-    ]
-  },
-  {
-    "id": "package_choice",
-    "title": "Package Choice",
-    "category": "Forms & selection",
-    "description": "Available, included and locked package choices with independent selection.",
-    "script": "res://examples/components/pages/actions_forms/package_choice.gd",
-    "covers": [
-      "res://rookframe/ui/components/forms/package_choice.tscn"
-    ],
-    "keywords": [
-      "package",
-      "selected",
-      "disabled"
-    ]
-  },
-  {
-    "id": "package_choice_card",
-    "title": "Package Choice Card",
-    "category": "Forms & selection",
-    "description": "Available, included and locked package choices with independent selection.",
-    "script": "res://examples/components/pages/actions_forms/package_choice_card.gd",
-    "covers": [
-      "res://rookframe/ui/components/forms/package_choice_card.tscn"
-    ],
-    "keywords": [
-      "package",
-      "selected",
       "disabled"
     ]
   },
@@ -209,45 +179,13 @@
     ]
   },
   {
-    "id": "menu_choice",
-    "title": "Menu Choice",
-    "category": "Forms & selection",
-    "description": "A native selection popup with density, disabled items and stable IDs.",
-    "script": "res://examples/components/pages/actions_forms/menu_choice.gd",
-    "covers": [
-      "res://rookframe/ui/menu/MenuChoice.tscn"
-    ],
-    "keywords": [
-      "select",
-      "popup",
-      "density",
-      "disabled"
-    ]
-  },
-  {
-    "id": "card_switch",
-    "title": "Switch Card",
-    "category": "Forms & selection",
-    "description": "Selectable cards with independent toggle state and compact density.",
-    "script": "res://examples/components/pages/actions_forms/card_switch.gd",
-    "covers": [
-      "res://rookframe/ui/menu/Switch.tscn"
-    ],
-    "keywords": [
-      "card",
-      "toggle",
-      "selected",
-      "disabled"
-    ]
-  },
-  {
-    "id": "switch_group",
-    "title": "Switch Group",
+    "id": "choice_group",
+    "title": "Choice Group",
     "category": "Forms & selection",
     "description": "Responsive card trays with explicit exclusive or independent selection.",
-    "script": "res://examples/components/pages/actions_forms/switch_group.gd",
+    "script": "res://examples/components/pages/actions_forms/choice_group.gd",
     "covers": [
-      "res://rookframe/ui/menu/SwitchGroup.tscn"
+      "res://rookframe/ui/components/forms/choice_group.tscn"
     ],
     "keywords": [
       "card",
@@ -338,14 +276,15 @@
     ]
   },
   {
-    "id": "radio_group",
-    "title": "Radio Group",
+    "id": "selection_group",
+    "title": "Selection Group",
     "category": "Forms & selection",
     "description": "Required and optional exclusive choices using native ButtonGroup rules.",
-    "script": "res://examples/components/pages/actions_forms/radio_group.gd",
+    "script": "res://examples/components/pages/actions_forms/selection_group.gd",
     "covers": [
-      "res://rookframe/ui/components/forms/radio_group.tres",
-      "Radio Group"
+      "res://rookframe/ui/components/forms/selection_group.tres",
+      "Radio Group",
+      "Toggle Group"
     ],
     "keywords": [
       "radio",
@@ -403,23 +342,6 @@
       "pressed",
       "selected",
       "disabled"
-    ]
-  },
-  {
-    "id": "toggle_group",
-    "title": "Toggle Group",
-    "category": "Actions",
-    "description": "Exclusive modes and independent options composed from native toggles.",
-    "script": "res://examples/components/pages/actions_forms/toggle_group.gd",
-    "covers": [
-      "res://rookframe/ui/components/actions/toggle_group.tres",
-      "Toggle Group"
-    ],
-    "keywords": [
-      "group",
-      "toggle",
-      "exclusive",
-      "multiple"
     ]
   },
   {

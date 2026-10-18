@@ -19,7 +19,7 @@ var _ink := preload("res://rookframe/ui/_internal/surfaces/content_reveal.gd").n
 @export var reduced_motion := false
 ## Measured whole-row pagination with a retained selected row.
 signal selected(id: String)
-const ROW = preload("res://rookframe/ui/_internal/data/task_choice.tscn")
+const ROW = preload("res://rookframe/ui/components/forms/choice.tscn")
 @export var row_scene: PackedScene = ROW
 var _entries: Array[Dictionary] = []
 var _rows: Array[Button] = []
@@ -112,11 +112,10 @@ func configure(entries: Array[Dictionary], selected_id: String, caption: String 
 	for index in _rows.size():
 		var entry := entries[index]
 		var row := _rows[index]
-		row.get_node(^"Inset/Row/Copy/Title").text = str(entry.get("title", ""))
-		row.get_node(^"Inset/Row/Copy/Subtitle").text = str(entry.get("subtitle", ""))
-		row.get_node(^"Inset/Row/Copy/Subtitle").visible = not str(entry.get("subtitle", "")).is_empty()
-		row.get_node(^"Inset/Row/Value").text = str(entry.get("value", ""))
-		row.get_node(^"Inset/Row/Icon").texture = entry.get("icon")
+		row.title = str(entry.get("title", ""))
+		row.description = str(entry.get("subtitle", ""))
+		row.value_text = str(entry.get("value", ""))
+		row.leading_icon = entry.get("icon")
 		_style_entry(row, entry, selected_id)
 		row.set_pressed_no_signal(str(entry.id) == selected_id)
 		row.accessibility_name = "%s. %s. %s" % [entry.get("title", ""), entry.get("subtitle", ""), entry.get("value", "")]
@@ -126,6 +125,7 @@ func configure(entries: Array[Dictionary], selected_id: String, caption: String 
 
 func _create_row(id: String) -> Control:
 	var row := row_scene.instantiate() as Button
+	row.variant = row.Variant.LIST
 	row.pressed.connect(func(): selected.emit(id))
 	return row
 
@@ -150,16 +150,16 @@ func _fit() -> void:
 	for row in _view_rows:
 		var row_height := float(height)
 		if framed_collection:
-			var title := row.get_node(^"Inset/Row/Copy/Title") as Label
-			var copy := row.get_node(^"Inset/Row/Copy") as VBoxContainer
-			var row_inset := row.get_node(^"Inset") as MarginContainer
-			var row_box := row.get_node(^"Inset/Row") as HBoxContainer
-			var width: float = (size.x - inset * 2 - (columns - 1) * grid.get_theme_constant("h_separation")) / columns - row_inset.get_theme_constant("margin_left") - row_inset.get_theme_constant("margin_right") - row.get_node(^"Inset/Row/Icon").get_combined_minimum_size().x - row.get_node(^"Inset/Row/Value").get_combined_minimum_size().x - row_box.get_theme_constant("separation") * 2
+			var title := row.get_node(^"Content/Row/Copy/Title") as Label
+			var copy := row.get_node(^"Content/Row/Copy") as VBoxContainer
+			var row_inset := row.get_node(^"Content") as MarginContainer
+			var row_box := row.get_node(^"Content/Row") as HBoxContainer
+			var width: float = (size.x - inset * 2 - (columns - 1) * grid.get_theme_constant("h_separation")) / columns - row_inset.get_theme_constant("margin_left") - row_inset.get_theme_constant("margin_right") - row.get_node(^"Content/Row/Icon").get_combined_minimum_size().x - row.get_node(^"Content/Row/Value").get_combined_minimum_size().x - row_box.get_theme_constant("separation") * 2
 			var title_height := title.get_theme_font("font").get_multiline_string_size(title.text, HORIZONTAL_ALIGNMENT_LEFT, maxf(1.0, width), title.get_theme_font_size("font_size"), title.max_lines_visible, TextServer.BREAK_MANDATORY | TextServer.BREAK_WORD_BOUND | TextServer.BREAK_ADAPTIVE).y
 			title_height += title.get_theme_constant("line_spacing") * (title.max_lines_visible - 1)
-			var subtitle_height: float = row.get_node(^"Inset/Row/Copy/Subtitle").get_combined_minimum_size().y if row.get_node(^"Inset/Row/Copy/Subtitle").visible else 0.0
+			var subtitle_height: float = row.get_node(^"Content/Row/Copy/Description").get_combined_minimum_size().y if row.get_node(^"Content/Row/Copy/Description").visible else 0.0
 			row_height = maxf(row_height, ceilf(title_height + subtitle_height + (copy.get_theme_constant("separation") if subtitle_height > 0 else 0) + row_inset.get_theme_constant("margin_top") + row_inset.get_theme_constant("margin_bottom")))
-		row_height = maxf(row_height, maxf(row.get_combined_minimum_size().y, row.get_node(^"Inset").get_combined_minimum_size().y))
+		row_height = maxf(row_height, maxf(row.get_combined_minimum_size().y, row.get_node(^"Content").get_combined_minimum_size().y))
 		row.custom_minimum_size.y = row_height
 		heights.append(row_height)
 	# One entry never enlarges the owning window. The authored frame reserves

@@ -44,9 +44,8 @@ effect. Input, data, identity, signals and reduced-motion endpoints remain nativ
 | `components/forms/text_field.tscn` | `uid://hcrialnjrunbn` | `components/forms/text_field.gd`, `uid://14x5hvhd0hgd` | `VBoxContainer` |
 | `components/forms/text_area.tscn` | `uid://ibntwmikwuovm` | `components/forms/text_area.gd`, `uid://bb8xvwqqnaxb3` | `VBoxContainer` |
 | `components/forms/search_field.tscn` | `uid://jhuolgtvtefyi` | `components/forms/search_field.gd`, `uid://bnvqayp06k4ud` | `VBoxContainer` |
-| `components/forms/choice_row.tscn` | `uid://kipsbpkvppkfb` | `components/forms/choice_row.gd`, `uid://cneqvtm4mj43s` | `Button` |
-| `components/forms/package_choice.tscn` | `uid://cj1dtt1u2dghw` | `components/forms/package_choice.gd`, `uid://bacunik1ndif2` | `Button` |
-| `components/forms/package_choice_card.tscn` | `uid://cdlme6itdqmki` | `components/forms/package_choice.gd`, `uid://bacunik1ndif2` | `Button` |
+| `components/forms/choice.tscn` | `uid://b6802g42csl28` | `components/forms/choice.gd`, `uid://defs3l4udt81d` | `Button` |
+| `components/forms/choice_group.tscn` | `uid://b3e1ecyd6msgb` | `components/forms/choice_group.gd`, `uid://b4ksyursovp5k` | `MarginContainer` |
 | `components/forms/image_field.tscn` | `uid://ljsdqcdmawsqy` | `components/forms/image_field.gd`, `uid://cgrcfqykt0c7o` | `VBoxContainer` |
 | `components/overlays/dialog.tscn` | `uid://87uetn404lqb` | `components/overlays/dialog.gd`, `uid://do77iyssrgyr2` | `Window` |
 | `components/overlays/file_picker_dialog.tscn` | `uid://g4tupp4dkeeb` | `components/overlays/file_picker_dialog.gd`, `uid://2iqy4kt4qdkx` | `Window` |
@@ -114,15 +113,14 @@ semantic minimum cell width. Fixed grids remain ordinary native
 | `text_field.tscn` / `VBoxContainer` | `label_text = "Field label"`; `value = ""`; `placeholder = ""`; `help_text = ""`; `error_text = ""`; `editable = true` | `value_changed(value)`, `value_committed(value)`; `focus_editor()`, `set_error(message)` | Native `LineEdit` input; Return commits. The visible label becomes its accessibility name, help/error becomes the description, and error copy begins with `Error:`. `editable` retains native read-only focus and selection behavior while preventing edits. |
 | `text_area.tscn` / `VBoxContainer` | Same defaults as `TextField` | Same signals and methods | Native `TextEdit` with a 112px minimum editor height; focus exit commits. Label/help/error accessibility and native read-only behavior match `TextField`. |
 | `search_field.tscn` / `VBoxContainer` | `label_text = "Search"`; `show_label = true`; `value = ""`; `placeholder = "Search"`; `show_clear_when_empty = false`; `perimeter_minimum_height = 44.0`; `clear_minimum_size = Vector2(44, 44)`; `editor_font_size = 0` | `value_changed(value)`, `value_committed(value)`, `cleared`; `focus_editor()`, `clear()` | Icon, editor, and clear action share one visible focus perimeter. `show_clear_when_empty` retains a discoverable reset action for workflows that need it. The density exports configure the one perimeter without changing its ownership. Return commits; clear emits `cleared` and returns focus to the editor. The label remains the editor's accessibility name even when visually hidden. |
-| `choice_row.tscn` / `Button` | `title = "Choice"`; `description = "Supporting decision copy"`; `action_label = "Select"`; `variant = DETAILED`; native `button_group = null`, `button_pressed = false`, `disabled = false` | `selection_changed(selected)` plus native `pressed` and `toggled`; `set_selected(selected)`, `is_selected()` | The complete native toggle Button is one 44px-minimum target. Title, description, and selected/not-selected state form its accessibility description. Assign a shared `ButtonGroup` for exclusive keyboard/controller selection. |
-| `package_choice.tscn` / `Button` | `package_name = "Package"`; `detail_text = ""`; `action_label = "ADD"`; native `button_pressed = false`, `disabled = false` | Native `pressed` and `toggled` | Complete multi-select Package target. The marker, Package identity, detail, and visible `ADD`/`INCLUDED` state form one accessible toggle; callers own Package selection policy and persistence. |
-| `package_choice_card.tscn` / `Button` | `package_name = "Package"`; `detail_text = ""`; `action_label = "INCLUDE"`; native `button_pressed = false`, `disabled = false` | Native `pressed` and `toggled` | Detailed multi-select Package card for wide task surfaces. It retains the same one-target selection and accessibility behavior as the compact Package choice. |
+| `choice.tscn` / `Button` | `title = "Choice"`; `description = ""`; `action_label = "Select"`; `selected_label = "Selected"`; `marker_text = ""`; `value_text = ""`; `leading_icon = null`; `variant = ROW`; `compact = false`; `show_description = true` | `selection_changed(selected)` plus native `pressed` and `toggled`; `set_selected(selected)`, `is_selected()`, `set_compact(bool)` | One native toggle target. Variants: `ROW`, `CARD`, `MARKED_ROW`, `MARKED_CARD`, `LIST`. Share a native `ButtonGroup` for exclusive selection; omit it for independent selection. Density, appearance and description visibility do not change selection. Native disabled/shortcut/focus behavior remains available. Explicit accessibility copy takes precedence; otherwise title, description and value supply the copy. |
+| `choice_group.tscn` / `MarginContainer` | `compact = false` | `get_options() -> BoxContainer`, `set_compact(bool)` | Responsive row-to-column layout. Add choices to the options slot. The host owns `ButtonGroup`, initial selection and content. Density propagates to options. |
 | `image_field.tscn` / `VBoxContainer` | `title = "Image"`; `help_text = ""`; `error_text = ""`; `preview = null`; `change_label = "Replace image"`; `disabled = false` | `replace_requested`; `set_preview(texture)`, `set_error(message)` | The native replace Button is the only input target and follows source-order focus. `change_label` is its accessible name, help/error is its description, and the preview is named from `title`. Disabled state prevents focus/activation. The component never opens, admits, or persists a path. |
 
 `SearchField` deliberately supplies one shared focus perimeter for its icon,
 native editor, and clear action. `TextField` and `TextArea` keep help or error
 copy adjacent to the editor and include that copy in the editor accessibility
-description. A `ChoiceRow` is one native toggle-button target; assign a shared
+description. A `Choice` is one native toggle-button target; assign a shared
 `ButtonGroup` for exclusive selection.
 
 `ImageField` never opens a file or persists an image. Connect
@@ -184,7 +182,7 @@ progress remains native `ProgressBar`.
 | `icon_action_grid.tscn` / `GridContainer` | `minimum_columns = 1`; `maximum_columns = 2`; `minimum_column_width = 220.0` | `column_count_changed(column_count)` | Add native semantic-icon Buttons directly. The whole 44px-minimum Button remains the target; icon-only actions need matching accessible names and tooltips. Reflow retains source order. |
 | `badge.tscn` / `PanelContainer` | `label_text = "Badge"`; `icon = null` | No signals or methods | Read-only short classification. Text remains visible; an optional icon is supplementary and the Badge does not receive focus or behave as a Button. |
 | `roll_row.tscn` / `GridContainer` | `state = PENDING`; `ordinal = "1"`; `title = "Roll"`; `detail = ""`; `result = ""`; `die_icon = dice.svg`; `compact_width = 720.0`; states `COMPLETE`, `CURRENT`, `PENDING`, `LOCKED` | `layout_profile_changed(profile)`; `get_action_slot()`; `ActionSlot` | Reflows the same state/ordinal/die/identity/result/action regions. Result stays empty until available. Visible state word and semantic icon communicate state; only the slotted action receives source-order focus. |
-| `structured_row.tscn` / `PanelContainer` | `variant = DATA`; `title = "Row identity"`; `detail = ""`; `value_text = ""`; `status_text = ""`; `leading_image = null`; `compact_width = 620.0`; variants `DATA`, `DETAIL`, `COMPACT_DETAIL`, `STACKED_DETAIL`, `SUMMARY`, `TABLE`, `HEADER`, `SELECTION_BANNER`, `CATEGORY`, `CATALOGUE`, `PORTRAIT`, `PENDING` | `layout_profile_changed(profile)`; `get_action_slot()`; `ActionSlot` | Context-neutral read-only row family with one stable trailing lane. Compact reflow retains content and focus order. Title/status remain textual; pending state is not color-only. Use `ChoiceRow`, not this scene, when the entire row must be selectable. |
+| `structured_row.tscn` / `PanelContainer` | `variant = DATA`; `title = "Row identity"`; `detail = ""`; `value_text = ""`; `status_text = ""`; `leading_image = null`; `compact_width = 620.0`; variants `DATA`, `DETAIL`, `COMPACT_DETAIL`, `STACKED_DETAIL`, `SUMMARY`, `TABLE`, `HEADER`, `SELECTION_BANNER`, `CATEGORY`, `CATALOGUE`, `PORTRAIT`, `PENDING` | `layout_profile_changed(profile)`; `get_action_slot()`; `ActionSlot` | Context-neutral read-only row family with one stable trailing lane. Compact reflow retains content and focus order. Title/status remain textual; pending state is not color-only. Use `Choice`, not this scene, when the entire row must be selectable. |
 | `key_value_row.tscn` / `PanelContainer` | `key_text = "Key"`; `value_text = ""` | No signals or methods | Compact read-only fact with a visible key, trailing value, and divider. It receives no input; key and value are combined into its accessibility name and description. |
 | `action_row.tscn` / `Button` | `title = "Action"`; `description = "Supporting action detail"`; `action_label = "â€º"`; `tone = STANDARD`; native `disabled = false`; tones `STANDARD`, `DANGER` | Native `pressed` | Complete native button target for a compact navigation or management action. Title, supporting detail, and trailing action label remain visible; the root uses a secondary or danger semantic action style. Callers own policy and persistence. |
 | `action_link.tscn` / `Button` | `title = "Action"`; `title_lane_width = 150.0`; `title_font_size = 0`; native `disabled = false` | Native `pressed` | Complete quiet navigation target with a label lane, intentional gap, continuous trailing rule, and scene-authored arrow head. The rule never touches the label and meets the arrow base; callers own policy and connect `pressed`. |
@@ -197,7 +195,7 @@ progress remains native `ProgressBar`.
 The result slot in `RollRow` remains empty before a result exists; do not add
 decorative punctuation. The state marker always names its state and uses a
 semantic icon. `StructuredRow` exposes a stable `ActionSlot`; selection itself
-uses `ChoiceRow` so a non-interactive record does not grow fake button
+uses `Choice` so a non-interactive record does not grow fake button
 behavior. `WorldRow` and `DisclosureRow` intentionally use a native root
 Button because selection or navigation is their complete documented behavior;
 the summary Card keeps its static relationship scene-authored while callers
@@ -358,7 +356,7 @@ and `restore_state(state)` retain the visible page as plain data when restoring
 a consumer's draft; they do not change the selected entry or any domain state.
 
 `theme/fullscreen_task_theme.tres` supplies the approved square task actions,
-inputs, choice rows and detail panels using unchanged package design tokens.
+inputs, choices and detail panels using unchanged package design tokens.
 The unchanged character pictograms and original attribution are under
 `icons/character/`.
 

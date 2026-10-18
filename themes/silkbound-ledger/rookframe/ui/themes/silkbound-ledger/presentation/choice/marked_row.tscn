@@ -1,0 +1,90 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://rookframe/ui/components/forms/choice.tscn" id="base"]
+[ext_resource type="Theme" path="res://rookframe/ui/theme/silkbound_theme.tres" id="skin_theme"]
+[sub_resource type="StyleBoxFlat" id="5580a5c7b8_ChoiceNormal"]
+bg_color = Color(0.082353, 0.090196, 0.098039, 0.82)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.243137, 0.262745, 0.274510, 1.0)
+
+[sub_resource type="StyleBoxFlat" id="5580a5c7b8_ChoicePressed"]
+bg_color = Color(0.203922, 0.239216, 0.254902, 1)
+border_width_left = 3
+border_width_top = 0
+border_width_right = 0
+border_width_bottom = 0
+border_color = Color(0.905882, 0.905882, 0.866667, 1.0)
+
+[sub_resource type="StyleBoxFlat" id="5580a5c7b8_ChoiceHover"]
+bg_color = Color(0.203922, 0.239216, 0.254902, 0.82)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.807843, 0.800000, 0.701961, 1.0)
+
+[sub_resource type="StyleBoxFlat" id="5580a5c7b8_ChoiceFocus"]
+bg_color = Color(0.082353, 0.090196, 0.098039, 0.82)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.807843, 0.800000, 0.701961, 1.0)
+
+[sub_resource type="StyleBoxFlat" id="5580a5c7b8_MarkerNormal"]
+bg_color = Color(0, 0, 0, 0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.356863, 0.384314, 0.396078, 1.0)
+
+[sub_resource type="StyleBoxFlat" id="5580a5c7b8_MarkerSelected"]
+bg_color = Color(0.137255, 0.156863, 0.168627, 1.0)
+border_width_left = 3
+border_width_top = 0
+border_width_right = 0
+border_width_bottom = 0
+border_color = Color(0.807843, 0.800000, 0.701961, 1.0)
+
+
+[node name="Choice" instance=ExtResource("base")]
+theme_override_styles/normal = SubResource("5580a5c7b8_ChoiceNormal")
+theme_override_styles/pressed = SubResource("5580a5c7b8_ChoicePressed")
+theme_override_styles/hover = SubResource("5580a5c7b8_ChoiceHover")
+theme_override_styles/hover_pressed = SubResource("5580a5c7b8_ChoicePressed")
+theme_override_styles/focus = SubResource("5580a5c7b8_ChoiceFocus")
+theme = ExtResource("skin_theme")
+
+[node name="Row" parent="Content"]
+theme_override_constants/separation = 10
+
+[node name="Marker" parent="Content/Row"]
+theme_override_styles/panel = SubResource("5580a5c7b8_MarkerNormal")
+
+[node name="Glyph" parent="Content/Row/Marker"]
+theme_override_colors/font_color = Color(0.905882, 0.905882, 0.866667, 1.0)
+theme_override_font_sizes/font_size = 18
+
+[node name="SelectedMarker" parent="Content/Row"]
+theme_override_styles/panel = SubResource("5580a5c7b8_MarkerSelected")
+
+[node name="Glyph" parent="Content/Row/SelectedMarker"]
+theme_override_colors/font_color = Color(0.905882, 0.905882, 0.866667, 1.0)
+theme_override_font_sizes/font_size = 18
+
+[node name="Copy" parent="Content/Row"]
+theme_override_constants/separation = 1
+
+[node name="Title" parent="Content/Row/Copy"]
+theme_override_colors/font_color = Color(0.905882, 0.905882, 0.866667, 1.0)
+theme_override_font_sizes/font_size = 18
+
+[node name="Description" parent="Content/Row/Copy"]
+theme_override_font_sizes/font_size = 18
+
+[node name="State" parent="Content/Row"]
+theme_override_font_sizes/font_size = 18

@@ -40,15 +40,24 @@ def main():
     missing = expected - covered
     assert not missing, "Unrepresented public components/capabilities:\n" + "\n".join(sorted(missing))
     assert {entry["category"] for entry in entries} == CATEGORIES
-    # Keep the library runnable with only the core package installed.
+    # Pages use core resources; only the catalogue host imports preview Themes.
+    catalogue_host = SHOWCASE / "examples/components/catalogue.gd"
+    preview_themes = {
+        f"res://rookframe/ui/themes/{name}/theme.tres":
+            ROOT / "themes" / name / "rookframe/ui/themes" / name / "theme.tres"
+        for name in ("silkbound-ledger", "fantasy", "cyberpunk")
+    }
     for source in (SHOWCASE / "examples/components").rglob("*"):
         if source.suffix not in {".gd", ".tscn", ".json"}:
             continue
         text = source.read_text()
-        assert not re.search(r"fantasy|cyberpunk|silkbound", text, re.IGNORECASE), source
+        if source != catalogue_host:
+            assert not re.search(r"fantasy|cyberpunk|silkbound", text, re.IGNORECASE), source
         for ref in re.findall(r'"(res://[^"\n]+)"', text):
             relative = ref.removeprefix("res://")
-            if ref.startswith("res://rookframe/"):
+            if source == catalogue_host and ref in preview_themes:
+                assert preview_themes[ref].is_file(), f"Missing preview Theme: {source} -> {ref}"
+            elif ref.startswith("res://rookframe/"):
                 assert (ROOT / "ui-kit" / relative).exists(), f"Non-core dependency: {source} -> {ref}"
             else:
                 assert ref.startswith("res://examples/components/"), f"External specimen dependency: {source} -> {ref}"

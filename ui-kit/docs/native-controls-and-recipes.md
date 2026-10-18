@@ -31,9 +31,8 @@ controls. Group resources are local to each instantiated scene.
 | Button | `actions/button.tscn` | `Button` | `variant = SECONDARY` (`SECONDARY`, `PRIMARY`, `DESTRUCTIVE`), `compact = false`; native text, icon, input, signals and toggle behavior. |
 | Toggle | `actions/toggle.tscn` | `Button` | Native properties, methods, signals, input and focus behavior remain unchanged. |
 | ButtonGroup | `actions/button_group.tscn` | `HFlowContainer` | Native properties, methods, signals, input and focus behavior remain unchanged. |
-| ToggleGroup | `actions/toggle_group.tres` | `ButtonGroup` | Assign one instance to exclusive Toggle buttons. Duplicate per independent group; omit the group for independent toggles. |
-| Select | `forms/select.tscn` | `OptionButton` | Native properties, methods, signals, input and focus behavior remain unchanged. |
-| RadioGroup | `forms/radio_group.tres` | `ButtonGroup` | Assign one instance to Checkbox buttons and set the initial selection. Duplicate per independent group. Native allow_unpress enables an optional choice. |
+| Select | `forms/select.tscn` | `OptionButton` | `variant = NATIVE` or `MENU`; `compact = false`. Native IDs, signals, search and selection remain unchanged. |
+| SelectionGroup | `forms/selection_group.tres` | `ButtonGroup` | Assign one instance to Checkbox, Toggle or Choice buttons and set the initial selection. Duplicate per independent group. Native allow_unpress enables an optional choice. |
 | Checkbox | `forms/checkbox.tscn` | `CheckBox` | Native properties, methods, signals, input and focus behavior remain unchanged. |
 | NativeSwitch | `forms/switch.tscn` | `CheckButton` | Native properties, methods, signals, input and focus behavior remain unchanged. |
 | Input | `forms/input.tscn` | `LineEdit` | Native properties, methods, signals, input and focus behavior remain unchanged. |
@@ -53,7 +52,7 @@ controls. Group resources are local to each instantiated scene.
 | Label | `data/label.tscn` | `Label` | Native properties, methods, signals, input and focus behavior remain unchanged. |
 | Typography | `data/typography.tscn` | `Label` | Native Label with the RookframeBody semantic role. Set theme_type_variation for other roles; fonts and appearance belong to the consumer. |
 | Table | `data/table.tscn` | `Tree` | Native properties, methods, signals, input and focus behavior remain unchanged. |
-| Item | `data/item.tscn` | `PanelContainer` | Display item inherits StructuredRow. Use ChoiceRow for selection and ActionRow for activation. |
+| Item | `data/item.tscn` | `PanelContainer` | Display item inherits StructuredRow. Use Choice for selection and ActionRow for activation. |
 | Avatar | `data/avatar.tscn` | `PanelContainer` | Set texture, initials and fallback_texture. Displays the supplied image, then initials, then fallback art. The host supplies the accessible identity. |
 | Progress | `feedback/progress.tscn` | `ProgressBar` | Native properties, methods, signals, input and focus behavior remain unchanged. |
 | Spinner | `feedback/spinner.tscn` | `PanelContainer` | Inherits TaskState in LOADING state, including title, description, state and reduced_motion. No separate animation implementation. |
@@ -63,9 +62,8 @@ controls. Group resources are local to each instantiated scene.
 | AlertDialog | `overlays/alert_dialog.tscn` | `Window` | Inherits Dialog in CONFIRMATION tone, including confirmed/cancelled signals, open_dialog() and get_body_slot(). |
 
 The Slider and Separator pages list both orientations. Accordion combines
-`surfaces/accordion.tres` with `surfaces/collapsible.tscn`. Radio Group combines
-`forms/radio_group.tres` with `forms/checkbox.tscn`; Toggle Group combines
-`actions/toggle_group.tres` with `actions/toggle.tscn`. Hosts still own required
+`surfaces/accordion.tres` with `surfaces/collapsible.tscn`. Radio and toggle sets share
+`forms/selection_group.tres` with Checkbox, Toggle or Choice buttons. Hosts still own required
 initial selections, content, labels and actions. Card, Item, Spinner and Alert
 Dialog inherit their existing core compositions without duplicating behavior.
 
@@ -205,51 +203,43 @@ stretch mode. `KEEP_ASPECT_CENTERED` is appropriate for icons or bounded art;
 Use `ImageField` only when replacement behavior and adjacent help/error copy
 are required.
 
-## Auxiliary shell-theme Switch
+## Choice and Choice Group
 
-Instance `res://rookframe/ui/menu/Switch.tscn` under a consumer Theme. The shared
-Usage token is `components.switch`, mapped to native `components_switch` and
-`components_switch__compact` variations. The consumer Theme supplies appearance.
-Without those mappings, the card uses native Button text colors, font and
-content margins, container spacing and the CheckBox checkmark. Disabled and
-selected states retain their native colors. Menu buttons, menu choices, editor
-buttons and Switch cards retain a minimum 44px target without theme sizing.
+Use `res://rookframe/ui/components/forms/choice.tscn` for a complete selectable target.
+Use `variant = CARD` for the former selectable Switch presentation. The other
+variants are `ROW`, `MARKED_ROW`, `MARKED_CARD` and `LIST`. Each variant uses the
+same native toggle Button and public interface. Use `title`, `description`,
+`leading_icon`, `marker_text` and `value_text` for content. Use `action_label`
+and `selected_label` for the visible state copy. Package inclusion is host data:
+set these labels to `Include` and `Included` on a marked variant.
 
-Set `title` and optional `description` for the card's copy; leave native
-`Button.text` and `icon` empty. Selected cards show the same checkmark resource
-as the current theme's dropdown, including its disabled tint. Unselected cards
-reserve the icon's space, so selection never shifts the copy. The native toggle
-state supplies the accessible selection state.
+`compact` controls density. `show_description` independently controls supporting
+copy. Appearance, density and description changes retain the Button, selection,
+connections and focus. Native `button_pressed`, `button_group`, `disabled`,
+`shortcut`, `pressed` and `toggled` remain usable. `selection_changed(bool)`
+mirrors native `toggled`. `set_selected(bool)` and `is_selected()` use the same
+native state. Silent native updates refresh the displayed state on the next draw.
+Explicit accessibility copy takes precedence over automatic title/description/value copy.
 
-Set `compact` or call `set_compact(bool)` for density. The recipe manages its
-minimum size: at least 116 px regular / 88 px compact, growing for wrapped copy.
-Each card remains a native toggle Button with `button_pressed`, `toggled(bool)`,
-`pressed`, `disabled`, `shortcut`, and keyboard focus. Theme and density changes
-preserve selection. The title and description supply accessible copy; explicit
-`accessibility_name` and `accessibility_description` take precedence.
+Cards retain the `components_switch` and `components_switch__compact` Theme
+variations. Their checkmark reserves space when unselected. The default card
+minimum is 116px, or 88px when compact; wrapped content can increase the height.
+Optional Themes own materials, fonts and colors. Other variants retain their
+existing semantic Theme variations and optional presentation resources.
 
-Use `res://rookframe/ui/menu/SwitchGroup.tscn` for related options. Add Switch
-instances to `get_options()` (the native BoxContainer at `Inset/Options`), and
-assign the same host-owned `ButtonGroup` to those cards for exclusive selection.
-Set one card's initial `button_pressed = true`. Independent groups use separate
-ButtonGroups; standalone cards can toggle independently.
+Use `res://rookframe/ui/components/forms/choice_group.tscn` for responsive layout.
+Add choices to `get_options()`. The group changes from a row to a column when
+options no longer fit. Preferred option widths are 320px regular and 280px compact;
+Theme constants can override them. Hidden options do not affect the layout.
+`set_compact(bool)` updates the group and its children. The existing
+`components_switch_group`, `components_switch_options` and `menu_group` Theme
+variations remain available.
 
-SwitchGroup uses the `menu_group` variation from the consumer Theme. It supports any number of options. Cards share a row
-using a preferred card width of 320 px regular / 280 px compact; when the row
-would not fit, the whole group stacks vertically. The threshold also accounts for padding, gaps and
-larger native card minimums. Adding, removing or hiding options recomputes the
-layout. Set `compact` on the group to update its padding, spacing and cards.
-The corresponding Theme variations are `components_switch_group` and
-`components_switch_options`, with `__compact` variants.
-
-The **Switch** section follows Buttons in the Menu showcase and demonstrates
-two- and three-option groups, responsive stacking, and disabled selected/unselected
-states. Run its integration check in the sibling showcase with:
-
-```sh
-/Applications/Godot.app/Contents/MacOS/Godot --headless --path . --script res://tests/switch.gd
-# Omit --headless and append -- --capture-dir=/tmp/switch to render both themes.
-```
+Choice Group does not select options. Assign one shared native `ButtonGroup` for
+exclusive selection. Use `forms/selection_group.tres` or `ButtonGroup.new()`.
+Set the initial selection in the host. Set `allow_unpress = true` when no
+selection is permitted. Duplicate the resource for each independent group.
+Omit `button_group` for independent choices.
 
 ## Compatibility shell-theme editor controls
 
@@ -289,10 +279,11 @@ tool/layer/placement example. Run its input, layout and material checks with:
 /Applications/Godot.app/Contents/MacOS/Godot --path . --script res://tests/editor_components.gd -- --capture-dir=/tmp/editor-components
 ```
 
-## Auxiliary shell-theme choices and native Settings controls
+## Select variants and native Settings controls
 
-Instance `res://rookframe/ui/menu/MenuChoice.tscn` with a consumer
-Theme. This native OptionButton binds its popup Theme, puts the selected check
+Instance `res://rookframe/ui/components/forms/select.tscn` with a consumer
+Theme. Set `variant = MENU` for the former MenuChoice presentation. The default
+`NATIVE` variant uses the stock OptionButton presentation. The menu variant binds its popup Theme, puts the selected check
 at the trailing edge, and bounds long menus to the available space above or
 below the field. Item IDs, metadata, tooltips, incremental search, keyboard
 navigation and selection signals remain native. Set `compact` or call
@@ -306,7 +297,7 @@ For a bare OptionButton, set `get_popup().theme_type_variation` to
 `settings_popup` or `settings_popup__compact`. Set a ScrollContainer's vertical
 scrollbar variation to `settings_scrollbar`. Use
 `Control.CURSOR_POINTING_HAND` for native Settings buttons and scrollbars.
-The menu/editor button recipes and MenuChoice supply this cursor, including
+The menu/editor button recipes and Select menu variant supply this cursor, including
 selectable popup items and popup scrollbars; disabled items/separators keep the
 arrow cursor. Verify with `tests/menu_choice.gd` in the showcase and
 `tests/current_design_system.gd` in the sibling showcase.
@@ -334,9 +325,9 @@ The host owns every value, action and translated string.
 | Requirement | Capability | Composition | Observable result |
 | --- | --- | --- | --- |
 | NAT-01 | Select; Native Select | Use OptionButton. Keep native IDs and disabled items. Document native search settings. | Selection uses IDs. Disabled items cannot activate. Empty lists have no invalid selected index. |
-| NAT-02 | Radio Group | Use ButtonGroup and CheckBox or ChoiceRow. | Required mode keeps one selected item. Optional mode permits none. The recipe states its initial selection. |
+| NAT-02 | Radio Group | Use ButtonGroup and CheckBox or Choice. | Required mode keeps one selected item. Optional mode permits none. The recipe states its initial selection. |
 | NAT-03 | Checkbox | Use native CheckBox for one boolean. | Pointer, keyboard, and controller each change the value once. Mixed state is absent. |
-| NAT-04 | Switch | Use CheckButton for an immediate boolean setting. | The host receives one change. Existing selectable Switch cards keep their separate contract. |
+| NAT-04 | Switch | Use CheckButton for an immediate boolean setting. | The host receives one change. Existing selectable Choice cards keep their separate contract. |
 | NAT-05 | Toggle | Use Button.toggle_mode. | Pressed state remains distinct from focus and disabled state. |
 | NAT-06 | Toggle Group | Use ButtonGroup for exclusive choice. Use independent toggles for multiple choice. | Group rules remain true after disabled-state and external-value changes. |
 | NAT-07 | Button Group | Use ActionBar and native containers. | Actions keep independent behavior and source order during compact layout. |
@@ -360,7 +351,7 @@ The host owns every value, action and translated string.
 | NAT-25 | Scroll Area | Use ScrollContainer and native scrollbars. | Wheel, touch, scrollbar drag, and focus-follow behavior work. Nested scroll owners are absent. |
 | NAT-26 | Aspect Ratio | Use AspectRatioContainer and TextureRect. | Fit and crop examples keep the selected ratio during resize. |
 | NAT-27 | Card | Use Section or existing surfaces. | Header, body, and actions remain readable. A display card has no implied activation. |
-| NAT-28 | Item | Use StructuredRow, ChoiceRow, or ActionRow by purpose. | Display, selection, and activation remain separate documented behaviors. |
+| NAT-28 | Item | Use StructuredRow, Choice, or ActionRow by purpose. | Display, selection, and activation remain separate documented behaviors. |
 | NAT-29 | Badge | Use the existing Badge. | Text communicates status without color. Long labels do not cover adjacent actions. |
 | NAT-30 | Avatar | Use TextureRect and a fallback recipe. | A missing image shows host-supplied initials or a generic icon. The identity has an accessible name. |
 | NAT-31 | Button | Use native Button and current theme variations. | Text and icon actions work with each input mode. Disabled actions emit no activation. |
