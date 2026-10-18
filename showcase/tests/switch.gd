@@ -1,7 +1,7 @@
 extends SceneTree
 ## Exercise native selection and responsive copy against both new theme mappings.
 const Catalogue = preload("res://examples/catalogue/visual_catalogue.tscn")
-const Switch = preload("res://rookframe/ui/menu/Switch.tscn")
+const Switch = preload("res://rookframe/ui/components/forms/choice.tscn")
 var failures: Array[String] = []
 var capture_dir := ""
 var toggles := 0
@@ -160,7 +160,7 @@ func verify() -> void:
 	check(audience.get_child(1).button_pressed and not audience.get_child(2).button_pressed, "Keyboard selection failed in a three-option group")
 	audience.get_child(1).release_focus()
 	# Independent toggles and silent host updates use the same native state.
-	var independent := Switch.instantiate() as Button
+	var independent := _variant_scene() as Button
 	independent.theme = screen.theme
 	independent.title = "Allow guests"
 	independent.position = Vector2(24, 800)
@@ -213,7 +213,7 @@ func verify() -> void:
 				await capture(("fantasy" if theme_index == 1 else "cyberpunk") + "-%d%s" % [width, "-rtl" if rtl else ""])
 	# More than three options and live additions use the same measured layout.
 	for index in range(2):
-		var extra := Switch.instantiate() as Button
+		var extra := _variant_scene() as Button
 		extra.title = "Extra choice %d" % index
 		extra.button_group = audience.get_child(0).button_group
 		audience.add_child(extra)
@@ -236,3 +236,9 @@ func verify() -> void:
 	await process_frame
 	print("SWITCH ", "PASS" if failures.is_empty() else failures)
 	quit(0 if failures.is_empty() else 1)
+
+
+func _variant_scene() -> Control:
+	var control = Switch.instantiate()
+	control.variant = 1
+	return control

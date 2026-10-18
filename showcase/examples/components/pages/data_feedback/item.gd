@@ -8,7 +8,7 @@ static func build(page) -> void:
 	var status = page.note(display, "No action requested.")
 	page.button(record.get_action_slot(), "Inspect compass", func(): status.text = "Compass inspection requested.")
 	var selection = page.section("Selectable item", "The entire choice row is one native toggle target.")
-	var choice = page.scene(Demo.path("forms/choice_row"), selection, {"title": "Field journal", "description": "Include in the expedition supplies"})
+	var choice = page.scene(Demo.path("forms/choice"), selection, {"title": "Field journal", "description": "Include in the expedition supplies"})
 	var selected = page.note(selection, "Journal is not selected.")
 	choice.selection_changed.connect(func(value: bool): selected.text = "Journal selected." if value else "Journal is not selected.")
 	var activation = page.section("Action item", "Activation requests an action without becoming a selection.")

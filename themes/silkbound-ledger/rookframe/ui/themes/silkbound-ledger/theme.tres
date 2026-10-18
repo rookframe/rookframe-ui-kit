@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/_internal/data/collection_row.tscn" id="scene_2"]
 [ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/_internal/data/summary_pair.tscn" id="scene_3"]
 [ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/_internal/data/summary_stat.tscn" id="scene_4"]
-[ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/_internal/data/task_choice.tscn" id="scene_5"]
 [ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/_internal/surfaces/wizard_step.tscn" id="scene_6"]
 [ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/chronicle/ChronicleSurface.tscn" id="scene_7"]
 [ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/components/content/miniature_browser.tscn" id="scene_8"]
@@ -34,10 +33,7 @@
 [ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/components/feedback/record_tooltip.tscn" id="scene_29"]
 [ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/components/feedback/step_progress.tscn" id="scene_30"]
 [ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/components/feedback/task_state.tscn" id="scene_31"]
-[ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/components/forms/choice_row.tscn" id="scene_32"]
 [ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/components/forms/image_field.tscn" id="scene_33"]
-[ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/components/forms/package_choice.tscn" id="scene_34"]
-[ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/components/forms/package_choice_card.tscn" id="scene_35"]
 [ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/components/forms/paginated_text_area.tscn" id="scene_36"]
 [ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/components/forms/search_field.tscn" id="scene_37"]
 [ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/components/forms/task_text_area.tscn" id="scene_38"]
@@ -69,10 +65,9 @@
 [ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/menu/MenuButtonDestructive.tscn" id="scene_64"]
 [ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/menu/MenuButtonPrimary.tscn" id="scene_65"]
 [ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/menu/MenuButtonStandard.tscn" id="scene_66"]
-[ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/menu/MenuChoice.tscn" id="scene_67"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/themes/silkbound-ledger/presentation/select.tscn" id="scene_67"]
 [ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/menu/MenuSurface.tscn" id="scene_68"]
-[ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/menu/Switch.tscn" id="scene_69"]
-[ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/menu/SwitchGroup.tscn" id="scene_70"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/themes/silkbound-ledger/presentation/choice_group.tscn" id="scene_70"]
 [ext_resource type="Script" path="res://rookframe/ui/themes/silkbound-ledger/presentation/collection_row.gd" id="hook_0"]
 [ext_resource type="Script" path="res://rookframe/ui/themes/silkbound-ledger/presentation/miniature_browser.gd" id="hook_1"]
 [ext_resource type="Script" path="res://rookframe/ui/themes/silkbound-ledger/presentation/miniature_picker.gd" id="hook_2"]
@@ -98,6 +93,8 @@
 
 [ext_resource type="Theme" path="res://rookframe/ui/theme/action_panel_theme.tres" id="action_profile"]
 
+[ext_resource type="Script" path="res://rookframe/ui/themes/silkbound-ledger/presentation/choice.gd" id="hook_choice"]
+
 [resource]
 script = ExtResource("script")
 native_theme = ExtResource("native")
@@ -108,7 +105,6 @@ presentations = Dictionary[String, PackedScene]({
 "res://rookframe/ui/_internal/data/collection_row.tscn": ExtResource("scene_2"),
 "res://rookframe/ui/_internal/data/summary_pair.tscn": ExtResource("scene_3"),
 "res://rookframe/ui/_internal/data/summary_stat.tscn": ExtResource("scene_4"),
-"res://rookframe/ui/_internal/data/task_choice.tscn": ExtResource("scene_5"),
 "res://rookframe/ui/_internal/surfaces/wizard_step.tscn": ExtResource("scene_6"),
 "res://rookframe/ui/chronicle/ChronicleSurface.tscn": ExtResource("scene_7"),
 "res://rookframe/ui/components/content/miniature_browser.tscn": ExtResource("scene_8"),
@@ -135,10 +131,7 @@ presentations = Dictionary[String, PackedScene]({
 "res://rookframe/ui/components/feedback/record_tooltip.tscn": ExtResource("scene_29"),
 "res://rookframe/ui/components/feedback/step_progress.tscn": ExtResource("scene_30"),
 "res://rookframe/ui/components/feedback/task_state.tscn": ExtResource("scene_31"),
-"res://rookframe/ui/components/forms/choice_row.tscn": ExtResource("scene_32"),
 "res://rookframe/ui/components/forms/image_field.tscn": ExtResource("scene_33"),
-"res://rookframe/ui/components/forms/package_choice.tscn": ExtResource("scene_34"),
-"res://rookframe/ui/components/forms/package_choice_card.tscn": ExtResource("scene_35"),
 "res://rookframe/ui/components/forms/paginated_text_area.tscn": ExtResource("scene_36"),
 "res://rookframe/ui/components/forms/search_field.tscn": ExtResource("scene_37"),
 "res://rookframe/ui/components/forms/task_text_area.tscn": ExtResource("scene_38"),
@@ -170,12 +163,12 @@ presentations = Dictionary[String, PackedScene]({
 "res://rookframe/ui/menu/MenuButtonDestructive.tscn": ExtResource("scene_64"),
 "res://rookframe/ui/menu/MenuButtonPrimary.tscn": ExtResource("scene_65"),
 "res://rookframe/ui/menu/MenuButtonStandard.tscn": ExtResource("scene_66"),
-"res://rookframe/ui/menu/MenuChoice.tscn": ExtResource("scene_67"),
+"res://rookframe/ui/components/forms/select.tscn": ExtResource("scene_67"),
 "res://rookframe/ui/menu/MenuSurface.tscn": ExtResource("scene_68"),
-"res://rookframe/ui/menu/Switch.tscn": ExtResource("scene_69"),
-"res://rookframe/ui/menu/SwitchGroup.tscn": ExtResource("scene_70")
+"res://rookframe/ui/components/forms/choice_group.tscn": ExtResource("scene_70")
 })
 presentation_hooks = Dictionary[String, Script]({
+"res://rookframe/ui/components/forms/choice.gd": ExtResource("hook_choice"),
 "res://rookframe/ui/_internal/data/collection_row.gd": ExtResource("hook_0"),
 "res://rookframe/ui/components/content/miniature_browser.gd": ExtResource("hook_1"),
 "res://rookframe/ui/components/content/miniature_picker.gd": ExtResource("hook_2"),

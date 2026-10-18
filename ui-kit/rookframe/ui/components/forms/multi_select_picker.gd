@@ -1,7 +1,7 @@
 extends VBoxContainer
-## Stable-ID multiple selection; native ChoiceRows own activation and focus.
+## Stable-ID multiple selection; native Choices own activation and focus.
 signal selection_changed(ids: PackedStringArray)
-const ROW = preload("res://rookframe/ui/components/forms/choice_row.tscn")
+const ROW = preload("res://rookframe/ui/components/forms/choice.tscn")
 const Focus = preload("res://rookframe/ui/_internal/interaction/focus.gd")
 @export var show_summary := true:
 	set(value):
@@ -98,11 +98,11 @@ func _refresh() -> void:
 		%Rows.move_child(row, index)
 		row.title = item.title
 		row.description = item.get("description", "")
-		row.icon = item.get("icon")
+		row.leading_icon = item.get("icon")
 		row.disabled = disabled or item.get("disabled", false)
 		row.focus_mode = Control.FOCUS_NONE if row.disabled else Control.FOCUS_ALL
 		row.set_pressed_no_signal(_selected.has(id))
-		# ChoiceRow refresh reads the native pressed state without emitting.
+		# Choice refresh reads the native pressed state without emitting.
 		row.action_label = tr("Select")
 		if _selected.has(id) and not _removes.has(id):
 			var remove := Button.new()

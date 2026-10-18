@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/components/forms/text_field.tscn" id="3_text_field"]
 [ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/components/forms/text_area.tscn" id="4_text_area"]
 [ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/components/forms/search_field.tscn" id="5_search"]
-[ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/components/forms/choice_row.tscn" id="6_choice"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/components/forms/choice.tscn" id="6_choice"]
 [ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/components/forms/image_field.tscn" id="7_image"]
 [ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/components/layout/responsive_split.tscn" id="8_split"]
 [ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/components/layout/section.tscn" id="9_section"]
@@ -28,10 +28,10 @@
 [ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/components/overlays/dialog.tscn" id="26_dialog"]
 [ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/components/overlays/file_picker_dialog.tscn" id="27_file_picker"]
 [ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/components/layout/compact_route_heading.tscn" id="28_compact_heading"]
-[ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/components/forms/package_choice.tscn" id="29_package_choice"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/components/forms/choice.tscn" id="29_package_choice"]
 [ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/components/data/key_value_row.tscn" id="30_key_value"]
 [ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/components/data/package_row.tscn" id="31_package_row"]
-[ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/components/forms/package_choice_card.tscn" id="32_package_choice_card"]
+[ext_resource type="PackedScene" path="res://rookframe/ui/components/forms/choice.tscn" id="32_package_choice_card"]
 [ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/components/data/package_card.tscn" id="33_package_card"]
 [ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/components/data/action_row.tscn" id="34_action_row"]
 [ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/components/data/action_link.tscn" id="35_action_link"]
@@ -410,7 +410,8 @@ button_pressed = true
 [node name="Compact" parent="Canvas/Page/Stack/Tabs/Forms/Margin/Content/Choices" instance=ExtResource("6_choice")]
 layout_mode = 2
 title = "Compact choice"
-variant = 1
+compact = true
+show_description = false
 
 [node name="Disabled" parent="Canvas/Page/Stack/Tabs/Forms/Margin/Content/Choices" instance=ExtResource("6_choice")]
 layout_mode = 2
@@ -419,15 +420,21 @@ title = "Unavailable choice"
 description = "Disabled state stays readable and cannot receive focus."
 
 [node name="PackageChoice" parent="Canvas/Page/Stack/Tabs/Forms/Margin/Content" instance=ExtResource("29_package_choice")]
+variant = 2
+action_label = "ADD"
+selected_label = "Included"
 layout_mode = 2
-package_name = "Rookframe Fixture Essentials"
-detail_text = "Optional Package · 1.0.1\nCrate, Lantern, and Miniature"
+title = "Rookframe Fixture Essentials"
+description = "Optional Package · 1.0.1\nCrate, Lantern, and Miniature"
 button_pressed = true
 
 [node name="PackageChoiceCard" parent="Canvas/Page/Stack/Tabs/Forms/Margin/Content" instance=ExtResource("32_package_choice_card")]
+variant = 3
+action_label = "INCLUDE"
+selected_label = "Included"
 layout_mode = 2
-package_name = "Rookframe Fixture Essentials"
-detail_text = "Optional Package · 1.0.1\nCrate, Lantern, and Miniature"
+title = "Rookframe Fixture Essentials"
+description = "Optional Package · 1.0.1\nCrate, Lantern, and Miniature"
 button_pressed = true
 
 [node name="ImageField" parent="Canvas/Page/Stack/Tabs/Forms/Margin/Content" instance=ExtResource("7_image")]

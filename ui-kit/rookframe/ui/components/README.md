@@ -10,7 +10,7 @@ See [the proxy paths and usage contract](../../../docs/native-controls-and-recip
 - `actions/` contains native buttons, toggles, action containers and toggle groups;
   `navigation/` contains retained native tabs.
 - `forms/` contains labelled field relationships, one-perimeter search,
-  complete generic and compact/detailed Package choice targets, and neutral
+  one Choice with row, card, marked and list presentations, and neutral
   media replacement.
 - `feedback/` contains in-task Notice, Task State, and Step Progress regions.
 - `data/` contains metrics, badges, compact key/value and compact/detailed

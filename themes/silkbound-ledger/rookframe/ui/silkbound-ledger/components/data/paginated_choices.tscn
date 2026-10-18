@@ -6,14 +6,12 @@
 [ext_resource type="FontVariation" path="res://rookframe/ui/theme/task_display.tres" id="a4f3daee31_display"]
 
 [ext_resource type="Script" path="res://rookframe/ui/silkbound-ledger/components/data/paginated_choices.gd" id="a4f3daee31_skin_script"]
-[ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/_internal/data/task_choice.tscn" id="a4f3daee31_scene_ROW"]
 [ext_resource type="Shader" path="res://rookframe/ui/components/surfaces/action_panel/content_ink.gdshader" id="a4f3daee31_reveal_shader"]
 
 [node name="PaginatedChoices" instance=ExtResource("base")]
 theme = ExtResource("a4f3daee31_theme")
 theme_override_constants/separation = 0
 script = ExtResource("a4f3daee31_skin_script")
-row_scene = ExtResource("a4f3daee31_scene_ROW")
 reveal_shader = ExtResource("a4f3daee31_reveal_shader")
 
 [node name="Title" parent="Caption"]

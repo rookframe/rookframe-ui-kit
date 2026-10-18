@@ -69,7 +69,7 @@ func _catalogue() -> void:
 			node.free()
 		else:
 			check(resource.is_class(entry.rootType) and resource.resource_local_to_scene, "Native group is local to its owning scene: " + path)
-	check(count == 33, "All native recipes and orientation variants are addressable")
+	check(count == 32, "All native recipes and orientation variants are addressable")
 
 func _buttons_and_groups() -> void:
 	var button: Button = mount("actions/button.tscn")
@@ -93,7 +93,7 @@ func _buttons_and_groups() -> void:
 	var second: Button = mount("actions/toggle.tscn")
 	first.text = "First"
 	second.text = "Second"
-	var group: ButtonGroup = load(UI + "actions/toggle_group.tres").duplicate()
+	var group: ButtonGroup = load(UI + "forms/selection_group.tres").duplicate()
 	first.button_group = group
 	second.button_group = group
 	first.button_pressed = true
@@ -104,12 +104,12 @@ func _buttons_and_groups() -> void:
 	group.allow_unpress = true
 	await press(second)
 	check(group.get_pressed_button() == null, "Optional native group permits no selection")
-	var independent: ButtonGroup = load(UI + "actions/toggle_group.tres").duplicate()
+	var independent: ButtonGroup = load(UI + "forms/selection_group.tres").duplicate()
 	check(not independent.allow_unpress and independent.get_buttons().is_empty(), "Runtime groups are independent")
 	first.free()
 	second.free()
 	var radio: CheckBox = mount("forms/checkbox.tscn")
-	radio.button_group = load(UI + "forms/radio_group.tres").duplicate()
+	radio.button_group = load(UI + "forms/selection_group.tres").duplicate()
 	radio.text = "Radio"
 	await press(radio)
 	check(radio.button_group.get_pressed_button() == radio, "Radio group uses native Checkbox selection")

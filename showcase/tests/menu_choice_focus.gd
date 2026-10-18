@@ -1,6 +1,6 @@
 extends SceneTree
 ## Render the native focus state: flat pale bars must not cover the walnut face.
-const Choice = preload("res://rookframe/ui/menu/MenuChoice.tscn")
+const Choice = preload("res://rookframe/ui/components/forms/select.tscn")
 const Fantasy = preload("res://rookframe/ui/menu/MenuTheme.tres")
 var failures: Array[String] = []
 var capture_dir := "/tmp/menu-choice-focus"
@@ -92,7 +92,7 @@ func verify() -> void:
 	root.gui_embed_subwindows = true
 	root.unfocusable = true
 	root.mouse_passthrough = true
-	var choice := Choice.instantiate() as OptionButton
+	var choice := _variant_scene() as OptionButton
 	choice.theme = Fantasy
 	root.add_child(choice)
 	choice.add_item("English")
@@ -132,3 +132,9 @@ func verify() -> void:
 	await settle()
 	print("MENU_CHOICE_FOCUS ", "PASS" if failures.is_empty() else failures)
 	quit(0 if failures.is_empty() else 1)
+
+
+func _variant_scene() -> Control:
+	var control = Choice.instantiate()
+	control.variant = 1
+	return control

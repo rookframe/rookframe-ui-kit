@@ -32,7 +32,7 @@ func test_fixed_frame_measured_choices_and_actions() -> void:
 		for row in choices.get_node(^"Area/Rows").get_children():
 			if row.visible:
 				assert_bool(row.get_global_rect().end.y <= choices.get_node(^"Pager").global_position.y).is_true()
-				assert_bool(row.get_node("Inset/Row/Value").get_global_rect().end.x <= row.get_global_rect().end.x).is_true()
+				assert_bool(row.get_node("Content/Row/Value").get_global_rect().end.x <= row.get_global_rect().end.x).is_true()
 				seen.append(row.accessibility_name)
 		if next.disabled:
 			break
@@ -79,7 +79,7 @@ func test_fixed_frame_measured_choices_and_actions() -> void:
 		assert_int(row.get_node(^"Inset/Row/Value").get_theme_font_size("font_size")).is_equal(profile[1])
 		assert_int(row.get_node(^"Inset").get_theme_constant("margin_top")).is_equal(profile[2])
 		for choice in choices.get_node(^"Area/Rows").get_children():
-			var value: Label = choice.get_node(^"Inset/Row/Value")
+			var value: Label = choice.get_node(^"Content/Row/Value")
 			if choice.is_visible_in_tree() and value.text == "12":
 				assert_int(value.get_theme_font_size("font_size")).is_equal(24 if profile[0].x == 1920 else 20)
 				assert_float(value.size.x).is_greater_equal(value.get_theme_font("font").get_string_size("12", HORIZONTAL_ALIGNMENT_LEFT, -1, value.get_theme_font_size("font_size")).x)

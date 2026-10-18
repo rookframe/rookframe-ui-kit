@@ -242,17 +242,23 @@
       "contract": "The icon, editor, and clear action share one visible focus perimeter."
     },
     {
-      "name": "ChoiceRow",
-      "scene": "res://rookframe/ui/components/forms/choice_row.tscn",
-      "sceneUid": "uid://kipsbpkvppkfb",
-      "script": "res://rookframe/ui/components/forms/choice_row.gd",
-      "scriptUid": "uid://cneqvtm4mj43s",
+      "name": "Choice",
+      "scene": "res://rookframe/ui/components/forms/choice.tscn",
+      "sceneUid": "uid://b6802g42csl28",
+      "script": "res://rookframe/ui/components/forms/choice.gd",
+      "scriptUid": "uid://defs3l4udt81d",
       "rootType": "Button",
       "properties": {
         "title": "Choice",
-        "description": "Supporting decision copy",
+        "description": "",
         "action_label": "Select",
-        "variant": "DETAILED"
+        "selected_label": "Selected",
+        "marker_text": "",
+        "value_text": "",
+        "leading_icon": null,
+        "show_description": true,
+        "compact": false,
+        "variant": "ROW"
       },
       "signals": [
         "selection_changed(selected: bool)",
@@ -261,61 +267,17 @@
       ],
       "methods": [
         "set_selected(selected: bool)",
-        "is_selected() -> bool"
+        "is_selected() -> bool",
+        "set_compact(bool)"
       ],
       "variants": [
-        "DETAILED",
-        "COMPACT"
+        "ROW",
+        "CARD",
+        "MARKED_ROW",
+        "MARKED_CARD",
+        "LIST"
       ],
-      "contract": "The complete native toggle button is one target; assign ButtonGroup for an exclusive set."
-    },
-    {
-      "name": "PackageChoice",
-      "scene": "res://rookframe/ui/components/forms/package_choice.tscn",
-      "sceneUid": "uid://cj1dtt1u2dghw",
-      "script": "res://rookframe/ui/components/forms/package_choice.gd",
-      "scriptUid": "uid://bacunik1ndif2",
-      "rootType": "Button",
-      "properties": {
-        "package_name": "Package",
-        "detail_text": "",
-        "action_label": "ADD",
-        "button_pressed": false,
-        "disabled": false
-      },
-      "signals": [
-        "pressed",
-        "toggled(toggled_on: bool)"
-      ],
-      "states": [
-        "available",
-        "included"
-      ],
-      "contract": "One native multi-select target that keeps the package marker, identity, supporting detail, and included state together; callers own Package policy and persistence."
-    },
-    {
-      "name": "PackageChoiceCard",
-      "scene": "res://rookframe/ui/components/forms/package_choice_card.tscn",
-      "sceneUid": "uid://cdlme6itdqmki",
-      "script": "res://rookframe/ui/components/forms/package_choice.gd",
-      "scriptUid": "uid://bacunik1ndif2",
-      "rootType": "Button",
-      "properties": {
-        "package_name": "Package",
-        "detail_text": "",
-        "action_label": "INCLUDE",
-        "button_pressed": false,
-        "disabled": false
-      },
-      "signals": [
-        "pressed",
-        "toggled(toggled_on: bool)"
-      ],
-      "states": [
-        "available",
-        "included"
-      ],
-      "contract": "The detailed multi-select Package card keeps the marker, Package identity, supporting detail, and included state in one native target; callers own Package policy and persistence."
+      "contract": "One native toggle target. Share ButtonGroup for exclusive selection; omit it for independent choices."
     },
     {
       "name": "ImageField",
@@ -646,7 +608,7 @@
       "properties": {
         "title": "Action",
         "description": "Supporting action detail",
-        "action_label": "â€º",
+        "action_label": "\u00e2\u20ac\u00ba",
         "tone": "STANDARD",
         "disabled": false
       },
@@ -730,7 +692,7 @@
       "properties": {
         "title": "Action",
         "description": "Supporting action detail",
-        "action_label": "â€º",
+        "action_label": "\u00e2\u20ac\u00ba",
         "tone": "STANDARD",
         "disabled": false
       },
@@ -1346,27 +1308,32 @@
       "nativeProxy": true
     },
     {
-      "name": "ToggleGroup",
-      "resource": "res://rookframe/ui/components/actions/toggle_group.tres",
-      "resourceUid": "uid://c8tvkeg114t6r",
-      "rootType": "ButtonGroup",
-      "contract": "Assign one instance to exclusive Toggle buttons. Duplicate per independent group; omit the group for independent toggles.",
-      "nativeProxy": true
-    },
-    {
       "name": "Select",
       "scene": "res://rookframe/ui/components/forms/select.tscn",
-      "sceneUid": "uid://b5elwurhf51gu",
+      "sceneUid": "uid://cyaig86l6yjex",
       "rootType": "OptionButton",
-      "contract": "Native properties, methods, signals, input and focus behavior remain unchanged.",
-      "nativeProxy": true
+      "contract": "Native OptionButton selection. MENU adds density, theme markers and bounded popup placement; NATIVE retains stock presentation.",
+      "nativeProxy": true,
+      "script": "res://rookframe/ui/components/forms/select.gd",
+      "scriptUid": "uid://cwgu6ixqs32ke",
+      "properties": {
+        "variant": "NATIVE",
+        "compact": false
+      },
+      "variants": [
+        "NATIVE",
+        "MENU"
+      ],
+      "methods": [
+        "set_compact(bool)"
+      ]
     },
     {
-      "name": "RadioGroup",
-      "resource": "res://rookframe/ui/components/forms/radio_group.tres",
-      "resourceUid": "uid://gcr81jnjqjml",
+      "name": "SelectionGroup",
+      "resource": "res://rookframe/ui/components/forms/selection_group.tres",
+      "resourceUid": "uid://dcsw1mrytq4yd",
       "rootType": "ButtonGroup",
-      "contract": "Assign one instance to Checkbox buttons and set the initial selection. Duplicate per independent group. Native allow_unpress enables an optional choice.",
+      "contract": "One native ButtonGroup for Checkboxes, Toggles or Choices. Set initial selection; allow_unpress permits clearing. Duplicate per independent group.",
       "nativeProxy": true
     },
     {
@@ -1596,6 +1563,22 @@
       "contract": "Inherits Dialog in CONFIRMATION tone, including confirmed/cancelled signals, open_dialog() and get_body_slot().",
       "inherits": "res://rookframe/ui/components/overlays/dialog.tscn",
       "nativeProxy": true
+    },
+    {
+      "name": "ChoiceGroup",
+      "scene": "res://rookframe/ui/components/forms/choice_group.tscn",
+      "sceneUid": "uid://b3e1ecyd6msgb",
+      "script": "res://rookframe/ui/components/forms/choice_group.gd",
+      "scriptUid": "uid://b4ksyursovp5k",
+      "rootType": "MarginContainer",
+      "properties": {
+        "compact": false
+      },
+      "methods": [
+        "get_options() -> BoxContainer",
+        "set_compact(bool)"
+      ],
+      "contract": "Responsive row-to-column layout and density propagation. Hosts own selection through native ButtonGroup."
     }
   ],
   "semanticIcons": {
@@ -1615,9 +1598,9 @@
   "currentDesignSystem": {
     "components": [
       "res://rookframe/ui/components/actions/button.tscn",
-      "res://rookframe/ui/menu/MenuChoice.tscn",
-      "res://rookframe/ui/menu/Switch.tscn",
-      "res://rookframe/ui/menu/SwitchGroup.tscn",
+      "res://rookframe/ui/components/forms/select.tscn",
+      "res://rookframe/ui/components/forms/choice.tscn",
+      "res://rookframe/ui/components/forms/choice_group.tscn",
       "res://rookframe/ui/menu/MenuSurface.tscn",
       "res://rookframe/ui/components/data/action_row.tscn",
       "res://rookframe/ui/editor/EditorToolRail.tscn",
@@ -1657,23 +1640,6 @@
       "density": "Append __compact to native variations; button recipes expose compact and set_compact(bool).",
       "behavior": "Native Button signals, toggle_mode, ButtonGroup, shortcuts, tooltips and focus. Surface children use ordinary Containers; EditorToolRail exposes Tools, a BoxContainer."
     },
-    "switch": {
-      "usage": "components.switch",
-      "scene": "res://rookframe/ui/menu/Switch.tscn",
-      "rootType": "Button",
-      "variations": [
-        "components_switch",
-        "components_switch__compact"
-      ],
-      "properties": {
-        "title": "Option",
-        "description": "",
-        "compact": false
-      },
-      "behavior": "Native toggle Button, button_pressed, toggled(bool), pressed, disabled, shortcut and keyboard focus. Share a host-owned ButtonGroup for exclusive selection. Theme and density changes preserve selection.",
-      "layout": "At least 116 px regular / 88 px compact. Title and description wrap. The trailing checkmark uses the same resource and disabled tint as MenuChoice, reserving its space when unselected.",
-      "grouping": "SwitchGroup.tscn supplies the menu_group stone/chassis tray. Add Switch cards to get_options() (Inset/Options) and share a host-owned ButtonGroup for exclusive selection. The group keeps an equal-width row while each option fits at 320 px regular / 280 px compact, otherwise stacking vertically. compact / set_compact(bool) update the group and its cards."
-    },
     "chronicle": {
       "scene": "res://rookframe/ui/chronicle/ChronicleSurface.tscn",
       "surface": "chronicle_surface",
@@ -1707,7 +1673,25 @@
       "res://rookframe/ui/menu/MenuButtonDestructive.tscn",
       "res://rookframe/ui/editor/EditorToolButton.tscn",
       "res://rookframe/ui/editor/EditorActionButton.tscn"
-    ]
+    ],
+    "choice": {
+      "usage": "components.switch",
+      "scene": "res://rookframe/ui/components/forms/choice.tscn",
+      "rootType": "Button",
+      "variations": [
+        "components_switch",
+        "components_switch__compact"
+      ],
+      "properties": {
+        "title": "Option",
+        "description": "",
+        "compact": false,
+        "variant": "CARD"
+      },
+      "behavior": "Native toggle Button, button_pressed, toggled(bool), pressed, disabled, shortcut and keyboard focus. Share a host-owned ButtonGroup for exclusive selection. Theme and density changes preserve selection.",
+      "layout": "At least 116 px regular / 88 px compact. Title and description wrap. The trailing checkmark uses the same resource and disabled tint as the Select menu variant, reserving its space when unselected.",
+      "grouping": "components/forms/choice_group.tscn supplies the menu_group stone/chassis tray. Add Choice cards to get_options() (Inset/Options) and share a host-owned ButtonGroup for exclusive selection. The group keeps an equal-width row while each option fits at 320 px regular / 280 px compact, otherwise stacking vertically. compact / set_compact(bool) update the group and its cards."
+    }
   },
   "appearance": "Native Godot defaults; no Theme or local skin assigned.",
   "behaviorResources": [
@@ -1752,7 +1736,7 @@
       "name": "Radio Group",
       "decision": "Included",
       "requirement": "NAT-02",
-      "implementation": "res://rookframe/ui/components/forms/radio_group.tres",
+      "implementation": "res://rookframe/ui/components/forms/selection_group.tres",
       "documentation": "docs/native-controls-and-recipes.md",
       "example": "showcase/examples/ui-expansion/specimen.tscn"
     },
@@ -1788,7 +1772,7 @@
       "name": "Toggle Group",
       "decision": "Included",
       "requirement": "NAT-06",
-      "implementation": "res://rookframe/ui/components/actions/toggle_group.tres",
+      "implementation": "res://rookframe/ui/components/forms/selection_group.tres",
       "documentation": "docs/native-controls-and-recipes.md",
       "example": "showcase/examples/ui-expansion/specimen.tscn"
     },

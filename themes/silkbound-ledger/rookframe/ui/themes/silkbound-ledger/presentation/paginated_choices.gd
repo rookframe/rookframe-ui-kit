@@ -44,26 +44,26 @@ func _fit_presentation(control) -> int:
 		var foreground = Color("e7e7dd")
 		Appearance.write(row, ^"theme_type_variation", "WizardChoice")
 		Appearance.write(row, ^"custom_minimum_size:y", height)
-		Appearance.write(row.get_node(^"Inset/Row/Icon"), ^"self_modulate", Color("d0be8e"))
-		Appearance.write(row.get_node(^"Inset/Row/Icon"), ^"custom_minimum_size", Vector2(24,24) if phone or tablet else Vector2(28,28))
-		for label in [^"Inset/Row/Copy/Title", ^"Inset/Row/Value"]:
+		Appearance.write(row.get_node(^"Content/Row/Icon"), ^"self_modulate", Color("d0be8e"))
+		Appearance.write(row.get_node(^"Content/Row/Icon"), ^"custom_minimum_size", Vector2(24,24) if phone or tablet else Vector2(28,28))
+		for label in [^"Content/Row/Copy/Title", ^"Content/Row/Value"]:
 			Appearance.override_item(row.get_node(label), "fonts", "font", preload("res://rookframe/ui/theme/silkbound_medium.tres"))
 			Appearance.override_item(row.get_node(label), "colors", "font_color", foreground)
-		Appearance.override_item(row.get_node(^"Inset/Row/Copy/Title"), "font_sizes", "font_size", 19 if phone else 20 if tablet else 24)
-		Appearance.override_item(row.get_node(^"Inset/Row/Copy/Subtitle"), "font_sizes", "font_size", 14 if phone else 15 if tablet else 18)
-		Appearance.override_item(row.get_node(^"Inset/Row/Copy/Subtitle"), "colors", "font_color", Color("aebabe"))
-		Appearance.override_item(row.get_node(^"Inset/Row/Copy"), "constants", "separation", 2 if phone or tablet else 4)
-		Appearance.override_item(row.get_node(^"Inset/Row"), "constants", "separation", 8 if phone or tablet else 12)
+		Appearance.override_item(row.get_node(^"Content/Row/Copy/Title"), "font_sizes", "font_size", 19 if phone else 20 if tablet else 24)
+		Appearance.override_item(row.get_node(^"Content/Row/Copy/Description"), "font_sizes", "font_size", 14 if phone else 15 if tablet else 18)
+		Appearance.override_item(row.get_node(^"Content/Row/Copy/Description"), "colors", "font_color", Color("aebabe"))
+		Appearance.override_item(row.get_node(^"Content/Row/Copy"), "constants", "separation", 2 if phone or tablet else 4)
+		Appearance.override_item(row.get_node(^"Content/Row"), "constants", "separation", 8 if phone or tablet else 12)
 		var pending = bool(control._entries[index].get("pending", false))
-		var value = row.get_node(^"Inset/Row/Value") as Label
+		var value = row.get_node(^"Content/Row/Value") as Label
 		Appearance.override_item(value, "font_sizes", "font_size", (15 if phone else 16 if tablet else 18) if pending else 20 if phone or tablet else 24)
 		var measured = value.get_theme_font("font").get_string_size(value.text,HORIZONTAL_ALIGNMENT_LEFT,-1,value.get_theme_font_size("font_size")).x
 		Appearance.write(value, ^"custom_minimum_size:x", minf(ceilf(measured),control.size.x / control.columns * 0.3))
 		Appearance.write(value, ^"size_flags_horizontal", Control.SIZE_FILL)
 		for edge in ["left","right","top","bottom"]:
-			Appearance.override_item(row.get_node(^"Inset"), "constants", "margin_"+edge,(8 if phone or tablet else 12) if edge in ["left","right"] else 2 if phone or tablet else 8)
-		preload("res://rookframe/ui/theme/silkbound_line_height.gd").apply(row.get_node(^"Inset/Row/Copy/Title"),1.1 if phone else 1.15)
-		preload("res://rookframe/ui/theme/silkbound_line_height.gd").apply(row.get_node(^"Inset/Row/Copy/Subtitle"),1.1 if phone else 1.2)
+			Appearance.override_item(row.get_node(^"Content"), "constants", "margin_"+edge,(8 if phone or tablet else 12) if edge in ["left","right"] else 2 if phone or tablet else 8)
+		preload("res://rookframe/ui/theme/silkbound_line_height.gd").apply(row.get_node(^"Content/Row/Copy/Title"),1.1 if phone else 1.15)
+		preload("res://rookframe/ui/theme/silkbound_line_height.gd").apply(row.get_node(^"Content/Row/Copy/Description"),1.1 if phone else 1.2)
 		preload("res://rookframe/ui/theme/silkbound_line_height.gd").apply(value,1.15)
 	return height
 
@@ -119,23 +119,23 @@ func _arrange_rows(control) -> Vector3:
 		Appearance.override_item(control.get_node(button), "font_sizes", "font_size", (25 if phone else 24) if control.framed_collection else 12 if phone else 15)
 	for row in control._rows:
 		Appearance.write(row, ^"custom_minimum_size:y", height)
-		var title = row.get_node(^"Inset/Row/Copy/Title") as Label
+		var title = row.get_node(^"Content/Row/Copy/Title") as Label
 		if control.framed_collection:
 			Appearance.override_item(title, "fonts", "font", preload("res://rookframe/ui/_internal/data/collection_title.tres"))
 			Appearance.write(title, ^"autowrap_mode", TextServer.AUTOWRAP_WORD_SMART)
 			Appearance.write(title, ^"max_lines_visible", 2)
 			Appearance.write(title, ^"text_overrun_behavior", TextServer.OVERRUN_TRIM_ELLIPSIS)
 		Appearance.override_item(title, "font_sizes", "font_size", (16 if phone and control.collection_layout == 2 else 17 if phone else 15 if tablet else 19) if control.framed_collection else 14 if phone and control.columns == 2 else 15 if phone else 16 if tablet else 20)
-		Appearance.override_item(row.get_node(^"Inset/Row/Copy/Subtitle"), "font_sizes", "font_size", (13 if phone else 12 if tablet else 14) if control.framed_collection else 10 if phone else 11 if tablet else 12)
-		Appearance.write(row.get_node(^"Inset/Row/Icon"), ^"custom_minimum_size", (Vector2(29, 29) if phone or tablet else Vector2(38, 38)) if control.framed_collection else Vector2(23, 23) if phone else Vector2(26, 26) if tablet else Vector2(30, 30))
-		Appearance.override_item(row.get_node(^"Inset/Row"), "constants", "separation", (8 if phone else 7 if tablet else 12) if control.framed_collection else 8 if phone else 10 if tablet else 14)
+		Appearance.override_item(row.get_node(^"Content/Row/Copy/Description"), "font_sizes", "font_size", (13 if phone else 12 if tablet else 14) if control.framed_collection else 10 if phone else 11 if tablet else 12)
+		Appearance.write(row.get_node(^"Content/Row/Icon"), ^"custom_minimum_size", (Vector2(29, 29) if phone or tablet else Vector2(38, 38)) if control.framed_collection else Vector2(23, 23) if phone else Vector2(26, 26) if tablet else Vector2(30, 30))
+		Appearance.override_item(row.get_node(^"Content/Row"), "constants", "separation", (8 if phone else 7 if tablet else 12) if control.framed_collection else 8 if phone else 10 if tablet else 14)
 		for edge in ["left", "right", "top", "bottom"]:
 			var horizontal: bool = edge in ["left", "right"]
 			var padding = (6 if horizontal else 4) if phone else (6 if horizontal else 7) if tablet else (12 if horizontal else 10) if control.collection_layout == 2 else (10 if horizontal else 9)
 			if not control.framed_collection:
 				padding = (9 if horizontal else 4) if phone else (10 if horizontal else 8) if tablet else (16 if horizontal else 9)
-			Appearance.override_item(row.get_node(^"Inset"), "constants", "margin_" + edge, padding)
-		var value = row.get_node(^"Inset/Row/Value") as Label
+			Appearance.override_item(row.get_node(^"Content"), "constants", "margin_" + edge, padding)
+		var value = row.get_node(^"Content/Row/Value") as Label
 		Appearance.write(value, ^"size_flags_horizontal", Control.SIZE_FILL if control.framed_collection or control.columns > 1 or tablet else Control.SIZE_EXPAND_FILL)
 		if control.framed_collection:
 			Appearance.override_item(value, "fonts", "font", control.get_theme_font("font"))
@@ -148,7 +148,7 @@ func _arrange_rows(control) -> Vector3:
 	return Vector3(height, inset, vertical_inset)
 
 func _style_entry(control, row: Control, entry: Dictionary, selected_id: String) -> void:
-	Appearance.write(row.get_node(^"Inset/Row/Icon"), ^"self_modulate", Color("d0be8e") if control.framed_collection or str(entry.id) == selected_id else Color("aebabe"))
+	Appearance.write(row.get_node(^"Content/Row/Icon"), ^"self_modulate", Color("d0be8e") if control.framed_collection or str(entry.id) == selected_id else Color("aebabe"))
 	var pending = bool(entry.get("pending", false))
-	Appearance.override_item(row.get_node(^"Inset/Row/Value"), "font_sizes", "font_size", 12 if pending else 20)
-	Appearance.override_item(row.get_node(^"Inset/Row/Value"), "colors", "font_color", Color("aebabe") if pending else Color("d0be8e"))
+	Appearance.override_item(row.get_node(^"Content/Row/Value"), "font_sizes", "font_size", 12 if pending else 20)
+	Appearance.override_item(row.get_node(^"Content/Row/Value"), "colors", "font_color", Color("aebabe") if pending else Color("d0be8e"))

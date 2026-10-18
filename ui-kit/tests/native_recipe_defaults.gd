@@ -6,12 +6,13 @@ func _initialize() -> void:
 	_run.call_deferred()
 
 func _run() -> void:
-	for path in ["menu/MenuButtonPrimary.tscn", "menu/MenuChoice.tscn", "editor/EditorToolButton.tscn", "menu/Switch.tscn"]:
+	for path in ["menu/MenuButtonPrimary.tscn", "components/forms/select.tscn", "editor/EditorToolButton.tscn", "components/forms/choice.tscn"]:
 		var control: Control = load("res://rookframe/ui/" + path).instantiate()
+		if path in ["components/forms/select.tscn", "components/forms/choice.tscn"]: control.variant = 1
 		root.add_child(control)
 		await process_frame
 		check(control.get_combined_minimum_size().y >= 44, path + " retains a 44px native target")
-		if path == "menu/Switch.tscn":
+		if path == "components/forms/choice.tscn":
 			var title: Label = control.get_node("Content/Row/Copy/Title")
 			check(title.get_theme_color("font_color") == control.get_theme_color("font_color", "Button"), "Card copy uses native Button text color")
 			check(not title.has_theme_color_override("font_shadow_color"), "Native card copy does not acquire an optional ink shadow")
