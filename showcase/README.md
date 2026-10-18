@@ -37,7 +37,8 @@ opens the navigation; Escape returns to the current view. Desktop views include
 section links. Reduced motion updates the active examples without rebuilding
 their state. Theme changes update the existing examples, page-owned popups and
 windows, and hinged-leaf content without rebuilding their state. The selection
-continues across page navigation. Light/dark changes only the catalogue chrome.
+continues across page navigation. Light/dark changes only the catalogue chrome,
+which starts in Dark mode.
 
 Open a dedicated view directly with `godot --path . -- --component=field`.
 Route IDs and page ownership are listed in `examples/components/manifests/`.
