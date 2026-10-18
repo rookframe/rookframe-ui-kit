@@ -44,7 +44,7 @@ var _next: Button
 var _menu: Button
 var _compact := false
 var _navigation_open := false
-var _dark := false
+var _dark := true
 
 func _ready() -> void:
 	var window := get_window()
@@ -54,7 +54,7 @@ func _ready() -> void:
 	window.content_scale_factor = display_scale
 	window.move_to_center()
 	entries = Registry.entries()
-	theme = Chrome.create()
+	theme = Chrome.create(_dark)
 	var background := PanelContainer.new()
 	background.theme_type_variation = &"ShowcaseBackground"
 	add_child(background)
