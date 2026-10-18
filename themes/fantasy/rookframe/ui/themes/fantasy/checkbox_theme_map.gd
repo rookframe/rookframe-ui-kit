@@ -1,0 +1,30 @@
+extends RefCounted
+## Native CheckBox items only; no component presentation hook is required.
+const ELEMENTS = {
+	"CheckBox": {
+		"base_type": &"CheckBox",
+		"fonts/font": "type.inlay",
+		"font_sizes/font_size": "button.standard.font_size",
+		"constants/h_separation": "checkbox.gap",
+		"constants/outline_size": "brass.inlay.outline_size",
+		"colors/font_outline_color": "brass.inlay.groove",
+		"colors/font_color": "button.standard.font_color",
+		"colors/font_hover_color": "checkbox.ink.hover",
+		"colors/font_pressed_color": "button.standard.font_pressed_color",
+		"colors/font_hover_pressed_color": "checkbox.ink.hover",
+		"colors/font_focus_color": "checkbox.ink.hover",
+		"colors/font_disabled_color": "button.standard.font_disabled_color",
+		"colors/checkbox_checked_color": "checkbox.white",
+		"colors/checkbox_unchecked_color": "checkbox.white",
+		"icons/checked": "checkbox.checked",
+		"icons/unchecked": "checkbox.unchecked",
+		"icons/checked_disabled": "checkbox.checked.disabled",
+		"icons/unchecked_disabled": "checkbox.unchecked.disabled",
+		"styles/normal": "checkbox.normal",
+		"styles/hover": "checkbox.hover",
+		"styles/pressed": "checkbox.pressed",
+		"styles/hover_pressed": "checkbox.hover_pressed",
+		"styles/disabled": "checkbox.disabled",
+		"styles/focus": "checkbox.focus",
+	},
+}

@@ -16,7 +16,10 @@ func _init(mapping: Script = null, materials: Script = null, extensions: Array[S
 	for usage in elements:
 		var properties: Dictionary = elements[usage]
 		var native_usage := native_type(usage)
-		set_type_variation(native_usage, native_type(properties.base_type))
+		# Native class mappings retain Godot's built-in inheritance. Only semantic
+		# usages create variations; Theme rejects variations named after classes.
+		if not ClassDB.class_exists(native_usage):
+			set_type_variation(native_usage, native_type(properties.base_type))
 		for property in properties:
 			if property == "base_type":
 				continue
