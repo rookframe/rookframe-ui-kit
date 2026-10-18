@@ -26,6 +26,17 @@ the workspace root; append `-- --capture-dir=/absolute/temp/path` for native
 state captures on bright/dark backgrounds at all three target sizes. Inspect
 the Button catalogue with `--preview=fantasy`
 as documented in the showcase README.
+
+The shared `components/forms/checkbox.tscn` uses the same walnut-and-brass cap,
+engraved type and brass checkmark through native `CheckBox` Theme items. Checked
+indicators sit into their casing; hover, keyboard focus and disabled states stay
+distinct. Every row retains its 44px minimum target, native toggled signal,
+RTL layout and live theme inheritance. No behavior script or motion is added.
+Run `godot --path showcase --script res://tests/fantasy_checkbox.gd` to verify
+input, theme switching and all three native sizes. Append
+`-- --capture-dir=/absolute/temp/path` for state and catalogue captures, or
+`-- --preview` to open the interactive Fantasy Checkbox page.
+
 Runtime paths and existing UIDs are preserved; resources are merged into the
 consumer's `rookframe/ui/`. Review this package through `../../showcase`.
 See the [recipe contract](../../ui-kit/docs/native-controls-and-recipes.md).

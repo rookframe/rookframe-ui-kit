@@ -59,6 +59,12 @@ continues to use stock Godot appearance. Omit `--preview` and pass
 `--capture-dir=/absolute/temp/path` to run the automatic theme/size matrix,
 save screenshots and exit.
 
+Open the Fantasy Checkbox page with
+`godot --path showcase --script res://tests/fantasy_checkbox.gd -- --preview`
+from the workspace root. Omit `--preview` to verify native input and live theme
+switching; add `--capture-dir=/absolute/temp/path` for checked/unchecked,
+hover/focus, disabled and long/RTL specimens on bright/dark backgrounds.
+
 Open the separate motion laboratory with
 `godot --path . res://examples/laboratory/laboratory.tscn`.
 It retains the Silkbound action-leaf examples. Choose a recipe, long content,
