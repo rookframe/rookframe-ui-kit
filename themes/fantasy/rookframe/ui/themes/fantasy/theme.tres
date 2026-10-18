@@ -2,7 +2,11 @@
 
 [ext_resource type="Script" path="res://rookframe/ui/themes/component_theme.gd" id="script"]
 [ext_resource type="Theme" path="res://rookframe/ui/menu/MenuTheme.tres" id="native"]
+[ext_resource type="Script" path="res://rookframe/ui/themes/fantasy/button_presentation.gd" id="button"]
 
 [resource]
 script = ExtResource("script")
 native_theme = ExtResource("native")
+presentation_hooks = Dictionary[String, Script]({
+"res://rookframe/ui/components/actions/button.gd": ExtResource("button")
+})

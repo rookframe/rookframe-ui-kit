@@ -298,4 +298,5 @@ static func button(usage: StringName, state: Dictionary) -> Dictionary:
         # Match native Button: focus ink applies at rest; hover/press keep their ink.
         if state.availability == State.ENABLED and state.interaction == State.RESTING:
             references["label"] = BUTTON_FOCUS[usage].label
+    references["icon"] = references["label"]
     return references
