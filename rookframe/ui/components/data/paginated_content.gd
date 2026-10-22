@@ -115,7 +115,8 @@ func _fit() -> void:
 	_content.size.y = maxf(height, _content.get_combined_minimum_size().y)
 	get_node(^"Area").position.x = content_inset_left
 	get_node(^"Area").size = Vector2(size.x - content_inset_left, height)
-	_pager.offset_left = content_inset_left
+	if not _external_pager:
+		_pager.offset_left = content_inset_left
 	queue_redraw()
 	# Native Containers finish wrapping their children before measuring pages.
 	_measure.call_deferred()
