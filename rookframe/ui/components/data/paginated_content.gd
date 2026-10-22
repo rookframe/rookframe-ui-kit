@@ -81,7 +81,7 @@ func refresh() -> void:
 	if not is_node_ready() or _content == null or _pending:
 		return
 	_pending = true
-	get_tree().process_frame.connect(_fit, CONNECT_ONE_SHOT)
+	_fit.call_deferred()
 
 func _fit() -> void:
 	_pending = false
