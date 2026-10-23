@@ -118,6 +118,19 @@
     "path": "res://rookframe/ui/theme/silkbound_theme.tres",
     "purpose": "Silkbound task and sheet typography with complete native and shared semantic role coverage."
   },
+  "arcPickerTheme": {
+    "path": "res://rookframe/ui/theme/arc_picker_theme.tres",
+    "purpose": "Silkbound Ledger ArcTrack and ArcPicker items, supplied to the canonical Theme as a supplemental profile.",
+    "variations": [
+      "RookframeArcTrack",
+      "RookframeArcCategory",
+      "RookframeArcItem",
+      "RookframeArcWell",
+      "RookframeArcCaption",
+      "RookframeArcCaptionKicker",
+      "RookframeArcCaptionTitle"
+    ]
+  },
   "schemaVersion": 1,
   "package": "silkbound-ledger"
 }

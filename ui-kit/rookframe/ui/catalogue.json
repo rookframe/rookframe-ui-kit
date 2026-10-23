@@ -167,6 +167,85 @@
       "contract": "Persistent bottom bar: leading action, identity, category lane, trailing action and an attached panel above. The profile follows the parent area width and selects RookframeHud (root separation), RookframeHudBar and RookframeHudAttached with __medium or __compact. Empty slots hide. In compact with compact_category_limit >= 0, tiles beyond the limit move to a More popover whose rows toggle or press the original tile. Caller children keep parent, index and connections."
     },
     {
+      "name": "ArcTrack",
+      "scene": "res://rookframe/ui/components/navigation/arc_track.tscn",
+      "sceneUid": "uid://c3aca71s6qw3h",
+      "script": "res://rookframe/ui/components/navigation/arc_track.gd",
+      "scriptUid": "uid://clrhy44nns2lg",
+      "rootType": "Container",
+      "properties": {
+        "pivot": "Vector2(0, 0)",
+        "radius": 160.0,
+        "start_angle": 180.0,
+        "end_angle": 360.0,
+        "alignment": "BEGIN",
+        "spacing": 8.0,
+        "first_index": 0,
+        "active": false,
+        "reveal": 1.0
+      },
+      "signals": [
+        "scrolled(first_index: int)",
+        "highlighted(entry: Control)"
+      ],
+      "methods": [
+        "get_entries() -> Array[Control]",
+        "get_placed_entries() -> Array[Control]",
+        "can_scroll(direction: int) -> bool",
+        "scroll_by(steps: int) -> bool",
+        "ensure_visible(entry: Control) -> bool",
+        "step_focus(from: Control, steps: int) -> Control"
+      ],
+      "contract": "Layout-only arc: direct child Controls sit in source order on a circular arc around pivot, at their minimum size and separated by spacing along the arc, over a drawn rail. Entries that do not fit or precede first_index overflow and hide; each scrollable end draws an arrowhead. Caller-hidden children stay hidden. Left/Right step focus in source order and scroll; the wheel scrolls. Uses RookframeArcTrack (rail_color, rail_active_color, rail_core_color, rail_width, rail_core_width, arrow_size, arrow).",
+      "states": [
+        "fits",
+        "overflowing"
+      ]
+    },
+    {
+      "name": "ArcPicker",
+      "scene": "res://rookframe/ui/components/navigation/arc_picker.tscn",
+      "sceneUid": "uid://2o41fw18b1pq",
+      "script": "res://rookframe/ui/components/navigation/arc_picker.gd",
+      "scriptUid": "uid://bxj323i1x2m0k",
+      "rootType": "Control",
+      "properties": {
+        "inner_radius": 96.0,
+        "outer_radius": 176.0,
+        "start_angle": 190.0,
+        "end_angle": 350.0,
+        "fit_to_viewport": true,
+        "viewport_margin": 16.0,
+        "close_on_outside_click": true,
+        "animate_open": true,
+        "reduced_motion": false
+      },
+      "signals": [
+        "category_changed(category_id: String)",
+        "highlight_changed(entry: Dictionary)",
+        "choose_requested(entry: Dictionary)",
+        "cancel_requested",
+        "closed"
+      ],
+      "methods": [
+        "configure(categories: Array[Dictionary], entries: Array[Dictionary], selected_id: String = \"\", labels: Dictionary = {})",
+        "open_at(at: Vector2)",
+        "close()",
+        "is_open() -> bool",
+        "select_category(category_id: String, notify: bool = true) -> bool",
+        "current_category() -> String",
+        "selected_id() -> String",
+        "set_selected(entry_id: String)",
+        "get_category_track() -> Container",
+        "get_item_track() -> Container"
+      ],
+      "states": [
+        "closed",
+        "open"
+      ],
+      "contract": "Two-level radial choice opened at a point: category medallions on an inner ArcTrack, previewed items on an outer ArcTrack and a caption hub at the origin. Previews may mix flat swatches and rendered tiles. Pressing an item selects, marks and emits choose_requested with the full record. Up/Down move between tracks; ui_cancel or an outside press closes and emits cancel_requested. fit_to_viewport mirrors and shifts to stay on screen. Variations RookframeArcCategory, RookframeArcItem, RookframeArcWell, RookframeArcCaption, RookframeArcCaptionKicker, RookframeArcCaptionTitle. Callers own records, previews and what choosing applies."
+    },
+    {
       "name": "AdaptiveToolbar",
       "scene": "res://rookframe/ui/components/layout/adaptive_toolbar.tscn",
       "sceneUid": "uid://gbsncdddrctra",

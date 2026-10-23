@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://c3aca71s6qw3h"]
+
+[ext_resource type="Script" uid="uid://clrhy44nns2lg" path="res://rookframe/ui/components/navigation/arc_track.gd" id="1_script"]
+
+[node name="ArcTrack" type="Container"]
+mouse_filter = 2
+theme_type_variation = &"RookframeArcTrack"
+script = ExtResource("1_script")

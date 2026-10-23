@@ -30,6 +30,10 @@ The nine-slice assets under `rookframe/ui/assets/frames/` are deterministic
 Rookframe-owned renderings of the checked-in Rookframe frame geometry. They are
 distributed under this repository's MIT License.
 
+The arc picker marks under `rookframe/ui/_internal/assets/arc/` are
+hand-authored Rookframe-owned SVG geometry, distributed under this
+repository's MIT License.
+
 No legacy shell atlas, example portrait, Font Awesome artwork, or asset with
 unclear provenance is included in the public foundation.
 

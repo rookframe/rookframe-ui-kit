@@ -2,6 +2,17 @@
 
 ## Unreleased
 
+- Add the in-place radial choice to the unthemed core: `navigation/arc_track.tscn`
+  places Controls along a scrollable arc over a drawn rail, and
+  `navigation/arc_picker.tscn` composes category and previewed item tracks with a
+  caption hub, keyboard/wheel/pointer input and on-screen fitting. Previews may
+  mix flat swatches and rendered tiles. Showcase page `arc_picker` and
+  `showcase/tests/arc_picker.gd` exercise it under every preview Theme.
+- Style ArcTrack and ArcPicker in every optional theme: carved brass medallions
+  with iron and brass rails in Fantasy, ink and paper medallions on a copper
+  ledger rule in Silkbound Ledger (canonical Theme only, through a supplemental
+  profile), and neon glass medallions on a cyan trace in Cyberpunk.
+
 - Add HUD building blocks to the unthemed core: `layout/hud_bar.tscn` with
   compact overflow, `data/identity_plate.tscn`, `data/vital_meter.tscn`, the
   `forms/favorite_toggle.tscn` native proxy, and the Button `EMBLEM` variant and

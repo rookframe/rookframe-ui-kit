@@ -9,4 +9,5 @@ func _init() -> void:
 	extensions.append(preload("expansion_theme_map.gd"))
 	extensions.append(preload("../themes/fantasy/checkbox_theme_map.gd"))
 	extensions.append(preload("../themes/fantasy/hud_theme_map.gd"))
+	extensions.append(preload("../themes/fantasy/arc_theme_map.gd"))
 	super(Mapping, Materials, extensions)
