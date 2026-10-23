@@ -162,6 +162,7 @@ func _picker_records() -> void:
 	var control := picker()
 	await settle()
 	check(control.theme == null, "Picker selects no appearance")
+	check(not control.is_open(), "The picker starts closed until opened")
 	check(control.get_category_track().get_child_count() == 3, "One medallion per category")
 	check(control.current_category() == "masonry", "Initial category owns the selected entry")
 	var items: Array = control.get_item_track().get_children()

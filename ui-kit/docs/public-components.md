@@ -304,8 +304,8 @@ disabled and focus text colors and a drawn triangle.
 ### ArcPicker
 
 `components/navigation/arc_picker.tscn` composes two centre-aligned ArcTracks
-around its own origin and a caption hub centred on it. Every descendant except the entries
-ignores the mouse.
+around its own origin and a caption hub centred on it. It starts closed (hidden). Every
+descendant except the entries ignores the mouse.
 
 | Properties and defaults | Signals and methods | Behavior, focus, input, and accessibility |
 | --- | --- | --- |

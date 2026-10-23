@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://c3aca71s6qw3h" path="res://rookframe/ui/components/navigation/arc_track.tscn" id="2_track"]
 
 [node name="ArcPicker" type="Control"]
+visible = false
 mouse_filter = 2
 script = ExtResource("1_script")
 
