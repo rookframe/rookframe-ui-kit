@@ -64,7 +64,6 @@ effect. Input, data, identity, signals and reduced-motion endpoints remain nativ
 | `components/data/package_row.tscn` | `uid://c6dihfeyukjh` | `components/data/package_row.gd`, `uid://dxok8xtr1f1ai` | `PanelContainer` |
 | `components/data/package_card.tscn` | `uid://d5mye7ybbq7rj` | `components/data/package_row.gd`, `uid://dxok8xtr1f1ai` | `PanelContainer` |
 | `components/surfaces/managed_surface.tscn` | `uid://vhwxjcowiuacj` | `components/surfaces/managed_surface.gd`, `uid://dbt641tlogj02` | `PanelContainer` |
-| `components/actions/icon_tile.tscn` | `uid://d0at4adohd2m2` | `components/actions/icon_tile.gd`, `uid://mirvhctq3nct` | `Button` |
 | `components/layout/hud_bar.tscn` | `uid://brgaxc18x4j11` | `components/layout/hud_bar.gd`, `uid://habd0dntqi1a` | `VBoxContainer` |
 | `components/data/identity_plate.tscn` | `uid://b0temsbdnrwqx` | `components/data/identity_plate.gd`, `uid://gvo5aiaypey7` | `Button` |
 | `components/data/vital_meter.tscn` | `uid://bmsda8g0vv0ap` | `components/data/vital_meter.gd`, `uid://c7rrhy8bk1dn4` | `VBoxContainer` |
@@ -208,37 +207,19 @@ inject only dynamic World data.
 ## HUD components
 
 These scenes compose a persistent game HUD from native Buttons and containers.
-They assign only semantic `theme_type_variation` names; a variation that no
-Theme defines falls back to the native class items. Callers own game rules,
-thresholds, favorites and roll logic. The
+HUD tiles are the shared [Button](native-controls-and-recipes.md#button) with
+`layout = STACKED`; the quick action is Button `EMBLEM`. The scenes assign only
+semantic `theme_type_variation` names; a variation whose base no Theme declares
+uses the native class items. Callers own game rules, thresholds, favorites and
+roll logic. The
 [HUD bar recipe](native-controls-and-recipes.md#hud-bar) shows the complete
 compositions.
-
-### IconTile
-
-`components/actions/icon_tile.tscn` is one native `Button` with its icon above a
-permanent label, for HUD categories, builder tools and picker choices. It has no
-child nodes: the scene sets `icon_alignment = CENTER`, `vertical_icon_alignment = TOP`,
-`expand_icon = false`, `autowrap_mode = AUTOWRAP_WORD_SMART`,
-`text_overrun_behavior = OVERRUN_NO_TRIMMING` and `focus_mode = FOCUS_ALL`.
-
-| Properties and defaults | Signals and methods | Behavior, focus, input, and accessibility |
-| --- | --- | --- |
-| `usage = CATEGORY` (`CATEGORY`, `TOOL`, `CHOICE`); `compact = false` | Native `pressed` and `toggled`; `set_compact(enabled)` | The minimum target is 44 × 44, or the Theme's `minimum_height`, and at least the widest word of the label. Larger caller minima are kept. Labels wrap between words and are never trimmed. `toggle_mode` and `button_group` stay caller decisions. `accessibility_name` mirrors `text` unless the caller sets it. |
-
-Variations: `RookframeIconTileCategory`, `RookframeIconTileTool`,
-`RookframeIconTileChoice`, each with `__compact`. A Theme supplies `normal`,
-`hover`, `pressed`, `hover_pressed`, `focus` and `disabled` styleboxes; `font`,
-`font_size` and `font_*_color`; `icon_normal_color`, `icon_pressed_color`,
-`icon_hover_color` and `icon_disabled_color`; `icon_max_width`; `h_separation`;
-and `minimum_height`. A raised selected tool is the theme's `pressed` stylebox
-with `expand_margin_top`.
 
 ### HudBar
 
 `components/layout/hud_bar.tscn` is the persistent bottom bar. Its `Bar` row holds
-`LeadingSlot`, `IdentitySlot`, a `Divider`, `CategorySlot`, a `More` IconTile and
-`TrailingSlot`. `AttachedPanel` with `AttachedSlot` sits directly above the bar on
+`LeadingSlot`, `IdentitySlot`, a `Divider`, `CategorySlot`, a stacked `More`
+Button and `TrailingSlot`. `AttachedPanel` with `AttachedSlot` sits directly above the bar on
 the same centre line.
 
 | Properties and defaults | Signals, methods, and slots | Behavior, focus, input, and accessibility |

@@ -2,10 +2,11 @@
 
 ## Unreleased
 
-- Add HUD building blocks to the unthemed core: `actions/icon_tile.tscn`,
-  `layout/hud_bar.tscn` with compact overflow, `data/identity_plate.tscn`,
-  `data/vital_meter.tscn`, the `forms/favorite_toggle.tscn` native proxy and the
-  Button `EMBLEM` variant (`components_button_emblem`).
+- Add HUD building blocks to the unthemed core: `layout/hud_bar.tscn` with
+  compact overflow, `data/identity_plate.tscn`, `data/vital_meter.tscn`, the
+  `forms/favorite_toggle.tscn` native proxy, and the Button `EMBLEM` variant and
+  `layout = STACKED` axis for HUD tiles (`components_button_emblem`, `__stacked`).
+  Document component boundaries and variation-name axes in the design contract.
 
 - Add the shared Chronicle surface for retained event histories, recaps, quest
   journals and lore: a lightly worn paper scroll in Fantasy and an archive panel

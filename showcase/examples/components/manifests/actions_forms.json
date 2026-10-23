@@ -449,7 +449,7 @@
     "id": "button",
     "title": "Button",
     "category": "Actions",
-    "description": "Primary, secondary and destructive actions in normal and compact sizes, with text or icons.",
+    "description": "Primary, secondary, destructive and emblem actions in normal and compact sizes, with text, icons or a stacked icon above a wrapping label.",
     "script": "res://examples/components/pages/actions_forms/button.gd",
     "covers": [
       "res://rookframe/ui/components/actions/button.tscn",
@@ -465,24 +465,11 @@
       "menu",
       "editor",
       "tool",
-      "disabled"
-    ]
-  },
-  {
-    "id": "icon_tile",
-    "title": "Icon Tile",
-    "category": "Actions",
-    "description": "An icon above a permanent label for HUD categories, tools and choices.",
-    "script": "res://examples/components/pages/actions_forms/icon_tile.gd",
-    "covers": [
-      "res://rookframe/ui/components/actions/icon_tile.tscn"
-    ],
-    "keywords": [
-      "hud",
+      "disabled",
+      "emblem",
+      "stacked",
       "tile",
-      "category",
-      "tool",
-      "choice"
+      "hud"
     ]
   }
 ]

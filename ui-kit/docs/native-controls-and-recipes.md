@@ -28,7 +28,7 @@ controls. Group resources are local to each instantiated scene.
 
 | Component | Public resource | Native root or resource | Usage |
 | --- | --- | --- | --- |
-| Button | `actions/button.tscn` | `Button` | `variant = SECONDARY` (`SECONDARY`, `PRIMARY`, `DESTRUCTIVE`, `EMBLEM`), `compact = false`; native text, icon, input, signals and toggle behavior. |
+| Button | `actions/button.tscn` | `Button` | `variant = SECONDARY` (`SECONDARY`, `PRIMARY`, `DESTRUCTIVE`, `EMBLEM`), `compact = false`, `layout = INLINE` (`INLINE`, `STACKED`); native text, icon, input, signals and toggle behavior. |
 | Toggle | `actions/toggle.tscn` | `Button` | Native properties, methods, signals, input and focus behavior remain unchanged. |
 | ButtonGroup | `actions/button_group.tscn` | `HFlowContainer` | Native properties, methods, signals, input and focus behavior remain unchanged. |
 | Select | `forms/select.tscn` | `OptionButton` | `variant = NATIVE` or `MENU`; `compact = false`. Native IDs, signals, search and selection remain unchanged. |
@@ -75,10 +75,11 @@ contains this small host-side factory.
 
 ## Button
 
-Use `components/actions/button.tscn` for menu actions, editor commands and icon
-tools. `variant` selects `SECONDARY` (standard), `PRIMARY`, `DESTRUCTIVE` or
-`EMBLEM`;
-`compact` / `set_compact(bool)` selects normal or compact size. Normal targets
+Use `components/actions/button.tscn` for menu actions, editor commands, icon
+tools and HUD tiles. Three independent axes describe it: `variant` is emphasis
+(`SECONDARY` standard, `PRIMARY`, `DESTRUCTIVE` or `EMBLEM`), `layout` is content
+arrangement (`INLINE` or `STACKED`), and `compact` / `set_compact(bool)` is
+density. Normal targets
 start at 52 × 52px and compact targets at 44 × 44px. Native text/icon sizing,
 larger caller minima and the Theme's `minimum_height` can grow these targets.
 Containers own placement and final width.
@@ -95,15 +96,28 @@ Destructive actions do not implement confirmation or effects; the host owns them
 settles that presentation immediately. Theme changes cancel the old presentation
 and restore its overrides without changing native content or interaction.
 
-`EMBLEM` is a prominent icon-only action, such as the quick roll at the start of
-a HUD bar. It centres its icon; leave `text` empty and set `accessibility_name`
-or `tooltip_text`. Without either, the Button warns once.
+`EMBLEM` is the most prominent emphasis, for one icon-only action such as the
+quick roll at the start of a HUD bar. Leave `text` empty and set
+`accessibility_name` or `tooltip_text`; without either, the Button warns once.
 
-The semantic Theme types are `components_button`, `components_button_primary`,
-`components_button_destructive` and `components_button_emblem`, with `__compact`
-for compact size. The
-component owns `theme_type_variation`; consumers style these types in a native
-Theme. Without mappings, all variants inherit native Godot Button appearance.
+`STACKED` places the icon above the label, for HUD categories, builder tools and
+picker choices. While stacked, the Button controls the native `icon_alignment`
+(centre), `vertical_icon_alignment` (top), `autowrap_mode` (smart word wrap) and
+`text_overrun_behavior` (no trimming); returning to `INLINE` restores the
+caller's values. The label wraps between words and is never trimmed, and the
+minimum width keeps the widest word whole. Scenes store `layout`, not the values
+it controls. Godot adds no gap between a stacked icon and its label;
+`icon_max_width` and the stylebox content margins shape the tile. Selection
+stays native: set `toggle_mode` and share a `ButtonGroup`. Native Button names
+itself from `text` for assistive technology.
+
+The semantic Theme type is
+`components_button[_primary|_destructive|_emblem][__stacked][__compact]`, for
+example `components_button_primary__stacked__compact`. The component owns
+`theme_type_variation`; consumers style these types in a native Theme. Godot
+resolves a variation only when a Theme in the tree declares its base, so a
+theme declares the chain (`…__stacked__compact` → `…__stacked` → `…` → `Button`).
+Without mappings, every combination uses native Godot Button appearance.
 No palette, font or Theme is installed by the component.
 
 The scene UID remains `uid://nsflvqoc35wn`. Its public behavior script is
@@ -200,7 +214,7 @@ when floating.
 | Acknowledgement or confirmed decision | `Dialog` |
 | Designed open-file task | `FilePickerDialog` |
 | Semantic icon actions | `IconActionGrid` plus native Buttons |
-| Persistent game HUD | `HudBar` with Button `EMBLEM`, `IdentityPlate`, `VitalMeter` and `IconTile`; see [HUD bar](#hud-bar) |
+| Persistent game HUD | `HudBar` with Button `EMBLEM`, `IdentityPlate`, `VitalMeter` and stacked Buttons; see [HUD bar](#hud-bar) |
 | Body scrolling | one `ScrollContainer` |
 
 ## HUD bar
@@ -212,12 +226,24 @@ layer: its profile measures that parent, and a shrink-to-fit container parent
 would grow with the bar. The HUD Bar showcase page builds each composition below
 with placeholder data.
 
+A tile is a Button with `layout = STACKED`. Callers own `toggle_mode` and any
+`ButtonGroup`.
+
 | Composition | Leading | Identity | Category lane | Trailing / attached |
 | --- | --- | --- | --- | --- |
-| Character | Button `EMBLEM` (roll) | `IdentityPlate` with a `VitalMeter` in `VitalSlot` | Seven `IconTile` `CATEGORY` toggles sharing one duplicated `selection_group.tres` with `allow_unpress = true`; `compact_category_limit = 4` | None |
-| Creature | None | `IdentityPlate` without a vital | Four `CATEGORY` toggles; `compact_category_limit = -1` | `ActionRow` showing current HP |
-| Builder tools | None | None | `TOOL` tiles; selection tools share a group with `allow_unpress = false`; the host toggles `visible` between mode sets | `AttachedSlot` with `CHOICE` tiles in their own groups and Choice `CARD` swatches |
-| Dice tray | — | — | `CHOICE` tiles with `toggle_mode = false`, one per die | `numeric_input.tscn` modifier and a secondary Button |
+| Character | Button `EMBLEM` (roll) | `IdentityPlate` with a `VitalMeter` in `VitalSlot` | Seven toggle tiles sharing one duplicated `selection_group.tres` with `allow_unpress = true`; `compact_category_limit = 4` | None |
+| Creature | None | `IdentityPlate` without a vital | Four toggle tiles; `compact_category_limit = -1` | `ActionRow` showing current HP with a caller minimum width |
+| Builder tools | None | None | Tool tiles; selection tools share a group with `allow_unpress = false`; the host toggles `visible` between mode sets | `AttachedSlot` with toggle tiles in their own groups and Choice `CARD` swatches |
+
+A dice tray outside the bar uses the same tiles with `toggle_mode = false`, one
+per die, a `numeric_input.tscn` modifier and a secondary Button.
+
+Tiles carry no usage of their own; their container gives them context. A theme
+that styles bar tiles differently from other stacked Buttons maps
+`layout/hud_bar.tscn` in its `presentations` to a template that assigns a
+profile Theme to `Bar/Row/CategorySlot` or `AttachedPanel/AttachedSlot`. The
+profile overrides items only; the theme's main Theme declares the variation
+chain. A selected or raised tool is the profile's native `pressed` style.
 
 A category tile's `toggled(true)` opens its list in a `Popover` anchored to the
 tile: a TaskHeader with Show all and Close, then PaginatedContent of

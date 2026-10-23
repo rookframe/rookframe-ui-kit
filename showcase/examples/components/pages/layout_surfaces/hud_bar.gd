@@ -3,7 +3,6 @@ extends RefCounted
 
 const Demo = preload("res://examples/components/pages/layout_surfaces/demo.gd")
 const Action = preload("res://rookframe/ui/components/actions/button.gd")
-const Tile = preload("res://rookframe/ui/components/actions/icon_tile.gd")
 const Meter = preload("res://rookframe/ui/components/data/vital_meter.gd")
 const Choice = preload("res://rookframe/ui/components/forms/choice.gd")
 const ICONS := "res://rookframe/ui/icons/"
@@ -40,14 +39,16 @@ static func _identity(page, bar, title: String, detail: String, initials: String
 	plate.pressed.connect(func(): _report(bar.get_meta(&"status"), "pressed: " + title + " (open record)"))
 	return plate
 
+# HUD tiles are stacked Buttons; the bar slot, not the Button, gives them context.
+static func _tile(page, parent: Node, entry: Array, properties: Dictionary = {}) -> Button:
+	properties.merge({"layout": Action.Layout.STACKED, "text": entry[0], "icon": load(ICONS + entry[1] + ".svg")})
+	return Demo.component(page, "components/actions/button.tscn", parent, properties)
+
 static func _tiles(page, bar, entries: Array, group: ButtonGroup) -> Array:
 	var status: Label = bar.get_meta(&"status")
 	var tiles := []
 	for entry in entries:
-		var tile = Demo.component(page, "components/actions/icon_tile.tscn", bar.get_category_slot(), {
-			"usage": Tile.Usage.CATEGORY, "text": entry[0], "icon": load(ICONS + entry[1] + ".svg"),
-			"toggle_mode": true, "button_group": group,
-		})
+		var tile = _tile(page, bar.get_category_slot(), entry, {"toggle_mode": true, "button_group": group})
 		tile.toggled.connect(func(on: bool): _report(status, "toggled(%s): %s" % [on, entry[0]]))
 		tiles.append(tile)
 	return tiles
@@ -156,9 +157,7 @@ static func _builder(page) -> void:
 
 static func _tool(page, bar, entry: Array, group: ButtonGroup) -> Button:
 	var status: Label = bar.get_meta(&"status")
-	var tile = Demo.component(page, "components/actions/icon_tile.tscn", bar.get_category_slot(), {
-		"usage": Tile.Usage.TOOL, "text": entry[0], "icon": load(ICONS + entry[1] + ".svg"), "toggle_mode": entry[2],
-	})
+	var tile = _tile(page, bar.get_category_slot(), entry, {"toggle_mode": entry[2]})
 	if group != null:
 		tile.button_group = group
 		tile.toggled.connect(func(on: bool): _report(status, "toggled(%s): %s" % [on, entry[0]]))
@@ -172,8 +171,6 @@ static func _choices(page, bar, entries: Array) -> HBoxContainer:
 	bar.get_attached_slot().add_child(row)
 	var group := ButtonGroup.new()
 	for entry in entries:
-		Demo.component(page, "components/actions/icon_tile.tscn", row, {
-			"usage": Tile.Usage.CHOICE, "text": entry[0], "icon": load(ICONS + entry[1] + ".svg"), "toggle_mode": true, "button_group": group,
-		})
+		_tile(page, row, entry, {"toggle_mode": true, "button_group": group})
 	group.get_buttons()[0].button_pressed = true
 	return row

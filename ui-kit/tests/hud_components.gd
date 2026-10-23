@@ -1,7 +1,6 @@
 extends SceneTree
 ## HUD components keep the variation, layout and forwarding contracts consumers build on.
 const UI := "res://rookframe/ui/components/"
-const Tile = preload("res://rookframe/ui/components/actions/icon_tile.gd")
 const Meter = preload("res://rookframe/ui/components/data/vital_meter.gd")
 const Action = preload("res://rookframe/ui/components/actions/button.gd")
 const Icon = preload("res://rookframe/ui/icons/check.svg")
@@ -32,40 +31,83 @@ func _run() -> void:
 	host = Control.new()
 	root.add_child(host)
 	host.size = Vector2(1920, 1080)
-	await _icon_tile()
+	await _stacked_button()
 	await _hud_profile()
 	await _hud_overflow()
 	await _hud_empty_slots()
 	await _identity_plate()
 	await _vital_meter()
 	await _emblem()
+	await _context_scope()
 	for failure in failures: push_error(failure)
 	print("HUD_COMPONENTS: %d assertions; %d failures" % [assertions, failures.size()])
 	quit(0 if failures.is_empty() else 1)
 
-func _icon_tile() -> void:
-	for usage in [Tile.Usage.CATEGORY, Tile.Usage.TOOL, Tile.Usage.CHOICE]:
+func stacked(text: String = "Abilities") -> Button:
+	var control: Button = load(UI + "actions/button.tscn").instantiate()
+	control.layout = Action.Layout.STACKED
+	control.text = text
+	control.icon = Icon
+	return control
+
+func _stacked_button() -> void:
+	for variant in [Action.Variant.SECONDARY, Action.Variant.PRIMARY, Action.Variant.DESTRUCTIVE, Action.Variant.EMBLEM]:
 		for compact in [false, true]:
-			var tile = mount("actions/icon_tile.tscn")
-			tile.usage = usage
-			tile.compact = compact
-			tile.text = "Abilities"
-			tile.icon = Icon
+			var sample := stacked()
+			sample.variant = variant
+			sample.accessibility_name = "Abilities"
+			sample.compact = compact
+			host.add_child(sample)
 			await settle()
-			var expected := String(Tile.THEME_TYPES[usage]) + ("__compact" if compact else "")
-			check(tile.theme_type_variation == StringName(expected), "IconTile resolves " + expected)
-			var minimum: Vector2 = tile.get_combined_minimum_size()
-			check(minimum.x >= 44 and minimum.y >= 44, "IconTile target is at least 44 x 44")
-			check(tile.accessibility_name == "Abilities", "IconTile mirrors its label for assistive technology")
-			check(tile.button_group == null and not tile.toggle_mode, "IconTile leaves selection to the caller")
-			tile.free()
-	var large = mount("actions/icon_tile.tscn")
-	large.custom_minimum_size = Vector2(120, 96)
-	large.compact = true
-	large.usage = Tile.Usage.TOOL
+			var expected := String(Action.THEME_TYPES[variant]) + "__stacked" + ("__compact" if compact else "")
+			check(sample.theme_type_variation == StringName(expected), "Stacked Button resolves " + expected)
+			var minimum: Vector2 = sample.get_combined_minimum_size()
+			check(minimum.x >= 44 and minimum.y >= 44, "Stacked target is at least 44 x 44")
+			sample.free()
+	var control := stacked("Companions")
+	control.vertical_icon_alignment = VERTICAL_ALIGNMENT_BOTTOM
+	control.layout = Action.Layout.INLINE
+	host.add_child(control)
 	await settle()
-	check(large.custom_minimum_size == Vector2(120, 96), "IconTile keeps a larger caller minimum")
-	large.free()
+	control.layout = Action.Layout.STACKED
+	check(control.icon_alignment == HORIZONTAL_ALIGNMENT_CENTER and control.vertical_icon_alignment == VERTICAL_ALIGNMENT_TOP, "Stacked places the icon above the label")
+	check(control.autowrap_mode == TextServer.AUTOWRAP_WORD_SMART and control.text_overrun_behavior == TextServer.OVERRUN_NO_TRIMMING, "Stacked labels wrap and are never trimmed")
+	check(control.accessibility_name.is_empty(), "Native Button keeps naming itself from its label")
+	var word := control.get_theme_font("font").get_string_size("Companions", HORIZONTAL_ALIGNMENT_LEFT, -1, control.get_theme_font_size("font_size")).x
+	check(control.get_combined_minimum_size().x >= word, "Wrapping keeps the widest word whole")
+	control.text = "Companions and extraordinarily long hirelings"
+	await settle()
+	word = control.get_theme_font("font").get_string_size("extraordinarily", HORIZONTAL_ALIGNMENT_LEFT, -1, control.get_theme_font_size("font_size")).x
+	check(control.get_combined_minimum_size().x >= word, "Label edits refit the widest word")
+	var packed := PackedScene.new()
+	check(packed.pack(control) == OK, "Stacked Button can be saved")
+	var stored := []
+	for index in packed.get_state().get_node_property_count(0):
+		stored.append(packed.get_state().get_node_property_name(0, index))
+	check(&"layout" in stored and not &"vertical_icon_alignment" in stored and not &"autowrap_mode" in stored, "Scenes store the layout, not the values it controls")
+	var restored: Button = packed.instantiate()
+	host.add_child(restored)
+	await settle()
+	check(restored.vertical_icon_alignment == VERTICAL_ALIGNMENT_TOP, "A restored stacked Button arranges itself again")
+	restored.free()
+	control.layout = Action.Layout.INLINE
+	check(control.vertical_icon_alignment == VERTICAL_ALIGNMENT_BOTTOM and control.autowrap_mode == TextServer.AUTOWRAP_OFF, "Inline restores the caller's native values")
+	check(control.theme_type_variation == &"components_button", "Inline drops the stacked suffix")
+	control.custom_minimum_size = Vector2(320, 96)
+	control.layout = Action.Layout.STACKED
+	control.compact = true
+	await settle()
+	check(control.custom_minimum_size == Vector2(320, 96), "Stacked keeps a larger caller minimum")
+	var theme := Theme.new()
+	theme.set_type_variation(&"components_button__stacked", &"components_button")
+	theme.set_type_variation(&"components_button__stacked__compact", &"components_button__stacked")
+	theme.set_constant("minimum_height", &"components_button", 64)
+	control.custom_minimum_size = Vector2.ZERO
+	host.theme = theme
+	await settle()
+	check(control.custom_minimum_size.y == 64, "A theme's declared base chain resolves suffixed names")
+	host.theme = null
+	control.free()
 
 func _bar(width: float) -> Array:
 	var parent := Control.new()
@@ -104,15 +146,12 @@ func _hud_overflow() -> void:
 	group.allow_unpress = true
 	var tiles: Array[Button] = []
 	for index in 7:
-		var tile = load(UI + "actions/icon_tile.tscn").instantiate()
-		tile.text = "Category %d" % (index + 1)
-		tile.icon = Icon
+		var tile := stacked("Category %d" % (index + 1))
 		tile.toggle_mode = true
 		tile.button_group = group
 		slot.add_child(tile)
 		tiles.append(tile)
-	var plain = load(UI + "actions/icon_tile.tscn").instantiate()
-	plain.text = "Plain"
+	var plain := stacked("Plain")
 	slot.add_child(plain)
 	tiles[2].visible = false
 	await settle()
@@ -171,9 +210,9 @@ func _hud_empty_slots() -> void:
 		check(not bar.get_node(path).visible, "Empty HUD part is hidden: " + path)
 	var identity = load(UI + "data/identity_plate.tscn").instantiate()
 	bar.get_identity_slot().add_child(identity)
-	var tile = load(UI + "actions/icon_tile.tscn").instantiate()
-	bar.get_category_slot().add_child(tile)
-	var choice = load(UI + "actions/icon_tile.tscn").instantiate()
+	var category := stacked()
+	bar.get_category_slot().add_child(category)
+	var choice := stacked("Choice")
 	bar.get_attached_slot().add_child(choice)
 	await settle()
 	check(bar.get_identity_slot().visible and bar.get_category_slot().visible, "Filled slots appear")
@@ -240,3 +279,42 @@ func _emblem() -> void:
 	button.compact = true
 	check(button.theme_type_variation == &"components_button_emblem__compact", "Compact emblem variation")
 	button.free()
+
+func _context_scope() -> void:
+	# A theme styles tiles by their container: its presentation template scopes a
+	# profile Theme to the HudBar category slot through the kit's binding.
+	var profile := Theme.new()
+	profile.set_constant("minimum_height", &"components_button__stacked", 96)
+	var source := GDScript.new()
+	source.source_code = "@tool\nextends Theme\nvar presentations := {}\n"
+	source.reload()
+	var theme: Theme = source.new()
+	# Godot resolves a variation only when a theme declares its base; the profile overrides items.
+	theme.set_type_variation(&"components_button__stacked", &"Button")
+	var template_root := VBoxContainer.new()
+	template_root.name = "HudBar"
+	var parent: Node = template_root
+	for name in ["Bar", "Row", "CategorySlot"]:
+		var node := HBoxContainer.new()
+		node.name = name
+		parent.add_child(node)
+		node.owner = template_root
+		parent = node
+	parent.theme = profile
+	var template := PackedScene.new()
+	template.pack(template_root)
+	template_root.free()
+	theme.presentations[UI + "layout/hud_bar.tscn"] = template
+	var pair := await _bar(1920)
+	var bar = pair[1]
+	var category := stacked()
+	var leading := stacked("Roll")
+	bar.get_category_slot().add_child(category)
+	bar.get_leading_slot().add_child(leading)
+	pair[0].theme = theme
+	await settle()
+	check(category.custom_minimum_size.y == 96 and leading.custom_minimum_size.y == 52, "A theme scopes tile appearance to the bar slot")
+	pair[0].theme = null
+	await settle()
+	check(category.custom_minimum_size.y == 52 and bar.get_category_slot().theme == null, "Removing the theme restores the unthemed slot")
+	pair[0].free()

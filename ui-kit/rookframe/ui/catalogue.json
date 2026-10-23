@@ -1314,12 +1314,13 @@
       "scene": "res://rookframe/ui/components/actions/button.tscn",
       "sceneUid": "uid://nsflvqoc35wn",
       "rootType": "Button",
-      "contract": "Native Button input, signals, text, icon and toggle behavior. Normal/compact minimum targets are 52/44px; the consumer Theme supplies semantic appearance. Empty text with an icon creates an icon-only action; provide an accessibility_name and tooltip_text. EMBLEM is a prominent icon-only action; it centres its icon and warns once when neither accessibility_name nor tooltip_text is set.",
+      "contract": "Native Button input, signals, text, icon and toggle behavior. Normal/compact minimum targets are 52/44px; the consumer Theme supplies semantic appearance. Empty text with an icon creates an icon-only action; provide an accessibility_name and tooltip_text. Independent axes: variant is emphasis (EMBLEM is one prominent icon-only action and warns once without an accessibility_name or tooltip_text), layout STACKED places the icon above a wrapping, untrimmed label, and compact is density. theme_type_variation is components_button[_primary|_destructive|_emblem][__stacked][__compact].",
       "nativeProxy": true,
       "script": "res://rookframe/ui/components/actions/button.gd",
       "properties": {
         "variant": "SECONDARY",
-        "compact": false
+        "compact": false,
+        "layout": "INLINE"
       },
       "variants": [
         "SECONDARY",
@@ -1330,32 +1331,11 @@
       "methods": [
         "set_compact(bool)"
       ],
-      "scriptUid": "uid://dthc7uwdw3f2"
-    },
-    {
-      "name": "IconTile",
-      "scene": "res://rookframe/ui/components/actions/icon_tile.tscn",
-      "sceneUid": "uid://d0at4adohd2m2",
-      "script": "res://rookframe/ui/components/actions/icon_tile.gd",
-      "scriptUid": "uid://mirvhctq3nct",
-      "rootType": "Button",
-      "properties": {
-        "usage": "CATEGORY",
-        "compact": false
-      },
-      "signals": [
-        "pressed",
-        "toggled(toggled_on: bool)"
-      ],
-      "methods": [
-        "set_compact(enabled: bool)"
-      ],
-      "variants": [
-        "CATEGORY",
-        "TOOL",
-        "CHOICE"
-      ],
-      "contract": "One native Button with its icon above a permanent wrapping label. usage and compact select RookframeIconTileCategory, RookframeIconTileTool or RookframeIconTileChoice, with __compact. Minimum target 44 x 44 or the Theme's minimum_height; larger caller minima are kept. The caller owns toggle_mode and button_group; accessibility_name mirrors text unless set."
+      "scriptUid": "uid://dthc7uwdw3f2",
+      "layouts": [
+        "INLINE",
+        "STACKED"
+      ]
     },
     {
       "name": "Toggle",

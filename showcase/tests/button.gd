@@ -1,6 +1,7 @@
 extends SceneTree
 ## Shared Button native layout and inherited appearance in real consumers.
 const Catalogue = preload("res://examples/components/catalogue.tscn")
+const Action = preload("res://rookframe/ui/components/actions/button.gd")
 const THEMES := {
 	"native": "",
 	"ledger": "res://rookframe/ui/themes/silkbound-ledger/theme.tres",
@@ -38,7 +39,8 @@ func _run() -> void:
 	root.content_scale_factor = 1.0
 	catalogue.show_page("button")
 	var page = catalogue.current_page
-	var actions: Array = page.find_children("*", "Button", true, false).filter(func(node): return node.scene_file_path == "res://rookframe/ui/components/actions/button.tscn")
+	# Optional themes map this matrix; their EMBLEM and stacked mappings are a follow-up in each package.
+	var actions: Array = page.find_children("*", "Button", true, false).filter(func(node): return node.scene_file_path == "res://rookframe/ui/components/actions/button.tscn" and node.variant != Action.Variant.EMBLEM and node.layout == Action.Layout.INLINE)
 	check(actions.size() == 34, "One production Button supplies the complete variant matrix")
 	for theme_name in THEMES:
 		var skin: Theme = ThemeDB.get_default_theme() if theme_name == "native" else load(THEMES[theme_name])
