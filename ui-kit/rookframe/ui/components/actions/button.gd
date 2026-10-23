@@ -70,7 +70,6 @@ func _refresh_button() -> void:
 	theme_type_variation = StringName(String(THEME_TYPES[variant])
 		+ ("__stacked" if layout == Layout.STACKED else "") + ("__compact" if compact else ""))
 	_arrange_content()
-	_fit_minimum()
 	if variant == Variant.EMBLEM and not _emblem_name_checked:
 		_emblem_name_checked = true
 		# Callers usually name the action after choosing the variant.
@@ -78,6 +77,8 @@ func _refresh_button() -> void:
 	var presented := Appearance.has_hook(self, &"_configure_button")
 	if presented:
 		Appearance.invoke(self, &"_configure_button")
+	# Measure after presentation, which may replace the state styleboxes.
+	_fit_minimum()
 	set_process(presented and not Engine.is_editor_hint())
 	_refreshing_button = false
 

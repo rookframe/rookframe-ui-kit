@@ -48,6 +48,9 @@ Shared optional dependencies belong outside the directory of theme projects.
   native class items apply.
 - Context belongs to the container. A child carries no usage for where it is
   placed; a theme styles it through a profile Theme scoped to the container.
+  Godot asks the nearest Theme first for every type in a lookup chain, so a
+  profile that defines a native type's items hides variations declared further
+  up; such a profile repeats the variations its descendants use.
 
 ## Themeable recipes
 

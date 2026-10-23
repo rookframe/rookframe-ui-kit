@@ -100,8 +100,8 @@ static func _category_list(page) -> Node:
 	pages.get_node("Area").add_child(column)
 	for index in 4:
 		var row = Demo.component(page, "components/data/structured_row.tscn", column, {"title": "Entry %d" % (index + 1), "detail": "A short summary of this entry.", "value_text": "d%d" % [4, 6, 8, 10][index]})
-		Demo.component(page, "components/data/action_row.tscn", row.get_action_slot(), {"title": "Use", "description": "", "action_label": ""})
-		Demo.component(page, "components/forms/favorite_toggle.tscn", row.get_action_slot(), {"accessibility_name": "Favorite: Entry %d" % (index + 1), "tooltip_text": "Favorite"})
+		Demo.component(page, "components/data/action_row.tscn", row.get_action_slot(), {"title": "Use", "description": "", "action_label": "", "custom_minimum_size": Vector2(88, 44), "size_flags_horizontal": Control.SIZE_SHRINK_END, "size_flags_vertical": Control.SIZE_SHRINK_CENTER})
+		Demo.component(page, "components/forms/favorite_toggle.tscn", row.get_action_slot(), {"accessibility_name": "Favorite: Entry %d" % (index + 1), "tooltip_text": "Favorite", "size_flags_vertical": Control.SIZE_SHRINK_CENTER})
 	host.add_child(pages)
 	pages.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	popover.set_meta(&"header", header)

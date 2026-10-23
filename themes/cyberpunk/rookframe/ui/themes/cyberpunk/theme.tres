@@ -2,11 +2,7 @@
 
 [ext_resource type="Script" path="res://rookframe/ui/themes/component_theme.gd" id="script"]
 [ext_resource type="Theme" path="res://rookframe/ui/menu/cyberpunk/CyberpunkTheme.tres" id="native"]
-[ext_resource type="PackedScene" path="res://rookframe/ui/themes/cyberpunk/hud_bar_presentation.tscn" id="hud_bar"]
 
 [resource]
 script = ExtResource("script")
 native_theme = ExtResource("native")
-presentations = Dictionary[String, PackedScene]({
-"res://rookframe/ui/components/layout/hud_bar.tscn": ExtResource("hud_bar")
-})

@@ -31,6 +31,7 @@ static func materials(menu: Dictionary) -> Dictionary:
 		"hud.emblem.icon": 38,
 		"hud.emblem.icon.compact": 28,
 		"hud.row.separation": 10,
+		"hud.attached.gap": 0,
 		"hud.row.separation.medium": 8,
 		"hud.row.separation.compact": 6,
 		"hud.rule.separation": 8,

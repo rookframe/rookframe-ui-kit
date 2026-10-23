@@ -117,6 +117,8 @@ func _apply_profile() -> void:
 	var changed := next != _profile
 	_profile = next
 	var suffix := "" if _profile == &"wide" else "__" + String(_profile)
+	# The root's separation is the gap between the attached panel and the bar.
+	theme_type_variation = StringName("RookframeHud" + suffix)
 	$Bar.theme_type_variation = StringName("RookframeHudBar" + suffix)
 	$Bar/Row.theme_type_variation = StringName("RookframeHudBar" + suffix)
 	$AttachedPanel.theme_type_variation = StringName("RookframeHudAttached" + suffix)

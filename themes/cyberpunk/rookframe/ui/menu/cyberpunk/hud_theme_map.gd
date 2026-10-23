@@ -14,6 +14,7 @@ const INK := {"normal": "font_color", "hover": "font_hover_color", "pressed": "f
 const ICON := {"normal": "icon_normal_color", "hover": "icon_hover_color", "pressed": "icon_pressed_color", "hover_pressed": "icon_hover_pressed_color", "disabled": "icon_disabled_color"}
 
 static var ELEMENTS: Dictionary = {
+	"RookframeHud": {"base_type": &"VBoxContainer", "constants/separation": "hud.attached.gap"},
 	"RookframeHudBar": {"base_type": &"PanelContainer", "styles/panel": "hud.bar", "constants/separation": "hud.row.separation"},
 	"RookframeHudBar@medium": {"base_type": &"RookframeHudBar", "styles/panel": "hud.bar.medium", "constants/separation": "hud.row.separation.medium"},
 	"RookframeHudBar@compact": {"base_type": &"RookframeHudBar", "styles/panel": "hud.bar.compact", "constants/separation": "hud.row.separation.compact"},

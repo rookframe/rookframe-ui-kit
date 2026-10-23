@@ -243,7 +243,10 @@ that styles bar tiles differently from other stacked Buttons maps
 `layout/hud_bar.tscn` in its `presentations` to a template that assigns a
 profile Theme to `Bar/Row/CategorySlot` or `AttachedPanel/AttachedSlot`. The
 profile overrides items only; the theme's main Theme declares the variation
-chain. A selected or raised tool is the profile's native `pressed` style.
+chain. Godot asks the nearest Theme first, so a profile that defines native
+`Button` or `CheckBox` items hides `components_button_*` or `RookframeFavorite`
+declared above it; a full-theme profile, such as one scoped to StructuredRow,
+must repeat those variations. A selected or raised tool is the profile's native `pressed` style.
 
 A category tile's `toggled(true)` opens its list in a `Popover` anchored to the
 tile: a TaskHeader with Show all and Close, then PaginatedContent of

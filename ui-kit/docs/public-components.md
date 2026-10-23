@@ -226,7 +226,9 @@ the same centre line.
 | --- | --- | --- |
 | `medium_width = 1180.0`; `compact_width = 900.0`; `compact_category_limit = -1`; `more_text = "More"`; `more_icon = icons/menu.svg` | `layout_profile_changed(profile)` (`wide`, `medium`, `compact`), `overflow_opened`; `get_leading_slot()`, `get_identity_slot()`, `get_category_slot()`, `get_trailing_slot()`, `get_attached_slot()`, `get_profile()`, `close_overflow()`; `LeadingSlot`, `IdentitySlot`, `CategorySlot`, `TrailingSlot`, `AttachedSlot` | The profile measures the parent area width, not the bar. Compact calls `set_compact(true)` on slot children that have it. Slots, `Divider` and `AttachedPanel` hide while empty. In compact with `compact_category_limit >= 0`, visible tiles after the limit hide and `More` opens a Popover with one ActionRow per hidden tile. A row toggles the original tile's `button_pressed` (native `toggled` and ButtonGroup apply) or emits its `pressed`, and focus returns to `More`. Tiles the caller hid stay hidden. Caller children never change parent or index; focus order is source order. |
 
-Variations: `RookframeHudBar`, `RookframeHudBar__medium` and
+Variations: `RookframeHud`, `RookframeHud__medium` and `RookframeHud__compact`
+on the root (`separation`, the gap between the attached panel and the bar);
+`RookframeHudBar`, `RookframeHudBar__medium` and
 `RookframeHudBar__compact` on the bar panel and its row (`panel` StyleBox,
 `separation`); `RookframeHudAttached` with the same suffixes on the attached
 panel (`panel` StyleBox; the theme draws cloth, frame and connector);

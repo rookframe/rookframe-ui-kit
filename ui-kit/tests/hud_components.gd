@@ -133,6 +133,7 @@ func _hud_profile() -> void:
 		var bar = pair[1]
 		check(bar.get_profile() == expected[width][0], "HudBar profile at %d is %s" % [width, expected[width][0]])
 		check(bar.get_node("Bar").theme_type_variation == expected[width][1], "HudBar variation at %d" % width)
+		check(bar.theme_type_variation == StringName(String(expected[width][1]).replace("HudBar", "Hud")), "HudBar root variation at %d" % width)
 		check(String(bar.get_node("AttachedPanel").theme_type_variation).begins_with("RookframeHudAttached"), "Attached panel follows the profile")
 		pair[0].free()
 	var pair := await _bar(1920)

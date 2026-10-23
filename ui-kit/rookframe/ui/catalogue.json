@@ -164,7 +164,7 @@
         "medium",
         "compact"
       ],
-      "contract": "Persistent bottom bar: leading action, identity, category lane, trailing action and an attached panel above. The profile follows the parent area width and selects RookframeHudBar and RookframeHudAttached with __medium or __compact. Empty slots hide. In compact with compact_category_limit >= 0, tiles beyond the limit move to a More popover whose rows toggle or press the original tile. Caller children keep parent, index and connections."
+      "contract": "Persistent bottom bar: leading action, identity, category lane, trailing action and an attached panel above. The profile follows the parent area width and selects RookframeHud (root separation), RookframeHudBar and RookframeHudAttached with __medium or __compact. Empty slots hide. In compact with compact_category_limit >= 0, tiles beyond the limit move to a More popover whose rows toggle or press the original tile. Caller children keep parent, index and connections."
     },
     {
       "name": "AdaptiveToolbar",
