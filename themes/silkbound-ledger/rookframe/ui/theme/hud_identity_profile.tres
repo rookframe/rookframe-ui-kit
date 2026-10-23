@@ -1,0 +1,11 @@
+[gd_resource type="Theme" format=3 uid="uid://cps23a02huqcj"]
+
+[resource]
+HBoxContainer/constants/separation = 10
+VBoxContainer/constants/separation = 2
+RookframeIdentity/base_type = &"Label"
+RookframeIdentity/font_sizes/font_size = 20
+RookframeMeta/base_type = &"Label"
+RookframeMeta/font_sizes/font_size = 15
+RookframeValue/base_type = &"Label"
+RookframeValue/font_sizes/font_size = 18
