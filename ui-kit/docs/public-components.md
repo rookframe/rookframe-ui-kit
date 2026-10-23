@@ -65,6 +65,8 @@ effect. Input, data, identity, signals and reduced-motion endpoints remain nativ
 | `components/data/package_card.tscn` | `uid://d5mye7ybbq7rj` | `components/data/package_row.gd`, `uid://dxok8xtr1f1ai` | `PanelContainer` |
 | `components/surfaces/managed_surface.tscn` | `uid://vhwxjcowiuacj` | `components/surfaces/managed_surface.gd`, `uid://dbt641tlogj02` | `PanelContainer` |
 | `components/layout/hud_bar.tscn` | `uid://brgaxc18x4j11` | `components/layout/hud_bar.gd`, `uid://habd0dntqi1a` | `VBoxContainer` |
+| `components/navigation/arc_track.tscn` | `uid://c3aca71s6qw3h` | `components/navigation/arc_track.gd`, `uid://clrhy44nns2lg` | `Container` |
+| `components/navigation/arc_picker.tscn` | `uid://2o41fw18b1pq` | `components/navigation/arc_picker.gd`, `uid://bxj323i1x2m0k` | `Control` |
 | `components/data/identity_plate.tscn` | `uid://b0temsbdnrwqx` | `components/data/identity_plate.gd`, `uid://gvo5aiaypey7` | `Button` |
 | `components/data/vital_meter.tscn` | `uid://bmsda8g0vv0ap` | `components/data/vital_meter.gd`, `uid://c7rrhy8bk1dn4` | `VBoxContainer` |
 
@@ -270,6 +272,54 @@ minimum. The caller sets `accessibility_name` (for example "Favorite: Lantern")
 and `tooltip_text`, and owns favorite persistence. A Theme supplies the
 `checked`, `unchecked`, `checked_disabled` and `unchecked_disabled` icons and the
 `normal`, `hover`, `pressed` and `focus` styleboxes.
+
+## Arc picker
+
+An in-place, two-level choice opened at a point in a scene, such as choosing a
+surface material beside the object being edited. Categories sit on an inner
+track and previewed items on an outer track, so the pointer or stick travels a
+similar short distance to every choice and the edited object stays in view. The
+scenes assign only semantic `theme_type_variation` names; a variation whose
+base no Theme declares uses the native class items. Callers own records,
+previews, what choosing applies, and when the picker opens and closes.
+
+### ArcTrack
+
+`components/navigation/arc_track.tscn` places its direct child Controls in source
+order along a circular arc and draws the rail they sit on. It is layout only:
+the root ignores the mouse, and children keep their parent, index, input and
+connections.
+
+| Properties and defaults | Signals and methods | Behavior, focus, input, and accessibility |
+| --- | --- | --- |
+| `pivot = Vector2.ZERO`; `radius = 160.0`; `start_angle = 180.0`; `end_angle = 360.0`; `alignment = BEGIN` (`BEGIN`, `CENTER`, `END`); `spacing = 8.0`; `first_index = 0`; `active = false`; `reveal = 1.0` | `scrolled(first_index)`, `highlighted(entry)`; `get_entries()`, `get_placed_entries()`, `can_scroll(direction)`, `scroll_by(steps)`, `ensure_visible(entry)`, `step_focus(from, steps)` | Angles are screen degrees (0 right, 90 down); an end below the start runs counter-clockwise. Each child is centred on the arc at its combined minimum size, separated by `spacing` measured along the arc; `alignment` places a track that fits at the start, middle or end of the sweep. Entries that do not fit the sweep, or come before `first_index`, overflow: the track hides them, and each scrollable end draws an arrowhead pointing along the rail. Children the caller hid are not entries and stay hidden. Left/Right on an entry move focus in source order, skipping disabled Buttons and scrolling onto overflowed entries; the mouse wheel over an entry scrolls. `highlighted` reports pointer entry and focus. `reveal` from 0 to 1 sweeps entries out from the start for presentation. The minimum size covers the ring from the local origin. |
+
+Variation: `RookframeArcTrack` (base `Container`). Colors `rail_color`,
+`rail_active_color` (while `active`) and `rail_core_color`; constants
+`rail_width` (default 2), `rail_core_width` (default 0, drawn over the rail) and
+`arrow_size` (default 10); icon `arrow`, drawn pointing along +x and modulated by
+the current rail color. Without these items the rail uses the native Button
+disabled and focus text colors and a drawn triangle.
+
+### ArcPicker
+
+`components/navigation/arc_picker.tscn` composes two centre-aligned ArcTracks
+around its own origin and a caption hub centred on it. Every descendant except the entries
+ignores the mouse.
+
+| Properties and defaults | Signals and methods | Behavior, focus, input, and accessibility |
+| --- | --- | --- |
+| `inner_radius = 96.0`; `outer_radius = 176.0`; `start_angle = 190.0`; `end_angle = 350.0`; `fit_to_viewport = true`; `viewport_margin = 16.0`; `close_on_outside_click = true`; `animate_open = true`; `reduced_motion = false` | `category_changed(category_id)`, `highlight_changed(entry)`, `choose_requested(entry)`, `cancel_requested`, `closed`; `configure(categories, entries, selected_id = "", labels = {})`, `open_at(position)`, `close()`, `is_open()`, `select_category(category_id, notify = true)`, `current_category()`, `selected_id()`, `set_selected(entry_id)`, `get_category_track()`, `get_item_track()` | Categories are `{id, title, icon}`; entries are `{id, title, preview, category}` or `{..., categories: [...]}` for an entry in several categories, with optional `disabled`. Previews are any Texture2D: flat swatches and rendered tiles may share a track. The initial category owns `selected_id`, else the first. Pressing or focusing a category selects it and rebuilds the item track. Pressing an item selects and marks it and emits `choose_requested` with its full record; `set_selected` marks without emitting. `open_at` places the origin in parent coordinates; with `fit_to_viewport` it mirrors the sweep toward the side with the most room, then shifts the origin so the rings stay inside the margin. Opening focuses the selected item, else the first available. Up moves focus out to the items, Down in to the categories, Left/Right along a track. `ui_cancel`, or a press outside every entry while `close_on_outside_click`, closes and emits `cancel_requested`; the outside press is not consumed. Opening animates `reveal` unless `reduced_motion`; closing settles. Entries are at least 44 × 44, named and tooltipped from their title. The caption always shows the category title and the highlighted, else selected, item title, or `labels.empty` (default "Nothing here yet") for an empty category, so meaning never depends on the icon or preview alone. A selected item also shows a selection mark. |
+
+Variations: categories use `RookframeArcCategory` and items `RookframeArcItem`
+(base `Button`; the native styleboxes draw the ring for each state; constants
+`diameter`, default 52 and 76, and `well_inset`, default 4; icon
+`selection_mark`, falling back to the native CheckBox `checked`). Categories show
+their icon through the native Button icon items. Each item's preview is clipped by
+the `panel` stylebox of `RookframeArcWell` (base `Panel`), so a fully rounded
+StyleBoxFlat makes it circular. The hub uses `RookframeArcCaption` (base
+`PanelContainer`) with `RookframeArcCaptionKicker` and `RookframeArcCaptionTitle`
+labels. Both tracks use `RookframeArcTrack`.
 
 ## Managed Surface
 

@@ -103,6 +103,7 @@ python3 tools/check_component_pages.py
 godot --headless --path . --script res://tests/component_catalogue.gd
 godot --headless --path . --script res://tests/component_catalogue_interactions.gd
 godot --path . --script res://tests/button.gd -- --capture-dir=/absolute/temp/path
+godot --path . --script res://tests/arc_picker.gd -- --capture-dir=/absolute/temp/path
 godot --path . --script res://tests/component_catalogue.gd -- --capture-dir=/absolute/temp/path
 godot --path . --script res://tests/specimen.gd -- --capture-dir=/absolute/temp/path
 godot --headless --path . --script res://tests/theme_activation.gd
