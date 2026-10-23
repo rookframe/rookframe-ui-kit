@@ -170,6 +170,8 @@ func close() -> void:
 		return
 	_settle()
 	set_process_input(false)
+	%Categories.active = false
+	%Items.active = false
 	hide()
 	closed.emit()
 
@@ -256,7 +258,14 @@ func _entry_button(kind: Entry.Kind, record: Dictionary, group: ButtonGroup) -> 
 	button.disabled = record.get("disabled", false)
 	button.button_group = group
 	button.mouse_exited.connect(_unhighlighted.bind(button))
+	button.focus_entered.connect(_activate_track.bind(kind))
 	return button
+
+
+# The rail holding focus is the active one.
+func _activate_track(kind: Entry.Kind) -> void:
+	%Categories.active = kind == Entry.Kind.CATEGORY
+	%Items.active = kind == Entry.Kind.ITEM
 
 
 # Up moves outward to the items, Down inward to the categories.
@@ -339,8 +348,10 @@ func _orient() -> void:
 	if not is_node_ready():
 		return
 	_mirror = Vector2.ONE
-	if fit_to_viewport and is_inside_tree() and visible:
-		var bounds := _fit_bounds().grow(-viewport_margin)
+	var visible_area := _fit_bounds() if is_inside_tree() else Rect2()
+	# Nothing visible to fit into, for example a clipped-away or collapsed parent.
+	if fit_to_viewport and visible and visible_area.size.x > viewport_margin * 2.0 and visible_area.size.y > viewport_margin * 2.0:
+		var bounds := visible_area.grow(-viewport_margin)
 		var best := -1.0
 		for mirror in [Vector2.ONE, Vector2(-1, 1), Vector2(1, -1), Vector2(-1, -1)]:
 			var reach := _reach(mirror).intersection(bounds).get_area()

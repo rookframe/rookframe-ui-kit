@@ -34,7 +34,7 @@ static func build(page) -> void:
 	_track(page)
 
 static func _picker(page, previews: Dictionary) -> void:
-	var body = page.section("Material picker", "Click the scene to open the picker there. Categories sit on the inner track and materials on the outer one; flat swatches and rendered tiles share the track. Arrow keys move along and between tracks, the wheel scrolls, Escape or a click outside closes. Near an edge the rings mirror and shift to stay on screen.")
+	var body = page.section("Material picker", "Click the scene, or use Open centred, to open the picker there. Categories sit on the inner track and materials on the outer one; flat swatches and rendered tiles share the track. Arrow keys move along and between tracks, the wheel scrolls, Escape or a click outside closes. Near an edge the rings mirror and shift to stay on screen.")
 	var stage := Demo.region(body, 640)
 	stage.mouse_filter = Control.MOUSE_FILTER_STOP
 	stage.clip_contents = true
@@ -64,7 +64,6 @@ static func _picker(page, previews: Dictionary) -> void:
 		if press != null and press.pressed and press.button_index == MOUSE_BUTTON_LEFT and not picker.is_open():
 			picker.open_at(press.position))
 	var open := func(): picker.open_at(stage.size * Vector2(0.5, 0.62))
-	stage.resized.connect(func(): open.call_deferred(), CONNECT_ONE_SHOT)
 	var actions = page.flow(body)
 	page.button(actions, "Open centred", open)
 	page.button(actions, "Open at top-right", func(): picker.open_at(Vector2(stage.size.x - 24, 24)))

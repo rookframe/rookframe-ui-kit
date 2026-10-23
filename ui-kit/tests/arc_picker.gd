@@ -237,12 +237,16 @@ func _picker_keyboard() -> void:
 	var items: Container = control.get_item_track()
 	var categories: Container = control.get_category_track()
 	check(root.gui_get_focus_owner() == items.get_child(1), "Opening focuses the selected entry")
+	check(items.active and not categories.active, "The focused track is the active rail")
 	await _action(&"ui_down")
 	check(root.gui_get_focus_owner() == categories.get_child(1), "Down moves to the current category")
+	check(categories.active and not items.active, "The active rail follows focus")
 	await _action(&"ui_left")
 	check(root.gui_get_focus_owner() == categories.get_child(0) and control.current_category() == "favorites", "Keyboard focus selects categories")
 	await _action(&"ui_up")
 	check(root.gui_get_focus_owner() == control.get_item_track().get_child(0), "Up moves out to the first available entry")
+	control.close()
+	check(not control.get_item_track().active and not categories.active, "Closing clears the active rail")
 	control.free()
 
 func _picker_dismissal() -> void:
