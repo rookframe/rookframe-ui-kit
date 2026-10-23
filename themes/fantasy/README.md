@@ -37,6 +37,18 @@ input, theme switching and all three native sizes. Append
 `-- --capture-dir=/absolute/temp/path` for state and catalogue captures, or
 `-- --preview` to open the interactive Fantasy Checkbox page.
 
+HUD components reuse the same walnut casing, brass leaf finial and engraved
+ink. Stacked Button tiles stay on the carved Button presentation: a selected
+tile sits into its casing, lights it beyond hover and takes the brightest ink,
+while keyboard focus is a separate brass ring. Tall tiles stretch the walnut
+instead of thickening the rim (`art_height`). `EMBLEM` is a square primary
+casing with cast leaves; stacked and compact tiles omit the leaves because a
+wrapping label cannot measure their clearance. The HudBar, attached panel (with
+its brass bridge to the bar) and IdentityPlate draw the casing at a fixed rim.
+`hud_bar.tscn` scopes a profile Theme to the identity slot so the plate reads
+at HUD scale. Vital levels differ in lightness, edge and glow, not hue alone;
+the favorite star is original vector art under this package's license.
+
 Runtime paths and existing UIDs are preserved; resources are merged into the
 consumer's `rookframe/ui/`. Review this package through `../../showcase`.
 See the [recipe contract](../../ui-kit/docs/native-controls-and-recipes.md).
