@@ -16,6 +16,10 @@ as every other theme. The shared native Theme entry wraps this package's existin
 mapping compiler. Installation does not activate it; hosts own selection and
 persistence. `res://rookframe/ui/menu/cyberpunk/CyberpunkTheme.tres` remains a compatibility resource.
 See [the common activation contract](../../ui-kit/docs/world-theme-styling.md).
+HUD mappings (stacked and emblem Buttons, HudBar, IdentityPlate, VitalMeter,
+FavoriteToggle) live in `hud_theme_map.gd` with values in `materials/hud_materials.gd`;
+`themes/cyberpunk/hud_bar_presentation.tscn` closes the HudBar gap so the attached
+tray stands on the bar rail. The favorite star SVGs are hand-authored for this package.
 Runtime paths and existing UIDs are preserved; resources are merged into the
 consumer's `rookframe/ui/`. Review this package through `../../showcase`.
 See the [recipe contract](../../ui-kit/docs/native-controls-and-recipes.md).
