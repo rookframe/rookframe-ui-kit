@@ -259,6 +259,38 @@ func _identity_plate() -> void:
 	plate.detail = ""
 	check(plate.accessibility_name == "Wanderer" and not plate.get_node("Content/Row/Copy/Detail").visible, "Empty detail is hidden")
 	plate.free()
+	# Content updates keep the values a theme's presentation template wrote.
+	var source := GDScript.new()
+	source.source_code = "@tool\nextends Theme\nvar presentations := {}\n"
+	source.reload()
+	var theme: Theme = source.new()
+	var template_root := Button.new()
+	template_root.name = "IdentityPlate"
+	var parent: Node = template_root
+	for name in ["Content", "Row", "Copy"]:
+		var node := Container.new()
+		node.name = name
+		parent.add_child(node)
+		node.owner = template_root
+		parent = node
+	var label := Label.new()
+	label.name = "Title"
+	label.uppercase = true
+	parent.add_child(label)
+	label.owner = template_root
+	var template := PackedScene.new()
+	template.pack(template_root)
+	template_root.free()
+	theme.presentations[UI + "data/identity_plate.tscn"] = template
+	host.theme = theme
+	var themed = mount("data/identity_plate.tscn")
+	await settle()
+	themed.title = "Renamed"
+	themed.compact = true
+	await settle()
+	check(themed.get_node("Content/Row/Copy/Title").uppercase, "Presentation values survive content and density updates")
+	themed.free()
+	host.theme = null
 
 func _vital_meter() -> void:
 	var meter = mount("data/vital_meter.tscn")

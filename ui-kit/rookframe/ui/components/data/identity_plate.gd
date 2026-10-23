@@ -4,7 +4,6 @@ extends Button
 ## Portrait, name and detail as one native button target, with an optional
 ## display-only vital below the copy. The caller connects the inherited pressed signal.
 
-const Appearance = preload("res://rookframe/ui/_internal/presentation/appearance.gd")
 const COPY_WIDTH := 240
 
 @export var title := "Name":
@@ -68,7 +67,6 @@ func _refresh() -> void:
 	if not is_node_ready() or _refreshing:
 		return
 	_refreshing = true
-	Appearance.restore(self)
 	theme_type_variation = &"RookframeHudIdentity__compact" if compact else &"RookframeHudIdentity"
 	var avatar := $Content/Row/Portrait
 	avatar.texture = portrait
@@ -139,9 +137,3 @@ func _refresh_vital_slot() -> void:
 		if child is CanvasItem and child.visible and not child.is_queued_for_deletion() and child.get_parent() == slot:
 			shown = true
 	slot.visible = shown
-
-
-func _exit_tree() -> void:
-	_refreshing = true
-	Appearance.restore(self)
-	_refreshing = false
