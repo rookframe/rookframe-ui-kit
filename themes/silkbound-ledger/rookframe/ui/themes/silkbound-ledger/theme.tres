@@ -94,13 +94,14 @@
 
 [ext_resource type="Theme" path="res://rookframe/ui/theme/action_panel_theme.tres" id="action_profile"]
 [ext_resource type="Theme" uid="uid://brgtnyj06pglw" path="res://rookframe/ui/theme/hud_theme.tres" id="hud_profile"]
+[ext_resource type="Theme" path="res://rookframe/ui/theme/arc_picker_theme.tres" id="arc_profile"]
 
 [ext_resource type="Script" path="res://rookframe/ui/themes/silkbound-ledger/presentation/choice.gd" id="hook_choice"]
 
 [resource]
 script = ExtResource("script")
 native_theme = ExtResource("native")
-supplemental_themes = Array[Theme]([ExtResource("action_profile"), ExtResource("hud_profile")])
+supplemental_themes = Array[Theme]([ExtResource("action_profile"), ExtResource("hud_profile"), ExtResource("arc_profile")])
 presentations = Dictionary[String, PackedScene]({
 "res://rookframe/ui/_internal/content/miniature_browser_row.tscn": ExtResource("scene_0"),
 "res://rookframe/ui/_internal/content/miniature_picker_row.tscn": ExtResource("scene_1"),
