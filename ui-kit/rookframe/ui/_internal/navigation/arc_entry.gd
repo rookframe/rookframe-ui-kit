@@ -34,6 +34,9 @@ func _ready() -> void:
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_THEME_CHANGED and is_node_ready():
 		_refresh()
+	elif what == NOTIFICATION_DRAW and is_node_ready():
+		# Disabling redraws the Button without any signal.
+		_refresh_preview_tint()
 
 
 func _refresh() -> void:
@@ -50,10 +53,17 @@ func _refresh() -> void:
 	$Well.visible = kind == Kind.ITEM
 	$Well.set_anchors_and_offsets_preset(PRESET_FULL_RECT, PRESET_MODE_MINSIZE, int(inset))
 	$Well/Preview.texture = preview
-	# The preview draws above every ring, so an unavailable one also dims.
-	var dim := get_theme_color(&"preview_disabled_modulate") if has_theme_color(&"preview_disabled_modulate") else Color(1, 1, 1, 0.45)
-	$Well.modulate = dim if disabled else Color.WHITE
+	_refresh_preview_tint()
 	_refresh_marker()
+
+
+# The preview draws above every ring, so an unavailable one also dims.
+func _refresh_preview_tint() -> void:
+	var tint := Color.WHITE
+	if disabled:
+		tint = get_theme_color(&"preview_disabled_modulate") if has_theme_color(&"preview_disabled_modulate") else Color(1, 1, 1, 0.45)
+	if $Well.modulate != tint:
+		$Well.modulate = tint
 
 
 func _refresh_marker() -> void:

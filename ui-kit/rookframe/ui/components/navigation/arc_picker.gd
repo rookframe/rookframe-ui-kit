@@ -340,7 +340,7 @@ func _orient() -> void:
 		return
 	_mirror = Vector2.ONE
 	if fit_to_viewport and is_inside_tree() and visible:
-		var bounds := get_viewport_rect().grow(-viewport_margin)
+		var bounds := _fit_bounds().grow(-viewport_margin)
 		var best := -1.0
 		for mirror in [Vector2.ONE, Vector2(-1, 1), Vector2(1, -1), Vector2(-1, -1)]:
 			var reach := _reach(mirror).intersection(bounds).get_area()
@@ -351,12 +351,24 @@ func _orient() -> void:
 		var shift := Vector2(
 			maxf(0.0, bounds.position.x - rings.position.x) - maxf(0.0, rings.end.x - bounds.end.x),
 			maxf(0.0, bounds.position.y - rings.position.y) - maxf(0.0, rings.end.y - bounds.end.y))
-		global_position += shift
+		# Rings larger than the visible area can only clamp; the origin itself stays visible.
+		global_position = (global_position + shift).clamp(bounds.position, bounds.end)
 	for pair in [[%Categories, inner_radius], [%Items, outer_radius]]:
 		pair[0].pivot = Vector2.ZERO
 		pair[0].radius = pair[1]
 		pair[0].start_angle = _mirrored(start_angle)
 		pair[0].end_angle = _mirrored(end_angle)
+
+
+# The viewport, narrowed by every ancestor that clips its children.
+func _fit_bounds() -> Rect2:
+	var bounds := get_viewport_rect()
+	var node := get_parent()
+	while node is Control:
+		if node.clip_contents:
+			bounds = bounds.intersection(node.get_global_rect())
+		node = node.get_parent()
+	return bounds
 
 
 func _mirrored(angle: float) -> float:

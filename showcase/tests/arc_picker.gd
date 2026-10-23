@@ -86,12 +86,26 @@ func _run() -> void:
 	quit(0 if failures.is_empty() else 1)
 
 func _check_entries(picker: Control, context: String) -> void:
+	# The stage and the page scroll clip, so the picker fits what stays visible of both.
 	var bounds := picker.get_viewport_rect()
-	for track in [picker.get_category_track(), picker.get_item_track()]:
-		for entry in track.get_placed_entries():
-			var minimum: Vector2 = entry.get_combined_minimum_size()
-			check(minimum.x >= 44 and minimum.y >= 44, context + ": targets are at least 44 x 44")
-			check(bounds.encloses(entry.get_global_rect()), context + ": %s stays on screen" % entry.tooltip_text)
+	var node := picker.get_parent()
+	while node is Control:
+		if node.clip_contents:
+			bounds = bounds.intersection(node.get_global_rect())
+		node = node.get_parent()
+	var rings := Rect2()
+	var placed: Array = picker.get_category_track().get_placed_entries() + picker.get_item_track().get_placed_entries()
+	for entry in placed:
+		var minimum: Vector2 = entry.get_combined_minimum_size()
+		check(minimum.x >= 44 and minimum.y >= 44, context + ": targets are at least 44 x 44")
+		rings = entry.get_global_rect() if rings.size == Vector2.ZERO else rings.merge(entry.get_global_rect())
+	# A visible area smaller than the rings (a phone-height stage under the page header) can only clamp.
+	if rings.size.x > bounds.size.x or rings.size.y > bounds.size.y:
+		check(bounds.has_point(picker.global_position), context + ": the picker origin stays visible when the rings cannot fit")
+		return
+	for entry in placed:
+		check(bounds.encloses(entry.get_global_rect()), context + ": %s stays on screen" % entry.tooltip_text)
+
 
 func check(condition: bool, message: String) -> void:
 	if not condition: failures.append(message)

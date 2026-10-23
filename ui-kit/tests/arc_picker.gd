@@ -171,6 +171,15 @@ func _picker_records() -> void:
 	check(not items[0].get_node("Marker").visible, "Unselected entries carry no mark")
 	check(items[2].disabled, "Disabled records stay visible but unavailable")
 	check(items[2].get_node("Well").modulate.a < 1.0 and items[1].get_node("Well").modulate == Color.WHITE, "Unavailable previews dim")
+	# Shown entries redraw when disabled changes; hidden ones settle when shown.
+	control.open_at(Vector2(640, 400))
+	items[1].disabled = true
+	await settle()
+	check(items[1].get_node("Well").modulate.a < 1.0, "Disabling later also dims the preview")
+	items[1].disabled = false
+	await settle()
+	check(items[1].get_node("Well").modulate == Color.WHITE, "Enabling restores the preview")
+	control.close()
 	check(items[0].accessibility_name == "Slate" and items[0].tooltip_text == "Slate", "Entries are named from their title")
 	check(items[0].theme_type_variation == &"RookframeArcItem", "Items use the item variation")
 	check(control.get_category_track().get_child(0).theme_type_variation == &"RookframeArcCategory", "Categories use the category variation")
@@ -292,6 +301,20 @@ func _picker_fit() -> void:
 		for button in control.get_item_track().get_placed_entries() + control.get_category_track().get_placed_entries():
 			check(bounds.encloses(button.get_global_rect()), "Entries stay on screen when opened at %s" % at)
 		control.close()
+	var stage := Control.new()
+	stage.clip_contents = true
+	stage.position = Vector2(200, 150)
+	stage.size = Vector2(700, 520)
+	host.add_child(stage)
+	control.reparent(stage, false)
+	control.open_at(Vector2(690, 10))
+	await settle()
+	var clip := stage.get_global_rect().grow(-control.viewport_margin + 1.0)
+	for button in control.get_item_track().get_placed_entries() + control.get_category_track().get_placed_entries():
+		check(clip.encloses(button.get_global_rect()), "Entries stay inside a clipping ancestor")
+	control.close()
+	control.reparent(host, false)
+	stage.free()
 	control.fit_to_viewport = false
 	control.open_at(Vector2(640, 40))
 	await settle()
