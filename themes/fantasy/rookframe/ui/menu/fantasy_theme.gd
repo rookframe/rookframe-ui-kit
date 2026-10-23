@@ -8,4 +8,5 @@ func _init() -> void:
 	var extensions: Array[Script] = preload("res://rookframe/ui/menu/shell_theme_maps.gd").MAPS.duplicate()
 	extensions.append(preload("expansion_theme_map.gd"))
 	extensions.append(preload("../themes/fantasy/checkbox_theme_map.gd"))
+	extensions.append(preload("../themes/fantasy/hud_theme_map.gd"))
 	super(Mapping, Materials, extensions)
