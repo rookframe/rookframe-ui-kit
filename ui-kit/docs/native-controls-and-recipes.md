@@ -28,12 +28,13 @@ controls. Group resources are local to each instantiated scene.
 
 | Component | Public resource | Native root or resource | Usage |
 | --- | --- | --- | --- |
-| Button | `actions/button.tscn` | `Button` | `variant = SECONDARY` (`SECONDARY`, `PRIMARY`, `DESTRUCTIVE`), `compact = false`; native text, icon, input, signals and toggle behavior. |
+| Button | `actions/button.tscn` | `Button` | `variant = SECONDARY` (`SECONDARY`, `PRIMARY`, `DESTRUCTIVE`, `EMBLEM`), `compact = false`; native text, icon, input, signals and toggle behavior. |
 | Toggle | `actions/toggle.tscn` | `Button` | Native properties, methods, signals, input and focus behavior remain unchanged. |
 | ButtonGroup | `actions/button_group.tscn` | `HFlowContainer` | Native properties, methods, signals, input and focus behavior remain unchanged. |
 | Select | `forms/select.tscn` | `OptionButton` | `variant = NATIVE` or `MENU`; `compact = false`. Native IDs, signals, search and selection remain unchanged. |
 | SelectionGroup | `forms/selection_group.tres` | `ButtonGroup` | Assign one instance to Checkbox, Toggle or Choice buttons and set the initial selection. Duplicate per independent group. Native allow_unpress enables an optional choice. |
 | Checkbox | `forms/checkbox.tscn` | `CheckBox` | Native properties, methods, signals, input and focus behavior remain unchanged. |
+| FavoriteToggle | `forms/favorite_toggle.tscn` | `CheckBox` | `RookframeFavorite` variation with no text and a 44 × 44 minimum. The caller sets `accessibility_name` and `tooltip_text` and owns favorites. |
 | NativeSwitch | `forms/switch.tscn` | `CheckButton` | Native properties, methods, signals, input and focus behavior remain unchanged. |
 | Input | `forms/input.tscn` | `LineEdit` | Native properties, methods, signals, input and focus behavior remain unchanged. |
 | NativeTextarea | `forms/textarea.tscn` | `TextEdit` | Native properties, methods, signals, input and focus behavior remain unchanged. |
@@ -75,7 +76,8 @@ contains this small host-side factory.
 ## Button
 
 Use `components/actions/button.tscn` for menu actions, editor commands and icon
-tools. `variant` selects `SECONDARY` (standard), `PRIMARY` or `DESTRUCTIVE`;
+tools. `variant` selects `SECONDARY` (standard), `PRIMARY`, `DESTRUCTIVE` or
+`EMBLEM`;
 `compact` / `set_compact(bool)` selects normal or compact size. Normal targets
 start at 52 × 52px and compact targets at 44 × 44px. Native text/icon sizing,
 larger caller minima and the Theme's `minimum_height` can grow these targets.
@@ -93,8 +95,13 @@ Destructive actions do not implement confirmation or effects; the host owns them
 settles that presentation immediately. Theme changes cancel the old presentation
 and restore its overrides without changing native content or interaction.
 
-The semantic Theme types are `components_button`, `components_button_primary`
-and `components_button_destructive`, with `__compact` for compact size. The
+`EMBLEM` is a prominent icon-only action, such as the quick roll at the start of
+a HUD bar. It centres its icon; leave `text` empty and set `accessibility_name`
+or `tooltip_text`. Without either, the Button warns once.
+
+The semantic Theme types are `components_button`, `components_button_primary`,
+`components_button_destructive` and `components_button_emblem`, with `__compact`
+for compact size. The
 component owns `theme_type_variation`; consumers style these types in a native
 Theme. Without mappings, all variants inherit native Godot Button appearance.
 No palette, font or Theme is installed by the component.
@@ -193,7 +200,32 @@ when floating.
 | Acknowledgement or confirmed decision | `Dialog` |
 | Designed open-file task | `FilePickerDialog` |
 | Semantic icon actions | `IconActionGrid` plus native Buttons |
+| Persistent game HUD | `HudBar` with Button `EMBLEM`, `IdentityPlate`, `VitalMeter` and `IconTile`; see [HUD bar](#hud-bar) |
 | Body scrolling | one `ScrollContainer` |
+
+## HUD bar
+
+Compose a persistent HUD from `layout/hud_bar.tscn`. Callers fill its slots and
+connect native `pressed` and `toggled`; the bar owns only layout, density and
+overflow. Anchor it bottom-centre in a non-container parent such as the HUD
+layer: its profile measures that parent, and a shrink-to-fit container parent
+would grow with the bar. The HUD Bar showcase page builds each composition below
+with placeholder data.
+
+| Composition | Leading | Identity | Category lane | Trailing / attached |
+| --- | --- | --- | --- | --- |
+| Character | Button `EMBLEM` (roll) | `IdentityPlate` with a `VitalMeter` in `VitalSlot` | Seven `IconTile` `CATEGORY` toggles sharing one duplicated `selection_group.tres` with `allow_unpress = true`; `compact_category_limit = 4` | None |
+| Creature | None | `IdentityPlate` without a vital | Four `CATEGORY` toggles; `compact_category_limit = -1` | `ActionRow` showing current HP |
+| Builder tools | None | None | `TOOL` tiles; selection tools share a group with `allow_unpress = false`; the host toggles `visible` between mode sets | `AttachedSlot` with `CHOICE` tiles in their own groups and Choice `CARD` swatches |
+| Dice tray | — | — | `CHOICE` tiles with `toggle_mode = false`, one per die | `numeric_input.tscn` modifier and a secondary Button |
+
+A category tile's `toggled(true)` opens its list in a `Popover` anchored to the
+tile: a TaskHeader with Show all and Close, then PaginatedContent of
+StructuredRows whose action slot holds an ActionRow and a FavoriteToggle; use
+TaskState when empty. Closing the list sets the tile's `button_pressed = false`
+and returns focus to it. A tile in the More overflow is hidden, so anchor its
+list to the HudBar instead. Choosing it there toggles the original tile, so
+the caller's logic stays the same.
 
 ## Image display
 

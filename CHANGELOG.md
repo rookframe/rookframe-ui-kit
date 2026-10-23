@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- Add HUD building blocks to the unthemed core: `actions/icon_tile.tscn`,
+  `layout/hud_bar.tscn` with compact overflow, `data/identity_plate.tscn`,
+  `data/vital_meter.tscn`, the `forms/favorite_toggle.tscn` native proxy and the
+  Button `EMBLEM` variant (`components_button_emblem`).
+
 - Add the shared Chronicle surface for retained event histories, recaps, quest
   journals and lore: a lightly worn paper scroll in Fantasy and an archive panel
   in Cyberpunk, with reading styles, compact density and catalogue guidance.

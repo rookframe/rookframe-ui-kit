@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://brgaxc18x4j11"]
+
+[ext_resource type="Script" uid="uid://habd0dntqi1a" path="res://rookframe/ui/components/layout/hud_bar.gd" id="1_script"]
+[ext_resource type="PackedScene" uid="uid://d0at4adohd2m2" path="res://rookframe/ui/components/actions/icon_tile.tscn" id="2_tile"]
+[ext_resource type="PackedScene" uid="uid://drqlqnjpihqjd" path="res://rookframe/ui/components/overlays/popover.tscn" id="3_popover"]
+[ext_resource type="Texture2D" uid="uid://d88a4v0tdgn2" path="res://rookframe/ui/icons/menu.svg" id="4_menu"]
+
+[node name="HudBar" type="VBoxContainer"]
+size_flags_horizontal = 4
+script = ExtResource("1_script")
+
+[node name="AttachedPanel" type="PanelContainer" parent="."]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+theme_type_variation = &"RookframeHudAttached"
+
+[node name="AttachedSlot" type="VBoxContainer" parent="AttachedPanel"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Bar" type="PanelContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_type_variation = &"RookframeHudBar"
+
+[node name="Row" type="HBoxContainer" parent="Bar"]
+layout_mode = 2
+theme_type_variation = &"RookframeHudBar"
+
+[node name="LeadingSlot" type="HBoxContainer" parent="Bar/Row"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="IdentitySlot" type="HBoxContainer" parent="Bar/Row"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Divider" type="VSeparator" parent="Bar/Row"]
+layout_mode = 2
+theme_type_variation = &"RookframeHudRule"
+
+[node name="CategorySlot" type="HBoxContainer" parent="Bar/Row"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="More" parent="Bar/Row" instance=ExtResource("2_tile")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+text = "More"
+icon = ExtResource("4_menu")
+
+[node name="TrailingSlot" type="HBoxContainer" parent="Bar/Row"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Overflow" parent="." instance=ExtResource("3_popover")]

@@ -25,6 +25,13 @@ static func build(page) -> void:
 					"size_flags_vertical": Control.SIZE_SHRINK_CENTER,
 				})
 				control.pressed.connect(func(): status.text = "Confirmation requested: " + item.action if item.variant == Action.Variant.DESTRUCTIVE else "Requested: " + item.action)
+	var emblem = page.section("Emblem", "A prominent icon-only action, such as the quick roll at the start of a HUD bar. The caller names it.")
+	var emblem_status = page.note(emblem, "No emblem pressed.")
+	var emblems = page.flow(emblem)
+	for compact in [false, true]:
+		for disabled in [false, true]:
+			var control = page.scene(SCENE, emblems, {"variant": Action.Variant.EMBLEM, "compact": compact, "disabled": disabled, "icon": load("res://rookframe/ui/icons/dice.svg"), "accessibility_name": "Roll dice", "tooltip_text": "Roll dice", "size_flags_vertical": Control.SIZE_SHRINK_CENTER})
+			control.pressed.connect(func(): emblem_status.text = "Requested: Roll dice")
 	var unavailable = page.section("Disabled", "Unavailable actions retain their labels and icons.")
 	for compact in [false, true]:
 		var row = page.flow(unavailable)

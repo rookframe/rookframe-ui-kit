@@ -311,6 +311,21 @@
     ]
   },
   {
+    "id": "favorite_toggle",
+    "title": "Favorite Toggle",
+    "category": "Forms & selection",
+    "description": "A native CheckBox that marks an entry as a favourite.",
+    "script": "res://examples/components/pages/actions_forms/favorite_toggle.gd",
+    "covers": [
+      "res://rookframe/ui/components/forms/favorite_toggle.tscn"
+    ],
+    "keywords": [
+      "favorite",
+      "star",
+      "checkbox"
+    ]
+  },
+  {
     "id": "native_switch",
     "title": "Switch",
     "category": "Forms & selection",
@@ -451,6 +466,23 @@
       "editor",
       "tool",
       "disabled"
+    ]
+  },
+  {
+    "id": "icon_tile",
+    "title": "Icon Tile",
+    "category": "Actions",
+    "description": "An icon above a permanent label for HUD categories, tools and choices.",
+    "script": "res://examples/components/pages/actions_forms/icon_tile.gd",
+    "covers": [
+      "res://rookframe/ui/components/actions/icon_tile.tscn"
+    ],
+    "keywords": [
+      "hud",
+      "tile",
+      "category",
+      "tool",
+      "choice"
     ]
   }
 ]

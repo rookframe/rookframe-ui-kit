@@ -64,6 +64,10 @@ effect. Input, data, identity, signals and reduced-motion endpoints remain nativ
 | `components/data/package_row.tscn` | `uid://c6dihfeyukjh` | `components/data/package_row.gd`, `uid://dxok8xtr1f1ai` | `PanelContainer` |
 | `components/data/package_card.tscn` | `uid://d5mye7ybbq7rj` | `components/data/package_row.gd`, `uid://dxok8xtr1f1ai` | `PanelContainer` |
 | `components/surfaces/managed_surface.tscn` | `uid://vhwxjcowiuacj` | `components/surfaces/managed_surface.gd`, `uid://dbt641tlogj02` | `PanelContainer` |
+| `components/actions/icon_tile.tscn` | `uid://d0at4adohd2m2` | `components/actions/icon_tile.gd`, `uid://mirvhctq3nct` | `Button` |
+| `components/layout/hud_bar.tscn` | `uid://brgaxc18x4j11` | `components/layout/hud_bar.gd`, `uid://habd0dntqi1a` | `VBoxContainer` |
+| `components/data/identity_plate.tscn` | `uid://b0temsbdnrwqx` | `components/data/identity_plate.gd`, `uid://gvo5aiaypey7` | `Button` |
+| `components/data/vital_meter.tscn` | `uid://bmsda8g0vv0ap` | `components/data/vital_meter.gd`, `uid://c7rrhy8bk1dn4` | `VBoxContainer` |
 
 `components/surfaces/managed_surface_state.gd` is the public
 `RookframeManagedSurfaceState` Resource with UID `uid://q51dth77eqqb`; it has no
@@ -200,6 +204,89 @@ behavior. `WorldRow` and `DisclosureRow` intentionally use a native root
 Button because selection or navigation is their complete documented behavior;
 the summary Card keeps its static relationship scene-authored while callers
 inject only dynamic World data.
+
+## HUD components
+
+These scenes compose a persistent game HUD from native Buttons and containers.
+They assign only semantic `theme_type_variation` names; a variation that no
+Theme defines falls back to the native class items. Callers own game rules,
+thresholds, favorites and roll logic. The
+[HUD bar recipe](native-controls-and-recipes.md#hud-bar) shows the complete
+compositions.
+
+### IconTile
+
+`components/actions/icon_tile.tscn` is one native `Button` with its icon above a
+permanent label, for HUD categories, builder tools and picker choices. It has no
+child nodes: the scene sets `icon_alignment = CENTER`, `vertical_icon_alignment = TOP`,
+`expand_icon = false`, `autowrap_mode = AUTOWRAP_WORD_SMART`,
+`text_overrun_behavior = OVERRUN_NO_TRIMMING` and `focus_mode = FOCUS_ALL`.
+
+| Properties and defaults | Signals and methods | Behavior, focus, input, and accessibility |
+| --- | --- | --- |
+| `usage = CATEGORY` (`CATEGORY`, `TOOL`, `CHOICE`); `compact = false` | Native `pressed` and `toggled`; `set_compact(enabled)` | The minimum target is 44 × 44, or the Theme's `minimum_height`, and at least the widest word of the label. Larger caller minima are kept. Labels wrap between words and are never trimmed. `toggle_mode` and `button_group` stay caller decisions. `accessibility_name` mirrors `text` unless the caller sets it. |
+
+Variations: `RookframeIconTileCategory`, `RookframeIconTileTool`,
+`RookframeIconTileChoice`, each with `__compact`. A Theme supplies `normal`,
+`hover`, `pressed`, `hover_pressed`, `focus` and `disabled` styleboxes; `font`,
+`font_size` and `font_*_color`; `icon_normal_color`, `icon_pressed_color`,
+`icon_hover_color` and `icon_disabled_color`; `icon_max_width`; `h_separation`;
+and `minimum_height`. A raised selected tool is the theme's `pressed` stylebox
+with `expand_margin_top`.
+
+### HudBar
+
+`components/layout/hud_bar.tscn` is the persistent bottom bar. Its `Bar` row holds
+`LeadingSlot`, `IdentitySlot`, a `Divider`, `CategorySlot`, a `More` IconTile and
+`TrailingSlot`. `AttachedPanel` with `AttachedSlot` sits directly above the bar on
+the same centre line.
+
+| Properties and defaults | Signals, methods, and slots | Behavior, focus, input, and accessibility |
+| --- | --- | --- |
+| `medium_width = 1180.0`; `compact_width = 900.0`; `compact_category_limit = -1`; `more_text = "More"`; `more_icon = icons/menu.svg` | `layout_profile_changed(profile)` (`wide`, `medium`, `compact`), `overflow_opened`; `get_leading_slot()`, `get_identity_slot()`, `get_category_slot()`, `get_trailing_slot()`, `get_attached_slot()`, `get_profile()`, `close_overflow()`; `LeadingSlot`, `IdentitySlot`, `CategorySlot`, `TrailingSlot`, `AttachedSlot` | The profile measures the parent area width, not the bar. Compact calls `set_compact(true)` on slot children that have it. Slots, `Divider` and `AttachedPanel` hide while empty. In compact with `compact_category_limit >= 0`, visible tiles after the limit hide and `More` opens a Popover with one ActionRow per hidden tile. A row toggles the original tile's `button_pressed` (native `toggled` and ButtonGroup apply) or emits its `pressed`, and focus returns to `More`. Tiles the caller hid stay hidden. Caller children never change parent or index; focus order is source order. |
+
+Variations: `RookframeHudBar`, `RookframeHudBar__medium` and
+`RookframeHudBar__compact` on the bar panel and its row (`panel` StyleBox,
+`separation`); `RookframeHudAttached` with the same suffixes on the attached
+panel (`panel` StyleBox; the theme draws cloth, frame and connector);
+`RookframeHudRule` on the divider (`separator` StyleBoxLine).
+
+### IdentityPlate
+
+`components/data/identity_plate.tscn` presents portrait, name and detail as one
+native `Button`, with an optional display-only vital below the copy.
+Every descendant ignores the mouse; `text` and `icon` stay empty.
+
+| Properties and defaults | Signals, methods, and slots | Behavior, focus, input, and accessibility |
+| --- | --- | --- |
+| `title = "Name"`; `detail = ""`; `portrait = null`; `initials = ""`; `compact = false` | Native `pressed`; `set_compact(enabled)`, `get_vital_slot()`; `VitalSlot` | `portrait` and `initials` pass to the Avatar. `Detail` hides when empty and `VitalSlot` hides without a visible child. `accessibility_name` is the title plus ", " and the detail. Copy wraps between words; portrait and copy stay visible in every profile. The minimum target follows the content and is at least 44 × 44. |
+
+Variations: `RookframeHudIdentity` and `RookframeHudIdentity__compact` (Button
+styleboxes; their content margins inset the content, and `minimum_height` and
+`copy_width` constants are optional). The labels use `RookframeIdentity` and
+`RookframeMeta`.
+
+### VitalMeter
+
+`components/data/vital_meter.tscn` is a display-only labelled value with a native
+`ProgressBar` track for hit points and similar resources.
+
+| Properties and defaults | Signals and methods | Behavior, focus, input, and accessibility |
+| --- | --- | --- |
+| `caption = "HP"`; `value = 0.0`; `max_value = 1.0`; `value_text = ""`; `level = STEADY` (`STEADY`, `WOUNDED`, `CRITICAL`, `DEPLETED`); `show_track = true` | No signals or methods | Empty `value_text` shows `value/max_value` without a trailing `.0`. The track maximum stays above zero. The caller chooses `level`; no thresholds are computed. It receives no input; `accessibility_name` is the caption and value text. |
+
+Variations: the track uses `RookframeVital`, `RookframeVitalWounded`,
+`RookframeVitalCritical` or `RookframeVitalDepleted` (`background` and `fill`
+styleboxes). The labels use `RookframeMeta` and `RookframeValue`.
+
+### FavoriteToggle
+
+`components/forms/favorite_toggle.tscn` is a [native proxy](native-controls-and-recipes.md#public-native-proxies):
+one `CheckBox` with the `RookframeFavorite` variation, no text and a 44 × 44
+minimum. The caller sets `accessibility_name` (for example "Favorite: Lantern")
+and `tooltip_text`, and owns favorite persistence. A Theme supplies the
+`checked`, `unchecked`, `checked_disabled` and `unchecked_disabled` icons and the
+`normal`, `hover`, `pressed` and `focus` styleboxes.
 
 ## Managed Surface
 
