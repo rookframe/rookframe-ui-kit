@@ -177,3 +177,4 @@ static func _static_init() -> void:
 	VALUES.merge(preload("chronicle_materials.gd").materials(VALUES))
 	VALUES.merge(preload("world_list_materials.gd").materials(VALUES))
 	VALUES.merge(preload("hud_materials.gd").materials(VALUES))
+	VALUES.merge(preload("arc_picker_materials.gd").materials(VALUES))
