@@ -50,6 +50,9 @@ func _refresh() -> void:
 	$Well.visible = kind == Kind.ITEM
 	$Well.set_anchors_and_offsets_preset(PRESET_FULL_RECT, PRESET_MODE_MINSIZE, int(inset))
 	$Well/Preview.texture = preview
+	# The preview draws above every ring, so an unavailable one also dims.
+	var dim := get_theme_color(&"preview_disabled_modulate") if has_theme_color(&"preview_disabled_modulate") else Color(1, 1, 1, 0.45)
+	$Well.modulate = dim if disabled else Color.WHITE
 	_refresh_marker()
 
 

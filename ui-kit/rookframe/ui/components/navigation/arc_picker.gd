@@ -100,6 +100,8 @@ func select_category(category_id: String, notify: bool = true) -> bool:
 	for button in %Categories.get_children():
 		if button is Entry:
 			button.set_pressed_no_signal(button.entry_id == category_id)
+			if button.entry_id == category_id:
+				%Categories.ensure_visible(button)
 	_build_items()
 	_refresh_caption()
 	if notify:
@@ -228,6 +230,9 @@ func _build_items() -> void:
 	for button in %Items.get_children():
 		%Items.remove_child(button)
 		button.queue_free()
+	# A removed item's highlight must not outlive it in the caption.
+	if _highlight in _entries:
+		_highlight = {}
 	for entry in _entries:
 		if _category_id not in _owners(entry):
 			continue

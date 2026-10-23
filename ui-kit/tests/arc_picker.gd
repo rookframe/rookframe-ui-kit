@@ -170,6 +170,7 @@ func _picker_records() -> void:
 	check(items[1].button_pressed and items[1].get_node("Marker").visible, "Selected entry is pressed and marked")
 	check(not items[0].get_node("Marker").visible, "Unselected entries carry no mark")
 	check(items[2].disabled, "Disabled records stay visible but unavailable")
+	check(items[2].get_node("Well").modulate.a < 1.0 and items[1].get_node("Well").modulate == Color.WHITE, "Unavailable previews dim")
 	check(items[0].accessibility_name == "Slate" and items[0].tooltip_text == "Slate", "Entries are named from their title")
 	check(items[0].theme_type_variation == &"RookframeArcItem", "Items use the item variation")
 	check(control.get_category_track().get_child(0).theme_type_variation == &"RookframeArcCategory", "Categories use the category variation")
@@ -191,6 +192,10 @@ func _picker_records() -> void:
 	control.select_category("empty")
 	await settle()
 	check(control.get_item_track().get_child_count() == 0 and control.get_node("%Title").text == "No materials", "Empty categories say so in the caption")
+	control.get_category_track().spacing = 400.0
+	control.select_category("masonry")
+	await settle()
+	check(control.get_category_track().get_child(1).visible, "A category selected from code scrolls onto the rail")
 	control.free()
 
 func _picker_choice() -> void:
@@ -211,6 +216,9 @@ func _picker_choice() -> void:
 	check(flag.get_node("Marker").visible and not control.get_item_track().get_child(1).get_node("Marker").visible, "The mark follows the selection")
 	control.set_selected("slate")
 	check(control.get_item_track().get_child(0).button_pressed and not flag.button_pressed and chosen.size() == 1, "Hosts can set the selection without a choice")
+	flag.grab_focus()
+	control.select_category("empty")
+	check(control.get_node("%Title").text == "No materials", "A removed item's highlight leaves the caption")
 	control.free()
 
 func _picker_keyboard() -> void:

@@ -314,7 +314,9 @@ descendant except the entries ignores the mouse.
 Variations: categories use `RookframeArcCategory` and items `RookframeArcItem`
 (base `Button`; the native styleboxes draw the ring for each state; constants
 `diameter`, default 52 and 76, and `well_inset`, default 4; icon
-`selection_mark`, falling back to the native CheckBox `checked`). Categories show
+`selection_mark`, falling back to the native CheckBox `checked`; items also take
+color `preview_disabled_modulate`, default half-transparent white, applied to a
+disabled item's preview). Categories show
 their icon through the native Button icon items. Each item's preview is clipped by
 the `panel` stylebox of `RookframeArcWell` (base `Panel`), so a fully rounded
 StyleBoxFlat makes it circular. The hub uses `RookframeArcCaption` (base
