@@ -16,6 +16,14 @@
       "sha256": "f1fa6c078d126509641e79b131041eee42c3d6669dd9a946e649b8be496aa654",
       "license": "MIT; see repository LICENSE",
       "replacementContract": "Preserve public path/UID, dimensions and any referencing AtlasTexture regions/StyleBoxTexture margins; update origin and checksum after replacement."
+    },
+    {
+      "id": "assets/action-panel/ai-generated-hud-leather-atlas",
+      "path": "assets/action-panel/ai-generated-hud-leather-atlas.png",
+      "origin": "ai-generated",
+      "sha256": "e0b7caca5b576bb9b3e9e7450b692854b6d83f122288c07792704ff76477defa",
+      "license": "MIT; see repository LICENSE",
+      "replacementContract": "Derived from assets/action-panel/ai-generated-leather-atlas.png by tools/export-hud-leather.gd; regenerate after replacing that source, preserve public path/UID, dimensions and the StyleBoxTexture regions/margins in theme/hud_theme.tres; update origin and checksum after replacement."
     }
   ]
 }

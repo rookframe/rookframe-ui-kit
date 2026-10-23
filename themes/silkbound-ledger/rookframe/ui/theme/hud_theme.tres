@@ -1,0 +1,1020 @@
+[gd_resource type="Theme" format=3 uid="uid://brgtnyj06pglw"]
+
+[ext_resource type="Texture2D" uid="uid://c45coogutdi8k" path="res://rookframe/ui/assets/action-panel/ai-generated-hud-leather-atlas.png" id="leather"]
+[ext_resource type="Texture2D" uid="uid://hrvoyqtrw38i" path="res://rookframe/ui/assets/controls/favorite-checked.svg" id="favorite_checked"]
+[ext_resource type="Texture2D" uid="uid://c02qxgl7cyfq6" path="res://rookframe/ui/assets/controls/favorite-unchecked.svg" id="favorite_unchecked"]
+[ext_resource type="Texture2D" uid="uid://copvdhlmmpqya" path="res://rookframe/ui/assets/controls/favorite-checked-disabled.svg" id="favorite_checked_disabled"]
+[ext_resource type="Texture2D" uid="uid://cp1wqoa76206i" path="res://rookframe/ui/assets/controls/favorite-unchecked-disabled.svg" id="favorite_unchecked_disabled"]
+
+[sub_resource type="StyleBoxTexture" id="BarWide"]
+texture = ExtResource("leather")
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+region_rect = Rect2(4, 4, 422, 98)
+texture_margin_left = 11.0
+texture_margin_top = 12.0
+texture_margin_right = 11.0
+texture_margin_bottom = 17.0
+content_margin_left = 16.0
+content_margin_top = 14.0
+content_margin_right = 16.0
+content_margin_bottom = 16.0
+
+[sub_resource type="StyleBoxTexture" id="BarMedium"]
+texture = ExtResource("leather")
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+region_rect = Rect2(4, 4, 422, 98)
+texture_margin_left = 11.0
+texture_margin_top = 12.0
+texture_margin_right = 11.0
+texture_margin_bottom = 17.0
+content_margin_left = 12.0
+content_margin_top = 12.0
+content_margin_right = 12.0
+content_margin_bottom = 14.0
+
+[sub_resource type="StyleBoxTexture" id="BarCompact"]
+texture = ExtResource("leather")
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+region_rect = Rect2(4, 4, 422, 98)
+texture_margin_left = 11.0
+texture_margin_top = 12.0
+texture_margin_right = 11.0
+texture_margin_bottom = 17.0
+content_margin_left = 8.0
+content_margin_top = 9.0
+content_margin_right = 8.0
+content_margin_bottom = 11.0
+
+[sub_resource type="StyleBoxTexture" id="AttachedWide"]
+texture = ExtResource("leather")
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+region_rect = Rect2(4, 106, 422, 115)
+texture_margin_left = 30.0
+texture_margin_top = 12.0
+texture_margin_right = 30.0
+texture_margin_bottom = 34.0
+expand_margin_bottom = 17.0
+content_margin_left = 16.0
+content_margin_top = 14.0
+content_margin_right = 16.0
+content_margin_bottom = 16.0
+
+[sub_resource type="StyleBoxTexture" id="AttachedCompact"]
+texture = ExtResource("leather")
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+region_rect = Rect2(4, 106, 422, 115)
+texture_margin_left = 30.0
+texture_margin_top = 12.0
+texture_margin_right = 30.0
+texture_margin_bottom = 34.0
+expand_margin_bottom = 17.0
+content_margin_left = 10.0
+content_margin_top = 9.0
+content_margin_right = 10.0
+content_margin_bottom = 11.0
+
+[sub_resource type="StyleBoxLine" id="Rule"]
+color = Color(0.737255, 0.572549, 0.466667, 0.55)
+grow_begin = -10.0
+grow_end = -10.0
+thickness = 1
+vertical = true
+
+[sub_resource type="StyleBoxTexture" id="IdentityNormal"]
+texture = ExtResource("leather")
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+region_rect = Rect2(4, 225, 435, 81)
+texture_margin_left = 12.0
+texture_margin_top = 12.0
+texture_margin_right = 30.0
+texture_margin_bottom = 25.0
+content_margin_left = 12.0
+content_margin_top = 10.0
+content_margin_right = 24.0
+content_margin_bottom = 14.0
+
+[sub_resource type="StyleBoxTexture" id="IdentityHover"]
+texture = ExtResource("leather")
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+region_rect = Rect2(4, 225, 435, 81)
+texture_margin_left = 12.0
+texture_margin_top = 12.0
+texture_margin_right = 30.0
+texture_margin_bottom = 25.0
+content_margin_left = 12.0
+content_margin_top = 10.0
+content_margin_right = 24.0
+content_margin_bottom = 14.0
+modulate_color = Color(1.45, 1.4, 1.35, 1)
+
+[sub_resource type="StyleBoxTexture" id="IdentityPressed"]
+texture = ExtResource("leather")
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+region_rect = Rect2(4, 225, 435, 81)
+texture_margin_left = 12.0
+texture_margin_top = 12.0
+texture_margin_right = 30.0
+texture_margin_bottom = 25.0
+content_margin_left = 12.0
+content_margin_top = 10.0
+content_margin_right = 24.0
+content_margin_bottom = 14.0
+modulate_color = Color(0.72, 0.72, 0.72, 1)
+
+[sub_resource type="StyleBoxTexture" id="IdentityDisabled"]
+texture = ExtResource("leather")
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+region_rect = Rect2(4, 225, 435, 81)
+texture_margin_left = 12.0
+texture_margin_top = 12.0
+texture_margin_right = 30.0
+texture_margin_bottom = 25.0
+content_margin_left = 12.0
+content_margin_top = 10.0
+content_margin_right = 24.0
+content_margin_bottom = 14.0
+modulate_color = Color(1, 1, 1, 0.55)
+
+[sub_resource type="StyleBoxTexture" id="IdentityCompactNormal"]
+texture = ExtResource("leather")
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+region_rect = Rect2(4, 225, 435, 81)
+texture_margin_left = 12.0
+texture_margin_top = 12.0
+texture_margin_right = 30.0
+texture_margin_bottom = 25.0
+content_margin_left = 8.0
+content_margin_top = 6.0
+content_margin_right = 20.0
+content_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxTexture" id="IdentityCompactHover"]
+texture = ExtResource("leather")
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+region_rect = Rect2(4, 225, 435, 81)
+texture_margin_left = 12.0
+texture_margin_top = 12.0
+texture_margin_right = 30.0
+texture_margin_bottom = 25.0
+content_margin_left = 8.0
+content_margin_top = 6.0
+content_margin_right = 20.0
+content_margin_bottom = 10.0
+modulate_color = Color(1.45, 1.4, 1.35, 1)
+
+[sub_resource type="StyleBoxTexture" id="IdentityCompactPressed"]
+texture = ExtResource("leather")
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+region_rect = Rect2(4, 225, 435, 81)
+texture_margin_left = 12.0
+texture_margin_top = 12.0
+texture_margin_right = 30.0
+texture_margin_bottom = 25.0
+content_margin_left = 8.0
+content_margin_top = 6.0
+content_margin_right = 20.0
+content_margin_bottom = 10.0
+modulate_color = Color(0.72, 0.72, 0.72, 1)
+
+[sub_resource type="StyleBoxTexture" id="IdentityCompactDisabled"]
+texture = ExtResource("leather")
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+region_rect = Rect2(4, 225, 435, 81)
+texture_margin_left = 12.0
+texture_margin_top = 12.0
+texture_margin_right = 30.0
+texture_margin_bottom = 25.0
+content_margin_left = 8.0
+content_margin_top = 6.0
+content_margin_right = 20.0
+content_margin_bottom = 10.0
+modulate_color = Color(1, 1, 1, 0.55)
+
+[sub_resource type="StyleBoxFlat" id="FocusRing"]
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.905882, 0.905882, 0.866667, 1)
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxFlat" id="TileFocusRing"]
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.905882, 0.905882, 0.866667, 1)
+expand_margin_left = 4.0
+expand_margin_top = 7.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxTexture" id="EmblemNormal"]
+texture = ExtResource("leather")
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+region_rect = Rect2(4, 310, 129, 80)
+texture_margin_left = 12.0
+texture_margin_top = 12.0
+texture_margin_right = 12.0
+texture_margin_bottom = 12.0
+content_margin_left = 14.0
+content_margin_top = 14.0
+content_margin_right = 14.0
+content_margin_bottom = 14.0
+
+[sub_resource type="StyleBoxTexture" id="EmblemHover"]
+texture = ExtResource("leather")
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+region_rect = Rect2(4, 310, 129, 80)
+texture_margin_left = 12.0
+texture_margin_top = 12.0
+texture_margin_right = 12.0
+texture_margin_bottom = 12.0
+content_margin_left = 14.0
+content_margin_top = 14.0
+content_margin_right = 14.0
+content_margin_bottom = 14.0
+modulate_color = Color(1.45, 1.4, 1.35, 1)
+
+[sub_resource type="StyleBoxTexture" id="EmblemPressed"]
+texture = ExtResource("leather")
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+region_rect = Rect2(4, 310, 129, 80)
+texture_margin_left = 12.0
+texture_margin_top = 12.0
+texture_margin_right = 12.0
+texture_margin_bottom = 12.0
+content_margin_left = 14.0
+content_margin_top = 16.0
+content_margin_right = 14.0
+content_margin_bottom = 12.0
+modulate_color = Color(0.72, 0.72, 0.72, 1)
+
+[sub_resource type="StyleBoxTexture" id="EmblemDisabled"]
+texture = ExtResource("leather")
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+region_rect = Rect2(4, 310, 129, 80)
+texture_margin_left = 12.0
+texture_margin_top = 12.0
+texture_margin_right = 12.0
+texture_margin_bottom = 12.0
+content_margin_left = 14.0
+content_margin_top = 14.0
+content_margin_right = 14.0
+content_margin_bottom = 14.0
+modulate_color = Color(1, 1, 1, 0.5)
+
+[sub_resource type="StyleBoxTexture" id="EmblemCompactNormal"]
+texture = ExtResource("leather")
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+region_rect = Rect2(4, 310, 129, 80)
+texture_margin_left = 12.0
+texture_margin_top = 12.0
+texture_margin_right = 12.0
+texture_margin_bottom = 12.0
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxTexture" id="EmblemCompactHover"]
+texture = ExtResource("leather")
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+region_rect = Rect2(4, 310, 129, 80)
+texture_margin_left = 12.0
+texture_margin_top = 12.0
+texture_margin_right = 12.0
+texture_margin_bottom = 12.0
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+modulate_color = Color(1.45, 1.4, 1.35, 1)
+
+[sub_resource type="StyleBoxTexture" id="EmblemCompactPressed"]
+texture = ExtResource("leather")
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+region_rect = Rect2(4, 310, 129, 80)
+texture_margin_left = 12.0
+texture_margin_top = 12.0
+texture_margin_right = 12.0
+texture_margin_bottom = 12.0
+content_margin_left = 10.0
+content_margin_top = 12.0
+content_margin_right = 10.0
+content_margin_bottom = 8.0
+modulate_color = Color(0.72, 0.72, 0.72, 1)
+
+[sub_resource type="StyleBoxTexture" id="EmblemCompactDisabled"]
+texture = ExtResource("leather")
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+region_rect = Rect2(4, 310, 129, 80)
+texture_margin_left = 12.0
+texture_margin_top = 12.0
+texture_margin_right = 12.0
+texture_margin_bottom = 12.0
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+modulate_color = Color(1, 1, 1, 0.5)
+
+[sub_resource type="StyleBoxFlat" id="TileNormal"]
+bg_color = Color(0.031373, 0.043137, 0.039216, 0.4)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.737255, 0.572549, 0.466667, 0.38)
+content_margin_left = 12.0
+content_margin_top = 10.0
+content_margin_right = 12.0
+content_margin_bottom = 9.0
+
+[sub_resource type="StyleBoxFlat" id="TileHover"]
+bg_color = Color(0.737255, 0.572549, 0.466667, 0.14)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.737255, 0.572549, 0.466667, 0.7)
+content_margin_left = 12.0
+content_margin_top = 10.0
+content_margin_right = 12.0
+content_margin_bottom = 9.0
+
+[sub_resource type="StyleBoxFlat" id="TileSelected"]
+bg_color = Color(0.807843, 0.8, 0.701961, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.807843, 0.8, 0.701961, 1)
+expand_margin_top = 3.0
+content_margin_left = 12.0
+content_margin_top = 10.0
+content_margin_right = 12.0
+content_margin_bottom = 9.0
+
+[sub_resource type="StyleBoxFlat" id="TileSelectedHover"]
+bg_color = Color(0.905882, 0.905882, 0.866667, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.807843, 0.8, 0.701961, 1)
+expand_margin_top = 3.0
+content_margin_left = 12.0
+content_margin_top = 10.0
+content_margin_right = 12.0
+content_margin_bottom = 9.0
+
+[sub_resource type="StyleBoxFlat" id="TileDisabled"]
+bg_color = Color(0.031373, 0.043137, 0.039216, 0.25)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.682353, 0.729412, 0.745098, 0.22)
+content_margin_left = 12.0
+content_margin_top = 10.0
+content_margin_right = 12.0
+content_margin_bottom = 9.0
+
+[sub_resource type="StyleBoxFlat" id="TileCompactNormal"]
+bg_color = Color(0.031373, 0.043137, 0.039216, 0.4)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.737255, 0.572549, 0.466667, 0.38)
+content_margin_left = 8.0
+content_margin_top = 6.0
+content_margin_right = 8.0
+content_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxFlat" id="TileCompactHover"]
+bg_color = Color(0.737255, 0.572549, 0.466667, 0.14)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.737255, 0.572549, 0.466667, 0.7)
+content_margin_left = 8.0
+content_margin_top = 6.0
+content_margin_right = 8.0
+content_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxFlat" id="TileCompactSelected"]
+bg_color = Color(0.807843, 0.8, 0.701961, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.807843, 0.8, 0.701961, 1)
+expand_margin_top = 3.0
+content_margin_left = 8.0
+content_margin_top = 6.0
+content_margin_right = 8.0
+content_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxFlat" id="TileCompactSelectedHover"]
+bg_color = Color(0.905882, 0.905882, 0.866667, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.807843, 0.8, 0.701961, 1)
+expand_margin_top = 3.0
+content_margin_left = 8.0
+content_margin_top = 6.0
+content_margin_right = 8.0
+content_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxFlat" id="TileCompactDisabled"]
+bg_color = Color(0.031373, 0.043137, 0.039216, 0.25)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.682353, 0.729412, 0.745098, 0.22)
+content_margin_left = 8.0
+content_margin_top = 6.0
+content_margin_right = 8.0
+content_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxFlat" id="PrimaryTile"]
+bg_color = Color(0.807843, 0.8, 0.701961, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.807843, 0.8, 0.701961, 1)
+content_margin_left = 12.0
+content_margin_top = 10.0
+content_margin_right = 12.0
+content_margin_bottom = 9.0
+
+[sub_resource type="StyleBoxFlat" id="PrimaryTileHover"]
+bg_color = Color(0.905882, 0.905882, 0.866667, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.807843, 0.8, 0.701961, 1)
+content_margin_left = 12.0
+content_margin_top = 10.0
+content_margin_right = 12.0
+content_margin_bottom = 9.0
+
+[sub_resource type="StyleBoxFlat" id="PrimaryTilePressed"]
+bg_color = Color(0.713725, 0.705882, 0.619608, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.905882, 0.905882, 0.866667, 1)
+expand_margin_top = 3.0
+content_margin_left = 12.0
+content_margin_top = 10.0
+content_margin_right = 12.0
+content_margin_bottom = 9.0
+
+[sub_resource type="StyleBoxFlat" id="PrimaryTileDisabled"]
+bg_color = Color(0.807843, 0.8, 0.701961, 0.35)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.807843, 0.8, 0.701961, 0.35)
+content_margin_left = 12.0
+content_margin_top = 10.0
+content_margin_right = 12.0
+content_margin_bottom = 9.0
+
+[sub_resource type="StyleBoxFlat" id="PrimaryTileCompact"]
+bg_color = Color(0.807843, 0.8, 0.701961, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.807843, 0.8, 0.701961, 1)
+content_margin_left = 8.0
+content_margin_top = 6.0
+content_margin_right = 8.0
+content_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxFlat" id="PrimaryTileCompactHover"]
+bg_color = Color(0.905882, 0.905882, 0.866667, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.807843, 0.8, 0.701961, 1)
+content_margin_left = 8.0
+content_margin_top = 6.0
+content_margin_right = 8.0
+content_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxFlat" id="PrimaryTileCompactPressed"]
+bg_color = Color(0.713725, 0.705882, 0.619608, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.905882, 0.905882, 0.866667, 1)
+expand_margin_top = 3.0
+content_margin_left = 8.0
+content_margin_top = 6.0
+content_margin_right = 8.0
+content_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxFlat" id="PrimaryTileCompactDisabled"]
+bg_color = Color(0.807843, 0.8, 0.701961, 0.35)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.807843, 0.8, 0.701961, 0.35)
+content_margin_left = 8.0
+content_margin_top = 6.0
+content_margin_right = 8.0
+content_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxFlat" id="DangerTile"]
+bg_color = Color(0.031373, 0.043137, 0.039216, 0.4)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 0.505882, 0.478431, 0.45)
+content_margin_left = 12.0
+content_margin_top = 10.0
+content_margin_right = 12.0
+content_margin_bottom = 9.0
+
+[sub_resource type="StyleBoxFlat" id="DangerTileHover"]
+bg_color = Color(1, 0.505882, 0.478431, 0.14)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 0.505882, 0.478431, 0.8)
+content_margin_left = 12.0
+content_margin_top = 10.0
+content_margin_right = 12.0
+content_margin_bottom = 9.0
+
+[sub_resource type="StyleBoxFlat" id="DangerTileSelected"]
+bg_color = Color(1, 0.505882, 0.478431, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 0.505882, 0.478431, 1)
+expand_margin_top = 3.0
+content_margin_left = 12.0
+content_margin_top = 10.0
+content_margin_right = 12.0
+content_margin_bottom = 9.0
+
+[sub_resource type="StyleBoxFlat" id="DangerTileCompact"]
+bg_color = Color(0.031373, 0.043137, 0.039216, 0.4)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 0.505882, 0.478431, 0.45)
+content_margin_left = 8.0
+content_margin_top = 6.0
+content_margin_right = 8.0
+content_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxFlat" id="DangerTileCompactHover"]
+bg_color = Color(1, 0.505882, 0.478431, 0.14)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 0.505882, 0.478431, 0.8)
+content_margin_left = 8.0
+content_margin_top = 6.0
+content_margin_right = 8.0
+content_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxFlat" id="DangerTileCompactSelected"]
+bg_color = Color(1, 0.505882, 0.478431, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 0.505882, 0.478431, 1)
+expand_margin_top = 3.0
+content_margin_left = 8.0
+content_margin_top = 6.0
+content_margin_right = 8.0
+content_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxTexture" id="EmblemTile"]
+texture = ExtResource("leather")
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+region_rect = Rect2(4, 310, 129, 80)
+texture_margin_left = 12.0
+texture_margin_top = 12.0
+texture_margin_right = 12.0
+texture_margin_bottom = 12.0
+content_margin_left = 14.0
+content_margin_top = 12.0
+content_margin_right = 14.0
+content_margin_bottom = 12.0
+
+[sub_resource type="StyleBoxTexture" id="EmblemTileHover"]
+texture = ExtResource("leather")
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+region_rect = Rect2(4, 310, 129, 80)
+texture_margin_left = 12.0
+texture_margin_top = 12.0
+texture_margin_right = 12.0
+texture_margin_bottom = 12.0
+content_margin_left = 14.0
+content_margin_top = 12.0
+content_margin_right = 14.0
+content_margin_bottom = 12.0
+modulate_color = Color(1.45, 1.4, 1.35, 1)
+
+[sub_resource type="StyleBoxTexture" id="EmblemTilePressed"]
+texture = ExtResource("leather")
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+region_rect = Rect2(4, 310, 129, 80)
+texture_margin_left = 12.0
+texture_margin_top = 12.0
+texture_margin_right = 12.0
+texture_margin_bottom = 12.0
+content_margin_left = 14.0
+content_margin_top = 14.0
+content_margin_right = 14.0
+content_margin_bottom = 10.0
+modulate_color = Color(0.72, 0.72, 0.72, 1)
+
+[sub_resource type="StyleBoxTexture" id="EmblemTileCompact"]
+texture = ExtResource("leather")
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+region_rect = Rect2(4, 310, 129, 80)
+texture_margin_left = 12.0
+texture_margin_top = 12.0
+texture_margin_right = 12.0
+texture_margin_bottom = 12.0
+content_margin_left = 10.0
+content_margin_top = 8.0
+content_margin_right = 10.0
+content_margin_bottom = 8.0
+
+[sub_resource type="StyleBoxTexture" id="EmblemTileCompactHover"]
+texture = ExtResource("leather")
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+region_rect = Rect2(4, 310, 129, 80)
+texture_margin_left = 12.0
+texture_margin_top = 12.0
+texture_margin_right = 12.0
+texture_margin_bottom = 12.0
+content_margin_left = 10.0
+content_margin_top = 8.0
+content_margin_right = 10.0
+content_margin_bottom = 8.0
+modulate_color = Color(1.45, 1.4, 1.35, 1)
+
+[sub_resource type="StyleBoxTexture" id="EmblemTileCompactPressed"]
+texture = ExtResource("leather")
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+region_rect = Rect2(4, 310, 129, 80)
+texture_margin_left = 12.0
+texture_margin_top = 12.0
+texture_margin_right = 12.0
+texture_margin_bottom = 12.0
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 6.0
+modulate_color = Color(0.72, 0.72, 0.72, 1)
+
+[sub_resource type="StyleBoxTexture" id="EmblemTileDisabled"]
+texture = ExtResource("leather")
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+region_rect = Rect2(4, 310, 129, 80)
+texture_margin_left = 12.0
+texture_margin_top = 12.0
+texture_margin_right = 12.0
+texture_margin_bottom = 12.0
+content_margin_left = 14.0
+content_margin_top = 12.0
+content_margin_right = 14.0
+content_margin_bottom = 12.0
+modulate_color = Color(1, 1, 1, 0.5)
+
+[sub_resource type="StyleBoxTexture" id="EmblemTileCompactDisabled"]
+texture = ExtResource("leather")
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+region_rect = Rect2(4, 310, 129, 80)
+texture_margin_left = 12.0
+texture_margin_top = 12.0
+texture_margin_right = 12.0
+texture_margin_bottom = 12.0
+content_margin_left = 10.0
+content_margin_top = 8.0
+content_margin_right = 10.0
+content_margin_bottom = 8.0
+modulate_color = Color(1, 1, 1, 0.5)
+
+[sub_resource type="StyleBoxFlat" id="VitalTrack"]
+bg_color = Color(0.082353, 0.090196, 0.098039, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.356863, 0.384314, 0.396078, 1)
+content_margin_top = 4.0
+content_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxFlat" id="VitalFill"]
+bg_color = Color(0.807843, 0.8, 0.701961, 1)
+
+[sub_resource type="StyleBoxFlat" id="VitalWoundedTrack"]
+bg_color = Color(0.082353, 0.090196, 0.098039, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.737255, 0.572549, 0.466667, 0.8)
+content_margin_top = 4.0
+content_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxFlat" id="VitalWoundedFill"]
+bg_color = Color(0.737255, 0.572549, 0.466667, 1)
+border_width_right = 2
+border_color = Color(0.082353, 0.090196, 0.098039, 1)
+
+[sub_resource type="StyleBoxFlat" id="VitalCriticalTrack"]
+bg_color = Color(0.2, 0.078431, 0.07451, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 0.505882, 0.478431, 1)
+content_margin_top = 4.0
+content_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxFlat" id="VitalCriticalFill"]
+bg_color = Color(1, 0.505882, 0.478431, 1)
+
+[sub_resource type="StyleBoxFlat" id="VitalDepletedTrack"]
+draw_center = false
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.682353, 0.729412, 0.745098, 0.45)
+content_margin_top = 4.0
+content_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxFlat" id="VitalDepletedFill"]
+bg_color = Color(0.682353, 0.729412, 0.745098, 0.45)
+
+[sub_resource type="StyleBoxFlat" id="FavoriteNormal"]
+draw_center = false
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxFlat" id="FavoriteHover"]
+bg_color = Color(0.737255, 0.572549, 0.466667, 0.14)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.737255, 0.572549, 0.466667, 0.6)
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxFlat" id="FavoriteFocus"]
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.905882, 0.905882, 0.866667, 1)
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+
+[resource]
+RookframeHudBar/base_type = &"PanelContainer"
+RookframeHudBar/constants/separation = 12
+RookframeHudBar/styles/panel = SubResource("BarWide")
+RookframeHudBar__medium/base_type = &"RookframeHudBar"
+RookframeHudBar__medium/constants/separation = 8
+RookframeHudBar__medium/styles/panel = SubResource("BarMedium")
+RookframeHudBar__compact/base_type = &"RookframeHudBar"
+RookframeHudBar__compact/constants/separation = 6
+RookframeHudBar__compact/styles/panel = SubResource("BarCompact")
+RookframeHudAttached/base_type = &"PanelContainer"
+RookframeHudAttached/styles/panel = SubResource("AttachedWide")
+RookframeHudAttached__medium/base_type = &"RookframeHudAttached"
+RookframeHudAttached__medium/styles/panel = SubResource("AttachedWide")
+RookframeHudAttached__compact/base_type = &"RookframeHudAttached"
+RookframeHudAttached__compact/styles/panel = SubResource("AttachedCompact")
+RookframeHudRule/base_type = &"VSeparator"
+RookframeHudRule/constants/separation = 9
+RookframeHudRule/styles/separator = SubResource("Rule")
+RookframeHudIdentity/base_type = &"Button"
+RookframeHudIdentity/constants/copy_width = 220
+RookframeHudIdentity/constants/minimum_height = 64
+RookframeHudIdentity/styles/normal = SubResource("IdentityNormal")
+RookframeHudIdentity/styles/hover = SubResource("IdentityHover")
+RookframeHudIdentity/styles/pressed = SubResource("IdentityPressed")
+RookframeHudIdentity/styles/hover_pressed = SubResource("IdentityPressed")
+RookframeHudIdentity/styles/disabled = SubResource("IdentityDisabled")
+RookframeHudIdentity/styles/focus = SubResource("FocusRing")
+RookframeHudIdentity__compact/base_type = &"RookframeHudIdentity"
+RookframeHudIdentity__compact/constants/copy_width = 150
+RookframeHudIdentity__compact/constants/minimum_height = 44
+RookframeHudIdentity__compact/styles/normal = SubResource("IdentityCompactNormal")
+RookframeHudIdentity__compact/styles/hover = SubResource("IdentityCompactHover")
+RookframeHudIdentity__compact/styles/pressed = SubResource("IdentityCompactPressed")
+RookframeHudIdentity__compact/styles/hover_pressed = SubResource("IdentityCompactPressed")
+RookframeHudIdentity__compact/styles/disabled = SubResource("IdentityCompactDisabled")
+RookframeVital/base_type = &"ProgressBar"
+RookframeVital/styles/background = SubResource("VitalTrack")
+RookframeVital/styles/fill = SubResource("VitalFill")
+RookframeVitalWounded/base_type = &"RookframeVital"
+RookframeVitalWounded/styles/background = SubResource("VitalWoundedTrack")
+RookframeVitalWounded/styles/fill = SubResource("VitalWoundedFill")
+RookframeVitalCritical/base_type = &"RookframeVital"
+RookframeVitalCritical/styles/background = SubResource("VitalCriticalTrack")
+RookframeVitalCritical/styles/fill = SubResource("VitalCriticalFill")
+RookframeVitalDepleted/base_type = &"RookframeVital"
+RookframeVitalDepleted/styles/background = SubResource("VitalDepletedTrack")
+RookframeVitalDepleted/styles/fill = SubResource("VitalDepletedFill")
+RookframeFavorite/base_type = &"CheckBox"
+RookframeFavorite/constants/h_separation = 0
+RookframeFavorite/icons/checked = ExtResource("favorite_checked")
+RookframeFavorite/icons/unchecked = ExtResource("favorite_unchecked")
+RookframeFavorite/icons/checked_disabled = ExtResource("favorite_checked_disabled")
+RookframeFavorite/icons/unchecked_disabled = ExtResource("favorite_unchecked_disabled")
+RookframeFavorite/styles/normal = SubResource("FavoriteNormal")
+RookframeFavorite/styles/pressed = SubResource("FavoriteNormal")
+RookframeFavorite/styles/disabled = SubResource("FavoriteNormal")
+RookframeFavorite/styles/hover = SubResource("FavoriteHover")
+RookframeFavorite/styles/hover_pressed = SubResource("FavoriteHover")
+RookframeFavorite/styles/focus = SubResource("FavoriteFocus")
+components_button_emblem/base_type = &"Button"
+components_button_emblem/constants/minimum_height = 72
+components_button_emblem/constants/icon_max_width = 30
+components_button_emblem/colors/icon_normal_color = Color(0.815686, 0.745098, 0.556863, 1)
+components_button_emblem/colors/icon_hover_color = Color(0.905882, 0.905882, 0.866667, 1)
+components_button_emblem/colors/icon_pressed_color = Color(0.815686, 0.745098, 0.556863, 1)
+components_button_emblem/colors/icon_hover_pressed_color = Color(0.905882, 0.905882, 0.866667, 1)
+components_button_emblem/colors/icon_focus_color = Color(0.905882, 0.905882, 0.866667, 1)
+components_button_emblem/colors/icon_disabled_color = Color(0.682353, 0.729412, 0.745098, 0.7)
+components_button_emblem/colors/font_color = Color(0.905882, 0.905882, 0.866667, 1)
+components_button_emblem/colors/font_hover_color = Color(0.905882, 0.905882, 0.866667, 1)
+components_button_emblem/colors/font_pressed_color = Color(0.905882, 0.905882, 0.866667, 1)
+components_button_emblem/colors/font_hover_pressed_color = Color(0.905882, 0.905882, 0.866667, 1)
+components_button_emblem/colors/font_focus_color = Color(0.905882, 0.905882, 0.866667, 1)
+components_button_emblem/colors/font_disabled_color = Color(0.682353, 0.729412, 0.745098, 1)
+components_button_emblem/styles/normal = SubResource("EmblemNormal")
+components_button_emblem/styles/hover = SubResource("EmblemHover")
+components_button_emblem/styles/pressed = SubResource("EmblemPressed")
+components_button_emblem/styles/hover_pressed = SubResource("EmblemPressed")
+components_button_emblem/styles/disabled = SubResource("EmblemDisabled")
+components_button_emblem/styles/focus = SubResource("FocusRing")
+components_button_emblem__compact/base_type = &"components_button_emblem"
+components_button_emblem__compact/constants/minimum_height = 56
+components_button_emblem__compact/constants/icon_max_width = 24
+components_button_emblem__compact/styles/normal = SubResource("EmblemCompactNormal")
+components_button_emblem__compact/styles/hover = SubResource("EmblemCompactHover")
+components_button_emblem__compact/styles/pressed = SubResource("EmblemCompactPressed")
+components_button_emblem__compact/styles/hover_pressed = SubResource("EmblemCompactPressed")
+components_button_emblem__compact/styles/disabled = SubResource("EmblemCompactDisabled")
+components_button__stacked/base_type = &"components_button"
+components_button__stacked/constants/icon_max_width = 24
+components_button__stacked/font_sizes/font_size = 19
+components_button__stacked/colors/font_pressed_color = Color(0.082353, 0.090196, 0.098039, 1)
+components_button__stacked/colors/font_hover_pressed_color = Color(0.082353, 0.090196, 0.098039, 1)
+components_button__stacked/colors/icon_normal_color = Color(0.815686, 0.745098, 0.556863, 1)
+components_button__stacked/colors/icon_hover_color = Color(0.815686, 0.745098, 0.556863, 1)
+components_button__stacked/colors/icon_focus_color = Color(0.815686, 0.745098, 0.556863, 1)
+components_button__stacked/colors/icon_pressed_color = Color(0.082353, 0.090196, 0.098039, 1)
+components_button__stacked/colors/icon_hover_pressed_color = Color(0.082353, 0.090196, 0.098039, 1)
+components_button__stacked/colors/icon_disabled_color = Color(0.682353, 0.729412, 0.745098, 0.7)
+components_button__stacked/styles/normal = SubResource("TileNormal")
+components_button__stacked/styles/hover = SubResource("TileHover")
+components_button__stacked/styles/pressed = SubResource("TileSelected")
+components_button__stacked/styles/hover_pressed = SubResource("TileSelectedHover")
+components_button__stacked/styles/disabled = SubResource("TileDisabled")
+components_button__stacked/styles/focus = SubResource("TileFocusRing")
+components_button__stacked__compact/base_type = &"components_button__stacked"
+components_button__stacked__compact/constants/minimum_height = 44
+components_button__stacked__compact/constants/icon_max_width = 20
+components_button__stacked__compact/font_sizes/font_size = 17
+components_button__stacked__compact/styles/normal = SubResource("TileCompactNormal")
+components_button__stacked__compact/styles/hover = SubResource("TileCompactHover")
+components_button__stacked__compact/styles/pressed = SubResource("TileCompactSelected")
+components_button__stacked__compact/styles/hover_pressed = SubResource("TileCompactSelectedHover")
+components_button__stacked__compact/styles/disabled = SubResource("TileCompactDisabled")
+components_button_primary__stacked/base_type = &"components_button_primary"
+components_button_primary__stacked/constants/icon_max_width = 24
+components_button_primary__stacked/font_sizes/font_size = 19
+components_button_primary__stacked/colors/font_hover_pressed_color = Color(0.082353, 0.090196, 0.098039, 1)
+components_button_primary__stacked/styles/normal = SubResource("PrimaryTile")
+components_button_primary__stacked/styles/hover = SubResource("PrimaryTileHover")
+components_button_primary__stacked/styles/pressed = SubResource("PrimaryTilePressed")
+components_button_primary__stacked/styles/hover_pressed = SubResource("PrimaryTilePressed")
+components_button_primary__stacked/styles/disabled = SubResource("PrimaryTileDisabled")
+components_button_primary__stacked/styles/focus = SubResource("TileFocusRing")
+components_button_primary__stacked__compact/base_type = &"components_button_primary__stacked"
+components_button_primary__stacked__compact/constants/minimum_height = 44
+components_button_primary__stacked__compact/constants/icon_max_width = 20
+components_button_primary__stacked__compact/font_sizes/font_size = 17
+components_button_primary__stacked__compact/styles/normal = SubResource("PrimaryTileCompact")
+components_button_primary__stacked__compact/styles/hover = SubResource("PrimaryTileCompactHover")
+components_button_primary__stacked__compact/styles/pressed = SubResource("PrimaryTileCompactPressed")
+components_button_primary__stacked__compact/styles/hover_pressed = SubResource("PrimaryTileCompactPressed")
+components_button_primary__stacked__compact/styles/disabled = SubResource("PrimaryTileCompactDisabled")
+components_button_destructive__stacked/base_type = &"components_button_destructive"
+components_button_destructive__stacked/constants/icon_max_width = 24
+components_button_destructive__stacked/font_sizes/font_size = 19
+components_button_destructive__stacked/colors/font_pressed_color = Color(0.082353, 0.090196, 0.098039, 1)
+components_button_destructive__stacked/colors/font_hover_pressed_color = Color(0.082353, 0.090196, 0.098039, 1)
+components_button_destructive__stacked/colors/icon_pressed_color = Color(0.082353, 0.090196, 0.098039, 1)
+components_button_destructive__stacked/colors/icon_hover_pressed_color = Color(0.082353, 0.090196, 0.098039, 1)
+components_button_destructive__stacked/styles/normal = SubResource("DangerTile")
+components_button_destructive__stacked/styles/hover = SubResource("DangerTileHover")
+components_button_destructive__stacked/styles/pressed = SubResource("DangerTileSelected")
+components_button_destructive__stacked/styles/hover_pressed = SubResource("DangerTileSelected")
+components_button_destructive__stacked/styles/disabled = SubResource("TileDisabled")
+components_button_destructive__stacked/styles/focus = SubResource("TileFocusRing")
+components_button_destructive__stacked__compact/base_type = &"components_button_destructive__stacked"
+components_button_destructive__stacked__compact/constants/minimum_height = 44
+components_button_destructive__stacked__compact/constants/icon_max_width = 20
+components_button_destructive__stacked__compact/font_sizes/font_size = 17
+components_button_destructive__stacked__compact/styles/normal = SubResource("DangerTileCompact")
+components_button_destructive__stacked__compact/styles/hover = SubResource("DangerTileCompactHover")
+components_button_destructive__stacked__compact/styles/pressed = SubResource("DangerTileCompactSelected")
+components_button_destructive__stacked__compact/styles/hover_pressed = SubResource("DangerTileCompactSelected")
+components_button_destructive__stacked__compact/styles/disabled = SubResource("TileCompactDisabled")
+components_button_emblem__stacked/base_type = &"components_button_emblem"
+components_button_emblem__stacked/constants/icon_max_width = 26
+components_button_emblem__stacked/font_sizes/font_size = 19
+components_button_emblem__stacked/styles/normal = SubResource("EmblemTile")
+components_button_emblem__stacked/styles/hover = SubResource("EmblemTileHover")
+components_button_emblem__stacked/styles/pressed = SubResource("EmblemTilePressed")
+components_button_emblem__stacked/styles/hover_pressed = SubResource("EmblemTilePressed")
+components_button_emblem__stacked/styles/disabled = SubResource("EmblemTileDisabled")
+components_button_emblem__stacked/styles/focus = SubResource("TileFocusRing")
+components_button_emblem__stacked__compact/base_type = &"components_button_emblem__stacked"
+components_button_emblem__stacked__compact/constants/minimum_height = 44
+components_button_emblem__stacked__compact/constants/icon_max_width = 22
+components_button_emblem__stacked__compact/font_sizes/font_size = 17
+components_button_emblem__stacked__compact/styles/normal = SubResource("EmblemTileCompact")
+components_button_emblem__stacked__compact/styles/hover = SubResource("EmblemTileCompactHover")
+components_button_emblem__stacked__compact/styles/pressed = SubResource("EmblemTileCompactPressed")
+components_button_emblem__stacked__compact/styles/hover_pressed = SubResource("EmblemTileCompactPressed")
+components_button_emblem__stacked__compact/styles/disabled = SubResource("EmblemTileCompactDisabled")

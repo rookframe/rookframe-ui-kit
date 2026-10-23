@@ -126,3 +126,32 @@ and both viewports stop when folded. The soft shadow follows the moving corners.
 Neither component owns category semantics, selection, persistence or SDK calls.
 The identity and badge nine-patches reuse the existing AI-named leather atlas;
 this addition introduces no generated artwork.
+
+## HUD bar
+
+The canonical Theme maps the [HUD components](../../../ui-kit/docs/public-components.md#hud-components)
+through `theme/hud_theme.tres`, a supplemental native Theme that declares every
+HUD and Button layout chain (`…__stacked__compact` → `…__stacked` → `…`).
+The bar, attached panel, identity plate and Emblem reuse the approved leather
+regions (`body`, `hud_badge`, `hud_identity`, `connector`) through
+`assets/action-panel/ai-generated-hud-leather-atlas.png`, a display-density
+derivative drawn 1:1 by tiled StyleBoxTextures. Regenerate it from the
+repository root with
+`godot --headless --script themes/silkbound-ledger/tools/export-hud-leather.gd`;
+the script prints the regions that `hud_theme.tres` uses. The attached panel
+carries its two connector straps below its edge (`expand_margin_bottom`), and
+they tuck behind the bar.
+
+Stacked tiles use the ink tile with a copper rule. A selected tile is a bone fill
+with ink label and pictogram and rises 3px through its `pressed` stylebox; focus
+is a 2px bone ring outside the raised edge. Destructive tiles keep coral and
+select to a coral fill with ink foreground. Vital levels differ by value and
+track edge as well as hue: steady bone, wounded copper with an ink end mark,
+critical coral inside a 2px coral track, depleted an empty muted outline.
+FavoriteToggle draws an outline star when off and a filled star when on; the
+disabled off star is dashed.
+
+`layout/hud_bar.tscn` maps to `presentation/hud_bar.tscn`, which scopes
+`theme/hud_identity_profile.tres` to `Bar/Row/IdentitySlot`. In the bar the
+identity copy uses 20/15/18px name, detail and value with tight rows, so the
+plate matches the tile height; elsewhere it keeps the general text roles.
