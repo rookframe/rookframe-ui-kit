@@ -138,7 +138,11 @@ func _fit_minimum() -> void:
 	var width := float(height)
 	if autowrap_mode != TextServer.AUTOWRAP_OFF:
 		# Native autowrap reports no label width; keep the widest word whole.
-		width = maxf(width, _widest_word() + get_theme_stylebox("normal").get_minimum_size().x)
+		# Godot wraps inside the current state's margins, so reserve the widest of them.
+		var margins := 0.0
+		for state in ["normal", "hover", "pressed", "hover_pressed", "disabled"]:
+			margins = maxf(margins, get_theme_stylebox(state).get_minimum_size().x)
+		width = maxf(width, ceilf(_widest_word() + margins))
 	# Keep caller-supplied larger minima, while allowing our own density to shrink.
 	for axis in 2:
 		if custom_minimum_size[axis] != _managed_minimum[axis]:

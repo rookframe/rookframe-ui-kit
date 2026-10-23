@@ -106,6 +106,15 @@ func _stacked_button() -> void:
 	host.theme = theme
 	await settle()
 	check(control.custom_minimum_size.y == 64, "A theme's declared base chain resolves suffixed names")
+	# A raised pressed state wraps inside wider margins than the normal state.
+	var raised := StyleBoxEmpty.new()
+	raised.content_margin_left = 30
+	raised.content_margin_right = 30
+	theme.set_stylebox("pressed", &"components_button", raised)
+	control.text = "Companions"
+	await settle()
+	word = control.get_theme_font("font").get_string_size("Companions", HORIZONTAL_ALIGNMENT_LEFT, -1, control.get_theme_font_size("font_size")).x
+	check(control.custom_minimum_size.x >= word + 60, "Wrapping reserves the widest state margins")
 	host.theme = null
 	control.free()
 
