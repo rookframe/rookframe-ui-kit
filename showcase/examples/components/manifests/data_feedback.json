@@ -446,6 +446,23 @@
     ]
   },
   {
+    "id": "vital_meter",
+    "title": "Vital Meter",
+    "category": "Data display",
+    "description": "A display-only labelled value with a native track.",
+    "script": "res://examples/components/pages/data_feedback/vital_meter.gd",
+    "covers": [
+      "res://rookframe/ui/components/data/vital_meter.tscn"
+    ],
+    "keywords": [
+      "hud",
+      "health",
+      "hp",
+      "meter",
+      "resource"
+    ]
+  },
+  {
     "id": "spinner",
     "title": "Spinner",
     "description": "Labelled indeterminate loading with a static reduced-motion presentation.",
@@ -485,6 +502,22 @@
     ],
     "keywords": [
       "avatar"
+    ]
+  },
+  {
+    "id": "identity_plate",
+    "title": "Identity Plate",
+    "category": "Data display",
+    "description": "Portrait, name and detail as one activatable target with an optional vital.",
+    "script": "res://examples/components/pages/data_feedback/identity_plate.gd",
+    "covers": [
+      "res://rookframe/ui/components/data/identity_plate.tscn"
+    ],
+    "keywords": [
+      "hud",
+      "identity",
+      "portrait",
+      "character"
     ]
   }
 ]

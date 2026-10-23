@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://cqgjyl4i5phi"]
+
+[node name="FavoriteToggle" type="CheckBox"]
+custom_minimum_size = Vector2(44, 44)
+theme_type_variation = &"RookframeFavorite"

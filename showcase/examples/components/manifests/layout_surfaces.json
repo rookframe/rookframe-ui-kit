@@ -90,6 +90,23 @@
     ]
   },
   {
+    "id": "hud_bar",
+    "title": "HUD Bar",
+    "category": "Layout",
+    "description": "A persistent bottom bar with emblem, identity, category tiles, overflow and an attached panel.",
+    "script": "res://examples/components/pages/layout_surfaces/hud_bar.gd",
+    "covers": [
+      "res://rookframe/ui/components/layout/hud_bar.tscn"
+    ],
+    "keywords": [
+      "hud",
+      "bar",
+      "overflow",
+      "toolbar",
+      "game"
+    ]
+  },
+  {
     "id": "adaptive_toolbar",
     "title": "Adaptive Toolbar",
     "category": "Layout",

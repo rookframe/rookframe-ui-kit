@@ -311,6 +311,21 @@
     ]
   },
   {
+    "id": "favorite_toggle",
+    "title": "Favorite Toggle",
+    "category": "Forms & selection",
+    "description": "A native CheckBox that marks an entry as a favourite.",
+    "script": "res://examples/components/pages/actions_forms/favorite_toggle.gd",
+    "covers": [
+      "res://rookframe/ui/components/forms/favorite_toggle.tscn"
+    ],
+    "keywords": [
+      "favorite",
+      "star",
+      "checkbox"
+    ]
+  },
+  {
     "id": "native_switch",
     "title": "Switch",
     "category": "Forms & selection",
@@ -434,7 +449,7 @@
     "id": "button",
     "title": "Button",
     "category": "Actions",
-    "description": "Primary, secondary and destructive actions in normal and compact sizes, with text or icons.",
+    "description": "Primary, secondary, destructive and emblem actions in normal and compact sizes, with text, icons or a stacked icon above a wrapping label.",
     "script": "res://examples/components/pages/actions_forms/button.gd",
     "covers": [
       "res://rookframe/ui/components/actions/button.tscn",
@@ -450,7 +465,11 @@
       "menu",
       "editor",
       "tool",
-      "disabled"
+      "disabled",
+      "emblem",
+      "stacked",
+      "tile",
+      "hud"
     ]
   }
 ]

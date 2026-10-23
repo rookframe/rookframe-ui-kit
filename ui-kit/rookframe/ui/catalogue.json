@@ -126,6 +126,47 @@
       "contract": "Leading and trailing source-order action lanes stack as a unit below the threshold."
     },
     {
+      "name": "HudBar",
+      "scene": "res://rookframe/ui/components/layout/hud_bar.tscn",
+      "sceneUid": "uid://brgaxc18x4j11",
+      "script": "res://rookframe/ui/components/layout/hud_bar.gd",
+      "scriptUid": "uid://habd0dntqi1a",
+      "rootType": "VBoxContainer",
+      "properties": {
+        "medium_width": 1180.0,
+        "compact_width": 900.0,
+        "compact_category_limit": -1,
+        "more_text": "More",
+        "more_icon": "res://rookframe/ui/icons/menu.svg"
+      },
+      "signals": [
+        "layout_profile_changed(profile: StringName)",
+        "overflow_opened"
+      ],
+      "methods": [
+        "get_leading_slot() -> Container",
+        "get_identity_slot() -> Container",
+        "get_category_slot() -> Container",
+        "get_trailing_slot() -> Container",
+        "get_attached_slot() -> Container",
+        "get_profile() -> StringName",
+        "close_overflow()"
+      ],
+      "slots": [
+        "LeadingSlot",
+        "IdentitySlot",
+        "CategorySlot",
+        "TrailingSlot",
+        "AttachedSlot"
+      ],
+      "states": [
+        "wide",
+        "medium",
+        "compact"
+      ],
+      "contract": "Persistent bottom bar: leading action, identity, category lane, trailing action and an attached panel above. The profile follows the parent area width and selects RookframeHud (root separation), RookframeHudBar and RookframeHudAttached with __medium or __compact. Empty slots hide. In compact with compact_category_limit >= 0, tiles beyond the limit move to a More popover whose rows toggle or press the original tile. Caller children keep parent, index and connections."
+    },
+    {
       "name": "AdaptiveToolbar",
       "scene": "res://rookframe/ui/components/layout/adaptive_toolbar.tscn",
       "sceneUid": "uid://gbsncdddrctra",
@@ -1273,22 +1314,28 @@
       "scene": "res://rookframe/ui/components/actions/button.tscn",
       "sceneUid": "uid://nsflvqoc35wn",
       "rootType": "Button",
-      "contract": "Native Button input, signals, text, icon and toggle behavior. Normal/compact minimum targets are 52/44px; the consumer Theme supplies semantic appearance. Empty text with an icon creates an icon-only action; provide an accessibility_name and tooltip_text.",
+      "contract": "Native Button input, signals, text, icon and toggle behavior. Normal/compact minimum targets are 52/44px; the consumer Theme supplies semantic appearance. Empty text with an icon creates an icon-only action; provide an accessibility_name and tooltip_text. Independent axes: variant is emphasis (EMBLEM is one prominent icon-only action and warns once without an accessibility_name or tooltip_text), layout STACKED places the icon above a wrapping, untrimmed label, and compact is density. theme_type_variation is components_button[_primary|_destructive|_emblem][__stacked][__compact].",
       "nativeProxy": true,
       "script": "res://rookframe/ui/components/actions/button.gd",
       "properties": {
         "variant": "SECONDARY",
-        "compact": false
+        "compact": false,
+        "layout": "INLINE"
       },
       "variants": [
         "SECONDARY",
         "PRIMARY",
-        "DESTRUCTIVE"
+        "DESTRUCTIVE",
+        "EMBLEM"
       ],
       "methods": [
         "set_compact(bool)"
       ],
-      "scriptUid": "uid://dthc7uwdw3f2"
+      "scriptUid": "uid://dthc7uwdw3f2",
+      "layouts": [
+        "INLINE",
+        "STACKED"
+      ]
     },
     {
       "name": "Toggle",
@@ -1342,6 +1389,14 @@
       "sceneUid": "uid://ckbo42fhr6k0s",
       "rootType": "CheckBox",
       "contract": "Native properties, methods, signals, input and focus behavior remain unchanged.",
+      "nativeProxy": true
+    },
+    {
+      "name": "FavoriteToggle",
+      "scene": "res://rookframe/ui/components/forms/favorite_toggle.tscn",
+      "sceneUid": "uid://cqgjyl4i5phi",
+      "rootType": "CheckBox",
+      "contract": "Native CheckBox with the RookframeFavorite variation and no text. The caller sets accessibility_name and tooltip_text and owns favorites; the Theme draws the star with native CheckBox icons.",
       "nativeProxy": true
     },
     {
@@ -1515,12 +1570,61 @@
       }
     },
     {
+      "name": "IdentityPlate",
+      "scene": "res://rookframe/ui/components/data/identity_plate.tscn",
+      "sceneUid": "uid://b0temsbdnrwqx",
+      "script": "res://rookframe/ui/components/data/identity_plate.gd",
+      "scriptUid": "uid://gvo5aiaypey7",
+      "rootType": "Button",
+      "properties": {
+        "title": "Name",
+        "detail": "",
+        "portrait": null,
+        "initials": "",
+        "compact": false
+      },
+      "signals": [
+        "pressed"
+      ],
+      "methods": [
+        "set_compact(enabled: bool)",
+        "get_vital_slot() -> Container"
+      ],
+      "slots": [
+        "VitalSlot"
+      ],
+      "contract": "One native button target (RookframeHudIdentity, __compact) with portrait, name, optional detail and an optional display-only vital. Descendants ignore the mouse. accessibility_name is title plus detail. The caller connects pressed."
+    },
+    {
       "name": "Progress",
       "scene": "res://rookframe/ui/components/feedback/progress.tscn",
       "sceneUid": "uid://d1ffeqgu0rgna",
       "rootType": "ProgressBar",
       "contract": "Native properties, methods, signals, input and focus behavior remain unchanged.",
       "nativeProxy": true
+    },
+    {
+      "name": "VitalMeter",
+      "scene": "res://rookframe/ui/components/data/vital_meter.tscn",
+      "sceneUid": "uid://bmsda8g0vv0ap",
+      "script": "res://rookframe/ui/components/data/vital_meter.gd",
+      "scriptUid": "uid://c7rrhy8bk1dn4",
+      "rootType": "VBoxContainer",
+      "properties": {
+        "caption": "HP",
+        "value": 0.0,
+        "max_value": 1.0,
+        "value_text": "",
+        "level": "STEADY",
+        "show_track": true
+      },
+      "states": [
+        "STEADY",
+        "WOUNDED",
+        "CRITICAL",
+        "DEPLETED"
+      ],
+      "contract": "Display-only caption, value text and native ProgressBar track. level selects RookframeVital, RookframeVitalWounded, RookframeVitalCritical or RookframeVitalDepleted; the caller chooses it and no thresholds are computed. Empty value_text shows value/max_value. accessibility_name is caption plus value text."
     },
     {
       "name": "Spinner",

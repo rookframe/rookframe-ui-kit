@@ -33,6 +33,25 @@ Shared optional dependencies belong outside the directory of theme projects.
 - Use native Themes and resource inheritance for optional appearance.
   Core components must not depend on a concrete theme or its assets.
 
+## Component boundaries and variation names
+
+- Add a public component only for structure (children, slots), behavior or an
+  accessibility contract that Godot and the kit lack. A difference in appearance
+  alone is a variation of the existing component; a preset of native properties
+  may be an inherited scene without a script, like Toggle.
+- Model a component's appearance as independent axes, such as emphasis, content
+  layout and density. Each axis is one property. The component composes one name
+  from them in a fixed order with density last, for example
+  `components_button_primary__stacked__compact`. Published names keep their spelling.
+- The core assigns names only. A theme declares each name's base, because Godot
+  resolves a variation only when a Theme in the tree declares it; otherwise the
+  native class items apply.
+- Context belongs to the container. A child carries no usage for where it is
+  placed; a theme styles it through a profile Theme scoped to the container.
+  Godot asks the nearest Theme first for every type in a lookup chain, so a
+  profile that defines a native type's items hides variations declared further
+  up; such a profile repeats the variations its descendants use.
+
 ## Themeable recipes
 
 Usage describes purpose, State describes interaction/availability, and Material

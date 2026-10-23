@@ -223,6 +223,7 @@ static func value(token: String) -> Variant:
 
 static func _static_init() -> void:
 	VALUES.merge(preload("checkbox_materials.gd").materials(VALUES))
+	VALUES.merge(preload("hud_materials.gd").materials(VALUES))
 	VALUES.merge(preload("settings_materials.gd").VALUES)
 	VALUES.merge(preload("editor_materials.gd").materials(VALUES))
 	VALUES.merge(preload("switch_materials.gd").materials(VALUES))

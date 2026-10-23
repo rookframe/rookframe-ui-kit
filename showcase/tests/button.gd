@@ -1,6 +1,7 @@
 extends SceneTree
 ## Shared Button native layout and inherited appearance in real consumers.
 const Catalogue = preload("res://examples/components/catalogue.tscn")
+const Action = preload("res://rookframe/ui/components/actions/button.gd")
 const THEMES := {
 	"native": "",
 	"ledger": "res://rookframe/ui/themes/silkbound-ledger/theme.tres",
@@ -39,7 +40,9 @@ func _run() -> void:
 	catalogue.show_page("button")
 	var page = catalogue.current_page
 	var actions: Array = page.find_children("*", "Button", true, false).filter(func(node): return node.scene_file_path == "res://rookframe/ui/components/actions/button.tscn")
-	check(actions.size() == 34, "One production Button supplies the complete variant matrix")
+	var matrix := actions.filter(func(node): return node.variant != Action.Variant.EMBLEM and node.layout == Action.Layout.INLINE)
+	check(matrix.size() == 34, "One production Button supplies the complete variant matrix")
+	check(actions.size() == 34 + 4 + 14, "The page adds four emblem and fourteen stacked actions")
 	for theme_name in THEMES:
 		var skin: Theme = ThemeDB.get_default_theme() if theme_name == "native" else load(THEMES[theme_name])
 		catalogue.select_theme("silkbound-ledger" if theme_name == "ledger" else theme_name)
@@ -66,8 +69,11 @@ func _run() -> void:
 		if theme_name != "native":
 			for control in actions:
 				check(skin.get_type_variation_base(control.theme_type_variation) != &"", "Consumer maps " + String(control.theme_type_variation))
-				if theme_name == "ledger":
-					check(control.get_theme_color("icon_normal_color") == control.get_theme_color("font_color"), "Selected foreground applies to icons and labels")
+				if theme_name == "ledger" and control in matrix:
+					check(control.get_theme_color("icon_normal_color") == control.get_theme_color("font_color"), "Ledger matrix icons match their labels")
+				if not control.text.is_empty():
+					for state in ["pressed", "hover_pressed"]:
+						check(control.get_theme_color("icon_%s_color" % state) == control.get_theme_color("font_%s_color" % state), "%s selected foreground applies to icons and labels: %s" % [theme_name, control.theme_type_variation])
 	catalogue.free()
 	for failure in failures: push_error(failure)
 	print("BUTTON_SHOWCASE: 4 themes at 3 sizes; %d failures" % failures.size())
