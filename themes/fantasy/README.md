@@ -48,6 +48,20 @@ its brass bridge to the bar) and IdentityPlate draw the casing at a fixed rim.
 `hud_bar.tscn` scopes a profile Theme to the identity slot so the plate reads
 at HUD scale. Vital levels differ in lightness, edge and glow, not hue alone;
 the favorite star is original vector art under this package's license.
+The shared `components/navigation/arc_picker.tscn` and `arc_track.tscn` use the
+same brass and walnut through native Theme items only. Categories are 46px
+dark medallions with a bevelled brass ring and brass icons, so five fit the
+default inner sweep while keeping the 44px target; 76px items are larger
+medallions whose ring surrounds a circular preview well. The selected entry's
+ring widens outward and brightens, and items also carry a brass selection mark.
+Keyboard focus adds a separate brass ring with a dark halo, and disabled entries
+fall back to blackened iron. Rails are iron at rest and brass while the track is
+active, both over a dark core, with matching arrowheads at scrollable ends. The
+caption hub is a dark plate with engraved category and display item titles.
+Ring and well shapes are stock `StyleBoxFlat` layers; the arrowhead and
+selection mark are hand-authored SVGs. Run
+`godot --path showcase --script res://tests/arc_picker.gd -- --theme=fantasy`
+and append `--capture-dir=/absolute/temp/path` (windowed) for captures.
 
 Runtime paths and existing UIDs are preserved; resources are merged into the
 consumer's `rookframe/ui/`. Review this package through `../../showcase`.

@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://d0plypw38qky8"]
+
+[ext_resource type="Script" uid="uid://v5krwyqnmysh" path="res://rookframe/ui/_internal/navigation/arc_entry.gd" id="1_script"]
+
+[node name="ArcEntry" type="Button"]
+custom_minimum_size = Vector2(76, 76)
+theme_type_variation = &"RookframeArcItem"
+toggle_mode = true
+icon_alignment = 1
+script = ExtResource("1_script")
+
+[node name="Well" type="Panel" parent="."]
+clip_children = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = -4.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_type_variation = &"RookframeArcWell"
+
+[node name="Preview" type="TextureRect" parent="Well"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Marker" type="TextureRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_filter = 2

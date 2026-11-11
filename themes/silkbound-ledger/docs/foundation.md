@@ -190,6 +190,28 @@ supply an icon and accessible name, and connect native
 focus order. These appearances project the approved RFG-177 Tabletop authority;
 they add no custom input handler or Package-specific callback API.
 
+### Arc picker
+
+`theme/arc_picker_theme.tres` is a supplemental profile of the canonical
+Theme; it declares the items the core
+[ArcTrack and ArcPicker](../../../ui-kit/docs/public-components.md#arc-picker)
+read. The picker floats over a game scene, so every medallion pairs a light
+edge with an ink edge or shadow and stays legible over bright and dark scenes.
+
+| Variation | Base type | Silkbound appearance |
+| --- | --- | --- |
+| `RookframeArcTrack` | `Container` | 6px copper ledger rule with a 2px ink core; paper while `active`; an ink-outlined arrowhead tinted by the rail at each scrollable end |
+| `RookframeArcCategory` | `Button` | 52px ink medallion with a muted edge and brass pictogram; selected is a paper fill with an ink edge and ink pictogram; hover lifts the fill; disabled thins and dims the edge, drops the shadow and fades the pictogram |
+| `RookframeArcItem` | `Button` | 76px coin: muted edge and ink rim around a 5px-inset preview; selected widens the rim to a paper band with an ink hairline and adds an ink-on-paper check seal; disabled is a dashed ring |
+| `RookframeArcWell` | `Panel` | Fully rounded mask, so previews are circular |
+| `RookframeArcCaption` | `PanelContainer` | Ink ledger label with copper top and bottom rules |
+| `RookframeArcCaptionKicker` | `Label` | 15px EB Garamond small capitals in copper |
+| `RookframeArcCaptionTitle` | `Label` | 20px EB Garamond semibold in paper |
+
+Focus on either track is a separate paper ring with an ink halo, outside the
+selected rim, so focus, selection and hover remain distinct. The marks under
+`_internal/assets/arc/` are implementation details of this profile.
+
 ## Native defaults covered by the foundation
 
 The Theme directly styles `Button`, `CheckBox`, `CheckButton`, `LineEdit`,

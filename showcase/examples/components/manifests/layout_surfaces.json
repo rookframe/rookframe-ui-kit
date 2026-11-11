@@ -155,6 +155,26 @@
     ]
   },
   {
+    "id": "arc_picker",
+    "title": "Arc Picker",
+    "category": "Navigation",
+    "description": "Two-level radial choice opened beside an edited object, and the layout-only arc track.",
+    "script": "res://examples/components/pages/layout_surfaces/arc_picker.gd",
+    "covers": [
+      "res://rookframe/ui/components/navigation/arc_picker.tscn",
+      "res://rookframe/ui/components/navigation/arc_track.tscn"
+    ],
+    "keywords": [
+      "radial",
+      "pie",
+      "arc",
+      "ring",
+      "material",
+      "picker",
+      "builder"
+    ]
+  },
+  {
     "id": "tabs",
     "title": "Tabs",
     "category": "Navigation",

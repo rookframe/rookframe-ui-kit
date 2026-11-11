@@ -1,0 +1,68 @@
+extends RefCounted
+## Native Theme items for the core ArcTrack and ArcPicker variations. The
+## Buttons' own styleboxes draw each medallion; no presentation hook is needed.
+const ELEMENTS = {
+	"RookframeArcTrack": {
+		"base_type": &"Container",
+		"colors/rail_color": "arc.rail",
+		"colors/rail_active_color": "arc.rail.active",
+		"colors/rail_core_color": "arc.rail.core",
+		"constants/rail_width": "arc.rail.width",
+		"constants/rail_core_width": "arc.rail.core_width",
+		"constants/arrow_size": "arc.arrow.size",
+		"icons/arrow": "arc.arrow",
+	},
+	"RookframeArcCategory": {
+		"base_type": &"Button",
+		"constants/diameter": "arc.category.diameter",
+		"constants/icon_max_width": "arc.category.icon_max_width",
+		"colors/icon_normal_color": "arc.category.icon",
+		"colors/icon_focus_color": "arc.category.icon.hover",
+		"colors/icon_hover_color": "arc.category.icon.hover",
+		"colors/icon_pressed_color": "arc.category.icon.selected",
+		"colors/icon_hover_pressed_color": "arc.category.icon.selected",
+		"colors/icon_disabled_color": "arc.category.icon.disabled",
+		"styles/normal": "arc.category.normal",
+		"styles/hover": "arc.category.hover",
+		"styles/pressed": "arc.category.pressed",
+		"styles/hover_pressed": "arc.category.hover_pressed",
+		"styles/disabled": "arc.category.disabled",
+		"styles/focus": "arc.category.focus",
+	},
+	"RookframeArcItem": {
+		"base_type": &"Button",
+		"constants/diameter": "arc.item.diameter",
+		"constants/well_inset": "arc.item.well_inset",
+		"icons/selection_mark": "arc.selection_mark",
+		"styles/normal": "arc.item.normal",
+		"styles/hover": "arc.item.hover",
+		"styles/pressed": "arc.item.pressed",
+		"styles/hover_pressed": "arc.item.hover_pressed",
+		"styles/disabled": "arc.item.disabled",
+		"styles/focus": "arc.item.focus",
+	},
+	"RookframeArcWell": {
+		"base_type": &"Panel",
+		"styles/panel": "arc.well",
+	},
+	"RookframeArcCaption": {
+		"base_type": &"PanelContainer",
+		"styles/panel": "arc.caption",
+	},
+	"RookframeArcCaptionKicker": {
+		"base_type": &"Label",
+		"fonts/font": "arc.caption.kicker.font",
+		"font_sizes/font_size": "arc.caption.kicker.size",
+		"colors/font_color": "arc.caption.kicker.ink",
+		"colors/font_outline_color": "arc.caption.outline",
+		"constants/outline_size": "arc.caption.outline_size",
+	},
+	"RookframeArcCaptionTitle": {
+		"base_type": &"Label",
+		"fonts/font": "arc.caption.title.font",
+		"font_sizes/font_size": "arc.caption.title.size",
+		"colors/font_color": "arc.caption.title.ink",
+		"colors/font_outline_color": "arc.caption.outline",
+		"constants/outline_size": "arc.caption.outline_size",
+	},
+}

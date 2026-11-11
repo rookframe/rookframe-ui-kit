@@ -1,0 +1,290 @@
+[gd_resource type="Theme" format=3]
+
+[ext_resource type="FontFile" path="res://rookframe/ui/assets/fonts/eb-garamond/prerendered/roman.res" id="silk_garamond"]
+[ext_resource type="Texture2D" path="res://rookframe/ui/_internal/assets/arc/arc-arrow.svg" id="arc_arrow"]
+[ext_resource type="Texture2D" path="res://rookframe/ui/_internal/assets/arc/arc-selection-mark.svg" id="arc_selection_mark"]
+[ext_resource type="Texture2D" path="res://rookframe/ui/_internal/assets/arc/arc-item-disabled.svg" id="arc_item_disabled"]
+
+[sub_resource type="FontVariation" id="CaptionKicker"]
+base_font = ExtResource("silk_garamond")
+variation_opentype = {2003265652: 500.0}
+opentype_features = {1664250723: 1, 1936548720: 1}
+spacing_glyph = 1
+
+[sub_resource type="FontVariation" id="CaptionTitle"]
+base_font = ExtResource("silk_garamond")
+variation_opentype = {2003265652: 600.0}
+opentype_features = {1953396077: 1}
+
+[sub_resource type="StyleBoxFlat" id="CategoryNormal"]
+content_margin_left = 12.0
+content_margin_top = 12.0
+content_margin_right = 12.0
+content_margin_bottom = 12.0
+bg_color = Color(0.137255, 0.156863, 0.168627, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.682353, 0.729412, 0.745098, 1)
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
+corner_detail = 16
+shadow_color = Color(0.082353, 0.090196, 0.098039, 0.55)
+shadow_size = 3
+
+[sub_resource type="StyleBoxFlat" id="CategoryHover"]
+content_margin_left = 12.0
+content_margin_top = 12.0
+content_margin_right = 12.0
+content_margin_bottom = 12.0
+bg_color = Color(0.203922, 0.239216, 0.254902, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.905882, 0.905882, 0.866667, 1)
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
+corner_detail = 16
+shadow_color = Color(0.082353, 0.090196, 0.098039, 0.55)
+shadow_size = 3
+
+[sub_resource type="StyleBoxFlat" id="CategorySelected"]
+content_margin_left = 12.0
+content_margin_top = 12.0
+content_margin_right = 12.0
+content_margin_bottom = 12.0
+bg_color = Color(0.807843, 0.8, 0.701961, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.082353, 0.090196, 0.098039, 1)
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
+corner_detail = 16
+shadow_color = Color(0.082353, 0.090196, 0.098039, 0.6)
+shadow_size = 3
+
+[sub_resource type="StyleBoxFlat" id="CategorySelectedHover"]
+content_margin_left = 12.0
+content_margin_top = 12.0
+content_margin_right = 12.0
+content_margin_bottom = 12.0
+bg_color = Color(0.905882, 0.905882, 0.866667, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.082353, 0.090196, 0.098039, 1)
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
+corner_detail = 16
+shadow_color = Color(0.082353, 0.090196, 0.098039, 0.6)
+shadow_size = 3
+
+[sub_resource type="StyleBoxFlat" id="CategoryFocus"]
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.905882, 0.905882, 0.866667, 1)
+corner_radius_top_left = 40
+corner_radius_top_right = 40
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 40
+corner_detail = 16
+expand_margin_left = 5.0
+expand_margin_top = 5.0
+expand_margin_right = 5.0
+expand_margin_bottom = 5.0
+shadow_color = Color(0.082353, 0.090196, 0.098039, 0.85)
+shadow_size = 3
+
+[sub_resource type="StyleBoxFlat" id="CategoryDisabled"]
+content_margin_left = 12.0
+content_margin_top = 12.0
+content_margin_right = 12.0
+content_margin_bottom = 12.0
+bg_color = Color(0.137255, 0.156863, 0.168627, 0.6)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.356863, 0.384314, 0.396078, 0.8)
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
+corner_detail = 16
+
+[sub_resource type="StyleBoxFlat" id="ItemNormal"]
+bg_color = Color(0.082353, 0.090196, 0.098039, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.682353, 0.729412, 0.745098, 1)
+corner_radius_top_left = 48
+corner_radius_top_right = 48
+corner_radius_bottom_right = 48
+corner_radius_bottom_left = 48
+corner_detail = 20
+shadow_color = Color(0.082353, 0.090196, 0.098039, 0.5)
+shadow_size = 3
+
+[sub_resource type="StyleBoxFlat" id="ItemHover"]
+bg_color = Color(0.203922, 0.239216, 0.254902, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.905882, 0.905882, 0.866667, 1)
+corner_radius_top_left = 48
+corner_radius_top_right = 48
+corner_radius_bottom_right = 48
+corner_radius_bottom_left = 48
+corner_detail = 20
+shadow_color = Color(0.082353, 0.090196, 0.098039, 0.5)
+shadow_size = 3
+
+[sub_resource type="StyleBoxFlat" id="ItemSelected"]
+bg_color = Color(0.807843, 0.8, 0.701961, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.082353, 0.090196, 0.098039, 1)
+corner_radius_top_left = 52
+corner_radius_top_right = 52
+corner_radius_bottom_right = 52
+corner_radius_bottom_left = 52
+corner_detail = 20
+expand_margin_left = 3.0
+expand_margin_top = 3.0
+expand_margin_right = 3.0
+expand_margin_bottom = 3.0
+shadow_color = Color(0.082353, 0.090196, 0.098039, 0.6)
+shadow_size = 3
+
+[sub_resource type="StyleBoxFlat" id="ItemSelectedHover"]
+bg_color = Color(0.905882, 0.905882, 0.866667, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.082353, 0.090196, 0.098039, 1)
+corner_radius_top_left = 52
+corner_radius_top_right = 52
+corner_radius_bottom_right = 52
+corner_radius_bottom_left = 52
+corner_detail = 20
+expand_margin_left = 3.0
+expand_margin_top = 3.0
+expand_margin_right = 3.0
+expand_margin_bottom = 3.0
+shadow_color = Color(0.082353, 0.090196, 0.098039, 0.6)
+shadow_size = 3
+
+[sub_resource type="StyleBoxFlat" id="ItemFocus"]
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.905882, 0.905882, 0.866667, 1)
+corner_radius_top_left = 60
+corner_radius_top_right = 60
+corner_radius_bottom_right = 60
+corner_radius_bottom_left = 60
+corner_detail = 20
+expand_margin_left = 7.0
+expand_margin_top = 7.0
+expand_margin_right = 7.0
+expand_margin_bottom = 7.0
+shadow_color = Color(0.082353, 0.090196, 0.098039, 0.85)
+shadow_size = 3
+
+[sub_resource type="StyleBoxTexture" id="ItemDisabled"]
+texture = ExtResource("arc_item_disabled")
+
+[sub_resource type="StyleBoxFlat" id="Well"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 48
+corner_radius_top_right = 48
+corner_radius_bottom_right = 48
+corner_radius_bottom_left = 48
+corner_detail = 20
+
+[sub_resource type="StyleBoxFlat" id="Caption"]
+content_margin_left = 12.0
+content_margin_top = 3.0
+content_margin_right = 12.0
+content_margin_bottom = 5.0
+bg_color = Color(0.082353, 0.090196, 0.098039, 0.94)
+border_width_top = 2
+border_width_bottom = 2
+border_color = Color(0.737255, 0.572549, 0.466667, 1)
+shadow_color = Color(0.082353, 0.090196, 0.098039, 0.35)
+shadow_size = 6
+
+[resource]
+RookframeArcTrack/base_type = &"Container"
+RookframeArcTrack/colors/rail_color = Color(0.737255, 0.572549, 0.466667, 1)
+RookframeArcTrack/colors/rail_active_color = Color(0.905882, 0.905882, 0.866667, 1)
+RookframeArcTrack/colors/rail_core_color = Color(0.082353, 0.090196, 0.098039, 1)
+RookframeArcTrack/constants/rail_width = 6
+RookframeArcTrack/constants/rail_core_width = 2
+RookframeArcTrack/constants/arrow_size = 18
+RookframeArcTrack/icons/arrow = ExtResource("arc_arrow")
+RookframeArcCategory/base_type = &"Button"
+RookframeArcCategory/colors/icon_normal_color = Color(0.815686, 0.745098, 0.556863, 1)
+RookframeArcCategory/colors/icon_hover_color = Color(0.905882, 0.905882, 0.866667, 1)
+RookframeArcCategory/colors/icon_focus_color = Color(0.815686, 0.745098, 0.556863, 1)
+RookframeArcCategory/colors/icon_pressed_color = Color(0.082353, 0.090196, 0.098039, 1)
+RookframeArcCategory/colors/icon_hover_pressed_color = Color(0.082353, 0.090196, 0.098039, 1)
+RookframeArcCategory/colors/icon_disabled_color = Color(0.682353, 0.729412, 0.745098, 0.45)
+RookframeArcCategory/constants/diameter = 52
+RookframeArcCategory/constants/icon_max_width = 26
+RookframeArcCategory/constants/h_separation = 0
+RookframeArcCategory/styles/normal = SubResource("CategoryNormal")
+RookframeArcCategory/styles/hover = SubResource("CategoryHover")
+RookframeArcCategory/styles/pressed = SubResource("CategorySelected")
+RookframeArcCategory/styles/hover_pressed = SubResource("CategorySelectedHover")
+RookframeArcCategory/styles/focus = SubResource("CategoryFocus")
+RookframeArcCategory/styles/disabled = SubResource("CategoryDisabled")
+RookframeArcItem/base_type = &"Button"
+RookframeArcItem/constants/diameter = 76
+RookframeArcItem/constants/well_inset = 5
+RookframeArcItem/constants/h_separation = 0
+RookframeArcItem/icons/selection_mark = ExtResource("arc_selection_mark")
+RookframeArcItem/styles/normal = SubResource("ItemNormal")
+RookframeArcItem/styles/hover = SubResource("ItemHover")
+RookframeArcItem/styles/pressed = SubResource("ItemSelected")
+RookframeArcItem/styles/hover_pressed = SubResource("ItemSelectedHover")
+RookframeArcItem/styles/focus = SubResource("ItemFocus")
+RookframeArcItem/styles/disabled = SubResource("ItemDisabled")
+RookframeArcWell/base_type = &"Panel"
+RookframeArcWell/styles/panel = SubResource("Well")
+RookframeArcCaption/base_type = &"PanelContainer"
+RookframeArcCaption/styles/panel = SubResource("Caption")
+RookframeArcCaptionKicker/base_type = &"Label"
+RookframeArcCaptionKicker/colors/font_color = Color(0.85098, 0.682353, 0.580392, 1)
+RookframeArcCaptionKicker/constants/line_spacing = 0
+RookframeArcCaptionKicker/fonts/font = SubResource("CaptionKicker")
+RookframeArcCaptionKicker/font_sizes/font_size = 15
+RookframeArcCaptionTitle/base_type = &"Label"
+RookframeArcCaptionTitle/colors/font_color = Color(0.905882, 0.905882, 0.866667, 1)
+RookframeArcCaptionTitle/constants/line_spacing = 0
+RookframeArcCaptionTitle/fonts/font = SubResource("CaptionTitle")
+RookframeArcCaptionTitle/font_sizes/font_size = 20

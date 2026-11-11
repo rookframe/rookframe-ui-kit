@@ -23,6 +23,8 @@ Material resources, fonts, tokens, licenses and existing UIDs retain their
 installed paths. Shared licensed fonts come from the optional `fonts` package.
 The previous green MenuButtonStandard smoke tint is preserved only in this
 package's explicit variant. Fantasy/Cyberpunk remain independent installations.
+Profiles such as `theme/action_panel_theme.tres` and `theme/arc_picker_theme.tres`
+reach the canonical Theme through its `supplemental_themes`.
 
 Run `python3 tools/workspace.py prepare` after edits. Core component checks stay
 in `ui-kit/tests`; themed component integration suites live in
