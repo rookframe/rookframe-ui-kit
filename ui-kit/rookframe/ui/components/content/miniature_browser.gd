@@ -41,7 +41,7 @@ func _ready() -> void:
 ## Supply localized copy; no locale is selected globally by this component.
 func configure(entries: Array[Dictionary], selected_id: String = "", labels: Dictionary = {}) -> void:
 	if not Records.valid(entries): return
-	var focused := get_viewport().gui_get_focus_owner()
+	var focused: Control = get_viewport().gui_get_focus_owner() if is_inside_tree() else null
 	var former := Records.focused_index(_rows, focused)
 	var retained := Records.reconcile(entries, _entries, _rows, get_node(^"Results/Rows"), _create_row)
 	_rows.assign(retained)
@@ -158,7 +158,7 @@ func _arrange() -> void:
 		row.custom_minimum_size.y = preview_height + caption_height + 24 if paginated else 148
 		row.get_node(^"Content/Stage").custom_minimum_size.y = preview_height
 	if paginated:
-		var focused := _rows.find(get_viewport().gui_get_focus_owner())
+		var focused := Records.focused_index(_rows, get_viewport().gui_get_focus_owner())
 		if focused in _matches: _page = _matches.find(focused) / _capacity
 		_show_page()
 
