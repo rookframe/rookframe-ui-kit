@@ -99,7 +99,7 @@ func _ready() -> void:
 
 func configure(entries: Array[Dictionary], selected_id: String, caption: String = "", count: String = "") -> void:
 	if not Records.valid(entries): return
-	var focused := get_viewport().gui_get_focus_owner()
+	var focused: Control = get_viewport().gui_get_focus_owner() if is_inside_tree() else null
 	_focus_position = Records.focused_index(_view_rows, focused)
 	if _focus_position >= 0: _restore_focus = focused
 	var retained := Records.reconcile(entries, _entries, _rows, get_node(^"Area/Rows"), _create_row)
