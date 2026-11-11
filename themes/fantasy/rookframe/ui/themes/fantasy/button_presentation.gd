@@ -82,6 +82,9 @@ func _process_button(control: Button, delta: float) -> void:
 	reveal_elapsed += delta
 	var reveal := _interpolate(control, reveal_from, reveal_target, reveal_elapsed, control.get_theme_constant("ornament_ms") / 1000.0)
 	var tint := control.get_theme_color("rest_tint") if mode == BaseButton.DRAW_NORMAL and not control.has_focus() else control.get_theme_color("cap_tint")
+	# Optional: selected tiles light their casing beyond the hover light.
+	if mode in [BaseButton.DRAW_PRESSED, BaseButton.DRAW_HOVER_PRESSED] and control.has_theme_color("selected_tint"):
+		tint = control.get_theme_color("selected_tint")
 	if not is_equal_approx(style.reveal, reveal) or style.tint != tint:
 		style.reveal = reveal
 		style.tint = tint

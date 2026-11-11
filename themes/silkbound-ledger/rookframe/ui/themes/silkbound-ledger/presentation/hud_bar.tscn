@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://fldmx7fn40uy"]
+
+[ext_resource type="PackedScene" uid="uid://brgaxc18x4j11" path="res://rookframe/ui/components/layout/hud_bar.tscn" id="base"]
+[ext_resource type="Theme" uid="uid://cps23a02huqcj" path="res://rookframe/ui/theme/hud_identity_profile.tres" id="identity_profile"]
+
+[node name="HudBar" instance=ExtResource("base")]
+
+[node name="IdentitySlot" parent="Bar/Row" index="1"]
+theme = ExtResource("identity_profile")

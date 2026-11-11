@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://bmsda8g0vv0ap"]
+
+[ext_resource type="Script" uid="uid://c7rrhy8bk1dn4" path="res://rookframe/ui/components/data/vital_meter.gd" id="1_script"]
+
+[node name="VitalMeter" type="VBoxContainer"]
+mouse_filter = 2
+script = ExtResource("1_script")
+
+[node name="Header" type="HBoxContainer" parent="."]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Caption" type="Label" parent="Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"RookframeMeta"
+text = "HP"
+autowrap_mode = 3
+
+[node name="Value" type="Label" parent="Header"]
+layout_mode = 2
+theme_type_variation = &"RookframeValue"
+text = "0/1"
+
+[node name="Track" type="ProgressBar" parent="."]
+layout_mode = 2
+mouse_filter = 2
+theme_type_variation = &"RookframeVital"
+max_value = 1.0
+show_percentage = false

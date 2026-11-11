@@ -68,6 +68,7 @@
 [ext_resource type="PackedScene" path="res://rookframe/ui/themes/silkbound-ledger/presentation/select.tscn" id="scene_67"]
 [ext_resource type="PackedScene" path="res://rookframe/ui/silkbound-ledger/menu/MenuSurface.tscn" id="scene_68"]
 [ext_resource type="PackedScene" path="res://rookframe/ui/themes/silkbound-ledger/presentation/choice_group.tscn" id="scene_70"]
+[ext_resource type="PackedScene" uid="uid://fldmx7fn40uy" path="res://rookframe/ui/themes/silkbound-ledger/presentation/hud_bar.tscn" id="scene_hud_bar"]
 [ext_resource type="Script" path="res://rookframe/ui/themes/silkbound-ledger/presentation/collection_row.gd" id="hook_0"]
 [ext_resource type="Script" path="res://rookframe/ui/themes/silkbound-ledger/presentation/miniature_browser.gd" id="hook_1"]
 [ext_resource type="Script" path="res://rookframe/ui/themes/silkbound-ledger/presentation/miniature_picker.gd" id="hook_2"]
@@ -92,13 +93,14 @@
 [ext_resource type="Script" path="res://rookframe/ui/themes/silkbound-ledger/presentation/ledger_frame.gd" id="hook_21"]
 
 [ext_resource type="Theme" path="res://rookframe/ui/theme/action_panel_theme.tres" id="action_profile"]
+[ext_resource type="Theme" uid="uid://brgtnyj06pglw" path="res://rookframe/ui/theme/hud_theme.tres" id="hud_profile"]
 
 [ext_resource type="Script" path="res://rookframe/ui/themes/silkbound-ledger/presentation/choice.gd" id="hook_choice"]
 
 [resource]
 script = ExtResource("script")
 native_theme = ExtResource("native")
-supplemental_themes = Array[Theme]([ExtResource("action_profile")])
+supplemental_themes = Array[Theme]([ExtResource("action_profile"), ExtResource("hud_profile")])
 presentations = Dictionary[String, PackedScene]({
 "res://rookframe/ui/_internal/content/miniature_browser_row.tscn": ExtResource("scene_0"),
 "res://rookframe/ui/_internal/content/miniature_picker_row.tscn": ExtResource("scene_1"),
@@ -165,7 +167,8 @@ presentations = Dictionary[String, PackedScene]({
 "res://rookframe/ui/menu/MenuButtonStandard.tscn": ExtResource("scene_66"),
 "res://rookframe/ui/components/forms/select.tscn": ExtResource("scene_67"),
 "res://rookframe/ui/menu/MenuSurface.tscn": ExtResource("scene_68"),
-"res://rookframe/ui/components/forms/choice_group.tscn": ExtResource("scene_70")
+"res://rookframe/ui/components/forms/choice_group.tscn": ExtResource("scene_70"),
+"res://rookframe/ui/components/layout/hud_bar.tscn": ExtResource("scene_hud_bar")
 })
 presentation_hooks = Dictionary[String, Script]({
 "res://rookframe/ui/components/forms/choice.gd": ExtResource("hook_choice"),

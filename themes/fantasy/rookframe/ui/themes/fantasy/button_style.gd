@@ -8,6 +8,8 @@ var depth := StyleBoxTexture.new()
 var surface := StyleBoxTexture.new()
 var adornment: Texture2D
 var cap_depth: float
+## Optional: above this cap height the rails stretch instead of the rim growing.
+var art_height := 0.0
 var shadow_drop: float
 var ornament_size: Vector2
 var ornament_travel: float
@@ -25,6 +27,7 @@ func configure(control: Button) -> void:
 	depth.modulate_color = control.get_theme_color("edge_tint")
 	adornment = control.get_theme_icon("adornment")
 	cap_depth = control.get_theme_constant("cap_depth")
+	art_height = control.get_theme_constant("art_height")
 	shadow_drop = control.get_theme_constant("shadow_drop")
 	ornament_size = Vector2(control.get_theme_constant("ornament_width"), control.get_theme_constant("ornament_height"))
 	ornament_travel = control.get_theme_constant("ornament_travel")
@@ -44,6 +47,11 @@ func _draw(canvas: RID, rect: Rect2) -> void:
 	var cap_height := maxf(1, rect.size.y - cap_depth)
 	var art_scale := cap_height / surface.texture.get_height()
 	var natural_size := Vector2(rect.size.x / art_scale, surface.texture.get_height())
+	if art_height > 0 and cap_height > art_height:
+		# Tall tiles keep the casing's rim width; the nine-patch rails take the height.
+		art_scale = art_height / surface.texture.get_height()
+		natural_size = rect.size / art_scale
+		natural_size.y = cap_height / art_scale
 	# Scale the nine-patch as a whole, preserving the original end fittings.
 	_draw_cap(canvas, shadow, rect.position + Vector2(0, shadow_drop), natural_size, art_scale)
 	if reveal > 0 and ornament_size.x > 0:

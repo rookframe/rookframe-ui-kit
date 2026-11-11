@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://b0temsbdnrwqx"]
+
+[ext_resource type="Script" uid="uid://gvo5aiaypey7" path="res://rookframe/ui/components/data/identity_plate.gd" id="1_script"]
+[ext_resource type="PackedScene" uid="uid://dljmiq1r21kjk" path="res://rookframe/ui/components/data/avatar.tscn" id="2_avatar"]
+
+[node name="IdentityPlate" type="Button"]
+custom_minimum_size = Vector2(44, 44)
+focus_mode = 2
+theme_type_variation = &"RookframeHudIdentity"
+script = ExtResource("1_script")
+
+[node name="Content" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Row" type="HBoxContainer" parent="Content"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Portrait" parent="Content/Row" instance=ExtResource("2_avatar")]
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+
+[node name="Copy" type="VBoxContainer" parent="Content/Row"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+mouse_filter = 2
+
+[node name="Title" type="Label" parent="Content/Row/Copy"]
+layout_mode = 2
+theme_type_variation = &"RookframeIdentity"
+text = "Name"
+mouse_filter = 2
+autowrap_mode = 3
+
+[node name="Detail" type="Label" parent="Content/Row/Copy"]
+visible = false
+layout_mode = 2
+theme_type_variation = &"RookframeMeta"
+mouse_filter = 2
+autowrap_mode = 3
+
+[node name="VitalSlot" type="VBoxContainer" parent="Content/Row/Copy"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+mouse_filter = 2

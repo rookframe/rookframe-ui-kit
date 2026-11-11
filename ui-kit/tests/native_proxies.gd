@@ -69,7 +69,7 @@ func _catalogue() -> void:
 			node.free()
 		else:
 			check(resource.is_class(entry.rootType) and resource.resource_local_to_scene, "Native group is local to its owning scene: " + path)
-	check(count == 32, "All native recipes and orientation variants are addressable")
+	check(count == 33, "All native recipes and orientation variants are addressable")
 
 func _buttons_and_groups() -> void:
 	var button: Button = mount("actions/button.tscn")

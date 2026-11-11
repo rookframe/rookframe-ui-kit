@@ -43,6 +43,7 @@ godot --headless --path ui-kit --script res://tests/native_recipe_defaults.gd
 godot --headless --path ui-kit --script res://tests/native_proxies.gd
 godot --headless --path ui-kit --script res://tests/button.gd
 godot --headless --path ui-kit --script res://tests/expansion_contracts.gd
+godot --headless --path ui-kit --script res://tests/hud_components.gd
 ```
 
 For cross-package suites, install the pinned development runner:

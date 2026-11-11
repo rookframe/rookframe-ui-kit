@@ -30,7 +30,7 @@ func _run() -> void:
 	host = HFlowContainer.new()
 	root.add_child(host)
 	host.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	for variant in [Action.Variant.PRIMARY, Action.Variant.SECONDARY, Action.Variant.DESTRUCTIVE]:
+	for variant in [Action.Variant.PRIMARY, Action.Variant.SECONDARY, Action.Variant.DESTRUCTIVE, Action.Variant.EMBLEM]:
 		for compact in [false, true]:
 			for content in ["text", "icon_text", "icon"]:
 				var control = Scene.instantiate()
@@ -44,6 +44,7 @@ func _run() -> void:
 				await process_frame
 				var height := 44 if compact else 52
 				check(control.get_combined_minimum_size().y == height, "Native density target for %s/%s/%s" % [variant, compact, content])
+				check(control.theme_type_variation == StringName(String(Action.THEME_TYPES[variant]) + ("__compact" if compact else "")), "Variant resolves its semantic Theme type")
 				if content == "icon":
 					check(control.get_combined_minimum_size() == Vector2(height, height), "Icon-only target is square")
 					check(control.icon_alignment == HORIZONTAL_ALIGNMENT_CENTER, "Icon-only image is centered")
