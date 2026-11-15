@@ -1,6 +1,7 @@
 @tool
 extends RefCounted
 const Appearance = preload("res://rookframe/ui/_internal/presentation/appearance.gd")
+const Tokens = preload("res://rookframe/ui/theme/silkbound_tokens.gd")
 
 
 
@@ -20,11 +21,11 @@ func _fit_presentation(control) -> int:
 	for path in [^"Caption/Title", ^"Caption/Count"]:
 		Appearance.override_item(control.get_node(path), "fonts", "font", preload("res://rookframe/ui/theme/silkbound_regular.tres"))
 		Appearance.override_item(control.get_node(path), "font_sizes", "font_size", 15 if phone else 16 if tablet else 18)
-	Appearance.override_item(control.get_node(^"Caption/Title"), "colors", "font_color", Color("aebabe"))
-	Appearance.override_item(control.get_node(^"Caption/Count"), "colors", "font_color", Color("d9ae94"))
+	Appearance.override_item(control.get_node(^"Caption/Title"), "colors", "font_color", Tokens.color(&"content_muted"))
+	Appearance.override_item(control.get_node(^"Caption/Count"), "colors", "font_color", Tokens.color(&"section_count"))
 	Appearance.write(control.get_node(^"Pager"), ^"custom_minimum_size:y", 53)
 	Appearance.override_item(control.get_node(^"Pager/Range"), "font_sizes", "font_size", 15 if phone else 17)
-	Appearance.override_item(control.get_node(^"Pager/Range"), "colors", "font_color", Color("aebabe"))
+	Appearance.override_item(control.get_node(^"Pager/Range"), "colors", "font_color", Tokens.color(&"content_muted"))
 	for key in ["Previous", "Next"]:
 		var action = control.get_node("Pager/" + key) as Button
 		Appearance.write(action, ^"theme_type_variation", "WizardButton")
@@ -41,17 +42,17 @@ func _fit_presentation(control) -> int:
 			Appearance.override_item(action, "styles", state, box)
 	for index in control._rows.size():
 		var row = control._rows[index]
-		var foreground = Color("e7e7dd")
+		var foreground = Tokens.color(&"content")
 		Appearance.write(row, ^"theme_type_variation", "WizardChoice")
 		Appearance.write(row, ^"custom_minimum_size:y", height)
-		Appearance.write(row.get_node(^"Content/Row/Icon"), ^"self_modulate", Color("d0be8e"))
+		Appearance.write(row.get_node(^"Content/Row/Icon"), ^"self_modulate", Tokens.color(&"pictogram"))
 		Appearance.write(row.get_node(^"Content/Row/Icon"), ^"custom_minimum_size", Vector2(24,24) if phone or tablet else Vector2(28,28))
 		for label in [^"Content/Row/Copy/Title", ^"Content/Row/Value"]:
 			Appearance.override_item(row.get_node(label), "fonts", "font", preload("res://rookframe/ui/theme/silkbound_medium.tres"))
 			Appearance.override_item(row.get_node(label), "colors", "font_color", foreground)
 		Appearance.override_item(row.get_node(^"Content/Row/Copy/Title"), "font_sizes", "font_size", 19 if phone else 20 if tablet else 24)
 		Appearance.override_item(row.get_node(^"Content/Row/Copy/Description"), "font_sizes", "font_size", 14 if phone else 15 if tablet else 18)
-		Appearance.override_item(row.get_node(^"Content/Row/Copy/Description"), "colors", "font_color", Color("aebabe"))
+		Appearance.override_item(row.get_node(^"Content/Row/Copy/Description"), "colors", "font_color", Tokens.color(&"content_muted"))
 		Appearance.override_item(row.get_node(^"Content/Row/Copy"), "constants", "separation", 2 if phone or tablet else 4)
 		Appearance.override_item(row.get_node(^"Content/Row"), "constants", "separation", 8 if phone or tablet else 12)
 		var pending = bool(control._entries[index].get("pending", false))
@@ -72,10 +73,10 @@ func _draw(control) -> void:
 		control.draw_style_box(preload("res://rookframe/ui/_internal/data/collection_frame.tres"), Rect2(Vector2.ZERO, control.size))
 		if control.get_node(^"Caption").visible:
 			control.draw_style_box(preload("res://rookframe/ui/_internal/data/collection_caption.tres"), Rect2(Vector2.ZERO, Vector2(control.size.x, control.get_node(^"Caption").size.y)))
-	control.draw_line(Vector2(0, 0.5), Vector2(control.size.x, 0.5), Color("3e4346"))
+	control.draw_line(Vector2(0, 0.5), Vector2(control.size.x, 0.5), Tokens.color(&"divider"))
 	var pager = control.get_node_or_null(^"Pager") as Control
 	if pager != null and pager.visible:
-		control.draw_line(Vector2(0, pager.position.y), Vector2(control.size.x, pager.position.y), Color("3e4346"))
+		control.draw_line(Vector2(0, pager.position.y), Vector2(control.size.x, pager.position.y), Tokens.color(&"divider"))
 
 func _arrange_rows(control) -> Vector3:
 	var phone = control.get_viewport_rect().size.y <= 560
@@ -111,7 +112,7 @@ func _arrange_rows(control) -> Vector3:
 	Appearance.override_item(control.get_node(^"Pager/Indicator/Page"), "font_sizes", "font_size", 15 if phone else 14)
 	Appearance.write(control.get_node(^"Pager/Indicator/PhoneCount"), ^"visible", control.framed_collection and phone)
 	if control.framed_collection:
-		Appearance.override_item(control.get_node(^"Caption/Title"), "colors", "font_color", Color("d9ae94"))
+		Appearance.override_item(control.get_node(^"Caption/Title"), "colors", "font_color", Tokens.color(&"section_count"))
 		for label in [^"Caption/Title", ^"Caption/Count", ^"Pager/Range"]:
 			Appearance.override_item(control.get_node(label), "styles", "normal", preload("res://rookframe/ui/_internal/data/collection_label.tres"))
 	for button in [^"Pager/Previous", ^"Pager/Next"]:
@@ -148,7 +149,7 @@ func _arrange_rows(control) -> Vector3:
 	return Vector3(height, inset, vertical_inset)
 
 func _style_entry(control, row: Control, entry: Dictionary, selected_id: String) -> void:
-	Appearance.write(row.get_node(^"Content/Row/Icon"), ^"self_modulate", Color("d0be8e") if control.framed_collection or str(entry.id) == selected_id else Color("aebabe"))
+	Appearance.write(row.get_node(^"Content/Row/Icon"), ^"self_modulate", Tokens.color(&"pictogram") if control.framed_collection or str(entry.id) == selected_id else Tokens.color(&"content_muted"))
 	var pending = bool(entry.get("pending", false))
 	Appearance.override_item(row.get_node(^"Content/Row/Value"), "font_sizes", "font_size", 12 if pending else 20)
-	Appearance.override_item(row.get_node(^"Content/Row/Value"), "colors", "font_color", Color("aebabe") if pending else Color("d0be8e"))
+	Appearance.override_item(row.get_node(^"Content/Row/Value"), "colors", "font_color", Tokens.color(&"content_muted") if pending else Tokens.color(&"pictogram"))

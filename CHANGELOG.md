@@ -8,6 +8,12 @@
   `themes/neutral_tokens.tres`; every component theme entry merges it beneath
   its own sources, so a token a theme omits resolves to its neutral default.
   `ui-kit/tests/design_tokens.gd` checks completeness and WCAG AA pairs.
+- Define every semantic token in Silkbound Ledger from one source,
+  `theme/silkbound_tokens.gd`, supplied to the canonical Theme as a supplemental
+  token set. Its Themes and presentation scenes name the token behind each role
+  value in `metadata/tokens`; `tools/apply-silkbound-tokens.gd` writes the token
+  values into them and checks for drift, and presentation scripts read the same
+  source. The appearance is unchanged.
 
 - Add the in-place radial choice to the unthemed core: `navigation/arc_track.tscn`
   places Controls along a scrollable arc over a drawn rail, and

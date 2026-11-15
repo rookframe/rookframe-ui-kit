@@ -5,7 +5,10 @@
 [sub_resource type="StyleBoxFlat" id="ed65557267_ValueRowSurface"]
 bg_color = Color(0, 0, 0, 0)
 border_width_bottom = 1
-border_color = Color(0.243137, 0.262745, 0.274510, 1.0)
+border_color = Color(0.243137, 0.262745, 0.27451, 1)
+metadata/tokens = {
+"border_color": &"divider"
+}
 
 
 [node name="KeyValueRow" instance=ExtResource("base")]

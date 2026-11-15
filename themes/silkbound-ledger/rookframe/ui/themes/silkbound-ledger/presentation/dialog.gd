@@ -1,6 +1,7 @@
 @tool
 extends RefCounted
 const Appearance = preload("res://rookframe/ui/_internal/presentation/appearance.gd")
+const Tokens = preload("res://rookframe/ui/theme/silkbound_tokens.gd")
 
 
 
@@ -11,7 +12,7 @@ func _style_panels(control) -> void:
 		var style = panel.get_theme_stylebox("panel").duplicate() as StyleBoxFlat
 		if style == null: continue
 		Appearance.write(style, ^"bg_color", Color.TRANSPARENT)
-		Appearance.write(style, ^"border_color", Color("bc927747"))
+		Appearance.write(style, ^"border_color", Color(Tokens.color(&"ornament"), 0.28))
 		if path == ^"Shell": style.set_border_width_all(0)
 		Appearance.override_item(panel, "styles", "panel", style)
 
@@ -33,7 +34,7 @@ func _draw_confirmation_underline(control) -> void:
 		button.get_theme_color("font_hover_color"), maxf(1.0, font.get_underline_thickness(font_size)))
 
 func _scrim_color(control) -> Color:
-	return Color(0, 0, 0, 0.667)
+	return Tokens.color(&"scrim")
 
 func _style_compact_layout(control, compact: bool) -> void:
 	var header = control.get_node_or_null(^"Shell/Content/Header") as MarginContainer

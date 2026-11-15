@@ -1,12 +1,9 @@
 @tool
 extends RefCounted
 const Appearance = preload("res://rookframe/ui/_internal/presentation/appearance.gd")
+const Tokens = preload("res://rookframe/ui/theme/silkbound_tokens.gd")
 
 
-const INK := Color("151719")
-const TEXT := Color("e7e7dd")
-const MUTED := Color("aebabe")
-const NEUTRAL := Color("ceccb3")
 
 func _fit(control) -> void:
 	if not control.is_node_ready(): return
@@ -80,20 +77,20 @@ func _draw(control) -> void:
 	if not control.is_node_ready(): return
 	var context = control.get_context_slot()
 	var start = context.global_position - control.global_position + Vector2(context.size.x, 4)
-	control.draw_line(start, start + Vector2(0, context.size.y - 8), Color("bc927747"))
+	control.draw_line(start, start + Vector2(0, context.size.y - 8), Color(Tokens.color(&"ornament"), 0.28))
 
 func _label_line_height(control, label: Control, multiplier: float) -> void:
 	preload("res://rookframe/ui/theme/silkbound_line_height.gd").apply(label, multiplier)
 
 func _style_step(control, step: Control, number: int, index: int) -> void:
-	Appearance.override_item(step.get_node(^"Row/Name"), "colors", "font_color", TEXT if number <= index else MUTED)
-	Appearance.override_item(step.get_node(^"Row/Marker/Number"), "colors", "font_color", TEXT if number == index else MUTED)
-	Appearance.write(step.get_node(^"Row/Marker/Done"), ^"self_modulate", TEXT)
+	Appearance.override_item(step.get_node(^"Row/Name"), "colors", "font_color", Tokens.color(&"content") if number <= index else Tokens.color(&"content_muted"))
+	Appearance.override_item(step.get_node(^"Row/Marker/Number"), "colors", "font_color", Tokens.color(&"content") if number == index else Tokens.color(&"content_muted"))
+	Appearance.write(step.get_node(^"Row/Marker/Done"), ^"self_modulate", Tokens.color(&"content"))
 	var frame = step.get_node(^"Row/Marker").get_theme_stylebox("panel").duplicate() as StyleBoxFlat
-	Appearance.write(frame, ^"bg_color", Color("bc92771c") if number == index else Color.TRANSPARENT)
-	Appearance.write(frame, ^"border_color", NEUTRAL if number <= index else Color("3e4346"))
+	Appearance.write(frame, ^"bg_color", Color(Tokens.color(&"ornament"), 0.11) if number == index else Color.TRANSPARENT)
+	Appearance.write(frame, ^"border_color", Tokens.color(&"border_strong") if number <= index else Tokens.color(&"divider"))
 	Appearance.override_item(step.get_node(^"Row/Marker"), "styles", "panel", frame)
-	Appearance.write(step.get_node(^"Rule"), ^"color", NEUTRAL if number == index else MUTED if number < index else Color("3e4346"))
+	Appearance.write(step.get_node(^"Rule"), ^"color", Tokens.color(&"border_strong") if number == index else Tokens.color(&"content_muted") if number < index else Tokens.color(&"divider"))
 
 func _style_primary_state(control, button: Button) -> void:
 	Appearance.write(button, ^"modulate:a", 0.4 if button.disabled else 1.0)

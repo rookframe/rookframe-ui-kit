@@ -84,6 +84,9 @@ grow_begin = -10.0
 grow_end = -10.0
 thickness = 1
 vertical = true
+metadata/tokens = {
+"color": [&"ornament", 0.55]
+}
 
 [sub_resource type="StyleBoxTexture" id="IdentityNormal"]
 texture = ExtResource("leather")
@@ -214,6 +217,9 @@ expand_margin_left = 4.0
 expand_margin_top = 4.0
 expand_margin_right = 4.0
 expand_margin_bottom = 4.0
+metadata/tokens = {
+"border_color": &"focus_ring"
+}
 
 [sub_resource type="StyleBoxFlat" id="TileFocusRing"]
 draw_center = false
@@ -226,6 +232,9 @@ expand_margin_left = 4.0
 expand_margin_top = 7.0
 expand_margin_right = 4.0
 expand_margin_bottom = 4.0
+metadata/tokens = {
+"border_color": &"focus_ring"
+}
 
 [sub_resource type="StyleBoxTexture" id="EmblemNormal"]
 texture = ExtResource("leather")
@@ -356,6 +365,9 @@ content_margin_left = 12.0
 content_margin_top = 10.0
 content_margin_right = 12.0
 content_margin_bottom = 9.0
+metadata/tokens = {
+"border_color": [&"ornament", 0.38]
+}
 
 [sub_resource type="StyleBoxFlat" id="TileHover"]
 bg_color = Color(0.737255, 0.572549, 0.466667, 0.14)
@@ -368,6 +380,10 @@ content_margin_left = 12.0
 content_margin_top = 10.0
 content_margin_right = 12.0
 content_margin_bottom = 9.0
+metadata/tokens = {
+"bg_color": [&"ornament", 0.14],
+"border_color": [&"ornament", 0.7]
+}
 
 [sub_resource type="StyleBoxFlat" id="TileSelected"]
 bg_color = Color(0.807843, 0.8, 0.701961, 1)
@@ -381,6 +397,10 @@ content_margin_left = 12.0
 content_margin_top = 10.0
 content_margin_right = 12.0
 content_margin_bottom = 9.0
+metadata/tokens = {
+"bg_color": &"accent",
+"border_color": &"accent"
+}
 
 [sub_resource type="StyleBoxFlat" id="TileSelectedHover"]
 bg_color = Color(0.905882, 0.905882, 0.866667, 1)
@@ -394,6 +414,10 @@ content_margin_left = 12.0
 content_margin_top = 10.0
 content_margin_right = 12.0
 content_margin_bottom = 9.0
+metadata/tokens = {
+"bg_color": &"accent_hover",
+"border_color": &"accent"
+}
 
 [sub_resource type="StyleBoxFlat" id="TileDisabled"]
 bg_color = Color(0.031373, 0.043137, 0.039216, 0.25)
@@ -418,6 +442,9 @@ content_margin_left = 8.0
 content_margin_top = 6.0
 content_margin_right = 8.0
 content_margin_bottom = 5.0
+metadata/tokens = {
+"border_color": [&"ornament", 0.38]
+}
 
 [sub_resource type="StyleBoxFlat" id="TileCompactHover"]
 bg_color = Color(0.737255, 0.572549, 0.466667, 0.14)
@@ -430,6 +457,10 @@ content_margin_left = 8.0
 content_margin_top = 6.0
 content_margin_right = 8.0
 content_margin_bottom = 5.0
+metadata/tokens = {
+"bg_color": [&"ornament", 0.14],
+"border_color": [&"ornament", 0.7]
+}
 
 [sub_resource type="StyleBoxFlat" id="TileCompactSelected"]
 bg_color = Color(0.807843, 0.8, 0.701961, 1)
@@ -443,6 +474,10 @@ content_margin_left = 8.0
 content_margin_top = 6.0
 content_margin_right = 8.0
 content_margin_bottom = 5.0
+metadata/tokens = {
+"bg_color": &"accent",
+"border_color": &"accent"
+}
 
 [sub_resource type="StyleBoxFlat" id="TileCompactSelectedHover"]
 bg_color = Color(0.905882, 0.905882, 0.866667, 1)
@@ -456,6 +491,10 @@ content_margin_left = 8.0
 content_margin_top = 6.0
 content_margin_right = 8.0
 content_margin_bottom = 5.0
+metadata/tokens = {
+"bg_color": &"accent_hover",
+"border_color": &"accent"
+}
 
 [sub_resource type="StyleBoxFlat" id="TileCompactDisabled"]
 bg_color = Color(0.031373, 0.043137, 0.039216, 0.25)
@@ -480,6 +519,10 @@ content_margin_left = 12.0
 content_margin_top = 10.0
 content_margin_right = 12.0
 content_margin_bottom = 9.0
+metadata/tokens = {
+"bg_color": &"accent",
+"border_color": &"accent"
+}
 
 [sub_resource type="StyleBoxFlat" id="PrimaryTileHover"]
 bg_color = Color(0.905882, 0.905882, 0.866667, 1)
@@ -492,9 +535,13 @@ content_margin_left = 12.0
 content_margin_top = 10.0
 content_margin_right = 12.0
 content_margin_bottom = 9.0
+metadata/tokens = {
+"bg_color": &"accent_hover",
+"border_color": &"accent"
+}
 
 [sub_resource type="StyleBoxFlat" id="PrimaryTilePressed"]
-bg_color = Color(0.713725, 0.705882, 0.619608, 1)
+bg_color = Color(0.713726, 0.705882, 0.619608, 1)
 border_width_left = 1
 border_width_top = 1
 border_width_right = 1
@@ -505,6 +552,9 @@ content_margin_left = 12.0
 content_margin_top = 10.0
 content_margin_right = 12.0
 content_margin_bottom = 9.0
+metadata/tokens = {
+"bg_color": &"accent_pressed"
+}
 
 [sub_resource type="StyleBoxFlat" id="PrimaryTileDisabled"]
 bg_color = Color(0.807843, 0.8, 0.701961, 0.35)
@@ -517,6 +567,10 @@ content_margin_left = 12.0
 content_margin_top = 10.0
 content_margin_right = 12.0
 content_margin_bottom = 9.0
+metadata/tokens = {
+"bg_color": [&"accent", 0.35],
+"border_color": [&"accent", 0.35]
+}
 
 [sub_resource type="StyleBoxFlat" id="PrimaryTileCompact"]
 bg_color = Color(0.807843, 0.8, 0.701961, 1)
@@ -529,6 +583,10 @@ content_margin_left = 8.0
 content_margin_top = 6.0
 content_margin_right = 8.0
 content_margin_bottom = 5.0
+metadata/tokens = {
+"bg_color": &"accent",
+"border_color": &"accent"
+}
 
 [sub_resource type="StyleBoxFlat" id="PrimaryTileCompactHover"]
 bg_color = Color(0.905882, 0.905882, 0.866667, 1)
@@ -541,9 +599,13 @@ content_margin_left = 8.0
 content_margin_top = 6.0
 content_margin_right = 8.0
 content_margin_bottom = 5.0
+metadata/tokens = {
+"bg_color": &"accent_hover",
+"border_color": &"accent"
+}
 
 [sub_resource type="StyleBoxFlat" id="PrimaryTileCompactPressed"]
-bg_color = Color(0.713725, 0.705882, 0.619608, 1)
+bg_color = Color(0.713726, 0.705882, 0.619608, 1)
 border_width_left = 1
 border_width_top = 1
 border_width_right = 1
@@ -554,6 +616,9 @@ content_margin_left = 8.0
 content_margin_top = 6.0
 content_margin_right = 8.0
 content_margin_bottom = 5.0
+metadata/tokens = {
+"bg_color": &"accent_pressed"
+}
 
 [sub_resource type="StyleBoxFlat" id="PrimaryTileCompactDisabled"]
 bg_color = Color(0.807843, 0.8, 0.701961, 0.35)
@@ -566,6 +631,10 @@ content_margin_left = 8.0
 content_margin_top = 6.0
 content_margin_right = 8.0
 content_margin_bottom = 5.0
+metadata/tokens = {
+"bg_color": [&"accent", 0.35],
+"border_color": [&"accent", 0.35]
+}
 
 [sub_resource type="StyleBoxFlat" id="DangerTile"]
 bg_color = Color(0.031373, 0.043137, 0.039216, 0.4)
@@ -578,6 +647,9 @@ content_margin_left = 12.0
 content_margin_top = 10.0
 content_margin_right = 12.0
 content_margin_bottom = 9.0
+metadata/tokens = {
+"border_color": [&"danger", 0.45]
+}
 
 [sub_resource type="StyleBoxFlat" id="DangerTileHover"]
 bg_color = Color(1, 0.505882, 0.478431, 0.14)
@@ -590,6 +662,10 @@ content_margin_left = 12.0
 content_margin_top = 10.0
 content_margin_right = 12.0
 content_margin_bottom = 9.0
+metadata/tokens = {
+"bg_color": [&"danger", 0.14],
+"border_color": [&"danger", 0.8]
+}
 
 [sub_resource type="StyleBoxFlat" id="DangerTileSelected"]
 bg_color = Color(1, 0.505882, 0.478431, 1)
@@ -603,6 +679,10 @@ content_margin_left = 12.0
 content_margin_top = 10.0
 content_margin_right = 12.0
 content_margin_bottom = 9.0
+metadata/tokens = {
+"bg_color": &"danger",
+"border_color": &"danger"
+}
 
 [sub_resource type="StyleBoxFlat" id="DangerTileCompact"]
 bg_color = Color(0.031373, 0.043137, 0.039216, 0.4)
@@ -615,6 +695,9 @@ content_margin_left = 8.0
 content_margin_top = 6.0
 content_margin_right = 8.0
 content_margin_bottom = 5.0
+metadata/tokens = {
+"border_color": [&"danger", 0.45]
+}
 
 [sub_resource type="StyleBoxFlat" id="DangerTileCompactHover"]
 bg_color = Color(1, 0.505882, 0.478431, 0.14)
@@ -627,6 +710,10 @@ content_margin_left = 8.0
 content_margin_top = 6.0
 content_margin_right = 8.0
 content_margin_bottom = 5.0
+metadata/tokens = {
+"bg_color": [&"danger", 0.14],
+"border_color": [&"danger", 0.8]
+}
 
 [sub_resource type="StyleBoxFlat" id="DangerTileCompactSelected"]
 bg_color = Color(1, 0.505882, 0.478431, 1)
@@ -640,6 +727,10 @@ content_margin_left = 8.0
 content_margin_top = 6.0
 content_margin_right = 8.0
 content_margin_bottom = 5.0
+metadata/tokens = {
+"bg_color": &"danger",
+"border_color": &"danger"
+}
 
 [sub_resource type="StyleBoxTexture" id="EmblemTile"]
 texture = ExtResource("leather")
@@ -768,9 +859,16 @@ border_width_bottom = 1
 border_color = Color(0.356863, 0.384314, 0.396078, 1)
 content_margin_top = 4.0
 content_margin_bottom = 4.0
+metadata/tokens = {
+"bg_color": &"canvas",
+"border_color": &"border"
+}
 
 [sub_resource type="StyleBoxFlat" id="VitalFill"]
 bg_color = Color(0.807843, 0.8, 0.701961, 1)
+metadata/tokens = {
+"bg_color": &"vital_full"
+}
 
 [sub_resource type="StyleBoxFlat" id="VitalWoundedTrack"]
 bg_color = Color(0.082353, 0.090196, 0.098039, 1)
@@ -781,11 +879,19 @@ border_width_bottom = 1
 border_color = Color(0.737255, 0.572549, 0.466667, 0.8)
 content_margin_top = 4.0
 content_margin_bottom = 4.0
+metadata/tokens = {
+"bg_color": &"canvas",
+"border_color": [&"vital_wounded", 0.8]
+}
 
 [sub_resource type="StyleBoxFlat" id="VitalWoundedFill"]
 bg_color = Color(0.737255, 0.572549, 0.466667, 1)
 border_width_right = 2
 border_color = Color(0.082353, 0.090196, 0.098039, 1)
+metadata/tokens = {
+"bg_color": &"vital_wounded",
+"border_color": &"canvas"
+}
 
 [sub_resource type="StyleBoxFlat" id="VitalCriticalTrack"]
 bg_color = Color(0.2, 0.078431, 0.07451, 1)
@@ -796,9 +902,15 @@ border_width_bottom = 2
 border_color = Color(1, 0.505882, 0.478431, 1)
 content_margin_top = 4.0
 content_margin_bottom = 4.0
+metadata/tokens = {
+"border_color": &"vital_critical"
+}
 
 [sub_resource type="StyleBoxFlat" id="VitalCriticalFill"]
 bg_color = Color(1, 0.505882, 0.478431, 1)
+metadata/tokens = {
+"bg_color": &"vital_critical"
+}
 
 [sub_resource type="StyleBoxFlat" id="VitalDepletedTrack"]
 draw_center = false
@@ -809,9 +921,15 @@ border_width_bottom = 1
 border_color = Color(0.682353, 0.729412, 0.745098, 0.45)
 content_margin_top = 4.0
 content_margin_bottom = 4.0
+metadata/tokens = {
+"border_color": &"vital_depleted"
+}
 
 [sub_resource type="StyleBoxFlat" id="VitalDepletedFill"]
 bg_color = Color(0.682353, 0.729412, 0.745098, 0.45)
+metadata/tokens = {
+"bg_color": &"vital_depleted"
+}
 
 [sub_resource type="StyleBoxFlat" id="FavoriteNormal"]
 draw_center = false
@@ -831,6 +949,10 @@ content_margin_left = 10.0
 content_margin_top = 10.0
 content_margin_right = 10.0
 content_margin_bottom = 10.0
+metadata/tokens = {
+"bg_color": [&"ornament", 0.14],
+"border_color": [&"ornament", 0.6]
+}
 
 [sub_resource type="StyleBoxFlat" id="FavoriteFocus"]
 draw_center = false
@@ -843,6 +965,9 @@ content_margin_left = 10.0
 content_margin_top = 10.0
 content_margin_right = 10.0
 content_margin_bottom = 10.0
+metadata/tokens = {
+"border_color": &"focus_ring"
+}
 
 [resource]
 RookframeHudBar/base_type = &"PanelContainer"
@@ -1018,3 +1143,30 @@ components_button_emblem__stacked__compact/styles/hover = SubResource("EmblemTil
 components_button_emblem__stacked__compact/styles/pressed = SubResource("EmblemTileCompactPressed")
 components_button_emblem__stacked__compact/styles/hover_pressed = SubResource("EmblemTileCompactPressed")
 components_button_emblem__stacked__compact/styles/disabled = SubResource("EmblemTileCompactDisabled")
+metadata/tokens = {
+"components_button_emblem/colors/icon_normal_color": &"pictogram",
+"components_button_emblem/colors/icon_hover_color": &"content",
+"components_button_emblem/colors/icon_pressed_color": &"pictogram",
+"components_button_emblem/colors/icon_hover_pressed_color": &"content",
+"components_button_emblem/colors/icon_focus_color": &"content",
+"components_button_emblem/colors/icon_disabled_color": [&"content_disabled", 0.7],
+"components_button_emblem/colors/font_color": &"content",
+"components_button_emblem/colors/font_hover_color": &"content",
+"components_button_emblem/colors/font_pressed_color": &"content",
+"components_button_emblem/colors/font_hover_pressed_color": &"content",
+"components_button_emblem/colors/font_focus_color": &"content",
+"components_button_emblem/colors/font_disabled_color": &"content_disabled",
+"components_button__stacked/colors/font_pressed_color": &"accent_content",
+"components_button__stacked/colors/font_hover_pressed_color": &"accent_content",
+"components_button__stacked/colors/icon_normal_color": &"pictogram",
+"components_button__stacked/colors/icon_hover_color": &"pictogram",
+"components_button__stacked/colors/icon_focus_color": &"pictogram",
+"components_button__stacked/colors/icon_pressed_color": &"accent_content",
+"components_button__stacked/colors/icon_hover_pressed_color": &"accent_content",
+"components_button__stacked/colors/icon_disabled_color": [&"content_disabled", 0.7],
+"components_button_primary__stacked/colors/font_hover_pressed_color": &"accent_content",
+"components_button_destructive__stacked/colors/font_pressed_color": &"accent_content",
+"components_button_destructive__stacked/colors/font_hover_pressed_color": &"accent_content",
+"components_button_destructive__stacked/colors/icon_pressed_color": &"accent_content",
+"components_button_destructive__stacked/colors/icon_hover_pressed_color": &"accent_content"
+}

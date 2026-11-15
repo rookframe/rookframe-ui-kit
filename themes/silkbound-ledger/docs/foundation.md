@@ -57,22 +57,45 @@ rules. New compositions use semantic variations, not these old frame textures.
 
 ## Token authority
 
-`rookframe_theme.tres` is the visual authority for native Controls.
-`tokens.gd` is its public companion for the reusable relationships that cannot
-express layout or state through Theme items alone. Godot serializes StyleBox
-values directly and cannot reference script constants from a `.tres`, so some
-exact colors and geometry appear in both files deliberately.
+`theme/silkbound_tokens.gd` is the single source of this theme's values for the
+[semantic tokens](../../../ui-kit/docs/world-theme-styling.md#semantic-tokens)
+(`RookframeTokens`), plus three theme-private colors without a semantic role:
+pictogram brass, section-count copper and ribbon. `theme/silkbound_tokens.tres`
+instances it, and the canonical Theme lists it first in `supplemental_themes`.
+
+A `.tres` item cannot refer to another item or to a script constant, so every
+authored value that plays a token's role names that token in `metadata/tokens`
+on the object that owns it. A StyleBox names its properties,
+`{"bg_color": &"surface", "border_color": [&"ornament", 0.38]}`, where an array
+keeps the token's color at its own alpha. A Theme names its items by path, such
+as `"RookframeMeta/colors/font_color": &"content_muted"` or
+`"RookframeTitle/fonts/font": &"display"`. `tools/apply-silkbound-tokens.gd`
+writes the token values into every such value in the package's Themes and
+presentation scenes; presentation scripts read `silkbound_tokens.gd` directly.
+To change a value, edit it in `silkbound_tokens.gd`, then from the repository root:
+
+```sh
+python3 tools/workspace.py prepare
+godot --headless --path showcase --script "$PWD/themes/silkbound-ledger/tools/apply-silkbound-tokens.gd"
+python3 tools/workspace.py prepare
+```
+
+Add `-- --check` to report values that differ from their token without writing.
+Values without `metadata/tokens` are material details with no semantic role,
+such as leather, linen, bindings and action-panel highlights.
 
 The three Theme resources share palette and native control roles.
 `rookframe_theme.tres` is the general profile; `silkbound_theme.tres` and the
 retained `fullscreen_task_theme.tres` path supply the task/sheet density profile.
 They are authored native resources, with no runtime theme engine or picker.
+The task/sheet profile keeps its denser `RookframeLabel`, `RookframeMeta` and
+`RookframeError` sizes and natural line spacing, so those items do not follow
+the `label` and `meta` size tokens or the `line_spacing_*` tokens.
+`tokens.gd` keeps its public constants for compatibility.
 
-When an exact value changes, maintainers update all three Themes and tokens in one
-change and review the visual catalogue for drift. The semantic names and
-purposes are the compatibility contract; exact visual values may change within
-a SemVer major line. The manual review seam is intentionally not an automated
-validation or release gate.
+The semantic names and purposes are the compatibility contract; exact visual
+values may change within a SemVer major line. Review the visual catalogue after
+a value changes.
 
 ## Theme variation names
 

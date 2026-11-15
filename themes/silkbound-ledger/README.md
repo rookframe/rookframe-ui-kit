@@ -26,6 +26,10 @@ package's explicit variant. Fantasy/Cyberpunk remain independent installations.
 Profiles such as `theme/action_panel_theme.tres` and `theme/arc_picker_theme.tres`
 reach the canonical Theme through its `supplemental_themes`.
 
+Semantic token values live in `rookframe/ui/theme/silkbound_tokens.gd`; see
+[token authority](docs/foundation.md#token-authority) for how authored values
+follow them through `tools/apply-silkbound-tokens.gd`.
+
 Run `python3 tools/workspace.py prepare` after edits. Core component checks stay
 in `ui-kit/tests`; themed component integration suites live in
 `showcase/tests/theme_components`. Run them with `python3 tools/check_components.py`.

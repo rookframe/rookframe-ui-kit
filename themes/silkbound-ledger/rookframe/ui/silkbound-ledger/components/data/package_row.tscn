@@ -8,7 +8,11 @@ border_width_left = 1
 border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
-border_color = Color(0.243137, 0.262745, 0.274510, 1.0)
+border_color = Color(0.243137, 0.262745, 0.27451, 1)
+metadata/tokens = {
+"bg_color": [&"canvas", 0.62],
+"border_color": &"divider"
+}
 
 
 [node name="PackageRow" instance=ExtResource("base")]

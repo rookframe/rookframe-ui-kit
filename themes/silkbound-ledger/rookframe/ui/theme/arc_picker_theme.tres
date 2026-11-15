@@ -34,6 +34,10 @@ corner_radius_bottom_left = 32
 corner_detail = 16
 shadow_color = Color(0.082353, 0.090196, 0.098039, 0.55)
 shadow_size = 3
+metadata/tokens = {
+"bg_color": &"surface",
+"shadow_color": [&"shadow", 0.55]
+}
 
 [sub_resource type="StyleBoxFlat" id="CategoryHover"]
 content_margin_left = 12.0
@@ -53,6 +57,10 @@ corner_radius_bottom_left = 32
 corner_detail = 16
 shadow_color = Color(0.082353, 0.090196, 0.098039, 0.55)
 shadow_size = 3
+metadata/tokens = {
+"bg_color": &"surface_hover",
+"shadow_color": [&"shadow", 0.55]
+}
 
 [sub_resource type="StyleBoxFlat" id="CategorySelected"]
 content_margin_left = 12.0
@@ -72,6 +80,11 @@ corner_radius_bottom_left = 32
 corner_detail = 16
 shadow_color = Color(0.082353, 0.090196, 0.098039, 0.6)
 shadow_size = 3
+metadata/tokens = {
+"bg_color": &"accent",
+"border_color": &"accent_content",
+"shadow_color": &"shadow"
+}
 
 [sub_resource type="StyleBoxFlat" id="CategorySelectedHover"]
 content_margin_left = 12.0
@@ -91,6 +104,11 @@ corner_radius_bottom_left = 32
 corner_detail = 16
 shadow_color = Color(0.082353, 0.090196, 0.098039, 0.6)
 shadow_size = 3
+metadata/tokens = {
+"bg_color": &"accent_hover",
+"border_color": &"accent_content",
+"shadow_color": &"shadow"
+}
 
 [sub_resource type="StyleBoxFlat" id="CategoryFocus"]
 draw_center = false
@@ -110,6 +128,10 @@ expand_margin_right = 5.0
 expand_margin_bottom = 5.0
 shadow_color = Color(0.082353, 0.090196, 0.098039, 0.85)
 shadow_size = 3
+metadata/tokens = {
+"border_color": &"focus_ring",
+"shadow_color": [&"shadow", 0.85]
+}
 
 [sub_resource type="StyleBoxFlat" id="CategoryDisabled"]
 content_margin_left = 12.0
@@ -127,6 +149,10 @@ corner_radius_top_right = 32
 corner_radius_bottom_right = 32
 corner_radius_bottom_left = 32
 corner_detail = 16
+metadata/tokens = {
+"bg_color": [&"surface", 0.6],
+"border_color": [&"border", 0.8]
+}
 
 [sub_resource type="StyleBoxFlat" id="ItemNormal"]
 bg_color = Color(0.082353, 0.090196, 0.098039, 1)
@@ -142,6 +168,10 @@ corner_radius_bottom_left = 48
 corner_detail = 20
 shadow_color = Color(0.082353, 0.090196, 0.098039, 0.5)
 shadow_size = 3
+metadata/tokens = {
+"bg_color": &"canvas",
+"shadow_color": [&"shadow", 0.5]
+}
 
 [sub_resource type="StyleBoxFlat" id="ItemHover"]
 bg_color = Color(0.203922, 0.239216, 0.254902, 1)
@@ -157,6 +187,10 @@ corner_radius_bottom_left = 48
 corner_detail = 20
 shadow_color = Color(0.082353, 0.090196, 0.098039, 0.5)
 shadow_size = 3
+metadata/tokens = {
+"bg_color": &"surface_hover",
+"shadow_color": [&"shadow", 0.5]
+}
 
 [sub_resource type="StyleBoxFlat" id="ItemSelected"]
 bg_color = Color(0.807843, 0.8, 0.701961, 1)
@@ -176,6 +210,11 @@ expand_margin_right = 3.0
 expand_margin_bottom = 3.0
 shadow_color = Color(0.082353, 0.090196, 0.098039, 0.6)
 shadow_size = 3
+metadata/tokens = {
+"bg_color": &"accent",
+"border_color": &"accent_content",
+"shadow_color": &"shadow"
+}
 
 [sub_resource type="StyleBoxFlat" id="ItemSelectedHover"]
 bg_color = Color(0.905882, 0.905882, 0.866667, 1)
@@ -195,6 +234,11 @@ expand_margin_right = 3.0
 expand_margin_bottom = 3.0
 shadow_color = Color(0.082353, 0.090196, 0.098039, 0.6)
 shadow_size = 3
+metadata/tokens = {
+"bg_color": &"accent_hover",
+"border_color": &"accent_content",
+"shadow_color": &"shadow"
+}
 
 [sub_resource type="StyleBoxFlat" id="ItemFocus"]
 draw_center = false
@@ -214,6 +258,10 @@ expand_margin_right = 7.0
 expand_margin_bottom = 7.0
 shadow_color = Color(0.082353, 0.090196, 0.098039, 0.85)
 shadow_size = 3
+metadata/tokens = {
+"border_color": &"focus_ring",
+"shadow_color": [&"shadow", 0.85]
+}
 
 [sub_resource type="StyleBoxTexture" id="ItemDisabled"]
 texture = ExtResource("arc_item_disabled")
@@ -237,6 +285,11 @@ border_width_bottom = 2
 border_color = Color(0.737255, 0.572549, 0.466667, 1)
 shadow_color = Color(0.082353, 0.090196, 0.098039, 0.35)
 shadow_size = 6
+metadata/tokens = {
+"bg_color": [&"canvas", 0.94],
+"border_color": &"ornament",
+"shadow_color": [&"shadow", 0.35]
+}
 
 [resource]
 RookframeArcTrack/base_type = &"Container"
@@ -288,3 +341,16 @@ RookframeArcCaptionTitle/colors/font_color = Color(0.905882, 0.905882, 0.866667,
 RookframeArcCaptionTitle/constants/line_spacing = 0
 RookframeArcCaptionTitle/fonts/font = SubResource("CaptionTitle")
 RookframeArcCaptionTitle/font_sizes/font_size = 20
+metadata/tokens = {
+"RookframeArcTrack/colors/rail_color": &"ornament",
+"RookframeArcTrack/colors/rail_core_color": &"canvas",
+"RookframeArcCategory/colors/icon_normal_color": &"pictogram",
+"RookframeArcCategory/colors/icon_hover_color": &"content",
+"RookframeArcCategory/colors/icon_focus_color": &"pictogram",
+"RookframeArcCategory/colors/icon_pressed_color": &"accent_content",
+"RookframeArcCategory/colors/icon_hover_pressed_color": &"accent_content",
+"RookframeArcCategory/colors/icon_disabled_color": [&"content_disabled", 0.45],
+"RookframeArcCaptionKicker/colors/font_color": &"section_count",
+"RookframeArcCaptionTitle/colors/font_color": &"content",
+"RookframeArcCaptionTitle/font_sizes/font_size": &"label"
+}
