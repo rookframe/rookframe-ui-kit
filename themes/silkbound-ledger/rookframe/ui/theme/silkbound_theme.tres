@@ -104,6 +104,22 @@ metadata/tokens = {
 "border_color": &"border"
 }
 
+[sub_resource type="StyleBoxFlat" id="RaisedSurface"]
+content_margin_left = 16.0
+content_margin_top = 16.0
+content_margin_right = 16.0
+content_margin_bottom = 16.0
+bg_color = Color(0.203922, 0.239216, 0.254902, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.356863, 0.384314, 0.396078, 1)
+metadata/tokens = {
+"bg_color": &"surface_raised",
+"border_color": &"border"
+}
+
 [sub_resource type="StyleBoxFlat" id="RaisedFrame"]
 bg_color = Color(0.137255, 0.156863, 0.168627, 1)
 border_width_left = 1
@@ -2600,7 +2616,7 @@ RookframePackageFrame/styles/panel = SubResource("PackageFrame")
 RookframeSurface/base_type = &"PanelContainer"
 RookframeSurface/styles/panel = SubResource("Surface")
 RookframeRaisedSurface/base_type = &"PanelContainer"
-RookframeRaisedSurface/styles/panel = SubResource("Raised")
+RookframeRaisedSurface/styles/panel = SubResource("RaisedSurface")
 RookframeRaisedFrame/base_type = &"PanelContainer"
 RookframeRaisedFrame/styles/panel = SubResource("RaisedFrame")
 RookframeActiveSurface/base_type = &"PanelContainer"
@@ -2688,7 +2704,7 @@ RookframeMeta/base_type = &"Label"
 RookframeMeta/colors/font_color = Color(0.682353, 0.729412, 0.745098, 1)
 RookframeMeta/font_sizes/font_size = 12
 RookframeStatus/base_type = &"Label"
-RookframeStatus/colors/font_color = Color(0.905882, 0.905882, 0.866667, 1)
+RookframeStatus/colors/font_color = Color(0.682353, 0.729412, 0.745098, 1)
 RookframeStatus/font_sizes/font_size = 18
 RookframePending/base_type = &"Label"
 RookframePending/colors/font_color = Color(0.682353, 0.729412, 0.745098, 1)
@@ -3680,13 +3696,13 @@ metadata/tokens = {
 "RookframeBody/colors/font_color": &"content",
 "RookframeBody/font_sizes/font_size": &"body",
 "RookframeMeta/colors/font_color": &"content_muted",
-"RookframeStatus/colors/font_color": &"content",
+"RookframeStatus/colors/font_color": &"content_muted",
 "RookframeStatus/font_sizes/font_size": &"meta",
 "RookframePending/colors/font_color": &"content_muted",
 "RookframePending/font_sizes/font_size": &"meta",
-"RookframeSuccess/colors/font_color": &"success_content",
+"RookframeSuccess/colors/font_color": &"success",
 "RookframeSuccess/font_sizes/font_size": &"meta",
-"RookframeError/colors/font_color": &"danger_content",
+"RookframeError/colors/font_color": &"danger",
 "RookframeIdentity/colors/font_color": &"content",
 "RookframeBadgeText/colors/font_color": &"content_muted",
 "RookframeBadgeText/font_sizes/font_size": &"meta",
