@@ -16,6 +16,14 @@ as every other theme. The shared native Theme entry wraps this package's existin
 mapping compiler. Installation does not activate it; hosts own selection and
 persistence. `res://rookframe/ui/menu/cyberpunk/CyberpunkTheme.tres` remains a compatibility resource.
 See [the common activation contract](../../ui-kit/docs/world-theme-styling.md).
+Every `RookframeTokens` value (colors, type faces and sizes, line spacing,
+space, shape, elevation, size and motion) comes from
+`menu/cyberpunk/materials/cyberpunk_tokens.gd`, which `cyberpunk_theme.gd`
+authors into the native Theme. Materials and mappings read the same script:
+semantic roles through its token values, component-only shades through its
+private palette, so no other file repeats a color or face. Mappings may name a
+token directly as `token.<item type>.<name>`, for example
+`token.colors.content`. The `materials/*.tres` StyleBoxes keep geometry only.
 HUD mappings (stacked and emblem Buttons, HudBar, IdentityPlate, VitalMeter,
 FavoriteToggle) live in `hud_theme_map.gd` with values in `materials/hud_materials.gd`;
 `RookframeHud` sets a zero gap so the attached tray stands on the bar rail. The favorite star SVGs are hand-authored for this package.

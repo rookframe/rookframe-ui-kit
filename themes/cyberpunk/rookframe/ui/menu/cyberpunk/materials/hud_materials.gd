@@ -7,16 +7,17 @@ const CONDITION := {"normal": "resting", "hover": "hovered", "pressed": "pressed
 # A selected tile rises out of the rail; its face takes the next emphasis up.
 const SELECTED := {"standard": "emissive.resting", "primary": "emissive.pressed", "destructive": "warning.hovered"}
 const FACE := {"standard": "alloy", "primary": "emissive", "destructive": "warning"}
+const T = preload("cyberpunk_tokens.gd")
 
 
 static func materials(menu: Dictionary) -> Dictionary:
 	var values := {
-		"hud.signal": Color("f277c7"),
-		"hud.signal.hover": Color("ff9fd9"),
-		"hud.signal.pressed": Color("d4559f"),
-		"hud.signal.edge": Color("ffd0ec"),
-		"hud.signal.ink": Color("1c0617"),
-		"hud.signal.ink.disabled": Color("9a8794"),
+		"hud.signal": T.shade("pink"),
+		"hud.signal.hover": T.shade("pink_hover"),
+		"hud.signal.pressed": T.shade("pink_pressed"),
+		"hud.signal.edge": T.shade("pink_edge"),
+		"hud.signal.ink": T.shade("pink_ink"),
+		"hud.signal.ink.disabled": T.shade("pink_ink_disabled"),
 		# Untracked Exo 2: Button measures whole words without glyph spacing, so a
 		# tracked label could break inside its widest word.
 		"hud.tile.font": menu["type.display.medium"],
@@ -64,7 +65,7 @@ static func materials(menu: Dictionary) -> Dictionary:
 					# Raised, not sunk: the face extends above the rail with a bright crown.
 					face.expand_margin_top = 4.0 if compact else 6.0
 					face.border_width_top = 3
-					face.border_color = menu["button.standard.font_hover_color"] if usage != "destructive" else Color("ffd5ca")
+					face.border_color = menu["button.standard.font_hover_color"] if usage != "destructive" else menu["button.destructive.font_pressed_color"]
 					if slot == "hover_pressed":
 						face.bg_color = face.bg_color.lightened(0.12)
 				values["hud.tile." + usage + "." + slot + suffix] = face
@@ -76,10 +77,10 @@ static func materials(menu: Dictionary) -> Dictionary:
 	# Emblem: the single signal-pink action that leads the bar.
 	var emblem := {
 		"normal": [values["hud.signal"], values["hud.signal.edge"]],
-		"hover": [values["hud.signal.hover"], Color.WHITE],
+		"hover": [values["hud.signal.hover"], T.shade("highlight")],
 		"pressed": [values["hud.signal.pressed"], values["hud.signal.edge"]],
-		"hover_pressed": [values["hud.signal.pressed"], Color.WHITE],
-		"disabled": [Color("3a2433"), Color("6b4a5e")],
+		"hover_pressed": [values["hud.signal.pressed"], T.shade("highlight")],
+		"disabled": [T.shade("pink_disabled"), T.shade("pink_border_disabled")],
 	}
 	for compact in [false, true]:
 		var suffix := ".compact" if compact else ""
@@ -111,7 +112,7 @@ static func materials(menu: Dictionary) -> Dictionary:
 			tile.expand_margin_bottom = standard.expand_margin_bottom
 			if slot in ["pressed", "hover_pressed"]:
 				tile.bg_color = values["hud.signal.hover"]
-				tile.border_color = Color.WHITE
+				tile.border_color = T.shade("highlight")
 				tile.border_width_top = 3
 			values["hud.tile.emblem." + slot + suffix] = tile
 		values["hud.tile.emblem.focus" + suffix] = values["hud.emblem.focus" + suffix]
@@ -120,7 +121,7 @@ static func materials(menu: Dictionary) -> Dictionary:
 	for profile in ["", ".medium", ".compact"]:
 		var inset: int = {"": 14, ".medium": 10, ".compact": 6}[profile]
 		var bar: StyleBoxFlat = menu["chassis.tray"].duplicate()
-		bar.bg_color = Color("08121cf5")
+		bar.bg_color = T.color(&"surface_sunken", 0xf5)
 		bar.border_color = rail
 		bar.border_width_top = 2
 		bar.border_width_left = 1
@@ -137,8 +138,8 @@ static func materials(menu: Dictionary) -> Dictionary:
 		# The attached tray is a tab standing on that rail: open below, its frame
 		# tucked under the rail (the presentation removes the container gap).
 		var attached: StyleBoxFlat = bar.duplicate()
-		attached.bg_color = Color("0b1824f5")
-		attached.border_color = Color("4b8996")
+		attached.bg_color = T.color(&"surface", 0xf5)
+		attached.border_color = T.color(&"border_strong")
 		attached.border_width_top = 1
 		attached.border_width_left = 2
 		attached.border_width_right = 2
@@ -151,18 +152,18 @@ static func materials(menu: Dictionary) -> Dictionary:
 		values["hud.attached" + profile] = attached
 	var rule := StyleBoxLine.new()
 	rule.vertical = true
-	rule.color = Color("4b8996")
+	rule.color = T.color(&"border_strong")
 	rule.thickness = 2
 	rule.grow_begin = -8.0
 	rule.grow_end = -8.0
 	values["hud.rule"] = rule
 	# Identity plate: a glass record on an alloy spine; focus keeps the white ring.
-	var plates := {"normal": ["0d1c29", menu["alloy.resting.border"].border_color], "hover": ["14293a", menu["alloy.hovered.border"].border_color], "pressed": ["091621", menu["alloy.pressed.border"].border_color], "hover_pressed": ["0f2231", menu["alloy.hovered.border"].border_color], "disabled": ["0b141c", menu["alloy.disabled.border"].border_color]}
+	var plates := {"normal": [T.color(&"surface"), menu["alloy.resting.border"].border_color], "hover": [T.color(&"surface_raised"), menu["alloy.hovered.border"].border_color], "pressed": [T.color(&"surface_sunken"), menu["alloy.pressed.border"].border_color], "hover_pressed": [T.color(&"surface_pressed"), menu["alloy.hovered.border"].border_color], "disabled": [T.color(&"surface_sunken"), menu["alloy.disabled.border"].border_color]}
 	for compact in [false, true]:
 		var suffix := ".compact" if compact else ""
 		for slot in plates:
 			var plate := StyleBoxFlat.new()
-			plate.bg_color = Color(plates[slot][0])
+			plate.bg_color = plates[slot][0]
 			plate.border_color = plates[slot][1]
 			plate.border_width_left = 3
 			plate.border_width_top = 1
@@ -179,8 +180,8 @@ static func materials(menu: Dictionary) -> Dictionary:
 		values["hud.identity.focus" + suffix] = _ring(menu["signal.adornment.focus"])
 	# Vital tracks: level differs in hue, luminance and shape (slanted lead, alarm frame).
 	var track := StyleBoxFlat.new()
-	track.bg_color = Color("050d14")
-	track.border_color = Color("31556a")
+	track.bg_color = T.color(&"canvas")
+	track.border_color = T.shade("tray_edge")
 	track.set_border_width_all(1)
 	track.corner_radius_top_right = 4
 	track.corner_radius_bottom_left = 4
@@ -189,15 +190,15 @@ static func materials(menu: Dictionary) -> Dictionary:
 	track.content_margin_bottom = 5
 	values["hud.vital.track"] = track
 	var alarm: StyleBoxFlat = track.duplicate()
-	alarm.border_color = Color("ff6f7d")
+	alarm.border_color = T.shade("alarm")
 	alarm.set_border_width_all(2)
-	alarm.bg_color = Color("1e0910")
+	alarm.bg_color = T.shade("alarm_fill")
 	values["hud.vital.track.critical"] = alarm
 	var spent: StyleBoxFlat = track.duplicate()
-	spent.border_color = Color("4a5961")
-	spent.bg_color = Color("0b0f12")
+	spent.border_color = T.color(&"vital_depleted")
+	spent.bg_color = T.shade("spent_fill")
 	values["hud.vital.track.depleted"] = spent
-	var fills := {"": [rail, Vector2.ZERO], ".wounded": [Color("ffc35c"), Vector2(0.6, 0)], ".critical": [Color("ff5d73"), Vector2(0.6, 0)], ".depleted": [Color("4a5961"), Vector2.ZERO]}
+	var fills := {"": [T.color(&"vital_full"), Vector2.ZERO], ".wounded": [T.color(&"vital_wounded"), Vector2(0.6, 0)], ".critical": [T.color(&"vital_critical"), Vector2(0.6, 0)], ".depleted": [T.color(&"vital_depleted"), Vector2.ZERO]}
 	for level in fills:
 		var fill: StyleBoxFlat = track.duplicate()
 		fill.bg_color = fills[level][0]
@@ -212,7 +213,7 @@ static func materials(menu: Dictionary) -> Dictionary:
 		cell.set_content_margin(side, 10)
 	values["hud.favorite.normal"] = cell
 	var lit := StyleBoxFlat.new()
-	lit.bg_color = Color("1c42528c")
+	lit.bg_color = T.shade("alloy_hovered", 0x8c)
 	lit.border_color = menu["alloy.hovered.border"].border_color
 	lit.border_width_bottom = 2
 	lit.corner_radius_top_right = 9
@@ -222,7 +223,7 @@ static func materials(menu: Dictionary) -> Dictionary:
 		lit.set_content_margin(side, 10)
 	values["hud.favorite.hover"] = lit
 	var held: StyleBoxFlat = lit.duplicate()
-	held.bg_color = Color("0f24308c")
+	held.bg_color = T.color(&"surface_pressed", 0x8c)
 	held.border_color = menu["alloy.pressed.border"].border_color
 	values["hud.favorite.pressed"] = held
 	values["hud.favorite.focus"] = menu["signal.adornment.focus"]

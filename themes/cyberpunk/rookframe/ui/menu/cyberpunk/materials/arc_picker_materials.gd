@@ -2,20 +2,21 @@
 extends RefCounted
 ## Arc picker Materials: a neon rail with a dark core, dark-glass medallions with
 ## signal rings and a chamfered HUD readout, all drawn from the existing palette.
-const PALETTE = {
-	"glass": Color("0d1c29f0"),
-	"glass_hover": Color("163a4bf2"),
-	"ring": Color("4aa3ad"),
-	"ring_hover": Color("81e7e8"),
-	"signal": Color("6bf2ef"),
-	"signal_hover": Color("c8ffff"),
-	"emissive": Color("60ccce"),
-	"emissive_hover": Color("99eded"),
-	"core": Color("06121a"),
-	"focus": Color("f4fafa"),
-	"shade": Color("000000a0"),
-	"glow": Color("6bf2ef70"),
-	"glow_hover": Color("6bf2efa0"),
+const T = preload("cyberpunk_tokens.gd")
+static var PALETTE: Dictionary = {
+	"glass": T.color(&"surface", 0xf0),
+	"glass_hover": T.shade("glass_hover", 0xf2),
+	"ring": T.shade("ring"),
+	"ring_hover": T.color(&"accent"),
+	"signal": T.shade("neon"),
+	"signal_hover": T.shade("neon_bright"),
+	"emissive": T.shade("primary_fill"),
+	"emissive_hover": T.color(&"accent_hover"),
+	"core": T.color(&"canvas"),
+	"focus": T.color(&"focus_ring"),
+	"shade": T.color(&"shadow"),
+	"glow": T.shade("neon", 0x70),
+	"glow_hover": T.shade("neon", 0xa0),
 }
 
 
@@ -59,7 +60,7 @@ static func materials(menu: Dictionary) -> Dictionary:
 		"arc.icon.hover": menu["button.standard.icon_hover_color"],
 		"arc.icon.focus": menu["button.standard.icon_focus_color"],
 		"arc.icon.selected": menu["button.primary.font_color"],
-		"arc.icon.disabled": Color("4e6470"),
+		"arc.icon.disabled": T.shade("arc_icon_disabled"),
 		"arc.caption.kicker": menu["subtitle.font_color"],
 		"arc.caption.title": menu["title.font_color"],
 		"arc.caption.kicker.font": menu["type.control"],
@@ -95,7 +96,7 @@ static func materials(menu: Dictionary) -> Dictionary:
 	var well := _medallion(Color.WHITE, Color.WHITE, 0, Color.TRANSPARENT, 0)
 	values["arc.well"] = well
 	var caption: StyleBoxFlat = menu["glass.record"].duplicate()
-	caption.bg_color = Color("09131ef0")
+	caption.bg_color = T.color(&"surface_sunken", 0xf0)
 	caption.border_color = PALETTE.ring
 	caption.border_width_left = 3
 	caption.border_width_right = 1

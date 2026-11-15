@@ -1,19 +1,21 @@
 @tool
 extends RefCounted
+const T = preload("cyberpunk_tokens.gd")
+
 ## Virtual display surfaces: crisp cyan signals and translucent blue fields.
 static func materials(settings: Dictionary) -> Dictionary:
 	var values := {
-		"choice.font": preload("ui.tres"),
-		"choice.ink": Color("c4d5df"),
-		"choice.ink.hover": Color("e9ffff"),
-		"choice.ink.disabled": Color("8199a5"),
+		"choice.font": T.FONTS[&"body"],
+		"choice.ink": T.color(&"content"),
+		"choice.ink.hover": T.shade("choice_ink_hover"),
+		"choice.ink.disabled": T.color(&"content_disabled"),
 		"choice.outline": Color.TRANSPARENT,
 		"choice.outline_size": 0,
 		"choice.arrow": preload("settings_arrow.svg"),
 		"choice.check": preload("choice_check.svg"),
 		"choice.blank": settings["settings.blank"],
 		"choice.modulate_arrow": 1,
-		"choice.selection_disabled": Color("8199a5"),
+		"choice.selection_disabled": T.color(&"content_disabled"),
 		"choice.selection_inset": 18,
 		"choice.popup_inset": 0,
 		"choice.popup_inset.compact": 0,
@@ -38,14 +40,14 @@ static func materials(settings: Dictionary) -> Dictionary:
 		for state in ["normal", "hover", "pressed", "hover_pressed", "disabled", "focus"]:
 			values["choice." + state + suffix] = settings["settings.control." + state]
 	var panel: StyleBoxFlat = settings["settings.popup"].duplicate()
-	panel.bg_color = Color("0d1b27fa")
-	panel.shadow_color = Color("00000080")
+	panel.bg_color = T.color(&"surface", 0xfa)
+	panel.shadow_color = T.color(&"shadow", 0x80)
 	panel.shadow_size = 6
 	panel.shadow_offset = Vector2(0, 4)
 	values["choice.popup"] = panel
 	var hover := StyleBoxFlat.new()
-	hover.bg_color = Color("244f6099")
-	hover.border_color = Color("81e7e8")
+	hover.bg_color = T.color(&"surface_hover", 0x99)
+	hover.border_color = T.color(&"accent")
 	hover.border_width_left = 2
 	values["choice.popup_hover"] = hover
 	return values
