@@ -5,6 +5,7 @@ const Frame = preload("../../_internal/menu/choice_frame.gd")
 const Layers = preload("../../_internal/menu/layered_style.gd")
 const CAP = preload("walnut_brass_cap.tres")
 const PLAIN_CAP = preload("walnut_plain_cap.tres")
+const Tokens = preload("../../themes/fantasy/tokens.gd")
 const GOLD := Color("f3d78e")
 const REST_TINT := Color("bfb6a6")
 static var VALUES := _materials()
@@ -90,7 +91,7 @@ static func _tray() -> StyleBox:
 	var shadow := StyleBoxFlat.new()
 	shadow.bg_color = Color("140c06")
 	shadow.shadow_color = Color("000000b8")
-	shadow.shadow_size = 7
+	shadow.shadow_size = Tokens.CONSTANTS.elevation_2
 	shadow.shadow_offset = Vector2(0, 5)
 	tray.layers.append(shadow)
 	# The same walnut face continues from the closed control into the tray.

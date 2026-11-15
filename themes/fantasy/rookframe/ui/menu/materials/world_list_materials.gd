@@ -2,23 +2,26 @@
 extends RefCounted
 ## Concrete World list Materials, including every shared default.
 const Geometry = preload("world_list_geometry.gd")
+const Tokens = preload("res://rookframe/ui/themes/fantasy/tokens.gd")
+## Semantic entries come from the Fantasy tokens; the panel lets 4% of the table through.
 const PALETTE = {
-	"panel": Color("171c18f5"),
-	"edge": Color("756443"),
-	"resting": Color("252d27"),
-	"hover": Color("394337"),
-	"pressed": Color("1c241e"),
-	"selected": Color("4c452b"),
+	"panel": Color(Tokens.COLORS.surface_sunken, 245.0 / 255.0),
+	"edge": Tokens.COLORS.border,
+	"resting": Tokens.COLORS.surface_raised,
+	"hover": Tokens.COLORS.surface_hover,
+	"pressed": Tokens.COLORS.surface_pressed,
+	"selected": Tokens.COLORS.accent_subtle,
 	"selected_hover": Color("605638"),
-	"focus": Color("e2c184"),
-	"online": Color("c4d899"),
+	"selected_edge": Tokens.COLORS.border_strong,
+	"focus": Tokens.COLORS.focus_ring,
+	"online": Tokens.COLORS.success_content,
 }
 
 static func _box(fill: Color, border: Color) -> StyleBoxFlat:
 	var box := StyleBoxFlat.new()
 	box.bg_color = fill
 	box.border_color = border
-	box.set_border_width_all(1)
+	box.set_border_width_all(Tokens.CONSTANTS.border_width)
 	box.content_margin_left = 16.0
 	box.content_margin_right = 16.0
 	box.content_margin_top = 12.0
@@ -28,7 +31,7 @@ static func _box(fill: Color, border: Color) -> StyleBoxFlat:
 static func materials(base: Dictionary) -> Dictionary:
 	var values: Dictionary = Geometry.VALUES.duplicate()
 	values["escape.surface_width"] = 540
-	values["backdrop.color"] = Color("030605dc")
+	values["backdrop.color"] = Tokens.COLORS.scrim
 	for compact in [false, true]:
 		var suffix := ".compact" if compact else ""
 		var surface: StyleBox = base["settings.surface" + suffix]
@@ -43,7 +46,7 @@ static func materials(base: Dictionary) -> Dictionary:
 	values["worlds.selection"] = PALETTE.selected
 	var focus := _box(Color.TRANSPARENT, PALETTE.focus)
 	focus.draw_center = false
-	focus.set_border_width_all(2)
+	focus.set_border_width_all(Tokens.CONSTANTS.focus_width)
 	focus.set_expand_margin_all(-2.0)
 	values["worlds.focus"] = focus
 	for selected in [false, true]:
@@ -55,7 +58,7 @@ static func materials(base: Dictionary) -> Dictionary:
 				fill = PALETTE.pressed
 			elif state == "disabled":
 				fill = PALETTE.panel
-			var face := _box(fill, PALETTE.focus if selected else PALETTE.edge)
+			var face := _box(fill, PALETTE.selected_edge if selected else PALETTE.edge)
 			if selected:
 				face.border_width_left = 4
 			values["worlds.row." + ("selected." if selected else "") + state] = face
