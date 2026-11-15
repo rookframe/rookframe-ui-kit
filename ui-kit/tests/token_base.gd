@@ -1,7 +1,8 @@
 extends SceneTree
 ## The token-built base layer completes every theme entry: each standard stock
 ## control and kit variation resolves from the entry, every value follows the
-## tokens, interactive states differ, and a type a theme defines stays its own.
+## tokens, its text meets WCAG AA, interactive states differ, and a type a theme
+## defines stays its own.
 const Tokens = preload("res://rookframe/ui/themes/design_tokens.gd")
 const TokenBase = preload("res://rookframe/ui/themes/token_base.gd")
 const ComponentTheme = preload("res://rookframe/ui/themes/component_theme.gd")
@@ -20,6 +21,9 @@ const STOCK: Array[StringName] = [
 ## the token type, and the native mapping compiler's usages, which resolve
 ## through their stock class.
 const OUTSIDE := ["RookframeTokens"]
+## Variations the layer declares for Packages and hosts although no kit source
+## assigns them, with their base type.
+const DECLARED := {&"RookframeBodyMuted": &"Label"}
 const INTERACTIVE: Array[StringName] = [
 	&"Button", &"OptionButton", &"RookframeSecondaryButton", &"RookframePrimaryButton",
 	&"RookframeQuietButton", &"RookframeDangerButton", &"RookframeTabButton", &"RookframeChoiceRow",
@@ -34,6 +38,7 @@ func _run() -> void:
 	var base := TokenBase.build(NEUTRAL)
 	_coverage(base)
 	_complete("Neutral entry", neutral, base, Theme.new())
+	_readable("Neutral entry", neutral, base)
 	_derived()
 	_states(neutral, PackedStringArray())
 	_ownership()
@@ -45,7 +50,9 @@ func _run() -> void:
 			for source in entry.supplemental_themes + [entry.native_theme]:
 				if source != null:
 					authored.merge_with(source)
-			_complete(path, entry, TokenBase.build(entry), authored)
+			var layer := TokenBase.build(entry)
+			_complete(path, entry, layer, authored)
+			_readable(path, entry, layer)
 			_states(entry, authored.get_type_list())
 	for failure in failures:
 		push_error(failure)
@@ -71,6 +78,8 @@ func _coverage(base: Theme) -> void:
 	_scan("res://rookframe/ui/components", pattern, used)
 	_scan("res://rookframe/ui/_internal", pattern, used)
 	check(used.size() > 60, "Kit sources name their variations")
+	for name: StringName in DECLARED:
+		check(base.get_type_variation_base(name) == DECLARED[name], "Base layer declares %s on %s" % [name, DECLARED[name]])
 	for name: String in used:
 		if not name in OUTSIDE:
 			check(types.has(name), "Base layer declares the kit variation %s (%s)" % [name, used[name]])
@@ -113,6 +122,33 @@ func _complete(label: String, entry: Theme, base: Theme, authored: Theme) -> voi
 			check(items.size() == authored.get_theme_item_list(data_type, type).size(), "%s: the base layer adds nothing to authored %s" % [label, type])
 			for item in items:
 				check(is_same(entry.get_theme_item(data_type, item, type), authored.get_theme_item(data_type, item, type)), "%s: authored %s/%s wins" % [label, type, item])
+
+## Text the base layer builds from an entry's tokens meets WCAG AA, including
+## types the theme authors itself, which would fall back to the layer without
+## their source: every label variation on `surface`, and every Button ink on its
+## own state fill, translucent fills seen over `surface`. That covers
+## `danger_content` on the destructive hover and pressed fills, which mix
+## `danger` into `danger_surface`. Disabled ink is exempt.
+func _readable(label: String, entry: Theme, base: Theme) -> void:
+	var surface := entry.get_color(&"surface", Tokens.TYPE)
+	for type in base.get_type_list():
+		var kind := base.get_type_variation_base(type)
+		if kind == &"Label" and base.has_color(&"font_color", type):
+			_aa(label, type, "text", base.get_color(&"font_color", type), surface)
+		elif kind == &"Button" or ClassDB.is_parent_class(type, &"Button"):
+			for state: StringName in [&"normal", &"hover", &"pressed"]:
+				var box := base.get_stylebox(state, type) as StyleBoxFlat
+				if box == null or not base.has_color(_ink(state), type):
+					continue
+				var fill := surface.lerp(Color(box.bg_color, 1.0), box.bg_color.a if box.draw_center else 0.0)
+				_aa(label, type, state, base.get_color(_ink(state), type), fill)
+
+func _ink(state: StringName) -> StringName:
+	return &"font_color" if state == &"normal" else StringName("font_%s_color" % state)
+
+func _aa(label: String, type: StringName, state: String, ink: Color, fill: Color) -> void:
+	var ratio := Tokens.contrast_ratio(ink, fill)
+	check(ratio >= Tokens.AA_MINIMUM, "%s: %s %s ink #%s on #%s is %.2f:1" % [label, type, state, ink.to_html(false), fill.to_html(false), ratio])
 
 ## No color, size or font is fixed: change every token and every value follows.
 func _derived() -> void:

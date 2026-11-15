@@ -48,7 +48,10 @@ items, and each type role as a `font` and a `font_size` item of the same name
 plus a `line_spacing_<role>` constant. The UI Kit names them; each theme supplies
 their values. `themes/design_tokens.gd` lists every name by item type
 (`COLORS`, `CONSTANTS`, `FONTS`, `FONT_SIZES`, or `names(data_type)`) with its
-neutral value, and the color pairs that must meet WCAG AA (`AA_PAIRS`).
+neutral value, and the color pairs that must meet WCAG AA (`AA_PAIRS`): each
+`*_content` on its surface, and `content` and `content_muted` on the surfaces,
+on `surface_hover`, `surface_pressed` and `accent_subtle`, where text sits on a
+row under the pointer, pressed or selected.
 The showcase page Design tokens (`--component=design_tokens`) shows every token
 of the selected theme. See the [migration steps](../../docs/migration-to-v2.md#semantic-tokens)
 for the order of preference in a Package: component, type variation, token read.
@@ -103,13 +106,25 @@ entry uses the `body` role.
 Buttons, fields, tabs and rows distinguish normal, hover, pressed, disabled and
 focus. Primary actions use `accent` with `accent_content`, secondary actions the
 raised surface, quiet actions no fill until pointed at, destructive actions the
-`danger` roles. Godot's unchecked mark is a dark well, so `CheckBox` and
+`danger` roles; their hover and pressed fills mix 10% and 16% of `danger` into
+`danger_surface`. Godot's unchecked mark is a dark well, so `CheckBox` and
 `CheckButton` keep a lit row around it; a theme that wants an outlined box
 authors the `CheckBox` icons. Box, flow and grid containers take their gap from
 `space_3` and `space_4`, and a Button icon is bounded to `icon_medium`.
+Text variations take a type role and an ink role: `RookframeBody` is running
+text in `body` and `content`; `RookframeBodyMuted` is secondary running text,
+such as a description under a heading, in the same `body` face, size and line
+spacing with `content_muted`. `RookframeMeta` is the smaller `meta` role for
+captions and counts. A theme may author any of them; one it leaves out comes
+from its tokens.
+
 `tests/token_base.gd` lists the stock controls, checks that every
-variation a kit scene or script assigns is declared, that every value follows
-the tokens, and that authored types are left alone. The mapping compiler's
+variation a kit scene or script assigns is declared, along with the
+variations offered to Packages such as `RookframeBodyMuted`, that every value
+follows the tokens, that the text it builds from each theme's tokens meets WCAG
+AA (label inks on `surface`, Button inks on each state fill, including
+`danger_content` on the destructive hover and pressed fills), and that authored
+types are left alone. The mapping compiler's
 usages below (`menu_*`, `editor_*`, `settings_*`, `components_switch*`) are not
 part of the layer; without a mapping they resolve through their stock class.
 

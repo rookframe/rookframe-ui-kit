@@ -2,6 +2,24 @@
 
 ## Unreleased
 
+- Text must stay readable on interactive fills: `AA_PAIRS` adds `content` and
+  `content_muted` on `surface_hover`, `surface_pressed` and `accent_subtle`.
+  Neutral set: `content_muted` #a0a0a0 -> #a8a8a8, `surface_hover` #404040 ->
+  #3c3c3c, `surface_pressed` #4a4a4a -> #303030 (pressed now sinks below
+  raised), `danger` #e06c6c -> #e47474. Fantasy: `content_muted`
+  (0.69, 0.65, 0.555) -> (0.7, 0.66, 0.565), `surface_hover` #394337 -> #373f35,
+  `accent_subtle` #4c452b -> #443d27. The base layer's destructive hover and
+  pressed fills mix 10% and 16% of `danger` (was 16% and 30%), so
+  `danger_content` stays at AA where a theme inks it in `danger`;
+  `ui-kit/tests/token_base.gd` checks every text ink the layer builds.
+- Silkbound Ledger: `surface_hover` (#3c464b), `surface_pressed` (#2c3337) and
+  `accent_subtle` (#3d413f, `surface` with 15% paper) are now distinct from
+  `surface_raised`, for the base layer and Package token reads. Authored
+  Silkbound controls keep their look: their bindings name the theme-private
+  `ledger_hover`, `ledger_pressed` and `ledger_selected` fill (#343d41).
+- Add the `RookframeBodyMuted` Label variation to the base layer: the body
+  face, size and line spacing in `content_muted`, for secondary running text.
+
 - Add the token-built base layer `themes/token_base.gd`. Every component theme
   entry generates the standard stock controls and kit type variations
   (`Rookframe*`, `Task*`, `Wizard*`, `components_button*`) from its own

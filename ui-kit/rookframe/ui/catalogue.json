@@ -1612,7 +1612,7 @@
       "scene": "res://rookframe/ui/components/data/typography.tscn",
       "sceneUid": "uid://6qfw2fvnalwu",
       "rootType": "Label",
-      "contract": "Native Label with the RookframeBody semantic role. Set theme_type_variation for other roles; fonts and appearance belong to the consumer.",
+      "contract": "Native Label with the RookframeBody semantic role. Set theme_type_variation for other roles, such as RookframeBodyMuted for secondary running text; fonts and appearance belong to the consumer.",
       "inherits": "res://rookframe/ui/components/data/label.tscn",
       "nativeProxy": true
     },

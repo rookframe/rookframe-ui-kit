@@ -4,7 +4,7 @@ const Demo = preload("res://examples/components/pages/layout_surfaces/demo.gd")
 
 static func build(page) -> void:
 	var roles = page.section("Semantic hierarchy")
-	for entry in [["RookframeHeading", "Beyond the horizon"], ["RookframeBody", "The expedition sets out at dawn, following the old road into the northern reaches."], ["RookframeMuted", "Session 12 · recorded today"]]:
+	for entry in [["RookframeHeading", "Beyond the horizon"], ["RookframeBody", "The expedition sets out at dawn, following the old road into the northern reaches."], ["RookframeBodyMuted", "Notes from the last session wait in the chronicle."]]:
 		var text = page.scene("res://rookframe/ui/components/data/typography.tscn", roles, {"text": entry[1]})
 		text.theme_type_variation = entry[0]
 	var long = page.section("Readable long content", "Native text wraps with the available width; no horizontal reading scroll is needed.")

@@ -14,8 +14,9 @@ const BUTTON_STATES: Array[StringName] = [&"normal", &"hover", &"pressed", &"hov
 ## Opacity of a disabled fill or border against the surface beneath it.
 const DISABLED_OPACITY := 0.5
 ## Share of a status color mixed into its surface under the pointer and while pressed.
-const STATUS_HOVER := 0.16
-const STATUS_PRESSED := 0.3
+## Small enough that `danger_content` stays at WCAG AA where a theme inks it in `danger`.
+const STATUS_HOVER := 0.1
+const STATUS_PRESSED := 0.16
 
 var _tokens: Theme
 var _theme := Theme.new()
@@ -401,6 +402,7 @@ func _kit_text() -> void:
 	_label(&"RookframeHeading", &"heading", &"content_heading")
 	_label(&"RookframeIdentity", &"heading", &"content_heading")
 	_label(&"RookframeBody", &"body", &"content")
+	_label(&"RookframeBodyMuted", &"body", &"content_muted")
 	_label(&"RookframeLabel", &"label", &"content")
 	_label(&"RookframeValue", &"value", &"content")
 	_label(&"RookframeMeta", &"meta", &"content_muted")

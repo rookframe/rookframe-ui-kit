@@ -262,7 +262,7 @@ border_width_right = 1
 border_width_bottom = 1
 border_color = Color(0.356863, 0.384314, 0.396078, 1)
 metadata/tokens = {
-"bg_color": &"surface_hover",
+"bg_color": &"ledger_hover",
 "border_color": &"border"
 }
 
@@ -309,7 +309,7 @@ border_width_right = 1
 border_width_bottom = 1
 border_color = Color(0.356863, 0.384314, 0.396078, 1)
 metadata/tokens = {
-"bg_color": &"surface_hover",
+"bg_color": &"ledger_hover",
 "border_color": &"border"
 }
 
@@ -650,7 +650,7 @@ border_width_right = 1
 border_width_bottom = 1
 border_color = Color(0.356863, 0.384314, 0.396078, 1)
 metadata/tokens = {
-"bg_color": &"surface_hover",
+"bg_color": &"ledger_hover",
 "border_color": &"border"
 }
 
@@ -666,7 +666,7 @@ border_width_right = 1
 border_width_bottom = 1
 border_color = Color(0.356863, 0.384314, 0.396078, 1)
 metadata/tokens = {
-"bg_color": &"surface_pressed",
+"bg_color": &"ledger_pressed",
 "border_color": &"border"
 }
 
@@ -720,7 +720,7 @@ border_width_right = 1
 border_width_bottom = 1
 border_color = Color(1, 0.505882, 0.478431, 1)
 metadata/tokens = {
-"bg_color": &"surface_hover",
+"bg_color": &"ledger_hover",
 "border_color": &"danger"
 }
 
@@ -746,7 +746,7 @@ bg_color = Color(0.203922, 0.239216, 0.254902, 1)
 border_width_bottom = 1
 border_color = Color(0.356863, 0.384314, 0.396078, 1)
 metadata/tokens = {
-"bg_color": &"surface_hover",
+"bg_color": &"ledger_hover",
 "border_color": &"border"
 }
 
@@ -897,7 +897,7 @@ bg_color = Color(0.203922, 0.239216, 0.254902, 1)
 border_width_bottom = 1
 border_color = Color(0.356863, 0.384314, 0.396078, 1)
 metadata/tokens = {
-"bg_color": &"surface_hover",
+"bg_color": &"ledger_hover",
 "border_color": &"border"
 }
 
@@ -929,7 +929,7 @@ border_width_right = 1
 border_width_bottom = 1
 border_color = Color(0.807843, 0.8, 0.701961, 1)
 metadata/tokens = {
-"bg_color": &"accent_subtle",
+"bg_color": &"ledger_selected",
 "border_color": &"border_strong"
 }
 
@@ -1193,7 +1193,7 @@ corner_radius_top_right = 31
 corner_radius_bottom_right = 31
 corner_radius_bottom_left = 31
 metadata/tokens = {
-"bg_color": &"surface_hover",
+"bg_color": &"ledger_hover",
 "border_color": &"border"
 }
 
@@ -1256,7 +1256,7 @@ border_width_right = 1
 border_width_bottom = 1
 border_color = Color(0.356863, 0.384314, 0.396078, 1)
 metadata/tokens = {
-"bg_color": &"surface_hover",
+"bg_color": &"ledger_hover",
 "border_color": &"border"
 }
 
@@ -1313,7 +1313,7 @@ border_width_right = 1
 border_width_bottom = 1
 border_color = Color(0.356863, 0.384314, 0.396078, 1)
 metadata/tokens = {
-"bg_color": &"surface_hover",
+"bg_color": &"ledger_hover",
 "border_color": &"border"
 }
 
@@ -1453,7 +1453,7 @@ content_margin_right = 0.0
 content_margin_top = 0.0
 content_margin_bottom = 0.0
 metadata/tokens = {
-"bg_color": &"accent_subtle",
+"bg_color": &"ledger_selected",
 "border_color": &"border_strong"
 }
 
@@ -1704,7 +1704,7 @@ content_margin_right = 4.0
 content_margin_top = 2.0
 content_margin_bottom = 2.0
 metadata/tokens = {
-"bg_color": &"surface_hover",
+"bg_color": &"ledger_hover",
 "border_color": &"border_strong"
 }
 
@@ -1765,7 +1765,7 @@ content_margin_top = 0.0
 border_width_bottom = 1
 content_margin_bottom = 0.0
 metadata/tokens = {
-"bg_color": &"surface_hover"
+"bg_color": &"ledger_hover"
 }
 
 [sub_resource type="StyleBoxFlat" id="silk_SilkPrimaryFrame"]

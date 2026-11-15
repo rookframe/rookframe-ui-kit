@@ -17,12 +17,13 @@ const COLORS := {
 	# Canvas
 	&"canvas": Color("#151719"),
 	&"scrim": Color(0.0, 0.0, 0.0, 0.667),
-	# Surface: Silkbound marks elevation with edges, so hover, pressed and raised share one fill.
+	# Surface: hover lifts above raised; pressed sinks between surface and raised.
+	# Authored controls mark these states with edges over the `ledger_*` primitives.
 	&"surface": Color("#23282b"),
 	&"surface_raised": Color("#343d41"),
 	&"surface_sunken": Color("#151719"),
-	&"surface_hover": Color("#343d41"),
-	&"surface_pressed": Color("#343d41"),
+	&"surface_hover": Color("#3c464b"),
+	&"surface_pressed": Color("#2c3337"),
 	# Content
 	&"content": Color("#e7e7dd"),
 	&"content_muted": Color("#aebabe"),
@@ -33,12 +34,13 @@ const COLORS := {
 	&"border_strong": Color("#ceccb3"),
 	&"divider": Color("#3e4346"),
 	&"focus_ring": Color("#e7e7dd"),
-	# Accent: neutral paper fills with ink foregrounds.
+	# Accent: neutral paper fills with ink foregrounds; the subtle fill is
+	# `surface` with 15% paper.
 	&"accent": Color("#ceccb3"),
 	&"accent_hover": Color("#e7e7dd"),
 	&"accent_pressed": Color("#b6b49e"),
 	&"accent_content": Color("#151719"),
-	&"accent_subtle": Color("#343d41"),
+	&"accent_subtle": Color("#3d413f"),
 	# Status: every tone sits on the ordinary surface and carries its color in the foreground.
 	&"info": Color("#d0be8e"),
 	&"info_surface": Color("#23282b"),
@@ -68,6 +70,11 @@ const PRIMITIVES := {
 	&"pictogram": Color("#d0be8e"),
 	&"section_count": Color("#d9ae94"),
 	&"ribbon": Color("#bd5b68"),
+	# The one raised fill authored controls keep under the pointer, while
+	# pressed and when selected; their edges tell the states apart.
+	&"ledger_hover": Color("#343d41"),
+	&"ledger_pressed": Color("#343d41"),
+	&"ledger_selected": Color("#343d41"),
 }
 
 ## Font resource per type role.

@@ -51,7 +51,7 @@ controls. Group resources are local to each instantiated scene.
 | Collapsible | `surfaces/collapsible.tscn` | `FoldableContainer` | Native properties, methods, signals, input and focus behavior remain unchanged. |
 | Card | `surfaces/card.tscn` | `PanelContainer` | Inherits Section: title, description, get_body_slot() and get_action_slot(). No implicit activation. |
 | Label | `data/label.tscn` | `Label` | Native properties, methods, signals, input and focus behavior remain unchanged. |
-| Typography | `data/typography.tscn` | `Label` | Native Label with the RookframeBody semantic role. Set theme_type_variation for other roles; fonts and appearance belong to the consumer. |
+| Typography | `data/typography.tscn` | `Label` | Native Label with the RookframeBody semantic role. Set theme_type_variation for other roles, such as RookframeBodyMuted for secondary running text; fonts and appearance belong to the consumer. |
 | Table | `data/table.tscn` | `Tree` | Native properties, methods, signals, input and focus behavior remain unchanged. |
 | Item | `data/item.tscn` | `PanelContainer` | Display item inherits StructuredRow. Use Choice for selection and ActionRow for activation. |
 | Avatar | `data/avatar.tscn` | `PanelContainer` | Set texture, initials and fallback_texture. Displays the supplied image, then initials, then fallback art. The host supplies the accessible identity. |

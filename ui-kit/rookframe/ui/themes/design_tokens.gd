@@ -21,15 +21,15 @@ const COLORS := {
 	# Canvas
 	&"canvas": Color("#1e1e1e"),
 	&"scrim": Color(0.0, 0.0, 0.0, 0.6),
-	# Surface
+	# Surface: pressed sinks below raised, so muted text stays readable on every state.
 	&"surface": Color("#2b2b2b"),
 	&"surface_raised": Color("#363636"),
 	&"surface_sunken": Color("#232323"),
-	&"surface_hover": Color("#404040"),
-	&"surface_pressed": Color("#4a4a4a"),
+	&"surface_hover": Color("#3c3c3c"),
+	&"surface_pressed": Color("#303030"),
 	# Content
 	&"content": Color("#e0e0e0"),
-	&"content_muted": Color("#a0a0a0"),
+	&"content_muted": Color("#a8a8a8"),
 	&"content_disabled": Color("#6b6b6b"),
 	&"content_heading": Color("#f2f2f2"),
 	# Border
@@ -53,7 +53,7 @@ const COLORS := {
 	&"warning": Color("#deb256"),
 	&"warning_surface": Color("#3a301e"),
 	&"warning_content": Color("#f5e3bb"),
-	&"danger": Color("#e06c6c"),
+	&"danger": Color("#e47474"),
 	&"danger_surface": Color("#3e2323"),
 	&"danger_content": Color("#f7d0d0"),
 	# Tabletop
@@ -130,7 +130,8 @@ const CONSTANTS := {
 }
 
 ## Foreground and background color pairs that must meet `AA_MINIMUM`.
-## `content_disabled` is exempt, as WCAG exempts inactive controls.
+## `content_disabled` is exempt, as WCAG exempts inactive controls. Text sits
+## on the interactive fills too: a row under the pointer, pressed or selected.
 const AA_PAIRS: Array[Array] = [
 	[&"content", &"surface"],
 	[&"content", &"surface_raised"],
@@ -141,6 +142,12 @@ const AA_PAIRS: Array[Array] = [
 	[&"content_heading", &"surface"],
 	[&"content_heading", &"surface_raised"],
 	[&"content_heading", &"surface_sunken"],
+	[&"content", &"surface_hover"],
+	[&"content", &"surface_pressed"],
+	[&"content", &"accent_subtle"],
+	[&"content_muted", &"surface_hover"],
+	[&"content_muted", &"surface_pressed"],
+	[&"content_muted", &"accent_subtle"],
 	[&"accent_content", &"accent"],
 	[&"info_content", &"info_surface"],
 	[&"success_content", &"success_surface"],

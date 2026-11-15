@@ -28,7 +28,7 @@ func _style_action(control, action: Button) -> void:
 		Appearance.write(frame, ^"content_margin_right", frame.content_margin_left)
 		Appearance.write(frame, ^"content_margin_top", 8 if action.icon != null else 6)
 		Appearance.write(frame, ^"content_margin_bottom", frame.content_margin_top)
-		Appearance.write(frame, ^"bg_color", Tokens.color(&"accent") if action.button_pressed else Tokens.color(&"surface_hover") if state in ["hover", "pressed", "hover_pressed"] else Tokens.color(&"surface"))
+		Appearance.write(frame, ^"bg_color", Tokens.color(&"accent") if action.button_pressed else Tokens.color(&"ledger_hover") if state in ["hover", "pressed", "hover_pressed"] else Tokens.color(&"surface"))
 		Appearance.write(frame, ^"border_color", Tokens.color(&"accent") if action.button_pressed else Tokens.color(&"border"))
 		Appearance.override_item(action, "styles", state, frame)
 

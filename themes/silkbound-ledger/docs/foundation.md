@@ -59,9 +59,14 @@ rules. New compositions use semantic variations, not these old frame textures.
 
 `theme/silkbound_tokens.gd` is the single source of this theme's values for the
 [semantic tokens](../../../ui-kit/docs/world-theme-styling.md#semantic-tokens)
-(`RookframeTokens`), plus three theme-private colors without a semantic role:
-pictogram brass, section-count copper and ribbon. `theme/silkbound_tokens.tres`
-instances it, and the canonical Theme lists it first in `supplemental_themes`.
+(`RookframeTokens`), plus theme-private colors without a semantic role:
+pictogram brass, section-count copper, ribbon, and the `ledger_hover`,
+`ledger_pressed` and `ledger_selected` fill. Authored controls keep that one
+raised fill under the pointer, while pressed and when selected, and tell the
+states apart by their edges; the semantic `surface_hover`, `surface_pressed` and
+`accent_subtle` values differ, for the base layer and Package token reads.
+`theme/silkbound_tokens.tres` instances it, and the canonical Theme lists it
+first in `supplemental_themes`.
 
 A `.tres` item cannot refer to another item or to a script constant, so every
 authored value that plays a token's role names that token in `metadata/tokens`

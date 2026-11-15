@@ -22,7 +22,7 @@ border_width_right = 0
 border_width_bottom = 0
 border_color = Color(0.905882, 0.905882, 0.866667, 1.0)
 metadata/tokens = {
-"bg_color": &"surface_pressed"
+"bg_color": &"ledger_pressed"
 }
 
 [sub_resource type="StyleBoxFlat" id="bcb66630cf_ChoiceHover"]
@@ -33,7 +33,7 @@ border_width_right = 1
 border_width_bottom = 1
 border_color = Color(0.807843, 0.8, 0.701961, 1)
 metadata/tokens = {
-"bg_color": [&"surface_hover", 0.84],
+"bg_color": [&"ledger_hover", 0.84],
 "border_color": &"border_strong"
 }
 

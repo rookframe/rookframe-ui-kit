@@ -58,7 +58,7 @@ corner_detail = 16
 shadow_color = Color(0.082353, 0.090196, 0.098039, 0.55)
 shadow_size = 3
 metadata/tokens = {
-"bg_color": &"surface_hover",
+"bg_color": &"ledger_hover",
 "shadow_color": [&"shadow", 0.55]
 }
 
@@ -188,7 +188,7 @@ corner_detail = 20
 shadow_color = Color(0.082353, 0.090196, 0.098039, 0.5)
 shadow_size = 3
 metadata/tokens = {
-"bg_color": &"surface_hover",
+"bg_color": &"ledger_hover",
 "shadow_color": [&"shadow", 0.5]
 }
 

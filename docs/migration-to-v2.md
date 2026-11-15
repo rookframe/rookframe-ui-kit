@@ -243,6 +243,9 @@ To open this page, run `godot --path showcase -- --component=design_tokens` from
 
    For example, set `theme_type_variation = &"RookframeMeta"` on a Label.
    Set `theme_type_variation = &"RookframeRaisedSurface"` on a PanelContainer.
+   For secondary running text, set `theme_type_variation = &"RookframeBodyMuted"` on a Label.
+   This variation has the font, size and line spacing of `RookframeBody` and the `content_muted` color.
+   Do not put a `theme_override_colors/font_color` on a `RookframeBody` Label to make it muted.
    This step does not need code.
 
 3. If you must draw a part yourself, read the token in code.

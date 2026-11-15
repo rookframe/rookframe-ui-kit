@@ -28,7 +28,7 @@ border_width_right = 0
 border_width_bottom = 0
 border_color = Color(0.807843, 0.8, 0.701961, 1)
 metadata/tokens = {
-"bg_color": &"accent_subtle",
+"bg_color": &"ledger_selected",
 "border_color": &"border_strong"
 }
 

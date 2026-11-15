@@ -19,11 +19,11 @@ const COLORS := {
 	&"surface": Color("1b211e"),
 	&"surface_raised": Color("252d27"),
 	&"surface_sunken": Color("171c18"),
-	&"surface_hover": Color("394337"),
+	&"surface_hover": Color("373f35"),
 	&"surface_pressed": Color("1c241e"),
 	# Content: menu body, metadata and title ink; disabled engraved Button ink.
 	&"content": Color(0.85, 0.81, 0.72, 1),
-	&"content_muted": Color(0.69, 0.65, 0.555, 1),
+	&"content_muted": Color(0.7, 0.66, 0.565, 1),
 	&"content_disabled": Color("847456"),
 	&"content_heading": Color(0.95, 0.905, 0.8, 1),
 	# Border: Settings edge and rule; a selected World row; brass keyboard focus.
@@ -37,7 +37,7 @@ const COLORS := {
 	&"accent_hover": Color("f0d091"),
 	&"accent_pressed": Color("a88854"),
 	&"accent_content": Color("201508"),
-	&"accent_subtle": Color("4c452b"),
+	&"accent_subtle": Color("443d27"),
 	# Status: iron, the vital greens, amber and oxblood. Each surface mixes 20%
 	# of its color into `surface`; each content is the matching light ink.
 	&"info": Color("8d958a"),
