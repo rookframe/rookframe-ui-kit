@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- Declare the semantic token contract: Theme type `RookframeTokens` with color,
+  type, space, shape, elevation, size and motion items, listed by item type in
+  `themes/design_tokens.gd`. The core ships the neutral set
+  `themes/neutral_tokens.tres`; every component theme entry merges it beneath
+  its own sources, so a token a theme omits resolves to its neutral default.
+  `ui-kit/tests/design_tokens.gd` checks completeness and WCAG AA pairs.
+
 - Add the in-place radial choice to the unthemed core: `navigation/arc_track.tscn`
   places Controls along a scrollable arc over a drawn rail, and
   `navigation/arc_picker.tscn` composes category and previewed item tracks with a

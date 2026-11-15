@@ -52,7 +52,15 @@ class PackageTests(unittest.TestCase):
         core = sources(['ui-kit'])
         self.assertFalse(any('/assets/' in p or '/theme/' in p for p in core))
         self.assertFalse(any(p.endswith(('.ttf', '.otf', '.gdshader')) for p in core))
+        # The semantic token contract declares neutral values for one Theme type
+        # that no native control reads; component themes merge it beneath theirs.
+        tokens = {'rookframe/ui/themes/design_tokens.gd', 'rookframe/ui/themes/neutral_tokens.tres'}
+        neutral = core['rookframe/ui/themes/neutral_tokens.tres'].read_text()
+        self.assertIn('path="res://rookframe/ui/themes/design_tokens.gd"', neutral)
+        self.assertNotRegex(neutral, r'(?m)^\w+/(?:colors|constants|fonts|font_sizes|styles|icons)/')
         for relative, path in core.items():
+            if relative in tokens:
+                continue
             if path.suffix == '.tres':
                 # Native grouping resources carry behavior, not appearance.
                 self.assertRegex(path.read_text(), r'^\[gd_resource type="(?:ButtonGroup|FoldableGroup)"', relative)

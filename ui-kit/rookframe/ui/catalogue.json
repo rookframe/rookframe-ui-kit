@@ -1877,6 +1877,15 @@
     }
   },
   "appearance": "Native Godot defaults; no Theme or local skin assigned.",
+  "designTokens": {
+    "themeType": "RookframeTokens",
+    "contract": "res://rookframe/ui/themes/design_tokens.gd",
+    "contractUid": "uid://pfhlsbnva3cb",
+    "neutral": "res://rookframe/ui/themes/neutral_tokens.tres",
+    "itemTypes": "COLORS (color), CONSTANTS (constant), FONTS (font), FONT_SIZES (font_size); names(data_type) returns the names of one item type.",
+    "fallback": "Component theme entries merge the neutral set beneath their sources; a token a theme omits resolves to its neutral value.",
+    "documentation": "docs/world-theme-styling.md#semantic-tokens"
+  },
   "behaviorResources": [
     {
       "name": "RookframeTransferContext",

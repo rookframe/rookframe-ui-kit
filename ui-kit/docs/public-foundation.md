@@ -1,8 +1,9 @@
 # Public foundation reference
 
 Normal resources under `res://rookframe/ui/` are public; `_internal/` is unsupported.
-The core supplies components, native interaction recipes, a Theme compiler and
-semantic icons. It supplies no Theme resources, material assets, fonts or palette.
+The core supplies components, native interaction recipes, a Theme compiler,
+semantic icons and the semantic token contract with its neutral values. It
+supplies no appearance Theme, material assets or fonts.
 
 ## Resource identities
 
@@ -12,6 +13,8 @@ semantic icons. It supplies no Theme resources, material assets, fonts or palett
 | `components/**/*.tscn` | Path and scene UID | Reusable native composition |
 | `components/**/*.gd` | Path and script UID | Component behavior |
 | `themes/component_theme.gd` | Path and script UID | Native Theme with optional component presentation |
+| `themes/design_tokens.gd` | Path and script UID | Semantic token names by item type, neutral values and AA pairs |
+| `themes/neutral_tokens.tres` | Path | Neutral `RookframeTokens` Theme |
 | `menu/menu_theme.gd` | Path and script UID | Compile caller-supplied Theme mappings |
 | `icons/<semantic-name>.svg` | Path and import UID | Interface pictogram |
 | `icons/manifest.json` | Path | Semantic registry and upstream provenance |

@@ -1,7 +1,9 @@
 # Rookframe UI Kit
 
 Unthemed Godot controls, composition and behavior. A core-only install uses
-Godot defaults and includes no custom fonts, material assets or Theme resources.
+Godot defaults and includes no custom fonts or material assets. Its only Theme
+resource is the neutral [semantic token](docs/world-theme-styling.md#semantic-tokens)
+set, which styles no native control.
 
 ## Agent entry points
 
@@ -45,6 +47,16 @@ godot --headless --path ui-kit --script res://tests/button.gd
 godot --headless --path ui-kit --script res://tests/expansion_contracts.gd
 godot --headless --path ui-kit --script res://tests/hud_components.gd
 godot --headless --path ui-kit --script res://tests/arc_picker.gd
+godot --headless --path ui-kit --script res://tests/design_tokens.gd
+```
+
+`design_tokens.gd` also audits every installed theme entry. Run it in the
+prepared showcase to cover the optional themes:
+
+```sh
+python3 tools/workspace.py prepare
+godot --headless --editor --path showcase --import --quit
+godot --headless --path showcase --script "$PWD/ui-kit/tests/design_tokens.gd"
 ```
 
 For cross-package suites, install the pinned development runner:

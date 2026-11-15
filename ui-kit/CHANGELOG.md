@@ -2,6 +2,7 @@
 
 ## v2 — unreleased
 
+- Add the `RookframeTokens` semantic token contract and its neutral set.
 - Give core collection, miniature picker and tooltip resources neutral names.
 - Remove obsolete appearance flags from common components.
 - Use neutral semantic variation names in core scenes.

@@ -1,0 +1,7 @@
+[gd_resource type="Theme" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://rookframe/ui/themes/design_tokens.gd" id="contract"]
+
+; Neutral RookframeTokens set. Values are derived from the contract, never authored here.
+[resource]
+script = ExtResource("contract")

@@ -37,6 +37,43 @@ Core-only installation includes the shared mechanism but no concrete appearance.
 Existing package Theme paths, inherited scenes, and their UIDs remain available
 for compatibility. New consumers need only the canonical resource and core scenes.
 
+## Semantic tokens
+
+Semantic tokens are named Theme items under the type `RookframeTokens`: colors
+as `color` items, spacing, shape, elevation, size and motion as `constant`
+items, and each type role as a `font` and a `font_size` item of the same name
+plus a `line_spacing_<role>` constant. The UI Kit names them; each theme supplies
+their values. `themes/design_tokens.gd` lists every name by item type
+(`COLORS`, `CONSTANTS`, `FONTS`, `FONT_SIZES`, or `names(data_type)`) with its
+neutral value, and the color pairs that must meet WCAG AA (`AA_PAIRS`).
+
+Read a token on the Control that draws it and refresh on theme changes:
+
+```gdscript
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_THEME_CHANGED:
+		_ring_color = get_theme_color(&"focus_ring", &"RookframeTokens")
+		_gap = get_theme_constant(&"space_2", &"RookframeTokens")
+```
+
+`line_spacing_<role>` is extra space between lines, as in the native Label
+`line_spacing` constant. Motion constants are milliseconds; `motion_ease` holds
+a `Tween.TransitionType`.
+
+A theme that omits a token falls back to the neutral default through stock Theme
+merging and lookup. `themes/neutral_tokens.tres` is the neutral set. Every
+`component_theme.gd` entry merges it before `supplemental_themes` and
+`native_theme`, and later sources replace earlier items, so authored tokens win
+and omitted ones keep their neutral value. A nearer Theme that does not define a
+token hides nothing: Godot continues the lookup through ancestor Themes. Where
+no component theme owns a Control, assign the neutral set as the project Theme
+(`gui/theme/custom`) or merge it into the project Theme; otherwise Godot returns
+its empty defaults for the token type.
+
+A theme package defines every token in its `native_theme` or a supplemental
+Theme. `tests/design_tokens.gd` reports tokens a theme entry does not author
+and AA pairs below 4.5:1.
+
 ## Native mapping compiler
 `menu/menu_theme.gd` compiles caller-supplied mapping and material scripts into
 a native Theme. Optional additional mapping scripts extend its shared usages.

@@ -2,6 +2,9 @@
 extends Theme
 ## Native Theme plus optional presentation for the shared component scenes.
 ## Templates author property overrides only; nodes and behavior are never replaced.
+## The neutral RookframeTokens set lies beneath every source, so a token a theme
+## leaves out resolves to its neutral default.
+const NEUTRAL_TOKENS = preload("neutral_tokens.tres")
 @export var native_theme: Theme:
 	set(value):
 		native_theme = value
@@ -13,9 +16,13 @@ extends Theme
 @export var presentations: Dictionary[String, PackedScene] = {}
 @export var presentation_hooks: Dictionary[String, Script] = {}
 
+func _init() -> void:
+	_rebuild()
+
 func _rebuild() -> void:
 	clear()
-	for source in supplemental_themes + [native_theme]:
+	# Later sources replace earlier items, so authored tokens override neutral ones.
+	for source in [NEUTRAL_TOKENS] + supplemental_themes + [native_theme]:
 		if source == null:
 			continue
 		merge_with(source)
