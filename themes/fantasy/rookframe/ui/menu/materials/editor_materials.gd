@@ -59,4 +59,23 @@ static func materials(menu: Dictionary) -> Dictionary:
 			surface.content_margin_top = padding
 			surface.content_margin_bottom = padding
 			values["editor.surface." + kind + suffix] = surface
+	values["expansion.surface.raised"] = _raised(menu)
 	return values
+
+
+## Cards above a panel: the stone panel's frame and inner edge around a flat
+## `surface_raised` fill, lifted by the first elevation.
+static func _raised(menu: Dictionary) -> StyleBox:
+	var surface := Layers.new()
+	var fill: StyleBoxFlat = menu["stone.tray"].duplicate()
+	fill.bg_color = menu["token.color.surface_raised"]
+	fill.border_width_bottom = 3
+	fill.shadow_size = menu["token.constant.elevation_1"]
+	fill.shadow_offset = Vector2(0, 3)
+	surface.layers.append(fill)
+	surface.layers.append(menu["stone.inner_edge"])
+	surface.content_margin_left = 18
+	surface.content_margin_right = 18
+	surface.content_margin_top = 18
+	surface.content_margin_bottom = 18
+	return surface

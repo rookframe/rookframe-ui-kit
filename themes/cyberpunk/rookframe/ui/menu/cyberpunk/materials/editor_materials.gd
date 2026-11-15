@@ -42,4 +42,15 @@ static func materials(menu: Dictionary) -> Dictionary:
 			surface.content_margin_top = padding
 			surface.content_margin_bottom = padding
 			values["editor.surface." + kind + suffix] = surface
+	# Cards above a sheet: the glass record's chamfered frame, filled with
+	# `surface_raised` and edged with `border`.
+	var raised: StyleBoxFlat = menu["glass.record"].duplicate()
+	raised.bg_color = menu["token.colors.surface_raised"]
+	raised.border_color = menu["token.colors.border"]
+	raised.shadow_size = menu["token.constants.elevation_2"]
+	raised.content_margin_left = 18
+	raised.content_margin_right = 18
+	raised.content_margin_top = 18
+	raised.content_margin_bottom = 18
+	values["expansion.surface.raised"] = raised
 	return values

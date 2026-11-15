@@ -15,7 +15,7 @@ const ELEMENTS = {
 	"RookframeSuccess": {"base_type": &"Label", "fonts/font": "token.font.meta", "font_sizes/font_size": "token.font_size.meta", "colors/font_color": "token.color.success"},
 	"RookframeError": {"base_type": &"Label", "fonts/font": "token.font.meta", "font_sizes/font_size": "token.font_size.meta", "colors/font_color": "token.color.danger"},
 	"RookframeBadgeText": {"base_type": &"Label", "fonts/font": "token.font.meta", "font_sizes/font_size": "token.font_size.meta", "colors/font_color": "token.color.content_muted"},
-	"RookframeRaisedSurface": {"base_type": &"PanelContainer", "styles/panel": "editor.surface.inset"},
+	"RookframeRaisedSurface": {"base_type": &"PanelContainer", "styles/panel": "expansion.surface.raised"},
 	"RookframeBadge": {"base_type": &"PanelContainer", "styles/panel": "editor.surface.inset"},
 	"RookframeInlineNoticeInfo": {"base_type": &"PanelContainer", "styles/panel": "editor.surface.inset"},
 	"RookframeInlineNoticePending": {"base_type": &"PanelContainer", "styles/panel": "editor.surface.inset"},
