@@ -58,6 +58,10 @@ class PackageTests(unittest.TestCase):
         neutral = core['rookframe/ui/themes/neutral_tokens.tres'].read_text()
         self.assertIn('path="res://rookframe/ui/themes/design_tokens.gd"', neutral)
         self.assertNotRegex(neutral, r'(?m)^\w+/(?:colors|constants|fonts|font_sizes|styles|icons)/')
+        # The base layer builds stock-control and variation items from those
+        # tokens at run time: it may name no color and load no font or material.
+        base = core['rookframe/ui/themes/token_base.gd'].read_text()
+        self.assertNotRegex(base, r'Color\(\s*[\d."#]|Color\.[A-Z]|#[0-9a-fA-F]{3,8}\b|load\("(?!design_tokens\.gd")|\.(?:ttf|otf|tres|png|svg)\b')
         for relative, path in core.items():
             if relative in tokens:
                 continue
