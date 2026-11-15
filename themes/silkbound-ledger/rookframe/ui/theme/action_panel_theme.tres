@@ -264,7 +264,8 @@ content_margin_bottom = 9.0
 [resource]
 default_font = ExtResource("font")
 default_font_size = 18
-Label/colors/font_color = Color(0.905882, 0.905882, 0.866667, 1)
+; Label items stay with the owning Theme: a base Label item here would
+; replace the Rookframe* label variations of slot content.
 VBoxContainer/constants/separation = 0
 HBoxContainer/constants/separation = 12
 RookframeActionHeader/base_type = &"PanelContainer"
@@ -442,7 +443,6 @@ components_button_primary/colors/icon_hover_pressed_color = Color(0.082353, 0.09
 components_button_primary/colors/icon_focus_color = Color(0.082353, 0.090196, 0.098039, 1)
 components_button_primary/colors/icon_disabled_color = Color(0.769, 0.773, 0.722, 0.48)
 metadata/tokens = {
-"Label/colors/font_color": &"content",
 "RookframeActionIcon/colors/icon_normal_color": &"pictogram",
 "LineEdit/colors/font_color": &"content",
 "LineEdit/colors/font_pressed_color": &"content",

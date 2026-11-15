@@ -40,6 +40,7 @@ func _ready() -> void:
 	for path in ["Header", "Header/Leaf", "Sections", "Footer", "Footer/Leaf"]:
 		get_node(path).item_rect_changed.connect(_refresh_decoration)
 	get_sections_slot().child_order_changed.connect(_sections_changed)
+	_bridge_emblem_theme()
 	_refresh_layout()
 	_sections_changed()
 
@@ -86,4 +87,17 @@ func _presentation_will_change() -> void:
 	get_node("DropMotion").finish()
 
 func _presentation_changed() -> void:
+	_bridge_emblem_theme()
 	_refresh_layout()
+
+## Native Theme inheritance stops at the Node2D that carries the emblem, so the
+## owning Theme is carried across it unless a presentation gave the leaf its own.
+func _bridge_emblem_theme() -> void:
+	var emblem: PanelContainer = get_node("Header/Emblem/Leaf")
+	if emblem.theme != null and not (emblem.has_meta(&"_bridged_theme") and emblem.theme == emblem.get_meta(&"_bridged_theme")):
+		return
+	var owning := Appearance.owning_theme(self)
+	emblem.set_meta(&"_bridged_theme", owning)
+	# The leaf's own presentation still resolves from the Theme above it.
+	emblem.set_meta(&"_presentation_theme", owning)
+	emblem.theme = owning
