@@ -23,6 +23,15 @@
   Cyberpunk (`menu/cyberpunk/materials/cyberpunk_tokens.gd`). Their `Rookframe*`
   type variations and role-bearing material values read the token source.
   Fantasy `RookframeTitle` and `RookframeSubtitle` now use the display face.
+- Retire the Silkbound Ledger `RookframeUiTokens` constants (`rookframe/ui/tokens.gd`):
+  only the fixed `RESPONSIVE_*_WIDTH` layout breakpoints remain, at the same path
+  and UID. Read the semantic token instead; `docs/migration-to-v2.md` maps each
+  removed constant. The legacy showcase catalogue was the only reader.
+- Add the showcase page Design tokens (`--component=design_tokens`) in a new
+  Foundations group. It lists every `RookframeTokens` item of the selected theme
+  from `design_tokens.gd` and updates in place on a theme change;
+  `showcase/tests/token_reference.gd` checks and captures it in every theme.
+- Document how Packages use tokens in `docs/migration-to-v2.md`.
 
 - Add the in-place radial choice to the unthemed core: `navigation/arc_track.tscn`
   places Controls along a scrollable arc over a drawn rail, and

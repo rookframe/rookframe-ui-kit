@@ -46,6 +46,9 @@ plus a `line_spacing_<role>` constant. The UI Kit names them; each theme supplie
 their values. `themes/design_tokens.gd` lists every name by item type
 (`COLORS`, `CONSTANTS`, `FONTS`, `FONT_SIZES`, or `names(data_type)`) with its
 neutral value, and the color pairs that must meet WCAG AA (`AA_PAIRS`).
+The showcase page Design tokens (`--component=design_tokens`) shows every token
+of the selected theme. See the [migration steps](../../docs/migration-to-v2.md#semantic-tokens)
+for the order of preference in a Package: component, type variation, token read.
 
 Read a token on the Control that draws it and refresh on theme changes:
 

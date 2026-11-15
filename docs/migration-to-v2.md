@@ -216,3 +216,138 @@ There are no aliases for these resources.
 20. Check selection, disabled states, keyboard focus, and popup behavior on the changed screens.
 
 21. Check the changed screens at 1920 × 1080, 1024 × 768, and 844 × 390.
+
+## Semantic tokens
+
+These instructions use the procedural rules in [ASD-STE100, Issue 9](https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf).
+The token names, Theme item names and code identifiers below are technical names.
+
+A semantic token is a named value of a theme.
+The UI Kit gives the name of each token.
+Each theme gives the value of each token.
+All tokens are Theme items of the Theme type `RookframeTokens`.
+Colors are `color` items.
+Space, shape, elevation, size and motion values are `constant` items.
+Each type role is a `font` item and a `font_size` item with the same name.
+Each type role also has a `line_spacing_<role>` constant.
+`res://rookframe/ui/themes/design_tokens.gd` contains the names of all tokens and their neutral values.
+The showcase page "Design tokens" shows each token in the selected theme.
+To open this page, run `godot --path showcase -- --component=design_tokens` from the repository root.
+
+1. Use a UI Kit component if a component does the necessary function.
+
+   Use the component as it is.
+   Do not override its Theme items.
+
+2. If no component does the function, use a stock Godot control with a UI Kit type variation.
+
+   For example, set `theme_type_variation = &"RookframeMeta"` on a Label.
+   Set `theme_type_variation = &"RookframeRaisedSurface"` on a PanelContainer.
+   This step does not need code.
+
+3. If you must draw a part yourself, read the token in code.
+
+   Use this step for custom drawing, for a StyleBox that you make at runtime, and for a shader value.
+   Read the token on the Control that draws the part.
+
+   ```gdscript
+   var line := get_theme_color(&"divider", &"RookframeTokens")
+   var gap := get_theme_constant(&"space_2", &"RookframeTokens")
+   var font := get_theme_font(&"body", &"RookframeTokens")
+   var font_size := get_theme_font_size(&"body", &"RookframeTokens")
+   ```
+
+4. Read the tokens again when the Control gets `NOTIFICATION_THEME_CHANGED`.
+
+   ```gdscript
+   func _notification(what: int) -> void:
+   	if what == NOTIFICATION_THEME_CHANGED:
+   		_line = get_theme_color(&"divider", &"RookframeTokens")
+   		queue_redraw()
+   ```
+
+   The host can change the World theme while the World runs.
+   This step shows the new theme immediately.
+   The UI Kit sets each motion duration to 0 when reduced motion is on.
+   Do not read the reduced motion setting of the host.
+
+5. Do not use literal values for appearance.
+
+   Do not write a literal `Color(...)`.
+   Do not put a literal pixel size, a literal color or a font resource in a `theme_override_*` property.
+   Do not copy a UI Kit style into your Package.
+
+6. If your Package needs its own type variation, get each value of the variation from a token.
+
+   Make the variation in a Theme in code.
+   Read each value from a `RookframeTokens` item.
+   Make the variation again when the owning Control gets `NOTIFICATION_THEME_CHANGED`.
+   Do not use a value that does not come from a token.
+   Do not assign this Theme to a Control that contains UI Kit components.
+   A nearer Theme stops the theme presentation of the UI Kit components below it.
+
+7. Replace the removed `RookframeUiTokens` constants.
+
+   The Silkbound Ledger script `res://rookframe/ui/tokens.gd` keeps its path, its UID and the class name `RookframeUiTokens`.
+   It now contains only the fixed layout breakpoints, because they do not change with the theme.
+   All other constants are removed.
+   Replace each removed constant with the item in this table.
+   Read a token as step 3 shows.
+
+   | Removed constant | Replacement |
+   | --- | --- |
+   | `COLOR_CANVAS` | `canvas` |
+   | `COLOR_SURFACE` | `surface` |
+   | `COLOR_SURFACE_RAISED` | `surface_raised` |
+   | `COLOR_SURFACE_SUNKEN` | `surface_sunken` |
+   | `COLOR_SURFACE_HOVER` | `surface_hover` |
+   | `COLOR_SURFACE_ACTIVE`, `COLOR_ACCENT` | `accent` |
+   | `COLOR_ACCENT_BRIGHT` | `accent_hover` |
+   | `COLOR_INK` | `accent_content` |
+   | `COLOR_EDGE` | `border` |
+   | `COLOR_RULE` | `divider` |
+   | `COLOR_CONTENT` | `content` |
+   | `COLOR_CONTENT_MUTED` | `content_muted` |
+   | `COLOR_DISABLED` | `content_disabled` |
+   | `COLOR_HIERARCHY` | `content_heading` |
+   | `COLOR_SUCCESS` | `success` |
+   | `COLOR_DANGER` | `danger` |
+   | `COLOR_ORNAMENT`, `COLOR_LEDGER_RULE` | `ornament` |
+   | `SPACE_1` to `SPACE_8` | `space_1` to `space_8` |
+   | `MINIMUM_TARGET_SIZE` | `target_minimum` |
+   | `PRIMARY_ACTION_HEIGHT` | `action_height` |
+   | `ICON_SIZE` | `icon_medium` |
+   | `FOCUS_WIDTH` | `focus_width` |
+   | `BORDER_WIDTH` | `border_width` |
+   | `RADIUS_SMALL`, `RADIUS_MEDIUM` | `radius_small`, `radius_medium` |
+   | `TYPE_TITLE`, `TYPE_SUBTITLE`, `TYPE_HEADING` | `font_size` of `display`, `title`, `heading` |
+   | `TYPE_BODY`, `TYPE_LABEL`, `TYPE_VALUE` | `font_size` of `body`, `label`, `value` |
+   | `TYPE_INPUT`, `TYPE_ACTION` | `font_size` of `label` |
+   | `TYPE_META`, `TYPE_STATUS`, `TYPE_BADGE` | `font_size` of `meta` |
+   | `TYPE_IDENTITY` | The `RookframeIdentity` type variation |
+   | `LINE_<role>` | `line_spacing_<role>` of the matching type role |
+   | `COLOR_RIBBON`, `COLOR_PICTOGRAM`, `COLOR_SECTION_COUNT` | No replacement. These colors belong to the theme. |
+   | `FRAME_CUT`, `LEDGER_RULE_WIDTH` | No replacement. The theme StyleBoxes draw frames and rules. |
+   | `TEXTAREA_MINIMUM_HEIGHT`, `ADAPTIVE_GRID_MINIMUM_CELL_WIDTH`, `METRIC_MINIMUM_CELL_WIDTH`, `MEDIA_PREVIEW_SIZE`, `INITIAL_DOCK_WIDTH`, `MANAGED_SURFACE_MINIMUM_WIDTH`, `MANAGED_SURFACE_MINIMUM_HEIGHT` | No replacement. Use the UI Kit component that has this size. |
+
+   A `LINE_<role>` constant was a line height.
+   A `line_spacing_<role>` constant is the extra space between lines, as in the Label `line_spacing` constant.
+   The `RESPONSIVE_*_WIDTH` breakpoints do not change.
+
+8. Make sure that each token has a value where your UI shows.
+
+   If a theme does not give a value for a token, the token has its neutral value.
+   The neutral values are in `res://rookframe/ui/themes/neutral_tokens.tres`.
+   Each UI Kit theme entry merges these values below its own values.
+   If no UI Kit theme entry is on the Control or on a parent, Godot gives empty default values.
+   In this condition, set `neutral_tokens.tres` as the project Theme (`gui/theme/custom`).
+   You can also merge it into the project Theme.
+
+9. Prepare the local dependencies and import the consumer project.
+
+   ```sh
+   python3 tools/workspace.py prepare
+   godot --headless --editor --path /path/to/godot-project --import --quit
+   ```
+
+10. Check the changed screens in each theme at 1920 × 1080, 1024 × 768, and 844 × 390.
