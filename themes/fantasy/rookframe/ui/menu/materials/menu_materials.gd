@@ -2,26 +2,16 @@
 extends RefCounted
 ## The sole authored source of concrete menu appearance values and visual assets.
 ## Each surface, border, depth, ink and padding treatment is independently addressable.
+## Values with a semantic role come from the Fantasy tokens; `token.*` exposes all of them.
+const Tokens = preload("res://rookframe/ui/themes/fantasy/tokens.gd")
 static var VALUES: Dictionary = {
-	"expansion.Title.size": 40,
-	"expansion.Subtitle.size": 30,
-	"expansion.Value.size": 30,
-	"expansion.Heading.size": 24,
 	"expansion.Identity.size": 22,
-	"expansion.Body.size": 21,
-	"expansion.Label.size": 20,
-	"expansion.Meta.size": 18,
-	"expansion.Status.size": 18,
-	"expansion.Pending.size": 18,
-	"expansion.Success.size": 18,
-	"expansion.Error.size": 18,
-	"expansion.BadgeText.size": 18,
 
 	"wood.texture_visible": 1,
 	"wood.icons_visible": 0,
 	"type.ui.medium": preload("res://rookframe/ui/menu/materials/ui_medium.tres"),
-	"type.display.medium": preload("res://rookframe/ui/menu/materials/display_medium.tres"),
-	"type.ui": preload("res://rookframe/ui/assets/fonts/Inter-VariableFont_opsz,wght.ttf"),
+	"type.display.medium": Tokens.FONTS.display,
+	"type.ui": Tokens.FONTS.body,
 	"steel.resting.surface": {"bg_color": Color("343b38"), "corner_radius_top_left": 5, "corner_radius_top_right": 5, "corner_radius_bottom_left": 5, "corner_radius_bottom_right": 5, "expand_margin_top": 0.0, "expand_margin_bottom": -6.0},
 	"steel.resting.border": {"border_width_left": 1, "border_width_top": 1, "border_width_right": 1, "border_width_bottom": 1, "border_color": Color("080b09")},
 	"steel.resting.depth": {"shadow_color": Color("000000cc"), "shadow_size": 5, "shadow_offset": Vector2(0, 3)},
@@ -67,26 +57,26 @@ static var VALUES: Dictionary = {
 	"button.standard.font_hover_color": Color("ddbe80"),
 	"button.standard.font_pressed_color": Color("ddbe80"),
 	"button.standard.font_focus_color": Color("ddbe80"),
-	"button.standard.font_disabled_color": Color("847456"),
+	"button.standard.font_disabled_color": Tokens.COLORS.content_disabled,
 	"button.standard.outline_size": 0,
 	"button.primary.font_color": Color("ddbe80"),
 	"button.primary.font_hover_color": Color("ddbe80"),
 	"button.primary.font_pressed_color": Color("ddbe80"),
-	"button.primary.font_disabled_color": Color("847456"),
+	"button.primary.font_disabled_color": Tokens.COLORS.content_disabled,
 	"button.compact.font_size": 20,
 	"outline.none": StyleBoxEmpty.new(),
 	"brass.focus": preload("res://rookframe/ui/menu/materials/brass_focus.tres"),
 	"title.font_size": 72,
-	"title.font_color": Color(0.95, 0.905, 0.8, 1),
+	"title.font_color": Tokens.COLORS.content_heading,
 	"title.font_shadow_color": Color(0, 0, 0, 0.75),
 	"title.shadow_offset_y": 2,
 	"title.line_spacing": -16,
 	"subtitle.font_size": 36,
 	"subtitle.font_color": Color(0.92, 0.865, 0.74, 1),
 	"body.font_size": 18,
-	"body.font_color": Color(0.85, 0.81, 0.72, 1),
+	"body.font_color": Tokens.COLORS.content,
 	"meta.font_size": 13,
-	"meta.font_color": Color(0.69, 0.65, 0.555, 1),
+	"meta.font_color": Tokens.COLORS.content_muted,
 	"papertitle.font_size": 34,
 	"papertitle.font_color": Color(0.188235, 0.176471, 0.145098, 1),
 	"paperbody.font_size": 16,
@@ -107,11 +97,11 @@ static var VALUES: Dictionary = {
 	"brass.perimeter": preload("res://rookframe/ui/menu/materials/perimeter.tres"),
 	"image.atmosphere": preload("res://rookframe/ui/menu/AI_generated_keepers-table.png"),
 	"image.identity": preload("res://rookframe/ui/menu/icons/AI_generated_chess-rook.svg"),
-	"identity.tint": Color(0.718, 0.608, 0.376, 1),
-	"metal.motion.hover_ms": 70,
+	"identity.tint": Tokens.COLORS.ornament,
+	"metal.motion.hover_ms": Tokens.CONSTANTS.motion_fast,
 	"metal.motion.press_ms": 35,
-	"metal.motion.release_ms": 110,
-	"metal.motion.transition": Tween.TRANS_QUAD,
+	"metal.motion.release_ms": Tokens.CONSTANTS.motion_medium,
+	"metal.motion.transition": Tokens.CONSTANTS.motion_ease,
 	"metal.motion.ease": Tween.EASE_OUT,
 	"steel.grain": preload("textures/AI_generated_blackened_steel.png"),
 	"bronze.grain": preload("textures/AI_generated_aged_bronze.png"),
@@ -222,6 +212,7 @@ static func value(token: String) -> Variant:
 	return VALUES[token]
 
 static func _static_init() -> void:
+	VALUES.merge(Tokens.materials())
 	VALUES.merge(preload("checkbox_materials.gd").materials(VALUES))
 	VALUES.merge(preload("hud_materials.gd").materials(VALUES))
 	VALUES.merge(preload("settings_materials.gd").VALUES)

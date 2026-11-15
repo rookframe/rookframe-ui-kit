@@ -4,6 +4,7 @@ extends RefCounted
 ## and carved depth. Tiles stay on the Button presentation; panels use the casing.
 const Frame = preload("../../themes/fantasy/hud_frame_style.gd")
 const Indicator = preload("../../themes/fantasy/checkbox_icon.gd")
+const Tokens = preload("../../themes/fantasy/tokens.gd")
 const SLOTS = ["normal", "hover", "pressed", "hover_pressed", "disabled"]
 
 static func materials(button: Dictionary) -> Dictionary:
@@ -64,7 +65,7 @@ static func materials(button: Dictionary) -> Dictionary:
 	for profile in ["", ".medium", ".compact"]:
 		var compact: bool = profile == ".compact"
 		var bar := _frame(cap, 10 if compact else 16, Color("a59b89"))
-		bar.shadow_size = 12
+		bar.shadow_size = Tokens.CONSTANTS.elevation_3
 		bar.shadow_offset = Vector2(0, 6)
 		_margins(bar, 10 if compact else 18 if profile == "" else 14, 10 if compact else 13, 12 if compact else 15)
 		values["hud.bar.panel" + profile] = bar
@@ -98,10 +99,10 @@ static func materials(button: Dictionary) -> Dictionary:
 
 	# Vital tracks: a recessed brass groove; levels differ in lightness, edge and glow.
 	values["hud.vital.track"] = _groove(Color("140e09"), Color("6b5330"), 1, 10)
-	values["hud.vital.track.depleted"] = _groove(Color("1c1210"), Color("8a3a2c"), 2, 10)
-	values["hud.vital.steady"] = _fill(Color("a9c46a"), Color("e3f0b4"))
-	values["hud.vital.wounded"] = _fill(Color("c98a34"), Color("f4cf86"))
-	var critical := _fill(Color("9c2a1e"), Color("ffb28f"))
+	values["hud.vital.track.depleted"] = _groove(Color("1c1210"), Tokens.COLORS.vital_depleted, 2, 10)
+	values["hud.vital.steady"] = _fill(Tokens.COLORS.vital_full, Color("e3f0b4"))
+	values["hud.vital.wounded"] = _fill(Tokens.COLORS.vital_wounded, Color("f4cf86"))
+	var critical := _fill(Tokens.COLORS.vital_critical, Color("ffb28f"))
 	critical.border_width_bottom = 1
 	critical.border_width_left = 1
 	critical.border_width_right = 1

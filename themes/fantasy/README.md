@@ -16,6 +16,14 @@ as every other theme. The shared native Theme entry wraps this package's existin
 mapping compiler. Installation does not activate it; hosts own selection and
 persistence. `res://rookframe/ui/menu/MenuTheme.tres` remains a compatibility resource.
 See [the common activation contract](../../ui-kit/docs/world-theme-styling.md).
+
+`res://rookframe/ui/themes/fantasy/tokens.gd` authors every Fantasy value of the
+semantic `RookframeTokens` set. `menu/fantasy_theme.gd` publishes them in the
+native Theme, and the Materials read the same entries for type, text inks,
+accent, focus, surfaces, status, vitals, scrim, shadow and motion: the
+`Rookframe*` type variations, Settings, World list, HUD vitals and carved Button
+inks follow a change made there. Line heights become Godot `line_spacing_<role>`
+from each face's own height. Casing, bevel and tint values stay in Materials.
 The shared `components/actions/button.tscn` renders the original menu's carved
 brass primary, walnut secondary and oxblood/steel destructive caps. Native text
 and icons share their state foreground. The theme owns layered depth, press and

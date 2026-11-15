@@ -2,22 +2,25 @@
 extends RefCounted
 ## Concrete Settings Materials. Stock StyleBoxes keep layout and hit bounds together.
 const Geometry = preload("settings_geometry.gd")
+const Tokens = preload("res://rookframe/ui/themes/fantasy/tokens.gd")
+## Semantic entries come from the Fantasy tokens; the panel lets 4% of the table through.
 const PALETTE = {
 	"secondary": Color("beb6a1"),
-	"surface": Color("1b211ef5"),
-	"edge": Color("756443"),
+	"surface": Color(Tokens.COLORS.surface, 245.0 / 255.0),
+	"edge": Tokens.COLORS.border,
 	"normal": Color("343d36"),
 	"hover": Color("465044"),
 	"pressed": Color("252d27"),
 	"disabled_bg": Color("282e29"),
 	"disabled": Color("a69d87"),
-	"accent": Color("e2c184"),
+	"accent": Tokens.COLORS.accent,
+	"focus": Tokens.COLORS.focus_ring,
 	"primary": Color("a3834e"),
 	"primary_hover": Color("bea16b"),
 	"primary_pressed": Color("81673d"),
 	"primary_ink": Color("14140d"),
-	"danger": Color("ff918c"),
-	"rule": Color("655d49"),
+	"danger": Tokens.COLORS.danger,
+	"rule": Tokens.COLORS.divider,
 }
 static var VALUES: Dictionary = _materials()
 
@@ -25,7 +28,7 @@ static func _box(fill: Color, border: Color, padding: float = 16.0) -> StyleBoxF
 	var box := StyleBoxFlat.new()
 	box.bg_color = fill
 	box.border_color = border
-	box.set_border_width_all(1)
+	box.set_border_width_all(Tokens.CONSTANTS.border_width)
 	box.content_margin_left = padding
 	box.content_margin_right = padding
 	box.content_margin_top = 10.0
@@ -54,8 +57,8 @@ static func _materials() -> Dictionary:
 		panel.content_margin_bottom = panel.content_margin_top
 		panel.border_width_top = 3
 		panel.border_width_bottom = 3
-		panel.shadow_color = Color(0, 0, 0, 0.6)
-		panel.shadow_size = 12
+		panel.shadow_color = Tokens.COLORS.shadow
+		panel.shadow_size = Tokens.CONSTANTS.elevation_3
 		panel.shadow_offset = Vector2(0, 6)
 		values["settings.surface" + (".compact" if compact else "")] = panel
 	for kind in ["control", "primary", "quiet"]:
@@ -79,14 +82,14 @@ static func _materials() -> Dictionary:
 				face.content_margin_top = 12.0
 				face.content_margin_bottom = 8.0
 			values["settings." + kind + "." + state] = face
-		var focus := _box(Color.TRANSPARENT, PALETTE.accent)
+		var focus := _box(Color.TRANSPARENT, PALETTE.focus)
 		focus.draw_center = false
-		focus.set_border_width_all(2)
+		focus.set_border_width_all(Tokens.CONSTANTS.focus_width)
 		values["settings." + kind + ".focus"] = focus
 	values["settings.popup"] = _box(PALETTE.surface, PALETTE.accent, 8.0)
 	var rule := StyleBoxLine.new()
 	rule.color = PALETTE.rule
-	rule.thickness = 1
+	rule.thickness = Tokens.CONSTANTS.border_width
 	values["settings.rule"] = rule
 	for key in ["track", "grabber", "hover", "pressed"]:
 		var fill: Color = PALETTE.pressed if key == "track" else PALETTE.accent if key == "hover" else PALETTE.primary_pressed if key == "pressed" else PALETTE.edge
