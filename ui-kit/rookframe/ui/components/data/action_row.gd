@@ -9,6 +9,8 @@ enum Tone {
 	DANGER,
 }
 
+var _minimum_height := 0.0
+
 @export var title := "Action":
 	set(value):
 		title = value
@@ -31,7 +33,18 @@ enum Tone {
 
 
 func _ready() -> void:
+	_minimum_height = custom_minimum_size.y
+	get_node(^"Content").minimum_size_changed.connect(_fit_height)
 	_refresh()
+	_fit_height()
+
+
+## The copy is laid over the button, so a row whose copy outgrows it grows to
+## hold the copy with its insets. Copy that fits keeps the authored height.
+func _fit_height() -> void:
+	var content: Control = get_node(^"Content")
+	var copy := content.get_combined_minimum_size().y
+	custom_minimum_size.y = _minimum_height if copy <= _minimum_height else copy + content.offset_top - content.offset_bottom
 
 
 func _refresh() -> void:
