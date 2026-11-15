@@ -69,7 +69,7 @@ const COLORS := {
 const FONTS := {
 	&"display": DISPLAY_FACE,
 	&"title": DISPLAY_FACE,
-	&"heading": BODY_FACE,
+	&"heading": DISPLAY_FACE,
 	&"body": BODY_FACE,
 	&"label": BODY_FACE,
 	&"value": BODY_FACE,
