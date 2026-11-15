@@ -105,7 +105,9 @@ focus. Primary actions use `accent` with `accent_content`, secondary actions the
 raised surface, quiet actions no fill until pointed at, destructive actions the
 `danger` roles. Godot's unchecked mark is a dark well, so `CheckBox` and
 `CheckButton` keep a lit row around it; a theme that wants an outlined box
-authors the `CheckBox` icons. `tests/token_base.gd` lists the stock controls, checks that every
+authors the `CheckBox` icons. Box, flow and grid containers take their gap from
+`space_3` and `space_4`, and a Button icon is bounded to `icon_medium`.
+`tests/token_base.gd` lists the stock controls, checks that every
 variation a kit scene or script assigns is declared, that every value follows
 the tokens, and that authored types are left alone. The mapping compiler's
 usages below (`menu_*`, `editor_*`, `settings_*`, `components_switch*`) are not

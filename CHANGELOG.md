@@ -11,7 +11,11 @@
   Silkbound Ledger gains only `FoldableContainer` (Accordion, Collapsible),
   `LinkButton`, `MenuBar`, the `ScrollContainer` focus ring, `RookframePopover`
   and the `RookframeInlineNotice*` states. An entry without a default font uses
-  the `body` role. `ui-kit/tests/token_base.gd` checks coverage and ownership.
+  the `body` role. The layer also spaces `HBoxContainer`, `VBoxContainer`, flow
+  and grid containers on `space_3`/`space_4` and bounds Button icons to
+  `icon_medium`, so Fantasy and Cyberpunk layouts gain the gaps Silkbound Ledger
+  authors. `ui-kit/tests/token_base.gd` checks coverage and ownership.
+- ActionRow grows to hold copy that outgrows its authored height.
 - Give the full-screen wizard a theme-independent responsive fit: where the
   owning Theme has no presentation hook, a core default hook
   (`_internal/presentation/defaults/fullscreen_wizard.gd`) sizes the header,
