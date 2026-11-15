@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- Fix PaginatedChoices pages that held one or two rows in a tall column: rows
+  on hidden pages are now measured at the column width instead of their stale
+  layout, and every row gets the measured page height. A configure repeated
+  before the deferred fit keeps revealing a changed selection, and a resize or
+  theme change keeps the selection (or the page's first entry) on screen.
+
 - Add the in-place radial choice to the unthemed core: `navigation/arc_track.tscn`
   places Controls along a scrollable arc over a drawn rail, and
   `navigation/arc_picker.tscn` composes category and previewed item tracks with a

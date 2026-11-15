@@ -29,6 +29,9 @@ var _page := 0
 var _pages: Array[Vector2i] = [Vector2i.ZERO]
 var _pending := false
 var _reveal := false
+# The entry a reflow keeps on screen: the selection when it is on the shown
+# page, otherwise the page's first entry. Page numbers change with the layout.
+var _anchor_id := ""
 @export var empty_text := "No entries in this group.":
 	set(value):
 		empty_text = value
@@ -57,6 +60,7 @@ func capture_state() -> Dictionary:
 func restore_state(state: Dictionary) -> void:
 	_page = maxi(0, int(state.get("page", 0)))
 	_reveal = false
+	_anchor_id = ""
 	_queue_fit()
 
 ## Return keyboard focus to an entry after its detail task closes.
@@ -104,7 +108,8 @@ func configure(entries: Array[Dictionary], selected_id: String, caption: String 
 	if _focus_position >= 0: _restore_focus = focused
 	var retained := Records.reconcile(entries, _entries, _rows, get_node(^"Area/Rows"), _create_row)
 	_rows.assign(retained)
-	_reveal = _selected != selected_id
+	# A repeated configure before the deferred fit must not cancel a reveal.
+	_reveal = _reveal or _selected != selected_id
 	_selected = selected_id
 	_entries = entries.duplicate(true)
 	_update_view()
@@ -144,22 +149,13 @@ func _fit() -> void:
 	var inset: float = metrics.y
 	var vertical_inset: float = metrics.z
 	var grid := get_node(^"Area/Rows") as GridContainer
-	# The authored row has an inset Control, so include its effective child
-	# minimum as well as the framed Button's minimum (ADR-0017).
+	var column_width: float = (size.x - inset * 2 - (columns - 1) * grid.get_theme_constant("h_separation")) / columns
 	var heights: Array[float] = []
 	for row in _view_rows:
-		var row_height := float(height)
-		if framed_collection:
-			var title := row.get_node(^"Content/Row/Copy/Title") as Label
-			var copy := row.get_node(^"Content/Row/Copy") as VBoxContainer
-			var row_inset := row.get_node(^"Content") as MarginContainer
-			var row_box := row.get_node(^"Content/Row") as HBoxContainer
-			var width: float = (size.x - inset * 2 - (columns - 1) * grid.get_theme_constant("h_separation")) / columns - row_inset.get_theme_constant("margin_left") - row_inset.get_theme_constant("margin_right") - row.get_node(^"Content/Row/Icon").get_combined_minimum_size().x - row.get_node(^"Content/Row/Value").get_combined_minimum_size().x - row_box.get_theme_constant("separation") * 2
-			var title_height := title.get_theme_font("font").get_multiline_string_size(title.text, HORIZONTAL_ALIGNMENT_LEFT, maxf(1.0, width), title.get_theme_font_size("font_size"), title.max_lines_visible, TextServer.BREAK_MANDATORY | TextServer.BREAK_WORD_BOUND | TextServer.BREAK_ADAPTIVE).y
-			title_height += title.get_theme_constant("line_spacing") * (title.max_lines_visible - 1)
-			var subtitle_height: float = row.get_node(^"Content/Row/Copy/Description").get_combined_minimum_size().y if row.get_node(^"Content/Row/Copy/Description").visible else 0.0
-			row_height = maxf(row_height, ceilf(title_height + subtitle_height + (copy.get_theme_constant("separation") if subtitle_height > 0 else 0) + row_inset.get_theme_constant("margin_top") + row_inset.get_theme_constant("margin_bottom")))
-		row_height = maxf(row_height, maxf(row.get_combined_minimum_size().y, row.get_node(^"Content").get_combined_minimum_size().y))
+		var row_height := maxf(float(height), _measure_row(row, column_width))
+		# The Choice derives its own minimum from its inset whenever the inset's
+		# minimum changes, so the page height is set on both.
+		row.get_node(^"Content").custom_minimum_size.y = row_height
 		row.custom_minimum_size.y = row_height
 		heights.append(row_height)
 	# One entry never enlarges the owning window. The authored frame reserves
@@ -173,10 +169,10 @@ func _fit() -> void:
 	if pager_visible:
 		_fit_pages(heights, available - get_node(^"Pager").get_combined_minimum_size().y, gap)
 	get_node(^"Pager").visible = pager_visible
-	if _reveal:
-		for index in _view_entries.size():
-			if str(_view_entries[index].id) == _selected:
-				_page = _page_for_entry(index)
+	# Reveal a changed selection; otherwise keep the anchored entry on screen.
+	var anchor := _view_index(_selected) if _reveal else -1
+	if anchor < 0: anchor = _view_index(_anchor_id)
+	if anchor >= 0: _page = _page_for_entry(anchor)
 	_reveal = false
 	var focused_index := Records.focused_index(_view_rows, _restore_focus if is_instance_valid(_restore_focus) else get_viewport().gui_get_focus_owner())
 	if focused_index >= 0: _page = Records.page_for(focused_index, _pages)
@@ -207,6 +203,69 @@ func _page_for_entry(index: int) -> int:
 			return page
 	return 0
 
+func _view_index(id: String) -> int:
+	if id.is_empty(): return -1
+	for index in _view_entries.size():
+		if str(_view_entries[index].id) == id: return index
+	return -1
+
+## Height of a Choice row at the column width. Godot does not lay out hidden
+## Controls, so a row on another page keeps the width of its last layout (or
+## none) and its wrapped labels would report a stale minimum height. The copy
+## labels are sized to the width the row's HBoxContainer will give them, and
+## their own minimum height is measured there (ADR-0017).
+func _measure_row(row: Control, column_width: float) -> float:
+	var inset := row.get_node(^"Content") as MarginContainer
+	var box := row.get_node(^"Content/Row") as HBoxContainer
+	var copy := row.get_node(^"Content/Row/Copy") as VBoxContainer
+	var copy_width := _copy_width(box, copy, column_width - inset.get_theme_constant("margin_left") - inset.get_theme_constant("margin_right"))
+	var copy_height := 0.0
+	var lines := 0
+	for child in copy.get_children():
+		var control := child as Control
+		if control == null or not control.visible or control.top_level: continue
+		if control is Label: control.size.x = copy_width
+		copy_height += control.get_minimum_size().max(control.custom_minimum_size).y
+		lines += 1
+	copy_height += copy.get_theme_constant("separation") * maxi(0, lines - 1)
+	var content := maxf(copy_height, copy.custom_minimum_size.y)
+	for child in box.get_children():
+		var control := child as Control
+		if control != null and control != copy and control.visible and not control.top_level:
+			content = maxf(content, control.get_combined_minimum_size().y)
+	content += inset.get_theme_constant("margin_top") + inset.get_theme_constant("margin_bottom")
+	# The Button's own minimum (its StyleBox), without the custom minimum that
+	# this fit or the Choice wrote from an earlier measurement.
+	return ceilf(maxf(content, row.get_minimum_size().y))
+
+## The width BoxContainer gives the copy: fixed siblings keep their minimum
+## width and expanding siblings share the rest by stretch ratio.
+func _copy_width(box: HBoxContainer, copy: Control, width: float) -> float:
+	var expanding: Array[Control] = [copy]
+	var shown := 0
+	for child in box.get_children():
+		var control := child as Control
+		if control == null or not control.visible or control.top_level: continue
+		shown += 1
+		if control == copy: continue
+		if control.size_flags_horizontal & Control.SIZE_EXPAND: expanding.append(control)
+		else: width -= control.get_combined_minimum_size().x
+	width -= box.get_theme_constant("separation") * maxi(0, shown - 1)
+	var ratio := 0.0
+	for control in expanding: ratio += control.size_flags_stretch_ratio
+	var settled := false
+	while not settled:
+		settled = true
+		for control in expanding:
+			var minimum := control.get_combined_minimum_size().x
+			if control != copy and width * control.size_flags_stretch_ratio / ratio < minimum:
+				width -= minimum
+				ratio -= control.size_flags_stretch_ratio
+				expanding.erase(control)
+				settled = false
+				break
+	return maxf(1.0, maxf(copy.custom_minimum_size.x, width * copy.size_flags_stretch_ratio / ratio))
+
 func _draw() -> void:
 	if Appearance.has_hook(self, &"_draw"):
 		Appearance.invoke(self, &"_draw", [])
@@ -220,6 +279,9 @@ func _show_page() -> void:
 		if row not in _view_rows: row.hide()
 	for index in _view_rows.size():
 		_view_rows[index].visible = index >= _pages[_page].x and index < _pages[_page].y
+	var shown := _view_index(_selected)
+	if shown < _pages[_page].x or shown >= _pages[_page].y: shown = _pages[_page].x
+	_anchor_id = str(_view_entries[shown].id) if shown < _view_entries.size() else ""
 	get_node(^"Pager/Previous").disabled = _page == 0
 	get_node(^"Pager/Next").disabled = _page == pages - 1
 	get_node(^"Pager/Indicator/Page").text = "%d / %d" % [_page + 1, pages]
