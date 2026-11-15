@@ -16,7 +16,7 @@ The filesystem is authoritative: normal resources under
 | Resource | Stable identity | Purpose |
 | --- | --- | --- |
 | `theme/rookframe_theme.tres` | `uid://s4dv3jijmvy1` | Shared Theme for built-in Godot Controls and semantic variations |
-| `tokens.gd` | `uid://bx5kfbojp1jkc` | Semantic palette, spacing, geometry, type, and responsive values for public relationships |
+| `tokens.gd` | `uid://bx5kfbojp1jkc` | Fixed layout breakpoints (`RookframeUiTokens`); themeable values are [semantic tokens](../../../ui-kit/docs/world-theme-styling.md#semantic-tokens) |
 | `catalogue.json` | Stable path and schema version | Machine-readable Theme and public component contract index |
 | `components/**/*.tscn` | Scene UID in the [component reference](../../../ui-kit/docs/public-components.md#public-identities) | Editor-authored relationship that Godot does not provide as one built-in node |
 | `components/**/*.gd` | Script UID in the [component reference](../../../ui-kit/docs/public-components.md#public-identities) | Small behavior required by its associated public relationship |

@@ -6,6 +6,8 @@ const TASK_HEADER_SCENE := preload("res://rookframe/ui/silkbound-ledger/componen
 const ACTION_BAR_SCENE := preload("res://rookframe/ui/silkbound-ledger/components/layout/action_bar.tscn")
 const SEARCH_FIELD_SCENE := preload("res://rookframe/ui/silkbound-ledger/components/forms/search_field.tscn")
 const METRIC_SCENE := preload("res://rookframe/ui/silkbound-ledger/components/data/metric.tscn")
+# This specimen shows Silkbound itself, so it may use the theme-private pictogram color.
+const SilkboundTokens := preload("res://rookframe/ui/theme/silkbound_tokens.gd")
 
 
 func _ready() -> void:
@@ -178,7 +180,7 @@ func _populate_icon_gallery() -> void:
 		var icon := TextureRect.new()
 		icon.custom_minimum_size = Vector2(32, 32)
 		icon.texture = load("res://rookframe/ui/icons/" + str(definition.get("path", semantic_name + ".svg")))
-		icon.self_modulate = RookframeUiTokens.COLOR_PICTOGRAM
+		icon.self_modulate = SilkboundTokens.PRIMITIVES[&"pictogram"]
 		icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 		icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 		icon.mouse_filter = Control.MOUSE_FILTER_IGNORE
