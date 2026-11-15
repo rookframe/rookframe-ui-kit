@@ -234,6 +234,8 @@ func _buttons() -> void:
 	_secondary(&"Button", _s(4), _s(2))
 	_type(&"Button", &"label")
 	_constant(&"Button", &"h_separation", _s(2))
+	# An icon of any source size draws at the medium icon size unless a variation says otherwise.
+	_constant(&"Button", &"icon_max_width", _k(&"icon_medium"))
 	_quiet(&"MenuButton", _s(3), _s(2))
 	_secondary(&"OptionButton", _s(4), _s(2))
 	_constant(&"OptionButton", &"arrow_margin", _s(3))
@@ -301,6 +303,14 @@ func _surfaces() -> void:
 	_constant(&"Window", &"title_height", title_height)
 	_color(&"Window", &"title_color", _c(&"content_heading"))
 	_type(&"Window", &"label", &"title_font", &"title_font_size")
+	# Containers space their children on the theme's rhythm rather than Godot's fixed gap.
+	for type: StringName in [&"HBoxContainer", &"VBoxContainer"]:
+		_constant(type, &"separation", _s(3))
+	for type: StringName in [&"HFlowContainer", &"VFlowContainer"]:
+		_constant(type, &"h_separation", _s(3))
+		_constant(type, &"v_separation", _s(3))
+	_constant(&"GridContainer", &"h_separation", _s(4))
+	_constant(&"GridContainer", &"v_separation", _s(3))
 	_style(&"HSeparator", &"separator", _line(_c(&"divider")))
 	_style(&"VSeparator", &"separator", _line(_c(&"divider"), true))
 	_style(&"ScrollContainer", &"focus", _focus())

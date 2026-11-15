@@ -14,6 +14,7 @@ const STOCK: Array[StringName] = [
 	&"TabBar", &"TabContainer", &"ItemList", &"Tree", &"FileDialog", &"FoldableContainer",
 	&"HScrollBar", &"VScrollBar", &"ScrollContainer", &"HSlider", &"VSlider", &"ProgressBar",
 	&"HSeparator", &"VSeparator",
+	&"HBoxContainer", &"VBoxContainer", &"HFlowContainer", &"VFlowContainer", &"GridContainer",
 ]
 ## Names the kit reads that are not standard variations of the base layer:
 ## the token type, and the native mapping compiler's usages, which resolve
