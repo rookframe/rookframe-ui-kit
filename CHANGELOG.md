@@ -13,6 +13,16 @@
   layout, and every row gets the measured page height. A configure repeated
   before the deferred fit keeps revealing a changed selection, and a resize or
   theme change keeps the selection (or the page's first entry) on screen.
+- Define every semantic token in Silkbound Ledger from one source,
+  `theme/silkbound_tokens.gd`, supplied to the canonical Theme as a supplemental
+  token set. Its Themes and presentation scenes name the token behind each role
+  value in `metadata/tokens`; `tools/apply-silkbound-tokens.gd` writes the token
+  values into them and checks for drift, and presentation scripts read the same
+  source. The appearance is unchanged.
+- Define every semantic token in Fantasy (`themes/fantasy/tokens.gd`) and
+  Cyberpunk (`menu/cyberpunk/materials/cyberpunk_tokens.gd`). Their `Rookframe*`
+  type variations and role-bearing material values read the token source.
+  Fantasy `RookframeTitle` and `RookframeSubtitle` now use the display face.
 
 - Add the in-place radial choice to the unthemed core: `navigation/arc_track.tscn`
   places Controls along a scrollable arc over a drawn rail, and

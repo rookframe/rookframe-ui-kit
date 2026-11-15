@@ -1,6 +1,7 @@
 @tool
 extends RefCounted
 const Appearance = preload("res://rookframe/ui/_internal/presentation/appearance.gd")
+const Tokens = preload("res://rookframe/ui/theme/silkbound_tokens.gd")
 
 
 
@@ -16,10 +17,10 @@ func _style_rail(control, rail: HBoxContainer) -> void:
 	Appearance.override_item(rail, "constants", &"separation", 6)
 
 func _step_icon_color(control) -> Color:
-	return Color("e7e7dd")
+	return Tokens.color(&"content")
 
 func _step_number_color(control, state_name: String) -> Color:
-	return Color("151719") if state_name == "current" else Color("aebabe")
+	return Tokens.color(&"accent_content") if state_name == "current" else Tokens.color(&"content_muted")
 
 func _connector_color(control, complete: bool) -> Color:
-	return Color("ceccb3") if complete else Color("3e4346")
+	return Tokens.color(&"accent") if complete else Tokens.color(&"divider")

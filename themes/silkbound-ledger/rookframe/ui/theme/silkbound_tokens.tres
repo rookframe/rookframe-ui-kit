@@ -1,0 +1,7 @@
+[gd_resource type="Theme" format=3]
+
+[ext_resource type="Script" path="res://rookframe/ui/theme/silkbound_tokens.gd" id="tokens"]
+
+; Silkbound Ledger RookframeTokens set. Values come from silkbound_tokens.gd, never authored here.
+[resource]
+script = ExtResource("tokens")

@@ -5,8 +5,8 @@
 [ext_resource type="Shader" path="res://rookframe/ui/components/surfaces/action_panel/content_ink.gdshader" id="03d63614c4_reveal_shader"]
 [ext_resource type="Theme" path="res://rookframe/ui/theme/silkbound_theme.tres" id="skin_theme"]
 [sub_resource type="StyleBoxFlat" id="03d63614c4_input"]
-bg_color = Color(0.137255, 0.156863, 0.168627, 1.0)
-border_color = Color(0.244353, 0.262784, 0.272745, 1)
+bg_color = Color(0.137255, 0.156863, 0.168627, 1)
+border_color = Color(0.243137, 0.262745, 0.27451, 1)
 border_width_left = 1
 border_width_right = 1
 border_width_top = 1
@@ -15,6 +15,10 @@ content_margin_left = 14.0
 content_margin_right = 14.0
 content_margin_top = 12.0
 content_margin_bottom = 12.0
+metadata/tokens = {
+"bg_color": &"surface",
+"border_color": &"divider"
+}
 
 [node name="PaginatedTextArea" instance=ExtResource("base")]
 script = ExtResource("03d63614c4_skin_script")

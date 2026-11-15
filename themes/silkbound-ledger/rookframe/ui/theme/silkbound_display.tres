@@ -1,0 +1,8 @@
+[gd_resource type="FontVariation" format=3]
+
+[ext_resource type="FontVariation" path="res://rookframe/ui/theme/silkbound_regular.tres" id="regular"]
+
+; Display face of titles, headings and labels: EB Garamond at weight 500 over the regular face.
+[resource]
+base_font = ExtResource("regular")
+variation_opentype = {"wght": 500.0}

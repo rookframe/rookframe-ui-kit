@@ -62,8 +62,11 @@ border_width_right = 1
 border_width_bottom = 1
 border_color = Color(0.9,0.86,0.72,1)
 [sub_resource type="StyleBoxFlat" id="line"]
-bg_color = Color(0.737,0.572,0.466,0.8)
+bg_color = Color(0.737255, 0.572549, 0.466667, 0.8)
 content_margin_top = 1.0
+metadata/tokens = {
+"bg_color": [&"ornament", 0.8]
+}
 [sub_resource type="StyleBoxTexture" id="roll_normal"]
 texture = SubResource("die")
 modulate_color = Color(1,1,1,1)
@@ -101,7 +104,10 @@ content_margin_right = 12.0
 content_margin_top = 9.0
 content_margin_bottom = 9.0
 border_width_bottom = 1
-border_color = Color(0.737, 0.572, 0.466, 0.55)
+border_color = Color(0.737255, 0.572549, 0.466667, 0.55)
+metadata/tokens = {
+"border_color": [&"ornament", 0.55]
+}
 [sub_resource type="StyleBoxFlat" id="field_hover"]
 bg_color = Color(0.82, 0.78, 0.65, 0.08)
 content_margin_left = 12.0
@@ -135,7 +141,10 @@ border_width_left = 1
 border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
-border_color = Color(0.737, 0.572, 0.466, 0.75)
+border_color = Color(0.737255, 0.572549, 0.466667, 0.75)
+metadata/tokens = {
+"border_color": [&"ornament", 0.75]
+}
 [sub_resource type="StyleBoxFlat" id="action"]
 bg_color = Color(0.02, 0.025, 0.023, 0.24)
 content_margin_left = 12.0
@@ -146,9 +155,12 @@ border_width_left = 1
 border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
-border_color = Color(0.737, 0.572, 0.466, 0.72)
+border_color = Color(0.737255, 0.572549, 0.466667, 0.72)
+metadata/tokens = {
+"border_color": [&"ornament", 0.72]
+}
 [sub_resource type="StyleBoxFlat" id="action_hover"]
-bg_color = Color(0.816, 0.745, 0.557, 0.16)
+bg_color = Color(0.815686, 0.745098, 0.556863, 0.16)
 content_margin_left = 12.0
 content_margin_top = 9.0
 content_margin_right = 12.0
@@ -158,6 +170,9 @@ border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
 border_color = Color(0.875, 0.729, 0.455, 1)
+metadata/tokens = {
+"bg_color": [&"pictogram", 0.16]
+}
 [sub_resource type="StyleBoxFlat" id="action_pressed"]
 bg_color = Color(0.01, 0.012, 0.01, 0.62)
 content_margin_left = 12.0
@@ -168,7 +183,10 @@ border_width_left = 1
 border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
-border_color = Color(0.816, 0.745, 0.557, 0.85)
+border_color = Color(0.815686, 0.745098, 0.556863, 0.85)
+metadata/tokens = {
+"border_color": [&"pictogram", 0.85]
+}
 [sub_resource type="StyleBoxFlat" id="action_disabled"]
 bg_color = Color(0.02, 0.025, 0.023, 0.12)
 content_margin_left = 12.0
@@ -179,9 +197,12 @@ border_width_left = 1
 border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
-border_color = Color(0.737, 0.572, 0.466, 0.27)
+border_color = Color(0.737255, 0.572549, 0.466667, 0.27)
+metadata/tokens = {
+"border_color": [&"ornament", 0.27]
+}
 [sub_resource type="StyleBoxFlat" id="action_primary"]
-bg_color = Color(0.808, 0.800, 0.702, 0.94)
+bg_color = Color(0.807843, 0.8, 0.701961, 0.94)
 content_margin_left = 12.0
 content_margin_top = 9.0
 content_margin_right = 12.0
@@ -191,6 +212,9 @@ border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
 border_color = Color(0.875, 0.729, 0.455, 0.95)
+metadata/tokens = {
+"bg_color": [&"accent", 0.94]
+}
 [sub_resource type="StyleBoxFlat" id="action_primary_hover"]
 bg_color = Color(0.92, 0.89, 0.77, 0.96)
 content_margin_left = 12.0
@@ -212,7 +236,10 @@ border_width_left = 1
 border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
-border_color = Color(0.816, 0.745, 0.557, 1)
+border_color = Color(0.815686, 0.745098, 0.556863, 1)
+metadata/tokens = {
+"border_color": &"pictogram"
+}
 [sub_resource type="StyleBoxFlat" id="check_quiet"]
 bg_color = Color(0, 0, 0, 0)
 content_margin_left = 8.0
@@ -220,11 +247,14 @@ content_margin_top = 9.0
 content_margin_right = 8.0
 content_margin_bottom = 9.0
 [sub_resource type="StyleBoxFlat" id="check_hover"]
-bg_color = Color(0.816, 0.745, 0.557, 0.10)
+bg_color = Color(0.815686, 0.745098, 0.556863, 0.1)
 content_margin_left = 8.0
 content_margin_top = 9.0
 content_margin_right = 8.0
 content_margin_bottom = 9.0
+metadata/tokens = {
+"bg_color": [&"pictogram", 0.1]
+}
 [sub_resource type="StyleBoxFlat" id="check_pressed"]
 bg_color = Color(0.01, 0.012, 0.01, 0.34)
 content_margin_left = 8.0
@@ -234,7 +264,7 @@ content_margin_bottom = 9.0
 [resource]
 default_font = ExtResource("font")
 default_font_size = 18
-Label/colors/font_color = Color(0.906,0.906,0.867,1)
+Label/colors/font_color = Color(0.905882, 0.905882, 0.866667, 1)
 VBoxContainer/constants/separation = 0
 HBoxContainer/constants/separation = 12
 RookframeActionHeader/base_type = &"PanelContainer"
@@ -248,7 +278,7 @@ RookframeActionEmblem/styles/panel = SubResource("emblem")
 RookframeActionIcon/base_type = &"Button"
 RookframeActionIcon/constants/icon_max_width = 24
 RookframeActionIcon/constants/h_separation = 0
-RookframeActionIcon/colors/icon_normal_color = Color(0.816,0.745,0.557,1)
+RookframeActionIcon/colors/icon_normal_color = Color(0.815686, 0.745098, 0.556863, 1)
 RookframeActionIcon/colors/icon_hover_color = Color(0.95,0.85,0.65,1)
 RookframeActionIcon/colors/icon_pressed_color = Color(0.7,0.61,0.42,1)
 RookframeActionIcon/colors/icon_disabled_color = Color(0.65,0.65,0.59,0.4)
@@ -269,10 +299,10 @@ RookframeActionDivider/constants/separation = 1
 RookframeActionDivider/styles/separator = SubResource("line")
 
 RookframeActionTextField/base_type = &"LineEdit"
-LineEdit/colors/font_color = Color(0.906,0.906,0.867,1)
+LineEdit/colors/font_color = Color(0.905882, 0.905882, 0.866667, 1)
 LineEdit/colors/font_placeholder_color = Color(0.769,0.773,0.722,0.85)
 LineEdit/colors/font_hover_color = Color(0.98,0.95,0.85,1)
-LineEdit/colors/font_pressed_color = Color(0.906,0.906,0.867,1)
+LineEdit/colors/font_pressed_color = Color(0.905882, 0.905882, 0.866667, 1)
 LineEdit/colors/font_disabled_color = Color(0.769,0.773,0.722,0.45)
 LineEdit/colors/caret_color = Color(0.875,0.729,0.455,1)
 LineEdit/colors/selection_color = Color(0.55,0.44,0.27,0.5)
@@ -285,10 +315,10 @@ LineEdit/styles/disabled = SubResource("field")
 LineEdit/styles/focus = SubResource("field_focus")
 
 RookframeActionSelect/base_type = &"OptionButton"
-OptionButton/colors/font_color = Color(0.906,0.906,0.867,1)
+OptionButton/colors/font_color = Color(0.905882, 0.905882, 0.866667, 1)
 OptionButton/colors/font_placeholder_color = Color(0.769,0.773,0.722,0.85)
 OptionButton/colors/font_hover_color = Color(0.98,0.95,0.85,1)
-OptionButton/colors/font_pressed_color = Color(0.906,0.906,0.867,1)
+OptionButton/colors/font_pressed_color = Color(0.905882, 0.905882, 0.866667, 1)
 OptionButton/colors/font_disabled_color = Color(0.769,0.773,0.722,0.45)
 OptionButton/colors/caret_color = Color(0.875,0.729,0.455,1)
 OptionButton/colors/selection_color = Color(0.55,0.44,0.27,0.5)
@@ -303,7 +333,7 @@ OptionButton/constants/arrow_margin = 12
 OptionButton/colors/icon_normal_color = Color(0.875,0.729,0.455,1)
 PopupMenu/styles/panel = SubResource("popup")
 PopupMenu/styles/hover = SubResource("field_hover")
-PopupMenu/colors/font_color = Color(0.906,0.906,0.867,1)
+PopupMenu/colors/font_color = Color(0.905882, 0.905882, 0.866667, 1)
 PopupMenu/colors/font_hover_color = Color(0.98,0.95,0.85,1)
 PopupMenu/constants/v_separation = 20
 
@@ -313,15 +343,15 @@ Button/styles/pressed = SubResource("action_pressed")
 Button/styles/hover_pressed = SubResource("action_pressed")
 Button/styles/disabled = SubResource("action_disabled")
 Button/styles/focus = SubResource("field_focus")
-Button/colors/font_color = Color(0.906, 0.906, 0.867, 1)
-Button/colors/icon_normal_color = Color(0.816, 0.745, 0.557, 1)
+Button/colors/font_color = Color(0.905882, 0.905882, 0.866667, 1)
+Button/colors/icon_normal_color = Color(0.815686, 0.745098, 0.556863, 1)
 Button/colors/font_hover_color = Color(0.98, 0.95, 0.85, 1)
-Button/colors/icon_hover_color = Color(0.816, 0.745, 0.557, 1)
-Button/colors/font_pressed_color = Color(0.906, 0.906, 0.867, 1)
-Button/colors/icon_pressed_color = Color(0.816, 0.745, 0.557, 1)
-Button/colors/font_hover_pressed_color = Color(0.906, 0.906, 0.867, 1)
+Button/colors/icon_hover_color = Color(0.815686, 0.745098, 0.556863, 1)
+Button/colors/font_pressed_color = Color(0.905882, 0.905882, 0.866667, 1)
+Button/colors/icon_pressed_color = Color(0.815686, 0.745098, 0.556863, 1)
+Button/colors/font_hover_pressed_color = Color(0.905882, 0.905882, 0.866667, 1)
 Button/colors/font_focus_color = Color(0.98, 0.95, 0.85, 1)
-Button/colors/icon_focus_color = Color(0.816, 0.745, 0.557, 1)
+Button/colors/icon_focus_color = Color(0.815686, 0.745098, 0.556863, 1)
 Button/colors/font_disabled_color = Color(0.769, 0.773, 0.722, 0.48)
 Button/colors/icon_disabled_color = Color(0.769, 0.773, 0.722, 0.48)
 Button/font_sizes/font_size = 18
@@ -333,15 +363,15 @@ RookframeSecondaryButton/styles/pressed = SubResource("action_pressed")
 RookframeSecondaryButton/styles/hover_pressed = SubResource("action_pressed")
 RookframeSecondaryButton/styles/disabled = SubResource("action_disabled")
 RookframeSecondaryButton/styles/focus = SubResource("field_focus")
-RookframeSecondaryButton/colors/font_color = Color(0.906, 0.906, 0.867, 1)
-RookframeSecondaryButton/colors/icon_normal_color = Color(0.816, 0.745, 0.557, 1)
+RookframeSecondaryButton/colors/font_color = Color(0.905882, 0.905882, 0.866667, 1)
+RookframeSecondaryButton/colors/icon_normal_color = Color(0.815686, 0.745098, 0.556863, 1)
 RookframeSecondaryButton/colors/font_hover_color = Color(0.98, 0.95, 0.85, 1)
-RookframeSecondaryButton/colors/icon_hover_color = Color(0.816, 0.745, 0.557, 1)
-RookframeSecondaryButton/colors/font_pressed_color = Color(0.906, 0.906, 0.867, 1)
-RookframeSecondaryButton/colors/icon_pressed_color = Color(0.816, 0.745, 0.557, 1)
-RookframeSecondaryButton/colors/font_hover_pressed_color = Color(0.906, 0.906, 0.867, 1)
+RookframeSecondaryButton/colors/icon_hover_color = Color(0.815686, 0.745098, 0.556863, 1)
+RookframeSecondaryButton/colors/font_pressed_color = Color(0.905882, 0.905882, 0.866667, 1)
+RookframeSecondaryButton/colors/icon_pressed_color = Color(0.815686, 0.745098, 0.556863, 1)
+RookframeSecondaryButton/colors/font_hover_pressed_color = Color(0.905882, 0.905882, 0.866667, 1)
 RookframeSecondaryButton/colors/font_focus_color = Color(0.98, 0.95, 0.85, 1)
-RookframeSecondaryButton/colors/icon_focus_color = Color(0.816, 0.745, 0.557, 1)
+RookframeSecondaryButton/colors/icon_focus_color = Color(0.815686, 0.745098, 0.556863, 1)
 RookframeSecondaryButton/colors/font_disabled_color = Color(0.769, 0.773, 0.722, 0.48)
 RookframeSecondaryButton/colors/icon_disabled_color = Color(0.769, 0.773, 0.722, 0.48)
 RookframeSecondaryButton/font_sizes/font_size = 18
@@ -353,15 +383,15 @@ RookframePrimaryButton/styles/pressed = SubResource("action_primary_pressed")
 RookframePrimaryButton/styles/hover_pressed = SubResource("action_primary_pressed")
 RookframePrimaryButton/styles/disabled = SubResource("action_disabled")
 RookframePrimaryButton/styles/focus = SubResource("field_focus")
-RookframePrimaryButton/colors/font_color = Color(0.082, 0.090, 0.098, 1)
-RookframePrimaryButton/colors/icon_normal_color = Color(0.082, 0.090, 0.098, 1)
-RookframePrimaryButton/colors/font_hover_color = Color(0.082, 0.090, 0.098, 1)
-RookframePrimaryButton/colors/icon_hover_color = Color(0.082, 0.090, 0.098, 1)
-RookframePrimaryButton/colors/font_pressed_color = Color(0.082, 0.090, 0.098, 1)
-RookframePrimaryButton/colors/icon_pressed_color = Color(0.082, 0.090, 0.098, 1)
-RookframePrimaryButton/colors/font_hover_pressed_color = Color(0.082, 0.090, 0.098, 1)
-RookframePrimaryButton/colors/font_focus_color = Color(0.082, 0.090, 0.098, 1)
-RookframePrimaryButton/colors/icon_focus_color = Color(0.082, 0.090, 0.098, 1)
+RookframePrimaryButton/colors/font_color = Color(0.082353, 0.090196, 0.098039, 1)
+RookframePrimaryButton/colors/icon_normal_color = Color(0.082353, 0.090196, 0.098039, 1)
+RookframePrimaryButton/colors/font_hover_color = Color(0.082353, 0.090196, 0.098039, 1)
+RookframePrimaryButton/colors/icon_hover_color = Color(0.082353, 0.090196, 0.098039, 1)
+RookframePrimaryButton/colors/font_pressed_color = Color(0.082353, 0.090196, 0.098039, 1)
+RookframePrimaryButton/colors/icon_pressed_color = Color(0.082353, 0.090196, 0.098039, 1)
+RookframePrimaryButton/colors/font_hover_pressed_color = Color(0.082353, 0.090196, 0.098039, 1)
+RookframePrimaryButton/colors/font_focus_color = Color(0.082353, 0.090196, 0.098039, 1)
+RookframePrimaryButton/colors/icon_focus_color = Color(0.082353, 0.090196, 0.098039, 1)
 RookframePrimaryButton/colors/font_disabled_color = Color(0.769, 0.773, 0.722, 0.48)
 RookframePrimaryButton/colors/icon_disabled_color = Color(0.769, 0.773, 0.722, 0.48)
 RookframePrimaryButton/font_sizes/font_size = 18
@@ -372,10 +402,10 @@ CheckBox/styles/pressed = SubResource("check_pressed")
 CheckBox/styles/hover_pressed = SubResource("check_hover")
 CheckBox/styles/disabled = SubResource("check_quiet")
 CheckBox/styles/focus = SubResource("field_focus")
-CheckBox/colors/font_color = Color(0.906, 0.906, 0.867, 1)
+CheckBox/colors/font_color = Color(0.905882, 0.905882, 0.866667, 1)
 CheckBox/colors/font_hover_color = Color(0.98, 0.95, 0.85, 1)
-CheckBox/colors/font_pressed_color = Color(0.906, 0.906, 0.867, 1)
-CheckBox/colors/font_hover_pressed_color = Color(0.906, 0.906, 0.867, 1)
+CheckBox/colors/font_pressed_color = Color(0.905882, 0.905882, 0.866667, 1)
+CheckBox/colors/font_hover_pressed_color = Color(0.905882, 0.905882, 0.866667, 1)
 CheckBox/colors/font_focus_color = Color(0.98, 0.95, 0.85, 1)
 CheckBox/colors/font_disabled_color = Color(0.769, 0.773, 0.722, 0.48)
 CheckBox/icons/checked = ExtResource("checkbox-checked")
@@ -395,19 +425,62 @@ components_button/base_type = &"RookframeSecondaryButton"
 components_button/constants/minimum_height = 52
 components_button__compact/base_type = &"components_button"
 components_button__compact/constants/minimum_height = 44
-components_button/colors/icon_normal_color = Color(0.906, 0.906, 0.867, 1)
+components_button/colors/icon_normal_color = Color(0.905882, 0.905882, 0.866667, 1)
 components_button/colors/icon_hover_color = Color(0.98, 0.95, 0.85, 1)
-components_button/colors/icon_pressed_color = Color(0.906, 0.906, 0.867, 1)
-components_button/colors/icon_hover_pressed_color = Color(0.906, 0.906, 0.867, 1)
+components_button/colors/icon_pressed_color = Color(0.905882, 0.905882, 0.866667, 1)
+components_button/colors/icon_hover_pressed_color = Color(0.905882, 0.905882, 0.866667, 1)
 components_button/colors/icon_focus_color = Color(0.98, 0.95, 0.85, 1)
 components_button/colors/icon_disabled_color = Color(0.769, 0.773, 0.722, 0.48)
 components_button_primary/base_type = &"RookframePrimaryButton"
 components_button_primary/constants/minimum_height = 52
 components_button_primary__compact/base_type = &"components_button_primary"
 components_button_primary__compact/constants/minimum_height = 44
-components_button_primary/colors/icon_normal_color = Color(0.082, 0.090, 0.098, 1)
-components_button_primary/colors/icon_hover_color = Color(0.082, 0.090, 0.098, 1)
-components_button_primary/colors/icon_pressed_color = Color(0.082, 0.090, 0.098, 1)
-components_button_primary/colors/icon_hover_pressed_color = Color(0.082, 0.090, 0.098, 1)
-components_button_primary/colors/icon_focus_color = Color(0.082, 0.090, 0.098, 1)
+components_button_primary/colors/icon_normal_color = Color(0.082353, 0.090196, 0.098039, 1)
+components_button_primary/colors/icon_hover_color = Color(0.082353, 0.090196, 0.098039, 1)
+components_button_primary/colors/icon_pressed_color = Color(0.082353, 0.090196, 0.098039, 1)
+components_button_primary/colors/icon_hover_pressed_color = Color(0.082353, 0.090196, 0.098039, 1)
+components_button_primary/colors/icon_focus_color = Color(0.082353, 0.090196, 0.098039, 1)
 components_button_primary/colors/icon_disabled_color = Color(0.769, 0.773, 0.722, 0.48)
+metadata/tokens = {
+"Label/colors/font_color": &"content",
+"RookframeActionIcon/colors/icon_normal_color": &"pictogram",
+"LineEdit/colors/font_color": &"content",
+"LineEdit/colors/font_pressed_color": &"content",
+"OptionButton/colors/font_color": &"content",
+"OptionButton/colors/font_pressed_color": &"content",
+"PopupMenu/colors/font_color": &"content",
+"Button/colors/font_color": &"content",
+"Button/colors/icon_normal_color": &"pictogram",
+"Button/colors/icon_hover_color": &"pictogram",
+"Button/colors/font_pressed_color": &"content",
+"Button/colors/icon_pressed_color": &"pictogram",
+"Button/colors/font_hover_pressed_color": &"content",
+"Button/colors/icon_focus_color": &"pictogram",
+"RookframeSecondaryButton/colors/font_color": &"content",
+"RookframeSecondaryButton/colors/icon_normal_color": &"pictogram",
+"RookframeSecondaryButton/colors/icon_hover_color": &"pictogram",
+"RookframeSecondaryButton/colors/font_pressed_color": &"content",
+"RookframeSecondaryButton/colors/icon_pressed_color": &"pictogram",
+"RookframeSecondaryButton/colors/font_hover_pressed_color": &"content",
+"RookframeSecondaryButton/colors/icon_focus_color": &"pictogram",
+"RookframePrimaryButton/colors/font_color": &"accent_content",
+"RookframePrimaryButton/colors/icon_normal_color": &"accent_content",
+"RookframePrimaryButton/colors/font_hover_color": &"accent_content",
+"RookframePrimaryButton/colors/icon_hover_color": &"accent_content",
+"RookframePrimaryButton/colors/font_pressed_color": &"accent_content",
+"RookframePrimaryButton/colors/icon_pressed_color": &"accent_content",
+"RookframePrimaryButton/colors/font_hover_pressed_color": &"accent_content",
+"RookframePrimaryButton/colors/font_focus_color": &"accent_content",
+"RookframePrimaryButton/colors/icon_focus_color": &"accent_content",
+"CheckBox/colors/font_color": &"content",
+"CheckBox/colors/font_pressed_color": &"content",
+"CheckBox/colors/font_hover_pressed_color": &"content",
+"components_button/colors/icon_normal_color": &"content",
+"components_button/colors/icon_pressed_color": &"content",
+"components_button/colors/icon_hover_pressed_color": &"content",
+"components_button_primary/colors/icon_normal_color": &"accent_content",
+"components_button_primary/colors/icon_hover_color": &"accent_content",
+"components_button_primary/colors/icon_pressed_color": &"accent_content",
+"components_button_primary/colors/icon_hover_pressed_color": &"accent_content",
+"components_button_primary/colors/icon_focus_color": &"accent_content"
+}

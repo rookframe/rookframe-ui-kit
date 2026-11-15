@@ -1,6 +1,7 @@
 @tool
 extends RefCounted
 const Appearance = preload("res://rookframe/ui/_internal/presentation/appearance.gd")
+const Tokens = preload("res://rookframe/ui/theme/silkbound_tokens.gd")
 
 
 
@@ -9,7 +10,7 @@ const Appearance = preload("res://rookframe/ui/_internal/presentation/appearance
 func _style_pager(control) -> void:
 	Appearance.override_item(control._range, "font_sizes", "font_size", 15 if control.get_viewport_rect().size.y <= 560 else 18)
 	if control.decorated_pager:
-		Appearance.override_item(control._range, "colors", "font_color", Color("aebabe"))
+		Appearance.override_item(control._range, "colors", "font_color", Tokens.color(&"content_muted"))
 		for button in [control._previous, control._next]:
 			Appearance.write(button, ^"theme_type_variation", "WizardButton")
 			Appearance.write(button, ^"text", "")
@@ -25,4 +26,4 @@ func _style_pager(control) -> void:
 
 func _draw(control) -> void:
 	if control.decorated_pager and control.content_inset_left > 0:
-		control.draw_line(Vector2.ZERO,Vector2(0,control.size.y),Color("3e4346"))
+		control.draw_line(Vector2.ZERO,Vector2(0,control.size.y),Tokens.color(&"divider"))

@@ -8,7 +8,11 @@ border_width_left = 1
 border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
-border_color = Color(0.243137, 0.262745, 0.274510, 1.0)
+border_color = Color(0.243137, 0.262745, 0.27451, 1)
+metadata/tokens = {
+"bg_color": [&"canvas", 0.82],
+"border_color": &"divider"
+}
 
 [sub_resource type="StyleBoxFlat" id="5580a5c7b8_ChoicePressed"]
 bg_color = Color(0.203922, 0.239216, 0.254902, 1)
@@ -17,6 +21,9 @@ border_width_top = 0
 border_width_right = 0
 border_width_bottom = 0
 border_color = Color(0.905882, 0.905882, 0.866667, 1.0)
+metadata/tokens = {
+"bg_color": &"surface_pressed"
+}
 
 [sub_resource type="StyleBoxFlat" id="5580a5c7b8_ChoiceHover"]
 bg_color = Color(0.203922, 0.239216, 0.254902, 0.82)
@@ -24,7 +31,11 @@ border_width_left = 1
 border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
-border_color = Color(0.807843, 0.800000, 0.701961, 1.0)
+border_color = Color(0.807843, 0.8, 0.701961, 1)
+metadata/tokens = {
+"bg_color": [&"surface_hover", 0.82],
+"border_color": &"border_strong"
+}
 
 [sub_resource type="StyleBoxFlat" id="5580a5c7b8_ChoiceFocus"]
 bg_color = Color(0.082353, 0.090196, 0.098039, 0.82)
@@ -33,6 +44,9 @@ border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
 border_color = Color(0.807843, 0.800000, 0.701961, 1.0)
+metadata/tokens = {
+"bg_color": [&"canvas", 0.82]
+}
 
 [sub_resource type="StyleBoxFlat" id="5580a5c7b8_MarkerNormal"]
 bg_color = Color(0, 0, 0, 0)
@@ -40,15 +54,22 @@ border_width_left = 1
 border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
-border_color = Color(0.356863, 0.384314, 0.396078, 1.0)
+border_color = Color(0.356863, 0.384314, 0.396078, 1)
+metadata/tokens = {
+"border_color": &"border"
+}
 
 [sub_resource type="StyleBoxFlat" id="5580a5c7b8_MarkerSelected"]
-bg_color = Color(0.137255, 0.156863, 0.168627, 1.0)
+bg_color = Color(0.137255, 0.156863, 0.168627, 1)
 border_width_left = 3
 border_width_top = 0
 border_width_right = 0
 border_width_bottom = 0
-border_color = Color(0.807843, 0.800000, 0.701961, 1.0)
+border_color = Color(0.807843, 0.8, 0.701961, 1)
+metadata/tokens = {
+"bg_color": &"surface",
+"border_color": &"border_strong"
+}
 
 
 [node name="Choice" instance=ExtResource("base")]
