@@ -2,22 +2,23 @@
 extends RefCounted
 ## Concrete Settings Materials. Stock StyleBoxes keep layout and hit bounds together.
 const Geometry = preload("../../materials/settings_geometry.gd")
-const PALETTE = {
-	"secondary": Color("adc3cd"),
-	"surface": Color("0d1b27f5"),
-	"edge": Color("416978"),
-	"normal": Color("152f3e"),
-	"hover": Color("244f60"),
-	"pressed": Color("102633"),
-	"disabled_bg": Color("182a34"),
-	"disabled": Color("8199a5"),
-	"accent": Color("81e7e8"),
-	"primary": Color("60ccce"),
-	"primary_hover": Color("99eded"),
-	"primary_pressed": Color("459fa9"),
-	"primary_ink": Color("09232d"),
-	"danger": Color("ff918c"),
-	"rule": Color("41606c"),
+const T = preload("cyberpunk_tokens.gd")
+static var PALETTE: Dictionary = {
+	"secondary": T.color(&"content_muted"),
+	"surface": T.color(&"surface", 0xf5),
+	"edge": T.color(&"border"),
+	"normal": T.color(&"surface_raised"),
+	"hover": T.color(&"surface_hover"),
+	"pressed": T.color(&"surface_pressed"),
+	"disabled_bg": T.shade("disabled_fill"),
+	"disabled": T.color(&"content_disabled"),
+	"accent": T.color(&"accent"),
+	"primary": T.shade("primary_fill"),
+	"primary_hover": T.color(&"accent_hover"),
+	"primary_pressed": T.color(&"accent_pressed"),
+	"primary_ink": T.shade("primary_ink"),
+	"danger": T.color(&"danger"),
+	"rule": T.color(&"divider"),
 }
 static var VALUES: Dictionary = _materials()
 
@@ -54,7 +55,7 @@ static func _materials() -> Dictionary:
 		panel.content_margin_bottom = panel.content_margin_top
 		panel.border_width_top = 3
 		panel.border_width_bottom = 3
-		panel.shadow_color = Color(0, 0, 0, 0.6)
+		panel.shadow_color = T.color(&"shadow", 0x99)
 		panel.shadow_size = 12
 		panel.shadow_offset = Vector2(0, 6)
 		values["settings.surface" + (".compact" if compact else "")] = panel

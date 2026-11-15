@@ -2,16 +2,17 @@
 extends RefCounted
 ## Concrete World list Materials, including every shared default.
 const Geometry = preload("../../materials/world_list_geometry.gd")
-const PALETTE = {
-	"panel": Color("0d1b27f5"),
-	"edge": Color("416978"),
-	"resting": Color("152f3e"),
-	"hover": Color("244f60"),
-	"pressed": Color("102633"),
-	"selected": Color("205263"),
-	"selected_hover": Color("2b6779"),
-	"focus": Color("81e7e8"),
-	"online": Color("81e7e8"),
+const T = preload("cyberpunk_tokens.gd")
+static var PALETTE: Dictionary = {
+	"panel": T.color(&"surface", 0xf5),
+	"edge": T.color(&"border"),
+	"resting": T.color(&"surface_raised"),
+	"hover": T.color(&"surface_hover"),
+	"pressed": T.color(&"surface_pressed"),
+	"selected": T.color(&"accent_subtle"),
+	"selected_hover": T.shade("selected_hover"),
+	"focus": T.color(&"accent"),
+	"online": T.color(&"accent"),
 }
 
 static func _box(fill: Color, border: Color) -> StyleBoxFlat:
@@ -28,7 +29,7 @@ static func _box(fill: Color, border: Color) -> StyleBoxFlat:
 static func materials(base: Dictionary) -> Dictionary:
 	var values: Dictionary = Geometry.VALUES.duplicate()
 	values["escape.surface_width"] = 540
-	values["backdrop.color"] = Color("020910dc")
+	values["backdrop.color"] = T.color(&"scrim")
 	for compact in [false, true]:
 		var suffix := ".compact" if compact else ""
 		var surface: StyleBox = base["settings.surface" + suffix]
