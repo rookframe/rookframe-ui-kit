@@ -2,6 +2,10 @@
 extends RefCounted
 ## Presentation-only writes are reversible; caller edits made later take priority.
 static var _writers: Array[Node] = []
+## Core presentation for a behavior script, used where the owning Theme supplies none.
+const DEFAULT_HOOKS := {
+	"res://rookframe/ui/components/surfaces/fullscreen_wizard.gd": "res://rookframe/ui/_internal/presentation/defaults/fullscreen_wizard.gd",
+}
 
 static func owning_theme(node: Node) -> Theme:
 	var current := node
@@ -26,6 +30,11 @@ static func hooks(node: Node) -> RefCounted:
 				implementation = hook_script.new()
 				break
 			script = script.get_base_script()
+	script = node.get_script()
+	while implementation == null and script != null:
+		if DEFAULT_HOOKS.has(script.resource_path):
+			implementation = (load(DEFAULT_HOOKS[script.resource_path]) as Script).new()
+		script = script.get_base_script()
 	if not cached.is_empty():
 		restore(node)
 	node.set_meta(&"_presentation_hooks", [theme, implementation])
