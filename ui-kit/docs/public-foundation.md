@@ -15,6 +15,7 @@ supplies no appearance Theme, material assets or fonts.
 | `themes/component_theme.gd` | Path and script UID | Native Theme with optional component presentation |
 | `themes/design_tokens.gd` | Path and script UID | Semantic token names by item type, neutral values and AA pairs |
 | `themes/neutral_tokens.tres` | Path | Neutral `RookframeTokens` Theme |
+| `themes/token_base.gd` | Path and script UID | Stock controls and kit variations built from a Theme's tokens |
 | `menu/menu_theme.gd` | Path and script UID | Compile caller-supplied Theme mappings |
 | `icons/<semantic-name>.svg` | Path and import UID | Interface pictogram |
 | `icons/manifest.json` | Path | Semantic registry and upstream provenance |

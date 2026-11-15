@@ -2,6 +2,29 @@
 
 ## Unreleased
 
+- Add the token-built base layer `themes/token_base.gd`. Every component theme
+  entry generates the standard stock controls and kit type variations
+  (`Rookframe*`, `Task*`, `Wizard*`, `components_button*`) from its own
+  `RookframeTokens` and lays them beneath its sources, so Package and host UI is
+  complete in any theme. A type a theme defines stays that theme's alone.
+  Fantasy and Cyberpunk gain every control and variation they did not author;
+  Silkbound Ledger gains only `FoldableContainer` (Accordion, Collapsible),
+  `LinkButton`, `MenuBar`, the `ScrollContainer` focus ring, `RookframePopover`
+  and the `RookframeInlineNotice*` states. An entry without a default font uses
+  the `body` role. `ui-kit/tests/token_base.gd` checks coverage and ownership.
+- Give the full-screen wizard a theme-independent responsive fit: where the
+  owning Theme has no presentation hook, a core default hook
+  (`_internal/presentation/defaults/fullscreen_wizard.gd`) sizes the header,
+  steps and footer from tokens, folds the step names into the header on short
+  viewports, bounds action icons to `icon_medium`, keeps actions at
+  `target_minimum` and marks pending, current and completed steps. Silkbound
+  Ledger keeps its own hook.
+- Carry the owning Theme to the Action Panel emblem, which sits beneath a
+  Node2D where native Theme inheritance stops; unskinned themes now style it.
+- Silkbound Ledger: the Action Panel profile Theme no longer defines the base
+  `Label` color, which replaced the `Rookframe*` label variations of slot
+  content. Plain labels are unchanged; `RookframeMeta`, `RookframeStatus`,
+  `RookframeSuccess`, `RookframeError` and the like now show their own ink there.
 - Declare the semantic token contract: Theme type `RookframeTokens` with color,
   type, space, shape, elevation, size and motion items, listed by item type in
   `themes/design_tokens.gd`. The core ships the neutral set

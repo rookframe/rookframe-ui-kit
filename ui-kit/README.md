@@ -3,7 +3,10 @@
 Unthemed Godot controls, composition and behavior. A core-only install uses
 Godot defaults and includes no custom fonts or material assets. Its only Theme
 resource is the neutral [semantic token](docs/world-theme-styling.md#semantic-tokens)
-set, which styles no native control.
+set, which styles no native control. A component theme entry adds the
+[token-built base layer](docs/world-theme-styling.md#token-built-base-layer):
+every stock control and kit variation its theme leaves undefined, generated
+from that theme's tokens.
 
 ## Agent entry points
 
@@ -48,15 +51,17 @@ godot --headless --path ui-kit --script res://tests/expansion_contracts.gd
 godot --headless --path ui-kit --script res://tests/hud_components.gd
 godot --headless --path ui-kit --script res://tests/arc_picker.gd
 godot --headless --path ui-kit --script res://tests/design_tokens.gd
+godot --headless --path ui-kit --script res://tests/token_base.gd
 ```
 
-`design_tokens.gd` also audits every installed theme entry. Run it in the
-prepared showcase to cover the optional themes:
+`design_tokens.gd` and `token_base.gd` also audit every installed theme entry.
+Run them in the prepared showcase to cover the optional themes:
 
 ```sh
 python3 tools/workspace.py prepare
 godot --headless --editor --path showcase --import --quit
 godot --headless --path showcase --script "$PWD/ui-kit/tests/design_tokens.gd"
+godot --headless --path showcase --script "$PWD/ui-kit/tests/token_base.gd"
 ```
 
 For cross-package suites, install the pinned development runner:

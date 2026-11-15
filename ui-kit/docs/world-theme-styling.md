@@ -31,6 +31,9 @@ remain package-owned implementation details.
 Core bindings apply appearance before readiness and respond to native Theme
 changes. Presentation writes are restored when selection changes; subsequent
 caller changes retain priority. Effects settle before their resources change.
+Where the selected Theme maps no hook to a behavior script, a core default from
+`Appearance.DEFAULT_HOOKS` applies, with or without a Theme; the full-screen
+wizard's responsive fit is one.
 The hinged leaf bridges its selected Theme across its internal SubViewport.
 Core-only installation includes the shared mechanism but no concrete appearance.
 
@@ -76,6 +79,37 @@ its empty defaults for the token type.
 A theme package defines every token in its `native_theme` or a supplemental
 Theme. `tests/design_tokens.gd` reports tokens a theme entry does not author
 and AA pairs below 4.5:1.
+
+## Token-built base layer
+
+`themes/token_base.gd` generates every standard stock control and kit type
+variation from a Theme's `RookframeTokens`: colors from the color roles, fonts
+and sizes from the type roles, paddings from `space_*`, corners, borders and
+focus from the shape tokens, shadows from elevation and `shadow`. It authors no
+value of its own, and icons stay Godot's, tinted by color roles. Every
+`component_theme.gd` entry builds it from the entry's resolved tokens and lays
+it beneath `supplemental_themes` and `native_theme`, so an entry is complete
+under any token set, and an entry without sources is the neutral appearance.
+
+A theme owns each type it defines. The base layer supplies only types that no
+source defines: it never adds an item to an authored type, because that item
+would replace the one the theme inherits from its own base type. A partly
+authored type therefore resolves its remaining items through its base type and
+then the native classes it extends, as stock Godot does; `OptionButton` with
+only an arrow takes the rest from `Button`. Author the whole of a type you
+restyle. Without a `default_font` or `default_font_size` in `native_theme`, the
+entry uses the `body` role.
+
+Buttons, fields, tabs and rows distinguish normal, hover, pressed, disabled and
+focus. Primary actions use `accent` with `accent_content`, secondary actions the
+raised surface, quiet actions no fill until pointed at, destructive actions the
+`danger` roles. Godot's unchecked mark is a dark well, so `CheckBox` and
+`CheckButton` keep a lit row around it; a theme that wants an outlined box
+authors the `CheckBox` icons. `tests/token_base.gd` lists the stock controls, checks that every
+variation a kit scene or script assigns is declared, that every value follows
+the tokens, and that authored types are left alone. The mapping compiler's
+usages below (`menu_*`, `editor_*`, `settings_*`, `components_switch*`) are not
+part of the layer; without a mapping they resolve through their stock class.
 
 ## Native mapping compiler
 `menu/menu_theme.gd` compiles caller-supplied mapping and material scripts into
