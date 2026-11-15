@@ -6,7 +6,7 @@ const ComponentTheme = preload("res://rookframe/ui/themes/component_theme.gd")
 const NEUTRAL = preload("res://rookframe/ui/themes/neutral_tokens.tres")
 const THEMES = "res://rookframe/ui/themes"
 ## Installed theme entries only report their gaps until every entry defines every token.
-const ENFORCE_THEME_ENTRIES := false
+const ENFORCE_THEME_ENTRIES := true
 var failures: Array[String] = []
 
 func _initialize() -> void:
