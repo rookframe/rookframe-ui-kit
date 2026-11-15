@@ -27,8 +27,9 @@ godot --path .
 
 The project opens `examples/components/catalogue.tscn`: a native Godot catalogue
 with one view per component or native composition recipe. Navigation groups
-components by purpose: Actions, Forms & selection, Navigation, Layout, Surfaces,
-Data display, and Feedback & overlays. Each view offers separate state and variant
+components by purpose: Foundations, Actions, Forms & selection, Navigation, Layout,
+Surfaces, Data display, and Feedback & overlays. Foundations holds the Design tokens
+page: every `RookframeTokens` item of the selected theme, read live from the Theme. Each view offers separate state and variant
 examples using production resources, plus local synthetic interaction feedback.
 
 Search by component, group, or purpose. Ctrl/Cmd+K focuses search; Enter opens
@@ -104,6 +105,7 @@ godot --headless --path . --script res://tests/component_catalogue.gd
 godot --headless --path . --script res://tests/component_catalogue_interactions.gd
 godot --path . --script res://tests/button.gd -- --capture-dir=/absolute/temp/path
 godot --path . --script res://tests/arc_picker.gd -- --capture-dir=/absolute/temp/path
+godot --path . --script res://tests/token_reference.gd -- --capture-dir=/absolute/temp/path
 godot --path . --script res://tests/component_catalogue.gd -- --capture-dir=/absolute/temp/path
 godot --path . --script res://tests/specimen.gd -- --capture-dir=/absolute/temp/path
 godot --headless --path . --script res://tests/theme_activation.gd

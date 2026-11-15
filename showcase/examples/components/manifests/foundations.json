@@ -1,0 +1,25 @@
+[
+  {
+    "id": "design_tokens",
+    "title": "Design tokens",
+    "category": "Foundations",
+    "description": "Every semantic token of the selected theme: color roles, type roles, space, shape, elevation, size and motion.",
+    "script": "res://examples/components/pages/foundations/design_tokens.gd",
+    "covers": [
+      "res://rookframe/ui/themes/design_tokens.gd",
+      "res://rookframe/ui/themes/neutral_tokens.tres"
+    ],
+    "keywords": [
+      "tokens",
+      "RookframeTokens",
+      "color",
+      "palette",
+      "contrast",
+      "font",
+      "spacing",
+      "radius",
+      "shadow",
+      "motion"
+    ]
+  }
+]

@@ -6,7 +6,7 @@ import re
 ROOT = Path(__file__).resolve().parents[2]
 SHOWCASE = ROOT / "showcase"
 CATEGORIES = {
-    "Actions", "Forms & selection", "Navigation", "Layout", "Surfaces",
+    "Foundations", "Actions", "Forms & selection", "Navigation", "Layout", "Surfaces",
     "Data display", "Feedback & overlays",
 }
 
@@ -37,6 +37,7 @@ def main():
     expected.update(c["script"] for c in catalogue.get("behaviorResources", []))
     expected.update(catalogue["currentDesignSystem"]["components"])
     expected.update(c["name"] for c in catalogue["expansionCapabilities"])
+    expected.add(catalogue["designTokens"]["contract"])
     missing = expected - covered
     assert not missing, "Unrepresented public components/capabilities:\n" + "\n".join(sorted(missing))
     assert {entry["category"] for entry in entries} == CATEGORIES

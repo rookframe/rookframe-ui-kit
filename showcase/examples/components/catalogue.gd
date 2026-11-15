@@ -10,6 +10,7 @@ const PREVIEW_THEMES := {
 	"cyberpunk": preload("res://rookframe/ui/themes/cyberpunk/theme.tres"),
 }
 const GROUP_COPY := {
+	"Foundations": "Read the semantic values the selected theme supplies.",
 	"Actions": "Trigger an action or choose a tool.",
 	"Forms & selection": "Enter, validate, and select values.",
 	"Navigation": "Move through retained views and content.",
