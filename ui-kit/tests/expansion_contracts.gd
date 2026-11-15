@@ -286,6 +286,37 @@ func _collections() -> void:
 	print("AT-37 1000 records / 100 updates: update_us=", updated - start, "; settle_us=", Time.get_ticks_usec() - updated)
 	check(large._rows == identities, "AT-37 Single-record edits retain all rows")
 	large.free()
+	await _paged_column()
+
+## Rows configured before their column is laid out are measured at the column
+## width, even on hidden pages, and the shown page follows the selection.
+func _paged_column() -> void:
+	var column := VBoxContainer.new()
+	host.add_child(column)
+	column.size = Vector2(600, 900)
+	var choices = load(UI + "components/data/paginated_choices.tscn").instantiate()
+	column.add_child(choices)
+	var entries: Array[Dictionary] = []
+	for i in 30: entries.append({"id": "a%d" % i, "title": "Ability %d" % i, "subtitle": "3d6"})
+	choices.configure(entries, "a15")
+	await settle(8)
+	var shown := entries.map(func(entry): return named(choices, "%s. 3d6. " % entry.title)).filter(func(row): return row.is_visible_in_tree())
+	check(shown.size() >= 10, "Paged rows fill a tall column: %d shown" % shown.size())
+	check(shown.all(func(row): return choices.get_global_rect().encloses(row.get_global_rect())), "Paged rows fit their page")
+	check(named(choices, "Ability 15. 3d6. ").is_visible_in_tree(), "Paged list shows the selection")
+	var results: Array[Dictionary] = []
+	for i in 30: results.append({"id": "r%d" % i, "title": "Result %d" % i, "subtitle": "1d6"})
+	# A consumer may configure twice before the deferred fit.
+	choices.configure(results, "r0")
+	choices.configure(results, "r0")
+	await settle(8)
+	check(named(choices, "Result 0. 1d6. ").is_visible_in_tree(), "Repeated configure still reveals a changed selection")
+	choices.configure(results, "r20")
+	await settle(8)
+	column.size = Vector2(600, 500)
+	await settle(8)
+	check(named(choices, "Result 20. 1d6. ").is_visible_in_tree(), "Reflow keeps the shown selection on its page")
+	column.free()
 
 func _transfer() -> void:
 	var region := Control.new()

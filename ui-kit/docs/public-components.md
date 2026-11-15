@@ -424,8 +424,11 @@ remaining viewport. It has no collection scroll region.
 `title`, `subtitle`, `value`, and optional `icon` through
 `configure(entries, selected_id, caption, count)`. It emits `selected(id)`.
 Pagination displays complete rows, reveals a changed selection, and retains
-native row Controls when their identities stay the same. Previous and Next
-change only the visible page. The consumer decides whether selection changes
+native row Controls when their identities stay the same. Every row, including
+rows on hidden pages, is measured at the current column width. A resize or
+theme change re-paginates and keeps the selection, or else the first entry of
+the shown page, on screen; `restore_state` applies its page number to the next
+fit. Previous and Next change only the visible page. The consumer decides whether selection changes
 rules or merely inspects a recorded result.
 
 `empty_text: String` supplies the empty collection message (default “No entries in this group.”). The consuming screen owns domain copy; captions do not change behavior.
