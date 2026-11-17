@@ -2,6 +2,58 @@
 
 ## Unreleased
 
+- Close the gaps found while moving MÖRK BORG to the base layer:
+  - `hinged_leaf` has a token-built look. Its `Skin` Panel now fills the leaf at
+    scale 1 with the new `RookframeHingedLeaf` variation (`surface`, `border`,
+    `radius_medium`), and the leaf hands the owning Theme to the skin as well as
+    to its content, because Theme lookups stop at its SubViewport. The slab edge
+    shown during the swing takes `border`. Silkbound Ledger's leaf is unchanged:
+    its presentation now carries the 2.5 anchors and 0.4 scale its leather needs.
+    A consumer template that styles `Surface/Viewport/Root/Skin` and relied on
+    that scale must set it itself.
+  - `TaskTextField` and `TaskTextArea` honour `compact` where no theme presents
+    them, through the core default hook `_internal/presentation/defaults/task_field.gd`:
+    gaps `space_1` (compact) or `space_2`, single-line editor `target_minimum`,
+    multiline editor `action_height + space_3` compact and
+    `2 × action_height + space_2` otherwise. The documented `label_font_size`,
+    `editor_font_size` and `editor_minimum_height` constant overrides now work
+    in every theme.
+  - The token-built `RookframeActionRoll` shows the kit's `icons/dice.svg`
+    through the Button `icon` Theme item, centred by equal `space_4` insets at
+    its natural 56 px width. The base layer may now load a kit pictogram from
+    `res://rookframe/ui/icons/`; `tests/test_workspace.py` still forbids colors,
+    fonts and materials.
+  - An icon-only shared Button keeps at most `space_4` beside its icon, so it is
+    56 px wide in Fantasy (was 96) and 52–60 px in Cyberpunk (was 68–70).
+    `Button.is_icon_only()` is public; a presentation that replaces the faces
+    fits them itself, as Fantasy's carved Button now does.
+  - A compact `IdentityPlate` wraps at no less than 7.5 em of its title size, so
+    a theme's fixed `copy_width` no longer breaks a short name (Fantasy: one line
+    instead of two for both the name and the detail).
+  - `HudBar` scopes a token-built profile Theme to its identity slot where the
+    owning Theme's presentation supplies none: `RookframeIdentity` and
+    `RookframeValue` at the `label` size and `space_1` between lines. Cyberpunk's
+    compact bar drops from 160 to 121 px. Silkbound Ledger and Fantasy keep their
+    own profiles. With no tokens in the tree the bar assigns no Theme.
+  - `TaskHeader` hides its Progress and Tabs slots while they hold nothing visible.
+  - `PaginatedContent` measures again one frame later before it reports content
+    taller than its viewport, so a layout still settling after a resize no longer logs.
+  - `ActionRow` keeps the widest word of its title, the gap and the trailing
+    label inside its width, so a narrow row no longer runs "HP" into "15 / 15".
+    A caller's `custom_minimum_size.x` remains the floor.
+- Silkbound Ledger: `RookframeLabel` (13 -> 20), `RookframeMeta` (12 -> 18) and
+  `RookframeError` (12 -> 18) now follow the `label` and `meta` size tokens, like
+  `RookframeStatus`, `RookframePending` and `RookframeSuccess`. The tokens were
+  already what the theme's controls, status roles and refined presentations
+  use; the three variations were the dense fallback of the task/sheet profile.
+  Captions and field labels that showed that fallback grow; review dense
+  Silkbound screens.
+- Silkbound Ledger: `border` is the copper its controls are outlined in
+  (`ornament` at 38%, was grey #5b6265), so token-built and Package outlines
+  match Button, LineEdit, TextEdit and OptionButton. Authored panels, cards,
+  popups and shell controls keep their grey edge through the theme-private
+  `ledger_edge` primitive. `border_strong` already matched selected outlines.
+
 - Text must stay readable on interactive fills: `AA_PAIRS` adds `content` and
   `content_muted` on `surface_hover`, `surface_pressed` and `accent_subtle`.
   Neutral set: `content_muted` #a0a0a0 -> #a8a8a8, `surface_hover` #404040 ->

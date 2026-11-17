@@ -60,8 +60,10 @@ rules. New compositions use semantic variations, not these old frame textures.
 `theme/silkbound_tokens.gd` is the single source of this theme's values for the
 [semantic tokens](../../../ui-kit/docs/world-theme-styling.md#semantic-tokens)
 (`RookframeTokens`), plus theme-private colors without a semantic role:
-pictogram brass, section-count copper, ribbon, and the `ledger_hover`,
-`ledger_pressed` and `ledger_selected` fill. Authored controls keep that one
+pictogram brass, section-count copper, ribbon, the grey `ledger_edge` of
+panels, cards, popups and shell controls, and the `ledger_hover`,
+`ledger_pressed` and `ledger_selected` fill. The semantic `border` is the
+copper at 38% that outlines Button, LineEdit, TextEdit and OptionButton. Authored controls keep that one
 raised fill under the pointer, while pressed and when selected, and tell the
 states apart by their edges; the semantic `surface_hover`, `surface_pressed` and
 `accent_subtle` values differ, for the base layer and Package token reads.
@@ -71,7 +73,7 @@ first in `supplemental_themes`.
 A `.tres` item cannot refer to another item or to a script constant, so every
 authored value that plays a token's role names that token in `metadata/tokens`
 on the object that owns it. A StyleBox names its properties,
-`{"bg_color": &"surface", "border_color": [&"ornament", 0.38]}`, where an array
+`{"bg_color": &"surface", "border_color": &"border"}`, where an array
 keeps the token's color at its own alpha. A Theme names its items by path, such
 as `"RookframeMeta/colors/font_color": &"content_muted"` or
 `"RookframeTitle/fonts/font": &"display"`. `tools/apply-silkbound-tokens.gd`
@@ -93,9 +95,9 @@ The three Theme resources share palette and native control roles.
 `rookframe_theme.tres` is the general profile; `silkbound_theme.tres` and the
 retained `fullscreen_task_theme.tres` path supply the task/sheet density profile.
 They are authored native resources, with no runtime theme engine or picker.
-The task/sheet profile keeps its denser `RookframeLabel`, `RookframeMeta` and
-`RookframeError` sizes and natural line spacing, so those items do not follow
-the `label` and `meta` size tokens or the `line_spacing_*` tokens.
+In both profiles `RookframeLabel` follows the `label` size token and
+`RookframeMeta` and `RookframeError` follow `meta`. The task/sheet profile keeps
+natural line spacing on them, so they do not follow the `line_spacing_*` tokens.
 `tokens.gd` keeps its public constants for compatibility.
 
 The semantic names and purposes are the compatibility contract; exact visual

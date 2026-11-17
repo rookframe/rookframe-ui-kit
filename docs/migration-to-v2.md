@@ -354,3 +354,17 @@ To open this page, run `godot --path showcase -- --component=design_tokens` from
    ```
 
 10. Check the changed screens in each theme at 1920 × 1080, 1024 × 768, and 844 × 390.
+
+    These components changed their size or look after the base layer was added:
+
+    | Component | Change | Action |
+    | --- | --- | --- |
+    | `hinged_leaf` | `Surface/Viewport/Root/Skin` fills the leaf at scale 1 and uses `RookframeHingedLeaf`. | If your own template styles `Skin` for the old 2.5 anchors and 0.4 scale, set them in that template. |
+    | `TaskTextField`, `TaskTextArea` | `compact` shrinks the gaps and the multiline editor in every theme. | Remove workarounds that set these sizes. |
+    | Shared Button with an icon and no text | Side padding is at most `space_4`. | Remove width workarounds. |
+    | `RookframeActionRoll` | The token-built variation shows the kit die icon. | Remove a die icon you added to cover the gap. |
+    | `IdentityPlate`, `HudBar` | Compact plates keep short names on one line. The bar sizes its identity from the `label` size where the theme has no HUD profile. | Remove font-size and gap workarounds in the identity slot. |
+    | `TaskHeader` | Empty Progress and Tabs slots are hidden. | No action. |
+    | `ActionRow` | The row grows to the width of its title word and trailing label. | Remove gap workarounds. |
+    | Silkbound Ledger `RookframeLabel`, `RookframeMeta`, `RookframeError` | Sizes are 20, 18 and 18 (were 13, 12 and 12). | Check dense Silkbound screens. |
+    | Silkbound Ledger `border` token | Copper at 38% opacity (was grey). | If you read `border` and need an opaque color, blend it with the surface behind it. |
