@@ -47,14 +47,14 @@ bg_color = Color(0.082353, 0.090196, 0.098039, 1)
 border_color = Color(0.356863, 0.384314, 0.396078, 1)
 metadata/tokens = {
 "bg_color": &"canvas",
-"border_color": &"border"
+"border_color": &"ledger_edge"
 }
 [sub_resource type="StyleBoxFlat" id="PackageInk"]
 bg_color = Color(0.082353, 0.090196, 0.098039, 1)
 border_color = Color(0.356863, 0.384314, 0.396078, 1)
 metadata/tokens = {
 "bg_color": &"canvas",
-"border_color": &"border"
+"border_color": &"ledger_edge"
 }
 [sub_resource type="StyleBoxFlat" id="PackageFrame"]
 bg_color = Color(0.082353, 0.090196, 0.098039, 1)
@@ -65,7 +65,7 @@ border_width_bottom = 1
 border_color = Color(0.356863, 0.384314, 0.396078, 1)
 metadata/tokens = {
 "bg_color": &"canvas",
-"border_color": &"border"
+"border_color": &"ledger_edge"
 }
 
 [sub_resource type="StyleBoxFlat" id="Surface"]
@@ -81,7 +81,7 @@ border_width_bottom = 1
 border_color = Color(0.356863, 0.384314, 0.396078, 1)
 metadata/tokens = {
 "bg_color": &"surface",
-"border_color": &"border"
+"border_color": &"ledger_edge"
 }
 
 [sub_resource type="StyleBoxFlat" id="Raised"]
@@ -97,7 +97,7 @@ border_width_bottom = 1
 border_color = Color(0.356863, 0.384314, 0.396078, 1)
 metadata/tokens = {
 "bg_color": &"surface",
-"border_color": &"border"
+"border_color": &"ledger_edge"
 }
 
 [sub_resource type="StyleBoxFlat" id="RaisedSurface"]
@@ -113,7 +113,7 @@ border_width_bottom = 1
 border_color = Color(0.356863, 0.384314, 0.396078, 1)
 metadata/tokens = {
 "bg_color": &"surface_raised",
-"border_color": &"border"
+"border_color": &"ledger_edge"
 }
 
 [sub_resource type="StyleBoxFlat" id="RaisedFrame"]
@@ -125,7 +125,7 @@ border_width_bottom = 1
 border_color = Color(0.356863, 0.384314, 0.396078, 1)
 metadata/tokens = {
 "bg_color": &"surface",
-"border_color": &"border"
+"border_color": &"ledger_edge"
 }
 
 [sub_resource type="StyleBoxFlat" id="ActiveSurface"]
@@ -137,7 +137,7 @@ border_width_bottom = 1
 border_color = Color(0.356863, 0.384314, 0.396078, 1)
 metadata/tokens = {
 "bg_color": &"surface_raised",
-"border_color": &"border"
+"border_color": &"ledger_edge"
 }
 
 [sub_resource type="StyleBoxFlat" id="InsetFrame"]
@@ -149,7 +149,7 @@ border_width_bottom = 1
 border_color = Color(0.356863, 0.384314, 0.396078, 1)
 metadata/tokens = {
 "bg_color": &"surface",
-"border_color": &"border"
+"border_color": &"ledger_edge"
 }
 
 [sub_resource type="StyleBoxFlat" id="TaskFrame"]
@@ -189,7 +189,7 @@ border_width_bottom = 1
 border_color = Color(0.356863, 0.384314, 0.396078, 1)
 metadata/tokens = {
 "bg_color": &"surface",
-"border_color": &"border"
+"border_color": &"ledger_edge"
 }
 
 [sub_resource type="StyleBoxFlat" id="ShellRail"]
@@ -201,7 +201,7 @@ border_width_bottom = 1
 border_color = Color(0.356863, 0.384314, 0.396078, 1)
 metadata/tokens = {
 "bg_color": [&"canvas", 0.94],
-"border_color": &"border"
+"border_color": &"ledger_edge"
 }
 
 [sub_resource type="StyleBoxFlat" id="ManagedChrome"]
@@ -214,7 +214,7 @@ border_width_bottom = 1
 border_color = Color(0.356863, 0.384314, 0.396078, 1)
 metadata/tokens = {
 "bg_color": &"surface",
-"border_color": &"border"
+"border_color": &"ledger_edge"
 }
 
 [sub_resource type="StyleBoxFlat" id="ManagedChromeCompact"]
@@ -227,7 +227,7 @@ border_width_bottom = 1
 border_color = Color(0.356863, 0.384314, 0.396078, 1)
 metadata/tokens = {
 "bg_color": &"surface",
-"border_color": &"border"
+"border_color": &"ledger_edge"
 }
 
 [sub_resource type="StyleBoxFlat" id="ShellControl"]
@@ -243,7 +243,7 @@ border_width_bottom = 1
 border_color = Color(0.356863, 0.384314, 0.396078, 1)
 metadata/tokens = {
 "bg_color": &"surface",
-"border_color": &"border"
+"border_color": &"ledger_edge"
 }
 
 [sub_resource type="StyleBoxFlat" id="ShellControlActive"]
@@ -259,7 +259,7 @@ border_width_bottom = 1
 border_color = Color(0.356863, 0.384314, 0.396078, 1)
 metadata/tokens = {
 "bg_color": &"ledger_hover",
-"border_color": &"border"
+"border_color": &"ledger_edge"
 }
 
 [sub_resource type="StyleBoxFlat" id="ShellControlFocus"]
@@ -290,7 +290,7 @@ border_width_bottom = 1
 border_color = Color(0.356863, 0.384314, 0.396078, 1)
 metadata/tokens = {
 "bg_color": &"surface",
-"border_color": &"border"
+"border_color": &"ledger_edge"
 }
 
 [sub_resource type="StyleBoxFlat" id="ManagedControlHover"]
@@ -306,7 +306,7 @@ border_width_bottom = 1
 border_color = Color(0.356863, 0.384314, 0.396078, 1)
 metadata/tokens = {
 "bg_color": &"ledger_hover",
-"border_color": &"border"
+"border_color": &"ledger_edge"
 }
 
 [sub_resource type="StyleBoxFlat" id="ManagedControlFocus"]
@@ -337,7 +337,7 @@ border_width_bottom = 1
 border_color = Color(0.356863, 0.384314, 0.396078, 1)
 metadata/tokens = {
 "bg_color": &"surface",
-"border_color": &"border"
+"border_color": &"ledger_edge"
 }
 
 [sub_resource type="StyleBoxFlat" id="ManagedCommit"]
@@ -395,7 +395,7 @@ border_width_bottom = 1
 border_color = Color(0.356863, 0.384314, 0.396078, 1)
 metadata/tokens = {
 "bg_color": &"surface_sunken",
-"border_color": &"border"
+"border_color": &"ledger_edge"
 }
 
 [sub_resource type="StyleBoxFlat" id="Notice"]
@@ -411,7 +411,7 @@ border_width_bottom = 1
 border_color = Color(0.356863, 0.384314, 0.396078, 1)
 metadata/tokens = {
 "bg_color": &"info_surface",
-"border_color": &"border"
+"border_color": &"ledger_edge"
 }
 
 [sub_resource type="StyleBoxFlat" id="Badge"]
@@ -427,7 +427,7 @@ border_width_bottom = 1
 border_color = Color(0.356863, 0.384314, 0.396078, 1)
 metadata/tokens = {
 "bg_color": &"surface",
-"border_color": &"border"
+"border_color": &"ledger_edge"
 }
 
 [sub_resource type="StyleBoxFlat" id="StepPending"]
@@ -443,7 +443,7 @@ corner_radius_bottom_right = 18
 corner_radius_bottom_left = 18
 metadata/tokens = {
 "bg_color": &"surface",
-"border_color": &"border"
+"border_color": &"ledger_edge"
 }
 
 [sub_resource type="StyleBoxFlat" id="StepCurrent"]
@@ -475,7 +475,7 @@ corner_radius_bottom_right = 18
 corner_radius_bottom_left = 18
 metadata/tokens = {
 "bg_color": &"surface",
-"border_color": &"border"
+"border_color": &"ledger_edge"
 }
 
 [sub_resource type="StyleBoxFlat" id="Input"]
@@ -491,7 +491,7 @@ border_width_bottom = 1
 border_color = Color(0.356863, 0.384314, 0.396078, 1)
 metadata/tokens = {
 "bg_color": &"surface",
-"border_color": &"border"
+"border_color": &"ledger_edge"
 }
 
 [sub_resource type="StyleBoxFlat" id="InputFocus"]
@@ -522,7 +522,7 @@ border_width_bottom = 1
 border_color = Color(0.356863, 0.384314, 0.396078, 1)
 metadata/tokens = {
 "bg_color": &"surface",
-"border_color": &"border"
+"border_color": &"ledger_edge"
 }
 
 [sub_resource type="StyleBoxFlat" id="SearchInput"]
@@ -537,7 +537,7 @@ border_width_right = 1
 border_width_bottom = 1
 border_color = Color(0.356863, 0.384314, 0.396078, 1)
 metadata/tokens = {
-"border_color": &"border"
+"border_color": &"ledger_edge"
 }
 
 [sub_resource type="StyleBoxFlat" id="SearchInputFocus"]
@@ -568,7 +568,7 @@ border_width_bottom = 1
 border_color = Color(0.356863, 0.384314, 0.396078, 1)
 metadata/tokens = {
 "bg_color": &"surface",
-"border_color": &"border"
+"border_color": &"ledger_edge"
 }
 
 [sub_resource type="StyleBoxFlat" id="ButtonHover"]
@@ -584,7 +584,7 @@ border_width_bottom = 1
 border_color = Color(0.356863, 0.384314, 0.396078, 1)
 metadata/tokens = {
 "bg_color": &"ledger_hover",
-"border_color": &"border"
+"border_color": &"ledger_edge"
 }
 
 [sub_resource type="StyleBoxFlat" id="ButtonPressed"]
@@ -600,7 +600,7 @@ border_width_bottom = 1
 border_color = Color(0.356863, 0.384314, 0.396078, 1)
 metadata/tokens = {
 "bg_color": &"ledger_pressed",
-"border_color": &"border"
+"border_color": &"ledger_edge"
 }
 
 [sub_resource type="StyleBoxFlat" id="ButtonFocus"]
@@ -631,7 +631,7 @@ border_width_bottom = 1
 border_color = Color(0.356863, 0.384314, 0.396078, 1)
 metadata/tokens = {
 "bg_color": &"surface",
-"border_color": &"border"
+"border_color": &"ledger_edge"
 }
 
 [sub_resource type="StyleBoxFlat" id="Quiet"]
@@ -642,7 +642,7 @@ content_margin_bottom = 10.0
 bg_color = Color(0.137255, 0.156863, 0.168627, 0)
 border_color = Color(0.356863, 0.384314, 0.396078, 1)
 metadata/tokens = {
-"border_color": &"border"
+"border_color": &"ledger_edge"
 }
 [sub_resource type="StyleBoxFlat" id="QuietHover"]
 content_margin_left = 12.0
@@ -657,7 +657,7 @@ border_width_bottom = 1
 border_color = Color(0.356863, 0.384314, 0.396078, 1)
 metadata/tokens = {
 "bg_color": &"ledger_hover",
-"border_color": &"border"
+"border_color": &"ledger_edge"
 }
 
 [sub_resource type="StyleBoxFlat" id="QuietPressed"]
@@ -673,7 +673,7 @@ border_width_bottom = 1
 border_color = Color(0.356863, 0.384314, 0.396078, 1)
 metadata/tokens = {
 "bg_color": &"ledger_pressed",
-"border_color": &"border"
+"border_color": &"ledger_edge"
 }
 
 [sub_resource type="StyleBoxFlat" id="QuietFocus"]
@@ -744,7 +744,7 @@ border_width_bottom = 1
 border_color = Color(0.356863, 0.384314, 0.396078, 1)
 metadata/tokens = {
 "bg_color": &"surface",
-"border_color": &"border"
+"border_color": &"ledger_edge"
 }
 
 [sub_resource type="StyleBoxFlat" id="TabHover"]
@@ -757,7 +757,7 @@ border_width_bottom = 1
 border_color = Color(0.356863, 0.384314, 0.396078, 1)
 metadata/tokens = {
 "bg_color": &"ledger_hover",
-"border_color": &"border"
+"border_color": &"ledger_edge"
 }
 
 [sub_resource type="StyleBoxFlat" id="TabSelected"]
@@ -784,7 +784,7 @@ border_width_bottom = 1
 border_color = Color(0.356863, 0.384314, 0.396078, 1)
 metadata/tokens = {
 "bg_color": &"surface",
-"border_color": &"border"
+"border_color": &"ledger_edge"
 }
 
 [sub_resource type="StyleBoxFlat" id="ProgressFill"]
@@ -792,35 +792,35 @@ bg_color = Color(0.807843, 0.8, 0.701961, 1)
 border_color = Color(0.356863, 0.384314, 0.396078, 1)
 metadata/tokens = {
 "bg_color": &"accent",
-"border_color": &"border"
+"border_color": &"ledger_edge"
 }
 [sub_resource type="StyleBoxFlat" id="Separator"]
 bg_color = Color(0.243137, 0.262745, 0.27451, 1)
 border_color = Color(0.356863, 0.384314, 0.396078, 1)
 metadata/tokens = {
 "bg_color": &"divider",
-"border_color": &"border"
+"border_color": &"ledger_edge"
 }
 [sub_resource type="StyleBoxFlat" id="Scrollbar"]
 bg_color = Color(0.243137, 0.262745, 0.27451, 1)
 border_color = Color(0.356863, 0.384314, 0.396078, 1)
 metadata/tokens = {
 "bg_color": &"divider",
-"border_color": &"border"
+"border_color": &"ledger_edge"
 }
 [sub_resource type="StyleBoxFlat" id="Grabber"]
 bg_color = Color(0.807843, 0.8, 0.701961, 1)
 border_color = Color(0.356863, 0.384314, 0.396078, 1)
 metadata/tokens = {
 "bg_color": &"accent",
-"border_color": &"border"
+"border_color": &"ledger_edge"
 }
 [sub_resource type="StyleBoxFlat" id="GrabberHighlight"]
 bg_color = Color(0.807843, 0.8, 0.701961, 1)
 border_color = Color(0.356863, 0.384314, 0.396078, 1)
 metadata/tokens = {
 "bg_color": &"accent",
-"border_color": &"border"
+"border_color": &"ledger_edge"
 }
 [sub_resource type="StyleBoxEmpty" id="Empty"]
 
@@ -849,7 +849,7 @@ border_width_bottom = 1
 border_color = Color(0.356863, 0.384314, 0.396078, 1)
 metadata/tokens = {
 "bg_color": &"info_surface",
-"border_color": &"border"
+"border_color": &"ledger_edge"
 }
 
 [sub_resource type="StyleBoxFlat" id="NoticeSuccess"]
@@ -865,7 +865,7 @@ border_width_bottom = 1
 border_color = Color(0.356863, 0.384314, 0.396078, 1)
 metadata/tokens = {
 "bg_color": &"success_surface",
-"border_color": &"border"
+"border_color": &"ledger_edge"
 }
 
 [sub_resource type="StyleBoxFlat" id="NoticeError"]
@@ -881,7 +881,7 @@ border_width_bottom = 1
 border_color = Color(0.356863, 0.384314, 0.396078, 1)
 metadata/tokens = {
 "bg_color": &"danger_surface",
-"border_color": &"border"
+"border_color": &"ledger_edge"
 }
 
 [sub_resource type="StyleBoxFlat" id="Row"]
@@ -908,7 +908,7 @@ border_width_bottom = 1
 border_color = Color(0.356863, 0.384314, 0.396078, 1)
 metadata/tokens = {
 "bg_color": &"ledger_hover",
-"border_color": &"border"
+"border_color": &"ledger_edge"
 }
 
 [sub_resource type="StyleBoxFlat" id="ListSelected"]
@@ -956,7 +956,7 @@ border_width_bottom = 1
 border_color = Color(0.356863, 0.384314, 0.396078, 1)
 metadata/tokens = {
 "bg_color": &"surface",
-"border_color": &"border"
+"border_color": &"ledger_edge"
 }
 
 [sub_resource type="StyleBoxFlat" id="SliderTrack"]
@@ -970,7 +970,7 @@ border_width_bottom = 1
 border_color = Color(0.356863, 0.384314, 0.396078, 1)
 metadata/tokens = {
 "bg_color": &"divider",
-"border_color": &"border"
+"border_color": &"ledger_edge"
 }
 
 [sub_resource type="StyleBoxFlat" id="SliderFill"]
@@ -980,7 +980,7 @@ bg_color = Color(0.807843, 0.8, 0.701961, 1)
 border_color = Color(0.356863, 0.384314, 0.396078, 1)
 metadata/tokens = {
 "bg_color": &"accent",
-"border_color": &"border"
+"border_color": &"ledger_edge"
 }
 [sub_resource type="StyleBoxFlat" id="WindowBorder"]
 content_margin_left = 16.0
@@ -1044,7 +1044,7 @@ bg_color = Color(0.137255, 0.156863, 0.168627, 1)
 border_color = Color(0.356863, 0.384314, 0.396078, 1)
 metadata/tokens = {
 "bg_color": &"surface",
-"border_color": &"border"
+"border_color": &"ledger_edge"
 }
 [sub_resource type="StyleBoxFlat" id="SecondaryHover"]
 content_margin_left = 16.0
@@ -1059,7 +1059,7 @@ bg_color = Color(0.203922, 0.239216, 0.254902, 1)
 border_color = Color(0.356863, 0.384314, 0.396078, 1)
 metadata/tokens = {
 "bg_color": &"ledger_hover",
-"border_color": &"border"
+"border_color": &"ledger_edge"
 }
 [sub_resource type="StyleBoxFlat" id="SecondaryPressed"]
 content_margin_left = 16.0
@@ -1074,7 +1074,7 @@ bg_color = Color(0.203922, 0.239216, 0.254902, 1)
 border_color = Color(0.356863, 0.384314, 0.396078, 1)
 metadata/tokens = {
 "bg_color": &"ledger_pressed",
-"border_color": &"border"
+"border_color": &"ledger_edge"
 }
 [sub_resource type="StyleBoxFlat" id="PrimaryNormal"]
 content_margin_left = 16.0
@@ -1215,7 +1215,7 @@ corner_radius_bottom_right = 31
 corner_radius_bottom_left = 31
 metadata/tokens = {
 "bg_color": &"surface",
-"border_color": &"border"
+"border_color": &"ledger_edge"
 }
 
 [sub_resource type="StyleBoxFlat" id="CircularActionHover"]
@@ -1231,7 +1231,7 @@ corner_radius_bottom_right = 31
 corner_radius_bottom_left = 31
 metadata/tokens = {
 "bg_color": &"ledger_hover",
-"border_color": &"border"
+"border_color": &"ledger_edge"
 }
 
 [sub_resource type="StyleBoxFlat" id="CircularActionFocus"]
@@ -1266,7 +1266,7 @@ corner_radius_bottom_right = 31
 corner_radius_bottom_left = 31
 metadata/tokens = {
 "bg_color": &"surface",
-"border_color": &"border"
+"border_color": &"ledger_edge"
 }
 
 [sub_resource type="StyleBoxFlat" id="CompactActionNormal"]
@@ -1280,7 +1280,7 @@ border_width_bottom = 1
 border_color = Color(0.356863, 0.384314, 0.396078, 1)
 metadata/tokens = {
 "bg_color": &"surface",
-"border_color": &"border"
+"border_color": &"ledger_edge"
 }
 
 [sub_resource type="StyleBoxFlat" id="CompactActionHover"]
@@ -1294,7 +1294,7 @@ border_width_bottom = 1
 border_color = Color(0.356863, 0.384314, 0.396078, 1)
 metadata/tokens = {
 "bg_color": &"ledger_hover",
-"border_color": &"border"
+"border_color": &"ledger_edge"
 }
 
 [sub_resource type="StyleBoxFlat" id="CompactActionFocus"]
@@ -1323,7 +1323,7 @@ border_width_bottom = 1
 border_color = Color(0.356863, 0.384314, 0.396078, 1)
 metadata/tokens = {
 "bg_color": &"surface",
-"border_color": &"border"
+"border_color": &"ledger_edge"
 }
 
 [sub_resource type="StyleBoxFlat" id="CompactActionTouchNormal"]
@@ -1337,7 +1337,7 @@ border_width_bottom = 1
 border_color = Color(0.356863, 0.384314, 0.396078, 1)
 metadata/tokens = {
 "bg_color": &"surface",
-"border_color": &"border"
+"border_color": &"ledger_edge"
 }
 
 [sub_resource type="StyleBoxFlat" id="CompactActionTouchHover"]
@@ -1351,7 +1351,7 @@ border_width_bottom = 1
 border_color = Color(0.356863, 0.384314, 0.396078, 1)
 metadata/tokens = {
 "bg_color": &"ledger_hover",
-"border_color": &"border"
+"border_color": &"ledger_edge"
 }
 
 [sub_resource type="StyleBoxFlat" id="CompactActionTouchDisabled"]
@@ -1365,7 +1365,7 @@ border_width_bottom = 1
 border_color = Color(0.356863, 0.384314, 0.396078, 1)
 metadata/tokens = {
 "bg_color": &"surface",
-"border_color": &"border"
+"border_color": &"ledger_edge"
 }
 
 [sub_resource type="StyleBoxFlat" id="silk_Button"]
@@ -1710,7 +1710,7 @@ content_margin_top = 2.0
 content_margin_bottom = 2.0
 metadata/tokens = {
 "bg_color": &"canvas",
-"border_color": &"border"
+"border_color": &"ledger_edge"
 }
 
 [sub_resource type="StyleBoxFlat" id="silk_GlyphHover"]
@@ -1743,7 +1743,7 @@ content_margin_top = 1.0
 content_margin_bottom = 0.0
 metadata/tokens = {
 "bg_color": &"surface",
-"border_color": &"border"
+"border_color": &"ledger_edge"
 }
 
 [sub_resource type="StyleBoxFlat" id="silk_FooterPhone"]
@@ -1756,7 +1756,7 @@ content_margin_top = 1.0
 content_margin_bottom = 0.0
 metadata/tokens = {
 "bg_color": &"surface",
-"border_color": &"border"
+"border_color": &"ledger_edge"
 }
 
 [sub_resource type="StyleBoxFlat" id="silk_RookframeIconFrame"]
@@ -1967,7 +1967,7 @@ content_margin_top = 16.0
 content_margin_bottom = 16.0
 metadata/tokens = {
 "bg_color": &"surface",
-"border_color": &"border"
+"border_color": &"ledger_edge"
 }
 
 [sub_resource type="StyleBoxFlat" id="silk_WizardLedger"]
@@ -2321,7 +2321,7 @@ content_margin_top = 16.0
 content_margin_bottom = 16.0
 metadata/tokens = {
 "bg_color": [&"canvas", 0.98],
-"border_color": &"border"
+"border_color": &"ledger_edge"
 }
 
 [sub_resource type="StyleBoxFlat" id="silk_DialogSurface"]

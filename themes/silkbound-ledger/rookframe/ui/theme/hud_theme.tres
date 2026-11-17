@@ -366,7 +366,7 @@ content_margin_top = 10.0
 content_margin_right = 12.0
 content_margin_bottom = 9.0
 metadata/tokens = {
-"border_color": [&"ornament", 0.38]
+"border_color": &"border"
 }
 
 [sub_resource type="StyleBoxFlat" id="TileHover"]
@@ -443,7 +443,7 @@ content_margin_top = 6.0
 content_margin_right = 8.0
 content_margin_bottom = 5.0
 metadata/tokens = {
-"border_color": [&"ornament", 0.38]
+"border_color": &"border"
 }
 
 [sub_resource type="StyleBoxFlat" id="TileCompactHover"]
@@ -861,7 +861,7 @@ content_margin_top = 4.0
 content_margin_bottom = 4.0
 metadata/tokens = {
 "bg_color": &"canvas",
-"border_color": &"border"
+"border_color": &"ledger_edge"
 }
 
 [sub_resource type="StyleBoxFlat" id="VitalFill"]

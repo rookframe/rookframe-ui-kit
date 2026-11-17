@@ -151,7 +151,7 @@ corner_radius_bottom_left = 32
 corner_detail = 16
 metadata/tokens = {
 "bg_color": [&"surface", 0.6],
-"border_color": [&"border", 0.8]
+"border_color": [&"ledger_edge", 0.8]
 }
 
 [sub_resource type="StyleBoxFlat" id="ItemNormal"]

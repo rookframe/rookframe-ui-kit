@@ -17,7 +17,7 @@ border_width_bottom = 1
 border_color = Color(0.356863, 0.384314, 0.396078, 1)
 metadata/tokens = {
 "bg_color": [&"canvas", 0.96],
-"border_color": &"border"
+"border_color": &"ledger_edge"
 }
 
 [sub_resource type="StyleBoxFlat" id="f0f1b810af_SelectedSurface"]

@@ -29,8 +29,9 @@ const COLORS := {
 	&"content_muted": Color("#aebabe"),
 	&"content_disabled": Color("#aebabe"),
 	&"content_heading": Color("#e7e7dd"),
-	# Border
-	&"border": Color("#5b6265"),
+	# Border: controls are outlined in copper at 38%, so the edge takes the tone of
+	# the surface behind it; panels keep the grey `ledger_edge` primitive.
+	&"border": Color(0.737255, 0.572549, 0.466667, 0.38),
 	&"border_strong": Color("#ceccb3"),
 	&"divider": Color("#3e4346"),
 	&"focus_ring": Color("#e7e7dd"),
@@ -70,6 +71,8 @@ const PRIMITIVES := {
 	&"pictogram": Color("#d0be8e"),
 	&"section_count": Color("#d9ae94"),
 	&"ribbon": Color("#bd5b68"),
+	# The grey outline of authored panels, cards, popups and shell controls.
+	&"ledger_edge": Color("#5b6265"),
 	# The one raised fill authored controls keep under the pointer, while
 	# pressed and when selected; their edges tell the states apart.
 	&"ledger_hover": Color("#343d41"),

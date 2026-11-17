@@ -15,7 +15,7 @@ func _draw(control) -> void:
 	if control.divider_top and control.get_node(^"Content/Caption").visible:
 		control.draw_line(Vector2.ZERO, Vector2(control.size.x, 0), Tokens.color(&"divider"))
 	if control.get_node(^"Content/Caption").visible:
-		control.draw_line(Vector2(0, control.get_node(^"Content/Caption").size.y + control.get_theme_constant("margin_top")), Vector2(control.size.x, control.get_node(^"Content/Caption").size.y + control.get_theme_constant("margin_top")), Tokens.color(&"border"))
+		control.draw_line(Vector2(0, control.get_node(^"Content/Caption").size.y + control.get_theme_constant("margin_top")), Vector2(control.size.x, control.get_node(^"Content/Caption").size.y + control.get_theme_constant("margin_top")), Tokens.color(&"ledger_edge"))
 	var pager = control.get_node(^"Content/Pager") as Control
 	if not pager.visible:
 		return
@@ -29,7 +29,7 @@ func _style_action(control, action: Button) -> void:
 		Appearance.write(frame, ^"content_margin_top", 8 if action.icon != null else 6)
 		Appearance.write(frame, ^"content_margin_bottom", frame.content_margin_top)
 		Appearance.write(frame, ^"bg_color", Tokens.color(&"accent") if action.button_pressed else Tokens.color(&"ledger_hover") if state in ["hover", "pressed", "hover_pressed"] else Tokens.color(&"surface"))
-		Appearance.write(frame, ^"border_color", Tokens.color(&"accent") if action.button_pressed else Tokens.color(&"border"))
+		Appearance.write(frame, ^"border_color", Tokens.color(&"accent") if action.button_pressed else Tokens.color(&"ledger_edge"))
 		Appearance.override_item(action, "styles", state, frame)
 
 func _style_collection(control, phone: bool, tablet: bool) -> void:
