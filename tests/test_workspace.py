@@ -60,8 +60,10 @@ class PackageTests(unittest.TestCase):
         self.assertNotRegex(neutral, r'(?m)^\w+/(?:colors|constants|fonts|font_sizes|styles|icons)/')
         # The base layer builds stock-control and variation items from those
         # tokens at run time: it may name no color and load no font or material.
+        # The kit's own semantic pictograms are the one resource it may place.
         base = core['rookframe/ui/themes/token_base.gd'].read_text()
-        self.assertNotRegex(base, r'Color\(\s*[\d."#]|Color\.[A-Z]|#[0-9a-fA-F]{3,8}\b|load\("(?!design_tokens\.gd")|\.(?:ttf|otf|tres|png|svg)\b')
+        self.assertNotRegex(base, r'Color\(\s*[\d."#]|Color\.[A-Z]|#[0-9a-fA-F]{3,8}\b|load\("(?!design_tokens\.gd"|res://rookframe/ui/icons/[\w-]+\.svg")|\.(?:ttf|otf|tres|png)\b')
+        self.assertNotRegex(base, r'(?<!load\("res://rookframe/ui/icons/)\b[\w-]+\.svg\b')
         for relative, path in core.items():
             if relative in tokens:
                 continue

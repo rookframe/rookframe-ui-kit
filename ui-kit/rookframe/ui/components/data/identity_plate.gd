@@ -5,6 +5,9 @@ extends Button
 ## display-only vital below the copy. The caller connects the inherited pressed signal.
 
 const COPY_WIDTH := 240
+## A compact plate still holds a short name on one line: its measure never
+## falls below this many ems of the title's own size.
+const COMPACT_MEASURE_EMS := 7.5
 
 @export var title := "Name":
 	set(value):
@@ -95,6 +98,8 @@ func _fit_content() -> void:
 		if label.visible:
 			measure = maxf(measure, _copy_width(label))
 	var copy_width := get_theme_constant("copy_width") if has_theme_constant("copy_width") else COPY_WIDTH
+	if compact:
+		copy_width = maxi(copy_width, ceili(COMPACT_MEASURE_EMS * $Content/Row/Copy/Title.get_theme_font_size("font_size")))
 	copy.custom_minimum_size.x = minf(measure, copy_width)
 	var height := 44
 	if has_theme_constant("minimum_height"):

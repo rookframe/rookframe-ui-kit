@@ -42,6 +42,7 @@ func _run() -> void:
 	_derived()
 	_states(neutral, PackedStringArray())
 	_ownership()
+	await _compact_field(neutral)
 	for directory in DirAccess.get_directories_at(THEMES):
 		var path := THEMES.path_join(directory).path_join("theme.tres")
 		if ResourceLoader.exists(path):
@@ -203,6 +204,24 @@ func _states(entry: Theme, owned: PackedStringArray) -> void:
 			var key := "%s %s %s %s" % [box.bg_color if box.draw_center else Color(), box.border_color, box.get_border_width_min(), ink]
 			check(not seen.has(key), "%s: %s differs from %s" % [type, state, seen.get(key, "")])
 			seen[key] = state
+
+## A compact task field really is denser where no theme presents it: a field
+## that ignores `compact` overflows the phone sheets that rely on it.
+func _compact_field(entry: Theme) -> void:
+	var host := Control.new()
+	host.theme = entry
+	root.add_child(host)
+	var areas: Array[Control] = []
+	for compact in [false, true]:
+		var area: Control = load("res://rookframe/ui/components/forms/task_text_area.tscn").instantiate()
+		area.compact = compact
+		host.add_child(area)
+		areas.append(area)
+	await process_frame
+	check(areas[1].get_node(^"Editor").custom_minimum_size.y < areas[0].get_node(^"Editor").custom_minimum_size.y, "A compact task area has a shorter editor")
+	check(areas[1].get_theme_constant(&"separation") < areas[0].get_theme_constant(&"separation"), "A compact task area closes its gaps")
+	check(areas[1].get_node(^"Editor").custom_minimum_size.y >= entry.get_constant(&"target_minimum", Tokens.TYPE), "A compact task area keeps the touch target")
+	host.free()
 
 ## A type a theme defines is that theme's alone; the rest still fills.
 func _ownership() -> void:

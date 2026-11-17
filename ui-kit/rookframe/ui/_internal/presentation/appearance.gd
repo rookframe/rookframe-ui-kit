@@ -5,6 +5,8 @@ static var _writers: Array[Node] = []
 ## Core presentation for a behavior script, used where the owning Theme supplies none.
 const DEFAULT_HOOKS := {
 	"res://rookframe/ui/components/surfaces/fullscreen_wizard.gd": "res://rookframe/ui/_internal/presentation/defaults/fullscreen_wizard.gd",
+	"res://rookframe/ui/components/forms/task_text_field.gd": "res://rookframe/ui/_internal/presentation/defaults/task_field.gd",
+	"res://rookframe/ui/components/forms/task_text_area.gd": "res://rookframe/ui/_internal/presentation/defaults/task_field.gd",
 }
 
 static func owning_theme(node: Node) -> Theme:
@@ -50,6 +52,13 @@ static func invoke(node: Node, method: StringName, args: Array = []) -> Variant:
 	var result: Variant = implementation.callv(method, [node] + args)
 	_writers.pop_back()
 	return result
+
+## Journals the writes a component makes itself until `end()`, so `restore()` undoes them.
+static func begin(writer: Node) -> void:
+	_writers.append(writer)
+
+static func end() -> void:
+	_writers.pop_back()
 
 static func write(target: Object, property: NodePath, value: Variant) -> void:
 	if target is Node and not _writers.is_empty():

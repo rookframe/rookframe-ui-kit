@@ -19,6 +19,8 @@ const TEXT_AREA = preload("res://rookframe/ui/components/forms/text_area.gd")
 var _page := 0
 var _pages: Array[Vector2] = [Vector2.ZERO]
 var _pending := false
+## A measure that found no page break is retried once after the layout settles.
+var _retrying := false
 var _content: Control
 var _focus_viewport: Viewport
 var _external_pager := false
@@ -92,6 +94,7 @@ func refresh() -> void:
 
 func _fit() -> void:
 	_pending = false
+	_retrying = false
 	if not is_visible_in_tree():
 		return
 	var height := size.y
@@ -120,6 +123,8 @@ func _measure() -> void:
 	if _pending or not is_visible_in_tree():
 		return
 	var height: float = get_node(^"Area").size.y
+	var retried := _retrying
+	_retrying = false
 	_pages.clear()
 	if not _pager.visible or height <= 0:
 		_pages.append(Vector2(0, height))
@@ -138,7 +143,13 @@ func _measure() -> void:
 				if span.x < end and span.y > end:
 					end = span.x
 			if end <= start:
-				push_error("PaginatedContent needs a viewport taller than its indivisible content.")
+				if retried:
+					push_error("PaginatedContent needs a viewport taller than its indivisible content.")
+				else:
+					# Nested Containers may still hold the layout of the previous area.
+					# Measure again once they have sorted; only a lasting misfit is reported.
+					_retrying = true
+					_remeasure.call_deferred()
 				break
 			_pages.append(Vector2(start, end))
 			start = end
@@ -148,6 +159,14 @@ func _measure() -> void:
 	var focused := get_viewport().gui_get_focus_owner()
 	if focused != null:
 		_reveal_focus(focused)
+
+func _remeasure() -> void:
+	if not _retrying or not is_inside_tree():
+		return
+	await get_tree().process_frame
+	# A newer fit clears the retry and owns the next measure.
+	if _retrying and not _pending:
+		_measure()
 
 func _collect_spans(node: Control, spans: Array[Vector2]) -> void:
 	if not node.is_visible_in_tree():

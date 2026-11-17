@@ -22,6 +22,7 @@ var _progress := 0.0
 var _depth := 0.0
 var _jolt := 0.0
 var _content_theme: Theme
+var _edge: StandardMaterial3D
 @onready var _surface: SubViewportContainer = $Surface
 @onready var _source: SubViewport = $Surface/Viewport
 @onready var _root: Control = $Surface/Viewport/Root
@@ -277,7 +278,28 @@ func _presentation_changed() -> void:
 	else: _folded()
 
 func _inherit_content_theme() -> void:
+	# Theme lookups stop at the SubViewport, so the live side is handed the owning Theme.
 	var content := get_content()
+	var skin: Control = $Surface/Viewport/Root/Skin
+	var owning := Appearance.owning_theme(self)
+	if skin.theme == null or skin.theme == _content_theme:
+		skin.theme = owning
 	if content.theme == null or content.theme == _content_theme:
-		_content_theme = Appearance.owning_theme(self)
-		content.theme = _content_theme
+		content.theme = owning
+	_content_theme = owning
+	_tint_edge()
+
+## The slab edge shown while the leaf swings takes the theme's outline color,
+## unless a presentation supplies its own material.
+func _tint_edge() -> void:
+	var slab: MeshInstance3D = $Motion/Hinge/Leather/Thickness
+	if slab.material_override != null and slab.material_override != _edge:
+		return
+	if not has_theme_color(&"border", &"RookframeTokens"):
+		slab.material_override = null
+		return
+	if _edge == null:
+		_edge = StandardMaterial3D.new()
+		_edge.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	_edge.albedo_color = get_theme_color(&"border", &"RookframeTokens")
+	slab.material_override = _edge

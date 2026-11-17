@@ -31,6 +31,11 @@ func _configure_button(control: Button) -> void:
 		return
 	style = CarvedStyle.new()
 	style.face = targets[SLOTS[mode]].duplicate()
+	if control.is_icon_only():
+		# The label padding clears the carved end fittings; an icon alone sits nearer the rim.
+		var inset := float(control.get_theme_constant(&"space_4", &"RookframeTokens"))
+		for side in [SIDE_LEFT, SIDE_RIGHT]:
+			style.face.set_content_margin(side, minf(style.face.get_margin(side), inset))
 	style.configure(control)
 	face_seconds = 0.0
 	face_elapsed = 0.0

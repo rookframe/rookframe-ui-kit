@@ -7,8 +7,11 @@ extends RefCounted
 ## Nothing here is authored appearance. Colors come from color roles, fonts and
 ## sizes from type roles, paddings from `space_*`, corners, borders and focus
 ## from shape tokens, shadows from elevation and `shadow`. Mixing weights and
-## opacity are the only numbers. Icons stay Godot's own, tinted by color roles.
+## opacity are the only numbers. Icons stay Godot's own, tinted by color roles;
+## the one placed pictogram is the kit's own semantic die on a roll action.
 const Tokens = preload("design_tokens.gd")
+## The kit's own die pictogram, tinted by the icon color roles like any Button icon.
+const DIE = preload("res://rookframe/ui/icons/dice.svg")
 
 const BUTTON_STATES: Array[StringName] = [&"normal", &"hover", &"pressed", &"hover_pressed", &"disabled"]
 ## Opacity of a disabled fill or border against the surface beneath it.
@@ -428,7 +431,10 @@ func _kit_actions() -> void:
 	_secondary(&"RookframeSecondaryButton", _s(4), _s(2))
 	for type: StringName in [&"RookframeShellControl", &"RookframeManagedControl", &"RookframeManagedAffirm"]:
 		_secondary(type, _s(3), _s(3))
-	_secondary(&"RookframeActionRoll", _s(3), _s(2))
+	# A roll action is named by its tooltip; the die is its face, centred by equal insets.
+	_secondary(&"RookframeActionRoll", _s(4), _s(2))
+	_theme.set_icon(&"icon", &"RookframeActionRoll", DIE)
+	_constant(&"RookframeActionRoll", &"icon_max_width", _k(&"icon_medium"))
 	_secondary(&"RookframeCompactAction", _s(4), _s(1))
 	_type(&"RookframeCompactAction", &"meta")
 	_vary(&"RookframeCompactActionTouch", &"RookframeCompactAction")
@@ -570,6 +576,8 @@ func _kit_tabletop() -> void:
 	_panel(&"RookframeHudAttached", _box(_c(&"surface"), _c(&"border"), _s(4), _s(4), _k(&"radius_medium")))
 	_panel(&"RookframeHudAttached__medium", _box(_c(&"surface"), _c(&"border"), _s(4), _s(4), _k(&"radius_medium")), &"RookframeHudAttached")
 	_panel(&"RookframeHudAttached__compact", _box(_c(&"surface"), _c(&"border"), _s(2), _s(2), _k(&"radius_medium")), &"RookframeHudAttached")
+	# A hinged leaf is a sheet folded out of the bar; callers inset their own content.
+	_panel(&"RookframeHingedLeaf", _box(_c(&"surface"), _c(&"border"), 0, 0, _k(&"radius_medium")), &"Panel")
 	_constant(&"RookframeHudBar", &"separation", _s(3))
 	_constant(&"RookframeHudBar__medium", &"separation", _s(2))
 	_constant(&"RookframeHudBar__compact", &"separation", _s(2))

@@ -44,10 +44,10 @@ scale = Vector2(2, 2)
 mouse_filter = 2
 
 [node name="Skin" type="Panel" parent="Surface/Viewport/Root"]
-anchor_right = 2.5
-anchor_bottom = 2.5
-scale = Vector2(0.4, 0.4)
+anchor_right = 1.0
+anchor_bottom = 1.0
 mouse_filter = 2
+theme_type_variation = &"RookframeHingedLeaf"
 
 [node name="Ink" type="CanvasGroup" parent="Surface/Viewport/Root"]
 

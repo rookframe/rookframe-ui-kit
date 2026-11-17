@@ -493,8 +493,11 @@ remains consumer-owned. Text wraps within the measured block width.
 `components/forms/task_text_field.tscn` and `task_text_area.tscn` retain the public
 TextField/TextArea script contracts with help above the native editor, task spacing,
 and 48/152 px editor minimum heights. They inherit their consumer Theme.
-Their `compact` property applies the approved phone relationship: 44/64 px
-native editors, smaller label spacing and help retained in accessibility copy.
+Their `compact` property applies the phone relationship: smaller gaps and a
+shorter multiline editor. Where the Theme supplies no presentation, a core
+default takes them from tokens: gaps `space_1` (compact) or `space_2`, a
+`target_minimum` single-line editor, and a multiline editor of
+`action_height + space_3` (compact) or `2 × action_height + space_2`.
 
 The task Theme also provides TaskSection for neutral active review tabs, and
 TaskAttribute, TaskFacts, TaskResult and TaskFormula with Compact variants for

@@ -9,6 +9,7 @@ signal layout_profile_changed(profile: StringName)
 signal overflow_opened
 
 const ActionRow = preload("res://rookframe/ui/components/data/action_row.tscn")
+const Tokens = preload("res://rookframe/ui/themes/design_tokens.gd")
 const SLOTS: Array[NodePath] = [
 	^"Bar/Row/LeadingSlot", ^"Bar/Row/IdentitySlot", ^"Bar/Row/CategorySlot",
 	^"Bar/Row/TrailingSlot", ^"AttachedPanel/AttachedSlot",
@@ -46,6 +47,7 @@ var _layout_pending := false
 var _updating := false
 var _parent_control: Control
 var _viewport: Viewport
+var _identity_profile: Theme
 
 
 func _enter_tree() -> void:
@@ -75,7 +77,48 @@ func _ready() -> void:
 		for child in slot.get_children():
 			_slot_child_entered(child)
 	%More.pressed.connect(_open_overflow)
+	_scope_identity()
 	_apply_profile()
+
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_THEME_CHANGED and is_node_ready():
+		_scope_identity()
+
+
+func _presentation_changed() -> void:
+	_scope_identity()
+
+
+## The identity reads at HUD scale: its name and vital value at the `label`
+## size and its lines close together, from the owning Theme's tokens. A theme's
+## presentation, or the caller, may scope a profile of its own instead.
+func _scope_identity() -> void:
+	var slot: Control = %IdentitySlot
+	if slot.theme != null and slot.theme != _identity_profile:
+		return
+	# Without tokens in the tree the bar keeps the stock look and assigns no Theme.
+	if not has_theme_constant(&"space_1", Tokens.TYPE):
+		if slot.theme != null:
+			slot.remove_meta(&"_presentation_theme")
+			slot.theme = null
+		return
+	if _identity_profile == null:
+		_identity_profile = Theme.new()
+		# The owning Theme declares each variation; a profile repeats the ones it sizes.
+		for type: StringName in [&"RookframeIdentity", &"RookframeValue"]:
+			_identity_profile.set_type_variation(type, &"Label")
+	var label_size := get_theme_font_size(&"label", Tokens.TYPE)
+	for type: StringName in [&"RookframeIdentity", &"RookframeValue"]:
+		if not _identity_profile.has_font_size(&"font_size", type) or _identity_profile.get_font_size(&"font_size", type) != label_size:
+			_identity_profile.set_font_size(&"font_size", type, label_size)
+	var gap := get_theme_constant(&"space_1", Tokens.TYPE)
+	if not _identity_profile.has_constant(&"separation", &"VBoxContainer") or _identity_profile.get_constant(&"separation", &"VBoxContainer") != gap:
+		_identity_profile.set_constant(&"separation", &"VBoxContainer", gap)
+	if slot.theme != _identity_profile:
+		# Marked as presentation, so the plate still finds the owning Theme above it.
+		slot.set_meta(&"_presentation_theme", _identity_profile)
+		slot.theme = _identity_profile
 
 
 func get_leading_slot() -> Container:

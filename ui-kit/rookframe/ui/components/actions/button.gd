@@ -2,6 +2,7 @@
 extends Button
 ## One native action control. The consumer Theme supplies semantic appearance.
 const Appearance = preload("res://rookframe/ui/_internal/presentation/appearance.gd")
+const Tokens = preload("res://rookframe/ui/themes/design_tokens.gd")
 
 enum Variant { SECONDARY, PRIMARY, DESTRUCTIVE, EMBLEM }
 enum Layout { INLINE, STACKED }
@@ -39,6 +40,7 @@ var _fitted_text := ""
 # Native properties the content layout currently controls: [caller value, layout value].
 var _owned := {}
 var _emblem_name_checked := false
+var _icon_only := false
 
 
 func _ready() -> void:
@@ -77,6 +79,7 @@ func _refresh_button() -> void:
 	var presented := Appearance.has_hook(self, &"_configure_button")
 	if presented:
 		Appearance.invoke(self, &"_configure_button")
+	_fit_icon_only()
 	# Measure after presentation, which may replace the state styleboxes.
 	_fit_minimum()
 	set_process(presented and not Engine.is_editor_hint())
@@ -99,6 +102,10 @@ func _exit_tree() -> void:
 func _content_changed() -> void:
 	if _refreshing_button:
 		return
+	if is_icon_only() != _icon_only:
+		# Label padding comes and goes with the label.
+		_refresh_button()
+		return
 	_refreshing_button = true
 	_arrange_content()
 	if text != _fitted_text:
@@ -113,6 +120,37 @@ func _arrange_content() -> void:
 	_control(&"vertical_icon_alignment", VERTICAL_ALIGNMENT_TOP, stacked)
 	_control(&"autowrap_mode", TextServer.AUTOWRAP_WORD_SMART, stacked)
 	_control(&"text_overrun_behavior", TextServer.OVERRUN_NO_TRIMMING, stacked)
+
+
+## True when the icon is the whole content. The action is then named by its
+## `accessibility_name` or tooltip.
+func is_icon_only() -> bool:
+	return text.is_empty() and icon != null
+
+
+## A theme pads its faces for a label. An icon alone keeps at most `space_4` beside
+## it, so an icon-only action stays near the touch target in every theme. A
+## presentation that replaces a face fits it itself.
+func _fit_icon_only() -> void:
+	_icon_only = is_icon_only()
+	if not _icon_only:
+		return
+	var limit := float(get_theme_constant(&"space_4", Tokens.TYPE) if has_theme_constant(&"space_4", Tokens.TYPE) else Tokens.CONSTANTS[&"space_4"])
+	var fitted := {}
+	Appearance.begin(self)
+	for state: StringName in [&"normal", &"hover", &"pressed", &"hover_pressed", &"disabled"]:
+		if has_theme_stylebox_override(state):
+			continue
+		var style := get_theme_stylebox(state)
+		if style.get_margin(SIDE_LEFT) <= limit and style.get_margin(SIDE_RIGHT) <= limit:
+			continue
+		if not fitted.has(style):
+			var face: StyleBox = style.duplicate()
+			face.content_margin_left = minf(style.get_margin(SIDE_LEFT), limit)
+			face.content_margin_right = minf(style.get_margin(SIDE_RIGHT), limit)
+			fitted[style] = face
+		Appearance.override_item(self, "styles", state, fitted[style])
+	Appearance.end()
 
 
 func _control(property: StringName, value: Variant, enabled: bool) -> void:

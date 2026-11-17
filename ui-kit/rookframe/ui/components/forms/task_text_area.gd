@@ -14,10 +14,9 @@ func _refresh() -> void:
 	_style_field()
 
 func _style_field() -> void:
+	# A theme's hook, or the core default that sizes the field from tokens.
 	if Appearance.has_hook(self, &"_style_field"):
 		Appearance.invoke(self, &"_style_field", [])
-		return
-	get_node(^"Editor").custom_minimum_size.y = 112 if get_node(^"Editor") is TextEdit else 44
 
 
 func _enter_tree() -> void:
