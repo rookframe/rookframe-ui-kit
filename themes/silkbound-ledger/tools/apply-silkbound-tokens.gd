@@ -5,8 +5,11 @@ extends SceneTree
 ## scene node names the token behind each of its own properties in
 ## `metadata/tokens`: `{"bg_color": &"surface", "border_color": [&"ornament", 0.38]}`.
 ## A Theme names its items by path (`"RookframeMeta/colors/font_color"`). An array
-## keeps the token's color with its own alpha. Font items take the token's font
-## resource; font sizes and constants take the token's number.
+## keeps the token's color with its own alpha. Font items take an in-file copy of
+## the token's FontVariation chain (`token_<file>` sub_resources) over the file's
+## own FontFile reference, so a Theme reaches each prerendered FontFile through a
+## single path: a cold `CACHE_MODE_IGNORE_DEEP` load reloads a FontFile once per
+## path. Font sizes and constants take the token's number.
 ##
 ## Run from the repository root after `python3 tools/workspace.py prepare`, which
 ## installs the fonts these values reference:
@@ -22,10 +25,13 @@ var failures: PackedStringArray = []
 var changed: PackedStringArray = []
 ## External resources a file needs, by path, added after its blocks are rewritten.
 var pending: Dictionary[String, String] = {}
+## Token font resources a file's bindings name, by path, inlined after its blocks are rewritten.
+var fonts: Dictionary[String, String] = {}
+var package := ""
 
 func _initialize() -> void:
 	check = OS.get_cmdline_user_args().has("--check")
-	var package := (get_script() as Script).resource_path.get_base_dir().get_base_dir()
+	package = (get_script() as Script).resource_path.get_base_dir().get_base_dir()
 	tokens = load(package.path_join("rookframe/ui/theme/silkbound_tokens.gd"))
 	for path in _sources(package.path_join("rookframe/ui")):
 		_apply(path)
@@ -53,6 +59,7 @@ func _apply(path: String) -> void:
 	var lines: Array[String] = []
 	lines.assign(source.split("\n"))
 	pending.clear()
+	fonts.clear()
 	var header := RegEx.create_from_string(HEADER)
 	var start := 0
 	var index := 0
@@ -67,6 +74,8 @@ func _apply(path: String) -> void:
 	blocks.reverse()
 	for block in blocks:
 		_apply_block(path, lines, block.x, block.y)
+	var inlined := _inline_fonts(path, lines)
+	_drop_unused_token_resources(lines, inlined)
 	var last := -1
 	for line in lines.size():
 		if lines[line].begins_with("[ext_resource "):
@@ -75,6 +84,7 @@ func _apply(path: String) -> void:
 		last += 1
 		var type := ResourceLoader.load(resource_path).get_class()
 		lines.insert(last, '[ext_resource type="%s" path="%s" id="%s"]' % [type, resource_path, pending[resource_path]])
+	_insert_sub_resources(lines, inlined)
 	var result := "\n".join(lines)
 	if result == source:
 		return
@@ -120,7 +130,9 @@ func _literal(path: String, lines: Array[String], property: String, binding: Var
 		if not tokens.FONTS.has(token):
 			failures.append("%s: %s names unknown font token %s" % [path, property, token])
 			return ""
-		return 'ExtResource("%s")' % _font_resource(lines, tokens.FONTS[token])
+		var font_path: String = tokens.FONTS[token]
+		fonts[font_path] = _token_id(font_path)
+		return 'SubResource("%s")' % fonts[font_path]
 	if property.contains("font_size"):
 		if not tokens.FONT_SIZES.has(token):
 			failures.append("%s: %s names unknown font size token %s" % [path, property, token])
@@ -144,6 +156,95 @@ func _number(value: float) -> String:
 	var text := "%.6f" % value
 	text = text.rstrip("0")
 	return text.trim_suffix(".")
+
+## The id of the tool's own resource for `resource_path` in a file.
+func _token_id(resource_path: String) -> String:
+	return "token_" + resource_path.get_file().get_basename()
+
+## Sub_resource lines copying each bound token font's FontVariation chain,
+## dependencies first. The FontFile ending a chain stays an external resource.
+func _inline_fonts(path: String, lines: Array[String]) -> PackedStringArray:
+	var blocks := PackedStringArray()
+	var done: Dictionary[String, bool] = {}
+	for resource_path in fonts:
+		_inline_font(path, lines, resource_path, blocks, done)
+	return blocks
+
+func _inline_font(path: String, lines: Array[String], resource_path: String, blocks: PackedStringArray, done: Dictionary[String, bool]) -> void:
+	if done.has(resource_path):
+		return
+	done[resource_path] = true
+	# Read the owning package's source; generated copies may lag behind it.
+	var source_path := package.path_join(resource_path.trim_prefix("res://"))
+	if not FileAccess.file_exists(source_path):
+		source_path = resource_path
+	var type_pattern := RegEx.create_from_string('type="([^"]+)"')
+	var path_pattern := RegEx.create_from_string('path="([^"]+)"')
+	var id_pattern := RegEx.create_from_string('id="([^"]+)"')
+	var references: Dictionary[String, String] = {}
+	var body := PackedStringArray()
+	var type := ""
+	var in_resource := false
+	for line in FileAccess.get_file_as_string(source_path).split("\n"):
+		if line.begins_with("[gd_resource "):
+			type = type_pattern.search(line).get_string(1)
+		elif line.begins_with("[ext_resource "):
+			var dependency := path_pattern.search(line).get_string(1)
+			var id := id_pattern.search(line).get_string(1)
+			if type_pattern.search(line).get_string(1) == "FontVariation":
+				_inline_font(path, lines, dependency, blocks, done)
+				references[id] = 'SubResource("%s")' % _token_id(dependency)
+			else:
+				references[id] = 'ExtResource("%s")' % _font_resource(lines, dependency)
+		elif line.begins_with("[sub_resource "):
+			failures.append("%s: font token %s has sub_resources, which are not inlined" % [path, resource_path])
+			return
+		elif line.begins_with("[resource]"):
+			in_resource = true
+		elif in_resource and not line.strip_edges().is_empty() and not line.begins_with(";"):
+			for id in references:
+				line = line.replace('ExtResource("%s")' % id, references[id])
+			body.append(line)
+	if type != "FontVariation":
+		failures.append("%s: font token %s is a %s, not a FontVariation" % [path, resource_path, type])
+		return
+	blocks.append('[sub_resource type="%s" id="%s"]' % [type, _token_id(resource_path)])
+	blocks.append_array(body)
+	blocks.append("")
+
+## Removes the tool's previous font sub_resources, and its external resources
+## nothing references any more (`inlined` holds the copies about to be inserted).
+func _drop_unused_token_resources(lines: Array[String], inlined: PackedStringArray) -> void:
+	var header := RegEx.create_from_string(HEADER)
+	var index := 0
+	while index < lines.size():
+		if lines[index].begins_with("[sub_resource ") and lines[index].contains(' id="token_'):
+			lines.remove_at(index)
+			while index < lines.size() and header.search(lines[index]) == null:
+				lines.remove_at(index)
+		else:
+			index += 1
+	var text := "\n".join(lines) + "\n".join(inlined)
+	var id_pattern := RegEx.create_from_string('id="(token_[^"]+)"')
+	index = 0
+	while index < lines.size():
+		var found := id_pattern.search(lines[index]) if lines[index].begins_with("[ext_resource ") else null
+		if found != null and not text.contains('ExtResource("%s")' % found.get_string(1)):
+			lines.remove_at(index)
+		else:
+			index += 1
+
+## Inserts the inlined font copies ahead of the file's other sub_resources.
+func _insert_sub_resources(lines: Array[String], blocks: PackedStringArray) -> void:
+	if blocks.is_empty():
+		return
+	var at := lines.size()
+	for index in lines.size():
+		if lines[index].begins_with("[sub_resource ") or lines[index].begins_with("[resource]") or lines[index].begins_with("[node "):
+			at = index
+			break
+	for index in range(blocks.size() - 1, -1, -1):
+		lines.insert(at, blocks[index])
 
 ## The id of the file's external resource for `resource_path`; absent ones are added later.
 func _font_resource(lines: Array[String], resource_path: String) -> String:

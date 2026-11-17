@@ -25,8 +25,15 @@
 [ext_resource type="Texture2D" path="res://rookframe/ui/_internal/assets/controls/radio-checked.svg" id="control_radio-checked"]
 [ext_resource type="Texture2D" path="res://rookframe/ui/_internal/assets/controls/switch-on_disabled.svg" id="control_switch-on_disabled"]
 [ext_resource type="Texture2D" path="res://rookframe/ui/_internal/assets/controls/radio-unchecked.svg" id="control_radio-unchecked"]
-[ext_resource type="FontVariation" path="res://rookframe/ui/theme/silkbound_display.tres" id="token_silkbound_display"]
-[ext_resource type="FontVariation" path="res://rookframe/ui/theme/silkbound_regular.tres" id="token_silkbound_regular"]
+
+[sub_resource type="FontVariation" id="token_silkbound_regular"]
+base_font = ExtResource("silk_garamond")
+variation_opentype = {2003265652: 400.0}
+opentype_features = {1953396077: 1}
+
+[sub_resource type="FontVariation" id="token_silkbound_display"]
+base_font = SubResource("token_silkbound_regular")
+variation_opentype = {"wght": 500.0}
 
 [sub_resource type="FontVariation" id="Font_silkbound_regular"]
 base_font = ExtResource("silk_garamond")
@@ -2680,19 +2687,19 @@ RookframeDialogSurface/base_type = &"PanelContainer"
 RookframeDialogSurface/styles/panel = SubResource("ManagedFrame")
 RookframeTitle/base_type = &"Label"
 RookframeTitle/colors/font_color = Color(0.905882, 0.905882, 0.866667, 1)
-RookframeTitle/fonts/font = ExtResource("token_silkbound_display")
+RookframeTitle/fonts/font = SubResource("token_silkbound_display")
 RookframeTitle/font_sizes/font_size = 40
 RookframeSubtitle/base_type = &"Label"
 RookframeSubtitle/colors/font_color = Color(0.905882, 0.905882, 0.866667, 1)
-RookframeSubtitle/fonts/font = ExtResource("token_silkbound_display")
+RookframeSubtitle/fonts/font = SubResource("token_silkbound_display")
 RookframeSubtitle/font_sizes/font_size = 30
 RookframeHeading/base_type = &"Label"
 RookframeHeading/colors/font_color = Color(0.905882, 0.905882, 0.866667, 1)
-RookframeHeading/fonts/font = ExtResource("token_silkbound_display")
+RookframeHeading/fonts/font = SubResource("token_silkbound_display")
 RookframeHeading/font_sizes/font_size = 24
 RookframeLabel/base_type = &"Label"
 RookframeLabel/colors/font_color = Color(0.905882, 0.905882, 0.866667, 1)
-RookframeLabel/fonts/font = ExtResource("token_silkbound_display")
+RookframeLabel/fonts/font = SubResource("token_silkbound_display")
 RookframeLabel/font_sizes/font_size = 20
 RookframeValue/base_type = &"Label"
 RookframeValue/colors/font_color = Color(0.905882, 0.905882, 0.866667, 1)
@@ -2721,7 +2728,7 @@ RookframeIdentity/fonts/font = SubResource("UiSemiBold")
 RookframeIdentity/font_sizes/font_size = 22
 RookframeBadgeText/base_type = &"Label"
 RookframeBadgeText/colors/font_color = Color(0.682353, 0.729412, 0.745098, 1)
-RookframeBadgeText/fonts/font = ExtResource("token_silkbound_display")
+RookframeBadgeText/fonts/font = SubResource("token_silkbound_display")
 RookframeBadgeText/font_sizes/font_size = 18
 RookframePrimaryButton/base_type = &"Button"
 RookframePrimaryButton/colors/font_color = Color(0.082353, 0.090196, 0.098039, 1)
@@ -3497,10 +3504,10 @@ RookframeInlineNoticeTitle/base_type = &"Label"
 RookframeInlineNoticeTitle/fonts/font = SubResource("Font_silkbound_medium")
 RookframeInlineNoticeTitle/font_sizes/font_size = 30
 RookframeInlineNoticeState/base_type = &"Label"
-RookframeInlineNoticeState/fonts/font = ExtResource("token_silkbound_regular")
+RookframeInlineNoticeState/fonts/font = SubResource("token_silkbound_regular")
 RookframeInlineNoticeState/font_sizes/font_size = 18
 RookframeInlineNoticeBody/base_type = &"Label"
-RookframeInlineNoticeBody/fonts/font = ExtResource("token_silkbound_regular")
+RookframeInlineNoticeBody/fonts/font = SubResource("token_silkbound_regular")
 RookframeInlineNoticeBody/font_sizes/font_size = 21
 RookframeInlineNoticeBody/colors/font_color = Color(0.682353, 0.729412, 0.745098, 1)
 RookframeSecondaryButton/fonts/font = SubResource("Font_silkbound_medium")
@@ -3617,13 +3624,13 @@ RookframeFavorite/styles/disabled = SubResource("FavoriteNormal")
 RookframeFavorite/styles/hover = SubResource("FavoriteHover")
 RookframeFavorite/styles/hover_pressed = SubResource("FavoriteHover")
 RookframeFavorite/styles/focus = SubResource("FavoriteFocus")
-RookframeValue/fonts/font = ExtResource("token_silkbound_regular")
-RookframeBody/fonts/font = ExtResource("token_silkbound_regular")
-RookframeMeta/fonts/font = ExtResource("token_silkbound_regular")
-RookframeStatus/fonts/font = ExtResource("token_silkbound_regular")
-RookframePending/fonts/font = ExtResource("token_silkbound_regular")
-RookframeSuccess/fonts/font = ExtResource("token_silkbound_regular")
-RookframeError/fonts/font = ExtResource("token_silkbound_regular")
+RookframeValue/fonts/font = SubResource("token_silkbound_regular")
+RookframeBody/fonts/font = SubResource("token_silkbound_regular")
+RookframeMeta/fonts/font = SubResource("token_silkbound_regular")
+RookframeStatus/fonts/font = SubResource("token_silkbound_regular")
+RookframePending/fonts/font = SubResource("token_silkbound_regular")
+RookframeSuccess/fonts/font = SubResource("token_silkbound_regular")
+RookframeError/fonts/font = SubResource("token_silkbound_regular")
 metadata/tokens = {
 "Button/colors/font_color": &"content",
 "Button/colors/font_hover_color": &"content",

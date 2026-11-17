@@ -79,6 +79,11 @@ as `"RookframeMeta/colors/font_color": &"content_muted"` or
 `"RookframeTitle/fonts/font": &"display"`. `tools/apply-silkbound-tokens.gd`
 writes the token values into every such value in the package's Themes and
 presentation scenes; presentation scripts read `silkbound_tokens.gd` directly.
+A font item takes an in-file copy of its token's FontVariation chain, the
+`token_<file>` sub_resources, over the file's own reference to the prerendered
+FontFile. A Theme then reaches each FontFile through one path, which keeps its
+cold `CACHE_MODE_IGNORE_DEEP` load within the 64 MiB bound checked by
+`showcase/tests/theme_components/theme_font_resources.gd`.
 To change a value, edit it in `silkbound_tokens.gd`, then from the repository root:
 
 ```sh
