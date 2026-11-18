@@ -4,6 +4,7 @@ extends VBoxContainer
 ## Persistent HUD bar: leading action, identity, a lane of tiles, a trailing
 ## action and an optional attached panel. Profiles change visibility and
 ## properties only; caller children keep their parent, index and connections.
+## Density reaches tiles a caller groups in plain Containers inside a slot.
 
 signal layout_profile_changed(profile: StringName)
 signal overflow_opened
@@ -173,8 +174,7 @@ func _apply_profile() -> void:
 func _slot_child_entered(child: Node) -> void:
 	if child is CanvasItem and not child.visibility_changed.is_connected(_queue_layout):
 		child.visibility_changed.connect(_queue_layout)
-	if child.has_method("set_compact"):
-		child.set_compact(_profile == &"compact")
+	_follow(child)
 	_queue_layout()
 
 
@@ -183,7 +183,30 @@ func _slot_child_exiting(child: Node) -> void:
 		child.visibility_changed.disconnect(_queue_layout)
 	if child is Control:
 		_overflowed.erase(child)
+	_unfollow(child)
 	_queue_layout()
+
+
+## A node with `set_compact` takes the bar's density and keeps its own children's.
+## A Container without it groups tiles: the bar reaches into it, and into the
+## groups it holds, including tiles added to them later.
+func _follow(node: Node) -> void:
+	if node.has_method(&"set_compact"):
+		node.set_compact(_profile == &"compact")
+	elif node is Container:
+		if not node.child_entered_tree.is_connected(_follow):
+			node.child_entered_tree.connect(_follow)
+			node.child_exiting_tree.connect(_unfollow)
+		for child in node.get_children():
+			_follow(child)
+
+
+func _unfollow(node: Node) -> void:
+	if node is Container and node.child_entered_tree.is_connected(_follow):
+		node.child_entered_tree.disconnect(_follow)
+		node.child_exiting_tree.disconnect(_unfollow)
+		for child in node.get_children():
+			_unfollow(child)
 
 
 func _queue_layout() -> void:
@@ -201,8 +224,7 @@ func _update_layout() -> void:
 	var compact := _profile == &"compact"
 	for path in SLOTS:
 		for child in get_node(path).get_children():
-			if child.has_method("set_compact"):
-				child.set_compact(compact)
+			_follow(child)
 	%More.set_compact(compact)
 	_update_overflow(compact and compact_category_limit >= 0)
 	for slot in [%LeadingSlot, %IdentitySlot, %CategorySlot, %TrailingSlot]:

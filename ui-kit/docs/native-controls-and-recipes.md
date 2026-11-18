@@ -227,7 +227,10 @@ would grow with the bar. The HUD Bar showcase page builds each composition below
 with placeholder data.
 
 A tile is a Button with `layout = STACKED`. Callers own `toggle_mode` and any
-`ButtonGroup`.
+`ButtonGroup`. Tiles may sit in plain Containers inside a slot, such as an
+HBoxContainer per tool group between `RookframeHudRule` separators; they take
+the bar's density like direct tiles. The `More` overflow counts only the slot's
+direct children, so keep `compact_category_limit = -1` with grouped tiles.
 
 | Composition | Leading | Identity | Category lane | Trailing / attached |
 | --- | --- | --- | --- | --- |

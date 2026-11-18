@@ -3,6 +3,12 @@
 ## Unreleased
 
 - Kit findings from the host HUD redesign:
+  - `HudBar` sets the density of tiles a caller groups in plain Containers
+    inside its slots, such as one HBoxContainer per tool group. A slot child
+    that has `set_compact` still takes it and keeps its own children's density;
+    a Container without it is reached into, with any Containers nested in it,
+    including tiles added later. The `More` overflow still counts direct slot
+    children only.
   - `PaginatedContent` reports "needs a viewport taller than its indivisible
     content" only after its room, its content's size and its indivisible spans
     have kept their measure for two frames. Rows that report a huge height
