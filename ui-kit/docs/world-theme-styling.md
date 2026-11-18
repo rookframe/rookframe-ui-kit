@@ -24,7 +24,9 @@ paths to inherited appearance templates; `presentation_hooks` maps core behavior
 script paths to presentation-only strategy scripts. The component calls its
 existing visual hooks on the selected strategy. Strategies receive the retained
 component and never replace its behavior script. Templates supply properties on
-existing nodes, not new input or content trees. Runtime-created children use core
+existing nodes, not new input or content trees. A scene that inherits a core
+scene takes the nearest inherited scene's template, unless `presentations` names
+the inheriting scene itself. Runtime-created children use core
 scenes and inherit the same selection. Native profile Themes inside a template
 remain package-owned implementation details.
 
@@ -104,7 +106,13 @@ restyle. Without a `default_font` or `default_font_size` in `native_theme`, the
 entry uses the `body` role.
 
 Buttons, fields, tabs and rows distinguish normal, hover, pressed, disabled and
-focus. Primary actions use `accent` with `accent_content`, secondary actions the
+focus. A disabled control halves the opacity of its fill and edge and inks its
+text and icon in `content_disabled`; unfilled controls differ by that ink alone,
+so a theme keeps `content_disabled` apart from `content` and `content_muted`.
+`RichTextLabel` emphasis derives from the `body` face: bold moves a variable
+face to weight 700, italics use its `ital` or `slnt` axis, and a face without
+the axis takes the theme's heavier face of the same family or the synthetic
+emphasis of Godot's default Theme. Primary actions use `accent` with `accent_content`, secondary actions the
 raised surface, quiet actions no fill until pointed at, destructive actions the
 `danger` roles; their hover and pressed fills mix 10% and 16% of `danger` into
 `danger_surface`. Godot's unchecked mark is a dark well, so `CheckBox` and

@@ -368,3 +368,8 @@ To open this page, run `godot --path showcase -- --component=design_tokens` from
     | `ActionRow` | The row grows to the width of its title word and trailing label. | Remove gap workarounds. |
     | Silkbound Ledger `RookframeLabel`, `RookframeMeta`, `RookframeError` | Sizes are 20, 18 and 18 (were 13, 12 and 12). | Check dense Silkbound screens. |
     | Silkbound Ledger `border` token | Copper at 38% opacity (was grey). | If you read `border` and need an opaque color, blend it with the surface behind it. |
+    | `PaginatedContent` | A misfit is reported only after the layout has kept its measure for two frames. | Remove code that delays `enabled` until rows settle. |
+    | Scenes that inherit a component scene | They take the base scene's presentation. | Remove `presentations` aliases for inheriting scenes. To opt out, give the inheriting scene its own entry. |
+    | `ActionRow` | A caller-set `accessibility_name` is kept. | Set the name once; no need to set it again after `title` changes. |
+    | `RichTextLabel` | `[b]` and `[i]` use real bold and italic faces in every theme. | Remove font overrides added to make bold visible. Check rich text that relied on bold being regular. |
+    | Silkbound Ledger disabled Buttons | `content_disabled` is #788387 and disabled StyleBoxes have a fainter edge; a disabled primary action has no fill. | Remove modulate or opacity workarounds on disabled Buttons. |

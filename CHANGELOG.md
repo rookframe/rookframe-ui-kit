@@ -2,6 +2,40 @@
 
 ## Unreleased
 
+- Kit findings from the host HUD redesign:
+  - `PaginatedContent` reports "needs a viewport taller than its indivisible
+    content" only after its room, its content's size and its indivisible spans
+    have kept their measure for two frames. Rows that report a huge height
+    until their wrapped copy has a width, and nested Containers still sorting,
+    no longer log. A consumer may enable paging in the frame it adds rows.
+  - A scene that inherits a component scene takes that scene's presentation.
+    Lookup walks the stock SceneState inheritance chain from the instance's
+    `scene_file_path`, nearest first, so a scene with its own `presentations`
+    entry keeps it. In Silkbound Ledger the kit's own `AlertDialog`, `Spinner`,
+    `Card` and `Item` now take the templates of `Dialog`, `TaskState`, `Section`
+    and `StructuredRow`; they previously had those components' hooks only.
+  - `ActionRow` keeps an `accessibility_name` its caller set. The title names
+    the row only while no other name is set.
+  - `RichTextLabel` has real `bold_font`, `italics_font` and
+    `bold_italics_font` in every theme; they were the regular face. The base
+    layer derives them from the `body` face: its weight axis at 700 (or 200 above
+    the body weight), its `ital` or `slnt` axis where it has one, else the
+    theme's heavier face of the same family and the synthetic emphasis of
+    Godot's default Theme (embolden 1.2, slant 0.2). Fantasy and Cyberpunk get
+    Inter at 700 with a synthetic slant. Running text keeps its font and size.
+- Silkbound Ledger: disabled Buttons are visibly inactive. `content_disabled`
+  is #788387 (was #aebabe, the same as `content_muted`). Button, the
+  secondary, primary, wizard, glyph and icon variations and the shared Button
+  component take token-bound disabled StyleBoxes with a half-strength edge
+  (`border` at 19%, `ledger_edge` at 50%, `ornament` at 20%) and, on the copper
+  outlined family, half the fill; a disabled primary action drops its paper
+  fill. `RookframePrimaryIcon`, `WizardPrimary`, `WizardQuiet`, `WizardChoice`
+  and `WizardSection` icons take `content_disabled` when disabled. Content
+  margins match each normal state, so nothing moves.
+- Silkbound Ledger: `[b]` is EB Garamond semibold (600) and `[i]` the real
+  italic. `[b][i]` shows the italic, because no bold italic is prerendered. The
+  Themes now load `italic.res`; a cold deep load is 41.7 MiB (was 31.5, bound 64).
+
 - Close the gaps found while moving MÖRK BORG to the base layer:
   - `hinged_leaf` has a token-built look. Its `Skin` Panel now fills the leaf at
     scale 1 with the new `RookframeHingedLeaf` variation (`surface`, `border`,
