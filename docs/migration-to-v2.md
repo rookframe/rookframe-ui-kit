@@ -246,6 +246,9 @@ To open this page, run `godot --path showcase -- --component=design_tokens` from
    For secondary running text, set `theme_type_variation = &"RookframeBodyMuted"` on a Label.
    This variation has the font, size and line spacing of `RookframeBody` and the `content_muted` color.
    Do not put a `theme_override_colors/font_color` on a `RookframeBody` Label to make it muted.
+   For lines that read as one block, such as a heading over its meta line, set
+   `theme_type_variation = &"RookframeTextStack"` on their VBoxContainer.
+   Do not put a `theme_override_constants/separation` on it.
    This step does not need code.
 
 3. If you must draw a part yourself, read the token in code.

@@ -123,12 +123,15 @@ Text variations take a type role and an ink role: `RookframeBody` is running
 text in `body` and `content`; `RookframeBodyMuted` is secondary running text,
 such as a description under a heading, in the same `body` face, size and line
 spacing with `content_muted`. `RookframeMeta` is the smaller `meta` role for
-captions and counts. A theme may author any of them; one it leaves out comes
-from its tokens.
+captions and counts. `RookframeTextStack` is a `VBoxContainer` for lines that
+read as one block, such as a heading over its meta line: its `separation` is
+`space_1`, where other box containers take `space_3`. A theme may author any of
+them; one it leaves out comes from its tokens.
 
 `tests/token_base.gd` lists the stock controls, checks that every
 variation a kit scene or script assigns is declared, along with the
-variations offered to Packages such as `RookframeBodyMuted`, that every value
+variations offered to Packages such as `RookframeBodyMuted` and
+`RookframeTextStack`, that every value
 follows the tokens, that the text it builds from each theme's tokens meets WCAG
 AA (label inks on `surface`, Button inks on each state fill, including
 `danger_content` on the destructive hover and pressed fills), and that authored

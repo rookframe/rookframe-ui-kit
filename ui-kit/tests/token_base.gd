@@ -23,7 +23,7 @@ const STOCK: Array[StringName] = [
 const OUTSIDE := ["RookframeTokens"]
 ## Variations the layer declares for Packages and hosts although no kit source
 ## assigns them, with their base type.
-const DECLARED := {&"RookframeBodyMuted": &"Label"}
+const DECLARED := {&"RookframeBodyMuted": &"Label", &"RookframeTextStack": &"VBoxContainer"}
 const INTERACTIVE: Array[StringName] = [
 	&"Button", &"OptionButton", &"RookframeSecondaryButton", &"RookframePrimaryButton",
 	&"RookframeQuietButton", &"RookframeDangerButton", &"RookframeTabButton", &"RookframeChoiceRow",

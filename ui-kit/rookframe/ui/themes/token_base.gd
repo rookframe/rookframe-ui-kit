@@ -484,6 +484,9 @@ func _kit_text() -> void:
 	_label(&"RookframeArcCaptionTitle", &"heading", &"content_heading")
 	_label(&"RookframeCreatureClassificationTablet", &"meta", &"content_muted")
 	_label(&"RookframeCreatureDialogAmountDesktop", &"label", &"content")
+	# Lines that read as one block, such as a heading over its meta line, sit at the least gap.
+	_vary(&"RookframeTextStack", &"VBoxContainer")
+	_constant(&"RookframeTextStack", &"separation", _s(1))
 
 func _kit_actions() -> void:
 	var pill := _k(&"radius_full")

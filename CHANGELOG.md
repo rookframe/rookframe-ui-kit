@@ -9,6 +9,9 @@
     a Container without it is reached into, with any Containers nested in it,
     including tiles added later. The `More` overflow still counts direct slot
     children only.
+  - Add the `RookframeTextStack` VBoxContainer variation to the base layer:
+    lines that read as one block, such as a heading over its meta line, at a
+    `space_1` gap instead of a `separation` override.
   - `PaginatedContent` reports "needs a viewport taller than its indivisible
     content" only after its room, its content's size and its indivisible spans
     have kept their measure for two frames. Rows that report a huge height
