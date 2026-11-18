@@ -3,6 +3,8 @@ extends Node
 ## A component's native Theme signal drives its optional presentation.
 const Appearance = preload("appearance.gd")
 var component: String
+## Scene path -> that scene and the scenes it inherits, nearest first.
+static var _lineages: Dictionary[String, PackedStringArray] = {}
 static func attach(control: Node) -> void:
 	if control.has_meta(&"_presentation_binding"):
 		return
@@ -10,6 +12,21 @@ static func attach(control: Node) -> void:
 	control.set_meta(&"_presentation_binding", weakref(binding))
 	binding.component = control.scene_file_path
 	control.add_child(binding, false, Node.INTERNAL_MODE_FRONT)
+
+## `path` followed by each scene it inherits, read from the stock SceneState chain.
+static func lineage(path: String) -> PackedStringArray:
+	if _lineages.has(path) and not Engine.is_editor_hint():
+		return _lineages[path]
+	var result := PackedStringArray([path])
+	var scene := load(path) as PackedScene if ResourceLoader.exists(path, "PackedScene") else null
+	while scene != null:
+		# The root node of an inherited scene is an instance of its base scene.
+		scene = scene.get_state().get_node_instance(0) if scene.get_state().get_node_count() > 0 else null
+		if scene == null or scene.resource_path.is_empty() or result.has(scene.resource_path):
+			break
+		result.append(scene.resource_path)
+	_lineages[path] = result
+	return result
 
 var _theme: Theme
 var _applying := false
@@ -45,9 +62,12 @@ func _sync() -> void:
 	Appearance.hooks(control)
 	Appearance.restore(control)
 	if next != null and next.get("presentations") != null:
-		var template: PackedScene = next.presentations.get(component)
-		if template != null:
-			Appearance.apply_template(control, template)
+		# A scene that inherits a component scene takes the nearest presented base's template.
+		for path in lineage(component):
+			var template: PackedScene = next.presentations.get(path)
+			if template != null:
+				Appearance.apply_template(control, template)
+				break
 	if control.is_node_ready():
 		if control.has_method("_presentation_changed"):
 			control._presentation_changed()
