@@ -19,8 +19,10 @@ const TEXT_AREA = preload("res://rookframe/ui/components/forms/text_area.gd")
 var _page := 0
 var _pages: Array[Vector2] = [Vector2.ZERO]
 var _pending := false
-## A measure that found no page break is retried once after the layout settles.
-var _retrying := false
+## Frames the content must keep its measure before a misfit is reported.
+const SETTLE_FRAMES := 2
+## A measure that found no page break waits for the layout to settle.
+var _settling := false
 var _content: Control
 var _focus_viewport: Viewport
 var _external_pager := false
@@ -94,7 +96,6 @@ func refresh() -> void:
 
 func _fit() -> void:
 	_pending = false
-	_retrying = false
 	if not is_visible_in_tree():
 		return
 	var height := size.y
@@ -117,14 +118,12 @@ func _fit() -> void:
 	# Native Containers finish wrapping their children before measuring pages.
 	_measure.call_deferred()
 
-func _measure() -> void:
+func _measure(settled := false) -> void:
 	# A route change or native Container reflow can invalidate a queued measure.
 	# The scheduled fit will measure the replacement content once it has settled.
 	if _pending or not is_visible_in_tree():
 		return
 	var height: float = get_node(^"Area").size.y
-	var retried := _retrying
-	_retrying = false
 	_pages.clear()
 	if not _pager.visible or height <= 0:
 		_pages.append(Vector2(0, height))
@@ -143,13 +142,13 @@ func _measure() -> void:
 				if span.x < end and span.y > end:
 					end = span.x
 			if end <= start:
-				if retried:
+				if settled:
 					push_error("PaginatedContent needs a viewport taller than its indivisible content.")
-				else:
-					# Nested Containers may still hold the layout of the previous area.
-					# Measure again once they have sorted; only a lasting misfit is reported.
-					_retrying = true
-					_remeasure.call_deferred()
+				elif not _settling:
+					# Wrapping copy reports a height no page holds until it has its width,
+					# and nested Containers may still hold the layout of the previous area.
+					# Measure again once they have settled; only a lasting misfit is reported.
+					_settle()
 				break
 			_pages.append(Vector2(start, end))
 			start = end
@@ -160,13 +159,27 @@ func _measure() -> void:
 	if focused != null:
 		_reveal_focus(focused)
 
-func _remeasure() -> void:
-	if not _retrying or not is_inside_tree():
-		return
-	await get_tree().process_frame
-	# A newer fit clears the retry and owns the next measure.
-	if _retrying and not _pending:
-		_measure()
+## Waits until the content and its room keep their measure, then measures for good.
+func _settle() -> void:
+	_settling = true
+	var measure := _layout()
+	var stable := 0
+	while stable < SETTLE_FRAMES:
+		await get_tree().process_frame
+		if not is_inside_tree() or not is_visible_in_tree() or _content == null:
+			_settling = false
+			return
+		var next := _layout()
+		stable = stable + 1 if next == measure and not _pending else 0
+		measure = next
+	_settling = false
+	_measure(true)
+
+## What a page break depends on: the room, the content's size and its indivisible spans.
+func _layout() -> Array:
+	var spans: Array[Vector2] = []
+	_collect_spans(_content, spans)
+	return [size, _content.size, _content.get_combined_minimum_size(), spans]
 
 func _collect_spans(node: Control, spans: Array[Vector2]) -> void:
 	if not node.is_visible_in_tree():
