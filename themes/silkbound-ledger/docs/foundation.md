@@ -109,6 +109,20 @@ The semantic names and purposes are the compatibility contract; exact visual
 values may change within a SemVer major line. Review the visual catalogue after
 a value changes.
 
+### World menu usages
+
+The host's in-World Game menu composes usages rather than `Rookframe*`
+variations: `world.escapeMenu.layout`, `.backdrop`, `.group`, `.surface`,
+`.content`, `.heading`, `.world` and `.hint`, with `@compact` forms below the
+layout's `breakpoint_compact`. `silkbound_theme.tres` declares their native
+types (`world_escapeMenu_*`), so the menu is a leather leaf with the copper edge
+of the HUD atlas over the `scrim` token, set in the `title`, `body` and `meta`
+type roles. They live in the native Theme, not a supplemental profile: the
+Silkbound presentation of `menu/MenuSurface.tscn` assigns that Theme to the
+surface itself, and a usage resolves from the nearest Theme. The shared
+`menu.*` usages stay undeclared, so a host that completes them from tokens,
+as the Manager does, keeps its own values.
+
 ## Theme variation names
 
 Set `theme_type_variation` on a native node of the documented base type; keep

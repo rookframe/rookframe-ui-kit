@@ -18,6 +18,27 @@ func test_public_themes_supply_world_rows_backdrop_and_tooltips() -> void:
 
 	assert_that(FANTASY.get_color("color", "components_backdrop")).is_not_equal(CYBERPUNK.get_color("color", "components_backdrop"))
 
+func test_silkbound_ledger_supplies_the_world_menu_usages() -> void:
+	# The host's Game menu names only usages. A theme that leaves them out draws a
+	# zero-width column on an opaque backdrop.
+	var appearance: Theme = load("res://rookframe/ui/themes/silkbound-ledger/theme.tres")
+	assert_int(appearance.get_constant("surface_width", "world_escapeMenu_layout")).is_greater(0)
+	assert_int(appearance.get_constant("breakpoint_compact", "world_escapeMenu_layout")).is_greater(0)
+	assert_bool(appearance.get_stylebox("panel", "world_escapeMenu_surface") is StyleBoxEmpty).is_true()
+	assert_bool(appearance.get_stylebox("panel", "world_escapeMenu_group") is StyleBoxTexture).is_true()
+	var backdrop := appearance.get_color("color", "world_escapeMenu_backdrop")
+	assert_that(backdrop).is_equal(appearance.get_color("scrim", "RookframeTokens"))
+	assert_float(backdrop.a).is_between(0.01, 0.99)
+	# The menu surface carries the Silkbound presentation Theme: the leaf must
+	# resolve there too, composed from the ordered usages.
+	var surface: Panel = auto_free(load("res://rookframe/ui/menu/MenuSurface.tscn").instantiate())
+	var root: Control = auto_free(Control.new())
+	root.theme = appearance
+	add_child(root)
+	root.add_child(surface)
+	Compiler.apply_usages(surface, [&"menu.surface", &"menu.group", &"world.escapeMenu.group"])
+	assert_object(surface.get_theme_stylebox("panel")).is_same(appearance.get_stylebox("panel", "world_escapeMenu_group"))
+
 func test_ordered_primary_keeps_sparse_overrides_and_native_local_priority() -> void:
 	for source in [FANTASY, CYBERPUNK]:
 		var appearance: Theme = source.duplicate()

@@ -26,6 +26,7 @@
 [ext_resource type="Texture2D" path="res://rookframe/ui/_internal/assets/controls/radio-checked.svg" id="control_radio-checked"]
 [ext_resource type="Texture2D" path="res://rookframe/ui/_internal/assets/controls/switch-on_disabled.svg" id="control_switch-on_disabled"]
 [ext_resource type="Texture2D" path="res://rookframe/ui/_internal/assets/controls/radio-unchecked.svg" id="control_radio-unchecked"]
+[ext_resource type="Texture2D" uid="uid://c45coogutdi8k" path="res://rookframe/ui/assets/action-panel/ai-generated-hud-leather-atlas.png" id="hud_leather"]
 
 [sub_resource type="FontVariation" id="token_silkbound_regular"]
 base_font = ExtResource("silk_garamond")
@@ -2483,6 +2484,28 @@ base_font = ExtResource("silk_garamond_italic")
 variation_opentype = {2003265652: 400.0}
 opentype_features = {1953396077: 1}
 
+[sub_resource type="StyleBoxTexture" id="silk_WorldMenuLeaf"]
+texture = ExtResource("hud_leather")
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+region_rect = Rect2(4, 4, 422, 98)
+texture_margin_left = 11.0
+texture_margin_top = 12.0
+texture_margin_right = 11.0
+texture_margin_bottom = 17.0
+
+[sub_resource type="StyleBoxEmpty" id="silk_WorldMenuPadding"]
+content_margin_left = 32.0
+content_margin_top = 32.0
+content_margin_right = 32.0
+content_margin_bottom = 36.0
+
+[sub_resource type="StyleBoxEmpty" id="silk_WorldMenuPaddingCompact"]
+content_margin_left = 16.0
+content_margin_top = 12.0
+content_margin_right = 16.0
+content_margin_bottom = 16.0
+
 [resource]
 default_font = SubResource("Font_silkbound_regular")
 default_font_size = 20
@@ -3706,6 +3729,39 @@ RookframeStatus/fonts/font = SubResource("token_silkbound_regular")
 RookframePending/fonts/font = SubResource("token_silkbound_regular")
 RookframeSuccess/fonts/font = SubResource("token_silkbound_regular")
 RookframeError/fonts/font = SubResource("token_silkbound_regular")
+world_escapeMenu_backdrop/base_type = &"ColorRect"
+world_escapeMenu_backdrop/colors/color = Color(0, 0, 0, 0.667)
+world_escapeMenu_layout/base_type = &"Control"
+world_escapeMenu_layout/constants/surface_width = 540
+world_escapeMenu_layout/constants/inset = 64
+world_escapeMenu_layout/constants/inset_compact = 12
+world_escapeMenu_layout/constants/breakpoint_compact = 600
+world_escapeMenu_group/base_type = &"Panel"
+world_escapeMenu_group/styles/panel = SubResource("silk_WorldMenuLeaf")
+world_escapeMenu_surface/base_type = &"PanelContainer"
+world_escapeMenu_surface/styles/panel = SubResource("silk_WorldMenuPadding")
+world_escapeMenu_surface__compact/base_type = &"world_escapeMenu_surface"
+world_escapeMenu_surface__compact/styles/panel = SubResource("silk_WorldMenuPaddingCompact")
+world_escapeMenu_content/base_type = &"VBoxContainer"
+world_escapeMenu_content/constants/separation = 16
+world_escapeMenu_content__compact/base_type = &"world_escapeMenu_content"
+world_escapeMenu_content__compact/constants/separation = 8
+world_escapeMenu_heading/base_type = &"Label"
+world_escapeMenu_heading__compact/base_type = &"world_escapeMenu_heading"
+world_escapeMenu_world/base_type = &"Label"
+world_escapeMenu_world__compact/base_type = &"world_escapeMenu_world"
+world_escapeMenu_hint/base_type = &"Label"
+world_escapeMenu_heading/fonts/font = SubResource("token_silkbound_display")
+world_escapeMenu_heading/font_sizes/font_size = 30
+world_escapeMenu_heading/colors/font_color = Color(0.905882, 0.905882, 0.866667, 1)
+world_escapeMenu_heading__compact/font_sizes/font_size = 24
+world_escapeMenu_world/fonts/font = SubResource("token_silkbound_regular")
+world_escapeMenu_world/font_sizes/font_size = 21
+world_escapeMenu_world/colors/font_color = Color(0.682353, 0.729412, 0.745098, 1)
+world_escapeMenu_world__compact/font_sizes/font_size = 18
+world_escapeMenu_hint/fonts/font = SubResource("token_silkbound_regular")
+world_escapeMenu_hint/font_sizes/font_size = 18
+world_escapeMenu_hint/colors/font_color = Color(0.682353, 0.729412, 0.745098, 1)
 metadata/tokens = {
 "Button/colors/font_color": &"content",
 "Button/colors/font_hover_color": &"content",
@@ -4086,5 +4142,19 @@ metadata/tokens = {
 "RookframeSuccess/fonts/font": &"meta",
 "RookframeError/fonts/font": &"meta",
 "RookframeInlineNoticeBody/fonts/font": &"body",
-"RookframeInlineNoticeState/fonts/font": &"meta"
+"RookframeInlineNoticeState/fonts/font": &"meta",
+"world_escapeMenu_backdrop/colors/color": &"scrim",
+"world_escapeMenu_content/constants/separation": &"space_4",
+"world_escapeMenu_content__compact/constants/separation": &"space_2",
+"world_escapeMenu_heading/fonts/font": &"title",
+"world_escapeMenu_heading/font_sizes/font_size": &"title",
+"world_escapeMenu_heading/colors/font_color": &"content_heading",
+"world_escapeMenu_heading__compact/font_sizes/font_size": &"heading",
+"world_escapeMenu_world/fonts/font": &"body",
+"world_escapeMenu_world/font_sizes/font_size": &"body",
+"world_escapeMenu_world/colors/font_color": &"content_muted",
+"world_escapeMenu_world__compact/font_sizes/font_size": &"meta",
+"world_escapeMenu_hint/fonts/font": &"meta",
+"world_escapeMenu_hint/font_sizes/font_size": &"meta",
+"world_escapeMenu_hint/colors/font_color": &"content_muted"
 }
