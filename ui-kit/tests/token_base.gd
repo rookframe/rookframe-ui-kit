@@ -171,7 +171,9 @@ func _derived() -> void:
 		for item in first.get_font_size_list(type):
 			check(first.get_font_size(item, type) != second.get_font_size(item, type), "%s/%s follows its type role" % [type, item])
 		for item in first.get_font_list(type):
-			check(second.get_font(item, type) == font, "%s/%s follows its type role" % [type, item])
+			# Emphasis is a FontVariation over the role's own face.
+			var face := second.get_font(item, type)
+			check(face == font or (face is FontVariation and face.base_font == font), "%s/%s follows its type role" % [type, item])
 		for item in first.get_stylebox_list(type):
 			var before := _paint(first.get_stylebox(item, type))
 			var after := _paint(second.get_stylebox(item, type))

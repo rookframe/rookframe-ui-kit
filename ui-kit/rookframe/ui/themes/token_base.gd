@@ -20,6 +20,12 @@ const DISABLED_OPACITY := 0.5
 ## Small enough that `danger_content` stays at WCAG AA where a theme inks it in `danger`.
 const STATUS_HOVER := 0.1
 const STATUS_PRESSED := 0.16
+## Emphasis where the body face has no axis or sibling for it: Godot's own default Theme values.
+const SYNTHETIC_BOLD := 1.2
+const SYNTHETIC_SLANT := Transform2D(Vector2(1.0, 0.2), Vector2(0.0, 1.0), Vector2.ZERO)
+## Weight of bold running text on a variable face, and its least step above the body weight.
+const BOLD_WEIGHT := 700
+const BOLD_STEP := 200
 
 var _tokens: Theme
 var _theme := Theme.new()
@@ -84,6 +90,56 @@ func _constant(type: StringName, item: StringName, value: int) -> void:
 func _type(type: StringName, role: StringName, font_item := &"font", size_item := &"font_size") -> void:
 	_theme.set_font(font_item, type, _tokens.get_font(role, Tokens.TYPE))
 	_theme.set_font_size(size_item, type, _tokens.get_font_size(role, Tokens.TYPE))
+
+# Fonts.
+
+## `font` in bold, italics or both. A variable face moves along its own weight,
+## italic or slant axis; a static one takes the theme's heavier face of the same
+## family, and failing that the synthetic emphasis of Godot's default Theme.
+func _emphasis(font: Font, bold: bool, italic: bool) -> Font:
+	var server := TextServerManager.get_primary_interface()
+	var axes := font.get_supported_variation_list()
+	var base := font
+	var weight_tag := server.name_to_tag("wght")
+	var weight := _coordinate(font, weight_tag, font.get_font_weight())
+	if bold and not axes.has(weight_tag):
+		for role in Tokens.names(Theme.DATA_TYPE_FONT):
+			var sibling := _tokens.get_font(role, Tokens.TYPE)
+			if sibling.get_font_name() == font.get_font_name() and sibling.get_font_weight() > base.get_font_weight():
+				base = sibling
+	var face := FontVariation.new()
+	if base is FontVariation:
+		# Keeps the face's features, spacing and fallbacks.
+		face = base.duplicate()
+	else:
+		face.base_font = base
+	var coordinates := {}
+	for key in face.variation_opentype:
+		coordinates[server.name_to_tag(key) if key is String else key] = face.variation_opentype[key]
+	if bold and axes.has(weight_tag):
+		coordinates[weight_tag] = clampi(maxi(BOLD_WEIGHT, weight + BOLD_STEP), axes[weight_tag].x, axes[weight_tag].y)
+	elif bold and base == font:
+		face.variation_embolden = SYNTHETIC_BOLD
+	if italic and axes.has(server.name_to_tag("ital")):
+		coordinates[server.name_to_tag("ital")] = axes[server.name_to_tag("ital")].y
+	elif italic and axes.has(server.name_to_tag("slnt")):
+		# The slant axis runs from upright at 0 to its most slanted, negative end.
+		coordinates[server.name_to_tag("slnt")] = axes[server.name_to_tag("slnt")].x
+	elif italic:
+		face.variation_transform = SYNTHETIC_SLANT
+	face.variation_opentype = coordinates
+	return face
+
+## The value `font` sets on a variation axis, or `default` where it sets none.
+func _coordinate(font: Font, tag: int, default: int) -> int:
+	var server := TextServerManager.get_primary_interface()
+	var current := font
+	while current is FontVariation:
+		for key in current.variation_opentype:
+			if (server.name_to_tag(key) if key is String else key) == tag:
+				return int(current.variation_opentype[key])
+		current = current.base_font
+	return default
 
 # StyleBoxes.
 
@@ -225,6 +281,11 @@ func _text() -> void:
 	_color(&"RichTextLabel", &"table_border", _c(&"divider"))
 	_constant(&"RichTextLabel", &"line_separation", _k(&"line_spacing_body"))
 	_type(&"RichTextLabel", &"mono", &"mono_font", &"mono_font_size")
+	# Running text keeps the Theme's default font and size; `[b]` and `[i]` emphasise the body face.
+	var body := _tokens.get_font(&"body", Tokens.TYPE)
+	_theme.set_font(&"bold_font", &"RichTextLabel", _emphasis(body, true, false))
+	_theme.set_font(&"italics_font", &"RichTextLabel", _emphasis(body, false, true))
+	_theme.set_font(&"bold_italics_font", &"RichTextLabel", _emphasis(body, true, true))
 	_style(&"RichTextLabel", &"focus", _focus())
 	_color(&"TooltipLabel", &"font_color", _c(&"content"))
 	_type(&"TooltipLabel", &"meta")
