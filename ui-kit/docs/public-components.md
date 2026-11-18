@@ -425,7 +425,8 @@ remaining viewport. It has no collection scroll region.
 `configure(entries, selected_id, caption, count)`. It emits `selected(id)`.
 Pagination displays complete rows, reveals a changed selection, and retains
 native row Controls when their identities stay the same. Every row, including
-rows on hidden pages, is measured at the current column width. A resize or
+rows on hidden pages, is measured at the current column width from the insets
+and copy it holds, and measured again when a row restyles itself. A resize or
 theme change re-paginates and keeps the selection, or else the first entry of
 the shown page, on screen; `restore_state` applies its page number to the next
 fit. Previous and Next change only the visible page. The consumer decides whether selection changes
@@ -593,7 +594,9 @@ that action itself.
 reveals and focuses a record, and `get_footer_slot()` accepts owned footer
 Controls. Updating stable IDs retains row focus and page state. Pagination
 keeps complete rows within the available area; long text wraps using native
-font metrics. Keyboard focus, hover, pressed and disabled states remain
+font metrics, and each row frame is measured from its own Controls at the
+column width, so it holds the wrapped copy in every Theme. Without a
+presentation a record keeps `space_1` between its content and its frame. Keyboard focus, hover, pressed and disabled states remain
 separate. Consumers must use these public methods rather than internal paths.
 
 `components/forms/paginated_text_area.tscn` is a fixed-page notepad.

@@ -287,6 +287,7 @@ func _collections() -> void:
 	check(large._rows == identities, "AT-37 Single-record edits retain all rows")
 	large.free()
 	await _paged_column()
+	await _row_measure()
 
 ## Rows configured before their column is laid out are measured at the column
 ## width, even on hidden pages, and the shown page follows the selection.
@@ -316,6 +317,55 @@ func _paged_column() -> void:
 	column.size = Vector2(600, 500)
 	await settle(8)
 	check(named(choices, "Result 20. 1d6. ").is_visible_in_tree(), "Reflow keeps the shown selection on its page")
+	column.free()
+
+## Row frames and page ranges follow the insets and copy the rows end up with.
+func _row_measure() -> void:
+	var choice = mount("components/forms/choice.tscn")
+	choice.variant = choice.Variant.LIST
+	await settle()
+	var inset: MarginContainer = choice.get_node(^"Content")
+	inset.add_theme_constant_override("margin_top", 2)
+	choice.title = "Renamed"
+	choice.notification(Control.NOTIFICATION_THEME_CHANGED)
+	await settle()
+	check(inset.get_theme_constant("margin_top") == 2, "Choice refresh keeps an inset its owner set")
+	choice.compact = true
+	await settle()
+	check(inset.get_theme_constant("margin_top") == 8, "Choice density change writes its default inset")
+	choice.free()
+	var box := Control.new()
+	host.add_child(box)
+	box.size = Vector2(360, 420)
+	var choices = load(UI + "components/data/paginated_choices.tscn").instantiate()
+	box.add_child(choices)
+	choices.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	var entries: Array[Dictionary] = []
+	for i in 12: entries.append({"id": "o%d" % i, "title": "Origin %d" % i, "subtitle": "d6"})
+	choices.configure(entries, "o0")
+	await settle(8)
+	# An owner restyles the rows after the fit, as a Choice does a frame after
+	# its Theme changes.
+	for row in choices._rows:
+		row.get_node(^"Content").add_theme_constant_override("margin_top", 30)
+	await settle(8)
+	var area: Control = choices.get_node(^"Area")
+	var shown: Array = choices._rows.filter(func(row): return row.is_visible_in_tree())
+	check(shown.size() >= 2 and shown.all(func(row): return area.get_global_rect().encloses(row.get_global_rect())), "Paged rows restyled after the fit still fit their page")
+	box.free()
+	var column := Control.new()
+	host.add_child(column)
+	column.size = Vector2(280, 700)
+	var collection = load(UI + "components/data/collection.tscn").instantiate()
+	column.add_child(collection)
+	collection.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	var records: Array[Dictionary] = [
+		{"id": "feature", "title": "Occult Herbmaster", "subtitle": "Prepare decoctions and recognise the herbs of Sarkash.", "value": "Class feature"},
+		{"id": "plain", "title": "A title long enough to wrap in a narrow column", "subtitle": "A description long enough to wrap in a narrow column."},
+	]
+	collection.configure(records, "")
+	await settle(8)
+	check(collection._rows.all(func(row): return row.is_visible_in_tree() and row.get_node(^"Details").size.y >= row.get_node(^"Details/Inset").get_combined_minimum_size().y), "Collection row frames hold their wrapped copy")
 	column.free()
 
 func _transfer() -> void:

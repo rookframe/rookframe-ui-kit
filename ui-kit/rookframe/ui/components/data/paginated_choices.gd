@@ -3,6 +3,7 @@ extends VBoxContainer
 const Appearance = preload("res://rookframe/ui/_internal/presentation/appearance.gd")
 const Records = preload("res://rookframe/ui/_internal/interaction/records.gd")
 const Focus = preload("res://rookframe/ui/_internal/interaction/focus.gd")
+const RowMeasure = preload("res://rookframe/ui/_internal/data/row_measure.gd")
 @export var focus_fallback: Control
 var _view_entries: Array[Dictionary] = []
 var _view_rows: Array = []
@@ -132,6 +133,9 @@ func _create_row(id: String) -> Control:
 	var row := row_scene.instantiate() as Button
 	row.variant = row.Variant.LIST
 	row.pressed.connect(func(): selected.emit(id))
+	# A Choice restyles itself a frame after its Theme or copy changes. The page
+	# ranges follow the rows it then draws, whichever of the two ran last.
+	row.minimum_size_changed.connect(_queue_fit)
 	return row
 
 func _queue_fit() -> void:
@@ -209,62 +213,12 @@ func _view_index(id: String) -> int:
 		if str(_view_entries[index].id) == id: return index
 	return -1
 
-## Height of a Choice row at the column width. Godot does not lay out hidden
-## Controls, so a row on another page keeps the width of its last layout (or
-## none) and its wrapped labels would report a stale minimum height. The copy
-## labels are sized to the width the row's HBoxContainer will give them, and
-## their own minimum height is measured there (ADR-0017).
+## Height of a Choice row at the column width, from the insets and copy the
+## row holds when the fit runs. The Button's own minimum (its StyleBox) counts
+## without the custom minimum that this fit or the Choice wrote earlier.
 func _measure_row(row: Control, column_width: float) -> float:
-	var inset := row.get_node(^"Content") as MarginContainer
-	var box := row.get_node(^"Content/Row") as HBoxContainer
-	var copy := row.get_node(^"Content/Row/Copy") as VBoxContainer
-	var copy_width := _copy_width(box, copy, column_width - inset.get_theme_constant("margin_left") - inset.get_theme_constant("margin_right"))
-	var copy_height := 0.0
-	var lines := 0
-	for child in copy.get_children():
-		var control := child as Control
-		if control == null or not control.visible or control.top_level: continue
-		if control is Label: control.size.x = copy_width
-		copy_height += control.get_minimum_size().max(control.custom_minimum_size).y
-		lines += 1
-	copy_height += copy.get_theme_constant("separation") * maxi(0, lines - 1)
-	var content := maxf(copy_height, copy.custom_minimum_size.y)
-	for child in box.get_children():
-		var control := child as Control
-		if control != null and control != copy and control.visible and not control.top_level:
-			content = maxf(content, control.get_combined_minimum_size().y)
-	content += inset.get_theme_constant("margin_top") + inset.get_theme_constant("margin_bottom")
-	# The Button's own minimum (its StyleBox), without the custom minimum that
-	# this fit or the Choice wrote from an earlier measurement.
+	var content := RowMeasure.height(row.get_node(^"Content"), row.get_node(^"Content/Row"), row.get_node(^"Content/Row/Copy"), column_width)
 	return ceilf(maxf(content, row.get_minimum_size().y))
-
-## The width BoxContainer gives the copy: fixed siblings keep their minimum
-## width and expanding siblings share the rest by stretch ratio.
-func _copy_width(box: HBoxContainer, copy: Control, width: float) -> float:
-	var expanding: Array[Control] = [copy]
-	var shown := 0
-	for child in box.get_children():
-		var control := child as Control
-		if control == null or not control.visible or control.top_level: continue
-		shown += 1
-		if control == copy: continue
-		if control.size_flags_horizontal & Control.SIZE_EXPAND: expanding.append(control)
-		else: width -= control.get_combined_minimum_size().x
-	width -= box.get_theme_constant("separation") * maxi(0, shown - 1)
-	var ratio := 0.0
-	for control in expanding: ratio += control.size_flags_stretch_ratio
-	var settled := false
-	while not settled:
-		settled = true
-		for control in expanding:
-			var minimum := control.get_combined_minimum_size().x
-			if control != copy and width * control.size_flags_stretch_ratio / ratio < minimum:
-				width -= minimum
-				ratio -= control.size_flags_stretch_ratio
-				expanding.erase(control)
-				settled = false
-				break
-	return maxf(1.0, maxf(copy.custom_minimum_size.x, width * copy.size_flags_stretch_ratio / ratio))
 
 func _draw() -> void:
 	if Appearance.has_hook(self, &"_draw"):

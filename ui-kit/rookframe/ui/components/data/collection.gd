@@ -3,6 +3,8 @@ extends MarginContainer
 const Appearance = preload("res://rookframe/ui/_internal/presentation/appearance.gd")
 const Records = preload("res://rookframe/ui/_internal/interaction/records.gd")
 const Focus = preload("res://rookframe/ui/_internal/interaction/focus.gd")
+const RowMeasure = preload("res://rookframe/ui/_internal/data/row_measure.gd")
+const Tokens = preload("res://rookframe/ui/themes/design_tokens.gd")
 @export var focus_fallback: Control
 var _view_entries: Array[Dictionary] = []
 var _view_rows: Array = []
@@ -171,23 +173,15 @@ func _fit() -> void:
 		row.get_node(^"Details/Inset/Row/Arrow").visible = phone and not inventory
 		var row_inset := row.get_node(^"Details/Inset") as MarginContainer
 		_style_record(title, subtitle, value, phone, tablet, inventory, entry)
-		var title_size := title.get_theme_font_size("font_size")
-		var subtitle_size := subtitle.get_theme_font_size("font_size")
 		icon.custom_minimum_size = Vector2.ONE * (24 if phone or tablet else 30 if inventory else 34)
 		_style_record_spacing(row, row_inset, phone, tablet, inventory)
-		var gap: int = row.get_node(^"Details/Inset/Row").get_theme_constant("separation")
-		var px := row_inset.get_theme_constant("margin_left")
-		var py := row_inset.get_theme_constant("margin_top")
-		var text_gap: int = row.get_node(^"Details/Inset/Row/Copy").get_theme_constant("separation")
-		var copy_width := width - 2 * px - icon.custom_minimum_size.x - gap - (16 if phone and not inventory else 0)
-		if value.visible:
-			copy_width -= value.get_minimum_size().x + gap
-		if row.get_node(^"Action").visible:
-			copy_width -= row.get_node(^"Action").get_combined_minimum_size().x + row.get_theme_constant("separation")
-		var flags := TextServer.BREAK_MANDATORY | TextServer.BREAK_WORD_BOUND | TextServer.BREAK_ADAPTIVE
-		var title_height := title.get_theme_font("font").get_multiline_string_size(title.text, HORIZONTAL_ALIGNMENT_LEFT, maxf(1, copy_width), title_size, -1, flags).y
-		var subtitle_height := subtitle.get_theme_font("font").get_multiline_string_size(subtitle.text, HORIZONTAL_ALIGNMENT_LEFT, maxf(1, copy_width), subtitle_size, -1, flags).y if subtitle.visible else 0.0
-		var height := maxf(54 if phone else 64 if inventory and tablet else 62 if tablet else 74, title_height + subtitle_height + 2 * py + (text_gap if subtitle.visible else 0) + (0 if phone else 1))
+		# The row is measured from its own Controls at the width its column gives
+		# the details Button, so the frame holds the wrapped copy in every Theme.
+		var details_width := width
+		if action.visible:
+			details_width -= action.get_combined_minimum_size().x + row.get_theme_constant("separation")
+		var content := RowMeasure.height(row_inset, row.get_node(^"Details/Inset/Row"), row.get_node(^"Details/Inset/Row/Copy"), details_width)
+		var height := maxf(54 if phone else 64 if inventory and tablet else 62 if tablet else 74, content + (0 if phone else 1))
 		button.custom_minimum_size.y = height
 		heights.append(height)
 	# Stock shrink sizing: sections without vertical EXPAND finish immediately
@@ -300,7 +294,12 @@ func _style_record_spacing(row: Control, row_inset: MarginContainer, phone: bool
 	if Appearance.has_hook(self, &"_style_record_spacing"):
 		Appearance.invoke(self, &"_style_record_spacing", [row, row_inset, phone, tablet, inventory])
 		return
-	pass
+	# Without a presentation the record keeps off the row frame by the Theme's
+	# smallest spacing step.
+	var margin := get_theme_constant(&"space_1", Tokens.TYPE)
+	for edge in ["left", "right", "top", "bottom"]:
+		if not row_inset.has_theme_constant_override("margin_" + edge) or row_inset.get_theme_constant("margin_" + edge) != margin:
+			row_inset.add_theme_constant_override("margin_" + edge, margin)
 
 ## Filter the view without replacing authoritative records or domain selection.
 func set_visible_ids(ids: PackedStringArray) -> bool:

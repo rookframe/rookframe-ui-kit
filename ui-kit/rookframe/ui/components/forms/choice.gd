@@ -58,11 +58,15 @@ var _configuring := false
 var _refresh_pending := false
 var _styled_variant := -1
 var _styled_theme: Theme
+# The variant and density the default insets were last written for.
+var _inset_layout := Vector2i(-1, -1)
+var _settle_pending := false
 var _automatic_name := ""
 var _automatic_description := ""
 
 func _ready() -> void:
 	$Content.minimum_size_changed.connect(_fit_content)
+	$Content.resized.connect(_queue_content_settle)
 	toggled.connect(func(selected: bool):
 		_update_state()
 		selection_changed.emit(selected)
@@ -110,6 +114,7 @@ func _refresh() -> void:
 			Appearance.invoke(self, &"_style_choice")
 		_styled_variant = variant
 		_styled_theme = owning_theme
+		_inset_layout = Vector2i(-1, -1)
 	$Content/Row/Copy/Title.text = title
 	$Content/Row/Copy/Description.text = description
 	$Content/Row/Copy/Description.visible = show_description and not description.is_empty()
@@ -123,7 +128,12 @@ func _refresh() -> void:
 	if variant == Variant.CARD:
 		theme_type_variation = "components_switch__compact" if compact else "components_switch"
 		_style_card()
-	else:
+		_inset_layout = Vector2i(-1, -1)
+	# The default insets are written once per variant, density and presentation.
+	# A refresh for new copy or a Theme notification leaves the insets an owner
+	# such as PaginatedChoices set afterwards, so the owner's measure stays true.
+	elif _inset_layout != Vector2i(variant, int(compact)):
+		_inset_layout = Vector2i(variant, int(compact))
 		var padding := Vector2(16, 12)
 		if variant == Variant.MARKED_ROW: padding = Vector2(12, 8)
 		if variant == Variant.MARKED_CARD: padding = Vector2(18, 16)
@@ -145,6 +155,21 @@ func _fit_content() -> void:
 	elif variant == Variant.LIST: minimum = 44
 	elif compact: minimum = 44
 	custom_minimum_size = $Content.get_combined_minimum_size().max(Vector2(44, minimum))
+
+func _queue_content_settle() -> void:
+	if _settle_pending: return
+	_settle_pending = true
+	_settle_content.call_deferred()
+
+## Godot resizes an anchored Control at once when a Theme override changes, and
+## again later only if its minimum size differs from the last one it settled on.
+## Overrides written in sequence can pass through a larger minimum and return,
+## which leaves the inset taller than the row. Its anchors are applied again.
+func _settle_content() -> void:
+	_settle_pending = false
+	var content := $Content as Control
+	if content.size != size.max(content.get_combined_minimum_size()):
+		content.set_anchor(SIDE_BOTTOM, content.anchor_bottom, true)
 
 func _update_state() -> void:
 	if not is_node_ready(): return

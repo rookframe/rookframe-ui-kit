@@ -2,6 +2,25 @@
 
 ## Unreleased
 
+- Row frames and page ranges follow the rows that are drawn:
+  - `Choice` writes its default insets once per variant, density and
+    presentation. A refresh for new copy or a Theme notification no longer
+    replaces insets its owner set afterwards. In Silkbound Ledger the
+    `PaginatedChoices` presentation's 2 px phone insets were replaced by the
+    Choice's 9 px a frame after the fit, so rows measured at 44 px drew at
+    58 px and the pager cut the second row of a phone list.
+  - `PaginatedChoices` fits again when a row's minimum size changes after the
+    fit, so page ranges match the rows whichever of the two restyled last.
+  - `Choice` applies its inset's anchors again when Theme overrides written in
+    sequence leave the inset taller than the row.
+  - `Collection` measures each row from its own Controls at the column width,
+    as `PaginatedChoices` does, instead of estimating the copy width and line
+    heights. In Fantasy and Cyberpunk a wrapped description ran 4 to 49 px
+    past its row frame in a narrow column, because the estimate did not match
+    the gaps and line heights the Controls resolve there. Silkbound Ledger
+    rows keep their heights.
+  - `Collection` without a presentation keeps `space_1` between a record's
+    content and its frame; the copy touched the frame in Fantasy and Cyberpunk.
 - Kit findings from the host HUD redesign:
   - `HudBar` sets the density of tiles a caller groups in plain Containers
     inside its slots, such as one HBoxContainer per tool group. A slot child
