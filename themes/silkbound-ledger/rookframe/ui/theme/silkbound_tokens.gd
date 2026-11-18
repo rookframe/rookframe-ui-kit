@@ -27,7 +27,8 @@ const COLORS := {
 	# Content
 	&"content": Color("#e7e7dd"),
 	&"content_muted": Color("#aebabe"),
-	&"content_disabled": Color("#aebabe"),
+	# Dimmer than muted, so an inactive control reads apart from secondary text.
+	&"content_disabled": Color("#788387"),
 	&"content_heading": Color("#e7e7dd"),
 	# Border: controls are outlined in copper at 38%, so the edge takes the tone of
 	# the surface behind it; panels keep the grey `ledger_edge` primitive.

@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" path="res://rookframe/ui/assets/controls/checkbox-unchecked-disabled.svg" id="checkbox-unchecked-disabled"]
 [ext_resource type="FontFile" path="res://rookframe/ui/assets/fonts/eb-garamond/prerendered/roman.res" id="silk_garamond"]
 [ext_resource type="FontFile" path="res://rookframe/ui/assets/fonts/eb-garamond/prerendered/ink.res" id="silk_garamond_ink"]
+[ext_resource type="FontFile" path="res://rookframe/ui/assets/fonts/eb-garamond/prerendered/italic.res" id="silk_garamond_italic"]
 [ext_resource type="Texture2D" path="res://rookframe/ui/_internal/assets/controls/radio-checked_disabled.svg" id="control_radio-checked_disabled"]
 [ext_resource type="Texture2D" path="res://rookframe/ui/_internal/assets/controls/slider-highlight.svg" id="control_slider-highlight"]
 [ext_resource type="Texture2D" path="res://rookframe/ui/_internal/assets/controls/radio-unchecked_disabled.svg" id="control_radio-unchecked_disabled"]
@@ -625,14 +626,14 @@ content_margin_left = 16.0
 content_margin_top = 10.0
 content_margin_right = 16.0
 content_margin_bottom = 10.0
-bg_color = Color(0.031373, 0.043137, 0.039216, 0.4)
+bg_color = Color(0.031373, 0.043137, 0.039216, 0.2)
 border_width_left = 1
 border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
-border_color = Color(0.737255, 0.572549, 0.466667, 0.38)
+border_color = Color(0.737255, 0.572549, 0.466667, 0.19)
 metadata/tokens = {
-"border_color": &"border"
+"border_color": [&"border", 0.19]
 }
 
 [sub_resource type="StyleBoxFlat" id="Quiet"]
@@ -1229,14 +1230,14 @@ border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
-border_color = Color(0.356863, 0.384314, 0.396078, 1)
+border_color = Color(0.356863, 0.384314, 0.396078, 0.5)
 corner_radius_top_left = 31
 corner_radius_top_right = 31
 corner_radius_bottom_right = 31
 corner_radius_bottom_left = 31
 metadata/tokens = {
 "bg_color": &"surface",
-"border_color": &"ledger_edge"
+"border_color": [&"ledger_edge", 0.5]
 }
 
 [sub_resource type="StyleBoxFlat" id="CompactActionNormal"]
@@ -1290,10 +1291,10 @@ border_width_left = 1
 border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
-border_color = Color(0.356863, 0.384314, 0.396078, 1)
+border_color = Color(0.356863, 0.384314, 0.396078, 0.5)
 metadata/tokens = {
 "bg_color": &"surface",
-"border_color": &"ledger_edge"
+"border_color": [&"ledger_edge", 0.5]
 }
 
 [sub_resource type="StyleBoxFlat" id="CompactActionTouchNormal"]
@@ -1332,10 +1333,10 @@ border_width_left = 1
 border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
-border_color = Color(0.356863, 0.384314, 0.396078, 1)
+border_color = Color(0.356863, 0.384314, 0.396078, 0.5)
 metadata/tokens = {
 "bg_color": &"surface",
-"border_color": &"ledger_edge"
+"border_color": [&"ledger_edge", 0.5]
 }
 
 [sub_resource type="StyleBoxFlat" id="silk_Button"]
@@ -2411,6 +2412,77 @@ metadata/tokens = {
 "border_color": &"focus_ring"
 }
 
+[sub_resource type="StyleBoxFlat" id="silk_ButtonDisabled"]
+content_margin_left = 12.0
+content_margin_top = 12.0
+content_margin_right = 12.0
+content_margin_bottom = 12.0
+bg_color = Color(0.031373, 0.043137, 0.039216, 0.2)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.737255, 0.572549, 0.466667, 0.19)
+metadata/tokens = {
+"border_color": [&"border", 0.19]
+}
+
+[sub_resource type="StyleBoxFlat" id="silk_ActionDisabled"]
+content_margin_left = 16.0
+content_margin_top = 8.0
+content_margin_right = 16.0
+content_margin_bottom = 8.0
+bg_color = Color(0.031373, 0.043137, 0.039216, 0.2)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.737255, 0.572549, 0.466667, 0.19)
+metadata/tokens = {
+"border_color": [&"border", 0.19]
+}
+
+[sub_resource type="StyleBoxFlat" id="silk_GlyphDisabled"]
+content_margin_left = 4.0
+content_margin_top = 2.0
+content_margin_right = 4.0
+content_margin_bottom = 2.0
+bg_color = Color(0.082353, 0.090196, 0.098039, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.356863, 0.384314, 0.396078, 0.5)
+metadata/tokens = {
+"bg_color": &"canvas",
+"border_color": [&"ledger_edge", 0.5]
+}
+
+[sub_resource type="StyleBoxFlat" id="silk_IconFrameDisabled"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0, 0, 0, 0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.737255, 0.572549, 0.466667, 0.2)
+metadata/tokens = {
+"border_color": [&"ornament", 0.2]
+}
+
+[sub_resource type="FontVariation" id="Font_silkbound_semibold"]
+base_font = ExtResource("silk_garamond")
+variation_opentype = {2003265652: 600.0}
+opentype_features = {1953396077: 1}
+
+[sub_resource type="FontVariation" id="Font_silkbound_italic"]
+base_font = ExtResource("silk_garamond_italic")
+variation_opentype = {2003265652: 400.0}
+opentype_features = {1953396077: 1}
+
 [resource]
 default_font = SubResource("Font_silkbound_regular")
 default_font_size = 20
@@ -2418,13 +2490,13 @@ Button/colors/font_color = Color(0.905882, 0.905882, 0.866667, 1)
 Button/colors/font_hover_color = Color(0.905882, 0.905882, 0.866667, 1)
 Button/colors/font_pressed_color = Color(0.905882, 0.905882, 0.866667, 1)
 Button/colors/font_focus_color = Color(0.905882, 0.905882, 0.866667, 1)
-Button/colors/font_disabled_color = Color(0.682353, 0.729412, 0.745098, 1)
+Button/colors/font_disabled_color = Color(0.470588, 0.513726, 0.529412, 1)
 Button/font_sizes/font_size = 20
 Button/styles/normal = SubResource("silk_Button")
 Button/styles/hover = SubResource("silk_Hover")
 Button/styles/pressed = SubResource("silk_Hover")
 Button/styles/focus = SubResource("silk_Focus")
-Button/styles/disabled = SubResource("silk_Button")
+Button/styles/disabled = SubResource("silk_ButtonDisabled")
 CheckBox/icons/checked = ExtResource("checkbox-checked")
 CheckBox/icons/unchecked = ExtResource("checkbox-unchecked")
 CheckBox/icons/checked_disabled = ExtResource("checkbox-checked-disabled")
@@ -2434,7 +2506,7 @@ CheckBox/colors/font_hover_color = Color(0.905882, 0.905882, 0.866667, 1)
 CheckBox/colors/font_pressed_color = Color(0.905882, 0.905882, 0.866667, 1)
 CheckBox/colors/font_hover_pressed_color = Color(0.905882, 0.905882, 0.866667, 1)
 CheckBox/colors/font_focus_color = Color(0.905882, 0.905882, 0.866667, 1)
-CheckBox/colors/font_disabled_color = Color(0.682353, 0.729412, 0.745098, 1)
+CheckBox/colors/font_disabled_color = Color(0.470588, 0.513726, 0.529412, 1)
 CheckBox/constants/h_separation = 12
 CheckBox/font_sizes/font_size = 20
 CheckBox/styles/normal = SubResource("Quiet")
@@ -2448,7 +2520,7 @@ CheckButton/colors/font_hover_color = Color(0.905882, 0.905882, 0.866667, 1)
 CheckButton/colors/font_pressed_color = Color(0.905882, 0.905882, 0.866667, 1)
 CheckButton/colors/font_hover_pressed_color = Color(0.905882, 0.905882, 0.866667, 1)
 CheckButton/colors/font_focus_color = Color(0.905882, 0.905882, 0.866667, 1)
-CheckButton/colors/font_disabled_color = Color(0.682353, 0.729412, 0.745098, 1)
+CheckButton/colors/font_disabled_color = Color(0.470588, 0.513726, 0.529412, 1)
 CheckButton/font_sizes/font_size = 20
 CheckButton/styles/normal = SubResource("Quiet")
 CheckButton/styles/pressed = SubResource("Quiet")
@@ -2513,7 +2585,7 @@ Panel/styles/panel = SubResource("Canvas")
 PanelContainer/styles/panel = SubResource("Surface")
 PopupMenu/colors/font_color = Color(0.905882, 0.905882, 0.866667, 1)
 PopupMenu/colors/font_hover_color = Color(0.905882, 0.905882, 0.866667, 1)
-PopupMenu/colors/font_disabled_color = Color(0.682353, 0.729412, 0.745098, 1)
+PopupMenu/colors/font_disabled_color = Color(0.470588, 0.513726, 0.529412, 1)
 PopupMenu/styles/panel = SubResource("Raised")
 PopupMenu/styles/hover = SubResource("ButtonHover")
 PopupMenu/constants/h_separation = 12
@@ -2534,7 +2606,7 @@ TabBar/styles/tab_unselected = SubResource("Tab")
 TabBar/styles/tab_hovered = SubResource("TabHover")
 TabBar/styles/tab_selected = SubResource("TabSelected")
 TabBar/styles/tab_focus = SubResource("ButtonFocus")
-TabContainer/colors/font_disabled_color = Color(0.682353, 0.729412, 0.745098, 1)
+TabContainer/colors/font_disabled_color = Color(0.470588, 0.513726, 0.529412, 1)
 TabContainer/colors/font_hovered_color = Color(0.905882, 0.905882, 0.866667, 1)
 TabContainer/colors/font_selected_color = Color(0.082353, 0.090196, 0.098039, 1)
 TabContainer/colors/font_unselected_color = Color(0.682353, 0.729412, 0.745098, 1)
@@ -2576,7 +2648,7 @@ VSlider/styles/grabber_area_highlight = SubResource("ProgressFill")
 VSeparator/constants/separation = 1
 VSeparator/styles/separator = SubResource("Separator")
 Tree/colors/font_color = Color(0.905882, 0.905882, 0.866667, 1)
-Tree/colors/font_disabled_color = Color(0.682353, 0.729412, 0.745098, 1)
+Tree/colors/font_disabled_color = Color(0.470588, 0.513726, 0.529412, 1)
 Tree/colors/font_hovered_color = Color(0.905882, 0.905882, 0.866667, 1)
 Tree/colors/font_hovered_selected_color = Color(0.082353, 0.090196, 0.098039, 1)
 Tree/colors/font_selected_color = Color(0.082353, 0.090196, 0.098039, 1)
@@ -2739,7 +2811,7 @@ RookframePrimaryButton/styles/normal = SubResource("silk_Primary")
 RookframePrimaryButton/styles/hover = SubResource("silk_PrimaryHover")
 RookframePrimaryButton/styles/pressed = SubResource("silk_PrimaryPressed")
 RookframePrimaryButton/styles/focus = SubResource("silk_Focus")
-RookframePrimaryButton/styles/disabled = SubResource("silk_Primary")
+RookframePrimaryButton/styles/disabled = SubResource("silk_ButtonDisabled")
 RookframeGoldButton/base_type = &"Button"
 RookframeGoldButton/colors/font_color = Color(0.082353, 0.090196, 0.098039, 1)
 RookframeGoldButton/colors/font_hover_color = Color(0.082353, 0.090196, 0.098039, 1)
@@ -2770,7 +2842,7 @@ RookframeManagedControl/colors/icon_normal_color = Color(0.815686, 0.745098, 0.5
 RookframeManagedControl/colors/icon_hover_color = Color(0.815686, 0.745098, 0.556863, 1)
 RookframeManagedControl/colors/icon_pressed_color = Color(0.815686, 0.745098, 0.556863, 1)
 RookframeManagedControl/colors/icon_focus_color = Color(0.815686, 0.745098, 0.556863, 1)
-RookframeManagedControl/colors/icon_disabled_color = Color(0.682353, 0.729412, 0.745098, 1)
+RookframeManagedControl/colors/icon_disabled_color = Color(0.470588, 0.513726, 0.529412, 1)
 RookframeManagedControl/constants/icon_max_width = 24
 RookframeManagedControl/fonts/font = SubResource("DisplayBold")
 RookframeManagedControl/styles/normal = SubResource("ManagedControl")
@@ -2818,7 +2890,7 @@ RookframeSecondaryButton/styles/normal = SubResource("silk_SecondaryAction")
 RookframeSecondaryButton/styles/hover = SubResource("silk_WizardHover")
 RookframeSecondaryButton/styles/pressed = SubResource("silk_WizardHover")
 RookframeSecondaryButton/styles/focus = SubResource("silk_Focus")
-RookframeSecondaryButton/styles/disabled = SubResource("silk_SecondaryAction")
+RookframeSecondaryButton/styles/disabled = SubResource("silk_ActionDisabled")
 RookframeQuietButton/base_type = &"Button"
 RookframeQuietButton/styles/normal = SubResource("Quiet")
 RookframeQuietButton/styles/hover = SubResource("QuietHover")
@@ -2841,7 +2913,7 @@ RookframeDangerOutline/colors/icon_normal_color = Color(1, 0.505882, 0.478431, 1
 RookframeDangerOutline/colors/icon_hover_color = Color(1, 0.505882, 0.478431, 1)
 RookframeDangerOutline/colors/icon_pressed_color = Color(1, 0.505882, 0.478431, 1)
 RookframeDangerOutline/colors/icon_focus_color = Color(1, 0.505882, 0.478431, 1)
-RookframeDangerOutline/colors/icon_disabled_color = Color(0.682353, 0.729412, 0.745098, 1)
+RookframeDangerOutline/colors/icon_disabled_color = Color(0.470588, 0.513726, 0.529412, 1)
 RookframeDangerOutline/constants/icon_max_width = 24
 RookframeDangerOutline/fonts/font = SubResource("DisplayBold")
 RookframeDangerOutline/styles/normal = SubResource("DangerOutline")
@@ -2871,7 +2943,7 @@ RookframeCircularAction/colors/icon_normal_color = Color(0.815686, 0.745098, 0.5
 RookframeCircularAction/colors/icon_hover_color = Color(0.815686, 0.745098, 0.556863, 1)
 RookframeCircularAction/colors/icon_pressed_color = Color(0.815686, 0.745098, 0.556863, 1)
 RookframeCircularAction/colors/icon_focus_color = Color(0.815686, 0.745098, 0.556863, 1)
-RookframeCircularAction/colors/icon_disabled_color = Color(0.682353, 0.729412, 0.745098, 1)
+RookframeCircularAction/colors/icon_disabled_color = Color(0.470588, 0.513726, 0.529412, 1)
 RookframeCircularAction/constants/icon_max_width = 30
 RookframeCircularAction/styles/normal = SubResource("CircularActionNormal")
 RookframeCircularAction/styles/hover = SubResource("CircularActionHover")
@@ -2902,7 +2974,7 @@ Button/colors/icon_hover_color = Color(0.815686, 0.745098, 0.556863, 1)
 Button/colors/icon_pressed_color = Color(0.815686, 0.745098, 0.556863, 1)
 Button/colors/icon_hover_pressed_color = Color(0.815686, 0.745098, 0.556863, 1)
 Button/colors/icon_focus_color = Color(0.815686, 0.745098, 0.556863, 1)
-Button/colors/icon_disabled_color = Color(0.682353, 0.729412, 0.745098, 1)
+Button/colors/icon_disabled_color = Color(0.470588, 0.513726, 0.529412, 1)
 Button/colors/font_hover_pressed_color = Color(0.905882, 0.905882, 0.866667, 1)
 MenuButton/constants/h_separation = 12
 MenuButton/colors/icon_normal_color = Color(0.815686, 0.745098, 0.556863, 1)
@@ -2910,7 +2982,7 @@ MenuButton/colors/icon_hover_color = Color(0.815686, 0.745098, 0.556863, 1)
 MenuButton/colors/icon_pressed_color = Color(0.815686, 0.745098, 0.556863, 1)
 MenuButton/colors/icon_hover_pressed_color = Color(0.815686, 0.745098, 0.556863, 1)
 MenuButton/colors/icon_focus_color = Color(0.815686, 0.745098, 0.556863, 1)
-MenuButton/colors/icon_disabled_color = Color(0.682353, 0.729412, 0.745098, 1)
+MenuButton/colors/icon_disabled_color = Color(0.470588, 0.513726, 0.529412, 1)
 MenuButton/colors/font_hover_pressed_color = Color(0.905882, 0.905882, 0.866667, 1)
 OptionButton/constants/h_separation = 12
 OptionButton/colors/icon_normal_color = Color(0.815686, 0.745098, 0.556863, 1)
@@ -2918,27 +2990,27 @@ OptionButton/colors/icon_hover_color = Color(0.815686, 0.745098, 0.556863, 1)
 OptionButton/colors/icon_pressed_color = Color(0.815686, 0.745098, 0.556863, 1)
 OptionButton/colors/icon_hover_pressed_color = Color(0.815686, 0.745098, 0.556863, 1)
 OptionButton/colors/icon_focus_color = Color(0.815686, 0.745098, 0.556863, 1)
-OptionButton/colors/icon_disabled_color = Color(0.682353, 0.729412, 0.745098, 1)
+OptionButton/colors/icon_disabled_color = Color(0.470588, 0.513726, 0.529412, 1)
 OptionButton/colors/font_hover_pressed_color = Color(0.905882, 0.905882, 0.866667, 1)
 CheckBox/colors/icon_normal_color = Color(0.815686, 0.745098, 0.556863, 1)
 CheckBox/colors/icon_hover_color = Color(0.815686, 0.745098, 0.556863, 1)
 CheckBox/colors/icon_pressed_color = Color(0.815686, 0.745098, 0.556863, 1)
 CheckBox/colors/icon_hover_pressed_color = Color(0.815686, 0.745098, 0.556863, 1)
 CheckBox/colors/icon_focus_color = Color(0.815686, 0.745098, 0.556863, 1)
-CheckBox/colors/icon_disabled_color = Color(0.682353, 0.729412, 0.745098, 1)
+CheckBox/colors/icon_disabled_color = Color(0.470588, 0.513726, 0.529412, 1)
 CheckButton/colors/icon_normal_color = Color(0.815686, 0.745098, 0.556863, 1)
 CheckButton/colors/icon_hover_color = Color(0.815686, 0.745098, 0.556863, 1)
 CheckButton/colors/icon_pressed_color = Color(0.815686, 0.745098, 0.556863, 1)
 CheckButton/colors/icon_hover_pressed_color = Color(0.815686, 0.745098, 0.556863, 1)
 CheckButton/colors/icon_focus_color = Color(0.815686, 0.745098, 0.556863, 1)
-CheckButton/colors/icon_disabled_color = Color(0.682353, 0.729412, 0.745098, 1)
+CheckButton/colors/icon_disabled_color = Color(0.470588, 0.513726, 0.529412, 1)
 RookframeShellControl/constants/h_separation = 12
 RookframeShellControl/colors/icon_normal_color = Color(0.815686, 0.745098, 0.556863, 1)
 RookframeShellControl/colors/icon_hover_color = Color(0.815686, 0.745098, 0.556863, 1)
 RookframeShellControl/colors/icon_pressed_color = Color(0.815686, 0.745098, 0.556863, 1)
 RookframeShellControl/colors/icon_hover_pressed_color = Color(0.815686, 0.745098, 0.556863, 1)
 RookframeShellControl/colors/icon_focus_color = Color(0.815686, 0.745098, 0.556863, 1)
-RookframeShellControl/colors/icon_disabled_color = Color(0.682353, 0.729412, 0.745098, 1)
+RookframeShellControl/colors/icon_disabled_color = Color(0.470588, 0.513726, 0.529412, 1)
 RookframeShellControl/colors/font_hover_pressed_color = Color(0.905882, 0.905882, 0.866667, 1)
 RookframeManagedControl/constants/h_separation = 12
 RookframeManagedControl/colors/icon_hover_pressed_color = Color(0.815686, 0.745098, 0.556863, 1)
@@ -2949,7 +3021,7 @@ RookframeSecondaryButton/colors/icon_hover_color = Color(0.815686, 0.745098, 0.5
 RookframeSecondaryButton/colors/icon_pressed_color = Color(0.815686, 0.745098, 0.556863, 1)
 RookframeSecondaryButton/colors/icon_hover_pressed_color = Color(0.815686, 0.745098, 0.556863, 1)
 RookframeSecondaryButton/colors/icon_focus_color = Color(0.815686, 0.745098, 0.556863, 1)
-RookframeSecondaryButton/colors/icon_disabled_color = Color(0.682353, 0.729412, 0.745098, 1)
+RookframeSecondaryButton/colors/icon_disabled_color = Color(0.470588, 0.513726, 0.529412, 1)
 RookframeSecondaryButton/colors/font_hover_pressed_color = Color(0.905882, 0.905882, 0.866667, 1)
 RookframeQuietButton/constants/h_separation = 12
 RookframeQuietButton/colors/icon_normal_color = Color(0.815686, 0.745098, 0.556863, 1)
@@ -2957,7 +3029,7 @@ RookframeQuietButton/colors/icon_hover_color = Color(0.815686, 0.745098, 0.55686
 RookframeQuietButton/colors/icon_pressed_color = Color(0.815686, 0.745098, 0.556863, 1)
 RookframeQuietButton/colors/icon_hover_pressed_color = Color(0.815686, 0.745098, 0.556863, 1)
 RookframeQuietButton/colors/icon_focus_color = Color(0.815686, 0.745098, 0.556863, 1)
-RookframeQuietButton/colors/icon_disabled_color = Color(0.682353, 0.729412, 0.745098, 1)
+RookframeQuietButton/colors/icon_disabled_color = Color(0.470588, 0.513726, 0.529412, 1)
 RookframeQuietButton/colors/font_hover_pressed_color = Color(0.905882, 0.905882, 0.866667, 1)
 RookframeCompactAction/constants/h_separation = 12
 RookframeCompactAction/colors/icon_normal_color = Color(0.815686, 0.745098, 0.556863, 1)
@@ -2965,7 +3037,7 @@ RookframeCompactAction/colors/icon_hover_color = Color(0.815686, 0.745098, 0.556
 RookframeCompactAction/colors/icon_pressed_color = Color(0.815686, 0.745098, 0.556863, 1)
 RookframeCompactAction/colors/icon_hover_pressed_color = Color(0.815686, 0.745098, 0.556863, 1)
 RookframeCompactAction/colors/icon_focus_color = Color(0.815686, 0.745098, 0.556863, 1)
-RookframeCompactAction/colors/icon_disabled_color = Color(0.682353, 0.729412, 0.745098, 1)
+RookframeCompactAction/colors/icon_disabled_color = Color(0.470588, 0.513726, 0.529412, 1)
 RookframeCompactAction/colors/font_hover_pressed_color = Color(0.905882, 0.905882, 0.866667, 1)
 RookframeCompactActionTouch/constants/h_separation = 12
 RookframeCompactActionTouch/colors/icon_normal_color = Color(0.815686, 0.745098, 0.556863, 1)
@@ -2973,7 +3045,7 @@ RookframeCompactActionTouch/colors/icon_hover_color = Color(0.815686, 0.745098, 
 RookframeCompactActionTouch/colors/icon_pressed_color = Color(0.815686, 0.745098, 0.556863, 1)
 RookframeCompactActionTouch/colors/icon_hover_pressed_color = Color(0.815686, 0.745098, 0.556863, 1)
 RookframeCompactActionTouch/colors/icon_focus_color = Color(0.815686, 0.745098, 0.556863, 1)
-RookframeCompactActionTouch/colors/icon_disabled_color = Color(0.682353, 0.729412, 0.745098, 1)
+RookframeCompactActionTouch/colors/icon_disabled_color = Color(0.470588, 0.513726, 0.529412, 1)
 RookframeCompactActionTouch/colors/font_hover_pressed_color = Color(0.905882, 0.905882, 0.866667, 1)
 RookframeCircularAction/constants/h_separation = 12
 RookframeCircularAction/colors/icon_hover_pressed_color = Color(0.815686, 0.745098, 0.556863, 1)
@@ -3012,6 +3084,9 @@ RookframeChoiceRow/colors/icon_hover_pressed_color = Color(0.905882, 0.905882, 0
 RookframeSearchInput/styles/read_only = SubResource("Empty")
 ProgressBar/constants/outline_size = 3
 RichTextLabel/fonts/normal_font = SubResource("Font_silkbound_regular")
+RichTextLabel/fonts/bold_font = SubResource("Font_silkbound_semibold")
+RichTextLabel/fonts/italics_font = SubResource("Font_silkbound_italic")
+RichTextLabel/fonts/bold_italics_font = SubResource("Font_silkbound_italic")
 Label/constants/line_spacing = 0
 Button/fonts/font = SubResource("Font_silkbound_medium")
 TaskButton/base_type = &"Button"
@@ -3020,7 +3095,7 @@ TaskGlyphButton/font_sizes/font_size = 24
 TaskGlyphButton/styles/normal = SubResource("silk_Glyph")
 TaskGlyphButton/styles/hover = SubResource("silk_GlyphHover")
 TaskGlyphButton/styles/pressed = SubResource("silk_GlyphHover")
-TaskGlyphButton/styles/disabled = SubResource("silk_Glyph")
+TaskGlyphButton/styles/disabled = SubResource("silk_GlyphDisabled")
 TaskDetailTab/base_type = &"Button"
 TaskDetailTab/fonts/font = SubResource("silk_TabFont")
 TaskDetailTab/font_sizes/font_size = 14
@@ -3045,7 +3120,7 @@ TaskPrimary/colors/icon_hover_pressed_color = Color(0.082353, 0.090196, 0.098039
 TaskPrimary/styles/normal = SubResource("silk_Primary")
 TaskPrimary/styles/hover = SubResource("silk_PrimaryHover")
 TaskPrimary/styles/pressed = SubResource("silk_PrimaryPressed")
-TaskPrimary/styles/disabled = SubResource("silk_Primary")
+TaskPrimary/styles/disabled = SubResource("silk_ButtonDisabled")
 TaskQuiet/base_type = &"Button"
 TaskQuiet/colors/font_color = Color(0.682353, 0.729412, 0.745098, 1)
 TaskQuiet/styles/normal = SubResource("silk_Quiet")
@@ -3088,7 +3163,7 @@ RookframeIcon/constants/icon_max_width = 24
 RookframeIcon/styles/normal = SubResource("silk_RookframeIconFrame")
 RookframeIcon/styles/hover = SubResource("silk_SilkHoverFrame")
 RookframeIcon/styles/pressed = SubResource("silk_SilkHoverFrame")
-RookframeIcon/styles/disabled = SubResource("silk_RookframeIconFrame")
+RookframeIcon/styles/disabled = SubResource("silk_IconFrameDisabled")
 RookframeIcon/colors/icon_normal_color = Color(0.815686, 0.745098, 0.556863, 1)
 RookframeIcon/colors/icon_hover_color = Color(0.815686, 0.745098, 0.556863, 1)
 RookframeIcon/colors/icon_pressed_color = Color(0.815686, 0.745098, 0.556863, 1)
@@ -3098,11 +3173,11 @@ RookframePrimaryIcon/constants/icon_max_width = 24
 RookframePrimaryIcon/styles/normal = SubResource("silk_SilkPrimaryFrame")
 RookframePrimaryIcon/styles/hover = SubResource("silk_SilkPrimaryFrame")
 RookframePrimaryIcon/styles/pressed = SubResource("silk_SilkPrimaryFrame")
-RookframePrimaryIcon/styles/disabled = SubResource("silk_SilkPrimaryFrame")
+RookframePrimaryIcon/styles/disabled = SubResource("silk_IconFrameDisabled")
 RookframePrimaryIcon/colors/icon_normal_color = Color(0.082353, 0.090196, 0.098039, 1)
 RookframePrimaryIcon/colors/icon_hover_color = Color(0.082353, 0.090196, 0.098039, 1)
 RookframePrimaryIcon/colors/icon_pressed_color = Color(0.082353, 0.090196, 0.098039, 1)
-RookframePrimaryIcon/colors/icon_disabled_color = Color(0.082353, 0.090196, 0.098039, 1)
+RookframePrimaryIcon/colors/icon_disabled_color = Color(0.470588, 0.513726, 0.529412, 1)
 SilkCreatureNamePhone/base_type = &"Label"
 SilkCreatureNamePhone/fonts/font = SubResource("silk_line_0")
 SilkCreatureNamePhone/font_sizes/font_size = 23
@@ -3400,7 +3475,7 @@ WizardButton/styles/normal = SubResource("silk_WizardButton")
 WizardButton/styles/hover = SubResource("silk_WizardHover")
 WizardButton/styles/pressed = SubResource("silk_WizardHover")
 WizardButton/styles/hover_pressed = SubResource("silk_WizardHover")
-WizardButton/styles/disabled = SubResource("silk_WizardButton")
+WizardButton/styles/disabled = SubResource("silk_ActionDisabled")
 WizardButton/colors/font_color = Color(0.905882, 0.905882, 0.866667, 1)
 WizardButton/colors/icon_normal_color = Color(0.815686, 0.745098, 0.556863, 1)
 WizardButton/colors/font_hover_color = Color(0.905882, 0.905882, 0.866667, 1)
@@ -3427,14 +3502,14 @@ WizardQuiet/colors/font_hover_pressed_color = Color(0.682353, 0.729412, 0.745098
 WizardQuiet/colors/icon_hover_pressed_color = Color(0.815686, 0.745098, 0.556863, 1)
 WizardQuiet/colors/font_focus_color = Color(0.682353, 0.729412, 0.745098, 1)
 WizardQuiet/colors/icon_focus_color = Color(0.815686, 0.745098, 0.556863, 1)
-WizardQuiet/colors/font_disabled_color = Color(0.682353, 0.729412, 0.745098, 1)
-WizardQuiet/colors/icon_disabled_color = Color(0.815686, 0.745098, 0.556863, 1)
+WizardQuiet/colors/font_disabled_color = Color(0.470588, 0.513726, 0.529412, 1)
+WizardQuiet/colors/icon_disabled_color = Color(0.470588, 0.513726, 0.529412, 1)
 WizardPrimary/base_type = &"Button"
 WizardPrimary/styles/normal = SubResource("silk_WizardPrimary")
 WizardPrimary/styles/hover = SubResource("silk_WizardPrimaryHover")
 WizardPrimary/styles/pressed = SubResource("silk_WizardPrimary")
 WizardPrimary/styles/hover_pressed = SubResource("silk_WizardPrimaryHover")
-WizardPrimary/styles/disabled = SubResource("silk_WizardPrimary")
+WizardPrimary/styles/disabled = SubResource("silk_ActionDisabled")
 WizardPrimary/colors/font_color = Color(0.082353, 0.090196, 0.098039, 1)
 WizardPrimary/colors/icon_normal_color = Color(0.082353, 0.090196, 0.098039, 1)
 WizardPrimary/colors/font_hover_color = Color(0.082353, 0.090196, 0.098039, 1)
@@ -3445,14 +3520,14 @@ WizardPrimary/colors/font_hover_pressed_color = Color(0.082353, 0.090196, 0.0980
 WizardPrimary/colors/icon_hover_pressed_color = Color(0.082353, 0.090196, 0.098039, 1)
 WizardPrimary/colors/font_focus_color = Color(0.082353, 0.090196, 0.098039, 1)
 WizardPrimary/colors/icon_focus_color = Color(0.082353, 0.090196, 0.098039, 1)
-WizardPrimary/colors/font_disabled_color = Color(0.682353, 0.729412, 0.745098, 1)
-WizardPrimary/colors/icon_disabled_color = Color(0.082353, 0.090196, 0.098039, 1)
+WizardPrimary/colors/font_disabled_color = Color(0.470588, 0.513726, 0.529412, 1)
+WizardPrimary/colors/icon_disabled_color = Color(0.470588, 0.513726, 0.529412, 1)
 WizardChoice/base_type = &"Button"
 WizardChoice/styles/normal = SubResource("silk_WizardChoice")
 WizardChoice/styles/hover = SubResource("silk_WizardChoiceHover")
 WizardChoice/styles/pressed = SubResource("silk_WizardSelected")
 WizardChoice/styles/hover_pressed = SubResource("silk_WizardSelected")
-WizardChoice/styles/disabled = SubResource("silk_WizardButton")
+WizardChoice/styles/disabled = SubResource("silk_ActionDisabled")
 WizardChoice/colors/font_color = Color(0.905882, 0.905882, 0.866667, 1)
 WizardChoice/colors/icon_normal_color = Color(0.815686, 0.745098, 0.556863, 1)
 WizardChoice/colors/font_hover_color = Color(0.905882, 0.905882, 0.866667, 1)
@@ -3463,14 +3538,14 @@ WizardChoice/colors/font_hover_pressed_color = Color(0.905882, 0.905882, 0.86666
 WizardChoice/colors/icon_hover_pressed_color = Color(0.815686, 0.745098, 0.556863, 1)
 WizardChoice/colors/font_focus_color = Color(0.905882, 0.905882, 0.866667, 1)
 WizardChoice/colors/icon_focus_color = Color(0.815686, 0.745098, 0.556863, 1)
-WizardChoice/colors/font_disabled_color = Color(0.682353, 0.729412, 0.745098, 1)
-WizardChoice/colors/icon_disabled_color = Color(0.815686, 0.745098, 0.556863, 1)
+WizardChoice/colors/font_disabled_color = Color(0.470588, 0.513726, 0.529412, 1)
+WizardChoice/colors/icon_disabled_color = Color(0.470588, 0.513726, 0.529412, 1)
 WizardSection/base_type = &"Button"
 WizardSection/styles/normal = SubResource("silk_WizardButton")
 WizardSection/styles/hover = SubResource("silk_WizardHover")
 WizardSection/styles/pressed = SubResource("silk_WizardSelected")
 WizardSection/styles/hover_pressed = SubResource("silk_WizardSelected")
-WizardSection/styles/disabled = SubResource("silk_WizardButton")
+WizardSection/styles/disabled = SubResource("silk_ActionDisabled")
 WizardSection/colors/font_color = Color(0.905882, 0.905882, 0.866667, 1)
 WizardSection/colors/icon_normal_color = Color(0.815686, 0.745098, 0.556863, 1)
 WizardSection/colors/font_hover_color = Color(0.905882, 0.905882, 0.866667, 1)
@@ -3481,8 +3556,8 @@ WizardSection/colors/font_hover_pressed_color = Color(0.905882, 0.905882, 0.8666
 WizardSection/colors/icon_hover_pressed_color = Color(0.082353, 0.090196, 0.098039, 1)
 WizardSection/colors/font_focus_color = Color(0.905882, 0.905882, 0.866667, 1)
 WizardSection/colors/icon_focus_color = Color(0.815686, 0.745098, 0.556863, 1)
-WizardSection/colors/font_disabled_color = Color(0.682353, 0.729412, 0.745098, 1)
-WizardSection/colors/icon_disabled_color = Color(0.815686, 0.745098, 0.556863, 1)
+WizardSection/colors/font_disabled_color = Color(0.470588, 0.513726, 0.529412, 1)
+WizardSection/colors/icon_disabled_color = Color(0.470588, 0.513726, 0.529412, 1)
 WizardFormula/base_type = &"Label"
 WizardFormula/styles/normal = SubResource("silk_WizardFormula")
 WizardFormulaCompact/base_type = &"Label"
@@ -3491,7 +3566,7 @@ WizardButton/fonts/font = SubResource("Font_silkbound_regular")
 WizardQuiet/fonts/font = SubResource("Font_silkbound_regular")
 WizardSection/fonts/font = SubResource("Font_silkbound_regular")
 WizardButton/colors/icon_disabled_color = Color(0.815686, 0.745098, 0.556863, 0.4)
-WizardButton/colors/font_disabled_color = Color(0.682353, 0.729412, 0.745098, 1)
+WizardButton/colors/font_disabled_color = Color(0.470588, 0.513726, 0.529412, 1)
 WizardFormulaBox/base_type = &"PanelContainer"
 WizardFormulaBox/styles/panel = SubResource("silk_WizardFormula")
 WizardFormulaBoxTablet/base_type = &"PanelContainer"
@@ -3515,7 +3590,7 @@ RookframeSecondaryButton/font_sizes/font_size = 20
 RookframeSecondaryButton/styles/hover_pressed = SubResource("silk_WizardHover")
 RookframeSecondaryButton/colors/font_pressed_color = Color(0.905882, 0.905882, 0.866667, 1)
 RookframeSecondaryButton/colors/font_focus_color = Color(0.905882, 0.905882, 0.866667, 1)
-RookframeSecondaryButton/colors/font_disabled_color = Color(0.682353, 0.729412, 0.745098, 1)
+RookframeSecondaryButton/colors/font_disabled_color = Color(0.470588, 0.513726, 0.529412, 1)
 RookframeModalSurface/base_type = &"PanelContainer"
 RookframeModalSurface/styles/panel = SubResource("silk_DialogSurface")
 RookframeDialogMessage/base_type = &"PanelContainer"
@@ -3533,14 +3608,14 @@ RookframeDialogCopy/constants/line_spacing = 4
 RookframePrimaryButton/fonts/font = SubResource("Font_silkbound_medium")
 RookframePrimaryButton/font_sizes/font_size = 20
 RookframePrimaryButton/styles/hover_pressed = SubResource("silk_PrimaryPressed")
-RookframePrimaryButton/colors/font_disabled_color = Color(0.682353, 0.729412, 0.745098, 1)
+RookframePrimaryButton/colors/font_disabled_color = Color(0.470588, 0.513726, 0.529412, 1)
 RookframeDangerButton/fonts/font = SubResource("Font_silkbound_medium")
 RookframeDangerButton/font_sizes/font_size = 20
 RookframeDangerButton/styles/hover_pressed = SubResource("silk_DangerAction")
 RookframeDangerButton/colors/font_pressed_color = Color(1, 0.505882, 0.478431, 1)
 RookframeDangerButton/colors/font_hover_pressed_color = Color(1, 0.505882, 0.478431, 1)
 RookframeDangerButton/colors/font_focus_color = Color(1, 0.505882, 0.478431, 1)
-RookframeDangerButton/colors/font_disabled_color = Color(0.682353, 0.729412, 0.745098, 1)
+RookframeDangerButton/colors/font_disabled_color = Color(0.470588, 0.513726, 0.529412, 1)
 
 CheckButton/icons/checked = ExtResource("control_switch-on")
 CheckButton/icons/unchecked = ExtResource("control_switch-off")
@@ -3578,7 +3653,7 @@ SpinBox/colors/up_icon_modulate_disabled = Color(0.682353, 0.729412, 0.745098, 1
 SpinBox/colors/down_icon_modulate_disabled = Color(0.682353, 0.729412, 0.745098, 1)
 OptionButton/colors/font_pressed_color = Color(0.905882, 0.905882, 0.866667, 1)
 OptionButton/colors/font_focus_color = Color(0.905882, 0.905882, 0.866667, 1)
-OptionButton/colors/font_disabled_color = Color(0.682353, 0.729412, 0.745098, 1)
+OptionButton/colors/font_disabled_color = Color(0.470588, 0.513726, 0.529412, 1)
 OptionButton/styles/disabled = SubResource("ButtonDisabled")
 
 ; Shared Button semantic variations. Native inheritance owns all draw states.
@@ -3591,7 +3666,7 @@ components_button/colors/icon_hover_color = Color(0.905882, 0.905882, 0.866667, 
 components_button/colors/icon_pressed_color = Color(0.905882, 0.905882, 0.866667, 1)
 components_button/colors/icon_hover_pressed_color = Color(0.905882, 0.905882, 0.866667, 1)
 components_button/colors/icon_focus_color = Color(0.905882, 0.905882, 0.866667, 1)
-components_button/colors/icon_disabled_color = Color(0.682353, 0.729412, 0.745098, 1)
+components_button/colors/icon_disabled_color = Color(0.470588, 0.513726, 0.529412, 1)
 components_button_primary/base_type = &"RookframePrimaryButton"
 components_button_primary/constants/minimum_height = 52
 components_button_primary__compact/base_type = &"components_button_primary"
@@ -3601,7 +3676,7 @@ components_button_primary/colors/icon_hover_color = Color(0.082353, 0.090196, 0.
 components_button_primary/colors/icon_pressed_color = Color(0.082353, 0.090196, 0.098039, 1)
 components_button_primary/colors/icon_hover_pressed_color = Color(0.082353, 0.090196, 0.098039, 1)
 components_button_primary/colors/icon_focus_color = Color(0.082353, 0.090196, 0.098039, 1)
-components_button_primary/colors/icon_disabled_color = Color(0.682353, 0.729412, 0.745098, 1)
+components_button_primary/colors/icon_disabled_color = Color(0.470588, 0.513726, 0.529412, 1)
 components_button_destructive/base_type = &"RookframeDangerButton"
 components_button_destructive/constants/minimum_height = 52
 components_button_destructive__compact/base_type = &"components_button_destructive"
@@ -3611,7 +3686,7 @@ components_button_destructive/colors/icon_hover_color = Color(1, 0.505882, 0.478
 components_button_destructive/colors/icon_pressed_color = Color(1, 0.505882, 0.478431, 1)
 components_button_destructive/colors/icon_hover_pressed_color = Color(1, 0.505882, 0.478431, 1)
 components_button_destructive/colors/icon_focus_color = Color(1, 0.505882, 0.478431, 1)
-components_button_destructive/colors/icon_disabled_color = Color(0.682353, 0.729412, 0.745098, 1)
+components_button_destructive/colors/icon_disabled_color = Color(0.470588, 0.513726, 0.529412, 1)
 RookframeFavorite/base_type = &"CheckBox"
 RookframeFavorite/constants/h_separation = 0
 RookframeFavorite/icons/checked = ExtResource("favorite_checked")
@@ -3900,7 +3975,7 @@ metadata/tokens = {
 "RookframePrimaryIcon/colors/icon_normal_color": &"accent_content",
 "RookframePrimaryIcon/colors/icon_hover_color": &"accent_content",
 "RookframePrimaryIcon/colors/icon_pressed_color": &"accent_content",
-"RookframePrimaryIcon/colors/icon_disabled_color": &"accent_content",
+"RookframePrimaryIcon/colors/icon_disabled_color": &"content_disabled",
 "RookframeIcon/colors/icon_focus_color": &"pictogram",
 "RookframePrimaryIcon/colors/icon_focus_color": &"accent_content",
 "TooltipLabel/colors/font_color": &"content",
@@ -3925,7 +4000,7 @@ metadata/tokens = {
 "WizardQuiet/colors/font_focus_color": &"content_muted",
 "WizardQuiet/colors/icon_focus_color": &"pictogram",
 "WizardQuiet/colors/font_disabled_color": &"content_disabled",
-"WizardQuiet/colors/icon_disabled_color": &"pictogram",
+"WizardQuiet/colors/icon_disabled_color": &"content_disabled",
 "WizardPrimary/colors/font_color": &"accent_content",
 "WizardPrimary/colors/icon_normal_color": &"accent_content",
 "WizardPrimary/colors/font_hover_color": &"accent_content",
@@ -3937,7 +4012,7 @@ metadata/tokens = {
 "WizardPrimary/colors/font_focus_color": &"accent_content",
 "WizardPrimary/colors/icon_focus_color": &"accent_content",
 "WizardPrimary/colors/font_disabled_color": &"content_disabled",
-"WizardPrimary/colors/icon_disabled_color": &"accent_content",
+"WizardPrimary/colors/icon_disabled_color": &"content_disabled",
 "WizardChoice/colors/font_color": &"content",
 "WizardChoice/colors/icon_normal_color": &"pictogram",
 "WizardChoice/colors/font_hover_color": &"content",
@@ -3949,7 +4024,7 @@ metadata/tokens = {
 "WizardChoice/colors/font_focus_color": &"content",
 "WizardChoice/colors/icon_focus_color": &"pictogram",
 "WizardChoice/colors/font_disabled_color": &"content_disabled",
-"WizardChoice/colors/icon_disabled_color": &"pictogram",
+"WizardChoice/colors/icon_disabled_color": &"content_disabled",
 "WizardSection/colors/font_color": &"content",
 "WizardSection/colors/icon_normal_color": &"pictogram",
 "WizardSection/colors/font_hover_color": &"content",
@@ -3961,7 +4036,7 @@ metadata/tokens = {
 "WizardSection/colors/font_focus_color": &"content",
 "WizardSection/colors/icon_focus_color": &"pictogram",
 "WizardSection/colors/font_disabled_color": &"content_disabled",
-"WizardSection/colors/icon_disabled_color": &"pictogram",
+"WizardSection/colors/icon_disabled_color": &"content_disabled",
 "WizardButton/colors/icon_disabled_color": [&"pictogram", 0.4],
 "WizardButton/colors/font_disabled_color": &"content_disabled",
 "RookframeInlineNoticeTitle/font_sizes/font_size": &"title",

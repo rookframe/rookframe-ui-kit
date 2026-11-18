@@ -322,4 +322,8 @@ bands. Interior rows and sections use neutral rules. Pictograms are brass, count
 are copper, selection is neutral, danger is coral and success is muted green.
 Selected/primary light fills use ink foregrounds; selected record rows use raised
 fill and a left rule. Keep focus, disabled, hover and error states distinct.
+A disabled action keeps its shape with a half-strength edge and
+`content_disabled` text and pictogram; a disabled primary action drops its
+paper fill. `RichTextLabel` shows `[b]` in semibold and `[i]` and `[b][i]` in the
+italic, the only prerendered italic weight.
 The ribbon, rule, pictogram, count and ornament token roles remain independent.
