@@ -12,6 +12,8 @@ enum Tone {
 var _minimum_height := 0.0
 var _minimum_width := 0.0
 var _managed_width := 0.0
+## The accessible name this row last derived from its title.
+var _managed_name := ""
 
 @export var title := "Action":
 	set(value):
@@ -104,7 +106,10 @@ func _refresh() -> void:
 		action.theme_type_variation = (
 			&"RookframeError" if tone == Tone.DANGER else &"RookframeLabel"
 		)
-	accessibility_name = title
+	# A name the caller set stays; the title names the row only when none is set.
+	if accessibility_name.is_empty() or accessibility_name == _managed_name:
+		_managed_name = title
+		accessibility_name = title
 	accessibility_description = description
 	if is_node_ready():
 		_fit_width()
