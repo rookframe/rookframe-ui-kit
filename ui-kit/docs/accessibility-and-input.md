@@ -19,7 +19,9 @@ polish.
 - `Dialog` and `FilePickerDialog` retain native modal focus. Escape follows the
   same cancellation path as the footer cancel action; acknowledgement dialogs
   intentionally expose only their single confirm action.
-- An open `Dialog` inserts one blocking scrim into its Control host. The scrim
+- An open `Dialog` inserts one blocking scrim into its Control host, colored
+  with the `scrim` token of the active theme. Hosts add no dimming of their
+  own behind a kit dialog. The scrim
   removes background pointer competition while the semantic icon, eyebrow,
   title, and accessibility description communicate the interruption without
   relying on accent color.

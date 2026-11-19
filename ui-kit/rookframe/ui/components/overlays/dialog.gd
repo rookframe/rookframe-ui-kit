@@ -1,6 +1,7 @@
 @tool
 extends Window
 const Appearance = preload("res://rookframe/ui/_internal/presentation/appearance.gd")
+const DesignTokens = preload("res://rookframe/ui/themes/design_tokens.gd")
 
 ## Designed modal composition with native Window focus, modality, and input.
 
@@ -183,6 +184,11 @@ func _exit_tree() -> void:
 	_remove_scrim()
 
 
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_THEME_CHANGED and is_instance_valid(_scrim):
+		_scrim.color = _scrim_color()
+
+
 func _sync_scrim() -> void:
 	if visible:
 		_ensure_scrim()
@@ -298,7 +304,11 @@ func _style_panels() -> void:
 func _scrim_color() -> Color:
 	if Appearance.has_hook(self, &"_scrim_color"):
 		return Appearance.invoke(self, &"_scrim_color", [])
-	return Color.TRANSPARENT
+	# Every theme dims the background with its semantic scrim token; a host
+	# without RookframeTokens still gets the neutral contract value.
+	if has_theme_color(&"scrim", DesignTokens.TYPE):
+		return get_theme_color(&"scrim", DesignTokens.TYPE)
+	return DesignTokens.COLORS[&"scrim"]
 
 func _style_compact_layout(compact: bool) -> void:
 	if Appearance.has_hook(self, &"_style_compact_layout"):

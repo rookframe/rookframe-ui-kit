@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- `Dialog` dims the background with the `scrim` token in every theme. Its
+  scrim was transparent in Fantasy and Cyberpunk, so hosts added their own
+  dimming behind it, and that dimming doubled up in Silkbound Ledger, whose
+  dialog already read the token. Silkbound Ledger's dialog presentation no
+  longer overrides the scrim color. A host whose Theme has no
+  `RookframeTokens` gets the neutral `scrim` value. Hosts should drop any
+  dimming they place behind a kit dialog.
 - Row frames and page ranges follow the rows that are drawn:
   - `Choice` writes its default insets once per variant, density and
     presentation. A refresh for new copy or a Theme notification no longer

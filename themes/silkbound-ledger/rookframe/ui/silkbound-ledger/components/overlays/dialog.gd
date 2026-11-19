@@ -9,8 +9,5 @@ func _style_panels() -> void:
 func _draw_confirmation_underline() -> void:
 	_skin._draw_confirmation_underline(self)
 
-func _scrim_color() -> Color:
-	return _skin._scrim_color(self)
-
 func _style_compact_layout(compact: bool) -> void:
 	_skin._style_compact_layout(self, compact)

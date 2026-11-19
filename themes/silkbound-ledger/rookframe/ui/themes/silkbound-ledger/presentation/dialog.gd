@@ -33,9 +33,6 @@ func _draw_confirmation_underline(control) -> void:
 	button.draw_line(Vector2(left, y), Vector2(left + width, y),
 		button.get_theme_color("font_hover_color"), maxf(1.0, font.get_underline_thickness(font_size)))
 
-func _scrim_color(control) -> Color:
-	return Tokens.color(&"scrim")
-
 func _style_compact_layout(control, compact: bool) -> void:
 	var header = control.get_node_or_null(^"Shell/Content/Header") as MarginContainer
 	if header != null:

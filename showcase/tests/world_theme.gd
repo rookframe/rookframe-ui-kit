@@ -90,3 +90,38 @@ func test_world_tooltips_follow_partial_theme_changes_and_keep_explicit_override
 	target.merge_with(authored)
 	Compiler.apply_world_tooltips(target, authored)
 	assert_that(target.get_color("font_color", &"TooltipLabel")).is_equal(Color.WHITE)
+
+func test_dialog_dims_with_the_scrim_token_in_every_theme() -> void:
+	# Hosts add no dimming behind a kit dialog, so the dialog's own scrim is the
+	# only dim in every theme and follows the theme the host switches to.
+	var themes: Array[Theme] = []
+	for name in ["silkbound-ledger", "fantasy", "cyberpunk"]:
+		themes.append(load("res://rookframe/ui/themes/%s/theme.tres" % name))
+	var viewport: SubViewport = auto_free(SubViewport.new())
+	viewport.size = Vector2i(1280, 720)
+	viewport.gui_embed_subwindows = true
+	add_child(viewport)
+	var host := Control.new()
+	viewport.add_child(host)
+	host.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	var dialog: Window = load("res://rookframe/ui/components/overlays/dialog.tscn").instantiate()
+	host.add_child(dialog)
+	for appearance in themes:
+		host.theme = appearance
+		dialog.open_dialog()
+		await get_tree().process_frame
+		var scrims := host.get_children().filter(func(child): return child is ColorRect)
+		assert_int(scrims.size()).is_equal(1)
+		var token := appearance.get_color("scrim", "RookframeTokens")
+		assert_float(token.a).is_between(0.01, 0.99)
+		assert_that(scrims[0].color).is_equal(token)
+		dialog.close_dialog()
+		await get_tree().process_frame
+	host.theme = themes[1]
+	dialog.open_dialog()
+	await get_tree().process_frame
+	host.theme = themes[2]
+	await get_tree().process_frame
+	var scrim: ColorRect = host.get_children().filter(func(child): return child is ColorRect)[0]
+	assert_that(scrim.color).is_equal(themes[2].get_color("scrim", "RookframeTokens"))
+	dialog.close_dialog()
